@@ -3,7 +3,7 @@ from typing import Dict, List, Tuple, Union
 from models import Paradigm, Question, GameState
 
 EPSILON = 0.2  # H(d) ≈ v の閾値
-SHIFT_THRESHOLD = 0.85  # パラダイムシフトの閾値
+TENSION_THRESHOLD = 2  # パラダイムシフト発動の緊張閾値
 
 
 def compute_effect(question: Question) -> list[tuple[str, int]] | list[str]:
@@ -85,18 +85,15 @@ def update(
                 _assimilate_descriptor(state.h, d_id, p_current)
 
     # Step 3: パラダイムシフト判定
-    current_consistency = consistency(state.o, p_current)
-    if current_consistency < SHIFT_THRESHOLD:
+    current_tension = tension(state.o, p_current)
+    if current_tension > TENSION_THRESHOLD:
+        current_alignment = alignment(state.o, p_current)
         best_id = state.p_current
-        best_score = current_consistency
-        o_keys = set(state.o.keys())
+        best_score = current_alignment
         for p_id, p in paradigms.items():
             if p_id == state.p_current:
                 continue
-            # 観測データとの重なりがないパラダイムは候補から除外
-            if not (p.d_all & o_keys):
-                continue
-            score = consistency(state.o, p)
+            score = alignment(state.o, p)
             if score > best_score:
                 best_score = score
                 best_id = p_id
@@ -116,14 +113,23 @@ def update(
     return state, remaining + newly_opened
 
 
-def consistency(o: dict[str, int], paradigm: Paradigm) -> float:
+def tension(o: dict[str, int], paradigm: Paradigm) -> int:
+    """アノマリーの数。D(P) 内の観測で P の予測と矛盾するものを数える。"""
     overlap = paradigm.d_all & set(o.keys())
-    if not overlap:
-        return 1.0
-    match_count = sum(
-        1 for d in overlap if paradigm.prediction(d) == o[d]
+    return sum(
+        1 for d in overlap if paradigm.prediction(d) != o[d]
     )
-    return match_count / len(overlap)
+
+
+def alignment(o: dict[str, int], paradigm: Paradigm) -> float:
+    """候補パラダイムの説明力。全観測に対する一致の割合。"""
+    if not o:
+        return 0.0
+    match_count = sum(
+        1 for d in paradigm.d_all & set(o.keys())
+        if paradigm.prediction(d) == o[d]
+    )
+    return match_count / len(o)
 
 
 def open_questions(

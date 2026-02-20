@@ -9,7 +9,8 @@ from engine import (
     get_answer,
     update,
     check_clear,
-    consistency,
+    tension,
+    alignment,
     open_questions,
 )
 
@@ -78,10 +79,11 @@ def main():
     print()
 
     while True:
-        # 現在のパラダイムと consistency を表示
+        # 現在のパラダイムと tension/alignment を表示
         p_cur = paradigms[state.p_current]
-        con = consistency(state.o, p_cur)
-        print(f"[パラダイム: {p_cur.name} | consistency: {con:.2f}]")
+        t = tension(state.o, p_cur)
+        a = alignment(state.o, p_cur)
+        print(f"[パラダイム: {p_cur.name} | tension: {t} | alignment: {a:.3f}]")
         print()
 
         if not current_open:
