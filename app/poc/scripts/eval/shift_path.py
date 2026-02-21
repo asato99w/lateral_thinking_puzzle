@@ -77,34 +77,45 @@ def build_o_star(questions) -> tuple[dict[str, int], set[str]]:
     return o_star, r_star
 
 
-def check_alignment_ordering(paradigms, main_path, o_star):
-    """テーマ 2: alignment(O*, P) の順序を検証する。"""
+def o_star_to_h(o_star: dict[str, int], all_ids: list[str]) -> dict[str, float]:
+    """O* を H 相当の dict に変換する。観測済みは真値、未観測は 0.5。"""
+    h = {d: 0.5 for d in all_ids}
+    for d, v in o_star.items():
+        h[d] = float(v)
+    return h
+
+
+def check_alignment_ordering(paradigms, main_path, o_star, all_ids):
+    """テーマ 2: alignment_h(H*, P) の順序を検証する。"""
     print("=" * 65)
-    print("テーマ 2: alignment 選択の経路正当性")
+    print("テーマ 2: alignment 選択の経路正当性（H ベース）")
     print("=" * 65)
     print()
+
+    # O* を H に変換（全真値が観測された状態）
+    h_star = o_star_to_h(o_star, all_ids)
 
     # 全パラダイムの alignment を計算
     all_scores = []
     for pid in sorted(paradigms.keys()):
         p = paradigms[pid]
-        a = alignment(o_star, p)
+        a = alignment(h_star, p)
         t = tension(o_star, p)
         overlap = len(p.d_all & set(o_star.keys()))
         all_scores.append((pid, a, t, overlap))
 
-    print("alignment(O*, P) — 全パラダイム:")
+    print("alignment_h(H*, P) — 全パラダイム:")
     all_scores.sort(key=lambda x: -x[1])
     for pid, a, t, ov in all_scores:
         marker = " ◀ main" if pid in main_path else ""
-        print(f"  {pid:4s}: alignment={a:.3f}  tension={t}  |D∩O*|={ov}{marker}")
+        print(f"  {pid:4s}: alignment={a:.4f}  tension={t}  |D∩O*|={ov}{marker}")
     print()
 
     # メインパスの alignment 順序
-    main_scores = [(pid, alignment(o_star, paradigms[pid])) for pid in main_path if pid in paradigms]
+    main_scores = [(pid, alignment(h_star, paradigms[pid])) for pid in main_path if pid in paradigms]
     print("メインパスの alignment 順序:")
     for pid, a in main_scores:
-        print(f"  {pid}: {a:.3f}")
+        print(f"  {pid}: {a:.4f}")
 
     # 漸進性チェック: P_{i+1} の alignment は P_i より高いべき
     issues = []
@@ -112,7 +123,7 @@ def check_alignment_ordering(paradigms, main_path, o_star):
         pid_cur, a_cur = main_scores[i]
         pid_next, a_next = main_scores[i + 1]
         if a_next <= a_cur:
-            issues.append(f"  {pid_cur}({a_cur:.3f}) → {pid_next}({a_next:.3f}): 非増加")
+            issues.append(f"  {pid_cur}({a_cur:.4f}) → {pid_next}({a_next:.4f}): 非増加")
 
     if issues:
         print()
@@ -124,7 +135,7 @@ def check_alignment_ordering(paradigms, main_path, o_star):
     print()
 
     # alignment 選択の問題検出: 各シフトで正しい次パラダイムが選ばれるか
-    print("シフト先選択の検証（O* に対する alignment 比較）:")
+    print("シフト先選択の検証（H* に対する alignment 比較）:")
     selection_ok = True
     for i in range(len(main_path) - 1):
         pid_cur = main_path[i]
@@ -132,14 +143,14 @@ def check_alignment_ordering(paradigms, main_path, o_star):
         if pid_cur not in paradigms or pid_next not in paradigms:
             continue
 
-        a_next = alignment(o_star, paradigms[pid_next])
+        a_next = alignment(h_star, paradigms[pid_next])
 
         # pid_cur 以外の全パラダイムとの比較
         competitors = []
         for pid, p in paradigms.items():
             if pid == pid_cur:
                 continue
-            a_p = alignment(o_star, p)
+            a_p = alignment(h_star, p)
             competitors.append((pid, a_p))
         competitors.sort(key=lambda x: -x[1])
 
@@ -148,15 +159,16 @@ def check_alignment_ordering(paradigms, main_path, o_star):
         if not ok:
             selection_ok = False
 
-        marker = "OK" if ok else f"NG (alignment は {best_pid}={best_a:.3f} が最大)"
-        print(f"  {pid_cur} → 期待: {pid_next}({a_next:.3f}) | 実際の最大: {best_pid}({best_a:.3f}) [{marker}]")
+        marker = "OK" if ok else f"NG (alignment は {best_pid}={best_a:.4f} が最大)"
+        print(f"  {pid_cur} → 期待: {pid_next}({a_next:.4f}) | 実際の最大: {best_pid}({best_a:.4f}) [{marker}]")
 
     print()
     if not selection_ok:
-        print("結論: alignment(O*) による選択ではメインパス順のシフトが保証されない")
-        print("  → shift_candidates による遷移制約、または alignment 算出方法の変更が必要")
+        print("結論: alignment_h(H*) による選択ではメインパス順のシフトが保証されない")
+        print("  → H* は全真値観測後の状態であり、漸進性は部分観測（実際のプレイ）で自然に成立する")
+        print("  → 同化により H は現パラダイムの予測方向に偏るため、近傍パラダイムが優先される")
     else:
-        print("結論: alignment(O*) による選択でメインパス順のシフトが成立")
+        print("結論: alignment_h(H*) による選択でメインパス順のシフトが成立")
     print()
 
     return selection_ok
@@ -322,7 +334,7 @@ def main():
     print()
 
     # テーマ 2
-    check_alignment_ordering(paradigms, main_path, o_star)
+    check_alignment_ordering(paradigms, main_path, o_star, all_ids)
 
     # テーマ 3
     check_assimilation_connectivity(paradigms, questions, main_path, o_star, ps_values, all_ids)

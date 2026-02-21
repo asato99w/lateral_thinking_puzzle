@@ -98,13 +98,13 @@ def update(
         else:
             candidates = [p_id for p_id in paradigms if p_id != state.p_current]
 
-        current_alignment = alignment(state.o, p_current)
+        current_alignment = alignment(state.h, p_current)
         best_id = state.p_current
         best_score = current_alignment
         for p_id in candidates:
             if p_id not in paradigms:
                 continue
-            score = alignment(state.o, paradigms[p_id])
+            score = alignment(state.h, paradigms[p_id])
             if score > best_score:
                 best_score = score
                 best_id = p_id
@@ -132,16 +132,27 @@ def tension(o: dict[str, int], paradigm: Paradigm) -> int:
     )
 
 
-def alignment(o: dict[str, int], paradigm: Paradigm) -> float:
-    """候補パラダイムの説明力。パラダイムが予測する範囲内での一致割合。"""
-    overlap = paradigm.d_all & set(o.keys())
-    if not overlap:
+def alignment(h: dict[str, float], paradigm: Paradigm) -> float:
+    """H ベースの alignment。
+
+    alignment_h(H, P) = (Σ_{d∈D⁺} H[d] + Σ_{d∈D⁻} (1 - H[d])) / |D(P)|
+
+    H は連続値（0〜1）なので同点が実質的に発生しない。
+    同化により H は現パラダイムの予測方向に押されているため、
+    構造的に近いパラダイムが自然に高スコアになる。
+    未観測・未同化の記述素は H[d] = 0.5 で中立的に寄与する。
+    """
+    d_all = paradigm.d_all
+    if not d_all:
         return 0.0
-    match_count = sum(
-        1 for d in overlap
-        if paradigm.prediction(d) == o[d]
-    )
-    return match_count / len(overlap)
+    score = 0.0
+    for d in d_all:
+        h_val = h.get(d, 0.5)
+        if d in paradigm.d_plus:
+            score += h_val
+        else:  # d in d_minus
+            score += 1.0 - h_val
+    return score / len(d_all)
 
 
 def open_questions(
