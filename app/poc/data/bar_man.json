@@ -1,0 +1,377 @@
+{
+  "title": "バーの男",
+  "statement": "ある男がバーに入り、バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた。男は「ありがとう」と言って帰った。なぜだろう？",
+  "init_paradigm": "P1",
+  "tension_threshold": 0,
+  "shift_candidates": {
+    "P1": ["P2", "S1", "S2"],
+    "P2": ["P3", "S1", "S2"],
+    "P3": ["P4"],
+    "P4": [],
+    "S1": ["P1"],
+    "S2": ["P1"]
+  },
+  "ps_values": [
+    ["Ps-1", 1], ["Ps-2", 1], ["Ps-3", 1], ["Ps-4", 1], ["Ps-5", 1]
+  ],
+  "all_descriptor_ids": [
+    "Ps-1", "Ps-2", "Ps-3", "Ps-4", "Ps-5",
+    "Pt-1", "Pt-2",
+    "Fs-01", "Fs-02", "Fs-03", "Fs-04", "Fs-05", "Fs-06", "Fs-07", "Fs-08",
+    "Fs-09", "Fs-10", "Fs-11", "Fs-12", "Fs-13", "Fs-14", "Fs-15", "Fs-16",
+    "Fs-17", "Fs-18", "Fs-19", "Fs-20", "Fs-21", "Fs-22", "Fs-23",
+    "Fs-25", "Fs-26", "Fs-27", "Fs-28",
+    "Fs-30", "Fs-31", "Fs-32", "Fs-33", "Fs-34", "Fs-35", "Fs-36", "Fs-37",
+    "Ft-01", "Ft-02", "Ft-03", "Ft-05", "Ft-06", "Ft-07", "Ft-08", "Ft-09",
+    "Ft-10", "Ft-11", "Ft-12", "Ft-13", "Ft-14", "Ft-15", "Ft-16", "Ft-17",
+    "Ft-19", "Ft-20"
+  ],
+  "paradigms": [
+    {
+      "id": "P1",
+      "name": "バーでの日常的やりとり",
+      "d_plus": [
+        "Fs-01", "Fs-02", "Fs-05", "Fs-06", "Fs-07", "Fs-08", "Fs-09",
+        "Fs-12", "Fs-13", "Fs-14", "Fs-15", "Fs-16", "Fs-18",
+        "Fs-20", "Fs-21", "Fs-25", "Fs-27"
+      ],
+      "d_minus": [
+        "Fs-10", "Fs-11", "Fs-17", "Fs-19", "Fs-22", "Fs-23", "Fs-26", "Fs-28",
+        "Ft-01", "Ft-03", "Ft-05", "Ft-06", "Ft-09", "Ft-10", "Ft-11",
+        "Ft-12", "Ft-13", "Ft-14", "Ft-15", "Ft-16", "Ft-17", "Ft-19", "Ft-20",
+        "Fs-35", "Fs-36"
+      ],
+      "relations": [
+        ["Fs-01", "Fs-09", 0.9],
+        ["Fs-09", "Fs-06", 0.8],
+        ["Fs-14", "Fs-16", 0.9],
+        ["Fs-16", "Fs-18", 0.8],
+        ["Fs-16", "Fs-12", 0.8],
+        ["Fs-09", "Fs-10", 0.8],
+        ["Fs-09", "Ft-01", 0.8],
+        ["Fs-16", "Fs-17", 0.9],
+        ["Fs-18", "Ft-11", 0.9],
+        ["Fs-16", "Fs-22", 0.8],
+        ["Fs-01", "Ft-06", 0.8]
+      ]
+    },
+    {
+      "id": "P2",
+      "name": "バーテンダーの善意",
+      "d_plus": [
+        "Fs-09", "Fs-14", "Fs-15", "Fs-17", "Fs-19", "Fs-20",
+        "Fs-22", "Fs-23", "Fs-25", "Fs-26", "Ft-20"
+      ],
+      "d_minus": [
+        "Fs-16", "Fs-18", "Fs-33", "Fs-34", "Ft-01", "Ft-05", "Ft-06"
+      ],
+      "relations": [
+        ["Fs-17", "Fs-19", 0.9],
+        ["Fs-17", "Fs-22", 0.8],
+        ["Fs-22", "Fs-23", 0.9],
+        ["Fs-23", "Fs-26", 0.8],
+        ["Fs-17", "Fs-16", 0.9],
+        ["Fs-17", "Fs-18", 0.9],
+        ["Fs-09", "Ft-01", 0.8],
+        ["Fs-15", "Fs-17", 0.8],
+        ["Fs-14", "Fs-19", 0.8],
+        ["Fs-25", "Fs-26", 0.8]
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "男の隠れた問題",
+      "d_plus": [
+        "Fs-10", "Fs-14", "Fs-15", "Fs-17", "Fs-19", "Fs-22", "Fs-23",
+        "Fs-25", "Fs-26", "Fs-28",
+        "Ft-01", "Ft-03", "Ft-05", "Ft-12", "Ft-20"
+      ],
+      "d_minus": [
+        "Fs-09", "Fs-16", "Fs-18", "Fs-33", "Fs-34",
+        "Ft-07", "Ft-08", "Ft-09"
+      ],
+      "relations": [
+        ["Fs-10", "Ft-01", 0.9],
+        ["Ft-01", "Ft-03", 0.9],
+        ["Ft-03", "Ft-05", 0.8],
+        ["Ft-05", "Fs-28", 0.8],
+        ["Fs-28", "Fs-26", 0.9],
+        ["Fs-10", "Fs-09", 0.8],
+        ["Ft-01", "Fs-10", 0.8]
+      ]
+    },
+    {
+      "id": "P4",
+      "name": "しゃっくりと驚かし",
+      "d_plus": [
+        "Fs-10", "Fs-14", "Fs-15", "Fs-17", "Fs-19", "Fs-22", "Fs-23",
+        "Fs-25", "Fs-26", "Fs-28",
+        "Ft-01", "Ft-03", "Ft-05", "Ft-06", "Ft-07", "Ft-08", "Ft-09",
+        "Ft-10", "Ft-11", "Ft-12", "Ft-13", "Ft-14", "Ft-15", "Ft-16",
+        "Ft-17", "Ft-19", "Ft-20"
+      ],
+      "d_minus": [
+        "Fs-09", "Fs-16", "Fs-18"
+      ],
+      "relations": [
+        ["Ft-07", "Ft-08", 0.8],
+        ["Ft-08", "Ft-09", 0.8],
+        ["Ft-10", "Ft-13", 0.9],
+        ["Ft-13", "Ft-15", 0.9],
+        ["Ft-15", "Ft-16", 0.9],
+        ["Ft-16", "Ft-17", 0.9],
+        ["Ft-11", "Ft-10", 0.8],
+        ["Ft-05", "Ft-13", 0.8],
+        ["Ft-13", "Fs-16", 0.9],
+        ["Ft-11", "Fs-18", 0.9]
+      ]
+    },
+    {
+      "id": "S1",
+      "name": "強盗・犯罪",
+      "d_plus": ["Fs-14", "Fs-16", "Fs-18", "Fs-33"],
+      "d_minus": ["Fs-17", "Fs-22", "Fs-23", "Ft-11"],
+      "relations": []
+    },
+    {
+      "id": "S2",
+      "name": "個人的関係",
+      "d_plus": ["Fs-04", "Fs-22", "Fs-30"],
+      "d_minus": ["Ft-01", "Ft-05", "Ft-13"],
+      "relations": []
+    }
+  ],
+  "questions": [
+    {
+      "id": "q01", "text": "男は飲み物を求めてバーに来ましたか？",
+      "ans_yes": [["Fs-01", 1]], "ans_no": [["Fs-01", 0]], "ans_irrelevant": ["Fs-01"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q02", "text": "男はバーの常連ですか？",
+      "ans_yes": [["Fs-04", 1]], "ans_no": [["Fs-04", 0]], "ans_irrelevant": ["Fs-04"],
+      "correct_answer": "irrelevant"
+    },
+    {
+      "id": "q03", "text": "男は喉が渇いていましたか？",
+      "ans_yes": [["Fs-09", 1]], "ans_no": [["Fs-09", 0]], "ans_irrelevant": ["Fs-09"],
+      "correct_answer": "no"
+    },
+    {
+      "id": "q04", "text": "男は体調に問題がありましたか？",
+      "ans_yes": [["Fs-10", 1]], "ans_no": [["Fs-10", 0]], "ans_irrelevant": ["Fs-10"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q05", "text": "水は飲む以外の目的がありましたか？",
+      "ans_yes": [["Fs-11", 1]], "ans_no": [["Fs-11", 0]], "ans_irrelevant": ["Fs-11"],
+      "correct_answer": "no"
+    },
+    {
+      "id": "q06", "text": "バーテンダーは銃を所持していましたか？",
+      "ans_yes": [["Fs-14", 1]], "ans_no": [["Fs-14", 0]], "ans_irrelevant": ["Fs-14"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q07", "text": "バーテンダーは男を脅そうとしましたか？",
+      "ans_yes": [["Fs-16", 1]], "ans_no": [["Fs-16", 0]], "ans_irrelevant": ["Fs-16"],
+      "correct_answer": "no"
+    },
+    {
+      "id": "q08", "text": "バーテンダーは男に敵意がありましたか？",
+      "ans_yes": [["Fs-18", 1]], "ans_no": [["Fs-18", 0]], "ans_irrelevant": ["Fs-18"],
+      "correct_answer": "no"
+    },
+    {
+      "id": "q09", "text": "銃は本物ですか？",
+      "ans_yes": [["Fs-20", 1]], "ans_no": [["Fs-20", 0]], "ans_irrelevant": ["Fs-20"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q10", "text": "男は水を飲まずに帰りましたか？",
+      "ans_yes": [["Fs-25", 1]], "ans_no": [["Fs-25", 0]], "ans_irrelevant": ["Fs-25"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q11", "text": "男の目的は達成されましたか？",
+      "ans_yes": [["Fs-26", 1]], "ans_no": [["Fs-26", 0]], "ans_irrelevant": ["Fs-26"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q12", "text": "来店した時間帯は重要ですか？",
+      "ans_yes": [["Fs-03", 1]], "ans_no": [["Fs-03", 0]], "ans_irrelevant": ["Fs-03"],
+      "correct_answer": "irrelevant"
+    },
+    {
+      "id": "q13", "text": "男がバーに入った理由は飲酒のためですか？",
+      "ans_yes": [["Fs-05", 0]], "ans_no": [["Fs-05", 1]], "ans_irrelevant": ["Fs-05"],
+      "correct_answer": "no"
+    },
+    {
+      "id": "q14", "text": "バーテンダーは男を助けようとしましたか？",
+      "ans_yes": [["Fs-17", 1]], "ans_no": [["Fs-17", 0]], "ans_irrelevant": ["Fs-17"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q15", "text": "銃を向けたのは撃つためではなかったのですか？",
+      "ans_yes": [["Fs-19", 1]], "ans_no": [["Fs-19", 0]], "ans_irrelevant": ["Fs-19"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q16", "text": "男はバーテンダーの行動に感謝しましたか？",
+      "ans_yes": [["Fs-22", 1]], "ans_no": [["Fs-22", 0]], "ans_irrelevant": ["Fs-22"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q17", "text": "バーテンダーの行動は男にとって有益でしたか？",
+      "ans_yes": [["Fs-23", 1]], "ans_no": [["Fs-23", 0]], "ans_irrelevant": ["Fs-23"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q18", "text": "男は何かの身体的症状を抱えていましたか？",
+      "ans_yes": [["Ft-01", 1]], "ans_no": [["Ft-01", 0]], "ans_irrelevant": ["Ft-01"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q19", "text": "男の症状は長時間続いていましたか？",
+      "ans_yes": [["Ft-02", 1]], "ans_no": [["Ft-02", 0]], "ans_irrelevant": ["Ft-02"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q20", "text": "男はその症状を止めたかったのですか？",
+      "ans_yes": [["Ft-03", 1]], "ans_no": [["Ft-03", 0]], "ans_irrelevant": ["Ft-03"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q21", "text": "水を頼んだのはその症状に関係がありますか？",
+      "ans_yes": [["Ft-05", 1]], "ans_no": [["Ft-05", 0]], "ans_irrelevant": ["Ft-05"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q22", "text": "水が不要になったのは症状が治ったからですか？",
+      "ans_yes": [["Ft-17", 1]], "ans_no": [["Ft-17", 0]], "ans_irrelevant": ["Ft-17"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q23", "text": "男の真の目的は水を飲むことではなかったのですか？",
+      "ans_yes": [["Ft-06", 1]], "ans_no": [["Ft-06", 0]], "ans_irrelevant": ["Ft-06"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q24", "text": "バーテンダーは男の症状に気づきましたか？",
+      "ans_yes": [["Ft-07", 1]], "ans_no": [["Ft-07", 0]], "ans_irrelevant": ["Ft-07"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q25", "text": "男の症状は外から見てわかるものでしたか？",
+      "ans_yes": [["Ft-08", 1]], "ans_no": [["Ft-08", 0]], "ans_irrelevant": ["Ft-08"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q26", "text": "バーテンダーはその症状の止め方を知っていましたか？",
+      "ans_yes": [["Ft-10", 1]], "ans_no": [["Ft-10", 0]], "ans_irrelevant": ["Ft-10"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q27", "text": "バーテンダーは善意で銃を向けましたか？",
+      "ans_yes": [["Ft-11", 1]], "ans_no": [["Ft-11", 0]], "ans_irrelevant": ["Ft-11"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q28", "text": "銃を向けた目的は男を驚かせることでしたか？",
+      "ans_yes": [["Ft-13", 1]], "ans_no": [["Ft-13", 0]], "ans_irrelevant": ["Ft-13"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q29", "text": "驚かせることで男の問題は解決しましたか？",
+      "ans_yes": [["Ft-15", 1]], "ans_no": [["Ft-15", 0]], "ans_irrelevant": ["Ft-15"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q30", "text": "男の症状はしゃっくりですか？",
+      "ans_yes": [["Pt-1", 1], ["Ft-16", 1]], "ans_no": [["Pt-1", 0]], "ans_irrelevant": ["Pt-1"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q31", "text": "男はバーテンダーの意図を理解しましたか？",
+      "ans_yes": [["Ft-19", 1]], "ans_no": [["Ft-19", 0]], "ans_irrelevant": ["Ft-19"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q32", "text": "男とバーテンダーは知り合いですか？",
+      "ans_yes": [["Fs-30", 1]], "ans_no": [["Fs-30", 0]], "ans_irrelevant": ["Fs-30"],
+      "correct_answer": "irrelevant"
+    },
+    {
+      "id": "q33", "text": "男の職業は関係がありますか？",
+      "ans_yes": [["Fs-31", 1]], "ans_no": [["Fs-31", 0]], "ans_irrelevant": ["Fs-31"],
+      "correct_answer": "irrelevant"
+    },
+    {
+      "id": "q34", "text": "バーの場所は重要ですか？",
+      "ans_yes": [["Fs-32", 1]], "ans_no": [["Fs-32", 0]], "ans_irrelevant": ["Fs-32"],
+      "correct_answer": "irrelevant"
+    },
+    {
+      "id": "q35", "text": "男は犯罪に関わっていますか？",
+      "ans_yes": [["Fs-33", 1]], "ans_no": [["Fs-33", 0]], "ans_irrelevant": ["Fs-33"],
+      "correct_answer": "no"
+    },
+    {
+      "id": "q36", "text": "バーテンダーは男に恨みがありますか？",
+      "ans_yes": [["Fs-34", 1]], "ans_no": [["Fs-34", 0]], "ans_irrelevant": ["Fs-34"],
+      "correct_answer": "no"
+    },
+    {
+      "id": "q37", "text": "男は酔っていましたか？",
+      "ans_yes": [["Fs-35", 1]], "ans_no": [["Fs-35", 0]], "ans_irrelevant": ["Fs-35"],
+      "correct_answer": "no"
+    },
+    {
+      "id": "q38", "text": "水に何か特別なものが入っていましたか？",
+      "ans_yes": [["Fs-36", 1]], "ans_no": [["Fs-36", 0]], "ans_irrelevant": ["Fs-36"],
+      "correct_answer": "no"
+    },
+    {
+      "id": "q39", "text": "この出来事は夜に起きましたか？",
+      "ans_yes": [["Fs-37", 1]], "ans_no": [["Fs-37", 0]], "ans_irrelevant": ["Fs-37"],
+      "correct_answer": "irrelevant"
+    },
+    {
+      "id": "q40", "text": "男がバーに来たのは水以外の理由がありますか？",
+      "ans_yes": [["Ft-06", 1]], "ans_no": [["Fs-01", 1]], "ans_irrelevant": ["Fs-01"],
+      "correct_answer": "no"
+    },
+    {
+      "id": "q41", "text": "バーテンダーの行動は男の注文を聞いた結果ですか？",
+      "ans_yes": [["Fs-15", 1], ["Ft-09", 1]], "ans_no": [["Fs-15", 0]], "ans_irrelevant": ["Fs-15"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q42", "text": "銃を向けられたことで男の問題は解決しましたか？",
+      "ans_yes": [["Fs-23", 1], ["Ft-01", 1]], "ans_no": [["Fs-23", 0]], "ans_irrelevant": ["Fs-23"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q43", "text": "男の体調の問題と銃を向けたことは関係がありますか？",
+      "ans_yes": [["Fs-10", 1], ["Ft-08", 1]], "ans_no": [["Fs-10", 0]], "ans_irrelevant": ["Fs-10"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q44", "text": "驚くことで治る症状ですか？",
+      "ans_yes": [["Ft-03", 1], ["Pt-1", 1]], "ans_no": [["Ft-03", 0]], "ans_irrelevant": ["Ft-03"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q45", "text": "水を飲むことでも治る症状ですか？",
+      "ans_yes": [["Ft-05", 1], ["Pt-2", 1]], "ans_no": [["Ft-05", 0]], "ans_irrelevant": ["Ft-05"],
+      "correct_answer": "yes"
+    },
+    {
+      "id": "q46", "text": "男はしゃっくりが止まらず、バーテンダーが驚かせて止めてくれたので感謝して帰ったのですか？",
+      "ans_yes": [["Ft-16", 1]], "ans_no": [], "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": true
+    }
+  ]
+}

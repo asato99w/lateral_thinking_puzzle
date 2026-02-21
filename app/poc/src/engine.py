@@ -3,7 +3,7 @@ from typing import Dict, List, Tuple, Union
 from models import Paradigm, Question, GameState
 
 EPSILON = 0.2  # H(d) ≈ v の閾値
-TENSION_THRESHOLD = 2  # パラダイムシフト発動の緊張閾値
+DEFAULT_TENSION_THRESHOLD = 2  # パラダイムシフト発動の緊張閾値（デフォルト）
 
 
 def compute_effect(question: Question) -> list[tuple[str, int]] | list[str]:
@@ -62,6 +62,8 @@ def update(
     paradigms: dict[str, Paradigm],
     all_questions: list[Question],
     current_open: list[Question],
+    tension_threshold: int = DEFAULT_TENSION_THRESHOLD,
+    shift_candidates: dict[str, list[str]] | None = None,
 ) -> tuple[GameState, list[Question]]:
     # Step 1: 直接更新
     eff = compute_effect(question)
@@ -83,17 +85,26 @@ def update(
             pred = p_current.prediction(d_id)
             if pred is not None and pred == v:
                 _assimilate_descriptor(state.h, d_id, p_current)
+        # 観測済み記述素の H は O の値を維持する（同化による上書きを防止）
+        for d, v in state.o.items():
+            state.h[d] = float(v)
 
     # Step 3: パラダイムシフト判定
     current_tension = tension(state.o, p_current)
-    if current_tension > TENSION_THRESHOLD:
+    if current_tension > tension_threshold:
+        # シフト候補の決定
+        if shift_candidates and state.p_current in shift_candidates:
+            candidates = shift_candidates[state.p_current]
+        else:
+            candidates = [p_id for p_id in paradigms if p_id != state.p_current]
+
         current_alignment = alignment(state.o, p_current)
         best_id = state.p_current
         best_score = current_alignment
-        for p_id, p in paradigms.items():
-            if p_id == state.p_current:
+        for p_id in candidates:
+            if p_id not in paradigms:
                 continue
-            score = alignment(state.o, p)
+            score = alignment(state.o, paradigms[p_id])
             if score > best_score:
                 best_score = score
                 best_id = p_id
@@ -122,14 +133,15 @@ def tension(o: dict[str, int], paradigm: Paradigm) -> int:
 
 
 def alignment(o: dict[str, int], paradigm: Paradigm) -> float:
-    """候補パラダイムの説明力。全観測に対する一致の割合。"""
-    if not o:
+    """候補パラダイムの説明力。パラダイムが予測する範囲内での一致割合。"""
+    overlap = paradigm.d_all & set(o.keys())
+    if not overlap:
         return 0.0
     match_count = sum(
-        1 for d in paradigm.d_all & set(o.keys())
+        1 for d in overlap
         if paradigm.prediction(d) == o[d]
     )
-    return match_count / len(o)
+    return match_count / len(overlap)
 
 
 def open_questions(
@@ -170,3 +182,6 @@ def _assimilate_from_paradigm(
         pred = paradigm.prediction(d_id)
         if pred is not None and pred == o[d_id]:
             _assimilate_descriptor(h, d_id, paradigm)
+    # 観測済み記述素の H は O の値を維持する
+    for d, v in o.items():
+        h[d] = float(v)
