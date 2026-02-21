@@ -16,6 +16,7 @@ class Paradigm:
     d_plus: Set[str] = field(default_factory=set)
     d_minus: Set[str] = field(default_factory=set)
     relations: List[Tuple[str, str, float]] = field(default_factory=list)
+    threshold: Optional[int] = None  # 近傍と O* から導出
 
     def __post_init__(self):
         self.validate()

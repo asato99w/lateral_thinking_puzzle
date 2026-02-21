@@ -8,6 +8,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from models import Paradigm, Question  # noqa: E402
+from threshold import build_o_star, compute_thresholds  # noqa: E402
 
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
@@ -73,10 +74,16 @@ def load_data(data_path: Path | None = None):
             is_clear=q.get("is_clear", False),
         ))
 
+    ps_values = {d[0]: d[1] for d in data["ps_values"]}
+
+    # 完全確定 O* から threshold を導出
+    o_star = build_o_star(questions, ps_values)
+    compute_thresholds(paradigms, o_star)
+
     return (
         paradigms,
         questions,
         data["all_descriptor_ids"],
-        {d[0]: d[1] for d in data["ps_values"]},
+        ps_values,
         data["init_paradigm"],
     )

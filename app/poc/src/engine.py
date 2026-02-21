@@ -3,7 +3,6 @@ from typing import Dict, List, Tuple, Union
 from models import Paradigm, Question, GameState
 
 EPSILON = 0.2  # H(d) ≈ v の閾値
-DEFAULT_TENSION_THRESHOLD = 2  # パラダイムシフト発動の緊張閾値（デフォルト）
 
 
 def compute_effect(question: Question) -> list[tuple[str, int]] | list[str]:
@@ -62,8 +61,6 @@ def update(
     paradigms: dict[str, Paradigm],
     all_questions: list[Question],
     current_open: list[Question],
-    tension_threshold: int = DEFAULT_TENSION_THRESHOLD,
-    shift_candidates: dict[str, list[str]] | None = None,
 ) -> tuple[GameState, list[Question]]:
     # Step 1: 直接更新
     eff = compute_effect(question)
@@ -91,19 +88,18 @@ def update(
 
     # Step 3: パラダイムシフト判定
     current_tension = tension(state.o, p_current)
-    if current_tension > tension_threshold:
-        # シフト候補の決定
-        if shift_candidates and state.p_current in shift_candidates:
-            candidates = shift_candidates[state.p_current]
-        else:
-            candidates = [p_id for p_id in paradigms if p_id != state.p_current]
+    if p_current.threshold is not None and current_tension > p_current.threshold:
+        # シフト候補は近傍 N(P)
+        candidates = [
+            p_id for p_id in paradigms
+            if p_id != state.p_current
+            and paradigms[p_id].d_all & p_current.d_all
+        ]
 
         current_alignment = alignment(state.h, p_current)
         best_id = state.p_current
         best_score = current_alignment
         for p_id in candidates:
-            if p_id not in paradigms:
-                continue
             score = alignment(state.h, paradigms[p_id])
             if score > best_score:
                 best_score = score

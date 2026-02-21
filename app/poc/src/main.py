@@ -13,6 +13,7 @@ from engine import (
     alignment,
     open_questions,
 )
+from threshold import build_o_star, compute_thresholds
 
 ANSWER_DISPLAY = {
     "yes": "YES",
@@ -129,9 +130,9 @@ def main():
     ps_values = {d[0]: d[1] for d in data["ps_values"]}
     init_paradigm_id = data["init_paradigm"]
 
-    # シフト制御パラメータ
-    tension_threshold = data.get("tension_threshold", 2)
-    shift_candidates = data.get("shift_candidates", None)
+    # 完全確定 O* から threshold を導出
+    o_star = build_o_star(questions, ps_values)
+    compute_thresholds(paradigms, o_star)
 
     # ゲーム初期化
     state = init_game(ps_values, paradigms, init_paradigm_id, all_descriptor_ids)
@@ -229,9 +230,7 @@ def main():
         p_before = state.p_current
 
         # 状態更新
-        state, current_open = update(state, selected, paradigms, questions, current_open,
-                                     tension_threshold=tension_threshold,
-                                     shift_candidates=shift_candidates)
+        state, current_open = update(state, selected, paradigms, questions, current_open)
 
         # パラダイムシフトの演出
         if state.p_current != p_before:

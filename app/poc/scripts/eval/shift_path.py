@@ -30,34 +30,10 @@ def infer_main_path(data: dict, paradigms: dict) -> list[str]:
     """データから main_path を推定する。
 
     1. data["main_path"] があればそのまま使う
-    2. data["shift_candidates"] から init → ... → 終端 のチェーンを探す
-    3. どちらもなければ MAIN_PATH（デフォルト）を使う
+    2. どちらもなければ MAIN_PATH（デフォルト）を使う
     """
     if "main_path" in data:
         return data["main_path"]
-
-    sc = data.get("shift_candidates")
-    if sc:
-        # shift_candidates から最長チェーンを探索
-        init = data["init_paradigm"]
-        # サブパラダイム（S*）を除外してメインパスを構成
-        main_ids = {pid for pid in paradigms if not pid.startswith("S")}
-
-        path = [init]
-        current = init
-        visited = {init}
-        while True:
-            candidates = sc.get(current, [])
-            # メインパラダイムのみ、未訪問のもの
-            nexts = [c for c in candidates if c in main_ids and c not in visited]
-            if not nexts:
-                break
-            # 番号順で最初のもの（P1→P2→P3→...）
-            nexts.sort()
-            current = nexts[0]
-            path.append(current)
-            visited.add(current)
-        return path
 
     return list(MAIN_PATH)
 
@@ -182,19 +158,49 @@ def check_assimilation_connectivity(paradigms, questions, main_path, o_star, ps_
     print()
 
     # 各パラダイムフェーズで回答される質問を推定
-    # P_i の D(P_i) に effect 記述素が含まれる質問 = P_i フェーズの質問
+    # 開放可能性を考慮: パラダイム P_i で質問が開くには、
+    # effect 記述素 d について以下のいずれかが成立する必要がある:
+    #   (a) P_i の prediction(d) == v（同化が H[d] を正解方向に押す）
+    #   (b) d ∈ D⁺(P_i)（パラダイムが d を肯定→プレイヤーが自然に探索）
+    # いずれも満たさない場合（d ∈ D⁻ かつ pred ≠ v）は、
+    # P_i の同化が H を正解と逆方向に押すため質問が開かない。
     phase_questions = {pid: [] for pid in main_path}
     for q in questions:
         eff = compute_effect(q)
         if q.correct_answer == "irrelevant":
             continue
-        eff_ds = {d for d, v in eff}
+        eff_pairs = list(eff)
+        eff_ds = {d for d, v in eff_pairs}
+        assigned = False
         for pid in main_path:
             if pid not in paradigms:
                 continue
-            if eff_ds & paradigms[pid].d_all:
+            p = paradigms[pid]
+            if not (eff_ds & p.d_all):
+                continue
+            # 開放可能性チェック
+            openable = False
+            for d, v in eff_pairs:
+                pred = p.prediction(d)
+                if pred is not None:
+                    if pred == v or d in p.d_plus:
+                        openable = True
+                        break
+            if openable:
                 phase_questions[pid].append(q)
-                break  # 最初に所属するフェーズに割り当て
+                assigned = True
+                break
+        if not assigned:
+            # どのフェーズでも開かない場合は最後のパラダイムに割り当て
+            phase_questions[main_path[-1]].append(q)
+
+    # フェーズ割り当ての診断出力
+    for pid in main_path:
+        qids = [q.id for q in phase_questions[pid]]
+        print(f"  {pid} フェーズの質問 ({len(qids)}): {', '.join(qids[:15])}")
+        if len(qids) > 15:
+            print(f"    ... 他 {len(qids) - 15} 問")
+    print()
 
     # 各シフトポイントでの観測推定
     # P_i 終了時の O ≈ Ps + P_1 ~ P_i の質問の effect
