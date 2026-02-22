@@ -72,6 +72,7 @@ def load_data(data_path: Path | None = None):
             ans_irrelevant=q["ans_irrelevant"],
             correct_answer=q["correct_answer"],
             is_clear=q.get("is_clear", False),
+            prerequisites=q.get("prerequisites", []),
         ))
 
     ps_values = {d[0]: d[1] for d in data["ps_values"]}

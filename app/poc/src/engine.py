@@ -38,9 +38,12 @@ def init_game(
 def init_questions(
     paradigm: Paradigm,
     questions: list[Question],
+    o: dict[str, int] | None = None,
 ) -> list[Question]:
     result = []
     for q in questions:
+        if o is not None and not all(d in o for d in q.prerequisites):
+            continue
         eff = compute_effect(q)
         if isinstance(eff, list) and len(eff) > 0 and isinstance(eff[0], tuple):
             has_match = False
@@ -165,6 +168,8 @@ def open_questions(
     result = []
     for q in questions:
         if q.id in state.answered:
+            continue
+        if not all(d in state.o for d in q.prerequisites):
             continue
         eff = compute_effect(q)
         if isinstance(eff, list) and len(eff) > 0 and isinstance(eff[0], tuple):

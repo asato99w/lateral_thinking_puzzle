@@ -3,687 +3,3189 @@
   "statement": "ある男がレストランに入り、ウミガメのスープを注文した。一口飲んで店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜか？",
   "init_paradigm": "P1",
   "ps_values": [
-    ["Ps-1", 1], ["Ps-2", 1], ["Ps-3", 1],
-    ["Ps-4", 1], ["Ps-5", 1], ["Ps-6", 1]
+    [
+      "Ps-1",
+      1
+    ],
+    [
+      "Ps-2",
+      1
+    ],
+    [
+      "Ps-3",
+      1
+    ],
+    [
+      "Ps-4",
+      1
+    ],
+    [
+      "Ps-5",
+      1
+    ],
+    [
+      "Ps-6",
+      1
+    ]
   ],
   "all_descriptor_ids": [
-    "Ps-1", "Ps-2", "Ps-3", "Ps-4", "Ps-5", "Ps-6",
-    "Pt-1", "Pt-2", "Pt-3", "Pt-4", "Pt-6",
-    "Fs-01", "Fs-03", "Fs-05", "Fs-07", "Fs-12", "Fs-13", "Fs-14",
-    "Fs-17", "Fs-18", "Fs-19", "Fs-20", "Fs-21", "Fs-23", "Fs-24",
-    "Fs-25", "Fs-26", "Fs-27", "Fs-28", "Fs-32", "Fs-33",
-    "Fs-39", "Fs-40", "Fs-41", "Fs-42", "Fs-43", "Fs-44",
-    "Ft-01", "Ft-02", "Ft-03", "Ft-07", "Ft-09", "Ft-10", "Ft-11",
-    "Ft-14", "Ft-16", "Ft-20", "Ft-21", "Ft-22", "Ft-23", "Ft-24",
-    "Ft-26", "Ft-27", "Ft-28", "Ft-29", "Ft-30", "Ft-31", "Ft-32",
-    "Ft-36", "Ft-37", "Ft-38", "Ft-40", "Ft-42", "Ft-43",
-    "B-01", "B-02",
-    "Fs-46", "Fs-47", "Fs-48", "Fs-49", "Fs-50",
-    "Fs-51", "Fs-52", "Fs-53", "Fs-54", "Fs-55",
-    "Fs-56", "Fs-57", "Fs-58", "Fs-59", "Fs-60", "Fs-61",
-    "Fs-62", "Fs-63",
-    "Ft-44", "Ft-45", "Ft-46", "Ft-47", "Ft-48", "Ft-49", "Ft-50", "Ft-51"
+    "Ps-1",
+    "Ps-2",
+    "Ps-3",
+    "Ps-4",
+    "Ps-5",
+    "Ps-6",
+    "Pt-1",
+    "Pt-2",
+    "Pt-3",
+    "Pt-4",
+    "Pt-6",
+    "Fs-01",
+    "Fs-03",
+    "Fs-05",
+    "Fs-07",
+    "Fs-12",
+    "Fs-13",
+    "Fs-14",
+    "Fs-17",
+    "Fs-18",
+    "Fs-19",
+    "Fs-20",
+    "Fs-21",
+    "Fs-23",
+    "Fs-24",
+    "Fs-25",
+    "Fs-26",
+    "Fs-27",
+    "Fs-28",
+    "Fs-32",
+    "Fs-33",
+    "Fs-39",
+    "Fs-40",
+    "Fs-41",
+    "Fs-42",
+    "Fs-43",
+    "Fs-44",
+    "Ft-01",
+    "Ft-02",
+    "Ft-03",
+    "Ft-07",
+    "Ft-09",
+    "Ft-10",
+    "Ft-11",
+    "Ft-14",
+    "Ft-16",
+    "Ft-20",
+    "Ft-21",
+    "Ft-22",
+    "Ft-23",
+    "Ft-24",
+    "Ft-26",
+    "Ft-27",
+    "Ft-28",
+    "Ft-29",
+    "Ft-30",
+    "Ft-31",
+    "Ft-32",
+    "Ft-36",
+    "Ft-37",
+    "Ft-38",
+    "Ft-40",
+    "Ft-42",
+    "Ft-43",
+    "B-01",
+    "B-02",
+    "Fs-46",
+    "Fs-47",
+    "Fs-48",
+    "Fs-49",
+    "Fs-50",
+    "Fs-51",
+    "Fs-52",
+    "Fs-53",
+    "Fs-54",
+    "Fs-55",
+    "Fs-56",
+    "Fs-57",
+    "Fs-58",
+    "Fs-59",
+    "Fs-60",
+    "Fs-61",
+    "Fs-62",
+    "Fs-63",
+    "Ft-44",
+    "Ft-45",
+    "Ft-46",
+    "Ft-47",
+    "Ft-48",
+    "Ft-49",
+    "Ft-50",
+    "Ft-51"
   ],
   "paradigms": [
     {
       "id": "P1",
       "name": "日常的な食事体験",
-      "d_plus": ["Fs-01", "Fs-03", "Fs-05", "Fs-07", "Fs-17", "Fs-19", "Fs-21", "Fs-23", "Fs-24", "Fs-32", "Fs-33"],
-      "d_minus": ["Ft-03", "Ft-09", "Ft-11", "Ft-22", "Ft-29", "Ft-37", "Fs-26", "Fs-39", "Fs-40", "Fs-43", "B-01", "B-02", "Fs-46", "Fs-47", "Fs-48", "Fs-49", "Fs-50", "Fs-51", "Fs-52", "Fs-53", "Fs-54", "Fs-55", "Fs-56", "Fs-57", "Fs-58", "Fs-59", "Fs-60", "Fs-61"],
+      "d_plus": [
+        "Fs-01",
+        "Fs-03",
+        "Fs-05",
+        "Fs-07",
+        "Fs-17",
+        "Fs-19",
+        "Fs-21",
+        "Fs-23",
+        "Fs-24",
+        "Fs-32",
+        "Fs-33"
+      ],
+      "d_minus": [
+        "Ft-03",
+        "Ft-09",
+        "Ft-11",
+        "Ft-22",
+        "Ft-29",
+        "Ft-37",
+        "Fs-26",
+        "Fs-39",
+        "Fs-40",
+        "Fs-43",
+        "B-01",
+        "B-02",
+        "Fs-46",
+        "Fs-47",
+        "Fs-48",
+        "Fs-49",
+        "Fs-50",
+        "Fs-51",
+        "Fs-52",
+        "Fs-53",
+        "Fs-54",
+        "Fs-55",
+        "Fs-56",
+        "Fs-57",
+        "Fs-58",
+        "Fs-59",
+        "Fs-60",
+        "Fs-61"
+      ],
       "relations": [
-        ["Fs-01", "Fs-05", 0.9],
-        ["Fs-05", "Fs-07", 0.9],
-        ["Fs-17", "Fs-19", 0.8],
-        ["Fs-19", "Fs-23", 0.8],
-        ["Fs-23", "Fs-24", 0.8],
-        ["Fs-32", "Fs-33", 0.9],
-        ["Fs-01", "Ft-03", 0.8],
-        ["Fs-01", "Ft-29", 0.9],
-        ["Fs-01", "Fs-39", 0.8],
-        ["Fs-01", "Fs-40", 0.8],
-        ["Fs-33", "Ft-37", 0.8],
-        ["Fs-19", "Fs-26", 0.7],
-        ["Fs-01", "Fs-46", 0.7],
-        ["Fs-01", "Fs-47", 0.7],
-        ["Fs-01", "Fs-48", 0.7],
-        ["Fs-01", "Fs-49", 0.7],
-        ["Fs-01", "Fs-50", 0.7],
-        ["Fs-01", "Fs-51", 0.7],
-        ["Fs-01", "Fs-52", 0.7],
-        ["Fs-01", "Fs-53", 0.7],
-        ["Fs-01", "Fs-54", 0.7],
-        ["Fs-01", "Fs-55", 0.7],
-        ["Fs-01", "Fs-56", 0.7],
-        ["Fs-01", "Fs-57", 0.7],
-        ["Fs-01", "Fs-58", 0.7],
-        ["Fs-01", "Fs-59", 0.7],
-        ["Fs-01", "Fs-60", 0.7],
-        ["Fs-01", "Fs-61", 0.7]
+        [
+          "Fs-01",
+          "Fs-05",
+          0.9
+        ],
+        [
+          "Fs-05",
+          "Fs-07",
+          0.9
+        ],
+        [
+          "Fs-17",
+          "Fs-19",
+          0.8
+        ],
+        [
+          "Fs-19",
+          "Fs-23",
+          0.8
+        ],
+        [
+          "Fs-23",
+          "Fs-24",
+          0.8
+        ],
+        [
+          "Fs-32",
+          "Fs-33",
+          0.9
+        ],
+        [
+          "Fs-01",
+          "Ft-03",
+          0.8
+        ],
+        [
+          "Fs-01",
+          "Ft-29",
+          0.9
+        ],
+        [
+          "Fs-01",
+          "Fs-39",
+          0.8
+        ],
+        [
+          "Fs-01",
+          "Fs-40",
+          0.8
+        ],
+        [
+          "Fs-33",
+          "Ft-37",
+          0.8
+        ],
+        [
+          "Fs-19",
+          "Fs-26",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-46",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-47",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-48",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-49",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-50",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-51",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-52",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-53",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-54",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-55",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-56",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-57",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-58",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-59",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-60",
+          0.7
+        ],
+        [
+          "Fs-01",
+          "Fs-61",
+          0.7
+        ]
       ]
     },
     {
       "id": "P2",
       "name": "過去の味覚体験との結びつき",
-      "d_plus": ["Fs-12", "Fs-14", "Fs-19", "Fs-24", "Fs-25", "Fs-26", "Fs-27", "Fs-28", "Ft-36", "Ft-38", "Fs-61"],
-      "d_minus": ["Ft-03", "Ft-09", "Ft-11", "Ft-29", "B-01", "Ft-44"],
+      "d_plus": [
+        "Fs-12",
+        "Fs-14",
+        "Fs-19",
+        "Fs-24",
+        "Fs-25",
+        "Fs-26",
+        "Fs-27",
+        "Fs-28",
+        "Ft-36",
+        "Ft-38",
+        "Fs-61"
+      ],
+      "d_minus": [
+        "Ft-03",
+        "Ft-09",
+        "Ft-11",
+        "Ft-29",
+        "B-01",
+        "Ft-44"
+      ],
       "relations": [
-        ["Fs-26", "Fs-12", 0.9],
-        ["Fs-26", "Fs-24", 0.9],
-        ["Fs-12", "Fs-14", 0.9],
-        ["Fs-27", "Ft-36", 0.8],
-        ["Fs-26", "Ft-38", 0.8],
-        ["Fs-12", "Ft-03", 0.7],
-        ["Fs-26", "Ft-29", 0.8],
-        ["Fs-26", "Ft-44", 0.7]
+        [
+          "Fs-26",
+          "Fs-12",
+          0.9
+        ],
+        [
+          "Fs-26",
+          "Fs-24",
+          0.9
+        ],
+        [
+          "Fs-12",
+          "Fs-14",
+          0.9
+        ],
+        [
+          "Fs-27",
+          "Ft-36",
+          0.8
+        ],
+        [
+          "Fs-26",
+          "Ft-38",
+          0.8
+        ],
+        [
+          "Fs-12",
+          "Ft-03",
+          0.7
+        ],
+        [
+          "Fs-26",
+          "Ft-29",
+          0.8
+        ],
+        [
+          "Fs-26",
+          "Ft-44",
+          0.7
+        ]
       ]
     },
     {
       "id": "P3",
       "name": "過去の嘘の発覚",
-      "d_plus": ["Fs-39", "Fs-40", "Fs-41", "Fs-42", "Fs-43", "Fs-44", "Ft-21", "Ft-22", "Ft-24", "Ft-26", "Ft-27", "Ft-37", "Ft-50", "Ft-51"],
-      "d_minus": ["Ft-29", "B-01", "Ft-01", "Ft-02", "Pt-1", "Fs-62", "Fs-63"],
+      "d_plus": [
+        "Fs-39",
+        "Fs-40",
+        "Fs-41",
+        "Fs-42",
+        "Fs-43",
+        "Fs-44",
+        "Ft-21",
+        "Ft-22",
+        "Ft-24",
+        "Ft-26",
+        "Ft-27",
+        "Ft-37",
+        "Ft-50",
+        "Ft-51"
+      ],
+      "d_minus": [
+        "Ft-29",
+        "B-01",
+        "Ft-01",
+        "Ft-02",
+        "Pt-1",
+        "Fs-62",
+        "Fs-63"
+      ],
       "relations": [
-        ["Ft-37", "Ft-22", 0.9],
-        ["Ft-22", "Fs-40", 0.9],
-        ["Fs-40", "Fs-43", 0.9],
-        ["Fs-43", "Fs-42", 0.9],
-        ["Fs-42", "Fs-44", 0.9],
-        ["Ft-22", "Ft-21", 0.7],
-        ["Ft-22", "Ft-24", 0.7],
-        ["Fs-40", "Ft-37", 0.8],
-        ["Fs-39", "Ft-22", 0.7],
-        ["Ft-22", "Ft-02", 0.7],
-        ["Ft-22", "Ft-01", 0.7],
-        ["Ft-37", "Pt-1", 0.7],
-        ["Ft-22", "Ft-50", 0.7],
-        ["Ft-22", "Ft-51", 0.7],
-        ["Ft-22", "Fs-62", 0.7],
-        ["Ft-22", "Fs-63", 0.7],
-        ["Fs-41", "Fs-39", 0.8],
-        ["Fs-44", "Fs-43", 0.8],
-        ["Ft-51", "Ft-22", 0.7]
+        [
+          "Ft-37",
+          "Ft-22",
+          0.9
+        ],
+        [
+          "Ft-22",
+          "Fs-40",
+          0.9
+        ],
+        [
+          "Fs-40",
+          "Fs-43",
+          0.9
+        ],
+        [
+          "Fs-43",
+          "Fs-42",
+          0.9
+        ],
+        [
+          "Fs-42",
+          "Fs-44",
+          0.9
+        ],
+        [
+          "Ft-22",
+          "Ft-21",
+          0.7
+        ],
+        [
+          "Ft-22",
+          "Ft-24",
+          0.7
+        ],
+        [
+          "Fs-40",
+          "Ft-37",
+          0.8
+        ],
+        [
+          "Fs-39",
+          "Ft-22",
+          0.7
+        ],
+        [
+          "Ft-22",
+          "Ft-02",
+          0.7
+        ],
+        [
+          "Ft-22",
+          "Ft-01",
+          0.7
+        ],
+        [
+          "Ft-37",
+          "Pt-1",
+          0.7
+        ],
+        [
+          "Ft-22",
+          "Ft-50",
+          0.7
+        ],
+        [
+          "Ft-22",
+          "Ft-51",
+          0.7
+        ],
+        [
+          "Ft-22",
+          "Fs-62",
+          0.7
+        ],
+        [
+          "Ft-22",
+          "Fs-63",
+          0.7
+        ],
+        [
+          "Fs-41",
+          "Fs-39",
+          0.8
+        ],
+        [
+          "Fs-44",
+          "Fs-43",
+          0.8
+        ],
+        [
+          "Ft-51",
+          "Ft-22",
+          0.7
+        ]
       ]
     },
     {
       "id": "P4",
       "name": "極限状況での隠蔽",
-      "d_plus": ["Ft-01", "Ft-02", "Ft-03", "Ft-07", "Ft-09", "Ft-10", "Ft-11", "Ft-14", "Ft-16", "Ft-20", "Ft-21", "Ft-22", "Ft-24", "Ft-26", "Ft-28", "Ft-32", "Pt-1", "Pt-2", "Pt-3", "Pt-4", "Ft-48"],
-      "d_minus": ["B-01", "Ft-29", "Pt-6", "Ft-40", "Ft-45", "Ft-47", "Ft-49"],
+      "d_plus": [
+        "Ft-01",
+        "Ft-02",
+        "Ft-03",
+        "Ft-07",
+        "Ft-09",
+        "Ft-10",
+        "Ft-11",
+        "Ft-14",
+        "Ft-16",
+        "Ft-20",
+        "Ft-21",
+        "Ft-22",
+        "Ft-24",
+        "Ft-26",
+        "Ft-28",
+        "Ft-32",
+        "Pt-1",
+        "Pt-2",
+        "Pt-3",
+        "Pt-4",
+        "Ft-48"
+      ],
+      "d_minus": [
+        "B-01",
+        "Ft-29",
+        "Pt-6",
+        "Ft-40",
+        "Ft-45",
+        "Ft-47",
+        "Ft-49"
+      ],
       "relations": [
-        ["Ft-03", "Ft-01", 0.8],
-        ["Ft-03", "Ft-09", 0.9],
-        ["Ft-09", "Ft-11", 0.9],
-        ["Ft-09", "Ft-10", 0.8],
-        ["Ft-02", "Ft-20", 0.8],
-        ["Ft-20", "Ft-21", 0.9],
-        ["Ft-21", "Ft-26", 0.8],
-        ["Ft-22", "Ft-24", 0.8],
-        ["Ft-11", "Ft-28", 0.8],
-        ["Ft-14", "Ft-16", 0.9],
-        ["Ft-26", "Ft-32", 0.8],
-        ["Ft-28", "Ft-29", 0.8],
-        ["Ft-32", "Pt-6", 0.7],
-        ["Ft-22", "Ft-40", 0.7],
-        ["Ft-11", "Ft-48", 0.8],
-        ["Ft-02", "Ft-45", 0.7],
-        ["Ft-28", "Ft-47", 0.8],
-        ["Ft-28", "Ft-49", 0.8]
+        [
+          "Ft-03",
+          "Ft-01",
+          0.8
+        ],
+        [
+          "Ft-03",
+          "Ft-09",
+          0.9
+        ],
+        [
+          "Ft-09",
+          "Ft-11",
+          0.9
+        ],
+        [
+          "Ft-09",
+          "Ft-10",
+          0.8
+        ],
+        [
+          "Ft-02",
+          "Ft-20",
+          0.8
+        ],
+        [
+          "Ft-20",
+          "Ft-21",
+          0.9
+        ],
+        [
+          "Ft-21",
+          "Ft-26",
+          0.8
+        ],
+        [
+          "Ft-22",
+          "Ft-24",
+          0.8
+        ],
+        [
+          "Ft-11",
+          "Ft-28",
+          0.8
+        ],
+        [
+          "Ft-14",
+          "Ft-16",
+          0.9
+        ],
+        [
+          "Ft-26",
+          "Ft-32",
+          0.8
+        ],
+        [
+          "Ft-28",
+          "Ft-29",
+          0.8
+        ],
+        [
+          "Ft-32",
+          "Pt-6",
+          0.7
+        ],
+        [
+          "Ft-22",
+          "Ft-40",
+          0.7
+        ],
+        [
+          "Ft-11",
+          "Ft-48",
+          0.8
+        ],
+        [
+          "Ft-02",
+          "Ft-45",
+          0.7
+        ],
+        [
+          "Ft-28",
+          "Ft-47",
+          0.8
+        ],
+        [
+          "Ft-28",
+          "Ft-49",
+          0.8
+        ]
       ]
     },
     {
       "id": "P5",
       "name": "人肉の発覚と絶望",
-      "d_plus": ["Ft-23", "Ft-29", "Ft-30", "Ft-31", "Ft-40", "Ft-42", "Ft-43", "Pt-6", "Ft-46"],
-      "d_minus": ["B-01", "B-02"],
+      "d_plus": [
+        "Ft-23",
+        "Ft-29",
+        "Ft-30",
+        "Ft-31",
+        "Ft-40",
+        "Ft-42",
+        "Ft-43",
+        "Pt-6",
+        "Ft-46"
+      ],
+      "d_minus": [
+        "B-01",
+        "B-02"
+      ],
       "relations": [
-        ["Ft-29", "Ft-42", 0.9],
-        ["Ft-40", "Ft-43", 0.9],
-        ["Ft-29", "Ft-23", 0.8],
-        ["Ft-30", "Ft-31", 0.9]
+        [
+          "Ft-29",
+          "Ft-42",
+          0.9
+        ],
+        [
+          "Ft-40",
+          "Ft-43",
+          0.9
+        ],
+        [
+          "Ft-29",
+          "Ft-23",
+          0.8
+        ],
+        [
+          "Ft-30",
+          "Ft-31",
+          0.9
+        ]
       ]
     },
     {
       "id": "S1",
       "name": "味覚の専門家としての確認",
-      "d_plus": ["B-01", "Fs-05", "Fs-07", "Fs-24"],
-      "d_minus": ["Fs-26", "Ft-03", "Ft-29"],
+      "d_plus": [
+        "B-01",
+        "Fs-05",
+        "Fs-07",
+        "Fs-24"
+      ],
+      "d_minus": [
+        "Fs-26",
+        "Ft-03",
+        "Ft-29"
+      ],
       "relations": [
-        ["B-01", "Fs-24", 0.9],
-        ["B-01", "Fs-26", 0.7],
-        ["B-01", "Ft-03", 0.7]
+        [
+          "B-01",
+          "Fs-24",
+          0.9
+        ],
+        [
+          "B-01",
+          "Fs-26",
+          0.7
+        ],
+        [
+          "B-01",
+          "Ft-03",
+          0.7
+        ]
       ]
     },
     {
       "id": "S2",
       "name": "スープへの恐怖・トラウマ",
-      "d_plus": ["B-02", "Fs-28"],
-      "d_minus": ["B-01", "Ft-29"],
+      "d_plus": [
+        "B-02",
+        "Fs-28"
+      ],
+      "d_minus": [
+        "B-01",
+        "Ft-29"
+      ],
       "relations": [
-        ["B-02", "Fs-28", 0.9],
-        ["B-02", "B-01", 0.7]
+        [
+          "B-02",
+          "Fs-28",
+          0.9
+        ],
+        [
+          "B-02",
+          "B-01",
+          0.7
+        ]
       ]
     }
   ],
   "questions": [
     {
-      "id": "q01", "text": "男は食事をするためにレストランに来ましたか？",
-      "ans_yes": [["Fs-01", 1]], "ans_no": [["Fs-01", 0]], "ans_irrelevant": ["Fs-01"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q02", "text": "男は一人で来ましたか？",
-      "ans_yes": [["Fs-03", 1]], "ans_no": [["Fs-03", 0]], "ans_irrelevant": ["Fs-03"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q03", "text": "男はこのレストランに特定の目的を持って来ましたか？",
-      "ans_yes": [["Fs-05", 1]], "ans_no": [["Fs-05", 0]], "ans_irrelevant": ["Fs-05"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q04", "text": "このレストランでなければなりませんでしたか？",
-      "ans_yes": [["Fs-07", 1]], "ans_no": [["Fs-07", 0]], "ans_irrelevant": ["Fs-07"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q05", "text": "男は料理の専門家ですか？",
-      "ans_yes": [["B-01", 1]], "ans_no": [["B-01", 0]], "ans_irrelevant": ["B-01"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q06", "text": "店員は嘘をついていますか？",
-      "ans_yes": [["Fs-32", 0]], "ans_no": [["Fs-32", 1]], "ans_irrelevant": ["Fs-32"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q07", "text": "スープの味は重要ですか？",
-      "ans_yes": [["Fs-17", 1]], "ans_no": [["Fs-17", 0]], "ans_irrelevant": ["Fs-17"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q08", "text": "男はウミガメのスープに特別な思い入れがありますか？",
-      "ans_yes": [["Fs-12", 1]], "ans_no": [["Fs-12", 0]], "ans_irrelevant": ["Fs-12"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q09", "text": "ウミガメのスープでなければなりませんでしたか？",
-      "ans_yes": [["Fs-14", 1]], "ans_no": [["Fs-14", 0]], "ans_irrelevant": ["Fs-14"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q10", "text": "注文したスープは本物のウミガメのスープですか？",
-      "ans_yes": [["Fs-33", 1]], "ans_no": [["Fs-33", 0]], "ans_irrelevant": ["Fs-33"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q11", "text": "一口しか飲まなかったのは意図的ですか？",
-      "ans_yes": [["Fs-21", 1]], "ans_no": [["Fs-21", 0]], "ans_irrelevant": ["Fs-21"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q12", "text": "味を確認するために飲みましたか？",
-      "ans_yes": [["Fs-19", 1]], "ans_no": [["Fs-19", 0]], "ans_irrelevant": ["Fs-19"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q13", "text": "一口で何かに気づきましたか？",
-      "ans_yes": [["Fs-18", 1], ["Fs-20", 1]], "ans_no": [["Fs-18", 0]], "ans_irrelevant": ["Fs-18"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q14", "text": "男はスープの味に驚きましたか？",
-      "ans_yes": [["Fs-20", 1]], "ans_no": [["Fs-20", 0]], "ans_irrelevant": ["Fs-20"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q15", "text": "男はスープを飲むことを恐れていましたか？",
-      "ans_yes": [["B-02", 1]], "ans_no": [["B-02", 0]], "ans_irrelevant": ["B-02"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q16", "text": "男はスープの正体に疑問を持ちましたか？",
-      "ans_yes": [["Fs-23", 1]], "ans_no": [["Fs-23", 0]], "ans_irrelevant": ["Fs-23"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q17", "text": "男は本物かどうかの判別基準を持っていますか？",
-      "ans_yes": [["Fs-24", 1]], "ans_no": [["Fs-24", 0]], "ans_irrelevant": ["Fs-24"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q18", "text": "真偽の確認は過去の体験と関係がありますか？",
-      "ans_yes": [["Fs-25", 1]], "ans_no": [["Fs-25", 0]], "ans_irrelevant": ["Fs-25"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q19", "text": "男は不安を感じていましたか？",
-      "ans_yes": [["Fs-28", 1]], "ans_no": [["Fs-28", 0]], "ans_irrelevant": ["Fs-28"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q20", "text": "男は以前にウミガメのスープを飲んだことがありますか？",
-      "ans_yes": [["Fs-26", 1]], "ans_no": [["Fs-26", 0]], "ans_irrelevant": ["Fs-26"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q21", "text": "過去に誰かから「ウミガメのスープだ」と言われてスープを飲まされたことがありますか？",
-      "ans_yes": [["Fs-27", 1]], "ans_no": [["Fs-27", 0]], "ans_irrelevant": ["Fs-27"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q22", "text": "男はスープの味を比較しようとしていましたか？",
-      "ans_yes": [["Fs-19", 1], ["Fs-24", 1]], "ans_no": [["Fs-19", 0]], "ans_irrelevant": ["Fs-19"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q23", "text": "男は過去の記憶を確かめたかったのですか？",
-      "ans_yes": [["Ft-36", 1]], "ans_no": [["Ft-36", 0]], "ans_irrelevant": ["Ft-36"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q24", "text": "男は味覚の記憶が残っていましたか？",
-      "ans_yes": [["Ft-38", 1]], "ans_no": [["Ft-38", 0]], "ans_irrelevant": ["Ft-38"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q25", "text": "以前のスープは別の人が作りましたか？",
-      "ans_yes": [["Fs-27", 1]], "ans_no": [["Fs-27", 0]], "ans_irrelevant": ["Fs-27"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q26", "text": "自殺の原因はレストランでの出来事と関係がありますか？",
-      "ans_yes": [["Fs-39", 1]], "ans_no": [["Fs-39", 0]], "ans_irrelevant": ["Fs-39"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q27", "text": "スープを飲んだことで何かを知りましたか？",
-      "ans_yes": [["Fs-40", 1], ["Fs-41", 1]], "ans_no": [["Fs-40", 0]], "ans_irrelevant": ["Fs-40"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q28", "text": "知った事実は耐えられないほどのものでしたか？",
-      "ans_yes": [["Fs-43", 1]], "ans_no": [["Fs-43", 0]], "ans_irrelevant": ["Fs-43"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q29", "text": "スープの一件がなければ自殺しませんでしたか？",
-      "ans_yes": [["Fs-44", 1]], "ans_no": [["Fs-44", 0]], "ans_irrelevant": ["Fs-44"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q30", "text": "男は絶望しましたか？",
-      "ans_yes": [["Fs-42", 1]], "ans_no": [["Fs-42", 0]], "ans_irrelevant": ["Fs-42"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q31", "text": "以前飲んだスープと今回のスープの味は違いましたか？",
-      "ans_yes": [["Ft-37", 1]], "ans_no": [["Ft-37", 0]], "ans_irrelevant": ["Ft-37"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q32", "text": "以前飲んだスープは本物のウミガメのスープでしたか？",
-      "ans_yes": [["Ft-37", 0]], "ans_no": [["Ft-37", 1]], "ans_irrelevant": ["Ft-37"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q33", "text": "男は誰かに騙されていましたか？",
-      "ans_yes": [["Ft-22", 1]], "ans_no": [["Ft-22", 0]], "ans_irrelevant": ["Ft-22"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q34", "text": "過去にスープを出した人物は男に本当のことを言っていましたか？",
-      "ans_yes": [["Ft-22", 0]], "ans_no": [["Ft-22", 1]], "ans_irrelevant": ["Ft-22"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q35", "text": "嘘をついた人物に悪意はありましたか？",
-      "ans_yes": [["Ft-21", 0], ["Ft-26", 0]], "ans_no": [["Ft-21", 1], ["Ft-26", 1]], "ans_irrelevant": ["Ft-21", "Ft-26"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q36", "text": "男は誰かに裏切られましたか？",
-      "ans_yes": [["Ft-22", 1]], "ans_no": [["Ft-22", 0]], "ans_irrelevant": ["Ft-22"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q37", "text": "本当のことを言ったら男は飲みませんでしたか？",
-      "ans_yes": [["Ft-24", 1]], "ans_no": [["Ft-24", 0]], "ans_irrelevant": ["Ft-24"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q38", "text": "男は過去に命の危険にさらされましたか？",
-      "ans_yes": [["Ft-03", 1]], "ans_no": [["Ft-03", 0]], "ans_irrelevant": ["Ft-03"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q39", "text": "男は事故に遭いましたか？",
-      "ans_yes": [["Pt-1", 1]], "ans_no": [["Pt-1", 0]], "ans_irrelevant": ["Pt-1"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q40", "text": "男は船に乗っていましたか？",
-      "ans_yes": [["Ft-01", 1]], "ans_no": [["Ft-01", 0]], "ans_irrelevant": ["Ft-01"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q41", "text": "男は遭難したことがありますか？",
-      "ans_yes": [["Pt-1", 1]], "ans_no": [["Pt-1", 0]], "ans_irrelevant": ["Pt-1"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q42", "text": "遭難しなければ今回の事態は起きませんでしたか？",
-      "ans_yes": [["Ft-07", 1]], "ans_no": [["Ft-07", 0]], "ans_irrelevant": ["Ft-07"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q43", "text": "そのとき仲間がいましたか？",
-      "ans_yes": [["Ft-02", 1]], "ans_no": [["Ft-02", 0]], "ans_irrelevant": ["Ft-02"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q44", "text": "食料に困りましたか？",
-      "ans_yes": [["Ft-09", 1], ["Pt-2", 1]], "ans_no": [["Ft-09", 0]], "ans_irrelevant": ["Ft-09"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q45", "text": "長い間救助が来ませんでしたか？",
-      "ans_yes": [["Ft-10", 1]], "ans_no": [["Ft-10", 0]], "ans_irrelevant": ["Ft-10"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q46", "text": "極限状態でしたか？",
-      "ans_yes": [["Ft-11", 1]], "ans_no": [["Ft-11", 0]], "ans_irrelevant": ["Ft-11"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q47", "text": "そのとき誰かが死にましたか？",
-      "ans_yes": [["Pt-3", 1]], "ans_no": [["Pt-3", 0]], "ans_irrelevant": ["Pt-3"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q48", "text": "死んだのは仲間ですか？",
-      "ans_yes": [["Pt-3", 1]], "ans_no": [["Pt-3", 0]], "ans_irrelevant": ["Pt-3"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q49", "text": "仲間は飢えで死にましたか？",
-      "ans_yes": [["Ft-14", 1], ["Ft-16", 1]], "ans_no": [["Ft-14", 0]], "ans_irrelevant": ["Ft-14"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q50", "text": "仲間が男にスープを飲ませましたか？",
-      "ans_yes": [["Pt-4", 1]], "ans_no": [["Pt-4", 0]], "ans_irrelevant": ["Pt-4"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q51", "text": "仲間は男を助けようとしましたか？",
-      "ans_yes": [["Ft-20", 1]], "ans_no": [["Ft-20", 0]], "ans_irrelevant": ["Ft-20"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q52", "text": "仲間は罪悪感を感じていましたか？",
-      "ans_yes": [["Ft-26", 1]], "ans_no": [["Ft-26", 0]], "ans_irrelevant": ["Ft-26"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q53", "text": "仲間は苦渋の決断をしましたか？",
-      "ans_yes": [["Ft-32", 1]], "ans_no": [["Ft-32", 0]], "ans_irrelevant": ["Ft-32"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q54", "text": "スープの材料は通常食べるものですか？",
-      "ans_yes": [["Ft-28", 0]], "ans_no": [["Ft-28", 1]], "ans_irrelevant": ["Ft-28"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q55", "text": "スープの材料は人間の肉ですか？",
-      "ans_yes": [["Ft-29", 1], ["Pt-6", 1]], "ans_no": [["Ft-29", 0]], "ans_irrelevant": ["Ft-29"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q56", "text": "死んだ仲間の肉が使われましたか？",
-      "ans_yes": [["Pt-6", 1]], "ans_no": [["Pt-6", 0]], "ans_irrelevant": ["Pt-6"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q57", "text": "男はそのことを知らずに飲みましたか？",
-      "ans_yes": [["Ft-23", 1]], "ans_no": [["Ft-23", 0]], "ans_irrelevant": ["Ft-23"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q58", "text": "他に食料がなかったのですか？",
-      "ans_yes": [["Ft-30", 1]], "ans_no": [["Ft-30", 0]], "ans_irrelevant": ["Ft-30"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q59", "text": "生き延びるためにそうするしかなかったのですか？",
-      "ans_yes": [["Ft-31", 1]], "ans_no": [["Ft-31", 0]], "ans_irrelevant": ["Ft-31"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q60", "text": "レストランで本物の味を知って、過去のスープが人肉だったと悟りましたか？",
-      "ans_yes": [["Ft-40", 1]], "ans_no": [["Ft-40", 0]], "ans_irrelevant": ["Ft-40"],
-      "correct_answer": "yes", "is_clear": true
-    },
-    {
-      "id": "q61", "text": "騙されていたことに怒りを感じましたか？",
-      "ans_yes": [["Ft-43", 1]], "ans_no": [["Ft-43", 0]], "ans_irrelevant": ["Ft-43"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q62", "text": "人肉を食べた事実に耐えられなかったのですか？",
-      "ans_yes": [["Ft-42", 1]], "ans_no": [["Ft-42", 0]], "ans_irrelevant": ["Ft-42"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q63", "text": "味を確認するために飲んだのは、以前にも飲んだことがあるからですか？",
-      "ans_yes": [["Fs-19", 1], ["Fs-26", 1]], "ans_no": [["Fs-19", 0]], "ans_irrelevant": ["Fs-19"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q64", "text": "スープの正体への疑問は、男の自殺の原因に関わっていますか？",
-      "ans_yes": [["Fs-23", 1], ["Fs-39", 1]], "ans_no": [["Fs-23", 0]], "ans_irrelevant": ["Fs-23"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q65", "text": "スープの味が重要なのは、味によって何かを知ったからですか？",
-      "ans_yes": [["Fs-17", 1], ["Fs-40", 1]], "ans_no": [["Fs-17", 0]], "ans_irrelevant": ["Fs-17"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q66", "text": "以前スープを飲んだときは、命に関わる状況でしたか？",
-      "ans_yes": [["Fs-26", 1], ["Ft-03", 1]], "ans_no": [["Fs-26", 0]], "ans_irrelevant": ["Fs-26"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q67", "text": "味覚の記憶が残っていたのは、食料に困った経験があるからですか？",
-      "ans_yes": [["Ft-38", 1], ["Ft-09", 1]], "ans_no": [["Ft-38", 0]], "ans_irrelevant": ["Ft-38"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q68", "text": "ウミガメのスープへの思い入れは、極限的な体験に由来しますか？",
-      "ans_yes": [["Fs-12", 1], ["Ft-11", 1]], "ans_no": [["Fs-12", 0]], "ans_irrelevant": ["Fs-12"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q69", "text": "以前のスープが別の食材だったことは、遭難と関係がありますか？",
-      "ans_yes": [["Ft-37", 1], ["Pt-1", 1]], "ans_no": [["Ft-37", 0]], "ans_irrelevant": ["Ft-37"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q70", "text": "嘘をついた人物は男と一緒にいた仲間ですか？",
-      "ans_yes": [["Ft-22", 1], ["Ft-02", 1]], "ans_no": [["Ft-22", 0]], "ans_irrelevant": ["Ft-22"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q71", "text": "男を助けようとして嘘をつかれたのは、船の上でのことですか？",
-      "ans_yes": [["Ft-21", 1], ["Ft-01", 1]], "ans_no": [["Ft-21", 0]], "ans_irrelevant": ["Ft-21"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q72", "text": "通常食べないものとは、人間の肉ですか？",
-      "ans_yes": [["Ft-28", 1], ["Ft-29", 1]], "ans_no": [["Ft-28", 0]], "ans_irrelevant": ["Ft-28"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q73", "text": "苦渋の決断とは、死んだ仲間の肉をスープにすることですか？",
-      "ans_yes": [["Ft-32", 1], ["Pt-6", 1]], "ans_no": [["Ft-32", 0]], "ans_irrelevant": ["Ft-32"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q74", "text": "隠蔽の結果、男は後に真実を悟りましたか？",
-      "ans_yes": [["Ft-22", 1], ["Ft-40", 1]], "ans_no": [["Ft-22", 0]], "ans_irrelevant": ["Ft-22"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q75", "text": "男の職業はこの話に重要ですか？",
-      "ans_yes": [["Fs-46", 1]], "ans_no": [["Fs-46", 0]], "ans_irrelevant": ["Fs-46"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q76", "text": "レストランの場所は重要ですか？",
-      "ans_yes": [["Fs-47", 1]], "ans_no": [["Fs-47", 0]], "ans_irrelevant": ["Fs-47"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q77", "text": "男がレストランに行った時間帯は重要ですか？",
-      "ans_yes": [["Fs-48", 1]], "ans_no": [["Fs-48", 0]], "ans_irrelevant": ["Fs-48"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q78", "text": "スープの値段は関係がありますか？",
-      "ans_yes": [["Fs-49", 1]], "ans_no": [["Fs-49", 0]], "ans_irrelevant": ["Fs-49"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q79", "text": "男の年齢は重要ですか？",
-      "ans_yes": [["Fs-50", 1]], "ans_no": [["Fs-50", 0]], "ans_irrelevant": ["Fs-50"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q80", "text": "レストランで何か事件が起きましたか？",
-      "ans_yes": [["Fs-51", 1]], "ans_no": [["Fs-51", 0]], "ans_irrelevant": ["Fs-51"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q81", "text": "店員はこの件に直接関係がありますか？",
-      "ans_yes": [["Fs-52", 1]], "ans_no": [["Fs-52", 0]], "ans_irrelevant": ["Fs-52"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q82", "text": "スープに毒が入っていましたか？",
-      "ans_yes": [["Fs-53", 1]], "ans_no": [["Fs-53", 0]], "ans_irrelevant": ["Fs-53"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q83", "text": "スープの品質に問題がありましたか？",
-      "ans_yes": [["Fs-54", 1]], "ans_no": [["Fs-54", 0]], "ans_irrelevant": ["Fs-54"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q84", "text": "スープがまずかったのですか？",
-      "ans_yes": [["Fs-55", 1]], "ans_no": [["Fs-55", 0]], "ans_irrelevant": ["Fs-55"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q85", "text": "男は恋愛の問題で自殺しましたか？",
-      "ans_yes": [["Fs-56", 1]], "ans_no": [["Fs-56", 0]], "ans_irrelevant": ["Fs-56"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q86", "text": "男は借金や経済的な問題がありましたか？",
-      "ans_yes": [["Fs-57", 1]], "ans_no": [["Fs-57", 0]], "ans_irrelevant": ["Fs-57"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q87", "text": "男は精神的な病気がありましたか？",
-      "ans_yes": [["Fs-58", 1]], "ans_no": [["Fs-58", 0]], "ans_irrelevant": ["Fs-58"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q88", "text": "男は誰かに殺されましたか？",
-      "ans_yes": [["Fs-59", 1]], "ans_no": [["Fs-59", 0]], "ans_irrelevant": ["Fs-59"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q89", "text": "男は誰かを殺したことがありますか？",
-      "ans_yes": [["Fs-60", 1]], "ans_no": [["Fs-60", 0]], "ans_irrelevant": ["Fs-60"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q90", "text": "男の過去の体験が、今回のレストラン訪問と関係していますか？",
-      "ans_yes": [["Fs-05", 1], ["Fs-61", 1]], "ans_no": [["Fs-05", 0], ["Fs-61", 0]], "ans_irrelevant": ["Fs-05", "Fs-61"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q91", "text": "男は戦争に参加したことがありますか？",
-      "ans_yes": [["Fs-62", 1]], "ans_no": [["Fs-62", 0]], "ans_irrelevant": ["Fs-62"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q92", "text": "男は犯罪に関わっていますか？",
-      "ans_yes": [["Fs-63", 1]], "ans_no": [["Fs-63", 0]], "ans_irrelevant": ["Fs-63"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q93", "text": "以前のスープはレストランで飲みましたか？",
-      "ans_yes": [["Ft-44", 1]], "ans_no": [["Ft-44", 0]], "ans_irrelevant": ["Ft-44"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q94", "text": "男が仲間を殺しましたか？",
-      "ans_yes": [["Ft-45", 1]], "ans_no": [["Ft-45", 0]], "ans_irrelevant": ["Ft-45"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q95", "text": "スープの材料は動物の肉ですか？",
-      "ans_yes": [["Ft-47", 1]], "ans_no": [["Ft-47", 0]], "ans_irrelevant": ["Ft-47"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q96", "text": "スープの材料は肉ですか？",
-      "ans_yes": [["Ft-48", 1]], "ans_no": [["Ft-48", 0]], "ans_irrelevant": ["Ft-48"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q97", "text": "スープの材料は食用として一般的なものですか？",
-      "ans_yes": [["Ft-49", 1]], "ans_no": [["Ft-49", 0]], "ans_irrelevant": ["Ft-49"],
-      "correct_answer": "no", "is_clear": false
-    },
-    {
-      "id": "q98", "text": "男は過去に危機的な状況に置かれたことがありますか？",
-      "ans_yes": [["Ft-50", 1]], "ans_no": [["Ft-50", 0]], "ans_irrelevant": ["Ft-50"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q99", "text": "男の過去のトラウマ体験が自殺の原因に関係しますか？",
-      "ans_yes": [["Ft-51", 1]], "ans_no": [["Ft-51", 0]], "ans_irrelevant": ["Ft-51"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q100", "text": "このレストランに来た目的は、過去に命の危機に関わる体験と関係がありますか？",
-      "ans_yes": [["Fs-05", 1], ["Ft-03", 1]], "ans_no": [["Fs-05", 0]], "ans_irrelevant": ["Fs-05"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q101", "text": "過去にスープを飲まされたことは、人肉と関係がありますか？",
-      "ans_yes": [["Fs-27", 1], ["Ft-29", 1]], "ans_no": [["Fs-27", 0]], "ans_irrelevant": ["Fs-27"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q102", "text": "自殺の原因がレストランでの出来事に関わるなら、船の上での出来事も関係しますか？",
-      "ans_yes": [["Fs-39", 1], ["Ft-01", 1]], "ans_no": [["Fs-39", 0]], "ans_irrelevant": ["Fs-39"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q103", "text": "耐えられない事実は、遭難事故と関係がありますか？",
-      "ans_yes": [["Fs-43", 1], ["Pt-1", 1]], "ans_no": [["Fs-43", 0]], "ans_irrelevant": ["Fs-43"],
-      "correct_answer": "yes", "is_clear": false
-    },
-    {
-      "id": "q104", "text": "騙されていたことと、仲間の存在は関係がありますか？",
-      "ans_yes": [["Ft-22", 1], ["Ft-02", 1]], "ans_no": [["Ft-22", 0]], "ans_irrelevant": ["Ft-22"],
-      "correct_answer": "yes", "is_clear": false
+      "id": "q01",
+      "text": "男は食事をするためにレストランに来ましたか？",
+      "ans_yes": [
+        [
+          "Fs-01",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-01",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-01"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q02",
+      "text": "男は一人で来ましたか？",
+      "ans_yes": [
+        [
+          "Fs-03",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-03",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-03"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q03",
+      "text": "男はこのレストランに特定の目的を持って来ましたか？",
+      "ans_yes": [
+        [
+          "Fs-05",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-05",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-05"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q04",
+      "text": "このレストランでなければなりませんでしたか？",
+      "ans_yes": [
+        [
+          "Fs-07",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-07",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-07"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q05",
+      "text": "男は料理の専門家ですか？",
+      "ans_yes": [
+        [
+          "B-01",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "B-01",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "B-01"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q06",
+      "text": "店員は嘘をついていますか？",
+      "ans_yes": [
+        [
+          "Fs-32",
+          0
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-32",
+          1
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-32"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q07",
+      "text": "スープの味は重要ですか？",
+      "ans_yes": [
+        [
+          "Fs-17",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-17",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-17"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q08",
+      "text": "男はウミガメのスープに特別な思い入れがありますか？",
+      "ans_yes": [
+        [
+          "Fs-12",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-12",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-12"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q09",
+      "text": "ウミガメのスープでなければなりませんでしたか？",
+      "ans_yes": [
+        [
+          "Fs-14",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-14",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-14"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q10",
+      "text": "注文したスープは本物のウミガメのスープですか？",
+      "ans_yes": [
+        [
+          "Fs-33",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-33",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-33"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q11",
+      "text": "一口しか飲まなかったのは意図的ですか？",
+      "ans_yes": [
+        [
+          "Fs-21",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-21",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-21"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q12",
+      "text": "味を確認するために飲みましたか？",
+      "ans_yes": [
+        [
+          "Fs-19",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-19",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-19"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q13",
+      "text": "一口で何かに気づきましたか？",
+      "ans_yes": [
+        [
+          "Fs-18",
+          1
+        ],
+        [
+          "Fs-20",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-18",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-18"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q14",
+      "text": "男はスープの味に驚きましたか？",
+      "ans_yes": [
+        [
+          "Fs-20",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-20",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-20"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q15",
+      "text": "男はスープを飲むことを恐れていましたか？",
+      "ans_yes": [
+        [
+          "B-02",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "B-02",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "B-02"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q16",
+      "text": "男はスープの正体に疑問を持ちましたか？",
+      "ans_yes": [
+        [
+          "Fs-23",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-23",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-23"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q17",
+      "text": "男は本物かどうかの判別基準を持っていますか？",
+      "ans_yes": [
+        [
+          "Fs-24",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-24",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-24"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q18",
+      "text": "真偽の確認は過去の体験と関係がありますか？",
+      "ans_yes": [
+        [
+          "Fs-25",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-25",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-25"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q19",
+      "text": "男は不安を感じていましたか？",
+      "ans_yes": [
+        [
+          "Fs-28",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-28",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-28"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q20",
+      "text": "男は以前にウミガメのスープを飲んだことがありますか？",
+      "ans_yes": [
+        [
+          "Fs-26",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-26",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-26"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q21",
+      "text": "過去に誰かから「ウミガメのスープだ」と言われてスープを飲まされたことがありますか？",
+      "ans_yes": [
+        [
+          "Fs-27",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-27",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-27"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q22",
+      "text": "男はスープの味を比較しようとしていましたか？",
+      "ans_yes": [
+        [
+          "Fs-19",
+          1
+        ],
+        [
+          "Fs-24",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-19",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-19"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q23",
+      "text": "男は過去の記憶を確かめたかったのですか？",
+      "ans_yes": [
+        [
+          "Ft-36",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-36",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-36"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q24",
+      "text": "男は味覚の記憶が残っていましたか？",
+      "ans_yes": [
+        [
+          "Ft-38",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-38",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-38"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q25",
+      "text": "以前のスープは別の人が作りましたか？",
+      "ans_yes": [
+        [
+          "Fs-27",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-27",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-27"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-26"
+      ]
+    },
+    {
+      "id": "q26",
+      "text": "自殺の原因はレストランでの出来事と関係がありますか？",
+      "ans_yes": [
+        [
+          "Fs-39",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-39",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-39"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q27",
+      "text": "スープを飲んだことで何かを知りましたか？",
+      "ans_yes": [
+        [
+          "Fs-40",
+          1
+        ],
+        [
+          "Fs-41",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-40",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-40"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q28",
+      "text": "知った事実は耐えられないほどのものでしたか？",
+      "ans_yes": [
+        [
+          "Fs-43",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-43",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-43"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q29",
+      "text": "スープの一件がなければ自殺しませんでしたか？",
+      "ans_yes": [
+        [
+          "Fs-44",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-44",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-44"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q30",
+      "text": "男は絶望しましたか？",
+      "ans_yes": [
+        [
+          "Fs-42",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-42",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-42"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q31",
+      "text": "以前飲んだスープと今回のスープの味は違いましたか？",
+      "ans_yes": [
+        [
+          "Ft-37",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-37",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-37"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-26"
+      ]
+    },
+    {
+      "id": "q32",
+      "text": "以前飲んだスープは本物のウミガメのスープでしたか？",
+      "ans_yes": [
+        [
+          "Ft-37",
+          0
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-37",
+          1
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-37"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-26"
+      ]
+    },
+    {
+      "id": "q33",
+      "text": "男は誰かに騙されていましたか？",
+      "ans_yes": [
+        [
+          "Ft-22",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-22",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-22"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q34",
+      "text": "過去にスープを出した人物は男に本当のことを言っていましたか？",
+      "ans_yes": [
+        [
+          "Ft-22",
+          0
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-22",
+          1
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-22"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-26"
+      ]
+    },
+    {
+      "id": "q35",
+      "text": "嘘をついた人物に悪意はありましたか？",
+      "ans_yes": [
+        [
+          "Ft-21",
+          0
+        ],
+        [
+          "Ft-26",
+          0
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-21",
+          1
+        ],
+        [
+          "Ft-26",
+          1
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-21",
+        "Ft-26"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-22"
+      ]
+    },
+    {
+      "id": "q36",
+      "text": "男は誰かに裏切られましたか？",
+      "ans_yes": [
+        [
+          "Ft-22",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-22",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-22"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q37",
+      "text": "本当のことを言ったら男は飲みませんでしたか？",
+      "ans_yes": [
+        [
+          "Ft-24",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-24",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-24"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-22"
+      ]
+    },
+    {
+      "id": "q38",
+      "text": "男は過去に命の危険にさらされましたか？",
+      "ans_yes": [
+        [
+          "Ft-03",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-03",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-03"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q39",
+      "text": "男は事故に遭いましたか？",
+      "ans_yes": [
+        [
+          "Pt-1",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Pt-1",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Pt-1"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q40",
+      "text": "男は船に乗っていましたか？",
+      "ans_yes": [
+        [
+          "Ft-01",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-01",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-01"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q41",
+      "text": "男は遭難したことがありますか？",
+      "ans_yes": [
+        [
+          "Pt-1",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Pt-1",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Pt-1"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q42",
+      "text": "遭難しなければ今回の事態は起きませんでしたか？",
+      "ans_yes": [
+        [
+          "Ft-07",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-07",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-07"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Pt-1"
+      ]
+    },
+    {
+      "id": "q43",
+      "text": "そのとき仲間がいましたか？",
+      "ans_yes": [
+        [
+          "Ft-02",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-02",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-02"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Pt-1"
+      ]
+    },
+    {
+      "id": "q44",
+      "text": "食料に困りましたか？",
+      "ans_yes": [
+        [
+          "Ft-09",
+          1
+        ],
+        [
+          "Pt-2",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-09",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-09"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q45",
+      "text": "長い間救助が来ませんでしたか？",
+      "ans_yes": [
+        [
+          "Ft-10",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-10",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-10"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Pt-1"
+      ]
+    },
+    {
+      "id": "q46",
+      "text": "極限状態でしたか？",
+      "ans_yes": [
+        [
+          "Ft-11",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-11",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-11"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q47",
+      "text": "そのとき誰かが死にましたか？",
+      "ans_yes": [
+        [
+          "Pt-3",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Pt-3",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Pt-3"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Pt-1"
+      ]
+    },
+    {
+      "id": "q48",
+      "text": "死んだのは仲間ですか？",
+      "ans_yes": [
+        [
+          "Pt-3",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Pt-3",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Pt-3"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Pt-3"
+      ]
+    },
+    {
+      "id": "q49",
+      "text": "仲間は飢えで死にましたか？",
+      "ans_yes": [
+        [
+          "Ft-14",
+          1
+        ],
+        [
+          "Ft-16",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-14",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-14"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-02"
+      ]
+    },
+    {
+      "id": "q50",
+      "text": "仲間が男にスープを飲ませましたか？",
+      "ans_yes": [
+        [
+          "Pt-4",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Pt-4",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Pt-4"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-02"
+      ]
+    },
+    {
+      "id": "q51",
+      "text": "仲間は男を助けようとしましたか？",
+      "ans_yes": [
+        [
+          "Ft-20",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-20",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-20"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-02"
+      ]
+    },
+    {
+      "id": "q52",
+      "text": "仲間は罪悪感を感じていましたか？",
+      "ans_yes": [
+        [
+          "Ft-26",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-26",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-26"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-02"
+      ]
+    },
+    {
+      "id": "q53",
+      "text": "仲間は苦渋の決断をしましたか？",
+      "ans_yes": [
+        [
+          "Ft-32",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-32",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-32"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-02"
+      ]
+    },
+    {
+      "id": "q54",
+      "text": "スープの材料は通常食べるものですか？",
+      "ans_yes": [
+        [
+          "Ft-28",
+          0
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-28",
+          1
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-28"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q55",
+      "text": "スープの材料は人間の肉ですか？",
+      "ans_yes": [
+        [
+          "Ft-29",
+          1
+        ],
+        [
+          "Pt-6",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-29",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-29"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q56",
+      "text": "死んだ仲間の肉が使われましたか？",
+      "ans_yes": [
+        [
+          "Pt-6",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Pt-6",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Pt-6"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Pt-3",
+        "Ft-02"
+      ]
+    },
+    {
+      "id": "q57",
+      "text": "男はそのことを知らずに飲みましたか？",
+      "ans_yes": [
+        [
+          "Ft-23",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-23",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-23"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q58",
+      "text": "他に食料がなかったのですか？",
+      "ans_yes": [
+        [
+          "Ft-30",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-30",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-30"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q59",
+      "text": "生き延びるためにそうするしかなかったのですか？",
+      "ans_yes": [
+        [
+          "Ft-31",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-31",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-31"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q60",
+      "text": "レストランで本物の味を知って、過去のスープが人肉だったと悟りましたか？",
+      "ans_yes": [
+        [
+          "Ft-40",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-40",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-40"
+      ],
+      "correct_answer": "yes",
+      "is_clear": true,
+      "prerequisites": []
+    },
+    {
+      "id": "q61",
+      "text": "騙されていたことに怒りを感じましたか？",
+      "ans_yes": [
+        [
+          "Ft-43",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-43",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-43"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q62",
+      "text": "人肉を食べた事実に耐えられなかったのですか？",
+      "ans_yes": [
+        [
+          "Ft-42",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-42",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-42"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q63",
+      "text": "味を確認するために飲んだのは、以前にも飲んだことがあるからですか？",
+      "ans_yes": [
+        [
+          "Fs-19",
+          1
+        ],
+        [
+          "Fs-26",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-19",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-19"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q64",
+      "text": "スープの正体への疑問は、男の自殺の原因に関わっていますか？",
+      "ans_yes": [
+        [
+          "Fs-23",
+          1
+        ],
+        [
+          "Fs-39",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-23",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-23"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q65",
+      "text": "スープの味が重要なのは、味によって何かを知ったからですか？",
+      "ans_yes": [
+        [
+          "Fs-17",
+          1
+        ],
+        [
+          "Fs-40",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-17",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-17"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q66",
+      "text": "以前スープを飲んだときは、命に関わる状況でしたか？",
+      "ans_yes": [
+        [
+          "Fs-26",
+          1
+        ],
+        [
+          "Ft-03",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-26",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-26"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-26"
+      ]
+    },
+    {
+      "id": "q67",
+      "text": "味覚の記憶が残っていたのは、食料に困った経験があるからですか？",
+      "ans_yes": [
+        [
+          "Ft-38",
+          1
+        ],
+        [
+          "Ft-09",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-38",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-38"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q68",
+      "text": "ウミガメのスープへの思い入れは、極限的な体験に由来しますか？",
+      "ans_yes": [
+        [
+          "Fs-12",
+          1
+        ],
+        [
+          "Ft-11",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-12",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-12"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q69",
+      "text": "以前のスープが別の食材だったことは、遭難と関係がありますか？",
+      "ans_yes": [
+        [
+          "Ft-37",
+          1
+        ],
+        [
+          "Pt-1",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-37",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-37"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-37"
+      ]
+    },
+    {
+      "id": "q70",
+      "text": "嘘をついた人物は男と一緒にいた仲間ですか？",
+      "ans_yes": [
+        [
+          "Ft-22",
+          1
+        ],
+        [
+          "Ft-02",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-22",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-22"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-22"
+      ]
+    },
+    {
+      "id": "q71",
+      "text": "男を助けようとして嘘をつかれたのは、船の上でのことですか？",
+      "ans_yes": [
+        [
+          "Ft-21",
+          1
+        ],
+        [
+          "Ft-01",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-21",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-21"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-22"
+      ]
+    },
+    {
+      "id": "q72",
+      "text": "通常食べないものとは、人間の肉ですか？",
+      "ans_yes": [
+        [
+          "Ft-28",
+          1
+        ],
+        [
+          "Ft-29",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-28",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-28"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q73",
+      "text": "苦渋の決断とは、死んだ仲間の肉をスープにすることですか？",
+      "ans_yes": [
+        [
+          "Ft-32",
+          1
+        ],
+        [
+          "Pt-6",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-32",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-32"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-32"
+      ]
+    },
+    {
+      "id": "q74",
+      "text": "隠蔽の結果、男は後に真実を悟りましたか？",
+      "ans_yes": [
+        [
+          "Ft-22",
+          1
+        ],
+        [
+          "Ft-40",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-22",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-22"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-22"
+      ]
+    },
+    {
+      "id": "q75",
+      "text": "男の職業はこの話に重要ですか？",
+      "ans_yes": [
+        [
+          "Fs-46",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-46",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-46"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q76",
+      "text": "レストランの場所は重要ですか？",
+      "ans_yes": [
+        [
+          "Fs-47",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-47",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-47"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q77",
+      "text": "男がレストランに行った時間帯は重要ですか？",
+      "ans_yes": [
+        [
+          "Fs-48",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-48",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-48"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q78",
+      "text": "スープの値段は関係がありますか？",
+      "ans_yes": [
+        [
+          "Fs-49",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-49",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-49"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q79",
+      "text": "男の年齢は重要ですか？",
+      "ans_yes": [
+        [
+          "Fs-50",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-50",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-50"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q80",
+      "text": "レストランで何か事件が起きましたか？",
+      "ans_yes": [
+        [
+          "Fs-51",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-51",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-51"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q81",
+      "text": "店員はこの件に直接関係がありますか？",
+      "ans_yes": [
+        [
+          "Fs-52",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-52",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-52"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q82",
+      "text": "スープに毒が入っていましたか？",
+      "ans_yes": [
+        [
+          "Fs-53",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-53",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-53"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q83",
+      "text": "スープの品質に問題がありましたか？",
+      "ans_yes": [
+        [
+          "Fs-54",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-54",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-54"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q84",
+      "text": "スープがまずかったのですか？",
+      "ans_yes": [
+        [
+          "Fs-55",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-55",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-55"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q85",
+      "text": "男は恋愛の問題で自殺しましたか？",
+      "ans_yes": [
+        [
+          "Fs-56",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-56",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-56"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q86",
+      "text": "男は借金や経済的な問題がありましたか？",
+      "ans_yes": [
+        [
+          "Fs-57",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-57",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-57"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q87",
+      "text": "男は精神的な病気がありましたか？",
+      "ans_yes": [
+        [
+          "Fs-58",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-58",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-58"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q88",
+      "text": "男は誰かに殺されましたか？",
+      "ans_yes": [
+        [
+          "Fs-59",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-59",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-59"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q89",
+      "text": "男は誰かを殺したことがありますか？",
+      "ans_yes": [
+        [
+          "Fs-60",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-60",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-60"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q90",
+      "text": "男の過去の体験が、今回のレストラン訪問と関係していますか？",
+      "ans_yes": [
+        [
+          "Fs-05",
+          1
+        ],
+        [
+          "Fs-61",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-05",
+          0
+        ],
+        [
+          "Fs-61",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-05",
+        "Fs-61"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q91",
+      "text": "男は戦争に参加したことがありますか？",
+      "ans_yes": [
+        [
+          "Fs-62",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-62",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-62"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q92",
+      "text": "男は犯罪に関わっていますか？",
+      "ans_yes": [
+        [
+          "Fs-63",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-63",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-63"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q93",
+      "text": "以前のスープはレストランで飲みましたか？",
+      "ans_yes": [
+        [
+          "Ft-44",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-44",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-44"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-26"
+      ]
+    },
+    {
+      "id": "q94",
+      "text": "男が仲間を殺しましたか？",
+      "ans_yes": [
+        [
+          "Ft-45",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-45",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-45"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-02"
+      ]
+    },
+    {
+      "id": "q95",
+      "text": "スープの材料は動物の肉ですか？",
+      "ans_yes": [
+        [
+          "Ft-47",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-47",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-47"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q96",
+      "text": "スープの材料は肉ですか？",
+      "ans_yes": [
+        [
+          "Ft-48",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-48",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-48"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q97",
+      "text": "スープの材料は食用として一般的なものですか？",
+      "ans_yes": [
+        [
+          "Ft-49",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-49",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-49"
+      ],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q98",
+      "text": "男は過去に危機的な状況に置かれたことがありますか？",
+      "ans_yes": [
+        [
+          "Ft-50",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-50",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-50"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q99",
+      "text": "男の過去のトラウマ体験が自殺の原因に関係しますか？",
+      "ans_yes": [
+        [
+          "Ft-51",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-51",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-51"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q100",
+      "text": "このレストランに来た目的は、過去に命の危機に関わる体験と関係がありますか？",
+      "ans_yes": [
+        [
+          "Fs-05",
+          1
+        ],
+        [
+          "Ft-03",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-05",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-05"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q101",
+      "text": "過去にスープを飲まされたことは、人肉と関係がありますか？",
+      "ans_yes": [
+        [
+          "Fs-27",
+          1
+        ],
+        [
+          "Ft-29",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-27",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-27"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-26"
+      ]
+    },
+    {
+      "id": "q102",
+      "text": "自殺の原因がレストランでの出来事に関わるなら、船の上での出来事も関係しますか？",
+      "ans_yes": [
+        [
+          "Fs-39",
+          1
+        ],
+        [
+          "Ft-01",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-39",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-39"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": []
+    },
+    {
+      "id": "q103",
+      "text": "耐えられない事実は、遭難事故と関係がありますか？",
+      "ans_yes": [
+        [
+          "Fs-43",
+          1
+        ],
+        [
+          "Pt-1",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-43",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Fs-43"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-43"
+      ]
+    },
+    {
+      "id": "q104",
+      "text": "騙されていたことと、仲間の存在は関係がありますか？",
+      "ans_yes": [
+        [
+          "Ft-22",
+          1
+        ],
+        [
+          "Ft-02",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-22",
+          0
+        ]
+      ],
+      "ans_irrelevant": [
+        "Ft-22"
+      ],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-22"
+      ]
     }
   ]
 }

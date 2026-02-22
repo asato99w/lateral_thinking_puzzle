@@ -59,6 +59,7 @@ class Question:
     ans_irrelevant: List[str]
     correct_answer: str  # "yes" / "no" / "irrelevant"
     is_clear: bool = False
+    prerequisites: List[str] = field(default_factory=list)
 
     @property
     def effect(self) -> Union[List[Tuple[str, int]], List[str]]:
