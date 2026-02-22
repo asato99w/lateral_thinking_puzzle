@@ -376,6 +376,11 @@
           "Fs-26",
           "Ft-44",
           0.7
+        ],
+        [
+          "Fs-26",
+          "Fs-27",
+          0.8
         ]
       ]
     },
@@ -3102,7 +3107,7 @@
       "correct_answer": "yes",
       "is_clear": false,
       "prerequisites": [
-        "Fs-26"
+        "Fs-27"
       ]
     },
     {
