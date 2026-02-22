@@ -15,8 +15,6 @@ struct StartGameUseCaseTests {
             title: "Test",
             statement: "Test statement",
             initParadigm: "P1",
-            tensionThreshold: 2,
-            shiftCandidates: [:],
             psValues: [("d1", 1)],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1],

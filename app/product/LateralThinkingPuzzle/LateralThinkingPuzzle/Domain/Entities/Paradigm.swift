@@ -10,6 +10,7 @@ struct Paradigm: Equatable, Sendable {
     let dPlus: Set<String>
     let dMinus: Set<String>
     let relations: [Relation]
+    var threshold: Int?
 
     var dAll: Set<String> { dPlus.union(dMinus) }
 

@@ -13,7 +13,7 @@ struct UpdateTests {
         _ = GameEngine.update(
             state: &state, question: q,
             paradigms: ["P1": p1], allQuestions: [q],
-            currentOpen: [q], tensionThreshold: 10
+            currentOpen: [q]
         )
 
         #expect(state.h["d1"] == 1.0)
@@ -30,7 +30,7 @@ struct UpdateTests {
         _ = GameEngine.update(
             state: &state, question: q,
             paradigms: ["P1": p1], allQuestions: [q],
-            currentOpen: [q], tensionThreshold: 10
+            currentOpen: [q]
         )
 
         #expect(state.r.contains("d5"))
@@ -44,7 +44,7 @@ struct UpdateTests {
         _ = GameEngine.update(
             state: &state, question: q,
             paradigms: ["P1": p1], allQuestions: [q],
-            currentOpen: [q], tensionThreshold: 10
+            currentOpen: [q]
         )
 
         #expect(state.answered.contains("q1"))
@@ -65,7 +65,7 @@ struct UpdateTests {
         _ = GameEngine.update(
             state: &state, question: q,
             paradigms: ["P1": p1], allQuestions: [q],
-            currentOpen: [q], tensionThreshold: 10
+            currentOpen: [q]
         )
 
         // d2 should be assimilated: 0.5 + 0.8*(1.0-0.5) = 0.9
@@ -74,11 +74,12 @@ struct UpdateTests {
 
     // MARK: - Paradigm Shift in Update
 
-    @Test func test_update_tensionExceedsThreshold_triggersShift() {
-        // P1: dPlus=[d1], dMinus=[d3]
-        // P2: dPlus=[d3], dMinus=[d1]
-        // Observe d1=0 (contradicts P1, matches P2) → tension=1 > threshold=0
-        let p1 = TestPuzzleData.makeParadigm(id: "P1", dPlus: ["d1"], dMinus: ["d3"])
+    @Test func test_update_tensionMeetsThreshold_triggersShift() {
+        // P1: dPlus=[d1], dMinus=[d3], threshold=0
+        // P2: dPlus=[d3], dMinus=[d1] (neighbor, shares d1 & d3)
+        // Observe d1=0 (contradicts P1, matches P2) → tension=1 >= threshold=0
+        var p1 = TestPuzzleData.makeParadigm(id: "P1", dPlus: ["d1"], dMinus: ["d3"])
+        p1.threshold = 0
         let p2 = TestPuzzleData.makeParadigm(id: "P2", dPlus: ["d3"], dMinus: ["d1"])
         let q = TestPuzzleData.makeQuestion(id: "q1", ansNo: [("d1", 0)], correctAnswer: .no)
         var state = GameState(h: ["d1": 0.5, "d3": 0.5], o: [:], r: [], pCurrent: "P1")
@@ -86,13 +87,14 @@ struct UpdateTests {
         _ = GameEngine.update(
             state: &state, question: q,
             paradigms: ["P1": p1, "P2": p2], allQuestions: [q],
-            currentOpen: [q], tensionThreshold: 0
+            currentOpen: [q]
         )
 
         #expect(state.pCurrent == "P2")
     }
 
-    @Test func test_update_tensionBelowThreshold_noShift() {
+    @Test func test_update_noThreshold_noShift() {
+        // threshold == nil → no shift even with high tension
         let p1 = TestPuzzleData.makeParadigm(id: "P1", dPlus: ["d1"], dMinus: ["d3"])
         let p2 = TestPuzzleData.makeParadigm(id: "P2", dPlus: ["d3"], dMinus: ["d1"])
         let q = TestPuzzleData.makeQuestion(id: "q1", ansNo: [("d1", 0)], correctAnswer: .no)
@@ -101,7 +103,24 @@ struct UpdateTests {
         _ = GameEngine.update(
             state: &state, question: q,
             paradigms: ["P1": p1, "P2": p2], allQuestions: [q],
-            currentOpen: [q], tensionThreshold: 10 // high threshold
+            currentOpen: [q]
+        )
+
+        #expect(state.pCurrent == "P1") // no shift (threshold is nil)
+    }
+
+    @Test func test_update_tensionBelowThreshold_noShift() {
+        // threshold=10, tension=1 → no shift
+        var p1 = TestPuzzleData.makeParadigm(id: "P1", dPlus: ["d1"], dMinus: ["d3"])
+        p1.threshold = 10
+        let p2 = TestPuzzleData.makeParadigm(id: "P2", dPlus: ["d3"], dMinus: ["d1"])
+        let q = TestPuzzleData.makeQuestion(id: "q1", ansNo: [("d1", 0)], correctAnswer: .no)
+        var state = GameState(h: ["d1": 0.5, "d3": 0.5], o: [:], r: [], pCurrent: "P1")
+
+        _ = GameEngine.update(
+            state: &state, question: q,
+            paradigms: ["P1": p1, "P2": p2], allQuestions: [q],
+            currentOpen: [q]
         )
 
         #expect(state.pCurrent == "P1") // no shift
@@ -118,29 +137,31 @@ struct UpdateTests {
         let newOpen = GameEngine.update(
             state: &state, question: q1,
             paradigms: ["P1": p1], allQuestions: [q1, q2],
-            currentOpen: [q1, q2], tensionThreshold: 10
+            currentOpen: [q1, q2]
         )
 
         #expect(!newOpen.contains(where: { $0.id == "q1" }))
     }
 
-    // MARK: - Shift Candidates
+    // MARK: - Neighbor-Based Candidate Filtering
 
-    @Test func test_update_shiftCandidates_limitsShiftTargets() {
-        let p1 = TestPuzzleData.makeParadigm(id: "P1", dPlus: ["d1"], dMinus: ["d3"])
+    @Test func test_update_nonNeighbor_notShiftCandidate() {
+        // P1 shares descriptors with P2 but NOT with P3
+        // Even though P3 has fewer anomalies, it's not a neighbor → no shift to P3
+        var p1 = TestPuzzleData.makeParadigm(id: "P1", dPlus: ["d1"], dMinus: ["d3"])
+        p1.threshold = 0
         let p2 = TestPuzzleData.makeParadigm(id: "P2", dPlus: ["d3"], dMinus: ["d1"])
-        let p3 = TestPuzzleData.makeParadigm(id: "P3", dPlus: ["d3"], dMinus: ["d1"])
+        let p3 = TestPuzzleData.makeParadigm(id: "P3", dPlus: ["d5"], dMinus: ["d6"])
         let q = TestPuzzleData.makeQuestion(id: "q1", ansNo: [("d1", 0)], correctAnswer: .no)
-        var state = GameState(h: ["d1": 0.5, "d3": 0.5], o: [:], r: [], pCurrent: "P1")
+        var state = GameState(h: ["d1": 0.5, "d3": 0.5, "d5": 0.5, "d6": 0.5], o: [:], r: [], pCurrent: "P1")
 
-        // Only P3 is a candidate, not P2
         _ = GameEngine.update(
             state: &state, question: q,
             paradigms: ["P1": p1, "P2": p2, "P3": p3], allQuestions: [q],
-            currentOpen: [q], tensionThreshold: 0,
-            shiftCandidates: ["P1": ["P3"]]
+            currentOpen: [q]
         )
 
-        #expect(state.pCurrent == "P3")
+        // Shifts to P2 (neighbor with fewer anomalies), not P3 (non-neighbor)
+        #expect(state.pCurrent == "P2")
     }
 }

@@ -20,7 +20,7 @@ struct PuzzleDataDTOTests {
         #expect(dto.title == "バーの男")
         #expect(dto.initParadigm == "P1")
         #expect(dto.paradigms.count == 6)
-        #expect(dto.questions.count == 55)
+        #expect(dto.questions.count == 69)
     }
 
     @Test func test_dtoToDomain_succeeds() throws {

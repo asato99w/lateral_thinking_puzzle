@@ -3,7 +3,6 @@ import Foundation
 enum GameEngine {
 
     static let epsilon: Double = 0.2
-    static let defaultTensionThreshold: Int = 2
 
     // MARK: - Tension
 
@@ -126,14 +125,63 @@ enum GameEngine {
 
     // MARK: - Update
 
+    // MARK: - Build O*
+
+    static func buildOStar(
+        questions: [Question],
+        psValues: [(String, Int)]
+    ) -> [String: Int] {
+        var oStar = [String: Int]()
+        for (dID, val) in psValues {
+            oStar[dID] = val
+        }
+        for q in questions {
+            if q.correctAnswer == .irrelevant { continue }
+            let eff = q.effect
+            if case let .observation(pairs) = eff {
+                for (dID, v) in pairs {
+                    oStar[dID] = v
+                }
+            }
+        }
+        return oStar
+    }
+
+    // MARK: - Compute Thresholds
+
+    static func computeThresholds(
+        paradigms: inout [String: Paradigm],
+        oStar: [String: Int]
+    ) {
+        var anomalies = [String: Int]()
+        for (pid, p) in paradigms {
+            anomalies[pid] = tension(o: oStar, paradigm: p)
+        }
+
+        for (pid, p) in paradigms {
+            let myAnomalies = anomalies[pid]!
+            let betterNeighborAnomalies = paradigms.compactMap { (pid2, p2) -> Int? in
+                guard pid2 != pid,
+                      !p.dAll.intersection(p2.dAll).isEmpty,
+                      anomalies[pid2]! < myAnomalies else { return nil }
+                return anomalies[pid2]!
+            }
+            if let maxVal = betterNeighborAnomalies.max() {
+                paradigms[pid]!.threshold = maxVal
+            } else {
+                paradigms[pid]!.threshold = nil
+            }
+        }
+    }
+
+    // MARK: - Update
+
     static func update(
         state: inout GameState,
         question: Question,
         paradigms: [String: Paradigm],
         allQuestions: [Question],
-        currentOpen: [Question],
-        tensionThreshold: Int = defaultTensionThreshold,
-        shiftCandidates: [String: [String]]? = nil
+        currentOpen: [Question]
     ) -> [Question] {
         // Step 1: Direct update
         let eff = question.effect
@@ -167,26 +215,24 @@ enum GameEngine {
 
         // Step 3: Paradigm shift
         let currentTension = tension(o: state.o, paradigm: pCurrent)
-        if currentTension > tensionThreshold {
-            let candidates: [String]
-            if let sc = shiftCandidates, let c = sc[state.pCurrent] {
-                candidates = c
-            } else {
-                candidates = paradigms.keys.filter { $0 != state.pCurrent }
+        if let threshold = pCurrent.threshold, currentTension >= threshold {
+            let currentAnomalies = currentTension
+            let candidates = paradigms.keys.filter { pID in
+                pID != state.pCurrent
+                    && !paradigms[pID]!.dAll.intersection(pCurrent.dAll).isEmpty
+                    && tension(o: state.o, paradigm: paradigms[pID]!) < currentAnomalies
             }
 
-            let currentAlignment = alignment(h: state.h, paradigm: pCurrent)
-            var bestID = state.pCurrent
-            var bestScore = currentAlignment
-            for pID in candidates {
-                guard let p = paradigms[pID] else { continue }
-                let score = alignment(h: state.h, paradigm: p)
-                if score > bestScore {
-                    bestScore = score
-                    bestID = pID
+            if !candidates.isEmpty {
+                var bestID = candidates[0]
+                var bestScore = alignment(h: state.h, paradigm: paradigms[candidates[0]]!)
+                for pID in candidates.dropFirst() {
+                    let score = alignment(h: state.h, paradigm: paradigms[pID]!)
+                    if score > bestScore {
+                        bestScore = score
+                        bestID = pID
+                    }
                 }
-            }
-            if bestID != state.pCurrent {
                 state.pCurrent = bestID
                 let pNew = paradigms[bestID]!
                 assimilateFromParadigm(h: &state.h, o: state.o, paradigm: pNew)

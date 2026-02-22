@@ -13,8 +13,7 @@ struct GameViewModelTests {
 
         let puzzle = PuzzleData(
             title: "Test", statement: "Test",
-            initParadigm: "P1", tensionThreshold: 2,
-            shiftCandidates: [:], psValues: [("d1", 1)],
+            initParadigm: "P1", psValues: [("d1", 1)],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free
         )
@@ -35,8 +34,7 @@ struct GameViewModelTests {
 
         let puzzle = PuzzleData(
             title: "Test", statement: "Test",
-            initParadigm: "P1", tensionThreshold: 10,
-            shiftCandidates: [:], psValues: [],
+            initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free
         )
@@ -59,8 +57,7 @@ struct GameViewModelTests {
 
         let puzzle = PuzzleData(
             title: "Test", statement: "Test",
-            initParadigm: "P1", tensionThreshold: 10,
-            shiftCandidates: [:], psValues: [],
+            initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free
         )

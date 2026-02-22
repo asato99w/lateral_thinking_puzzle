@@ -36,12 +36,13 @@ struct PuzzleDataDTO: Codable {
             return (id, val)
         }
 
+        let oStar = GameEngine.buildOStar(questions: domainQuestions, psValues: ps)
+        GameEngine.computeThresholds(paradigms: &paradigmMap, oStar: oStar)
+
         return PuzzleData(
             title: title,
             statement: statement,
             initParadigm: initParadigm,
-            tensionThreshold: tensionThreshold,
-            shiftCandidates: shiftCandidates,
             psValues: ps,
             allDescriptorIDs: allDescriptorIds,
             paradigms: paradigmMap,
