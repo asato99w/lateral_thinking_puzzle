@@ -4,8 +4,8 @@ struct PuzzleDataDTO: Codable {
     let title: String
     let statement: String
     let initParadigm: String
-    let tensionThreshold: Int
-    let shiftCandidates: [String: [String]]
+    let tensionThreshold: Int?
+    let shiftCandidates: [String: [String]]?
     let psValues: [[PsValueElement]]
     let allDescriptorIds: [String]
     let paradigms: [ParadigmDTO]
