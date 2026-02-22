@@ -98,7 +98,10 @@
         ["Ft-22", "Ft-50", 0.7],
         ["Ft-22", "Ft-51", 0.7],
         ["Ft-22", "Fs-62", 0.7],
-        ["Ft-22", "Fs-63", 0.7]
+        ["Ft-22", "Fs-63", 0.7],
+        ["Fs-41", "Fs-39", 0.8],
+        ["Fs-44", "Fs-43", 0.8],
+        ["Ft-51", "Ft-22", 0.7]
       ]
     },
     {
@@ -655,6 +658,31 @@
     {
       "id": "q99", "text": "男の過去のトラウマ体験が自殺の原因に関係しますか？",
       "ans_yes": [["Ft-51", 1]], "ans_no": [["Ft-51", 0]], "ans_irrelevant": ["Ft-51"],
+      "correct_answer": "yes", "is_clear": false
+    },
+    {
+      "id": "q100", "text": "このレストランに来た目的は、過去に命の危機に関わる体験と関係がありますか？",
+      "ans_yes": [["Fs-05", 1], ["Ft-03", 1]], "ans_no": [["Fs-05", 0]], "ans_irrelevant": ["Fs-05"],
+      "correct_answer": "yes", "is_clear": false
+    },
+    {
+      "id": "q101", "text": "過去にスープを飲まされたことは、人肉と関係がありますか？",
+      "ans_yes": [["Fs-27", 1], ["Ft-29", 1]], "ans_no": [["Fs-27", 0]], "ans_irrelevant": ["Fs-27"],
+      "correct_answer": "yes", "is_clear": false
+    },
+    {
+      "id": "q102", "text": "自殺の原因がレストランでの出来事に関わるなら、船の上での出来事も関係しますか？",
+      "ans_yes": [["Fs-39", 1], ["Ft-01", 1]], "ans_no": [["Fs-39", 0]], "ans_irrelevant": ["Fs-39"],
+      "correct_answer": "yes", "is_clear": false
+    },
+    {
+      "id": "q103", "text": "耐えられない事実は、遭難事故と関係がありますか？",
+      "ans_yes": [["Fs-43", 1], ["Pt-1", 1]], "ans_no": [["Fs-43", 0]], "ans_irrelevant": ["Fs-43"],
+      "correct_answer": "yes", "is_clear": false
+    },
+    {
+      "id": "q104", "text": "騙されていたことと、仲間の存在は関係がありますか？",
+      "ans_yes": [["Ft-22", 1], ["Ft-02", 1]], "ans_no": [["Ft-22", 0]], "ans_irrelevant": ["Ft-22"],
       "correct_answer": "yes", "is_clear": false
     }
   ]
