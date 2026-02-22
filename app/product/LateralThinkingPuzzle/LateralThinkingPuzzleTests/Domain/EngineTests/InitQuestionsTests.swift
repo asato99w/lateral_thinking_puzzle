@@ -38,4 +38,14 @@ struct InitQuestionsTests {
         let result = GameEngine.initQuestions(paradigm: paradigm, questions: [q1])
         #expect(result.map(\.id) == ["q1"])
     }
+
+    @Test func test_initQuestions_excludesQuestionWithMatchAndConflict() {
+        // Q with effect containing both match (d1=1, pred=1) and conflict (d3=1, pred=0)
+        // Should be excluded because anomaly effect contaminates initial open set
+        let paradigm = TestPuzzleData.makeParadigm(dPlus: ["d1"], dMinus: ["d3"])
+        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1), ("d3", 1)], correctAnswer: .yes)
+
+        let result = GameEngine.initQuestions(paradigm: paradigm, questions: [q1])
+        #expect(result.isEmpty)
+    }
 }

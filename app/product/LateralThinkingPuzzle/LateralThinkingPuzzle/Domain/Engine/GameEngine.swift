@@ -86,11 +86,19 @@ enum GameEngine {
         for q in questions {
             let eff = q.effect
             if case let .observation(pairs) = eff {
+                var hasMatch = false
+                var hasConflict = false
                 for (dID, v) in pairs {
-                    if let pred = paradigm.prediction(dID), pred == v {
-                        result.append(q)
-                        break
+                    if let pred = paradigm.prediction(dID) {
+                        if pred == v {
+                            hasMatch = true
+                        } else {
+                            hasConflict = true
+                        }
                     }
+                }
+                if hasMatch && !hasConflict {
+                    result.append(q)
                 }
             }
         }
