@@ -20,6 +20,9 @@ env/
 *.swo
 *~
 
+# Xcode
+xcuserdata/
+
 # OS
 .DS_Store
 Thumbs.db
