@@ -43,11 +43,17 @@ def init_questions(
     for q in questions:
         eff = compute_effect(q)
         if isinstance(eff, list) and len(eff) > 0 and isinstance(eff[0], tuple):
+            has_match = False
+            has_conflict = False
             for d_id, v in eff:
                 pred = paradigm.prediction(d_id)
-                if pred is not None and pred == v:
-                    result.append(q)
-                    break
+                if pred is not None:
+                    if pred == v:
+                        has_match = True
+                    else:
+                        has_conflict = True
+            if has_match and not has_conflict:
+                result.append(q)
     return result
 
 

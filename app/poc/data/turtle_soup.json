@@ -611,8 +611,8 @@
       "correct_answer": "no", "is_clear": false
     },
     {
-      "id": "q90", "text": "男の過去に何か重大な出来事がありましたか？",
-      "ans_yes": [["Fs-61", 1]], "ans_no": [["Fs-61", 0]], "ans_irrelevant": ["Fs-61"],
+      "id": "q90", "text": "男の過去の体験が、今回のレストラン訪問と関係していますか？",
+      "ans_yes": [["Fs-05", 1], ["Fs-61", 1]], "ans_no": [["Fs-05", 0], ["Fs-61", 0]], "ans_irrelevant": ["Fs-05", "Fs-61"],
       "correct_answer": "yes", "is_clear": false
     },
     {
