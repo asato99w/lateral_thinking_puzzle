@@ -1,12 +1,10 @@
 """完全確定におけるアノマリーの単調減少を検証する。"""
-from common import load_data, MAIN_PATH
+from common import load_data, load_raw, MAIN_PATH
 from engine import tension, alignment, compute_effect
 
 
-def main():
-    paradigms, questions, *_ = load_data()
-
-    # 全質問の effect を O* に集約
+def build_o_star(questions):
+    """全質問の正解から O* を構築。"""
     o_star = {}
     r_star = set()
     for q in questions:
@@ -17,6 +15,22 @@ def main():
         else:
             for d_id, v in eff:
                 o_star[d_id] = v
+    return o_star, r_star
+
+
+def o_star_to_h(o_star, all_ids):
+    """O* を H 相当の dict に変換する。"""
+    h = {d: 0.5 for d in all_ids}
+    for d, v in o_star.items():
+        h[d] = float(v)
+    return h
+
+
+def main():
+    paradigms, questions, all_ids, *_ = load_data()
+
+    o_star, r_star = build_o_star(questions)
+    h_star = o_star_to_h(o_star, all_ids)
 
     print(f"O* 記述素数: {len(o_star)}")
     print(f"R* 記述素数: {len(r_star)}")
@@ -32,7 +46,7 @@ def main():
             continue
         p = paradigms[pid]
         t = tension(o_star, p)
-        a = alignment(o_star, p)
+        a = alignment(h_star, p)
         overlap = p.d_all & set(o_star.keys())
         anomaly_ds = [d for d in overlap if p.prediction(d) != o_star[d]]
 

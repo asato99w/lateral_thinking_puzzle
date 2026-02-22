@@ -88,23 +88,24 @@ def update(
 
     # Step 3: パラダイムシフト判定
     current_tension = tension(state.o, p_current)
-    if p_current.threshold is not None and current_tension > p_current.threshold:
-        # シフト候補は近傍 N(P)
+    if p_current.threshold is not None and current_tension >= p_current.threshold:
+        # シフト候補: 近傍かつアノマリーがより少ないパラダイム
+        current_anomalies = current_tension
         candidates = [
             p_id for p_id in paradigms
             if p_id != state.p_current
             and paradigms[p_id].d_all & p_current.d_all
+            and tension(state.o, paradigms[p_id]) < current_anomalies
         ]
 
-        current_alignment = alignment(state.h, p_current)
-        best_id = state.p_current
-        best_score = current_alignment
-        for p_id in candidates:
-            score = alignment(state.h, paradigms[p_id])
-            if score > best_score:
-                best_score = score
-                best_id = p_id
-        if best_id != state.p_current:
+        if candidates:
+            best_id = candidates[0]
+            best_score = alignment(state.h, paradigms[candidates[0]])
+            for p_id in candidates[1:]:
+                score = alignment(state.h, paradigms[p_id])
+                if score > best_score:
+                    best_score = score
+                    best_id = p_id
             state.p_current = best_id
             p_new = paradigms[best_id]
             _assimilate_from_paradigm(state.h, state.o, p_new)

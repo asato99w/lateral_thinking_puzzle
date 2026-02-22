@@ -48,9 +48,9 @@ def load_data(data_path: Path | None = None):
 
     data = load_raw(data_path)
 
-    # main_path: データに定義があればそちらを使う
+    # main_path: データに定義があればそちらを使う（in-place 更新で import 先にも反映）
     if "main_path" in data:
-        MAIN_PATH = data["main_path"]
+        MAIN_PATH[:] = data["main_path"]
 
     paradigms = {}
     for p in data["paradigms"]:

@@ -1,13 +1,14 @@
 """パラダイムシフト経路の検証。
 
-テーマ 2: alignment 選択の経路正当性
-  - O*（全真値観測）に対する各パラダイムの alignment を計算
+テーマ1: alignment 順序の検証
+  - H*（全真値をHに変換）に対する各パラダイムの alignment を計算
   - alignment 順序がメインパス順と整合するか確認
-  - 各シフトポイントで alignment 選択が正しいパラダイムを選ぶか検証
+  - メインパスの後のパラダイムほど alignment が高いことはデータの構造的性質
 
-テーマ 3: 同化接続性
-  - 各シフト P_i → P_{i+1} で、同化の起点となる記述素が存在するか
-  - R(P_{i+1}) で到達可能な未回答質問の記述素があるか
+テーマ2: シフト先選択の到達性検証（仮想 H ベース）
+  - 全パラダイム（サブ含む）について仮想 H_Pi を構築し遷移先を計算
+  - 遷移グラフを構築し、全パラダイムから最終パラダイム P_T に到達可能か検証
+  - サブパラダイムへの寄り道は許容（引っ掛け）、復帰できるかが問題
 
 使い方:
   python shift_path.py                       # turtle_soup.json
@@ -16,14 +17,7 @@
 from __future__ import annotations
 
 from common import load_data, load_raw, MAIN_PATH
-from engine import (
-    init_game,
-    init_questions,
-    tension,
-    alignment,
-    compute_effect,
-    EPSILON,
-)
+from engine import tension, alignment, compute_effect
 
 
 def infer_main_path(data: dict, paradigms: dict) -> list[str]:
@@ -62,9 +56,9 @@ def o_star_to_h(o_star: dict[str, int], all_ids: list[str]) -> dict[str, float]:
 
 
 def check_alignment_ordering(paradigms, main_path, o_star, all_ids):
-    """テーマ 2: alignment_h(H*, P) の順序を検証する。"""
+    """テーマ1: alignment_h(H*, P) の順序を検証する。"""
     print("=" * 65)
-    print("テーマ 2: alignment 選択の経路正当性（H ベース）")
+    print("テーマ1: alignment 順序（H* ベース）")
     print("=" * 65)
     print()
 
@@ -110,217 +104,132 @@ def check_alignment_ordering(paradigms, main_path, o_star, all_ids):
         print("  → メインパス順に alignment が単調増加: OK")
     print()
 
-    # alignment 選択の問題検出: 各シフトで正しい次パラダイムが選ばれるか
-    print("シフト先選択の検証（H* に対する alignment 比較）:")
-    selection_ok = True
-    for i in range(len(main_path) - 1):
-        pid_cur = main_path[i]
-        pid_next = main_path[i + 1]
-        if pid_cur not in paradigms or pid_next not in paradigms:
+    return not bool(issues)
+
+
+def build_virtual_h(paradigm, all_ids):
+    """パラダイム P に完全同化した仮想 H を構築する。
+
+    D⁺(P) → 1.0, D⁻(P) → 0.0, それ以外 → 0.5
+    """
+    h = {d: 0.5 for d in all_ids}
+    for d in paradigm.d_plus:
+        h[d] = 1.0
+    for d in paradigm.d_minus:
+        h[d] = 0.0
+    return h
+
+
+def select_shift_target(pid_cur, paradigms, o_star, all_ids):
+    """仮想 H_Pi で engine のシフト先選択を再現する。
+
+    返り値: (選択先ID or None, 候補リスト[(pid, alignment)])
+    """
+    p_cur = paradigms[pid_cur]
+    h_pi = build_virtual_h(p_cur, all_ids)
+
+    cur_tension = tension(o_star, p_cur)
+    candidates = []
+    for p_id in paradigms:
+        if p_id == pid_cur:
             continue
+        p = paradigms[p_id]
+        if not (p.d_all & p_cur.d_all):
+            continue
+        if tension(o_star, p) >= cur_tension:
+            continue
+        candidates.append(p_id)
 
-        a_next = alignment(h_star, paradigms[pid_next])
+    if not candidates:
+        return None, []
 
-        # pid_cur 以外の全パラダイムとの比較
-        competitors = []
-        for pid, p in paradigms.items():
-            if pid == pid_cur:
-                continue
-            a_p = alignment(h_star, p)
-            competitors.append((pid, a_p))
-        competitors.sort(key=lambda x: -x[1])
+    candidate_scores = []
+    for p_id in candidates:
+        a = alignment(h_pi, paradigms[p_id])
+        candidate_scores.append((p_id, a))
+    candidate_scores.sort(key=lambda x: -x[1])
 
-        best_pid, best_a = competitors[0]
-        ok = best_pid == pid_next
-        if not ok:
-            selection_ok = False
-
-        marker = "OK" if ok else f"NG (alignment は {best_pid}={best_a:.4f} が最大)"
-        print(f"  {pid_cur} → 期待: {pid_next}({a_next:.4f}) | 実際の最大: {best_pid}({best_a:.4f}) [{marker}]")
-
-    print()
-    if not selection_ok:
-        print("結論: alignment_h(H*) による選択ではメインパス順のシフトが保証されない")
-        print("  → H* は全真値観測後の状態であり、漸進性は部分観測（実際のプレイ）で自然に成立する")
-        print("  → 同化により H は現パラダイムの予測方向に偏るため、近傍パラダイムが優先される")
-    else:
-        print("結論: alignment_h(H*) による選択でメインパス順のシフトが成立")
-    print()
-
-    return selection_ok
+    return candidate_scores[0][0], candidate_scores
 
 
-def check_assimilation_connectivity(paradigms, questions, main_path, o_star, ps_values, all_ids):
-    """テーマ 3: 各シフトにおける同化接続性を検証する。"""
+def check_shift_selection(paradigms, main_path, o_star, all_ids):
+    """テーマ2: 全パラダイムからの遷移先と P_T への到達性を検証する。
+
+    1. 全パラダイム（サブ含む）で仮想 H_Pi を構築しシフト先を計算
+    2. 遷移グラフを構築
+    3. 全パラダイムから P_T（メインパス終点）に到達可能か検証
+    """
     print("=" * 65)
-    print("テーマ 3: 同化接続性")
+    print("テーマ2: シフト先選択と到達性（仮想 H_Pi ベース）")
     print("=" * 65)
     print()
 
-    # 各パラダイムフェーズで回答される質問を推定
-    # 開放可能性を考慮: パラダイム P_i で質問が開くには、
-    # effect 記述素 d について以下のいずれかが成立する必要がある:
-    #   (a) P_i の prediction(d) == v（同化が H[d] を正解方向に押す）
-    #   (b) d ∈ D⁺(P_i)（パラダイムが d を肯定→プレイヤーが自然に探索）
-    # いずれも満たさない場合（d ∈ D⁻ かつ pred ≠ v）は、
-    # P_i の同化が H を正解と逆方向に押すため質問が開かない。
-    phase_questions = {pid: [] for pid in main_path}
-    for q in questions:
-        eff = compute_effect(q)
-        if q.correct_answer == "irrelevant":
+    p_goal = main_path[-1]
+    main_set = set(main_path)
+
+    # 全パラダイムの遷移先を計算
+    transitions = {}  # pid -> 選択先
+    for pid in paradigms:
+        if pid == p_goal:
             continue
-        eff_pairs = list(eff)
-        eff_ds = {d for d, v in eff_pairs}
-        assigned = False
-        for pid in main_path:
-            if pid not in paradigms:
-                continue
-            p = paradigms[pid]
-            if not (eff_ds & p.d_all):
-                continue
-            # 開放可能性チェック
-            openable = False
-            for d, v in eff_pairs:
-                pred = p.prediction(d)
-                if pred is not None:
-                    if pred == v or d in p.d_plus:
-                        openable = True
-                        break
-            if openable:
-                phase_questions[pid].append(q)
-                assigned = True
-                break
-        if not assigned:
-            # どのフェーズでも開かない場合は最後のパラダイムに割り当て
-            phase_questions[main_path[-1]].append(q)
+        target, candidate_scores = select_shift_target(
+            pid, paradigms, o_star, all_ids,
+        )
+        transitions[pid] = target
 
-    # フェーズ割り当ての診断出力
-    for pid in main_path:
-        qids = [q.id for q in phase_questions[pid]]
-        print(f"  {pid} フェーズの質問 ({len(qids)}): {', '.join(qids[:15])}")
-        if len(qids) > 15:
-            print(f"    ... 他 {len(qids) - 15} 問")
-    print()
-
-    # 各シフトポイントでの観測推定
-    # P_i 終了時の O ≈ Ps + P_1 ~ P_i の質問の effect
-    cumulative_o = dict(ps_values)
-
-    all_ok = True
-    for i in range(len(main_path) - 1):
-        pid_cur = main_path[i]
-        pid_next = main_path[i + 1]
-        if pid_cur not in paradigms or pid_next not in paradigms:
-            continue
-
-        # P_i フェーズの質問回答を O に追加
-        for q in phase_questions[pid_cur]:
-            eff = compute_effect(q)
-            if q.correct_answer != "irrelevant":
-                for d, v in eff:
-                    cumulative_o[d] = v
-
-        p_next = paradigms[pid_next]
-
-        print(f"--- シフト {pid_cur} → {pid_next} ---")
-        print(f"  推定 |O| at shift: {len(cumulative_o)}")
-
-        # 条件 1: O ∩ D(P_{i+1}) の大きさ
-        overlap = set(cumulative_o.keys()) & p_next.d_all
-        print(f"  O ∩ D({pid_next}): {len(overlap)} 記述素")
-        if not overlap:
-            print(f"  ⚠ O と D({pid_next}) の重なりなし — 同化起点がない")
-            all_ok = False
-            print()
-            continue
-
-        # 条件 2: prediction が一致する記述素（同化起点）
-        assimilation_sources = []
-        for d in sorted(overlap):
-            pred = p_next.prediction(d)
-            obs = cumulative_o[d]
-            match = pred == obs
-            if match:
-                assimilation_sources.append(d)
-
-        print(f"  同化起点（prediction 一致）: {len(assimilation_sources)} 記述素")
-        if not assimilation_sources:
-            print(f"  ⚠ prediction が一致する記述素なし — 同化が発火しない")
-            mismatch_detail = []
-            for d in sorted(overlap):
-                pred = p_next.prediction(d)
-                obs = cumulative_o[d]
-                mismatch_detail.append(f"    {d}: O={obs}, pred={pred}")
-            for line in mismatch_detail[:10]:
-                print(line)
-            all_ok = False
-            print()
-            continue
-
-        # 条件 3: R(P_{i+1}) でソースから到達可能なターゲット
-        reachable_targets = set()
-        for src, tgt, w in p_next.relations:
-            if src in assimilation_sources:
-                reachable_targets.add(tgt)
-
-        print(f"  R({pid_next}) 到達可能ターゲット: {len(reachable_targets)} 記述素")
-        if reachable_targets:
-            for t in sorted(reachable_targets):
-                pred_t = p_next.prediction(t)
-                h_current = float(cumulative_o.get(t, 0.5))  # 未観測なら 0.5
-                observed = t in cumulative_o
-                print(f"    {t}: pred={pred_t}, observed={'Y' if observed else 'N'}")
+        is_main = "main" if pid in main_set else "sub"
+        t = tension(o_star, paradigms[pid])
+        print(f"  {pid} [{is_main}] (tension={t}):")
+        if target is None:
+            print(f"    → 候補なし（危機状態）")
         else:
-            print(f"  ⚠ R({pid_next}) のソースに同化起点がない — H が動かない")
-            # 関係のソースと同化起点の不一致を表示
-            rel_sources = {src for src, _, _ in p_next.relations}
-            print(f"    R({pid_next}) のソース: {sorted(rel_sources)}")
-            print(f"    同化起点: {sorted(assimilation_sources)}")
-            print(f"    交差: {sorted(rel_sources & set(assimilation_sources))}")
-            all_ok = False
-            print()
-            continue
-
-        # 条件 4: ターゲット記述素を含む未回答質問が存在するか
-        answered_ids = {q.id for q in phase_questions[pid_cur]}  # 簡易推定
-        for j in range(i):
-            answered_ids |= {q.id for q in phase_questions[main_path[j]]}
-
-        openable_via_target = []
-        for q in questions:
-            if q.id in answered_ids:
-                continue
-            eff = compute_effect(q)
-            if q.correct_answer == "irrelevant":
-                continue
-            for d, v in eff:
-                if d in reachable_targets:
-                    pred_d = p_next.prediction(d)
-                    # 同化で H[d] が pred_d 方向に動く
-                    # open 条件: H[d] ≈ v
-                    # 動く方向と正解が一致すれば開く可能性あり
-                    if pred_d == v:
-                        openable_via_target.append((q.id, d, v))
-                        break
-
-        print(f"  同化で開く可能性のある質問: {len(openable_via_target)}")
-        if openable_via_target:
-            for qid, d, v in openable_via_target:
-                print(f"    {qid}: H[{d}] → {v} で open")
-        else:
-            print(f"  ⚠ 同化ターゲットを含む未回答質問がない")
-            all_ok = False
-
+            for p_id, a in candidate_scores:
+                marker = " ★" if p_id == target else ""
+                print(f"    {p_id}: alignment={a:.4f}{marker}")
+            print(f"    → {target}")
         print()
 
-    print("=" * 65)
-    if all_ok:
-        print("結論: 全シフトで同化接続性が成立")
+    # 到達性チェック: 各パラダイムから遷移を辿って P_T に到達できるか
+    print("-" * 40)
+    print(f"到達性チェック（目標: {p_goal}）")
+    print("-" * 40)
+
+    issues = []
+    for start_pid in paradigms:
+        if start_pid == p_goal:
+            continue
+
+        visited = set()
+        current = start_pid
+        path = [current]
+
+        while current != p_goal and current is not None and current not in visited:
+            visited.add(current)
+            current = transitions.get(current)
+            if current is not None:
+                path.append(current)
+
+        path_str = " → ".join(path)
+        if current == p_goal:
+            print(f"  {start_pid}: {path_str}  OK")
+        elif current is None:
+            print(f"  {start_pid}: {path_str} → 行き止まり  NG")
+            issues.append(f"{start_pid}: 行き止まり（{path_str}）")
+        else:
+            # ループ検出
+            print(f"  {start_pid}: {path_str} → ループ  NG")
+            issues.append(f"{start_pid}: ループ（{path_str}）")
+
+    print()
+    if issues:
+        print("⚠ 到達不能なパラダイムあり:")
+        for issue in issues:
+            print(f"  {issue}")
     else:
-        print("結論: 同化接続性に問題あり — 内部構造(R(P))または質問設計の見直しが必要")
+        print(f"全パラダイムから {p_goal} に到達可能: OK")
     print()
 
-    return all_ok
+    return not bool(issues)
 
 
 def main():
@@ -339,11 +248,8 @@ def main():
     print(f"|O*| = {len(o_star)}, |R*| = {len(r_star)}")
     print()
 
-    # テーマ 2
     check_alignment_ordering(paradigms, main_path, o_star, all_ids)
-
-    # テーマ 3
-    check_assimilation_connectivity(paradigms, questions, main_path, o_star, ps_values, all_ids)
+    check_shift_selection(paradigms, main_path, o_star, all_ids)
 
 
 if __name__ == "__main__":

@@ -116,7 +116,7 @@ def main():
                 continue
             p = paradigms[pid]
             t = tension(state.o, p)
-            a = alignment(state.o, p)
+            a = alignment(state.h, p)
             overlap = len(p.d_all & set(state.o.keys()))
             anomaly_detail = check_anomaly_detail(state.o, p)
             line = f"    {pid}: t={t} a={a:.3f} |D∩O|={overlap}"

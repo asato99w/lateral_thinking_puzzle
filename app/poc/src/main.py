@@ -159,7 +159,7 @@ def main():
         if debug_mode:
             p_cur = paradigms[state.p_current]
             t = tension(state.o, p_cur)
-            a = alignment(state.o, p_cur)
+            a = alignment(state.h, p_cur)
             print(f"[DEBUG パラダイム: {p_cur.name} ({state.p_current}) | tension: {t} | alignment: {a:.3f}]")
             print()
 
