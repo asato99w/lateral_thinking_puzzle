@@ -122,7 +122,6 @@ def select_shift_target(pid_cur, paradigms, o_star, all_ids):
     """仮想 H_Pi で engine のシフト先選択を再現する。
 
     方式: explained_o(O*, P') > explained_o(O*, P_cur) で候補を絞り、
-    最小跳躍（explained_o が最小のグループ）に限定した上で
     alignment(H_Pi, P') で最良を選択する。
 
     返り値: (選択先ID or None, 候補リスト[(pid, alignment)])
@@ -143,16 +142,8 @@ def select_shift_target(pid_cur, paradigms, o_star, all_ids):
     if not candidates:
         return None, []
 
-    # 最小跳躍: 候補の中で explained_o が最小のグループに絞る
-    candidate_eo = {
-        p_id: explained_o(o_star, paradigms[p_id])
-        for p_id in candidates
-    }
-    min_eo = min(candidate_eo.values())
-    nearest = [p_id for p_id in candidates if candidate_eo[p_id] == min_eo]
-
     candidate_scores = []
-    for p_id in nearest:
+    for p_id in candidates:
         a = alignment(h_pi, paradigms[p_id])
         candidate_scores.append((p_id, a))
     candidate_scores.sort(key=lambda x: -x[1])

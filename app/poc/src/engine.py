@@ -131,7 +131,7 @@ def update(
 
     # Step 3: パラダイムシフト判定
     current_tension = tension(state.o, p_current)
-    if p_current.threshold is not None and current_tension > p_current.threshold:
+    if p_current.threshold is not None and current_tension >= p_current.threshold:
         # シフト候補: explained_o が現パラダイムより大きいパラダイム
         current_explained = explained_o(state.o, p_current)
         candidates = [
@@ -141,17 +141,9 @@ def update(
         ]
 
         if candidates:
-            # 最小跳躍: 候補の中で explained_o が最小のグループに絞る
-            candidate_eo = {
-                p_id: explained_o(state.o, paradigms[p_id])
-                for p_id in candidates
-            }
-            min_eo = min(candidate_eo.values())
-            nearest = [p_id for p_id in candidates if candidate_eo[p_id] == min_eo]
-
-            best_id = nearest[0]
-            best_score = alignment(state.h, paradigms[nearest[0]])
-            for p_id in nearest[1:]:
+            best_id = candidates[0]
+            best_score = alignment(state.h, paradigms[candidates[0]])
+            for p_id in candidates[1:]:
                 score = alignment(state.h, paradigms[p_id])
                 if score > best_score:
                     best_score = score
