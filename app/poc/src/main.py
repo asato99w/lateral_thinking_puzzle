@@ -83,6 +83,7 @@ def build_questions(data: dict) -> list[Question]:
             ans_irrelevant=q["ans_irrelevant"],
             correct_answer=q["correct_answer"],
             is_clear=q.get("is_clear", False),
+            prerequisites=q.get("prerequisites", []),
         ))
     return questions
 
@@ -139,7 +140,7 @@ def main():
 
     # 初期質問の決定
     p_init = paradigms[init_paradigm_id]
-    current_open = init_questions(p_init, questions)
+    current_open = init_questions(p_init, questions, state.o)
 
     step = 0
     debug_mode = False
