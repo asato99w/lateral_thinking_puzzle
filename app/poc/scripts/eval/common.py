@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from models import Paradigm, Question  # noqa: E402
 from threshold import build_o_star, compute_thresholds  # noqa: E402
+from engine import build_core_map  # noqa: E402
 
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
@@ -60,6 +61,8 @@ def load_data(data_path: Path | None = None):
             d_plus=set(p["d_plus"]),
             d_minus=set(p["d_minus"]),
             relations=[(r[0], r[1], r[2]) for r in p["relations"]],
+            depth=p.get("depth", 0),
+            core=set(p.get("core", [])),
         )
 
     questions = []

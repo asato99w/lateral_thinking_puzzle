@@ -12,6 +12,7 @@ from engine import (
     tension,
     alignment,
     open_questions,
+    build_core_map,
 )
 from threshold import build_o_star, compute_thresholds
 
@@ -68,6 +69,8 @@ def build_paradigms(data: dict) -> dict[str, Paradigm]:
             d_plus=set(p["d_plus"]),
             d_minus=set(p["d_minus"]),
             relations=[(r[0], r[1], r[2]) for r in p["relations"]],
+            depth=p.get("depth", 0),
+            core=set(p.get("core", [])),
         )
     return paradigms
 
@@ -135,12 +138,15 @@ def main():
     o_star = build_o_star(questions, ps_values)
     compute_thresholds(paradigms, o_star)
 
+    # コアマップの構築
+    core_map = build_core_map(paradigms)
+
     # ゲーム初期化
     state = init_game(ps_values, paradigms, init_paradigm_id, all_descriptor_ids)
 
     # 初期質問の決定
     p_init = paradigms[init_paradigm_id]
-    current_open = init_questions(p_init, questions, state.o)
+    current_open = init_questions(p_init, questions, state.o, core_map)
 
     step = 0
     debug_mode = False
@@ -231,7 +237,7 @@ def main():
         p_before = state.p_current
 
         # 状態更新
-        state, current_open = update(state, selected, paradigms, questions, current_open)
+        state, current_open = update(state, selected, paradigms, questions, current_open, core_map)
 
         # パラダイムシフトの演出
         if state.p_current != p_before:

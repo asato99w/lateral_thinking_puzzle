@@ -5,6 +5,41 @@ from models import Paradigm, Question, GameState
 EPSILON = 0.2  # H(d) ≈ v の閾値
 
 
+def build_core_map(paradigms: dict[str, Paradigm]) -> dict[str, int]:
+    """コア記述素 → その記述素が属するパラダイムの depth のマップを構築。"""
+    core_map: dict[str, int] = {}
+    for p in paradigms.values():
+        for d in p.core:
+            core_map[d] = p.depth
+    return core_map
+
+
+def _question_descriptors(q: Question) -> set[str]:
+    """質問が参照する全記述素（ans_yes, ans_no, ans_irrelevant の和集合）。"""
+    ds: set[str] = set()
+    for d, v in q.ans_yes:
+        ds.add(d)
+    for d, v in q.ans_no:
+        ds.add(d)
+    for d in q.ans_irrelevant:
+        ds.add(d)
+    return ds
+
+
+def _core_blocked(q: Question, current_depth: int, core_map: dict[str, int]) -> bool:
+    """質問がコア制約によりブロックされるかを判定。
+
+    質問の参照記述素にコア記述素が含まれ、かつそのコアのパラダイム深度が
+    現在のパラダイム深度より大きい場合、ブロックする。
+    """
+    if not core_map:
+        return False
+    for d in _question_descriptors(q):
+        if d in core_map and core_map[d] > current_depth:
+            return True
+    return False
+
+
 def compute_effect(question: Question) -> list[tuple[str, int]] | list[str]:
     return question.effect
 
@@ -39,9 +74,12 @@ def init_questions(
     paradigm: Paradigm,
     questions: list[Question],
     o: dict[str, int] | None = None,
+    core_map: dict[str, int] | None = None,
 ) -> list[Question]:
     result = []
     for q in questions:
+        if core_map and _core_blocked(q, paradigm.depth, core_map):
+            continue
         if o is not None and not all(d in o for d in q.prerequisites):
             continue
         eff = compute_effect(q)
@@ -70,6 +108,7 @@ def update(
     paradigms: dict[str, Paradigm],
     all_questions: list[Question],
     current_open: list[Question],
+    core_map: dict[str, int] | None = None,
 ) -> tuple[GameState, list[Question]]:
     # Step 1: 直接更新
     eff = compute_effect(question)
@@ -123,7 +162,7 @@ def update(
     remaining = [q for q in current_open if q.id != question.id]
     remaining_ids = {q.id for q in remaining}
     newly_opened = [
-        q for q in open_questions(state, all_questions)
+        q for q in open_questions(state, all_questions, paradigms, core_map)
         if q.id not in remaining_ids and q.id not in state.answered
     ]
 
@@ -164,10 +203,17 @@ def alignment(h: dict[str, float], paradigm: Paradigm) -> float:
 def open_questions(
     state: GameState,
     questions: list[Question],
+    paradigms: dict[str, Paradigm] | None = None,
+    core_map: dict[str, int] | None = None,
 ) -> list[Question]:
+    current_depth = 0
+    if paradigms and state.p_current in paradigms:
+        current_depth = paradigms[state.p_current].depth
     result = []
     for q in questions:
         if q.id in state.answered:
+            continue
+        if core_map and _core_blocked(q, current_depth, core_map):
             continue
         if not all(d in state.o for d in q.prerequisites):
             continue

@@ -17,6 +17,8 @@ class Paradigm:
     d_minus: Set[str] = field(default_factory=set)
     relations: List[Tuple[str, str, float]] = field(default_factory=list)
     threshold: Optional[int] = None  # 近傍と O* から導出
+    depth: int = 0  # 真理論からの距離（メインパスの順序）
+    core: Set[str] = field(default_factory=set)  # パラダイムコア記述素
 
     def __post_init__(self):
         self.validate()
@@ -37,6 +39,12 @@ class Paradigm:
                 raise ValueError(
                     f"Paradigm {self.id}: relation の tgt '{tgt}' が D(P) に含まれない"
                 )
+        d_all = self.d_plus | self.d_minus
+        if not self.core.issubset(d_all):
+            invalid = sorted(self.core - d_all)
+            raise ValueError(
+                f"Paradigm {self.id}: core が D(P) に含まれない: {invalid}"
+            )
 
     @property
     def d_all(self) -> Set[str]:
