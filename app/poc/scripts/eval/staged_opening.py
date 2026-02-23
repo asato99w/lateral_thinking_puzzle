@@ -28,7 +28,7 @@ def classify_question(q, paradigms):
         if pid not in paradigms:
             continue
         p = paradigms[pid]
-        overlap = eff_ds & p.d_all
+        overlap = eff_ds & p.conceivable
         if overlap:
             homes[pid] = overlap
 
@@ -172,7 +172,7 @@ def main():
     for pid in MAIN_PATH:
         if pid == init_pid or pid not in paradigms:
             continue
-        shared_ds |= p_init.d_all & paradigms[pid].d_all
+        shared_ds |= p_init.conceivable & paradigms[pid].conceivable
 
     print(f"共有記述素: {sorted(shared_ds)}")
     print()

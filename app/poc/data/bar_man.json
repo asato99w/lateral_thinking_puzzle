@@ -136,63 +136,6 @@
     {
       "id": "P1",
       "name": "バーでの日常的やりとり",
-      "d_plus": [
-        "Fs-01",
-        "Fs-02",
-        "Fs-05",
-        "Fs-06",
-        "Fs-07",
-        "Fs-08",
-        "Fs-09",
-        "Fs-12",
-        "Fs-13",
-        "Fs-14",
-        "Fs-15",
-        "Fs-16",
-        "Fs-18",
-        "Fs-20",
-        "Fs-21",
-        "Fs-25",
-        "Fs-27"
-      ],
-      "d_minus": [
-        "Fs-10",
-        "Fs-11",
-        "Fs-17",
-        "Fs-19",
-        "Fs-22",
-        "Fs-23",
-        "Fs-26",
-        "Fs-28",
-        "Ft-01",
-        "Ft-03",
-        "Ft-05",
-        "Ft-06",
-        "Ft-09",
-        "Ft-10",
-        "Ft-11",
-        "Ft-12",
-        "Ft-13",
-        "Ft-14",
-        "Ft-15",
-        "Ft-16",
-        "Ft-17",
-        "Ft-19",
-        "Ft-20",
-        "Fs-35",
-        "Fs-36",
-        "B-01",
-        "B-02",
-        "B-03",
-        "B-04",
-        "B-05",
-        "B-06",
-        "M-01",
-        "M-02",
-        "M-03",
-        "M-04",
-        "M-05"
-      ],
       "relations": [
         [
           "Fs-01",
@@ -279,43 +222,280 @@
           "B-04",
           0.8
         ]
+      ],
+      "p_pred": [
+        [
+          "Fs-01",
+          1
+        ],
+        [
+          "Fs-02",
+          1
+        ],
+        [
+          "Fs-05",
+          1
+        ],
+        [
+          "Fs-06",
+          1
+        ],
+        [
+          "Fs-07",
+          1
+        ],
+        [
+          "Fs-08",
+          1
+        ],
+        [
+          "Fs-09",
+          1
+        ],
+        [
+          "Fs-12",
+          1
+        ],
+        [
+          "Fs-13",
+          1
+        ],
+        [
+          "Fs-14",
+          1
+        ],
+        [
+          "Fs-15",
+          1
+        ],
+        [
+          "Fs-16",
+          1
+        ],
+        [
+          "Fs-18",
+          1
+        ],
+        [
+          "Fs-20",
+          1
+        ],
+        [
+          "Fs-21",
+          1
+        ],
+        [
+          "Fs-25",
+          1
+        ],
+        [
+          "Fs-27",
+          1
+        ],
+        [
+          "Fs-10",
+          0
+        ],
+        [
+          "Fs-11",
+          0
+        ],
+        [
+          "Fs-17",
+          0
+        ],
+        [
+          "Fs-19",
+          0
+        ],
+        [
+          "Fs-22",
+          0
+        ],
+        [
+          "Fs-23",
+          0
+        ],
+        [
+          "Fs-26",
+          0
+        ],
+        [
+          "Fs-28",
+          0
+        ],
+        [
+          "Ft-01",
+          0
+        ],
+        [
+          "Ft-03",
+          0
+        ],
+        [
+          "Ft-05",
+          0
+        ],
+        [
+          "Ft-06",
+          0
+        ],
+        [
+          "Ft-09",
+          0
+        ],
+        [
+          "Ft-10",
+          0
+        ],
+        [
+          "Ft-11",
+          0
+        ],
+        [
+          "Ft-12",
+          0
+        ],
+        [
+          "Ft-13",
+          0
+        ],
+        [
+          "Ft-14",
+          0
+        ],
+        [
+          "Ft-15",
+          0
+        ],
+        [
+          "Ft-16",
+          0
+        ],
+        [
+          "Ft-17",
+          0
+        ],
+        [
+          "Ft-19",
+          0
+        ],
+        [
+          "Ft-20",
+          0
+        ],
+        [
+          "Fs-35",
+          0
+        ],
+        [
+          "Fs-36",
+          0
+        ],
+        [
+          "B-01",
+          0
+        ],
+        [
+          "B-02",
+          0
+        ],
+        [
+          "B-03",
+          0
+        ],
+        [
+          "B-04",
+          0
+        ],
+        [
+          "B-05",
+          0
+        ],
+        [
+          "B-06",
+          0
+        ],
+        [
+          "M-01",
+          0
+        ],
+        [
+          "M-02",
+          0
+        ],
+        [
+          "M-03",
+          0
+        ],
+        [
+          "M-04",
+          0
+        ],
+        [
+          "M-05",
+          0
+        ]
+      ],
+      "conceivable": [
+        "B-01",
+        "B-02",
+        "B-03",
+        "B-04",
+        "B-05",
+        "B-06",
+        "Fs-01",
+        "Fs-02",
+        "Fs-05",
+        "Fs-06",
+        "Fs-07",
+        "Fs-08",
+        "Fs-09",
+        "Fs-10",
+        "Fs-11",
+        "Fs-12",
+        "Fs-13",
+        "Fs-14",
+        "Fs-15",
+        "Fs-16",
+        "Fs-17",
+        "Fs-18",
+        "Fs-19",
+        "Fs-20",
+        "Fs-21",
+        "Fs-22",
+        "Fs-23",
+        "Fs-25",
+        "Fs-26",
+        "Fs-27",
+        "Fs-28",
+        "Fs-35",
+        "Fs-36",
+        "Ft-01",
+        "Ft-03",
+        "Ft-05",
+        "Ft-06",
+        "Ft-09",
+        "Ft-10",
+        "Ft-11",
+        "Ft-12",
+        "Ft-13",
+        "Ft-14",
+        "Ft-15",
+        "Ft-16",
+        "Ft-17",
+        "Ft-19",
+        "Ft-20",
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05"
       ]
     },
     {
       "id": "P2",
       "name": "バーテンダーの善意",
-      "d_plus": [
-        "Fs-09",
-        "Fs-14",
-        "Fs-15",
-        "Fs-17",
-        "Fs-19",
-        "Fs-20",
-        "Fs-22",
-        "Fs-23",
-        "Fs-25",
-        "Fs-26",
-        "Ft-20",
-        "B-02",
-        "B-03",
-        "B-04",
-        "M-06",
-        "M-07",
-        "M-08"
-      ],
-      "d_minus": [
-        "Fs-16",
-        "Fs-18",
-        "Fs-33",
-        "Fs-34",
-        "Ft-01",
-        "Ft-05",
-        "Ft-06",
-        "B-01",
-        "B-06",
-        "M-01",
-        "M-05"
-      ],
       "relations": [
         [
           "Fs-17",
@@ -407,49 +587,155 @@
           "Fs-19",
           0.8
         ]
+      ],
+      "p_pred": [
+        [
+          "Fs-09",
+          1
+        ],
+        [
+          "Fs-14",
+          1
+        ],
+        [
+          "Fs-15",
+          1
+        ],
+        [
+          "Fs-17",
+          1
+        ],
+        [
+          "Fs-19",
+          1
+        ],
+        [
+          "Fs-20",
+          1
+        ],
+        [
+          "Fs-22",
+          1
+        ],
+        [
+          "Fs-23",
+          1
+        ],
+        [
+          "Fs-25",
+          1
+        ],
+        [
+          "Fs-26",
+          1
+        ],
+        [
+          "Ft-20",
+          1
+        ],
+        [
+          "B-02",
+          1
+        ],
+        [
+          "B-03",
+          1
+        ],
+        [
+          "B-04",
+          1
+        ],
+        [
+          "M-06",
+          1
+        ],
+        [
+          "M-07",
+          1
+        ],
+        [
+          "M-08",
+          1
+        ],
+        [
+          "Fs-16",
+          0
+        ],
+        [
+          "Fs-18",
+          0
+        ],
+        [
+          "Fs-33",
+          0
+        ],
+        [
+          "Fs-34",
+          0
+        ],
+        [
+          "Ft-01",
+          0
+        ],
+        [
+          "Ft-05",
+          0
+        ],
+        [
+          "Ft-06",
+          0
+        ],
+        [
+          "B-01",
+          0
+        ],
+        [
+          "B-06",
+          0
+        ],
+        [
+          "M-01",
+          0
+        ],
+        [
+          "M-05",
+          0
+        ]
+      ],
+      "conceivable": [
+        "B-01",
+        "B-02",
+        "B-03",
+        "B-04",
+        "B-06",
+        "Fs-09",
+        "Fs-14",
+        "Fs-15",
+        "Fs-16",
+        "Fs-17",
+        "Fs-18",
+        "Fs-19",
+        "Fs-20",
+        "Fs-22",
+        "Fs-23",
+        "Fs-25",
+        "Fs-26",
+        "Fs-33",
+        "Fs-34",
+        "Ft-01",
+        "Ft-05",
+        "Ft-06",
+        "Ft-20",
+        "M-01",
+        "M-05",
+        "M-06",
+        "M-07",
+        "M-08"
       ]
     },
     {
       "id": "P3",
       "name": "男の隠れた問題",
-      "d_plus": [
-        "Fs-10",
-        "Fs-14",
-        "Fs-15",
-        "Fs-17",
-        "Fs-19",
-        "Fs-22",
-        "Fs-23",
-        "Fs-25",
-        "Fs-26",
-        "Fs-28",
-        "Ft-01",
-        "Ft-03",
-        "Ft-05",
-        "Ft-12",
-        "Ft-20",
-        "B-01",
-        "B-02",
-        "B-03",
-        "B-04",
-        "M-01",
-        "M-02",
-        "M-04",
-        "M-09",
-        "M-10",
-        "M-11"
-      ],
-      "d_minus": [
-        "Fs-09",
-        "Fs-16",
-        "Fs-18",
-        "Fs-33",
-        "Fs-34",
-        "Ft-07",
-        "Ft-08",
-        "Ft-09",
-        "M-03"
-      ],
       "relations": [
         [
           "Fs-10",
@@ -531,56 +817,185 @@
           "Ft-03",
           0.8
         ]
-      ]
-    },
-    {
-      "id": "P4",
-      "name": "しゃっくりと驚かし",
-      "d_plus": [
+      ],
+      "p_pred": [
+        [
+          "Fs-10",
+          1
+        ],
+        [
+          "Fs-14",
+          1
+        ],
+        [
+          "Fs-15",
+          1
+        ],
+        [
+          "Fs-17",
+          1
+        ],
+        [
+          "Fs-19",
+          1
+        ],
+        [
+          "Fs-22",
+          1
+        ],
+        [
+          "Fs-23",
+          1
+        ],
+        [
+          "Fs-25",
+          1
+        ],
+        [
+          "Fs-26",
+          1
+        ],
+        [
+          "Fs-28",
+          1
+        ],
+        [
+          "Ft-01",
+          1
+        ],
+        [
+          "Ft-03",
+          1
+        ],
+        [
+          "Ft-05",
+          1
+        ],
+        [
+          "Ft-12",
+          1
+        ],
+        [
+          "Ft-20",
+          1
+        ],
+        [
+          "B-01",
+          1
+        ],
+        [
+          "B-02",
+          1
+        ],
+        [
+          "B-03",
+          1
+        ],
+        [
+          "B-04",
+          1
+        ],
+        [
+          "M-01",
+          1
+        ],
+        [
+          "M-02",
+          1
+        ],
+        [
+          "M-04",
+          1
+        ],
+        [
+          "M-09",
+          1
+        ],
+        [
+          "M-10",
+          1
+        ],
+        [
+          "M-11",
+          1
+        ],
+        [
+          "Fs-09",
+          0
+        ],
+        [
+          "Fs-16",
+          0
+        ],
+        [
+          "Fs-18",
+          0
+        ],
+        [
+          "Fs-33",
+          0
+        ],
+        [
+          "Fs-34",
+          0
+        ],
+        [
+          "Ft-07",
+          0
+        ],
+        [
+          "Ft-08",
+          0
+        ],
+        [
+          "Ft-09",
+          0
+        ],
+        [
+          "M-03",
+          0
+        ]
+      ],
+      "conceivable": [
+        "B-01",
+        "B-02",
+        "B-03",
+        "B-04",
+        "Fs-09",
         "Fs-10",
         "Fs-14",
         "Fs-15",
+        "Fs-16",
         "Fs-17",
+        "Fs-18",
         "Fs-19",
         "Fs-22",
         "Fs-23",
         "Fs-25",
         "Fs-26",
         "Fs-28",
+        "Fs-33",
+        "Fs-34",
         "Ft-01",
         "Ft-03",
         "Ft-05",
-        "Ft-06",
         "Ft-07",
         "Ft-08",
         "Ft-09",
-        "Ft-10",
-        "Ft-11",
         "Ft-12",
-        "Ft-13",
-        "Ft-14",
-        "Ft-15",
-        "Ft-16",
-        "Ft-17",
-        "Ft-19",
         "Ft-20",
-        "B-01",
-        "B-02",
-        "B-03",
-        "B-04",
-        "B-05",
-        "B-06",
         "M-01",
         "M-02",
         "M-03",
         "M-04",
-        "M-05"
-      ],
-      "d_minus": [
-        "Fs-09",
-        "Fs-16",
-        "Fs-18"
-      ],
+        "M-09",
+        "M-10",
+        "M-11"
+      ]
+    },
+    {
+      "id": "P4",
+      "name": "しゃっくりと驚かし",
       "relations": [
         [
           "Ft-07",
@@ -652,39 +1067,304 @@
           "M-05",
           0.8
         ]
+      ],
+      "p_pred": [
+        [
+          "Fs-10",
+          1
+        ],
+        [
+          "Fs-14",
+          1
+        ],
+        [
+          "Fs-15",
+          1
+        ],
+        [
+          "Fs-17",
+          1
+        ],
+        [
+          "Fs-19",
+          1
+        ],
+        [
+          "Fs-22",
+          1
+        ],
+        [
+          "Fs-23",
+          1
+        ],
+        [
+          "Fs-25",
+          1
+        ],
+        [
+          "Fs-26",
+          1
+        ],
+        [
+          "Fs-28",
+          1
+        ],
+        [
+          "Ft-01",
+          1
+        ],
+        [
+          "Ft-03",
+          1
+        ],
+        [
+          "Ft-05",
+          1
+        ],
+        [
+          "Ft-06",
+          1
+        ],
+        [
+          "Ft-07",
+          1
+        ],
+        [
+          "Ft-08",
+          1
+        ],
+        [
+          "Ft-09",
+          1
+        ],
+        [
+          "Ft-10",
+          1
+        ],
+        [
+          "Ft-11",
+          1
+        ],
+        [
+          "Ft-12",
+          1
+        ],
+        [
+          "Ft-13",
+          1
+        ],
+        [
+          "Ft-14",
+          1
+        ],
+        [
+          "Ft-15",
+          1
+        ],
+        [
+          "Ft-16",
+          1
+        ],
+        [
+          "Ft-17",
+          1
+        ],
+        [
+          "Ft-19",
+          1
+        ],
+        [
+          "Ft-20",
+          1
+        ],
+        [
+          "B-01",
+          1
+        ],
+        [
+          "B-02",
+          1
+        ],
+        [
+          "B-03",
+          1
+        ],
+        [
+          "B-04",
+          1
+        ],
+        [
+          "B-05",
+          1
+        ],
+        [
+          "B-06",
+          1
+        ],
+        [
+          "M-01",
+          1
+        ],
+        [
+          "M-02",
+          1
+        ],
+        [
+          "M-03",
+          1
+        ],
+        [
+          "M-04",
+          1
+        ],
+        [
+          "M-05",
+          1
+        ],
+        [
+          "Fs-09",
+          0
+        ],
+        [
+          "Fs-16",
+          0
+        ],
+        [
+          "Fs-18",
+          0
+        ]
+      ],
+      "conceivable": [
+        "B-01",
+        "B-02",
+        "B-03",
+        "B-04",
+        "B-05",
+        "B-06",
+        "Fs-09",
+        "Fs-10",
+        "Fs-14",
+        "Fs-15",
+        "Fs-16",
+        "Fs-17",
+        "Fs-18",
+        "Fs-19",
+        "Fs-22",
+        "Fs-23",
+        "Fs-25",
+        "Fs-26",
+        "Fs-28",
+        "Ft-01",
+        "Ft-03",
+        "Ft-05",
+        "Ft-06",
+        "Ft-07",
+        "Ft-08",
+        "Ft-09",
+        "Ft-10",
+        "Ft-11",
+        "Ft-12",
+        "Ft-13",
+        "Ft-14",
+        "Ft-15",
+        "Ft-16",
+        "Ft-17",
+        "Ft-19",
+        "Ft-20",
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05"
       ]
     },
     {
       "id": "S1",
       "name": "強盗・犯罪",
-      "d_plus": [
+      "relations": [],
+      "p_pred": [
+        [
+          "Fs-14",
+          1
+        ],
+        [
+          "Fs-16",
+          1
+        ],
+        [
+          "Fs-18",
+          1
+        ],
+        [
+          "Fs-33",
+          1
+        ],
+        [
+          "Fs-17",
+          0
+        ],
+        [
+          "Fs-22",
+          0
+        ],
+        [
+          "Fs-23",
+          0
+        ],
+        [
+          "Ft-11",
+          0
+        ]
+      ],
+      "conceivable": [
         "Fs-14",
         "Fs-16",
-        "Fs-18",
-        "Fs-33"
-      ],
-      "d_minus": [
         "Fs-17",
+        "Fs-18",
         "Fs-22",
         "Fs-23",
+        "Fs-33",
         "Ft-11"
-      ],
-      "relations": []
+      ]
     },
     {
       "id": "S2",
       "name": "個人的関係",
-      "d_plus": [
+      "relations": [],
+      "p_pred": [
+        [
+          "Fs-04",
+          1
+        ],
+        [
+          "Fs-22",
+          1
+        ],
+        [
+          "Fs-30",
+          1
+        ],
+        [
+          "Ft-01",
+          0
+        ],
+        [
+          "Ft-05",
+          0
+        ],
+        [
+          "Ft-13",
+          0
+        ]
+      ],
+      "conceivable": [
         "Fs-04",
         "Fs-22",
-        "Fs-30"
-      ],
-      "d_minus": [
+        "Fs-30",
         "Ft-01",
         "Ft-05",
         "Ft-13"
-      ],
-      "relations": []
+      ]
     }
   ],
   "questions": [
@@ -707,7 +1387,8 @@
         "Fs-01"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q02",
@@ -728,7 +1409,8 @@
         "Fs-04"
       ],
       "correct_answer": "irrelevant",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q03",
@@ -754,7 +1436,8 @@
         "Fs-09"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q04",
@@ -775,7 +1458,8 @@
         "Fs-10"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q05",
@@ -796,7 +1480,8 @@
         "Fs-11"
       ],
       "correct_answer": "no",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q06",
@@ -817,7 +1502,8 @@
         "Fs-14"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q07",
@@ -843,7 +1529,8 @@
         "Fs-16"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q08",
@@ -869,7 +1556,8 @@
         "Fs-18"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q09",
@@ -890,7 +1578,8 @@
         "Fs-20"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q10",
@@ -911,7 +1600,8 @@
         "Fs-25"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q11",
@@ -937,7 +1627,8 @@
         "Fs-26"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q12",
@@ -958,7 +1649,8 @@
         "Fs-03"
       ],
       "correct_answer": "irrelevant",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q13",
@@ -979,7 +1671,8 @@
         "Fs-05"
       ],
       "correct_answer": "no",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q14",
@@ -1000,7 +1693,8 @@
         "Fs-17"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q15",
@@ -1021,7 +1715,8 @@
         "Fs-19"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q16",
@@ -1042,7 +1737,8 @@
         "Fs-22"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q17",
@@ -1063,7 +1759,8 @@
         "Fs-23"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q18",
@@ -1084,7 +1781,8 @@
         "Ft-01"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q19",
@@ -1107,7 +1805,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q20",
@@ -1130,7 +1829,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q21",
@@ -1153,7 +1853,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q22",
@@ -1181,7 +1882,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q23",
@@ -1202,7 +1904,8 @@
         "Ft-06"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q24",
@@ -1225,7 +1928,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q25",
@@ -1248,7 +1952,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q26",
@@ -1276,7 +1981,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q27",
@@ -1302,7 +2008,8 @@
         "Ft-11"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q28",
@@ -1328,7 +2035,8 @@
         "Ft-13"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q29",
@@ -1354,7 +2062,8 @@
         "Ft-15"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q30",
@@ -1381,7 +2090,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q31",
@@ -1407,7 +2117,8 @@
         "Ft-19"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q32",
@@ -1428,7 +2139,8 @@
         "Fs-30"
       ],
       "correct_answer": "irrelevant",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q33",
@@ -1449,7 +2161,8 @@
         "Fs-31"
       ],
       "correct_answer": "irrelevant",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q34",
@@ -1470,7 +2183,8 @@
         "Fs-32"
       ],
       "correct_answer": "irrelevant",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q35",
@@ -1491,7 +2205,8 @@
         "Fs-33"
       ],
       "correct_answer": "no",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q36",
@@ -1512,7 +2227,8 @@
         "Fs-34"
       ],
       "correct_answer": "no",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q37",
@@ -1533,7 +2249,8 @@
         "Fs-35"
       ],
       "correct_answer": "no",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q38",
@@ -1554,7 +2271,8 @@
         "Fs-36"
       ],
       "correct_answer": "no",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q39",
@@ -1575,7 +2293,8 @@
         "Fs-37"
       ],
       "correct_answer": "irrelevant",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q40",
@@ -1596,7 +2315,8 @@
         "Fs-01"
       ],
       "correct_answer": "no",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q41",
@@ -1621,7 +2341,8 @@
         "Fs-01"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q42",
@@ -1646,7 +2367,8 @@
         "Fs-23"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q43",
@@ -1671,7 +2393,8 @@
         "Fs-10"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q44",
@@ -1698,7 +2421,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q45",
@@ -1725,7 +2449,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q46",
@@ -1740,7 +2465,8 @@
       "ans_irrelevant": [],
       "correct_answer": "yes",
       "is_clear": true,
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q47",
@@ -1766,7 +2492,8 @@
         "B-02"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q48",
@@ -1792,7 +2519,8 @@
         "B-03"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q49",
@@ -1813,7 +2541,8 @@
         "M-01"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q50",
@@ -1841,7 +2570,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q51",
@@ -1869,7 +2599,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-17"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q52",
@@ -1897,7 +2628,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q53",
@@ -1925,7 +2657,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q54",
@@ -1946,7 +2679,8 @@
         "B-06"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q55",
@@ -1974,7 +2708,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q56",
@@ -1999,7 +2734,8 @@
         "Fs-01"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q57",
@@ -2024,7 +2760,8 @@
         "Fs-05"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q58",
@@ -2049,7 +2786,8 @@
         "Fs-01"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q59",
@@ -2074,7 +2812,8 @@
         "Fs-01"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q60",
@@ -2101,7 +2840,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-05"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q61",
@@ -2128,7 +2868,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q62",
@@ -2153,7 +2894,8 @@
         "Fs-01"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q63",
@@ -2178,7 +2920,8 @@
         "M-06"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q64",
@@ -2203,7 +2946,8 @@
         "M-07"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q65",
@@ -2230,7 +2974,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q66",
@@ -2255,7 +3000,8 @@
         "M-06"
       ],
       "correct_answer": "yes",
-      "prerequisites": []
+      "prerequisites": [],
+      "related_descriptors": []
     },
     {
       "id": "q67",
@@ -2282,7 +3028,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Ft-01"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q68",
@@ -2309,7 +3056,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     },
     {
       "id": "q69",
@@ -2341,7 +3089,8 @@
       "correct_answer": "yes",
       "prerequisites": [
         "Fs-10"
-      ]
+      ],
+      "related_descriptors": []
     }
   ]
 }

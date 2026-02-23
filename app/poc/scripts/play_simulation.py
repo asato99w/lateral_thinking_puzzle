@@ -17,7 +17,7 @@ from engine import (
     alignment,
     open_questions,
 )
-from threshold import build_o_star, compute_thresholds
+from threshold import build_o_star, compute_thresholds, compute_depths
 
 ANSWER_DISPLAY = {"yes": "YES", "no": "NO", "irrelevant": "関係ない"}
 
@@ -32,8 +32,8 @@ def load_and_build(data_path: Path):
         paradigms[p["id"]] = Paradigm(
             id=p["id"],
             name=p["name"],
-            d_plus=set(p["d_plus"]),
-            d_minus=set(p["d_minus"]),
+            p_pred={d: v for d, v in p["p_pred"]},
+            conceivable=set(p["conceivable"]),
             relations=[(r[0], r[1], r[2]) for r in p["relations"]],
         )
 
@@ -47,6 +47,8 @@ def load_and_build(data_path: Path):
             ans_irrelevant=q["ans_irrelevant"],
             correct_answer=q["correct_answer"],
             is_clear=q.get("is_clear", False),
+            prerequisites=q.get("prerequisites", []),
+            related_descriptors=q.get("related_descriptors", []),
         ))
 
     ps_values = {d[0]: d[1] for d in data["ps_values"]}
@@ -55,6 +57,7 @@ def load_and_build(data_path: Path):
 
     o_star = build_o_star(questions, ps_values)
     compute_thresholds(paradigms, o_star)
+    compute_depths(paradigms, o_star)
 
     return data, paradigms, questions, all_descriptor_ids, ps_values, init_paradigm_id
 
@@ -67,7 +70,8 @@ def print_paradigm_state(state: GameState, paradigms: dict[str, Paradigm]):
         a = alignment(state.h, p)
         marker = " ◀" if pid == current else ""
         th_str = f"th={p.threshold}" if p.threshold is not None else "th=–"
-        print(f"    {pid} ({p.name}): tension={t} {th_str} alignment={a:.3f}{marker}")
+        d_str = f"depth={p.depth}" if p.depth is not None else "depth=–"
+        print(f"    {pid} ({p.name}): tension={t} {th_str} {d_str} alignment={a:.3f}{marker}")
 
 
 def main():
@@ -98,11 +102,12 @@ def main():
     print(f"記述素数: {len(all_descriptor_ids)}")
     print()
 
-    # 閾値の表示
-    print("── 閾値 ──")
+    # 閾値と深度の表示
+    print("── 閾値・深度 ──")
     for pid, p in paradigms.items():
         th_str = str(p.threshold) if p.threshold is not None else "–(シフト元にならない)"
-        print(f"  {pid} ({p.name}): threshold = {th_str}")
+        d_str = str(p.depth) if p.depth is not None else "–"
+        print(f"  {pid} ({p.name}): threshold = {th_str}, depth = {d_str}")
     print()
 
     # 初期状態

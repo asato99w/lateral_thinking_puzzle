@@ -12,9 +12,8 @@ from engine import (
     tension,
     alignment,
     open_questions,
-    build_core_map,
 )
-from threshold import build_o_star, compute_thresholds
+from threshold import build_o_star, compute_thresholds, compute_depths
 
 ANSWER_DISPLAY = {
     "yes": "YES",
@@ -66,11 +65,9 @@ def build_paradigms(data: dict) -> dict[str, Paradigm]:
         paradigms[p["id"]] = Paradigm(
             id=p["id"],
             name=p["name"],
-            d_plus=set(p["d_plus"]),
-            d_minus=set(p["d_minus"]),
+            p_pred={d: v for d, v in p["p_pred"]},
+            conceivable=set(p["conceivable"]),
             relations=[(r[0], r[1], r[2]) for r in p["relations"]],
-            depth=p.get("depth", 0),
-            core=set(p.get("core", [])),
         )
     return paradigms
 
@@ -87,6 +84,7 @@ def build_questions(data: dict) -> list[Question]:
             correct_answer=q["correct_answer"],
             is_clear=q.get("is_clear", False),
             prerequisites=q.get("prerequisites", []),
+            related_descriptors=q.get("related_descriptors", []),
         ))
     return questions
 
@@ -134,19 +132,17 @@ def main():
     ps_values = {d[0]: d[1] for d in data["ps_values"]}
     init_paradigm_id = data["init_paradigm"]
 
-    # 完全確定 O* から threshold を導出
+    # 完全確定 O* から threshold と depth を導出
     o_star = build_o_star(questions, ps_values)
     compute_thresholds(paradigms, o_star)
-
-    # コアマップの構築
-    core_map = build_core_map(paradigms)
+    compute_depths(paradigms, o_star)
 
     # ゲーム初期化
     state = init_game(ps_values, paradigms, init_paradigm_id, all_descriptor_ids)
 
     # 初期質問の決定
     p_init = paradigms[init_paradigm_id]
-    current_open = init_questions(p_init, questions, state.o, core_map)
+    current_open = init_questions(p_init, questions, state.o)
 
     step = 0
     debug_mode = False
@@ -237,7 +233,7 @@ def main():
         p_before = state.p_current
 
         # 状態更新
-        state, current_open = update(state, selected, paradigms, questions, current_open, core_map)
+        state, current_open = update(state, selected, paradigms, questions, current_open)
 
         # パラダイムシフトの演出
         if state.p_current != p_before:

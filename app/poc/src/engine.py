@@ -5,17 +5,8 @@ from models import Paradigm, Question, GameState
 EPSILON = 0.2  # H(d) ≈ v の閾値
 
 
-def build_core_map(paradigms: dict[str, Paradigm]) -> dict[str, int]:
-    """コア記述素 → その記述素が属するパラダイムの depth のマップを構築。"""
-    core_map: dict[str, int] = {}
-    for p in paradigms.values():
-        for d in p.core:
-            core_map[d] = p.depth
-    return core_map
-
-
-def _question_descriptors(q: Question) -> set[str]:
-    """質問が参照する全記述素（ans_yes, ans_no, ans_irrelevant の和集合）。"""
+def _question_all_descriptors(q: Question) -> set[str]:
+    """質問が参照する全記述素（効果記述素 + 関連記述素の和集合）。"""
     ds: set[str] = set()
     for d, v in q.ans_yes:
         ds.add(d)
@@ -23,19 +14,15 @@ def _question_descriptors(q: Question) -> set[str]:
         ds.add(d)
     for d in q.ans_irrelevant:
         ds.add(d)
+    for d in q.related_descriptors:
+        ds.add(d)
     return ds
 
 
-def _core_blocked(q: Question, current_depth: int, core_map: dict[str, int]) -> bool:
-    """質問がコア制約によりブロックされるかを判定。
-
-    質問の参照記述素にコア記述素が含まれ、かつそのコアのパラダイム深度が
-    現在のパラダイム深度より大きい場合、ブロックする。
-    """
-    if not core_map:
-        return False
-    for d in _question_descriptors(q):
-        if d in core_map and core_map[d] > current_depth:
+def _conceivable_blocked(q: Question, conceivable: set[str]) -> bool:
+    """質問の参照記述素のいずれかが Conceivable(P) 外ならブロック。"""
+    for d in _question_all_descriptors(q):
+        if d not in conceivable:
             return True
     return False
 
@@ -74,11 +61,10 @@ def init_questions(
     paradigm: Paradigm,
     questions: list[Question],
     o: dict[str, int] | None = None,
-    core_map: dict[str, int] | None = None,
 ) -> list[Question]:
     result = []
     for q in questions:
-        if core_map and _core_blocked(q, paradigm.depth, core_map):
+        if _conceivable_blocked(q, paradigm.conceivable):
             continue
         if o is not None and not all(d in o for d in q.prerequisites):
             continue
@@ -102,13 +88,22 @@ def get_answer(question: Question) -> str:
     return question.correct_answer
 
 
+def explained_o(o: dict[str, int], paradigm: Paradigm) -> int:
+    """O ∩ Predictions(P) のうち一致するものの数。"""
+    count = 0
+    for d_id, v in o.items():
+        pred = paradigm.prediction(d_id)
+        if pred is not None and pred == v:
+            count += 1
+    return count
+
+
 def update(
     state: GameState,
     question: Question,
     paradigms: dict[str, Paradigm],
     all_questions: list[Question],
     current_open: list[Question],
-    core_map: dict[str, int] | None = None,
 ) -> tuple[GameState, list[Question]]:
     # Step 1: 直接更新
     eff = compute_effect(question)
@@ -136,20 +131,27 @@ def update(
 
     # Step 3: パラダイムシフト判定
     current_tension = tension(state.o, p_current)
-    if p_current.threshold is not None and current_tension >= p_current.threshold:
-        # シフト候補: 近傍かつアノマリーがより少ないパラダイム
-        current_anomalies = current_tension
+    if p_current.threshold is not None and current_tension > p_current.threshold:
+        # シフト候補: explained_o が現パラダイムより大きいパラダイム
+        current_explained = explained_o(state.o, p_current)
         candidates = [
             p_id for p_id in paradigms
             if p_id != state.p_current
-            and paradigms[p_id].d_all & p_current.d_all
-            and tension(state.o, paradigms[p_id]) < current_anomalies
+            and explained_o(state.o, paradigms[p_id]) > current_explained
         ]
 
         if candidates:
-            best_id = candidates[0]
-            best_score = alignment(state.h, paradigms[candidates[0]])
-            for p_id in candidates[1:]:
+            # 最小跳躍: 候補の中で explained_o が最小のグループに絞る
+            candidate_eo = {
+                p_id: explained_o(state.o, paradigms[p_id])
+                for p_id in candidates
+            }
+            min_eo = min(candidate_eo.values())
+            nearest = [p_id for p_id in candidates if candidate_eo[p_id] == min_eo]
+
+            best_id = nearest[0]
+            best_score = alignment(state.h, paradigms[nearest[0]])
+            for p_id in nearest[1:]:
                 score = alignment(state.h, paradigms[p_id])
                 if score > best_score:
                     best_score = score
@@ -162,7 +164,7 @@ def update(
     remaining = [q for q in current_open if q.id != question.id]
     remaining_ids = {q.id for q in remaining}
     newly_opened = [
-        q for q in open_questions(state, all_questions, paradigms, core_map)
+        q for q in open_questions(state, all_questions, paradigms)
         if q.id not in remaining_ids and q.id not in state.answered
     ]
 
@@ -170,50 +172,50 @@ def update(
 
 
 def tension(o: dict[str, int], paradigm: Paradigm) -> int:
-    """アノマリーの数。D(P) 内の観測で P の予測と矛盾するものを数える。"""
-    overlap = paradigm.d_all & set(o.keys())
-    return sum(
-        1 for d in overlap if paradigm.prediction(d) != o[d]
-    )
+    """アノマリーの数。Conceivable(P) ∩ O で P の予測と矛盾するものを数える。"""
+    count = 0
+    for d in paradigm.conceivable:
+        if d in o:
+            pred = paradigm.prediction(d)
+            if pred is not None and pred != o[d]:
+                count += 1
+    return count
 
 
 def alignment(h: dict[str, float], paradigm: Paradigm) -> float:
     """H ベースの alignment。
 
-    alignment_h(H, P) = (Σ_{d∈D⁺} H[d] + Σ_{d∈D⁻} (1 - H[d])) / |D(P)|
-
-    H は連続値（0〜1）なので同点が実質的に発生しない。
-    同化により H は現パラダイムの予測方向に押されているため、
-    構造的に近いパラダイムが自然に高スコアになる。
-    未観測・未同化の記述素は H[d] = 0.5 で中立的に寄与する。
+    P_pred で予測がある d について H(d) と p_pred(d) の一致度を計算。
+    P_pred の大きさに依存しない（P_pred 絞り込みとは分離）。
     """
-    d_all = paradigm.d_all
-    if not d_all:
+    pred_items = paradigm.p_pred
+    if not pred_items:
         return 0.0
     score = 0.0
-    for d in d_all:
+    count = 0
+    for d, pred_val in pred_items.items():
         h_val = h.get(d, 0.5)
-        if d in paradigm.d_plus:
+        if pred_val == 1:
             score += h_val
-        else:  # d in d_minus
+        else:  # pred_val == 0
             score += 1.0 - h_val
-    return score / len(d_all)
+        count += 1
+    return score / count if count > 0 else 0.0
 
 
 def open_questions(
     state: GameState,
     questions: list[Question],
     paradigms: dict[str, Paradigm] | None = None,
-    core_map: dict[str, int] | None = None,
 ) -> list[Question]:
-    current_depth = 0
+    conceivable = set()
     if paradigms and state.p_current in paradigms:
-        current_depth = paradigms[state.p_current].depth
+        conceivable = paradigms[state.p_current].conceivable
     result = []
     for q in questions:
         if q.id in state.answered:
             continue
-        if core_map and _core_blocked(q, current_depth, core_map):
+        if conceivable and _conceivable_blocked(q, conceivable):
             continue
         if not all(d in state.o for d in q.prerequisites):
             continue
@@ -243,7 +245,7 @@ def _assimilate_from_paradigm(
     o: dict[str, int],
     paradigm: Paradigm,
 ):
-    for d_id in set(o.keys()) & paradigm.d_all:
+    for d_id in set(o.keys()) & paradigm.conceivable:
         pred = paradigm.prediction(d_id)
         if pred is not None and pred == o[d_id]:
             _assimilate_descriptor(h, d_id, paradigm)

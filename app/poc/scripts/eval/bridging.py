@@ -20,7 +20,7 @@ def main():
 
         homes = {}
         for pid, p in main_paradigms.items():
-            overlap = eff_ds & p.d_all
+            overlap = eff_ds & p.conceivable
             if overlap:
                 homes[pid] = overlap
 
@@ -28,15 +28,15 @@ def main():
             single.append((q, homes))
             continue
 
-        # 固有記述素にまたがるか判定
+        # 固有想起記述素にまたがるか判定
         all_pids = list(homes.keys())
         is_bridge = False
         for idx, pid1 in enumerate(all_pids):
             for pid2 in all_pids[idx+1:]:
                 p1 = main_paradigms[pid1]
                 p2 = main_paradigms[pid2]
-                excl_1 = homes[pid1] - p2.d_all
-                excl_2 = homes[pid2] - p1.d_all
+                excl_1 = homes[pid1] - p2.conceivable
+                excl_2 = homes[pid2] - p1.conceivable
                 if excl_1 and excl_2:
                     is_bridge = True
         if is_bridge:

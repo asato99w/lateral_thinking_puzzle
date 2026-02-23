@@ -1,7 +1,7 @@
-"""固有記述素からのオープン連鎖到達性を構造的に検証する。
+"""固有想起記述素からのオープン連鎖到達性を構造的に検証する。
 
 各メインパスパラダイム P_i について:
-  1. 固有記述素 E(P_i) = D(P_i) - ∪_{j≠i} D(P_j) を特定
+  1. 固有想起記述素 E(P_i) = Conceivable(P_i) - ∪_{j≠i} Conceivable(P_j) を特定
   2. R(P_i) の推移閉包で E(P_i) から到達可能な記述素を算出
   3. 到達可能な記述素を通じて開ける質問のうち anomaly を生むものを特定
   4. anomaly の上界が threshold 以上かを検証
@@ -25,12 +25,12 @@ from threshold import build_o_star
 
 
 def compute_exclusive_descriptors(paradigm, all_paradigms):
-    """P_i の固有記述素: D(P_i) にのみ属し他のどの D(P_j) にも属さない記述素。"""
-    other_d_all = set()
+    """P_i の固有想起記述素: Conceivable(P_i) にのみ属し他のどの Conceivable(P_j) にも属さない。"""
+    other_conceivable = set()
     for pid, p in all_paradigms.items():
         if pid != paradigm.id:
-            other_d_all |= p.d_all
-    return paradigm.d_all - other_d_all
+            other_conceivable |= p.conceivable
+    return paradigm.conceivable - other_conceivable
 
 
 def compute_reachable(seeds, relations):
@@ -50,15 +50,16 @@ def compute_reachable(seeds, relations):
 def analyze_paradigm(pid, paradigms, questions, o_star):
     """一つのパラダイムについて構造的到達性を分析する。"""
     paradigm = paradigms[pid]
-    main_set = set(MAIN_PATH)
 
-    # Step 1: 固有記述素
+    # Step 1: 固有想起記述素
     exclusive = compute_exclusive_descriptors(paradigm, paradigms)
-    shared = paradigm.d_all - exclusive
+    shared = paradigm.conceivable - exclusive
 
-    print(f"  |D(P)|={len(paradigm.d_all)}, "
-          f"|D⁺|={len(paradigm.d_plus)}, |D⁻|={len(paradigm.d_minus)}")
-    print(f"  固有記述素: {len(exclusive)}, 共有記述素: {len(shared)}")
+    pred_1 = sum(1 for v in paradigm.p_pred.values() if v == 1)
+    pred_0 = sum(1 for v in paradigm.p_pred.values() if v == 0)
+    print(f"  |Conceivable|={len(paradigm.conceivable)}, "
+          f"|p_pred|={len(paradigm.p_pred)} (1:{pred_1}, 0:{pred_0})")
+    print(f"  固有想起記述素: {len(exclusive)}, 共有想起記述素: {len(shared)}")
 
     # Step 2: R(P) による到達可能性
     reachable = compute_reachable(exclusive, paradigm.relations)
@@ -67,7 +68,7 @@ def analyze_paradigm(pid, paradigms, questions, o_star):
 
     print(f"  R(P) 到達可能: {len(reachable)} "
           f"(固有{len(reachable & exclusive)} + 新規{len(reachable_from_exclusive)})")
-    print(f"  到達可能な共有記述素: {len(reachable_shared)}")
+    print(f"  到達可能な共有想起記述素: {len(reachable_shared)}")
 
     # Step 3 & 4: 到達可能記述素で開ける質問と anomaly
     openable_via_reach = []  # (question, opening_ds, anomaly_ds)
@@ -124,7 +125,7 @@ def analyze_paradigm(pid, paradigms, questions, o_star):
     if not ok:
         unreachable_shared = shared - reachable
         if unreachable_shared:
-            print(f"  [診断] 到達不能な共有記述素: {len(unreachable_shared)}")
+            print(f"  [診断] 到達不能な共有想起記述素: {len(unreachable_shared)}")
             print(f"    {sorted(unreachable_shared)}")
 
         # 固有記述素からの関係が少ない場合

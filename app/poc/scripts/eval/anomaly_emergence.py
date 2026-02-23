@@ -15,7 +15,7 @@ from engine import (
 
 
 def classify_effect(q, paradigms):
-    """質問の effect 記述素がどのパラダイムに属するかを返す。"""
+    """質問の effect 記述素がどのパラダイムの Conceivable に属するかを返す。"""
     eff = compute_effect(q)
     if q.correct_answer == "irrelevant":
         return {}
@@ -24,18 +24,18 @@ def classify_effect(q, paradigms):
     for pid in MAIN_PATH:
         if pid not in paradigms:
             continue
-        overlap = eff_ds & paradigms[pid].d_all
+        overlap = eff_ds & paradigms[pid].conceivable
         if overlap:
             homes[pid] = overlap
     return homes
 
 
 def check_anomaly_detail(o, paradigm):
-    """アノマリーの詳細を返す。"""
+    """アノマリーの詳細を返す。Conceivable ∩ O で予測と矛盾するもの。"""
     anomalies = []
-    for d in paradigm.d_all & set(o.keys()):
+    for d in paradigm.conceivable & set(o.keys()):
         pred = paradigm.prediction(d)
-        if pred != o[d]:
+        if pred is not None and pred != o[d]:
             anomalies.append((d, o[d], pred))
     return anomalies
 
@@ -106,7 +106,9 @@ def main():
         if pid not in paradigms:
             continue
         p = paradigms[pid]
-        print(f"  {pid}: |D⁺|={len(p.d_plus)}, |D⁻|={len(p.d_minus)}, |R(P)|={len(p.relations)}")
+        pred_1 = sum(1 for v in p.p_pred.values() if v == 1)
+        pred_0 = sum(1 for v in p.p_pred.values() if v == 0)
+        print(f"  {pid}: |Conceivable|={len(p.conceivable)}, |p_pred|={len(p.p_pred)} (1:{pred_1}, 0:{pred_0}), |R(P)|={len(p.relations)}")
     print()
 
     def show_state(label):
@@ -117,9 +119,9 @@ def main():
             p = paradigms[pid]
             t = tension(state.o, p)
             a = alignment(state.h, p)
-            overlap = len(p.d_all & set(state.o.keys()))
+            overlap = len(p.conceivable & set(state.o.keys()))
             anomaly_detail = check_anomaly_detail(state.o, p)
-            line = f"    {pid}: t={t} a={a:.3f} |D∩O|={overlap}"
+            line = f"    {pid}: t={t} a={a:.3f} |Conceivable∩O|={overlap}"
             if anomaly_detail:
                 ads = [f"{d}(O={ov},P={pv})" for d, ov, pv in anomaly_detail]
                 line += f" anomaly={ads}"

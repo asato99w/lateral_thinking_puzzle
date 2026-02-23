@@ -13,49 +13,36 @@ class Descriptor:
 class Paradigm:
     id: str
     name: str
-    d_plus: Set[str] = field(default_factory=set)
-    d_minus: Set[str] = field(default_factory=set)
+    p_pred: Dict[str, int] = field(default_factory=dict)  # {d_id: 0|1}, unknown=キー不在
+    conceivable: Set[str] = field(default_factory=set)  # 想起可能集合
     relations: List[Tuple[str, str, float]] = field(default_factory=list)
-    threshold: Optional[int] = None  # 近傍と O* から導出
-    depth: int = 0  # 真理論からの距離（メインパスの順序）
-    core: Set[str] = field(default_factory=set)  # パラダイムコア記述素
+    threshold: Optional[int] = None  # 自動計算
+    depth: Optional[int] = None  # Explained(P)包含関係から自動導出
 
     def __post_init__(self):
         self.validate()
 
     def validate(self):
-        d_all = self.d_plus | self.d_minus
-        overlap = self.d_plus & self.d_minus
-        if overlap:
+        # conceivable は p_pred のキーの部分集合でなければならない
+        pred_keys = set(self.p_pred.keys())
+        if not self.conceivable.issubset(pred_keys):
+            invalid = sorted(self.conceivable - pred_keys)
             raise ValueError(
-                f"Paradigm {self.id}: d_plus と d_minus が重複: {sorted(overlap)}"
+                f"Paradigm {self.id}: conceivable に p_pred に存在しない記述素: {invalid}"
             )
+        # relations の src/tgt は conceivable に含まれる必要がある
         for src, tgt, w in self.relations:
-            if src not in d_all:
+            if src not in self.conceivable:
                 raise ValueError(
-                    f"Paradigm {self.id}: relation の src '{src}' が D(P) に含まれない"
+                    f"Paradigm {self.id}: relation の src '{src}' が conceivable に含まれない"
                 )
-            if tgt not in d_all:
+            if tgt not in self.conceivable:
                 raise ValueError(
-                    f"Paradigm {self.id}: relation の tgt '{tgt}' が D(P) に含まれない"
+                    f"Paradigm {self.id}: relation の tgt '{tgt}' が conceivable に含まれない"
                 )
-        d_all = self.d_plus | self.d_minus
-        if not self.core.issubset(d_all):
-            invalid = sorted(self.core - d_all)
-            raise ValueError(
-                f"Paradigm {self.id}: core が D(P) に含まれない: {invalid}"
-            )
-
-    @property
-    def d_all(self) -> Set[str]:
-        return self.d_plus | self.d_minus
 
     def prediction(self, d_id: str) -> Optional[int]:
-        if d_id in self.d_plus:
-            return 1
-        if d_id in self.d_minus:
-            return 0
-        return None
+        return self.p_pred.get(d_id)
 
 
 @dataclass
@@ -68,6 +55,7 @@ class Question:
     correct_answer: str  # "yes" / "no" / "irrelevant"
     is_clear: bool = False
     prerequisites: List[str] = field(default_factory=list)
+    related_descriptors: List[str] = field(default_factory=list)
 
     @property
     def effect(self) -> Union[List[Tuple[str, int]], List[str]]:

@@ -47,7 +47,7 @@ def main():
         p = paradigms[pid]
         t = tension(o_star, p)
         a = alignment(h_star, p)
-        overlap = p.d_all & set(o_star.keys())
+        overlap = p.conceivable & set(o_star.keys())
         anomaly_ds = [d for d in overlap if p.prediction(d) != o_star[d]]
 
         mark = ""
@@ -57,7 +57,7 @@ def main():
         prev_anomalies = t
 
         print(f"  {pid} ({p.name})")
-        print(f"    anomalies={t}, alignment={a:.3f}, |D(P)∩O*|={len(overlap)}")
+        print(f"    anomalies={t}, alignment={a:.3f}, |Conceivable∩O*|={len(overlap)}")
         if anomaly_ds:
             print(f"    アノマリー記述素: {sorted(anomaly_ds)}")
         if mark:

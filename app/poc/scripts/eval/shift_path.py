@@ -17,7 +17,7 @@
 from __future__ import annotations
 
 from common import load_data, load_raw, MAIN_PATH
-from engine import tension, alignment, compute_effect
+from engine import tension, alignment, compute_effect, explained_o
 
 
 def infer_main_path(data: dict, paradigms: dict) -> list[str]:
@@ -71,14 +71,14 @@ def check_alignment_ordering(paradigms, main_path, o_star, all_ids):
         p = paradigms[pid]
         a = alignment(h_star, p)
         t = tension(o_star, p)
-        overlap = len(p.d_all & set(o_star.keys()))
+        overlap = len(p.conceivable & set(o_star.keys()))
         all_scores.append((pid, a, t, overlap))
 
     print("alignment_h(H*, P) — 全パラダイム:")
     all_scores.sort(key=lambda x: -x[1])
     for pid, a, t, ov in all_scores:
         marker = " ◀ main" if pid in main_path else ""
-        print(f"  {pid:4s}: alignment={a:.4f}  tension={t}  |D∩O*|={ov}{marker}")
+        print(f"  {pid:4s}: alignment={a:.4f}  tension={t}  |Conceivable∩O*|={ov}{marker}")
     print()
 
     # メインパスの alignment 順序
@@ -110,41 +110,49 @@ def check_alignment_ordering(paradigms, main_path, o_star, all_ids):
 def build_virtual_h(paradigm, all_ids):
     """パラダイム P に完全同化した仮想 H を構築する。
 
-    D⁺(P) → 1.0, D⁻(P) → 0.0, それ以外 → 0.5
+    p_pred(d)=1 → 1.0, p_pred(d)=0 → 0.0, それ以外 → 0.5
     """
     h = {d: 0.5 for d in all_ids}
-    for d in paradigm.d_plus:
-        h[d] = 1.0
-    for d in paradigm.d_minus:
-        h[d] = 0.0
+    for d, pred_val in paradigm.p_pred.items():
+        h[d] = float(pred_val)
     return h
 
 
 def select_shift_target(pid_cur, paradigms, o_star, all_ids):
     """仮想 H_Pi で engine のシフト先選択を再現する。
 
+    方式: explained_o(O*, P') > explained_o(O*, P_cur) で候補を絞り、
+    最小跳躍（explained_o が最小のグループ）に限定した上で
+    alignment(H_Pi, P') で最良を選択する。
+
     返り値: (選択先ID or None, 候補リスト[(pid, alignment)])
     """
     p_cur = paradigms[pid_cur]
     h_pi = build_virtual_h(p_cur, all_ids)
 
-    cur_tension = tension(o_star, p_cur)
+    cur_explained = explained_o(o_star, p_cur)
     candidates = []
     for p_id in paradigms:
         if p_id == pid_cur:
             continue
         p = paradigms[p_id]
-        if not (p.d_all & p_cur.d_all):
-            continue
-        if tension(o_star, p) >= cur_tension:
+        if explained_o(o_star, p) <= cur_explained:
             continue
         candidates.append(p_id)
 
     if not candidates:
         return None, []
 
+    # 最小跳躍: 候補の中で explained_o が最小のグループに絞る
+    candidate_eo = {
+        p_id: explained_o(o_star, paradigms[p_id])
+        for p_id in candidates
+    }
+    min_eo = min(candidate_eo.values())
+    nearest = [p_id for p_id in candidates if candidate_eo[p_id] == min_eo]
+
     candidate_scores = []
-    for p_id in candidates:
+    for p_id in nearest:
         a = alignment(h_pi, paradigms[p_id])
         candidate_scores.append((p_id, a))
     candidate_scores.sort(key=lambda x: -x[1])
