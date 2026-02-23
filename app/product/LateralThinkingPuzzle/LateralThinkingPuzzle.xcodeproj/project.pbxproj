@@ -558,7 +558,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.asatokazu.LateralThinkingPuzzle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kazuasato.LateralThinkingPuzzle;
 				SDKROOT = iphoneos;
 				SWIFT_STRICT_CONCURRENCY = targeted;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -575,7 +575,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.asatokazu.LateralThinkingPuzzleTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kazuasato.LateralThinkingPuzzleTests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LateralThinkingPuzzle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LateralThinkingPuzzle";
@@ -594,7 +594,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.asatokazu.LateralThinkingPuzzle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kazuasato.LateralThinkingPuzzle;
 				SDKROOT = iphoneos;
 				SWIFT_STRICT_CONCURRENCY = targeted;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -611,7 +611,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.asatokazu.LateralThinkingPuzzleUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kazuasato.LateralThinkingPuzzleUITests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = LateralThinkingPuzzle;
@@ -628,7 +628,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.asatokazu.LateralThinkingPuzzleUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kazuasato.LateralThinkingPuzzleUITests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = LateralThinkingPuzzle;
@@ -766,7 +766,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.asatokazu.LateralThinkingPuzzleTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kazuasato.LateralThinkingPuzzleTests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LateralThinkingPuzzle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LateralThinkingPuzzle";
