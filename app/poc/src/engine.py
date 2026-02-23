@@ -131,7 +131,7 @@ def update(
 
     # Step 3: パラダイムシフト判定
     current_tension = tension(state.o, p_current)
-    if p_current.threshold is not None and current_tension >= p_current.threshold:
+    if p_current.threshold is not None and current_tension > p_current.threshold:
         # シフト候補: explained_o が現パラダイムより大きいパラダイム
         current_explained = explained_o(state.o, p_current)
         candidates = [
