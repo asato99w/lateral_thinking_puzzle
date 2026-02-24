@@ -19,8 +19,11 @@ targets:
       - path: LateralThinkingPuzzle
         excludes:
           - "Resources/**"
-      - path: LateralThinkingPuzzle/Resources
+      - path: LateralThinkingPuzzle/Resources/Assets.xcassets
         buildPhase: resources
+      - path: LateralThinkingPuzzle/Resources/Puzzles
+        buildPhase: resources
+        type: folder
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES

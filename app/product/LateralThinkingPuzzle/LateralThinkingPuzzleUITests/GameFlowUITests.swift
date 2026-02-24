@@ -6,6 +6,8 @@ final class GameFlowUITests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = true
+        // Force Japanese locale so manifest resolves to ja/
+        app.launchArguments += ["-AppleLanguages", "(ja)", "-AppleLocale", "ja_JP"]
         app.launch()
     }
 
@@ -39,10 +41,8 @@ final class GameFlowUITests: XCTestCase {
         XCTAssertTrue(questionsHeader.waitForExistence(timeout: 3), "Questions section should appear")
 
         // 5. Find and tap a question button
-        // Questions are in Button with plain style, look for text content
         let allButtons = app.buttons
         if allButtons.count > 0 {
-            // Tap the first question button (index 0 might be nav back, try index 0)
             let questionButton = allButtons.element(boundBy: allButtons.count > 1 ? 1 : 0)
             if questionButton.exists {
                 questionButton.tap()
@@ -55,7 +55,6 @@ final class GameFlowUITests: XCTestCase {
                 add(afterAnswerAttachment)
             }
 
-            // Tap another question if available
             let remainingButtons = app.buttons
             if remainingButtons.count > 1 {
                 let nextButton = remainingButtons.element(boundBy: remainingButtons.count > 1 ? 1 : 0)

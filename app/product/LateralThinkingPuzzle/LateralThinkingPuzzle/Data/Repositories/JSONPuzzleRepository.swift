@@ -2,13 +2,30 @@ import Foundation
 
 struct JSONPuzzleRepository: PuzzleRepository {
 
-    private static let puzzleIDs = ["bar_man", "desert_man", "turtle_soup"]
+    @MainActor
+    private func puzzleSubdirectory() -> String {
+        "Puzzles/\(ContentLanguage.current)"
+    }
 
+    @MainActor
+    private func loadManifest() throws -> [String] {
+        let subdir = puzzleSubdirectory()
+        guard let url = Bundle.main.url(forResource: "manifest", withExtension: "json", subdirectory: subdir) else {
+            throw PuzzleRepositoryError.manifestNotFound(language: ContentLanguage.current)
+        }
+        let data = try Data(contentsOf: url)
+        let manifest = try JSONDecoder().decode(Manifest.self, from: data)
+        return manifest.puzzles
+    }
+
+    @MainActor
     func fetchPuzzleList() async throws -> [PuzzleSummary] {
+        let ids = try loadManifest()
+        let subdir = puzzleSubdirectory()
         var summaries = [PuzzleSummary]()
 
-        for id in Self.puzzleIDs {
-            guard let url = Bundle.main.url(forResource: id, withExtension: "json") else {
+        for id in ids {
+            guard let url = Bundle.main.url(forResource: id, withExtension: "json", subdirectory: subdir) else {
                 continue
             }
             let data = try Data(contentsOf: url)
@@ -26,8 +43,10 @@ struct JSONPuzzleRepository: PuzzleRepository {
         return summaries
     }
 
+    @MainActor
     func fetchPuzzle(id: String) async throws -> PuzzleData {
-        guard let url = Bundle.main.url(forResource: id, withExtension: "json") else {
+        let subdir = puzzleSubdirectory()
+        guard let url = Bundle.main.url(forResource: id, withExtension: "json", subdirectory: subdir) else {
             throw PuzzleRepositoryError.puzzleNotFound(id: id)
         }
         let data = try Data(contentsOf: url)
@@ -36,6 +55,11 @@ struct JSONPuzzleRepository: PuzzleRepository {
     }
 }
 
+private struct Manifest: Decodable {
+    let puzzles: [String]
+}
+
 enum PuzzleRepositoryError: Error {
     case puzzleNotFound(id: String)
+    case manifestNotFound(language: String)
 }

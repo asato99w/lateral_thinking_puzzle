@@ -11,7 +11,7 @@ struct GameView: View {
                 VStack(alignment: .leading, spacing: 24) {
                     // Statement
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("出題")
+                        Text(Strings.statement)
                             .font(.headline)
                         Text(viewModel.puzzle.statement)
                             .font(.body)
@@ -24,7 +24,7 @@ struct GameView: View {
                     // Open Questions
                     if !viewModel.openQuestions.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("質問を選んでください")
+                            Text(Strings.chooseQuestion)
                                 .font(.headline)
                             ForEach(viewModel.openQuestions) { question in
                                 Button {
@@ -44,7 +44,7 @@ struct GameView: View {
                     // Answered Questions
                     if !viewModel.answeredQuestions.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("回答済み")
+                            Text(Strings.answered)
                                 .font(.headline)
                                 .foregroundStyle(.secondary)
                             ForEach(viewModel.answeredQuestions, id: \.question.id) { item in
@@ -71,9 +71,9 @@ struct GameView: View {
 
     private func answerLabel(_ answer: Answer) -> String {
         switch answer {
-        case .yes: "YES"
-        case .no: "NO"
-        case .irrelevant: "関係ない"
+        case .yes: Strings.answerYes
+        case .no: Strings.answerNo
+        case .irrelevant: Strings.answerIrrelevant
         }
     }
 

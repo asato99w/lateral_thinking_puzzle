@@ -3,19 +3,22 @@ import SwiftUI
 struct PuzzleListView: View {
     @State private var viewModel = PuzzleListViewModel(repository: JSONPuzzleRepository())
     @State private var selectedPuzzleID: String?
+    #if DEBUG
+    @State private var showDebugSettings = false
+    #endif
 
     var body: some View {
         NavigationStack {
             Group {
                 if viewModel.isLoading {
-                    ProgressView("読み込み中...")
+                    ProgressView(Strings.loading)
                 } else if let error = viewModel.error {
                     VStack(spacing: 16) {
-                        Text("エラー")
+                        Text(Strings.error)
                             .font(.headline)
                         Text(error)
                             .foregroundStyle(.secondary)
-                        Button("再試行") {
+                        Button(Strings.retry) {
                             Task { await viewModel.loadPuzzles() }
                         }
                     }
@@ -35,13 +38,29 @@ struct PuzzleListView: View {
                     }
                 }
             }
-            .navigationTitle("水平思考パズル")
+            .navigationTitle(Strings.appTitle)
             .navigationDestination(for: String.self) { puzzleID in
                 GameContainerView(puzzleID: puzzleID)
             }
             .task {
                 await viewModel.loadPuzzles()
             }
+            #if DEBUG
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showDebugSettings = true
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                }
+            }
+            .sheet(isPresented: $showDebugSettings, onDismiss: {
+                Task { await viewModel.loadPuzzles() }
+            }) {
+                DebugView()
+            }
+            #endif
         }
     }
 }
@@ -56,7 +75,7 @@ struct GameContainerView: View {
             if let puzzle {
                 GameView(viewModel: GameViewModel(puzzle: puzzle))
             } else if let error {
-                Text("エラー: \(error)")
+                Text(Strings.errorDetail(error))
             } else {
                 ProgressView()
             }

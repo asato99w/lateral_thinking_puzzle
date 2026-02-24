@@ -10,6 +10,7 @@
 		066C3962B6550DFAB1599856 /* PuzzleDataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC948A578774CAF41935B25 /* PuzzleDataDTO.swift */; };
 		12EB5355CCC830B4259246FF /* StartGameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9BC42A4A2E223A12F8FAEE /* StartGameUseCase.swift */; };
 		18EC2E9FA8696468CD063AFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B540568A2D9BA95C593777B /* Assets.xcassets */; };
+		1B8A21A73D963BDB5CF5B0FC /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB6263F76439654D551DAF9 /* Strings.swift */; };
 		25E80825A1E9A0324E66617A /* StartGameUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3742522576B17BB6D231F7C9 /* StartGameUseCaseTests.swift */; };
 		2825310AAEAB2BF51BC2F1F1 /* PuzzleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A04A829E1DD3D8AAACAF11 /* PuzzleData.swift */; };
 		331949E8CB8BDFFF3D579F3D /* AnswerQuestionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9ADD171A431C722655532F /* AnswerQuestionUseCase.swift */; };
@@ -20,13 +21,12 @@
 		49139206150FB409866C5B05 /* ODRResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3052792C9296775437E01C /* ODRResourceManager.swift */; };
 		4A0489D21694861F64687DCC /* FetchPuzzleListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE281DC255DF30D95D5752C /* FetchPuzzleListUseCase.swift */; };
 		4F726FC591C26B6A561CABF1 /* UpdateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183AEBC4B4761F358CDF836D /* UpdateTests.swift */; };
-		53EFED6898FC617B7AD0E08C /* bar_man.json in Resources */ = {isa = PBXBuildFile; fileRef = 94044E1AAEE45E62B645595C /* bar_man.json */; };
 		577E50F7CE2206E70FDB88A5 /* OpenQuestionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39896B9D4BBF73AE48295536 /* OpenQuestionsTests.swift */; };
-		658F21E6ADB09DC5E2DEF2C3 /* turtle_soup.json in Resources */ = {isa = PBXBuildFile; fileRef = AEB1887B9C91EF2AEC838628 /* turtle_soup.json */; };
 		6FB8DA092B9C5DD736540103 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467A8BA496892CA35A40647 /* GameState.swift */; };
 		6FCAF5EFDDEAE1B79834F651 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4F4BD8B59DFBC9E7240C90 /* GameEngine.swift */; };
 		86BAC7AECF3FF0327F876AD8 /* GameViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72C63E56556E8A392C38AB3 /* GameViewModelTests.swift */; };
 		894C604BE5ADAD20C9D44B37 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23D268450ADA433418DD0AD /* Question.swift */; };
+		89612250146802490BABD501 /* Puzzles in Resources */ = {isa = PBXBuildFile; fileRef = BB6C2C10C94D414110013839 /* Puzzles */; };
 		8C7080B66D2B9809AA215A7E /* AlignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C43782BB87FBBED7163845F /* AlignmentTests.swift */; };
 		8CFB5DC6A48369CC16896BD3 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF5AB2BBAB3E41263676A0A /* Answer.swift */; };
 		901EA7C01117275D926B9FB9 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390FCC37798F7B52323F20FE /* QuestionTests.swift */; };
@@ -35,17 +35,19 @@
 		9A5999721C28975751EAB531 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B31DEE9014886B35E2B0EDB /* Relation.swift */; };
 		A57E05CFAF56D2240860AF17 /* GameFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D6ECDE6898C632A2F06E72 /* GameFlowUITests.swift */; };
 		B03665B15523EAAD583586A6 /* TestPuzzleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E6B72EEE85E7172E0D9C28 /* TestPuzzleData.swift */; };
+		B5AD6FD1D94BD29D31690236 /* ContentLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0969EDF09A0B7C02C772097E /* ContentLanguage.swift */; };
 		B6A1DBC25834496548E7C3B1 /* CheckClearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A5722BC5EB364685912730 /* CheckClearTests.swift */; };
 		C91D08898A1569D6D00C9F17 /* TensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89B2CDD14A3EB2731DE2FA4 /* TensionTests.swift */; };
 		CB24315DD7FDCA8F9EF09B6A /* LateralThinkingPuzzleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C73D45C9FC2B0E2A33912B3 /* LateralThinkingPuzzleApp.swift */; };
 		D2C3982B9840E25380F46E22 /* ClearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80350637A696C4D16192B28C /* ClearView.swift */; };
 		DC0DC75505F9C6711AE670C3 /* JSONPuzzleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7276F89768C144D5D31B1E /* JSONPuzzleRepository.swift */; };
 		DC66D9B79EE152C8DCCDF3C5 /* InitGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E02285508B3C82E29F7B105 /* InitGameTests.swift */; };
-		E29859C78448B2EA8FCA494C /* desert_man.json in Resources */ = {isa = PBXBuildFile; fileRef = 91407ABFFE1B17B38397F577 /* desert_man.json */; };
 		E70DDCC1B90B207653E064F9 /* PuzzleTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7F597959B93A24C68C4598 /* PuzzleTier.swift */; };
 		EEB4839C58BB61C58B0AB198 /* Paradigm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F698B8F320518732089A6 /* Paradigm.swift */; };
+		EECD96D01D0BBFAED9846A8B /* DebugSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968C23CAA9A9283A66523901 /* DebugSettings.swift */; };
 		F1AC4C6DFB4B38F939FB1E75 /* PuzzleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C36E3A3EE1C60BD7F65A9 /* PuzzleListView.swift */; };
 		F56A971359BC9467DEAECB89 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319CDF38B9C62BE0F2DF47BF /* GameViewModel.swift */; };
+		F96535E12B0CB417EB56F4A9 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A722E366C093C646D591C /* DebugView.swift */; };
 		F9FE1D8612FC62B949AB616B /* PuzzleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B6E16CCCA631851A75B81 /* PuzzleListViewModel.swift */; };
 		FEF9D56F54C866F051F86815 /* ParadigmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672A1B7D1476883386BC99A /* ParadigmTests.swift */; };
 /* End PBXBuildFile section */
@@ -68,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0969EDF09A0B7C02C772097E /* ContentLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLanguage.swift; sourceTree = "<group>"; };
 		0B8EFDB5A00CADE158A74B4A /* PuzzleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleRepository.swift; sourceTree = "<group>"; };
 		0C43782BB87FBBED7163845F /* AlignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignmentTests.swift; sourceTree = "<group>"; };
 		130E6059C55FF21BF8F70F21 /* AssimilateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssimilateTests.swift; sourceTree = "<group>"; };
@@ -75,6 +78,7 @@
 		1C73D45C9FC2B0E2A33912B3 /* LateralThinkingPuzzleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateralThinkingPuzzleApp.swift; sourceTree = "<group>"; };
 		1EC948A578774CAF41935B25 /* PuzzleDataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleDataDTO.swift; sourceTree = "<group>"; };
 		2B31DEE9014886B35E2B0EDB /* Relation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relation.swift; sourceTree = "<group>"; };
+		2C0A722E366C093C646D591C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		2C0B6E16CCCA631851A75B81 /* PuzzleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleListViewModel.swift; sourceTree = "<group>"; };
 		2DE9A5B27332A3ACC23041F9 /* Descriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Descriptor.swift; sourceTree = "<group>"; };
 		2EF5AB2BBAB3E41263676A0A /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
@@ -95,15 +99,15 @@
 		80350637A696C4D16192B28C /* ClearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearView.swift; sourceTree = "<group>"; };
 		8467A8BA496892CA35A40647 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		8B7276F89768C144D5D31B1E /* JSONPuzzleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPuzzleRepository.swift; sourceTree = "<group>"; };
-		91407ABFFE1B17B38397F577 /* desert_man.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = desert_man.json; sourceTree = "<group>"; };
-		94044E1AAEE45E62B645595C /* bar_man.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bar_man.json; sourceTree = "<group>"; };
+		968C23CAA9A9283A66523901 /* DebugSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettings.swift; sourceTree = "<group>"; };
 		A4E6B72EEE85E7172E0D9C28 /* TestPuzzleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPuzzleData.swift; sourceTree = "<group>"; };
-		AEB1887B9C91EF2AEC838628 /* turtle_soup.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = turtle_soup.json; sourceTree = "<group>"; };
+		ACB6263F76439654D551DAF9 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		B0051E19363D84346FE3ACC0 /* PuzzleDataDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleDataDTOTests.swift; sourceTree = "<group>"; };
 		B11DA9000FF7F15D26D8F5AC /* LateralThinkingPuzzleTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = LateralThinkingPuzzleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2E666413CC4CDA85D99C301 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		B89B2CDD14A3EB2731DE2FA4 /* TensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensionTests.swift; sourceTree = "<group>"; };
 		B966B694F952C734AD4D6F14 /* LateralThinkingPuzzle.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LateralThinkingPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB6C2C10C94D414110013839 /* Puzzles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Puzzles; path = LateralThinkingPuzzle/Resources/Puzzles; sourceTree = SOURCE_ROOT; };
 		C0A04A829E1DD3D8AAACAF11 /* PuzzleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleData.swift; sourceTree = "<group>"; };
 		C37F698B8F320518732089A6 /* Paradigm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paradigm.swift; sourceTree = "<group>"; };
 		C672A1B7D1476883386BC99A /* ParadigmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParadigmTests.swift; sourceTree = "<group>"; };
@@ -132,10 +136,20 @@
 			path = EntitiesTests;
 			sourceTree = "<group>";
 		};
+		27739619E12A95654290835E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0969EDF09A0B7C02C772097E /* ContentLanguage.swift */,
+				ACB6263F76439654D551DAF9 /* Strings.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		348CEAEEB15B0B4C80940DBD /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				C9B3F351652A027DEB1B533B /* Clear */,
+				F3AD09E298E81C6C8A4AE9B8 /* Debug */,
 				78DE9E6C9506F061C2BE2B91 /* Game */,
 				CD6349C40FC0AAA1D95E643D /* PuzzleList */,
 			);
@@ -189,6 +203,7 @@
 			children = (
 				73C09AECDB3795EDDD067E91 /* Engine */,
 				CE7929D70709D2C21C5C001A /* Entities */,
+				27739619E12A95654290835E /* Services */,
 				73E9DBB6D52C44A3689B4537 /* UseCases */,
 			);
 			path = Domain;
@@ -215,6 +230,7 @@
 		66AA7A31CE53A8D5FA57CF73 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				968C23CAA9A9283A66523901 /* DebugSettings.swift */,
 				1C73D45C9FC2B0E2A33912B3 /* LateralThinkingPuzzleApp.swift */,
 			);
 			path = App;
@@ -271,20 +287,9 @@
 			isa = PBXGroup;
 			children = (
 				3B540568A2D9BA95C593777B /* Assets.xcassets */,
-				A8D82A8EFFAAC678C2D825E0 /* Puzzles */,
 			);
 			name = Resources;
 			path = LateralThinkingPuzzle/Resources;
-			sourceTree = "<group>";
-		};
-		A8D82A8EFFAAC678C2D825E0 /* Puzzles */ = {
-			isa = PBXGroup;
-			children = (
-				94044E1AAEE45E62B645595C /* bar_man.json */,
-				91407ABFFE1B17B38397F577 /* desert_man.json */,
-				AEB1887B9C91EF2AEC838628 /* turtle_soup.json */,
-			);
-			path = Puzzles;
 			sourceTree = "<group>";
 		};
 		B85212F78C8448FF21331123 /* ODR */ = {
@@ -340,6 +345,7 @@
 		DC006BAC8E54EA5B527E1DC6 = {
 			isa = PBXGroup;
 			children = (
+				BB6C2C10C94D414110013839 /* Puzzles */,
 				48A64FE33784A5CF0D9D160E /* LateralThinkingPuzzle */,
 				7CFABFB73EBA3BA83298A4EC /* LateralThinkingPuzzleTests */,
 				EE158917F2FA4B470E165009 /* LateralThinkingPuzzleUITests */,
@@ -364,6 +370,14 @@
 				7650F9902F0ACAC2A46B19AE /* LateralThinkingPuzzleUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F3AD09E298E81C6C8A4AE9B8 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				2C0A722E366C093C646D591C /* DebugView.swift */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 		F9BA6714F48741EDA8177872 /* DTO */ = {
@@ -476,9 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18EC2E9FA8696468CD063AFE /* Assets.xcassets in Resources */,
-				53EFED6898FC617B7AD0E08C /* bar_man.json in Resources */,
-				E29859C78448B2EA8FCA494C /* desert_man.json in Resources */,
-				658F21E6ADB09DC5E2DEF2C3 /* turtle_soup.json in Resources */,
+				89612250146802490BABD501 /* Puzzles in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +533,9 @@
 				8CFB5DC6A48369CC16896BD3 /* Answer.swift in Sources */,
 				331949E8CB8BDFFF3D579F3D /* AnswerQuestionUseCase.swift in Sources */,
 				D2C3982B9840E25380F46E22 /* ClearView.swift in Sources */,
+				B5AD6FD1D94BD29D31690236 /* ContentLanguage.swift in Sources */,
+				EECD96D01D0BBFAED9846A8B /* DebugSettings.swift in Sources */,
+				F96535E12B0CB417EB56F4A9 /* DebugView.swift in Sources */,
 				3597CCC08FACF5758A8D08E9 /* Descriptor.swift in Sources */,
 				4A0489D21694861F64687DCC /* FetchPuzzleListUseCase.swift in Sources */,
 				6FCAF5EFDDEAE1B79834F651 /* GameEngine.swift in Sources */,
@@ -540,6 +555,7 @@
 				894C604BE5ADAD20C9D44B37 /* Question.swift in Sources */,
 				9A5999721C28975751EAB531 /* Relation.swift in Sources */,
 				12EB5355CCC830B4259246FF /* StartGameUseCase.swift in Sources */,
+				1B8A21A73D963BDB5CF5B0FC /* Strings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

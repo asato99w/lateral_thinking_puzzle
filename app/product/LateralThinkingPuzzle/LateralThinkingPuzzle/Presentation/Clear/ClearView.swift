@@ -12,7 +12,7 @@ struct ClearView: View {
                 .font(.system(size: 80))
                 .foregroundStyle(.green)
 
-            Text("クリア!")
+            Text(Strings.cleared)
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
@@ -22,7 +22,7 @@ struct ClearView: View {
 
             Spacer()
 
-            Button("パズル一覧に戻る") {
+            Button(Strings.backToList) {
                 dismiss()
             }
             .buttonStyle(.borderedProminent)
