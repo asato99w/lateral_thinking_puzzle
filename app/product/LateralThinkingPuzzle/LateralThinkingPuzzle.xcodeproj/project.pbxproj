@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0B1C2D3E4F5A6B7C8D9E0F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0E1D2C3B4A596877869A041 /* Assets.xcassets */; };
 		066C3962B6550DFAB1599856 /* PuzzleDataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC948A578774CAF41935B25 /* PuzzleDataDTO.swift */; };
 		12EB5355CCC830B4259246FF /* StartGameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9BC42A4A2E223A12F8FAEE /* StartGameUseCase.swift */; };
 		25E80825A1E9A0324E66617A /* StartGameUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3742522576B17BB6D231F7C9 /* StartGameUseCaseTests.swift */; };
@@ -21,7 +22,6 @@
 		4F726FC591C26B6A561CABF1 /* UpdateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183AEBC4B4761F358CDF836D /* UpdateTests.swift */; };
 		577E50F7CE2206E70FDB88A5 /* OpenQuestionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39896B9D4BBF73AE48295536 /* OpenQuestionsTests.swift */; };
 		6EDCE2E2D1D50FAC12AE3EDC /* bar_man.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D680AC8545BD6463A3C33A8 /* bar_man.json */; };
-		A1B2C3D4E5F6A7B8C9D0E1F2 /* turtle_soup.json in Resources */ = {isa = PBXBuildFile; fileRef = F1E2D3C4B5A6978869504132 /* turtle_soup.json */; };
 		6FB8DA092B9C5DD736540103 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467A8BA496892CA35A40647 /* GameState.swift */; };
 		6FCAF5EFDDEAE1B79834F651 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4F4BD8B59DFBC9E7240C90 /* GameEngine.swift */; };
 		86BAC7AECF3FF0327F876AD8 /* GameViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72C63E56556E8A392C38AB3 /* GameViewModelTests.swift */; };
@@ -32,6 +32,7 @@
 		9098C4524FD2DF87B97AEA1C /* PuzzleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8EFDB5A00CADE158A74B4A /* PuzzleRepository.swift */; };
 		9185592B12301634E2ECA320 /* AssimilateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130E6059C55FF21BF8F70F21 /* AssimilateTests.swift */; };
 		9A5999721C28975751EAB531 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B31DEE9014886B35E2B0EDB /* Relation.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* turtle_soup.json in Resources */ = {isa = PBXBuildFile; fileRef = F1E2D3C4B5A6978869504132 /* turtle_soup.json */; };
 		A57E05CFAF56D2240860AF17 /* GameFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D6ECDE6898C632A2F06E72 /* GameFlowUITests.swift */; };
 		B03665B15523EAAD583586A6 /* TestPuzzleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E6B72EEE85E7172E0D9C28 /* TestPuzzleData.swift */; };
 		B6A1DBC25834496548E7C3B1 /* CheckClearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A5722BC5EB364685912730 /* CheckClearTests.swift */; };
@@ -85,7 +86,7 @@
 		3F9ADD171A431C722655532F /* AnswerQuestionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerQuestionUseCase.swift; sourceTree = "<group>"; };
 		4A7F597959B93A24C68C4598 /* PuzzleTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleTier.swift; sourceTree = "<group>"; };
 		4D680AC8545BD6463A3C33A8 /* bar_man.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bar_man.json; sourceTree = "<group>"; };
-		F1E2D3C4B5A6978869504132 /* turtle_soup.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = turtle_soup.json; sourceTree = "<group>"; };
+		F0E1D2C3B4A596877869A041 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E02285508B3C82E29F7B105 /* InitGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitGameTests.swift; sourceTree = "<group>"; };
 		539C36E3A3EE1C60BD7F65A9 /* PuzzleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleListView.swift; sourceTree = "<group>"; };
 		62A5722BC5EB364685912730 /* CheckClearTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckClearTests.swift; sourceTree = "<group>"; };
@@ -99,13 +100,14 @@
 		B11DA9000FF7F15D26D8F5AC /* LateralThinkingPuzzleTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = LateralThinkingPuzzleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2E666413CC4CDA85D99C301 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		B89B2CDD14A3EB2731DE2FA4 /* TensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensionTests.swift; sourceTree = "<group>"; };
-		B966B694F952C734AD4D6F14 /* LateralThinkingPuzzle.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LateralThinkingPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B966B694F952C734AD4D6F14 /* LateralThinkingPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LateralThinkingPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A04A829E1DD3D8AAACAF11 /* PuzzleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleData.swift; sourceTree = "<group>"; };
 		C37F698B8F320518732089A6 /* Paradigm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paradigm.swift; sourceTree = "<group>"; };
 		C672A1B7D1476883386BC99A /* ParadigmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParadigmTests.swift; sourceTree = "<group>"; };
 		D4D6ECDE6898C632A2F06E72 /* GameFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFlowUITests.swift; sourceTree = "<group>"; };
 		D72C63E56556E8A392C38AB3 /* GameViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelTests.swift; sourceTree = "<group>"; };
 		DC4F4BD8B59DFBC9E7240C90 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		F1E2D3C4B5A6978869504132 /* turtle_soup.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = turtle_soup.json; sourceTree = "<group>"; };
 		F23D268450ADA433418DD0AD /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		FC3052792C9296775437E01C /* ODRResourceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ODRResourceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -294,6 +296,7 @@
 		BF799B7C493D1F82A22ADE63 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F0E1D2C3B4A596877869A041 /* Assets.xcassets */,
 				BCC8EEC8A8E17DF0D15AF33B /* Puzzles */,
 			);
 			path = Resources;
@@ -448,7 +451,6 @@
 			);
 			mainGroup = DC006BAC8E54EA5B527E1DC6;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -464,6 +466,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0B1C2D3E4F5A6B7C8D9E0F1 /* Assets.xcassets in Resources */,
 				6EDCE2E2D1D50FAC12AE3EDC /* bar_man.json in Resources */,
 				A1B2C3D4E5F6A7B8C9D0E1F2 /* turtle_soup.json in Resources */,
 			);
@@ -552,7 +555,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 76359B69WG;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleIconName = AppIcon;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				"INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad" = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -588,7 +596,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 76359B69WG;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleIconName = AppIcon;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				"INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad" = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
