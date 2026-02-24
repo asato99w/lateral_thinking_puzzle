@@ -9,6 +9,9 @@ final class GameViewModel {
     private(set) var answeredQuestions: [(question: Question, answer: Answer)] = []
     private(set) var isCleared = false
 
+    /// Whether the answered-questions section is expanded
+    var showAnswered = false
+
     private let startGame = StartGameUseCase()
     private let answerQuestion = AnswerQuestionUseCase()
 

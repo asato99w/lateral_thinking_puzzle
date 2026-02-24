@@ -31,7 +31,7 @@ struct PuzzleListView: View {
                                 Text(puzzle.statementPreview)
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
-                                    .lineLimit(2)
+                                    .lineLimit(1)
                             }
                             .padding(.vertical, 4)
                         }
