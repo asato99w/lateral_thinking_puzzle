@@ -10,7 +10,7 @@ struct ClearView: View {
 
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 80))
-                .foregroundStyle(.green)
+                .foregroundStyle(Theme.solvedBadge)
 
             Text(Strings.cleared)
                 .font(.largeTitle)
@@ -22,11 +22,17 @@ struct ClearView: View {
 
             Spacer()
 
-            Button(Strings.backToList) {
+            Button {
                 dismiss()
+            } label: {
+                Text(Strings.backToList)
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Theme.accent)
+                    .foregroundStyle(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: Theme.cardCornerRadius))
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
         }
         .padding()
         .navigationBarBackButtonHidden(true)

@@ -3,6 +3,7 @@ import Observation
 
 @MainActor @Observable
 final class GameViewModel {
+    let puzzleID: String
     let puzzle: PuzzleData
     private(set) var state: GameState
     private(set) var openQuestions: [Question]
@@ -15,7 +16,8 @@ final class GameViewModel {
     private let startGame = StartGameUseCase()
     private let answerQuestion = AnswerQuestionUseCase()
 
-    init(puzzle: PuzzleData) {
+    init(puzzleID: String = "", puzzle: PuzzleData) {
+        self.puzzleID = puzzleID
         self.puzzle = puzzle
         let result = startGame.execute(puzzle: puzzle)
         self.state = result.state
@@ -37,6 +39,7 @@ final class GameViewModel {
 
         if result.events.contains(.puzzleCleared) {
             isCleared = true
+            SolvedPuzzleStore.shared.markSolved(puzzleID)
         }
     }
 }

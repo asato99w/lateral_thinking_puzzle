@@ -27,6 +27,12 @@ struct DebugView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
+
+                Section("Solved Puzzles") {
+                    Button("Reset Solved Puzzles", role: .destructive) {
+                        SolvedPuzzleStore.shared.reset()
+                    }
+                }
             }
             .navigationTitle("Debug Settings")
             .navigationBarTitleDisplayMode(.inline)

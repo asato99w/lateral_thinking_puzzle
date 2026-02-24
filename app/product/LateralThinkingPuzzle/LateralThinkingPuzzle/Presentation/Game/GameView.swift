@@ -38,25 +38,25 @@ struct GameView: View {
 
     private var statementSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(Strings.statement)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(.secondary)
+            sectionLabel(Strings.statement)
             Text(viewModel.puzzle.statement)
                 .font(.body)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.fill.quaternary)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .background(Theme.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: Theme.cardCornerRadius))
+        .overlay(
+            RoundedRectangle(cornerRadius: Theme.cardCornerRadius)
+                .stroke(Theme.cardBorder, lineWidth: 1)
+        )
     }
 
     // MARK: - Open Questions
 
     private var openQuestionsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(Strings.chooseQuestion)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(.secondary)
+            sectionLabel(Strings.chooseQuestion)
             ForEach(viewModel.openQuestions) { question in
                 questionButton(question)
                     .transition(.opacity.combined(with: .move(edge: .leading)))
@@ -79,11 +79,11 @@ struct GameView: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 12)
             }
-            .background(.fill.quaternary)
+            .background(Theme.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: Theme.cardCornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: Theme.cardCornerRadius)
-                    .strokeBorder(Color(.separator), lineWidth: 0.5)
+                    .stroke(Theme.cardBorder, lineWidth: 1)
             )
             .overlay {
                 // Feedback overlay
@@ -146,6 +146,17 @@ struct GameView: View {
     }
 
     // MARK: - Helpers
+
+    private func sectionLabel(_ text: String) -> some View {
+        HStack(spacing: 8) {
+            RoundedRectangle(cornerRadius: 2)
+                .fill(Theme.accent)
+                .frame(width: 4, height: 18)
+            Text(text)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.white.opacity(0.85))
+        }
+    }
 
     private func answerLabel(_ answer: Answer) -> String {
         switch answer {
