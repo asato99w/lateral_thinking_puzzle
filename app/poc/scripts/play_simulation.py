@@ -49,6 +49,7 @@ def load_and_build(data_path: Path):
             is_clear=q.get("is_clear", False),
             prerequisites=q.get("prerequisites", []),
             related_descriptors=q.get("related_descriptors", []),
+            topic_category=q.get("topic_category", ""),
         ))
 
     ps_values = {d[0]: d[1] for d in data["ps_values"]}

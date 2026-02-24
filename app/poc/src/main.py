@@ -85,6 +85,7 @@ def build_questions(data: dict) -> list[Question]:
             is_clear=q.get("is_clear", False),
             prerequisites=q.get("prerequisites", []),
             related_descriptors=q.get("related_descriptors", []),
+            topic_category=q.get("topic_category", ""),
         ))
     return questions
 
