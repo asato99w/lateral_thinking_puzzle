@@ -8,6 +8,7 @@ struct Question: Equatable, Identifiable, Sendable {
     let isClear: Bool
     let prerequisites: [String]
     let relatedDescriptors: [String]
+    let topicCategory: String
 
     var effect: QuestionEffect {
         switch correctAnswer {

@@ -13,6 +13,18 @@ final class GameViewModel {
     /// Whether the answered-questions section is expanded
     var showAnswered = false
 
+    /// Selected topic category filter (nil = show all)
+    var selectedCategory: String?
+
+    var filteredOpenQuestions: [Question] {
+        guard let cat = selectedCategory else { return openQuestions }
+        return openQuestions.filter { $0.topicCategory == cat }
+    }
+
+    func openCountForCategory(_ categoryID: String) -> Int {
+        openQuestions.filter { $0.topicCategory == categoryID }.count
+    }
+
     private let startGame = StartGameUseCase()
     private let answerQuestion = AnswerQuestionUseCase()
 

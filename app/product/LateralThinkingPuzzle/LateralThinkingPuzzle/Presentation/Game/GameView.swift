@@ -37,10 +37,15 @@ struct GameView: View {
 
                 Divider().opacity(0.3)
 
+                // Category filter tabs
+                if !viewModel.puzzle.topicCategories.isEmpty {
+                    categoryTabBar
+                }
+
                 // Scrollable: question buttons only
                 ScrollView {
                     VStack(alignment: .leading, spacing: 8) {
-                        if !viewModel.openQuestions.isEmpty {
+                        if !viewModel.filteredOpenQuestions.isEmpty {
                             questionList
                         }
                     }
@@ -130,8 +135,8 @@ struct GameView: View {
     }
 
     private var questionList: some View {
-        ForEach(Array(viewModel.openQuestions.enumerated()), id: \.element.id) { index, question in
-            questionButton(question, number: viewModel.answeredQuestions.count + index + 1)
+        ForEach(Array(viewModel.filteredOpenQuestions.enumerated()), id: \.element.id) { index, question in
+            questionButton(question, number: index + 1)
                 .transition(.opacity.combined(with: .move(edge: .leading)))
         }
     }
@@ -238,6 +243,57 @@ struct GameView: View {
                 .foregroundStyle(.secondary)
         }
         .tint(.secondary)
+    }
+
+    // MARK: - Category Tab Bar
+
+    private var categoryTabBar: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                categoryTab(
+                    label: Strings.allCategories,
+                    count: viewModel.openQuestions.count,
+                    isActive: viewModel.selectedCategory == nil
+                ) {
+                    viewModel.selectedCategory = nil
+                }
+
+                ForEach(viewModel.puzzle.topicCategories) { cat in
+                    categoryTab(
+                        label: cat.name,
+                        count: viewModel.openCountForCategory(cat.id),
+                        isActive: viewModel.selectedCategory == cat.id
+                    ) {
+                        viewModel.selectedCategory = cat.id
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 8)
+        }
+    }
+
+    private func categoryTab(label: String, count: Int, isActive: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 4) {
+                Text(label)
+                    .font(.caption.weight(.semibold))
+                    .lineLimit(1)
+                Text("\(count)")
+                    .font(.caption2.bold().monospacedDigit())
+                    .padding(.horizontal, 5)
+                    .padding(.vertical, 1)
+                    .background(.white.opacity(isActive ? 0.2 : 0.1))
+                    .clipShape(Capsule())
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 7)
+            .background(isActive ? Theme.categoryActive : Theme.categoryInactive)
+            .foregroundStyle(.white)
+            .clipShape(Capsule())
+        }
+        .buttonStyle(.plain)
+        .animation(.easeInOut(duration: Theme.animationDuration), value: isActive)
     }
 
     // MARK: - Helpers

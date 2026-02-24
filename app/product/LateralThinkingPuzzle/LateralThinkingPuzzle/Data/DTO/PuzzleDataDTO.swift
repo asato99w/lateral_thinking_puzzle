@@ -1,5 +1,14 @@
 import Foundation
 
+struct TopicCategoryDTO: Codable {
+    let id: String
+    let name: String
+
+    func toDomain() -> TopicCategory {
+        TopicCategory(id: id, name: name)
+    }
+}
+
 struct PuzzleDataDTO: Codable {
     let title: String
     let statement: String
@@ -10,6 +19,7 @@ struct PuzzleDataDTO: Codable {
     let allDescriptorIds: [String]
     let paradigms: [ParadigmDTO]
     let questions: [QuestionDTO]
+    let topicCategories: [TopicCategoryDTO]?
 
     enum CodingKeys: String, CodingKey {
         case title, statement
@@ -19,6 +29,7 @@ struct PuzzleDataDTO: Codable {
         case psValues = "ps_values"
         case allDescriptorIds = "all_descriptor_ids"
         case paradigms, questions
+        case topicCategories = "topic_categories"
     }
 
     func toDomain() throws -> PuzzleData {
@@ -48,7 +59,8 @@ struct PuzzleDataDTO: Codable {
             allDescriptorIDs: allDescriptorIds,
             paradigms: paradigmMap,
             questions: domainQuestions,
-            tier: .free
+            tier: .free,
+            topicCategories: (topicCategories ?? []).map { $0.toDomain() }
         )
     }
 }
@@ -214,6 +226,7 @@ struct QuestionDTO: Codable {
     let isClear: Bool?
     let prerequisites: [String]?
     let relatedDescriptors: [String]?
+    let topicCategory: String?
 
     enum CodingKeys: String, CodingKey {
         case id, text
@@ -224,6 +237,7 @@ struct QuestionDTO: Codable {
         case isClear = "is_clear"
         case prerequisites
         case relatedDescriptors = "related_descriptors"
+        case topicCategory = "topic_category"
     }
 
     func toDomain() -> Question {
@@ -248,7 +262,8 @@ struct QuestionDTO: Codable {
             correctAnswer: answer,
             isClear: isClear ?? false,
             prerequisites: prerequisites ?? [],
-            relatedDescriptors: relatedDescriptors ?? []
+            relatedDescriptors: relatedDescriptors ?? [],
+            topicCategory: topicCategory ?? ""
         )
     }
 }

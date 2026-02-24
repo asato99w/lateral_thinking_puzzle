@@ -23,7 +23,8 @@ enum TestPuzzleData {
         correctAnswer: Answer = .yes,
         isClear: Bool = false,
         prerequisites: [String] = [],
-        relatedDescriptors: [String] = []
+        relatedDescriptors: [String] = [],
+        topicCategory: String = ""
     ) -> Question {
         Question(
             id: id,
@@ -34,7 +35,8 @@ enum TestPuzzleData {
             correctAnswer: correctAnswer,
             isClear: isClear,
             prerequisites: prerequisites,
-            relatedDescriptors: relatedDescriptors
+            relatedDescriptors: relatedDescriptors,
+            topicCategory: topicCategory
         )
     }
 

@@ -20,6 +20,11 @@ enum Theme {
     static let solvedBadge = Color.green
     static let progressText = Color.white.opacity(0.7)
 
+    // MARK: - Category Tab
+
+    static let categoryActive = Color.indigo
+    static let categoryInactive = Color(white: 0.22)
+
     // MARK: - Dimensions
 
     static let accentBarWidth: CGFloat = 3

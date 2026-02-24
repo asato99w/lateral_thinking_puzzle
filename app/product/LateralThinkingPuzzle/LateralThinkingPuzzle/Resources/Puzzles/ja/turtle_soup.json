@@ -2,6 +2,28 @@
   "title": "ウミガメのスープ",
   "statement": "ある男がレストランに入り、ウミガメのスープを注文した。一口飲んで店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜか？",
   "init_paradigm": "P1",
+  "topic_categories": [
+    {
+      "id": "A",
+      "name": "レストランと来店"
+    },
+    {
+      "id": "B",
+      "name": "スープと味"
+    },
+    {
+      "id": "C",
+      "name": "男の行動と認識"
+    },
+    {
+      "id": "D",
+      "name": "男の人物像と背景"
+    },
+    {
+      "id": "E",
+      "name": "自殺の原因"
+    }
+  ],
   "ps_values": [
     [
       "Ps-1",
@@ -2166,7 +2188,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "A"
     },
     {
       "id": "q02",
@@ -2188,7 +2211,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q03",
@@ -2210,7 +2234,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "A"
     },
     {
       "id": "q04",
@@ -2232,7 +2257,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "A"
     },
     {
       "id": "q05",
@@ -2254,7 +2280,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q06",
@@ -2276,7 +2303,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "A"
     },
     {
       "id": "q07",
@@ -2298,7 +2326,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q08",
@@ -2320,7 +2349,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q09",
@@ -2342,7 +2372,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q10",
@@ -2364,7 +2395,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q11",
@@ -2386,7 +2418,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q12",
@@ -2408,7 +2441,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q13",
@@ -2434,7 +2468,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q14",
@@ -2456,7 +2491,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q15",
@@ -2478,7 +2514,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q16",
@@ -2500,7 +2537,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q17",
@@ -2522,7 +2560,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q18",
@@ -2544,7 +2583,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q19",
@@ -2566,7 +2606,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q20",
@@ -2588,7 +2629,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q105",
@@ -2617,7 +2659,8 @@
       "prerequisites": [
         "Fs-26"
       ],
-      "related_descriptors": []
+      "related_descriptors": [],
+      "topic_category": "B"
     },
     {
       "id": "q21",
@@ -2639,7 +2682,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q22",
@@ -2665,7 +2709,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q23",
@@ -2687,7 +2732,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q24",
@@ -2709,7 +2755,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q25",
@@ -2733,7 +2780,8 @@
       "is_clear": false,
       "prerequisites": [
         "Fs-26"
-      ]
+      ],
+      "topic_category": "B"
     },
     {
       "id": "q26",
@@ -2755,7 +2803,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q27",
@@ -2781,7 +2830,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q28",
@@ -2803,7 +2853,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q29",
@@ -2825,7 +2876,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q30",
@@ -2847,7 +2899,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q31",
@@ -2871,7 +2924,8 @@
       "is_clear": false,
       "prerequisites": [
         "Fs-26"
-      ]
+      ],
+      "topic_category": "B"
     },
     {
       "id": "q32",
@@ -2895,7 +2949,8 @@
       "is_clear": false,
       "prerequisites": [
         "Fs-26"
-      ]
+      ],
+      "topic_category": "B"
     },
     {
       "id": "q33",
@@ -2917,7 +2972,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q34",
@@ -2941,7 +2997,8 @@
       "is_clear": false,
       "prerequisites": [
         "Fs-26"
-      ]
+      ],
+      "topic_category": "B"
     },
     {
       "id": "q35",
@@ -2974,7 +3031,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-22"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q36",
@@ -2996,7 +3054,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q37",
@@ -3020,7 +3079,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-22"
-      ]
+      ],
+      "topic_category": "C"
     },
     {
       "id": "q38",
@@ -3042,7 +3102,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q39",
@@ -3064,7 +3125,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q40",
@@ -3086,7 +3148,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q41",
@@ -3108,7 +3171,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q42",
@@ -3132,7 +3196,8 @@
       "is_clear": false,
       "prerequisites": [
         "Pt-1"
-      ]
+      ],
+      "topic_category": "E"
     },
     {
       "id": "q43",
@@ -3156,7 +3221,8 @@
       "is_clear": false,
       "prerequisites": [
         "Pt-1"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q44",
@@ -3182,7 +3248,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q45",
@@ -3206,7 +3273,8 @@
       "is_clear": false,
       "prerequisites": [
         "Pt-1"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q46",
@@ -3228,7 +3296,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q47",
@@ -3252,7 +3321,8 @@
       "is_clear": false,
       "prerequisites": [
         "Pt-1"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q48",
@@ -3276,7 +3346,8 @@
       "is_clear": false,
       "prerequisites": [
         "Pt-3"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q49",
@@ -3304,7 +3375,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-02"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q50",
@@ -3328,7 +3400,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-02"
-      ]
+      ],
+      "topic_category": "B"
     },
     {
       "id": "q51",
@@ -3352,7 +3425,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-02"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q52",
@@ -3376,7 +3450,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-02"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q53",
@@ -3400,7 +3475,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-02"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q54",
@@ -3422,7 +3498,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q55",
@@ -3448,7 +3525,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q56",
@@ -3473,7 +3551,8 @@
       "prerequisites": [
         "Pt-3",
         "Ft-02"
-      ]
+      ],
+      "topic_category": "B"
     },
     {
       "id": "q57",
@@ -3495,7 +3574,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q58",
@@ -3517,7 +3597,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q59",
@@ -3539,7 +3620,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q60",
@@ -3561,7 +3643,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": true,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q61",
@@ -3583,7 +3666,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q62",
@@ -3605,7 +3689,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q63",
@@ -3631,7 +3716,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "C"
     },
     {
       "id": "q64",
@@ -3657,7 +3743,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q65",
@@ -3683,7 +3770,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q66",
@@ -3711,7 +3799,8 @@
       "is_clear": false,
       "prerequisites": [
         "Fs-26"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q67",
@@ -3737,7 +3826,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q68",
@@ -3763,7 +3853,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q69",
@@ -3791,7 +3882,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-37"
-      ]
+      ],
+      "topic_category": "B"
     },
     {
       "id": "q70",
@@ -3819,7 +3911,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-22"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q71",
@@ -3847,7 +3940,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-22"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q72",
@@ -3873,7 +3967,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q73",
@@ -3901,7 +3996,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-32"
-      ]
+      ],
+      "topic_category": "B"
     },
     {
       "id": "q74",
@@ -3929,7 +4025,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-22"
-      ]
+      ],
+      "topic_category": "C"
     },
     {
       "id": "q75",
@@ -3951,7 +4048,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q76",
@@ -3973,7 +4071,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "A"
     },
     {
       "id": "q77",
@@ -3995,7 +4094,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "A"
     },
     {
       "id": "q78",
@@ -4017,7 +4117,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q79",
@@ -4039,7 +4140,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q80",
@@ -4061,7 +4163,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "A"
     },
     {
       "id": "q81",
@@ -4083,7 +4186,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "A"
     },
     {
       "id": "q82",
@@ -4105,7 +4209,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q83",
@@ -4127,7 +4232,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q84",
@@ -4149,7 +4255,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q85",
@@ -4171,7 +4278,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q86",
@@ -4193,7 +4301,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q87",
@@ -4215,7 +4324,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q88",
@@ -4237,7 +4347,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q89",
@@ -4259,7 +4370,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q90",
@@ -4290,7 +4402,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "A"
     },
     {
       "id": "q91",
@@ -4312,7 +4425,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q92",
@@ -4334,7 +4448,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q93",
@@ -4358,7 +4473,8 @@
       "is_clear": false,
       "prerequisites": [
         "Fs-26"
-      ]
+      ],
+      "topic_category": "B"
     },
     {
       "id": "q94",
@@ -4382,7 +4498,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-02"
-      ]
+      ],
+      "topic_category": "D"
     },
     {
       "id": "q95",
@@ -4404,7 +4521,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q96",
@@ -4426,7 +4544,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q106",
@@ -4461,7 +4580,8 @@
       "correct_answer": "yes",
       "is_clear": false,
       "prerequisites": [],
-      "related_descriptors": []
+      "related_descriptors": [],
+      "topic_category": "B"
     },
     {
       "id": "q97",
@@ -4483,7 +4603,8 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "B"
     },
     {
       "id": "q98",
@@ -4505,7 +4626,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "D"
     },
     {
       "id": "q99",
@@ -4527,7 +4649,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q100",
@@ -4553,7 +4676,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "A"
     },
     {
       "id": "q101",
@@ -4581,7 +4705,8 @@
       "is_clear": false,
       "prerequisites": [
         "Fs-27"
-      ]
+      ],
+      "topic_category": "B"
     },
     {
       "id": "q102",
@@ -4607,7 +4732,8 @@
       ],
       "correct_answer": "yes",
       "is_clear": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "topic_category": "E"
     },
     {
       "id": "q103",
@@ -4635,7 +4761,8 @@
       "is_clear": false,
       "prerequisites": [
         "Fs-43"
-      ]
+      ],
+      "topic_category": "E"
     },
     {
       "id": "q104",
@@ -4663,7 +4790,8 @@
       "is_clear": false,
       "prerequisites": [
         "Ft-22"
-      ]
+      ],
+      "topic_category": "D"
     }
   ]
 }

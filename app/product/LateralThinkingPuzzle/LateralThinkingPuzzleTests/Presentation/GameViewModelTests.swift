@@ -17,7 +17,8 @@ struct GameViewModelTests {
             title: "Test", statement: "Test",
             initParadigm: "P1", psValues: [("d1", 1)],
             allDescriptorIDs: ["d1", "d2", "d3"],
-            paradigms: ["P1": p1], questions: [q1], tier: .free
+            paradigms: ["P1": p1], questions: [q1], tier: .free,
+            topicCategories: []
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -40,7 +41,8 @@ struct GameViewModelTests {
             title: "Test", statement: "Test",
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
-            paradigms: ["P1": p1], questions: [q1], tier: .free
+            paradigms: ["P1": p1], questions: [q1], tier: .free,
+            topicCategories: []
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -65,7 +67,8 @@ struct GameViewModelTests {
             title: "Test", statement: "Test",
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d3"],
-            paradigms: ["P1": p1], questions: [q1], tier: .free
+            paradigms: ["P1": p1], questions: [q1], tier: .free,
+            topicCategories: []
         )
 
         let vm = GameViewModel(puzzle: puzzle)

@@ -21,7 +21,8 @@ struct StartGameUseCaseTests {
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1],
             questions: [q1, q2],
-            tier: .free
+            tier: .free,
+            topicCategories: []
         )
 
         let useCase = StartGameUseCase()

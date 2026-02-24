@@ -16,6 +16,7 @@ enum Strings {
     static var answerYes: String { "YES" }
     static var answerNo: String { "NO" }
     static var answerIrrelevant: String { s("関係ない", "Irrelevant") }
+    static var allCategories: String { s("すべて", "All") }
     static var solved: String { s("クリア済み", "Solved") }
     static var difficulty: String { s("難易度:", "Difficulty:") }
     static var contentDownload: String { s("コンテンツ", "Content") }
