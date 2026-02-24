@@ -29,13 +29,12 @@ struct PuzzleDataDTOTests {
           "title": "テスト",
           "statement": "テスト問題",
           "init_paradigm": "P1",
-          "tension_threshold": 2,
-          "shift_candidates": {"P1": ["P2"]},
           "ps_values": [["ps1", 1]],
           "all_descriptor_ids": ["d1", "d2", "ps1"],
           "paradigms": [{
             "id": "P1", "name": "テスト",
-            "d_plus": ["d1"], "d_minus": ["d2"],
+            "p_pred": [["d1", 1], ["d2", 0]],
+            "conceivable": ["d1", "d2"],
             "relations": [["d1", "d2", 0.8]]
           }],
           "questions": [{
@@ -52,7 +51,8 @@ struct PuzzleDataDTOTests {
 
         #expect(puzzle.title == "テスト")
         #expect(puzzle.paradigms["P1"] != nil)
-        #expect(puzzle.paradigms["P1"]!.dPlus == Set(["d1"]))
+        #expect(puzzle.paradigms["P1"]!.pPred["d1"] == 1)
+        #expect(puzzle.paradigms["P1"]!.pPred["d2"] == 0)
         #expect(puzzle.questions.count == 1)
         #expect(puzzle.questions[0].correctAnswer == .yes)
     }

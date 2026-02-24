@@ -38,6 +38,7 @@ struct PuzzleDataDTO: Codable {
 
         let oStar = GameEngine.buildOStar(questions: domainQuestions, psValues: ps)
         GameEngine.computeThresholds(paradigms: &paradigmMap, oStar: oStar)
+        GameEngine.computeDepths(paradigms: &paradigmMap, oStar: oStar)
 
         return PuzzleData(
             title: title,
@@ -96,18 +97,21 @@ enum PsValueElement: Codable {
 struct ParadigmDTO: Codable {
     let id: String
     let name: String
-    let dPlus: [String]
-    let dMinus: [String]
+    let pPred: [[PPredElement]]
+    let conceivable: [String]
     let relations: [[RelationElement]]
 
     enum CodingKeys: String, CodingKey {
         case id, name
-        case dPlus = "d_plus"
-        case dMinus = "d_minus"
+        case pPred = "p_pred"
+        case conceivable
         case relations
     }
 
     func toDomain() throws -> Paradigm {
+        let predDict = Dictionary(uniqueKeysWithValues: pPred.map { pair -> (String, Int) in
+            (pair[0].stringValue!, pair[1].intValue!)
+        })
         let rels = relations.map { arr -> Relation in
             let src = arr[0].stringValue!
             let tgt = arr[1].stringValue!
@@ -117,10 +121,47 @@ struct ParadigmDTO: Codable {
         return try Paradigm(
             id: id,
             name: name,
-            dPlus: Set(dPlus),
-            dMinus: Set(dMinus),
+            pPred: predDict,
+            conceivable: Set(conceivable),
             relations: rels
         )
+    }
+}
+
+enum PPredElement: Codable {
+    case string(String)
+    case int(Int)
+
+    var stringValue: String? {
+        if case let .string(v) = self { return v }
+        return nil
+    }
+
+    var intValue: Int? {
+        if case let .int(v) = self { return v }
+        return nil
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let v = try? container.decode(String.self) {
+            self = .string(v)
+        } else if let v = try? container.decode(Int.self) {
+            self = .int(v)
+        } else {
+            throw DecodingError.typeMismatch(
+                PPredElement.self,
+                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Expected String or Int")
+            )
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case let .string(v): try container.encode(v)
+        case let .int(v): try container.encode(v)
+        }
     }
 }
 
@@ -171,6 +212,8 @@ struct QuestionDTO: Codable {
     let ansIrrelevant: [String]
     let correctAnswer: String
     let isClear: Bool?
+    let prerequisites: [String]?
+    let relatedDescriptors: [String]?
 
     enum CodingKeys: String, CodingKey {
         case id, text
@@ -179,6 +222,8 @@ struct QuestionDTO: Codable {
         case ansIrrelevant = "ans_irrelevant"
         case correctAnswer = "correct_answer"
         case isClear = "is_clear"
+        case prerequisites
+        case relatedDescriptors = "related_descriptors"
     }
 
     func toDomain() -> Question {
@@ -201,7 +246,9 @@ struct QuestionDTO: Codable {
             ansNo: no,
             ansIrrelevant: ansIrrelevant,
             correctAnswer: answer,
-            isClear: isClear ?? false
+            isClear: isClear ?? false,
+            prerequisites: prerequisites ?? [],
+            relatedDescriptors: relatedDescriptors ?? []
         )
     }
 }

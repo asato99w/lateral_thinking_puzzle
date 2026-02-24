@@ -6,6 +6,8 @@ struct Question: Equatable, Identifiable, Sendable {
     let ansIrrelevant: [String]
     let correctAnswer: Answer
     let isClear: Bool
+    let prerequisites: [String]
+    let relatedDescriptors: [String]
 
     var effect: QuestionEffect {
         switch correctAnswer {
@@ -16,6 +18,16 @@ struct Question: Equatable, Identifiable, Sendable {
         case .irrelevant:
             return .irrelevant(ansIrrelevant)
         }
+    }
+
+    /// All descriptors referenced by this question (effect + related).
+    var allDescriptors: Set<String> {
+        var ds = Set<String>()
+        for (d, _) in ansYes { ds.insert(d) }
+        for (d, _) in ansNo { ds.insert(d) }
+        for d in ansIrrelevant { ds.insert(d) }
+        for d in relatedDescriptors { ds.insert(d) }
+        return ds
     }
 
     static func == (lhs: Question, rhs: Question) -> Bool {

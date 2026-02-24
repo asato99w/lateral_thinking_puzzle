@@ -4,30 +4,64 @@ enum GameEngine {
 
     static let epsilon: Double = 0.2
 
+    // MARK: - Conceivable Block
+
+    /// Returns true if any descriptor referenced by the question is outside conceivable.
+    static func conceivableBlocked(_ question: Question, conceivable: Set<String>) -> Bool {
+        for d in question.allDescriptors {
+            if !conceivable.contains(d) {
+                return true
+            }
+        }
+        return false
+    }
+
     // MARK: - Tension
 
+    /// Anomaly count: Conceivable(P) ∩ O where P's prediction conflicts with O.
     static func tension(o: [String: Int], paradigm: Paradigm) -> Int {
-        let overlap = paradigm.dAll.intersection(Set(o.keys))
-        return overlap.reduce(0) { count, d in
-            count + (paradigm.prediction(d) != o[d] ? 1 : 0)
+        var count = 0
+        for d in paradigm.conceivable {
+            if let oVal = o[d] {
+                if let pred = paradigm.prediction(d), pred != oVal {
+                    count += 1
+                }
+            }
         }
+        return count
     }
 
     // MARK: - Alignment
 
+    /// H-based alignment using pPred.
     static func alignment(h: [String: Double], paradigm: Paradigm) -> Double {
-        let dAll = paradigm.dAll
-        guard !dAll.isEmpty else { return 0.0 }
+        let predItems = paradigm.pPred
+        guard !predItems.isEmpty else { return 0.0 }
         var score = 0.0
-        for d in dAll {
+        var count = 0
+        for (d, predVal) in predItems {
             let hVal = h[d] ?? 0.5
-            if paradigm.dPlus.contains(d) {
+            if predVal == 1 {
                 score += hVal
             } else {
                 score += 1.0 - hVal
             }
+            count += 1
         }
-        return score / Double(dAll.count)
+        return count > 0 ? score / Double(count) : 0.0
+    }
+
+    // MARK: - Explained O
+
+    /// Count of O entries that match P's prediction.
+    static func explainedO(o: [String: Int], paradigm: Paradigm) -> Int {
+        var count = 0
+        for (dID, v) in o {
+            if let pred = paradigm.prediction(dID), pred == v {
+                count += 1
+            }
+        }
+        return count
     }
 
     // MARK: - Assimilate
@@ -44,7 +78,7 @@ enum GameEngine {
     }
 
     static func assimilateFromParadigm(h: inout [String: Double], o: [String: Int], paradigm: Paradigm) {
-        for dID in Set(o.keys).intersection(paradigm.dAll) {
+        for dID in Set(o.keys).intersection(paradigm.conceivable) {
             if let pred = paradigm.prediction(dID), pred == o[dID] {
                 assimilateDescriptor(h: &h, dID: dID, paradigm: paradigm)
             }
@@ -81,9 +115,19 @@ enum GameEngine {
 
     // MARK: - Init Questions
 
-    static func initQuestions(paradigm: Paradigm, questions: [Question]) -> [Question] {
+    static func initQuestions(
+        paradigm: Paradigm,
+        questions: [Question],
+        o: [String: Int]? = nil
+    ) -> [Question] {
         var result = [Question]()
         for q in questions {
+            if conceivableBlocked(q, conceivable: paradigm.conceivable) {
+                continue
+            }
+            if let o = o, !q.prerequisites.allSatisfy({ o.keys.contains($0) }) {
+                continue
+            }
             let eff = q.effect
             if case let .observation(pairs) = eff {
                 var hasMatch = false
@@ -107,10 +151,24 @@ enum GameEngine {
 
     // MARK: - Open Questions
 
-    static func openQuestions(state: GameState, questions: [Question]) -> [Question] {
+    static func openQuestions(
+        state: GameState,
+        questions: [Question],
+        paradigms: [String: Paradigm]? = nil
+    ) -> [Question] {
+        var conceivable = Set<String>()
+        if let paradigms = paradigms, let p = paradigms[state.pCurrent] {
+            conceivable = p.conceivable
+        }
         var result = [Question]()
         for q in questions {
             if state.answered.contains(q.id) { continue }
+            if !conceivable.isEmpty && conceivableBlocked(q, conceivable: conceivable) {
+                continue
+            }
+            if !q.prerequisites.allSatisfy({ state.o.keys.contains($0) }) {
+                continue
+            }
             let eff = q.effect
             if case let .observation(pairs) = eff {
                 for (dID, v) in pairs {
@@ -130,8 +188,6 @@ enum GameEngine {
     static func checkClear(question: Question) -> Bool {
         question.isClear
     }
-
-    // MARK: - Update
 
     // MARK: - Build O*
 
@@ -161,24 +217,118 @@ enum GameEngine {
         paradigms: inout [String: Paradigm],
         oStar: [String: Int]
     ) {
-        var anomalies = [String: Int]()
         for (pid, p) in paradigms {
-            anomalies[pid] = tension(o: oStar, paradigm: p)
-        }
+            let exclusive = exclusiveConceivableAnomalies(paradigm: p, allParadigms: paradigms, oStar: oStar)
 
-        for (pid, p) in paradigms {
-            let myAnomalies = anomalies[pid]!
-            let betterNeighborAnomalies = paradigms.compactMap { (pid2, p2) -> Int? in
-                guard pid2 != pid,
-                      !p.dAll.intersection(p2.dAll).isEmpty,
-                      anomalies[pid2]! < myAnomalies else { return nil }
-                return anomalies[pid2]!
+            var minShared: Int?
+            for (pid2, p2) in paradigms where pid2 != pid {
+                let shared = sharedConceivableAnomalies(paradigm: p, other: p2, oStar: oStar)
+                if minShared == nil || shared < minShared! {
+                    minShared = shared
+                }
             }
-            if let maxVal = betterNeighborAnomalies.max() {
-                paradigms[pid]!.threshold = maxVal
+
+            if let minShared = minShared {
+                paradigms[pid]!.threshold = exclusive + minShared
             } else {
                 paradigms[pid]!.threshold = nil
             }
+        }
+    }
+
+    /// Exclusive conceivable anomalies: descriptors unique to this paradigm's conceivable that conflict with O*.
+    private static func exclusiveConceivableAnomalies(
+        paradigm: Paradigm,
+        allParadigms: [String: Paradigm],
+        oStar: [String: Int]
+    ) -> Int {
+        var otherConceivable = Set<String>()
+        for (pid, p) in allParadigms where pid != paradigm.id {
+            otherConceivable.formUnion(p.conceivable)
+        }
+        let exclusive = paradigm.conceivable.subtracting(otherConceivable)
+        var count = 0
+        for d in exclusive {
+            if let pred = paradigm.prediction(d), let oVal = oStar[d], pred != oVal {
+                count += 1
+            }
+        }
+        return count
+    }
+
+    /// Shared conceivable anomalies between two paradigms.
+    private static func sharedConceivableAnomalies(
+        paradigm: Paradigm,
+        other: Paradigm,
+        oStar: [String: Int]
+    ) -> Int {
+        let shared = paradigm.conceivable.intersection(other.conceivable)
+        var count = 0
+        for d in shared {
+            if let pred = paradigm.prediction(d), let oVal = oStar[d], pred != oVal {
+                count += 1
+            }
+        }
+        return count
+    }
+
+    // MARK: - Compute Depths
+
+    static func computeDepths(
+        paradigms: inout [String: Paradigm],
+        oStar: [String: Int]
+    ) {
+        // Compute Explained(P) for each paradigm
+        var explained = [String: Set<String>]()
+        for (pid, p) in paradigms {
+            var exp = Set<String>()
+            for (d, predVal) in p.pPred {
+                if let oVal = oStar[d], predVal == oVal {
+                    exp.insert(d)
+                }
+            }
+            explained[pid] = exp
+        }
+
+        let pids = Array(paradigms.keys)
+
+        // Build containment DAG: a → b means Explained(a) ⊂ Explained(b)
+        var strictlyContained = [String: Set<String>]()
+        for pid in pids { strictlyContained[pid] = [] }
+
+        for a in pids {
+            for b in pids where a != b {
+                if explained[a]!.isStrictSubset(of: explained[b]!) {
+                    strictlyContained[a]!.insert(b)
+                }
+            }
+        }
+
+        // Topological sort for depth assignment
+        var depthMap = [String: Int]()
+
+        func computeDepth(_ pid: String, _ visited: inout Set<String>) -> Int {
+            if let cached = depthMap[pid] { return cached }
+            if visited.contains(pid) { return 0 }
+            visited.insert(pid)
+
+            let parents = pids.filter { strictlyContained[$0]!.contains(pid) }
+            if parents.isEmpty {
+                depthMap[pid] = 0
+            } else {
+                let maxParentDepth = parents.map { computeDepth($0, &visited) }.max()!
+                depthMap[pid] = maxParentDepth + 1
+            }
+            return depthMap[pid]!
+        }
+
+        for pid in pids {
+            var visited = Set<String>()
+            _ = computeDepth(pid, &visited)
+        }
+
+        for (pid, _) in paradigms {
+            paradigms[pid]!.depth = depthMap[pid] ?? 0
         }
     }
 
@@ -223,12 +373,11 @@ enum GameEngine {
 
         // Step 3: Paradigm shift
         let currentTension = tension(o: state.o, paradigm: pCurrent)
-        if let threshold = pCurrent.threshold, currentTension >= threshold {
-            let currentAnomalies = currentTension
+        if let threshold = pCurrent.threshold, currentTension > threshold {
+            let currentExplained = explainedO(o: state.o, paradigm: pCurrent)
             let candidates = paradigms.keys.filter { pID in
                 pID != state.pCurrent
-                    && !paradigms[pID]!.dAll.intersection(pCurrent.dAll).isEmpty
-                    && tension(o: state.o, paradigm: paradigms[pID]!) < currentAnomalies
+                    && explainedO(o: state.o, paradigm: paradigms[pID]!) > currentExplained
             }
 
             if !candidates.isEmpty {
@@ -247,10 +396,10 @@ enum GameEngine {
             }
         }
 
-        // Step 4: Open questions update (add only, exclude answered)
+        // Step 4: Open questions update
         var remaining = currentOpen.filter { $0.id != question.id }
         let remainingIDs = Set(remaining.map(\.id))
-        let newlyOpened = openQuestions(state: state, questions: allQuestions)
+        let newlyOpened = openQuestions(state: state, questions: allQuestions, paradigms: paradigms)
             .filter { !remainingIDs.contains($0.id) && !state.answered.contains($0.id) }
 
         remaining.append(contentsOf: newlyOpened)

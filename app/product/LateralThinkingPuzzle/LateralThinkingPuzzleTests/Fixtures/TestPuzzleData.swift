@@ -7,11 +7,11 @@ enum TestPuzzleData {
     static func makeParadigm(
         id: String = "P1",
         name: String = "Test Paradigm",
-        dPlus: Set<String> = ["d1", "d2"],
-        dMinus: Set<String> = ["d3", "d4"],
+        pPred: [String: Int] = ["d1": 1, "d2": 1, "d3": 0, "d4": 0],
+        conceivable: Set<String> = ["d1", "d2", "d3", "d4"],
         relations: [Relation] = []
     ) -> Paradigm {
-        try! Paradigm(id: id, name: name, dPlus: dPlus, dMinus: dMinus, relations: relations)
+        try! Paradigm(id: id, name: name, pPred: pPred, conceivable: conceivable, relations: relations)
     }
 
     static func makeQuestion(
@@ -21,7 +21,9 @@ enum TestPuzzleData {
         ansNo: [(String, Int)] = [("d1", 0)],
         ansIrrelevant: [String] = ["d1"],
         correctAnswer: Answer = .yes,
-        isClear: Bool = false
+        isClear: Bool = false,
+        prerequisites: [String] = [],
+        relatedDescriptors: [String] = []
     ) -> Question {
         Question(
             id: id,
@@ -30,7 +32,9 @@ enum TestPuzzleData {
             ansNo: ansNo,
             ansIrrelevant: ansIrrelevant,
             correctAnswer: correctAnswer,
-            isClear: isClear
+            isClear: isClear,
+            prerequisites: prerequisites,
+            relatedDescriptors: relatedDescriptors
         )
     }
 
@@ -44,14 +48,14 @@ enum TestPuzzleData {
     ) {
         let p1 = makeParadigm(
             id: "P1", name: "Initial",
-            dPlus: ["d1", "d2"],
-            dMinus: ["d3"],
+            pPred: ["d1": 1, "d2": 1, "d3": 0],
+            conceivable: ["d1", "d2", "d3"],
             relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
         )
         let p2 = makeParadigm(
             id: "P2", name: "Alternative",
-            dPlus: ["d3"],
-            dMinus: ["d1", "d2"],
+            pPred: ["d1": 0, "d2": 0, "d3": 1],
+            conceivable: ["d1", "d2", "d3"],
             relations: []
         )
 

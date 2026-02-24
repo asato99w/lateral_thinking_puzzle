@@ -12,7 +12,7 @@ struct StartGameUseCase: Sendable {
             allDescriptorIDs: puzzle.allDescriptorIDs
         )
         let initialParadigm = puzzle.paradigms[puzzle.initParadigm]!
-        let open = GameEngine.initQuestions(paradigm: initialParadigm, questions: puzzle.questions)
+        let open = GameEngine.initQuestions(paradigm: initialParadigm, questions: puzzle.questions, o: state.o)
         return StartGameResult(state: state, openQuestions: open)
     }
 }
