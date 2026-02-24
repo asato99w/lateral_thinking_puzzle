@@ -5,30 +5,48 @@ struct GameView: View {
 
     /// Tracks feedback overlay: question ID -> answer being shown
     @State private var feedbackForQuestion: [String: Answer] = [:]
+    @State private var statementExpanded = true
+
+    private var totalQuestionCount: Int {
+        viewModel.openQuestions.count + viewModel.answeredQuestions.count
+    }
 
     var body: some View {
         if viewModel.isCleared {
             ClearView(puzzle: viewModel.puzzle)
                 .transition(.opacity)
         } else {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    // Statement
+            VStack(spacing: 0) {
+                // Fixed top area
+                VStack(alignment: .leading, spacing: 12) {
                     statementSection
 
-                    // Open Questions
-                    if !viewModel.openQuestions.isEmpty {
-                        openQuestionsSection
-                    }
-
-                    // Answered Questions
                     if !viewModel.answeredQuestions.isEmpty {
                         answeredSection
                     }
+
+                    progressPill
+
+                    if !viewModel.openQuestions.isEmpty {
+                        sectionLabel(Strings.chooseQuestion)
+                    }
                 }
-                .padding()
+                .padding(.horizontal)
+                .padding(.top, 8)
+                .padding(.bottom, 12)
+
+                Divider().opacity(0.3)
+
+                // Scrollable: question buttons only
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 8) {
+                        if !viewModel.openQuestions.isEmpty {
+                            questionList
+                        }
+                    }
+                    .padding()
+                }
             }
-            .navigationTitle(viewModel.puzzle.title)
             .navigationBarTitleDisplayMode(.inline)
             .animation(.easeInOut(duration: Theme.transitionDuration), value: viewModel.isCleared)
         }
@@ -37,10 +55,43 @@ struct GameView: View {
     // MARK: - Statement
 
     private var statementSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            sectionLabel(Strings.statement)
-            Text(viewModel.puzzle.statement)
-                .font(.body)
+        VStack(alignment: .leading, spacing: 12) {
+            // Header row (always visible, tappable)
+            Button {
+                withAnimation(.easeInOut(duration: Theme.animationDuration)) {
+                    statementExpanded.toggle()
+                }
+            } label: {
+                HStack(spacing: 12) {
+                    Text(PuzzleMetadata.icon(for: viewModel.puzzleID))
+                        .font(.system(size: 36))
+                        .frame(width: 56, height: 56)
+                        .background(Theme.accent.opacity(0.2))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(viewModel.puzzle.title)
+                            .font(.headline)
+                        difficultyStars(PuzzleMetadata.difficulty(for: viewModel.puzzleID))
+                    }
+
+                    Spacer()
+
+                    Image(systemName: statementExpanded ? "chevron.up" : "chevron.down")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .buttonStyle(.plain)
+
+            // Collapsible statement text
+            if statementExpanded {
+                sectionLabel(Strings.statement)
+
+                Text(viewModel.puzzle.statement)
+                    .font(.body)
+                    .lineSpacing(4)
+            }
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -52,32 +103,57 @@ struct GameView: View {
         )
     }
 
+    // MARK: - Progress Pill
+
+    private var progressPill: some View {
+        HStack(spacing: 6) {
+            Text("\(viewModel.answeredQuestions.count)")
+                .font(.title3.bold().monospacedDigit())
+                .foregroundStyle(Theme.accent)
+            Text("/ \(totalQuestionCount)")
+                .font(.subheadline.monospacedDigit())
+                .foregroundStyle(Theme.progressText)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+        .background(Theme.accent.opacity(0.12))
+        .clipShape(Capsule())
+    }
+
     // MARK: - Open Questions
 
     private var openQuestionsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionLabel(Strings.chooseQuestion)
-            ForEach(viewModel.openQuestions) { question in
-                questionButton(question)
-                    .transition(.opacity.combined(with: .move(edge: .leading)))
-            }
+            questionList
         }
     }
 
-    private func questionButton(_ question: Question) -> some View {
+    private var questionList: some View {
+        ForEach(Array(viewModel.openQuestions.enumerated()), id: \.element.id) { index, question in
+            questionButton(question, number: viewModel.answeredQuestions.count + index + 1)
+                .transition(.opacity.combined(with: .move(edge: .leading)))
+        }
+    }
+
+    private func questionButton(_ question: Question, number: Int) -> some View {
         Button {
             handleQuestionTap(question)
         } label: {
             HStack(spacing: 0) {
-                // Accent bar
-                RoundedRectangle(cornerRadius: Theme.accentBarWidth / 2)
-                    .fill(Theme.accent)
-                    .frame(width: Theme.accentBarWidth)
+                // Number badge
+                Text("\(number)")
+                    .font(.caption.bold().monospacedDigit())
+                    .foregroundStyle(Theme.accent)
+                    .frame(width: 40)
+                    .frame(maxHeight: .infinity)
+                    .background(Theme.accent.opacity(0.15))
 
                 Text(question.text)
+                    .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 12)
-                    .padding(.vertical, 12)
+                    .padding(.vertical, 14)
             }
             .background(Theme.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: Theme.cardCornerRadius))
@@ -126,17 +202,36 @@ struct GameView: View {
     private var answeredSection: some View {
         DisclosureGroup(isExpanded: $viewModel.showAnswered) {
             VStack(alignment: .leading, spacing: 8) {
-                ForEach(viewModel.answeredQuestions, id: \.question.id) { item in
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(item.question.text)
-                            .font(.subheadline)
-                        Text(answerLabel(item.answer))
-                            .font(.caption.weight(.bold))
+                ForEach(Array(viewModel.answeredQuestions.enumerated()), id: \.element.question.id) { index, item in
+                    HStack(spacing: 0) {
+                        Text("\(index + 1)")
+                            .font(.caption.bold().monospacedDigit())
                             .foregroundStyle(answerColor(item.answer))
+                            .frame(width: 40)
+                            .frame(maxHeight: .infinity)
+                            .background(answerColor(item.answer).opacity(0.12))
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(item.question.text)
+                                .font(.subheadline)
+                            Text(answerLabel(item.answer))
+                                .font(.caption.weight(.bold))
+                                .foregroundStyle(answerColor(item.answer))
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
+
+                        Spacer(minLength: 0)
                     }
-                    .padding(.vertical, 4)
+                    .background(Theme.cardBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: Theme.cardCornerRadius))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: Theme.cardCornerRadius)
+                            .stroke(answerColor(item.answer).opacity(0.2), lineWidth: 1)
+                    )
                 }
             }
+            .padding(.top, 8)
         } label: {
             Text("\(Strings.answered) (\(viewModel.answeredQuestions.count))")
                 .font(.subheadline.weight(.semibold))
@@ -155,6 +250,16 @@ struct GameView: View {
             Text(text)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.white.opacity(0.85))
+        }
+    }
+
+    private func difficultyStars(_ level: Int) -> some View {
+        HStack(spacing: 4) {
+            ForEach(1...3, id: \.self) { star in
+                Image(systemName: star <= level ? "star.fill" : "star")
+                    .font(.caption2)
+                    .foregroundStyle(star <= level ? Theme.starFilled : Theme.starEmpty)
+            }
         }
     }
 
