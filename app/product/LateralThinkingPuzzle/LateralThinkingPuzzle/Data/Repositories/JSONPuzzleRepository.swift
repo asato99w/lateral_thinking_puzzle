@@ -2,7 +2,7 @@ import Foundation
 
 struct JSONPuzzleRepository: PuzzleRepository {
 
-    private static let puzzleIDs = ["bar_man", "turtle_soup"]
+    private static let puzzleIDs = ["bar_man", "desert_man", "turtle_soup"]
 
     func fetchPuzzleList() async throws -> [PuzzleSummary] {
         var summaries = [PuzzleSummary]()

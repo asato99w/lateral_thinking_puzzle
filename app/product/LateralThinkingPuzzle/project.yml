@@ -19,12 +19,13 @@ targets:
       - path: LateralThinkingPuzzle
         excludes:
           - "Resources/**"
-    resources:
       - path: LateralThinkingPuzzle/Resources
         buildPhase: resources
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES
+        DEVELOPMENT_TEAM: 76359B69WG
+        CODE_SIGN_STYLE: Automatic
         PRODUCT_BUNDLE_IDENTIFIER: com.kazuasato.LateralThinkingPuzzle
         MARKETING_VERSION: "1.0.0"
         CURRENT_PROJECT_VERSION: "1"
