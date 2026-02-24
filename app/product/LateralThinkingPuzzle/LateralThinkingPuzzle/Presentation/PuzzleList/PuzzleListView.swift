@@ -35,8 +35,15 @@ struct PuzzleListView: View {
             .task {
                 await viewModel.loadPuzzles()
             }
-            #if DEBUG
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NavigationLink {
+                        ContentDownloadView()
+                    } label: {
+                        Image(systemName: "arrow.down.circle")
+                    }
+                }
+                #if DEBUG
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         showDebugSettings = true
@@ -44,7 +51,9 @@ struct PuzzleListView: View {
                         Image(systemName: "gearshape")
                     }
                 }
+                #endif
             }
+            #if DEBUG
             .sheet(isPresented: $showDebugSettings, onDismiss: {
                 Task { await viewModel.loadPuzzles() }
             }) {

@@ -18,6 +18,12 @@ enum Strings {
     static var answerIrrelevant: String { s("関係ない", "Irrelevant") }
     static var solved: String { s("クリア済み", "Solved") }
     static var difficulty: String { s("難易度:", "Difficulty:") }
+    static var contentDownload: String { s("コンテンツ", "Content") }
+    static var packs: String { s("パック", "Packs") }
+    static var puzzles: String { s("パズル", "Puzzles") }
+    static var bundled: String { s("同梱済み", "Bundled") }
+    static var downloadComplete: String { s("ダウンロード済み", "Downloaded") }
+    static var downloading: String { s("ダウンロード中…", "Downloading…") }
 
     static func solvedProgress(_ solved: Int, _ total: Int) -> String {
         "\(solved)/\(total) Solved"

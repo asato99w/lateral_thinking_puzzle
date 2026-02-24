@@ -1,0 +1,98 @@
+{
+  "puzzles": [
+    {
+      "id": "turtle_soup",
+      "odr_tag": "puzzle-turtle-soup",
+      "title_ja": "ウミガメのスープ",
+      "title_en": "Turtle Soup",
+      "statement_preview_ja": "ある男がレストランでウミガメのスープを注文した…",
+      "statement_preview_en": "A man ordered turtle soup at a restaurant…",
+      "icon": "\ud83d\udc22",
+      "difficulty": 1,
+      "tier": "free",
+      "bundled": true
+    },
+    {
+      "id": "bar_man",
+      "odr_tag": "puzzle-bar-man",
+      "title_ja": "バーの男",
+      "title_en": "The Bar Man",
+      "statement_preview_ja": "ある男がバーに入り、バーテンダーに水を頼んだ…",
+      "statement_preview_en": "A man walked into a bar and asked for water…",
+      "icon": "\ud83c\udf78",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": true
+    },
+    {
+      "id": "desert_man",
+      "odr_tag": "puzzle-desert-man",
+      "title_ja": "砂漠の男",
+      "title_en": "The Desert Man",
+      "statement_preview_ja": "砂漠の真ん中で男が死んでいた…",
+      "statement_preview_en": "A man was found dead in the middle of the desert…",
+      "icon": "\ud83c\udfdc\ufe0f",
+      "difficulty": 3,
+      "tier": "free",
+      "bundled": true
+    },
+    {
+      "id": "underground",
+      "odr_tag": "puzzle-underground",
+      "title_ja": "禁じられた地下室",
+      "title_en": "The Forbidden Basement",
+      "statement_preview_ja": "ある家の地下室には誰も入ってはいけないと言われていた…",
+      "statement_preview_en": "No one was allowed to enter the basement of a certain house…",
+      "icon": "\ud83d\udeaa",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false
+    },
+    {
+      "id": "cassette",
+      "odr_tag": "puzzle-cassette",
+      "title_ja": "カセットテープ",
+      "title_en": "The Cassette Tape",
+      "statement_preview_ja": "カセットテープを再生すると、男は自ら命を絶った…",
+      "statement_preview_en": "After playing a cassette tape, a man took his own life…",
+      "icon": "\ud83d\udcfc",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false
+    },
+    {
+      "id": "hole_money",
+      "odr_tag": "puzzle-hole-money",
+      "title_ja": "穴と一万円",
+      "title_en": "The Hole and 10,000 Yen",
+      "statement_preview_ja": "男は穴に一万円札を落としてしまった…",
+      "statement_preview_en": "A man dropped a 10,000 yen bill into a hole…",
+      "icon": "\ud83d\udd73\ufe0f",
+      "difficulty": 1,
+      "tier": "free",
+      "bundled": false
+    }
+  ],
+  "packs": [
+    {
+      "id": "classic",
+      "title_ja": "定番パック",
+      "title_en": "Classic Pack",
+      "description_ja": "人気の水平思考パズル3問セット",
+      "description_en": "3 popular lateral thinking puzzles",
+      "icon": "\ud83d\udce6",
+      "puzzle_ids": ["turtle_soup", "bar_man", "desert_man"],
+      "tier": "free"
+    },
+    {
+      "id": "mystery",
+      "title_ja": "ミステリーパック",
+      "title_en": "Mystery Pack",
+      "description_ja": "不思議な謎を解き明かす3問セット",
+      "description_en": "3 puzzles to unravel mysterious riddles",
+      "icon": "\ud83d\udd2e",
+      "puzzle_ids": ["underground", "cassette", "hole_money"],
+      "tier": "free"
+    }
+  ]
+}
