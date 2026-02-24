@@ -5,7 +5,7 @@
 ## ディレクトリ構成
 
 ```
-samples/NNN_タイトル/
+samples/NNN_YYYYMMDD_タイトル/
   01_初回適用/              ← 最初の適用
     01_入力.md
     02_記述素展開.md
