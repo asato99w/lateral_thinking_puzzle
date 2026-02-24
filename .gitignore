@@ -22,6 +22,7 @@ env/
 
 # Xcode
 xcuserdata/
+*.pbxproj
 
 # OS
 .DS_Store
