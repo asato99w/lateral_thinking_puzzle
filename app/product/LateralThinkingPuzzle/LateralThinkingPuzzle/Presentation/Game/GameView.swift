@@ -137,22 +137,40 @@ struct GameView: View {
     private var questionList: some View {
         ForEach(Array(viewModel.filteredOpenQuestions.enumerated()), id: \.element.id) { index, question in
             questionButton(question, number: index + 1)
-                .transition(.opacity.combined(with: .move(edge: .leading)))
+                .transition(
+                    viewModel.isNewQuestion(question.id)
+                        ? .asymmetric(
+                            insertion: .opacity.combined(with: .move(edge: .trailing)).combined(with: .scale(scale: 0.95)),
+                            removal: .opacity
+                          )
+                        : .opacity
+                )
         }
     }
 
     private func questionButton(_ question: Question, number: Int) -> some View {
-        Button {
+        let isNew = viewModel.isNewQuestion(question.id)
+
+        return Button {
             handleQuestionTap(question)
         } label: {
             HStack(spacing: 0) {
-                // Number badge
-                Text("\(number)")
-                    .font(.caption.bold().monospacedDigit())
-                    .foregroundStyle(Theme.accent)
-                    .frame(width: 40)
-                    .frame(maxHeight: .infinity)
-                    .background(Theme.accent.opacity(0.15))
+                // Number badge + new dot
+                ZStack(alignment: .topLeading) {
+                    Text("\(number)")
+                        .font(.caption.bold().monospacedDigit())
+                        .foregroundStyle(Theme.accent)
+                        .frame(width: 40)
+                        .frame(maxHeight: .infinity)
+                        .background(Theme.accent.opacity(0.15))
+
+                    if isNew {
+                        Circle()
+                            .fill(Theme.accent)
+                            .frame(width: 8, height: 8)
+                            .offset(x: 4, y: 4)
+                    }
+                }
 
                 Text(question.text)
                     .font(.subheadline)
@@ -164,7 +182,7 @@ struct GameView: View {
             .clipShape(RoundedRectangle(cornerRadius: Theme.cardCornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: Theme.cardCornerRadius)
-                    .stroke(Theme.cardBorder, lineWidth: 1)
+                    .stroke(isNew ? Theme.accent.opacity(0.6) : Theme.cardBorder, lineWidth: 1)
             )
             .overlay {
                 // Feedback overlay
@@ -253,7 +271,8 @@ struct GameView: View {
                 categoryTab(
                     label: Strings.allCategories,
                     count: viewModel.openQuestions.count,
-                    isActive: viewModel.selectedCategory == nil
+                    isActive: viewModel.selectedCategory == nil,
+                    hasNew: !viewModel.newQuestionIDs.isEmpty
                 ) {
                     viewModel.selectedCategory = nil
                 }
@@ -262,7 +281,8 @@ struct GameView: View {
                     categoryTab(
                         label: cat.name,
                         count: viewModel.openCountForCategory(cat.id),
-                        isActive: viewModel.selectedCategory == cat.id
+                        isActive: viewModel.selectedCategory == cat.id,
+                        hasNew: viewModel.hasNewQuestions(inCategory: cat.id)
                     ) {
                         viewModel.selectedCategory = cat.id
                     }
@@ -273,7 +293,7 @@ struct GameView: View {
         }
     }
 
-    private func categoryTab(label: String, count: Int, isActive: Bool, action: @escaping () -> Void) -> some View {
+    private func categoryTab(label: String, count: Int, isActive: Bool, hasNew: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 4) {
                 Text(label)
@@ -291,6 +311,14 @@ struct GameView: View {
             .background(isActive ? Theme.categoryActive : Theme.categoryInactive)
             .foregroundStyle(.white)
             .clipShape(Capsule())
+            .overlay(alignment: .topTrailing) {
+                if hasNew {
+                    Circle()
+                        .fill(Theme.accent)
+                        .frame(width: 8, height: 8)
+                        .offset(x: 2, y: -2)
+                }
+            }
         }
         .buttonStyle(.plain)
         .animation(.easeInOut(duration: Theme.animationDuration), value: isActive)
