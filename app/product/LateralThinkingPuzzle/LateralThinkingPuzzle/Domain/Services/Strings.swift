@@ -34,6 +34,7 @@ enum Strings {
         s("他 \(count) 件を表示", "Show \(count) more")
     }
     static var hideOthers: String { s("閉じる", "Hide") }
+    static var history: String { s("履歴", "History") }
 
     static func solvedProgress(_ solved: Int, _ total: Int) -> String {
         "\(solved)/\(total) Solved"

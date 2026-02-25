@@ -13,7 +13,7 @@ struct GameView: View {
 
     var body: some View {
         if viewModel.isCleared {
-            ClearView(puzzle: viewModel.puzzle)
+            ClearView(puzzle: viewModel.puzzle, answeredQuestions: viewModel.answeredQuestions)
                 .transition(.opacity)
         } else {
             VStack(spacing: 0) {

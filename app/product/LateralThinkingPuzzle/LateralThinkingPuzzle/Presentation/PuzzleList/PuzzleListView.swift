@@ -3,6 +3,7 @@ import SwiftUI
 struct PuzzleListView: View {
     @State private var viewModel = PuzzleListView.makeViewModel()
     @State private var solvedStore = SolvedPuzzleStore.shared
+    @State private var historyStore = GameHistoryStore.shared
     #if DEBUG
     @State private var showDebugSettings = false
     #endif
@@ -189,8 +190,17 @@ struct PuzzleListView: View {
                     .fixedSize(horizontal: false, vertical: true)
 
                 if solved {
-                    solvedBadge
-                        .padding(.top, 2)
+                    HStack(spacing: 8) {
+                        solvedBadge
+                        if historyStore.history(for: puzzle.id) != nil {
+                            NavigationLink {
+                                GameHistoryView(history: historyStore.history(for: puzzle.id)!)
+                            } label: {
+                                historyBadge
+                            }
+                        }
+                    }
+                    .padding(.top, 2)
                 } else if !puzzle.isDownloaded {
                     downloadBadge
                         .padding(.top, 2)
@@ -233,6 +243,18 @@ struct PuzzleListView: View {
                 .font(.caption2.weight(.medium))
         }
         .foregroundStyle(Theme.solvedBadge)
+    }
+
+    // MARK: - History Badge
+
+    private var historyBadge: some View {
+        HStack(spacing: 3) {
+            Image(systemName: "clock.arrow.circlepath")
+                .font(.caption2)
+            Text(Strings.history)
+                .font(.caption2.weight(.medium))
+        }
+        .foregroundStyle(Theme.accent)
     }
 
     // MARK: - Download Badge

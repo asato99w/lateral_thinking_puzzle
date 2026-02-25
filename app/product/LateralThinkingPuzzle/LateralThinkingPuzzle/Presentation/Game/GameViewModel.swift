@@ -83,6 +83,15 @@ final class GameViewModel {
         if result.events.contains(.puzzleCleared) {
             isCleared = true
             SolvedPuzzleStore.shared.markSolved(puzzleID)
+            saveHistory()
         }
+    }
+
+    private func saveHistory() {
+        let entries = answeredQuestions.map {
+            GameHistoryEntry(questionText: $0.question.text, answer: $0.answer.rawValue)
+        }
+        let history = GameHistory(puzzleID: puzzleID, puzzleTitle: puzzle.title, entries: entries)
+        GameHistoryStore.shared.save(history)
     }
 }
