@@ -3,8 +3,10 @@
 P_pred の比較だけでパラダイム間の構造的な方向性を測定する。
 shift_direction.py（動的検証）とは相補的な静的分析。
 
-各メインパス遷移 P_i → P_{i+1} について:
-  1. Q(P_i) の各質問を effect(q) の (d, v) ごとに P_i / P_{i+1} と比較
+メインパス遷移とサブパラダイム遷移の両方を分析する。
+
+各遷移 P_from → P_to について:
+  1. Q(P_from) の各質問を effect(q) の (d, v) ごとに P_from / P_to と比較
   2. anomaly_count と net_direction の 2 軸で 4 分類
   3. 遷移方向スコアと駆動率を算出
 
@@ -43,12 +45,12 @@ def compute_question_metrics(q, p_from, p_to):
     oppose = 0
 
     for d, v in eff:
-        # P_i にアノマリーを生むか
+        # P_from にアノマリーを生むか
         pred_from = p_from.prediction(d)
         if pred_from is not None and pred_from != v:
             anomaly_count += 1
 
-        # P_{i+1} と整合するか / 矛盾するか
+        # P_to と整合するか / 矛盾するか
         pred_to = p_to.prediction(d)
         if pred_to is not None:
             if pred_to == v:
@@ -83,77 +85,69 @@ def classify_transition(q, p_from, p_to):
         return "中立"
 
 
-# ── main ─────────────────────────────────────────────
+# ── 遷移分析（共通） ────────────────────────────────
 
 
-def main():
-    paradigms, questions, all_ids, ps_values, init_pid = load_data()
+def analyze_transition(pid_from, pid_to, paradigms, questions, detail=True):
+    """単一遷移 (pid_from → pid_to) の静的分析を実行・出力する。
 
-    # メインパスを導出
-    main_path = compute_main_path(init_pid, paradigms, questions, all_ids)
+    Returns:
+        (direction_score, drive_rate, n_drive, qp_size)
+    """
+    p_from = paradigms[pid_from]
+    p_to = paradigms[pid_to]
 
-    print("=" * 65)
-    print("遷移駆動集合の静的分析")
-    print("=" * 65)
-    print(f"メインパス: {' → '.join(main_path)}")
-    print()
+    qp = derive_qp(questions, p_from)
 
-    for i in range(len(main_path) - 1):
-        pid_from = main_path[i]
-        pid_to = main_path[i + 1]
-        p_from = paradigms[pid_from]
-        p_to = paradigms[pid_to]
-
-        print("-" * 50)
-        print(f"遷移: {pid_from} → {pid_to}")
-        print("-" * 50)
-
-        # Q(P_i) を導出
-        qp = derive_qp(questions, p_from)
+    if detail:
         print(f"  |Q({pid_from})| = {len(qp)}")
         print(f"  threshold({pid_from}) = {p_from.threshold}")
         print()
 
-        # 各質問を分類
-        categories = {"遷移駆動": [], "駆動・逆方向": [], "方向支持": [], "中立": []}
-        metrics_by_q = {}
+    # 各質問を分類
+    categories = {"遷移駆動": [], "駆動・逆方向": [], "方向支持": [], "中立": []}
+    metrics_by_q = {}
 
-        for q in qp:
-            metrics = compute_question_metrics(q, p_from, p_to)
-            cat = classify_transition(q, p_from, p_to)
-            categories[cat].append(q)
-            metrics_by_q[q.id] = (metrics, cat)
+    for q in qp:
+        metrics = compute_question_metrics(q, p_from, p_to)
+        cat = classify_transition(q, p_from, p_to)
+        categories[cat].append(q)
+        metrics_by_q[q.id] = (metrics, cat)
 
-        # 4 分類の件数
+    # 4 分類の件数
+    if detail:
         print("  【4 分類】")
-        total_classified = 0
-        for cat_name in ["遷移駆動", "駆動・逆方向", "方向支持", "中立"]:
-            count = len(categories[cat_name])
-            total_classified += count
+    total_classified = 0
+    for cat_name in ["遷移駆動", "駆動・逆方向", "方向支持", "中立"]:
+        count = len(categories[cat_name])
+        total_classified += count
+        if detail:
             print(f"    {cat_name}: {count}")
+    if detail:
         print(f"    合計: {total_classified}")
         print()
 
-        # 集合レベルの指標
-        sum_net = 0
-        sum_support_oppose = 0
-        for q in qp:
-            anomaly_count, support, oppose, net_direction = metrics_by_q[q.id][0]
-            sum_net += net_direction
-            sum_support_oppose += support + oppose
+    # 集合レベルの指標
+    sum_net = 0
+    sum_support_oppose = 0
+    for q in qp:
+        anomaly_count, support, oppose, net_direction = metrics_by_q[q.id][0]
+        sum_net += net_direction
+        sum_support_oppose += support + oppose
 
-        if sum_support_oppose > 0:
-            direction_score = sum_net / sum_support_oppose
-        else:
-            direction_score = 0.0
+    if sum_support_oppose > 0:
+        direction_score = sum_net / sum_support_oppose
+    else:
+        direction_score = 0.0
 
-        n_drive = len(categories["遷移駆動"])
-        n_drive_reverse = len(categories["駆動・逆方向"])
-        if n_drive + n_drive_reverse > 0:
-            drive_rate = n_drive / (n_drive + n_drive_reverse)
-        else:
-            drive_rate = float("nan")
+    n_drive = len(categories["遷移駆動"])
+    n_drive_reverse = len(categories["駆動・逆方向"])
+    if n_drive + n_drive_reverse > 0:
+        drive_rate = n_drive / (n_drive + n_drive_reverse)
+    else:
+        drive_rate = float("nan")
 
+    if detail:
         print("  【集合レベルの指標】")
         print(f"    遷移方向スコア: {direction_score:+.4f}")
         if n_drive + n_drive_reverse > 0:
@@ -185,6 +179,97 @@ def main():
                 f"{oppose:>7} {net_direction:>+7}  {cat}"
             )
         print()
+
+    return (direction_score, drive_rate, n_drive, len(qp))
+
+
+# ── main ─────────────────────────────────────────────
+
+
+def main():
+    paradigms, questions, all_ids, ps_values, init_pid = load_data()
+
+    # メインパスを導出
+    main_path = compute_main_path(init_pid, paradigms, questions, all_ids)
+    main_set = set(main_path)
+    sub_pids = sorted(pid for pid in paradigms if pid not in main_set)
+
+    print("=" * 65)
+    print("遷移駆動集合の静的分析")
+    print("=" * 65)
+    print(f"メインパス: {' → '.join(main_path)}")
+    if sub_pids:
+        print(f"サブパラダイム: {', '.join(sub_pids)}")
+    print()
+
+    # ── メインパス遷移 ──
+
+    print("=" * 65)
+    print("■ メインパス遷移")
+    print("=" * 65)
+    print()
+
+    for i in range(len(main_path) - 1):
+        pid_from = main_path[i]
+        pid_to = main_path[i + 1]
+
+        print("-" * 50)
+        print(f"遷移: {pid_from} → {pid_to}")
+        print("-" * 50)
+
+        analyze_transition(pid_from, pid_to, paradigms, questions)
+
+    # ── サブパラダイム遷移 ──
+
+    if not sub_pids:
+        return
+
+    print("=" * 65)
+    print("■ サブパラダイム遷移")
+    print("=" * 65)
+    print()
+
+    for sid in sub_pids:
+        s_para = paradigms[sid]
+        qp = derive_qp(questions, s_para)
+        if not qp:
+            print(f"{sid}: Q({sid}) が空のためスキップ")
+            print()
+            continue
+
+        # 遷移先の候補: sid 以外の全パラダイム
+        candidates = [pid for pid in paradigms if pid != sid]
+
+        print("-" * 50)
+        print(f"起点: {sid} ({s_para.name})")
+        print(f"  |Q({sid})| = {len(qp)}, threshold = {s_para.threshold}")
+        print("-" * 50)
+        print()
+
+        # まず全候補へのサマリ表を出力
+        print("  【候補別サマリ】")
+        print(f"    {'遷移先':<6} {'方向スコア':>10} {'駆動率':>8} {'遷移駆動':>8} {'|Q|':>5}")
+        print(f"    {'-'*6} {'-'*10} {'-'*8} {'-'*8} {'-'*5}")
+
+        results = []
+        for pid_to in candidates:
+            ds, dr, nd, qs = analyze_transition(
+                sid, pid_to, paradigms, questions, detail=False,
+            )
+            results.append((pid_to, ds, dr, nd, qs))
+
+        # 方向スコア降順でソート
+        results.sort(key=lambda x: -x[1])
+        for pid_to, ds, dr, nd, qs in results:
+            dr_str = f"{dr:.4f}" if nd > 0 or dr == dr else "N/A"
+            print(f"    {pid_to:<6} {ds:>+10.4f} {dr_str:>8} {nd:>8} {qs:>5}")
+        print()
+
+        # 最も方向スコアが高い遷移先の詳細を出力
+        best_pid = results[0][0]
+        print(f"  ── 最良遷移先 {sid} → {best_pid} の詳細 ──")
+        print()
+        analyze_transition(sid, best_pid, paradigms, questions)
 
 
 if __name__ == "__main__":
