@@ -28,6 +28,13 @@ struct DebugView: View {
                         .foregroundStyle(.secondary)
                 }
 
+                Section("Downloads") {
+                    Toggle("Mock Downloads", isOn: $settings.useMockDownloads)
+                    Text("Simulates download/delete without ODR.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
                 Section("Solved Puzzles") {
                     Button("Reset Solved Puzzles", role: .destructive) {
                         SolvedPuzzleStore.shared.reset()

@@ -25,6 +25,10 @@ enum Strings {
     static var bundled: String { s("同梱済み", "Bundled") }
     static var downloadComplete: String { s("ダウンロード済み", "Downloaded") }
     static var downloading: String { s("ダウンロード中…", "Downloading…") }
+    static var deleteContent: String { s("削除", "Delete") }
+    static var notDownloaded: String { s("未ダウンロード", "Not Downloaded") }
+    static var free: String { s("無料", "Free") }
+    static var download: String { s("ダウンロード", "Download") }
 
     static func solvedProgress(_ solved: Int, _ total: Int) -> String {
         "\(solved)/\(total) Solved"

@@ -1,7 +1,16 @@
 import SwiftUI
 
 struct ContentDownloadView: View {
-    @State private var viewModel = ContentDownloadViewModel()
+    @State private var viewModel = ContentDownloadView.makeViewModel()
+
+    private static func makeViewModel() -> ContentDownloadViewModel {
+        #if DEBUG
+        if DebugSettings.isMockDownloadsEnabled {
+            return ContentDownloadViewModel(resourceProvider: MockResourceProvider.shared)
+        }
+        #endif
+        return ContentDownloadViewModel()
+    }
 
     var body: some View {
         Group {
@@ -45,7 +54,12 @@ struct ContentDownloadView: View {
             sectionHeader(Strings.packs)
 
             ForEach(packs) { pack in
-                packCard(pack)
+                NavigationLink {
+                    PackDetailView(pack: pack, viewModel: viewModel)
+                } label: {
+                    packCard(pack)
+                }
+                .buttonStyle(.plain)
             }
         }
         .padding(.horizontal)
@@ -55,52 +69,26 @@ struct ContentDownloadView: View {
 
     private func packCard(_ pack: PackCatalogEntry) -> some View {
         let state = viewModel.packState(for: pack)
-        let puzzles = pack.puzzleIds.compactMap { id in
-            viewModel.catalog?.puzzles.first { $0.id == id }
+
+        return HStack(spacing: 12) {
+            Text(pack.icon)
+                .font(.system(size: 28))
+                .frame(width: 44, height: 44)
+                .background(Theme.accent.opacity(0.2))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+
+            Text(CatalogService.localizedTitle(pack))
+                .font(.headline)
+
+            Spacer()
+
+            packStateBadge(state)
+
+            Image(systemName: "chevron.right")
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
-
-        return VStack(alignment: .leading, spacing: 12) {
-            // Header: icon + title + description + download button
-            HStack(spacing: 12) {
-                Text(pack.icon)
-                    .font(.system(size: 32))
-                    .frame(width: 52, height: 52)
-                    .background(Theme.accent.opacity(0.2))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(CatalogService.localizedTitle(pack))
-                        .font(.headline)
-                    Text(CatalogService.localizedDescription(pack))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-
-                Spacer()
-
-                packDownloadButton(pack, state: state)
-            }
-
-            // Puzzle emoji preview
-            HStack(spacing: 6) {
-                ForEach(puzzles) { puzzle in
-                    Text(puzzle.icon)
-                        .font(.title3)
-                }
-            }
-
-            // Progress indicator for partial downloads
-            if case .partial(let downloaded, let total) = state {
-                HStack(spacing: 8) {
-                    ProgressView(value: Double(downloaded), total: Double(total))
-                        .tint(Theme.accent)
-                    Text("\(downloaded)/\(total)")
-                        .font(.caption2.monospacedDigit())
-                        .foregroundStyle(.secondary)
-                }
-            }
-        }
-        .padding(14)
+        .padding(12)
         .background(Theme.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: Theme.cardCornerRadius))
         .overlay(
@@ -110,23 +98,22 @@ struct ContentDownloadView: View {
     }
 
     @ViewBuilder
-    private func packDownloadButton(_ pack: PackCatalogEntry, state: PackDownloadState) -> some View {
+    private func packStateBadge(_ state: PackDownloadState) -> some View {
         switch state {
         case .downloaded:
             Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(Theme.solvedBadge)
-                .font(.title2)
         case .downloading:
             ProgressView()
-                .controlSize(.small)
-        case .notDownloaded, .partial:
-            Button {
-                Task { await viewModel.downloadPack(pack) }
-            } label: {
-                Image(systemName: "arrow.down.circle.fill")
-                    .foregroundStyle(Theme.accent)
-                    .font(.title2)
-            }
+                .controlSize(.mini)
+        case .partial(let downloaded, let total):
+            Text("\(downloaded)/\(total)")
+                .font(.caption.monospacedDigit())
+                .foregroundStyle(.secondary)
+        case .notDownloaded:
+            Text(Strings.free)
+                .font(.caption.weight(.medium))
+                .foregroundStyle(.secondary)
         }
     }
 
@@ -188,10 +175,19 @@ struct ContentDownloadView: View {
     @ViewBuilder
     private func puzzleDownloadButton(_ puzzle: PuzzleCatalogEntry, state: PuzzleDownloadState) -> some View {
         switch state {
-        case .bundled, .downloaded:
+        case .bundled:
             Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(Theme.solvedBadge)
                 .font(.title2)
+        case .downloaded:
+            Button {
+                viewModel.removePuzzle(puzzle)
+            } label: {
+                Image(systemName: "trash.circle")
+                    .foregroundStyle(.secondary)
+                    .font(.title2)
+            }
+            .accessibilityIdentifier("delete-\(puzzle.id)")
         case .downloading(let progress):
             CircularProgressView(progress: progress)
                 .frame(width: 28, height: 28)
@@ -203,6 +199,7 @@ struct ContentDownloadView: View {
                     .foregroundStyle(Theme.accent)
                     .font(.title2)
             }
+            .accessibilityIdentifier("download-\(puzzle.id)")
         }
     }
 
@@ -234,7 +231,13 @@ struct ContentDownloadView: View {
             }
             .foregroundStyle(Theme.accent)
         case .notDownloaded:
-            EmptyView()
+            HStack(spacing: 3) {
+                Image(systemName: "yensign.circle")
+                    .font(.caption2)
+                Text(Strings.free)
+                    .font(.caption2.weight(.medium))
+            }
+            .foregroundStyle(.secondary)
         }
     }
 

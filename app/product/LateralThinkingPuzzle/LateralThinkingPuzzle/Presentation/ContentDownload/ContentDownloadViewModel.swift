@@ -68,6 +68,12 @@ final class ContentDownloadViewModel {
         }
     }
 
+    func removePuzzle(_ puzzle: PuzzleCatalogEntry) {
+        guard puzzleStates[puzzle.id] == .downloaded else { return }
+        resourceProvider.remove(tag: puzzle.odrTag)
+        puzzleStates[puzzle.id] = .notDownloaded
+    }
+
     func downloadPack(_ pack: PackCatalogEntry) async {
         guard let catalog else { return }
         let puzzlesToDownload = pack.puzzleIds.compactMap { id in
@@ -79,6 +85,15 @@ final class ContentDownloadViewModel {
                 group.addTask {
                     await self.downloadPuzzle(puzzle)
                 }
+            }
+        }
+    }
+
+    func removePack(_ pack: PackCatalogEntry) {
+        guard let catalog else { return }
+        for id in pack.puzzleIds {
+            if let puzzle = catalog.puzzles.first(where: { $0.id == id }) {
+                removePuzzle(puzzle)
             }
         }
     }

@@ -1,11 +1,20 @@
 import SwiftUI
 
 struct PuzzleListView: View {
-    @State private var viewModel = PuzzleListViewModel(repository: JSONPuzzleRepository())
+    @State private var viewModel = PuzzleListView.makeViewModel()
     @State private var solvedStore = SolvedPuzzleStore.shared
     #if DEBUG
     @State private var showDebugSettings = false
     #endif
+
+    private static func makeViewModel() -> PuzzleListViewModel {
+        #if DEBUG
+        if DebugSettings.isMockDownloadsEnabled {
+            return PuzzleListViewModel(resourceProvider: MockResourceProvider.shared)
+        }
+        #endif
+        return PuzzleListViewModel()
+    }
 
     private var solvedCount: Int { solvedStore.solvedIDs.count }
     private var totalCount: Int { viewModel.puzzles.count }
@@ -32,8 +41,8 @@ struct PuzzleListView: View {
             .navigationDestination(for: String.self) { puzzleID in
                 GameContainerView(puzzleID: puzzleID)
             }
-            .task {
-                await viewModel.loadPuzzles()
+            .onAppear {
+                Task { await viewModel.loadPuzzles() }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -55,6 +64,7 @@ struct PuzzleListView: View {
             }
             #if DEBUG
             .sheet(isPresented: $showDebugSettings, onDismiss: {
+                viewModel = PuzzleListView.makeViewModel()
                 Task { await viewModel.loadPuzzles() }
             }) {
                 DebugView()
@@ -79,8 +89,11 @@ struct PuzzleListView: View {
 
     private var heroSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(Strings.appTitle)
-                .font(.system(size: 34, weight: .bold, design: .default))
+            (Text("Lateral")
+                .foregroundStyle(.white)
+            + Text("Q")
+                .foregroundStyle(Theme.accent))
+                .font(.system(size: 34, weight: .bold, design: .serif))
 
             Text(Strings.appSubtitle)
                 .font(.subheadline)
@@ -128,10 +141,19 @@ struct PuzzleListView: View {
     private var cardList: some View {
         LazyVStack(spacing: 14) {
             ForEach(viewModel.puzzles, id: \.id) { puzzle in
-                NavigationLink(value: puzzle.id) {
-                    puzzleCard(puzzle)
+                if puzzle.isDownloaded {
+                    NavigationLink(value: puzzle.id) {
+                        puzzleCard(puzzle)
+                    }
+                    .buttonStyle(.plain)
+                } else {
+                    NavigationLink {
+                        ContentDownloadView()
+                    } label: {
+                        puzzleCard(puzzle)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
         }
         .padding(.horizontal)
@@ -141,13 +163,11 @@ struct PuzzleListView: View {
     // MARK: - Puzzle Card
 
     private func puzzleCard(_ puzzle: PuzzleSummary) -> some View {
-        let icon = PuzzleMetadata.icon(for: puzzle.id)
-        let difficulty = PuzzleMetadata.difficulty(for: puzzle.id)
         let solved = solvedStore.isSolved(puzzle.id)
 
         return HStack(spacing: 14) {
             // Emoji thumbnail
-            Text(icon)
+            Text(puzzle.icon)
                 .font(.system(size: 40))
                 .frame(width: 64, height: 64)
                 .background(Color.indigo.opacity(0.2))
@@ -159,7 +179,7 @@ struct PuzzleListView: View {
                     Text(puzzle.title)
                         .font(.headline)
                     Spacer()
-                    difficultyStars(difficulty)
+                    difficultyStars(puzzle.difficulty)
                 }
 
                 Text(puzzle.statementPreview)
@@ -170,6 +190,9 @@ struct PuzzleListView: View {
 
                 if solved {
                     solvedBadge
+                        .padding(.top, 2)
+                } else if !puzzle.isDownloaded {
+                    downloadBadge
                         .padding(.top, 2)
                 }
             }
@@ -182,6 +205,7 @@ struct PuzzleListView: View {
                 .stroke(Theme.cardBorder, lineWidth: 1)
         )
         .shadow(color: .black.opacity(0.3), radius: 4, y: 2)
+        .opacity(puzzle.isDownloaded ? 1.0 : 0.6)
     }
 
     // MARK: - Difficulty Stars
@@ -209,6 +233,18 @@ struct PuzzleListView: View {
                 .font(.caption2.weight(.medium))
         }
         .foregroundStyle(Theme.solvedBadge)
+    }
+
+    // MARK: - Download Badge
+
+    private var downloadBadge: some View {
+        HStack(spacing: 3) {
+            Image(systemName: "arrow.down.circle")
+                .font(.caption2)
+            Text(Strings.notDownloaded)
+                .font(.caption2.weight(.medium))
+        }
+        .foregroundStyle(Theme.accent)
     }
 }
 

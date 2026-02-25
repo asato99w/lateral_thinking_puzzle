@@ -7,17 +7,37 @@ final class PuzzleListViewModel {
     private(set) var isLoading = false
     private(set) var error: String?
 
-    private let fetchPuzzleList: FetchPuzzleListUseCase
+    private let resourceProvider: ResourceProvider
 
-    init(repository: PuzzleRepository) {
-        self.fetchPuzzleList = FetchPuzzleListUseCase(repository: repository)
+    init(resourceProvider: ResourceProvider = ODRResourceProvider()) {
+        self.resourceProvider = resourceProvider
     }
 
     func loadPuzzles() async {
         isLoading = true
         error = nil
         do {
-            puzzles = try await fetchPuzzleList.execute()
+            let catalog = try CatalogService.load()
+            var summaries: [PuzzleSummary] = []
+            for entry in catalog.puzzles {
+                let isDownloaded: Bool
+                if entry.bundled {
+                    isDownloaded = true
+                } else {
+                    isDownloaded = await resourceProvider.isAvailable(tag: entry.odrTag)
+                }
+                let tier: PuzzleTier = entry.tier == "paid" ? .premium : .free
+                summaries.append(PuzzleSummary(
+                    id: entry.id,
+                    title: CatalogService.localizedTitle(entry),
+                    statementPreview: CatalogService.localizedPreview(entry),
+                    icon: entry.icon,
+                    difficulty: entry.difficulty,
+                    tier: tier,
+                    isDownloaded: isDownloaded
+                ))
+            }
+            puzzles = summaries
         } catch {
             self.error = error.localizedDescription
         }
