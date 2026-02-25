@@ -183,6 +183,38 @@ def analyze_transition(pid_from, pid_to, paradigms, questions, detail=True):
     return (direction_score, drive_rate, n_drive, len(qp))
 
 
+# ── 全候補サマリ ─────────────────────────────────────
+
+
+def print_candidate_summary(pid_from, paradigms, questions, expected_to=None):
+    """pid_from から全候補パラダイムへの方向スコア・駆動率のサマリ表を出力する。
+
+    expected_to が指定された場合、その遷移先に ★ マーカーを付ける。
+    """
+    candidates = [pid for pid in paradigms if pid != pid_from]
+
+    print("  【全候補サマリ】")
+    print(f"    {'遷移先':<6} {'方向スコア':>10} {'駆動率':>8} {'遷移駆動':>8}")
+    print(f"    {'-'*6} {'-'*10} {'-'*8} {'-'*8}")
+
+    results = []
+    for pid_to in candidates:
+        ds, dr, nd, qs = analyze_transition(
+            pid_from, pid_to, paradigms, questions, detail=False,
+        )
+        results.append((pid_to, ds, dr, nd, qs))
+
+    # 方向スコア降順でソート
+    results.sort(key=lambda x: -x[1])
+    for pid_to, ds, dr, nd, qs in results:
+        dr_str = f"{dr:.4f}" if nd > 0 or dr == dr else "N/A"
+        marker = " ★" if pid_to == expected_to else ""
+        print(f"    {pid_to:<6} {ds:>+10.4f} {dr_str:>8} {nd:>8}{marker}")
+    print()
+
+    return results
+
+
 # ── main ─────────────────────────────────────────────
 
 
@@ -217,6 +249,10 @@ def main():
         print(f"遷移: {pid_from} → {pid_to}")
         print("-" * 50)
 
+        # 全候補へのサマリ（期待遷移先に ★）
+        print_candidate_summary(pid_from, paradigms, questions, expected_to=pid_to)
+
+        # 期待遷移先の詳細
         analyze_transition(pid_from, pid_to, paradigms, questions)
 
     # ── サブパラダイム遷移 ──
@@ -237,35 +273,16 @@ def main():
             print()
             continue
 
-        # 遷移先の候補: sid 以外の全パラダイム
-        candidates = [pid for pid in paradigms if pid != sid]
-
         print("-" * 50)
         print(f"起点: {sid} ({s_para.name})")
         print(f"  |Q({sid})| = {len(qp)}, threshold = {s_para.threshold}")
         print("-" * 50)
         print()
 
-        # まず全候補へのサマリ表を出力
-        print("  【候補別サマリ】")
-        print(f"    {'遷移先':<6} {'方向スコア':>10} {'駆動率':>8} {'遷移駆動':>8} {'|Q|':>5}")
-        print(f"    {'-'*6} {'-'*10} {'-'*8} {'-'*8} {'-'*5}")
+        # 全候補へのサマリ
+        results = print_candidate_summary(sid, paradigms, questions)
 
-        results = []
-        for pid_to in candidates:
-            ds, dr, nd, qs = analyze_transition(
-                sid, pid_to, paradigms, questions, detail=False,
-            )
-            results.append((pid_to, ds, dr, nd, qs))
-
-        # 方向スコア降順でソート
-        results.sort(key=lambda x: -x[1])
-        for pid_to, ds, dr, nd, qs in results:
-            dr_str = f"{dr:.4f}" if nd > 0 or dr == dr else "N/A"
-            print(f"    {pid_to:<6} {ds:>+10.4f} {dr_str:>8} {nd:>8} {qs:>5}")
-        print()
-
-        # 最も方向スコアが高い遷移先の詳細を出力
+        # 最も方向スコアが高い遷移先の詳細
         best_pid = results[0][0]
         print(f"  ── 最良遷移先 {sid} → {best_pid} の詳細 ──")
         print()
