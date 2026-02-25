@@ -124,7 +124,12 @@ struct ContentDownloadView: View {
             sectionHeader(Strings.puzzles)
 
             ForEach(puzzles) { puzzle in
-                puzzleCard(puzzle)
+                NavigationLink {
+                    PuzzleDetailView(puzzle: puzzle, viewModel: viewModel)
+                } label: {
+                    puzzleCard(puzzle)
+                }
+                .buttonStyle(.plain)
             }
         }
         .padding(.horizontal)
@@ -134,36 +139,25 @@ struct ContentDownloadView: View {
     private func puzzleCard(_ puzzle: PuzzleCatalogEntry) -> some View {
         let state = viewModel.puzzleStates[puzzle.id] ?? .notDownloaded
 
-        return HStack(spacing: 14) {
-            // Emoji thumbnail
+        return HStack(spacing: 12) {
             Text(puzzle.icon)
-                .font(.system(size: 40))
-                .frame(width: 64, height: 64)
+                .font(.system(size: 28))
+                .frame(width: 44, height: 44)
                 .background(Theme.accent.opacity(0.2))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
 
-            // Info
-            VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    Text(CatalogService.localizedTitle(puzzle))
-                        .font(.headline)
-                    Spacer()
-                    difficultyStars(puzzle.difficulty)
-                }
+            Text(CatalogService.localizedTitle(puzzle))
+                .font(.headline)
 
-                Text(CatalogService.localizedPreview(puzzle))
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.5))
-                    .lineLimit(2)
+            Spacer()
 
-                downloadStateBadge(state)
-                    .padding(.top, 2)
-            }
+            puzzleStateBadge(state)
 
-            // Download button
-            puzzleDownloadButton(puzzle, state: state)
+            Image(systemName: "chevron.right")
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
-        .padding(14)
+        .padding(12)
         .background(Theme.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: Theme.cardCornerRadius))
         .overlay(
@@ -173,71 +167,21 @@ struct ContentDownloadView: View {
     }
 
     @ViewBuilder
-    private func puzzleDownloadButton(_ puzzle: PuzzleCatalogEntry, state: PuzzleDownloadState) -> some View {
+    private func puzzleStateBadge(_ state: PuzzleDownloadState) -> some View {
         switch state {
         case .bundled:
             Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(Theme.solvedBadge)
-                .font(.title2)
         case .downloaded:
-            Button {
-                viewModel.removePuzzle(puzzle)
-            } label: {
-                Image(systemName: "trash.circle")
-                    .foregroundStyle(.secondary)
-                    .font(.title2)
-            }
-            .accessibilityIdentifier("delete-\(puzzle.id)")
-        case .downloading(let progress):
-            CircularProgressView(progress: progress)
-                .frame(width: 28, height: 28)
-        case .notDownloaded:
-            Button {
-                Task { await viewModel.downloadPuzzle(puzzle) }
-            } label: {
-                Image(systemName: "arrow.down.circle.fill")
-                    .foregroundStyle(Theme.accent)
-                    .font(.title2)
-            }
-            .accessibilityIdentifier("download-\(puzzle.id)")
-        }
-    }
-
-    @ViewBuilder
-    private func downloadStateBadge(_ state: PuzzleDownloadState) -> some View {
-        switch state {
-        case .bundled:
-            HStack(spacing: 3) {
-                Image(systemName: "internaldrive.fill")
-                    .font(.caption2)
-                Text(Strings.bundled)
-                    .font(.caption2.weight(.medium))
-            }
-            .foregroundStyle(.secondary)
-        case .downloaded:
-            HStack(spacing: 3) {
-                Image(systemName: "checkmark.circle.fill")
-                    .font(.caption2)
-                Text(Strings.downloadComplete)
-                    .font(.caption2.weight(.medium))
-            }
-            .foregroundStyle(Theme.solvedBadge)
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundStyle(Theme.solvedBadge)
         case .downloading:
-            HStack(spacing: 3) {
-                Image(systemName: "arrow.down.circle")
-                    .font(.caption2)
-                Text(Strings.downloading)
-                    .font(.caption2.weight(.medium))
-            }
-            .foregroundStyle(Theme.accent)
+            ProgressView()
+                .controlSize(.mini)
         case .notDownloaded:
-            HStack(spacing: 3) {
-                Image(systemName: "yensign.circle")
-                    .font(.caption2)
-                Text(Strings.free)
-                    .font(.caption2.weight(.medium))
-            }
-            .foregroundStyle(.secondary)
+            Text(Strings.free)
+                .font(.caption.weight(.medium))
+                .foregroundStyle(.secondary)
         }
     }
 

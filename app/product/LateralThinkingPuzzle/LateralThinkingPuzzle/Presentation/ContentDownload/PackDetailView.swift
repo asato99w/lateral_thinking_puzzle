@@ -87,7 +87,12 @@ struct PackDetailView: View {
     private var puzzleList: some View {
         VStack(alignment: .leading, spacing: 12) {
             ForEach(puzzles) { puzzle in
-                puzzleRow(puzzle)
+                NavigationLink {
+                    PuzzleDetailView(puzzle: puzzle, viewModel: viewModel)
+                } label: {
+                    puzzleRow(puzzle)
+                }
+                .buttonStyle(.plain)
             }
         }
         .padding(.horizontal)
@@ -95,26 +100,25 @@ struct PackDetailView: View {
     }
 
     private func puzzleRow(_ puzzle: PuzzleCatalogEntry) -> some View {
-        HStack(spacing: 14) {
+        let state = viewModel.puzzleStates[puzzle.id] ?? .notDownloaded
+
+        return HStack(spacing: 12) {
             Text(puzzle.icon)
-                .font(.system(size: 36))
-                .frame(width: 56, height: 56)
+                .font(.system(size: 28))
+                .frame(width: 44, height: 44)
                 .background(Theme.accent.opacity(0.2))
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
 
-            VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    Text(CatalogService.localizedTitle(puzzle))
-                        .font(.headline)
-                    Spacer()
-                    difficultyStars(puzzle.difficulty)
-                }
+            Text(CatalogService.localizedTitle(puzzle))
+                .font(.headline)
 
-                Text(CatalogService.localizedPreview(puzzle))
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.5))
-                    .lineLimit(2)
-            }
+            Spacer()
+
+            puzzleStateBadge(state)
+
+            Image(systemName: "chevron.right")
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
         .padding(12)
         .background(Theme.cardBackground)
@@ -123,6 +127,25 @@ struct PackDetailView: View {
             RoundedRectangle(cornerRadius: Theme.cardCornerRadius)
                 .stroke(Theme.cardBorder, lineWidth: 1)
         )
+    }
+
+    @ViewBuilder
+    private func puzzleStateBadge(_ state: PuzzleDownloadState) -> some View {
+        switch state {
+        case .bundled:
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundStyle(Theme.solvedBadge)
+        case .downloaded:
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundStyle(Theme.solvedBadge)
+        case .downloading:
+            ProgressView()
+                .controlSize(.mini)
+        case .notDownloaded:
+            Text(Strings.free)
+                .font(.caption.weight(.medium))
+                .foregroundStyle(.secondary)
+        }
     }
 
     // MARK: - Helpers
