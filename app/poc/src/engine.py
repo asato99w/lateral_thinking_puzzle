@@ -129,25 +129,11 @@ def update(
         for d, v in state.o.items():
             state.h[d] = float(v)
 
-    # Step 3: パラダイムシフト判定
+    # Step 3: パラダイムシフト判定（最小緩和原理）
     current_tension = tension(state.o, p_current)
     if p_current.threshold is not None and current_tension > p_current.threshold:
-        # シフト候補: explained_o が現パラダイムより大きいパラダイム
-        current_explained = explained_o(state.o, p_current)
-        candidates = [
-            p_id for p_id in paradigms
-            if p_id != state.p_current
-            and explained_o(state.o, paradigms[p_id]) > current_explained
-        ]
-
-        if candidates:
-            best_id = candidates[0]
-            best_score = alignment(state.h, paradigms[candidates[0]])
-            for p_id in candidates[1:]:
-                score = alignment(state.h, paradigms[p_id])
-                if score > best_score:
-                    best_score = score
-                    best_id = p_id
+        best_id = select_shift_target(state.o, p_current, paradigms)
+        if best_id is not None:
             state.p_current = best_id
             p_new = paradigms[best_id]
             _assimilate_from_paradigm(state.h, state.o, p_new)
@@ -161,6 +147,48 @@ def update(
     ]
 
     return state, remaining + newly_opened
+
+
+def select_shift_target(
+    o: dict[str, int],
+    p_current: Paradigm,
+    paradigms: dict[str, Paradigm],
+) -> str | None:
+    """最小緩和原理に基づくシフト先選択。
+
+    候補: tension(O, P') <= tension(O, P_current) かつ P' != P_current
+    多段タイブレーク:
+      1. tension DESC（最小緩和 = tension が最大の候補を優先）
+      2. attention DESC（P_current のアノマリーのうち P' の Conceivable に含まれる数）
+      3. resolve ASC（P_current のアノマリーのうち P' が正しく予測する数が少ない方）
+      4. pid ASC（決定的にするため）
+    """
+    # P_current のアノマリー集合
+    anomalies = {
+        d for d in p_current.conceivable
+        if d in o and p_current.prediction(d) is not None
+        and p_current.prediction(d) != o[d]
+    }
+    cur_tension = tension(o, p_current)
+
+    candidates = []
+    for pid, p in paradigms.items():
+        if pid == p_current.id:
+            continue
+        t = tension(o, p)
+        if t <= cur_tension:
+            att = len({d for d in anomalies if d in p.conceivable})
+            res = len({d for d in anomalies
+                       if d in p.conceivable
+                       and p.prediction(d) is not None and p.prediction(d) == o[d]})
+            candidates.append((pid, t, att, res))
+
+    if not candidates:
+        return None
+
+    # tension DESC → attention DESC → resolve ASC → pid ASC
+    candidates.sort(key=lambda x: (-x[1], -x[2], x[3], x[0]))
+    return candidates[0][0]
 
 
 def tension(o: dict[str, int], paradigm: Paradigm) -> int:

@@ -2,16 +2,16 @@
 
 メインパスは固定リストではなく、遷移グラフから最短パスとして導出する。
   - T（tension(O*, T)=0）を特定
-  - 各パラダイムの O* ベース遷移先を計算
+  - 各パラダイムの O* ベース遷移先を最小緩和原理で計算
   - init_paradigm から T への遷移チェーンがメインパス
 
-テーマ1: alignment 順序の検証
-  - H*（全真値をHに変換）に対する各パラダイムの alignment を計算
-  - alignment 順序がメインパス順と整合するか確認
-  - メインパスの後のパラダイムほど alignment が高いことはデータの構造的性質
+テーマ1: tension 順序の検証
+  - O* に対する各パラダイムの tension を計算
+  - メインパス順に tension が単調減少であることを確認
+  - メインパスの後のパラダイムほど tension が低いことはデータの構造的性質
 
-テーマ2: シフト先選択の到達性検証（仮想 H ベース）
-  - 全パラダイム（サブ含む）について仮想 H_Pi を構築し遷移先を計算
+テーマ2: シフト先選択の到達性検証（最小緩和原理）
+  - 全パラダイム（サブ含む）について最小緩和原理で遷移先を計算
   - 遷移グラフを構築し、全パラダイムから T に到達可能か検証
   - サブパラダイムへの寄り道は許容（引っ掛け）、復帰できるかが問題
 
@@ -41,7 +41,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from common import load_data, load_raw  # noqa: E402
-from engine import tension, alignment, compute_effect, explained_o, _question_all_descriptors
+from engine import tension, alignment, compute_effect, explained_o, select_shift_target, _question_all_descriptors
 
 
 def build_o_star(questions) -> tuple[dict[str, int], set[str]]:
@@ -78,56 +78,58 @@ def build_virtual_h(paradigm, all_ids):
     return h
 
 
-def select_shift_target(pid_cur, paradigms, o_star, all_ids):
-    """仮想 H_Pi で engine のシフト先選択を再現する。
+def select_shift_target_with_details(pid_cur, paradigms, o_star):
+    """engine の select_shift_target を呼び出し、詳細情報も返す。
 
-    方式: explained_o(O*, P') > explained_o(O*, P_cur) で候補を絞り、
-    alignment(H_Pi, P') で最良を選択する。
+    方式: 最小緩和原理（tension → attention → resolve → pid）。
 
-    返り値: (選択先ID or None, 候補リスト[(pid, alignment)])
+    返り値: (選択先ID or None, 候補リスト[(pid, tension, attention, resolve)])
     """
     p_cur = paradigms[pid_cur]
-    h_pi = build_virtual_h(p_cur, all_ids)
+    # P_current のアノマリー集合
+    anomalies = {
+        d for d in p_cur.conceivable
+        if d in o_star and p_cur.prediction(d) is not None
+        and p_cur.prediction(d) != o_star[d]
+    }
+    cur_tension = tension(o_star, p_cur)
 
-    cur_explained = explained_o(o_star, p_cur)
     candidates = []
-    for p_id in paradigms:
-        if p_id == pid_cur:
+    for pid, p in paradigms.items():
+        if pid == pid_cur:
             continue
-        p = paradigms[p_id]
-        if explained_o(o_star, p) <= cur_explained:
-            continue
-        candidates.append(p_id)
+        t = tension(o_star, p)
+        if t <= cur_tension:
+            att = len({d for d in anomalies if d in p.conceivable})
+            res = len({d for d in anomalies
+                       if d in p.conceivable
+                       and p.prediction(d) is not None and p.prediction(d) == o_star[d]})
+            candidates.append((pid, t, att, res))
 
     if not candidates:
         return None, []
 
-    candidate_scores = []
-    for p_id in candidates:
-        a = alignment(h_pi, paradigms[p_id])
-        candidate_scores.append((p_id, a))
-    candidate_scores.sort(key=lambda x: -x[1])
-
-    return candidate_scores[0][0], candidate_scores
+    # tension DESC → attention DESC → resolve ASC → pid ASC
+    candidates.sort(key=lambda x: (-x[1], -x[2], x[3], x[0]))
+    return candidates[0][0], candidates
 
 
 def compute_main_path(
     init_pid: str,
     paradigms: dict,
     o_star: dict[str, int],
-    all_ids: list[str],
 ) -> tuple[list[str], dict[str, str | None]]:
     """遷移グラフから init → T のメインパスを導出する。
 
-    各パラダイムの O* ベース遷移先を計算し、init から遷移を辿る。
-    遷移先がないパラダイム（最大 eo）が終端 T となる。
+    各パラダイムの O* ベース遷移先を最小緩和原理で計算し、init から遷移を辿る。
+    遷移先がないパラダイムが終端 T となる。
 
     返り値: (メインパス, 遷移グラフ全体)
     """
-    # 全パラダイムの遷移先を計算
+    # 全パラダイムの遷移先を計算（engine の select_shift_target を使用）
     transitions = {}
     for pid in paradigms:
-        target, _ = select_shift_target(pid, paradigms, o_star, all_ids)
+        target = select_shift_target(o_star, paradigms[pid], paradigms)
         transitions[pid] = target
 
     # init から遷移を辿ってメインパスを導出
@@ -145,17 +147,20 @@ def compute_main_path(
     return path, transitions
 
 
-def check_alignment_ordering(paradigms, main_path, o_star, all_ids):
-    """テーマ1: alignment_h(H*, P) の順序を検証する。"""
+def check_tension_ordering(paradigms, main_path, o_star, all_ids):
+    """テーマ1: tension(O*, P) の順序を検証する。
+
+    メインパス順に tension が単調減少であることを確認する。
+    """
     print("=" * 65)
-    print("テーマ1: alignment 順序（H* ベース）")
+    print("テーマ1: tension 順序（O* ベース）")
     print("=" * 65)
     print()
 
-    # O* を H に変換（全真値が観測された状態）
+    # 参考: H* ベースの alignment も表示
     h_star = o_star_to_h(o_star, all_ids)
 
-    # 全パラダイムの alignment を計算
+    # 全パラダイムの tension を計算
     all_scores = []
     main_set = set(main_path)
     for pid in sorted(paradigms.keys()):
@@ -163,50 +168,50 @@ def check_alignment_ordering(paradigms, main_path, o_star, all_ids):
         a = alignment(h_star, p)
         t = tension(o_star, p)
         overlap = len(p.conceivable & set(o_star.keys()))
-        all_scores.append((pid, a, t, overlap))
+        all_scores.append((pid, t, a, overlap))
 
-    print("alignment_h(H*, P) — 全パラダイム:")
+    print("tension(O*, P) — 全パラダイム:")
     all_scores.sort(key=lambda x: -x[1])
-    for pid, a, t, ov in all_scores:
+    for pid, t, a, ov in all_scores:
         marker = " ◀ main" if pid in main_set else ""
-        print(f"  {pid:4s}: alignment={a:.4f}  tension={t}  |Conceivable∩O*|={ov}{marker}")
+        print(f"  {pid:4s}: tension={t}  alignment={a:.4f}  |Conceivable∩O*|={ov}{marker}")
     print()
 
-    # メインパスの alignment 順序
-    main_scores = [(pid, alignment(h_star, paradigms[pid])) for pid in main_path if pid in paradigms]
-    print("メインパスの alignment 順序:")
-    for pid, a in main_scores:
-        print(f"  {pid}: {a:.4f}")
+    # メインパスの tension 順序
+    main_tensions = [(pid, tension(o_star, paradigms[pid])) for pid in main_path if pid in paradigms]
+    print("メインパスの tension 順序:")
+    for pid, t in main_tensions:
+        print(f"  {pid}: tension={t}")
 
-    # 漸進性チェック: P_{i+1} の alignment は P_i より高いべき
+    # 漸進性チェック: P_{i+1} の tension は P_i より低い（または同じ）べき
     issues = []
-    for i in range(len(main_scores) - 1):
-        pid_cur, a_cur = main_scores[i]
-        pid_next, a_next = main_scores[i + 1]
-        if a_next <= a_cur:
-            issues.append(f"  {pid_cur}({a_cur:.4f}) → {pid_next}({a_next:.4f}): 非増加")
+    for i in range(len(main_tensions) - 1):
+        pid_cur, t_cur = main_tensions[i]
+        pid_next, t_next = main_tensions[i + 1]
+        if t_next > t_cur:
+            issues.append(f"  {pid_cur}(tension={t_cur}) → {pid_next}(tension={t_next}): 非減少")
 
     if issues:
         print()
-        print("⚠ alignment が非増加な遷移あり（正常: 後のパラダイムほど高い）:")
+        print("⚠ tension が非減少な遷移あり（正常: 後のパラダイムほど低い）:")
         for issue in issues:
             print(issue)
     else:
-        print("  → メインパス順に alignment が単調増加: OK")
+        print("  → メインパス順に tension が単調減少: OK")
     print()
 
     return not bool(issues)
 
 
-def check_shift_selection(paradigms, main_path, transitions, o_star, all_ids):
+def check_shift_selection(paradigms, main_path, transitions, o_star):
     """テーマ2: 全パラダイムからの遷移先と T への到達性を検証する。
 
-    1. 全パラダイム（サブ含む）の遷移先を表示
+    1. 全パラダイム（サブ含む）の遷移先を最小緩和原理で表示
     2. 遷移グラフを構築
     3. 全パラダイムから T に到達可能か検証
     """
     print("=" * 65)
-    print("テーマ2: シフト先選択と到達性（仮想 H_Pi ベース）")
+    print("テーマ2: シフト先選択と到達性（最小緩和原理）")
     print("=" * 65)
     print()
 
@@ -217,8 +222,8 @@ def check_shift_selection(paradigms, main_path, transitions, o_star, all_ids):
     for pid in sorted(paradigms.keys()):
         if pid == p_goal:
             continue
-        target, candidate_scores = select_shift_target(
-            pid, paradigms, o_star, all_ids,
+        target, candidate_details = select_shift_target_with_details(
+            pid, paradigms, o_star,
         )
 
         is_main = "main" if pid in main_set else "sub"
@@ -227,9 +232,9 @@ def check_shift_selection(paradigms, main_path, transitions, o_star, all_ids):
         if target is None:
             print(f"    → 候補なし（危機状態）")
         else:
-            for p_id, a in candidate_scores:
-                marker = " ★" if p_id == target else ""
-                print(f"    {p_id}: alignment={a:.4f}{marker}")
+            for c_pid, c_t, c_att, c_res in candidate_details:
+                marker = " ★" if c_pid == target else ""
+                print(f"    {c_pid}: tension={c_t} attention={c_att} resolve={c_res}{marker}")
             print(f"    → {target}")
         print()
 
@@ -509,7 +514,7 @@ def main():
 
     # メインパスを遷移グラフから導出
     main_path, transitions = compute_main_path(
-        init_pid, paradigms, o_star, all_ids,
+        init_pid, paradigms, o_star,
     )
     terminal = main_path[-1]
     terminal_tension = tension(o_star, paradigms[terminal])
@@ -527,8 +532,8 @@ def main():
         print(f"⚠ 終端パラダイム {terminal} の tension(O*)={terminal_tension} > 0")
         print()
 
-    check_alignment_ordering(paradigms, main_path, o_star, all_ids)
-    check_shift_selection(paradigms, main_path, transitions, o_star, all_ids)
+    check_tension_ordering(paradigms, main_path, o_star, all_ids)
+    check_shift_selection(paradigms, main_path, transitions, o_star)
     check_eo_inclusion(paradigms, main_path, o_star)
     check_shift_driver_reachability(paradigms, main_path, questions, o_star)
 

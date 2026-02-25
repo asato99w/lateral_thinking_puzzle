@@ -1,10 +1,11 @@
 """パラダイムシフトの質を計測する。
 
 シフト発生時の決定性と影響度を分析する:
-- alignment margin: 新パラダイムの alignment - 旧パラダイムの alignment
+- 選択指標: tension, attention, resolve（最小緩和原理）
 - explained_o gain: Δexplained_o（新 - 旧）
 - H disruption: シフトによるH変化量（同化再適用による）
 - tension解消率: シフト後 tension / シフト前 tension
+- alignment margin: 参考指標として残す
 """
 from __future__ import annotations
 
@@ -21,6 +22,7 @@ from engine import (  # noqa: E402
     tension,
     alignment,
     explained_o,
+    select_shift_target,
     open_questions,
     _assimilate_descriptor,
     _assimilate_from_paradigm,
@@ -81,36 +83,36 @@ def update_with_shift_tracking(state, question, paradigms, all_questions, curren
         for d, v in state.o.items():
             state.h[d] = float(v)
 
-    # === Phase 3: パラダイムシフト判定（詳細記録付き）===
+    # === Phase 3: パラダイムシフト判定（最小緩和原理、詳細記録付き）===
     shift_info = None
     current_tension = tension(state.o, p_current)
     if p_current.threshold is not None and current_tension > p_current.threshold:
-        current_explained = explained_o(state.o, p_current)
-        candidates = [
-            p_id for p_id in paradigms
-            if p_id != state.p_current
-            and explained_o(state.o, paradigms[p_id]) > current_explained
-        ]
+        best_id = select_shift_target(state.o, p_current, paradigms)
 
-        if candidates:
-            best_id = candidates[0]
-            best_score = alignment(state.h, paradigms[candidates[0]])
-            for p_id in candidates[1:]:
-                score = alignment(state.h, paradigms[p_id])
-                if score > best_score:
-                    best_score = score
-                    best_id = p_id
+        if best_id is not None:
+            # P_current のアノマリー集合（attention/resolve 計算用）
+            anomalies = {
+                d for d in p_current.conceivable
+                if d in state.o and p_current.prediction(d) is not None
+                and p_current.prediction(d) != state.o[d]
+            }
+            p_new = paradigms[best_id]
+            new_tension_val = tension(state.o, p_new)
+            attention = len({d for d in anomalies if d in p_new.conceivable})
+            resolve = len({d for d in anomalies
+                           if d in p_new.conceivable
+                           and p_new.prediction(d) is not None
+                           and p_new.prediction(d) == state.o[d]})
 
             # シフト前の状態を記録
             old_pid = state.p_current
             old_alignment = alignment(state.h, p_current)
-            old_explained = current_explained
+            old_explained = explained_o(state.o, p_current)
             old_tension = current_tension
             h_before_shift = dict(state.h)
 
             # シフト実行
             state.p_current = best_id
-            p_new = paradigms[best_id]
             _assimilate_from_paradigm(state.h, state.o, p_new)
 
             # シフト後の状態を記録
@@ -129,6 +131,9 @@ def update_with_shift_tracking(state, question, paradigms, all_questions, curren
                 "new_pid": best_id,
                 "old_p_name": p_current.name,
                 "new_p_name": p_new.name,
+                "new_tension_at_select": new_tension_val,
+                "attention": attention,
+                "resolve": resolve,
                 "old_alignment": old_alignment,
                 "new_alignment": new_alignment,
                 "margin": new_alignment - old_alignment,
@@ -210,7 +215,9 @@ def main():
         print(f"=== シフト {i}: {s['old_pid']} → {s['new_pid']} "
               f"(step {s['step']}, {s['question_id']}) ===")
         print(f"  {s['old_p_name']} → {s['new_p_name']}")
-        print(f"  alignment: {s['old_alignment']:.4f} → {s['new_alignment']:.4f} "
+        print(f"  選択指標: tension={s['new_tension_at_select']} "
+              f"attention={s['attention']} resolve={s['resolve']}")
+        print(f"  alignment (参考): {s['old_alignment']:.4f} → {s['new_alignment']:.4f} "
               f"(margin={s['margin']:+.4f})")
         print(f"  explained_o: {s['old_explained']} → {s['new_explained']} "
               f"(gain={s['gain']:+d})")
@@ -226,7 +233,7 @@ def main():
         avg_margin = sum(s["margin"] for s in shifts) / len(shifts)
         avg_disruption = sum(s["h_disruption"] for s in shifts) / len(shifts)
         avg_resolution = sum(s["tension_resolution_rate"] for s in shifts) / len(shifts)
-        print(f"平均 margin: {avg_margin:+.4f}")
+        print(f"平均 alignment margin (参考): {avg_margin:+.4f}")
         print(f"平均 H disruption: {avg_disruption:.2f}")
         print(f"平均 tension解消率: {avg_resolution:.0f}%")
 

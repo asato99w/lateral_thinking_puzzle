@@ -222,7 +222,7 @@ def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
 
     # メインパスを導出
-    main_path = compute_main_path(init_pid, paradigms, questions, all_ids)
+    main_path = compute_main_path(init_pid, paradigms, questions)
     main_set = set(main_path)
     sub_pids = sorted(pid for pid in paradigms if pid not in main_set)
 

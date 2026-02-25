@@ -1,10 +1,9 @@
 """シフト方向検証スクリプト。
 
-統合アルゴリズム Phase 4d の実装。
 各メインパス遷移 P_i → P_{i+1} について:
   1. P_i フェーズの質問を順に回答するシミュレーション
-  2. tension > threshold 時点での alignment を全候補に対して計算
-  3. P_{i+1} が argmax であることを検証
+  2. tension > threshold 時点で select_shift_target（最小緩和原理）を適用
+  3. 選択結果が P_{i+1} と一致することを検証
 
 使い方:
   python shift_direction.py                       # turtle_soup.json
@@ -28,6 +27,7 @@ from engine import (  # noqa: E402
     tension,
     alignment,
     explained_o,
+    select_shift_target,
 )
 
 
@@ -68,8 +68,8 @@ def classify_questions(questions, paradigm):
     return safe, anomaly
 
 
-def compute_main_path(init_pid, paradigms, questions, all_ids):
-    """O* ベースの遷移グラフからメインパスを導出する。"""
+def compute_main_path(init_pid, paradigms, questions):
+    """O* ベースの遷移グラフからメインパスを導出する（最小緩和原理）。"""
     o_star = {}
     for q in questions:
         if q.correct_answer == "irrelevant":
@@ -83,26 +83,8 @@ def compute_main_path(init_pid, paradigms, questions, all_ids):
     current = init_pid
     while True:
         p_cur = paradigms[current]
-        cur_eo = explained_o(o_star, p_cur)
-
-        # 仮想 H: P に完全同化
-        h_pi = {d: 0.5 for d in all_ids}
-        for d, pred_val in p_cur.p_pred.items():
-            h_pi[d] = float(pred_val)
-
-        candidates = []
-        for pid in paradigms:
-            if pid == current:
-                continue
-            if explained_o(o_star, paradigms[pid]) > cur_eo:
-                a = alignment(h_pi, paradigms[pid])
-                candidates.append((pid, a))
-
-        if not candidates:
-            break
-        candidates.sort(key=lambda x: -x[1])
-        nxt = candidates[0][0]
-        if nxt in visited:
+        nxt = select_shift_target(o_star, p_cur, paradigms)
+        if nxt is None or nxt in visited:
             break
         path.append(nxt)
         visited.add(nxt)
@@ -123,7 +105,7 @@ def simulate_shift_direction(
     ps_values: dict,
     init_pid: str,
 ) -> dict:
-    """P_from フェーズの質問を順に回答し、シフト時点の alignment を計算する。
+    """P_from フェーズの質問を順に回答し、シフト時点で select_shift_target を適用する。
 
     Returns:
         {
@@ -131,10 +113,9 @@ def simulate_shift_direction(
             "shift_step": int | None,
             "tension_at_shift": int | None,
             "threshold": int | None,
-            "alignment_scores": [(pid, alignment)] sorted desc,
-            "argmax_pid": str | None,
+            "selected_pid": str | None,
+            "candidate_details": [(pid, tension, attention, resolve)],
             "target_matches": bool,
-            "margin": float | None,
             "total_steps": int,
         }
     """
@@ -144,8 +125,6 @@ def simulate_shift_direction(
     state = init_game(ps_values, paradigms, init_pid, all_ids)
 
     # P_from がアクティブな状態を想定
-    # init_pid から pid_from までの遷移をシミュレーションするのは複雑なため、
-    # P_from の conceivable に基づく質問のみで簡易シミュレーションを行う
     state.p_current = pid_from
 
     # Q(P_from) の質問を分類
@@ -165,10 +144,9 @@ def simulate_shift_direction(
         "shift_step": None,
         "tension_at_shift": None,
         "threshold": p_from.threshold,
-        "alignment_scores": [],
-        "argmax_pid": None,
+        "selected_pid": None,
+        "candidate_details": [],
         "target_matches": False,
-        "margin": None,
         "total_steps": 0,
     }
 
@@ -179,9 +157,6 @@ def simulate_shift_direction(
             continue
 
         step += 1
-
-        # 回答前の状態を保持
-        p_before = state.p_current
 
         state, current_open = update(
             state, q, paradigms, questions, current_open,
@@ -196,28 +171,32 @@ def simulate_shift_direction(
             result["shift_step"] = step
             result["tension_at_shift"] = current_tension
 
-            # シフト時点の alignment を計算
-            cur_eo = explained_o(state.o, p_from)
-            scores = []
-            for pid in paradigms:
+            # select_shift_target で選択を再現
+            selected = select_shift_target(state.o, p_from, paradigms)
+            result["selected_pid"] = selected
+
+            # 候補詳細を計算（表示用）
+            anomalies = {
+                d for d in p_from.conceivable
+                if d in state.o and p_from.prediction(d) is not None
+                and p_from.prediction(d) != state.o[d]
+            }
+            details = []
+            for pid, p in paradigms.items():
                 if pid == pid_from:
                     continue
-                p = paradigms[pid]
-                if explained_o(state.o, p) > cur_eo:
-                    a = alignment(state.h, p)
-                    scores.append((pid, a))
-            scores.sort(key=lambda x: -x[1])
-            result["alignment_scores"] = scores
+                t = tension(state.o, p)
+                if t <= current_tension:
+                    att = len({d for d in anomalies if d in p.conceivable})
+                    res = len({d for d in anomalies
+                               if d in p.conceivable
+                               and p.prediction(d) is not None and p.prediction(d) == state.o[d]})
+                    details.append((pid, t, att, res))
+            details.sort(key=lambda x: (-x[1], -x[2], x[3], x[0]))
+            result["candidate_details"] = details
 
-            if scores:
-                result["argmax_pid"] = scores[0][0]
-                result["target_matches"] = scores[0][0] == pid_to
-                if len(scores) >= 2:
-                    result["margin"] = scores[0][1] - scores[1][1]
-                else:
-                    result["margin"] = scores[0][1]
-
-            # シフト発動後も続行して全ステップ数を記録
+            if selected is not None:
+                result["target_matches"] = selected == pid_to
 
         # 新規オープンの anomaly 質問をキューに追加
         for oq in current_open:
@@ -236,7 +215,7 @@ def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
 
     # メインパスを導出
-    main_path = compute_main_path(init_pid, paradigms, questions, all_ids)
+    main_path = compute_main_path(init_pid, paradigms, questions)
 
     print("=" * 65)
     print("シフト方向検証")
@@ -275,22 +254,22 @@ def main():
             print(f"  シフト発動: step {result['shift_step']}, "
                   f"tension={result['tension_at_shift']}")
 
-            if result["alignment_scores"]:
-                print(f"  alignment スコア（シフト時点）:")
-                for pid, a in result["alignment_scores"]:
-                    marker = " ★" if pid == result["argmax_pid"] else ""
+            if result["candidate_details"]:
+                print(f"  候補（シフト時点、最小緩和原理）:")
+                for pid, t, att, res in result["candidate_details"]:
+                    marker = " ★" if pid == result["selected_pid"] else ""
                     target = " (想定シフト先)" if pid == pid_to else ""
-                    print(f"    {pid}: {a:.4f}{marker}{target}")
+                    print(f"    {pid}: tension={t} attention={att} resolve={res}{marker}{target}")
             else:
                 print(f"  候補パラダイムなし")
 
             if result["target_matches"]:
-                print(f"  argmax = {result['argmax_pid']} = 想定シフト先: OK")
-                if result["margin"] is not None:
-                    margin_status = "OK" if result["margin"] > 0.05 else "注意（マージン小）"
-                    print(f"  マージン: {result['margin']:.4f} ({margin_status})")
+                print(f"  選択 = {result['selected_pid']} = 想定シフト先: OK")
+            elif result["selected_pid"] is not None:
+                print(f"  選択 = {result['selected_pid']} ≠ 想定シフト先 {pid_to}: NG")
+                all_ok = False
             else:
-                print(f"  argmax = {result['argmax_pid']} ≠ 想定シフト先 {pid_to}: NG")
+                print(f"  候補なし ≠ 想定シフト先 {pid_to}: NG")
                 all_ok = False
 
         print()
