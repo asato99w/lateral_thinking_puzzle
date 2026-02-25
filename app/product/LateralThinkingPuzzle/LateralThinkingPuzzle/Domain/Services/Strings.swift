@@ -30,6 +30,11 @@ enum Strings {
     static var free: String { s("無料", "Free") }
     static var download: String { s("ダウンロード", "Download") }
 
+    static func showOthers(_ count: Int) -> String {
+        s("他 \(count) 件を表示", "Show \(count) more")
+    }
+    static var hideOthers: String { s("閉じる", "Hide") }
+
     static func solvedProgress(_ solved: Int, _ total: Int) -> String {
         "\(solved)/\(total) Solved"
     }

@@ -223,44 +223,75 @@ struct GameView: View {
     // MARK: - Answered Questions
 
     private var answeredSection: some View {
-        DisclosureGroup(isExpanded: $viewModel.showAnswered) {
-            VStack(alignment: .leading, spacing: 8) {
-                ForEach(Array(viewModel.answeredQuestions.enumerated()), id: \.element.question.id) { index, item in
-                    HStack(spacing: 0) {
-                        Text("\(index + 1)")
-                            .font(.caption.bold().monospacedDigit())
-                            .foregroundStyle(answerColor(item.answer))
-                            .frame(width: 40)
-                            .frame(maxHeight: .infinity)
-                            .background(answerColor(item.answer).opacity(0.12))
+        let items = viewModel.answeredQuestions
+        let latest = items.last
+        let olderCount = items.count - 1
 
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(item.question.text)
-                                .font(.subheadline)
-                            Text(answerLabel(item.answer))
-                                .font(.caption.weight(.bold))
-                                .foregroundStyle(answerColor(item.answer))
-                        }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-
-                        Spacer(minLength: 0)
-                    }
-                    .background(Theme.cardBackground)
-                    .clipShape(RoundedRectangle(cornerRadius: Theme.cardCornerRadius))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: Theme.cardCornerRadius)
-                            .stroke(answerColor(item.answer).opacity(0.2), lineWidth: 1)
-                    )
-                }
-            }
-            .padding(.top, 8)
-        } label: {
-            Text("\(Strings.answered) (\(viewModel.answeredQuestions.count))")
+        return VStack(alignment: .leading, spacing: 8) {
+            // Section label
+            Text("\(Strings.answered) (\(items.count))")
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.secondary)
+
+            // Latest answer (always visible)
+            if let latest {
+                answeredCard(latest.question, answer: latest.answer, number: items.count)
+            }
+
+            // Toggle for older answers
+            if olderCount > 0 {
+                Button {
+                    withAnimation(.easeInOut(duration: Theme.animationDuration)) {
+                        viewModel.showAnswered.toggle()
+                    }
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: viewModel.showAnswered ? "chevron.up" : "chevron.down")
+                            .font(.caption2)
+                        Text(viewModel.showAnswered ? Strings.hideOthers : Strings.showOthers(olderCount))
+                            .font(.caption.weight(.medium))
+                    }
+                    .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+
+                if viewModel.showAnswered {
+                    ForEach(Array(items.dropLast().reversed().enumerated()), id: \.element.question.id) { offset, item in
+                        let number = items.count - 1 - offset
+                        answeredCard(item.question, answer: item.answer, number: number)
+                    }
+                }
+            }
         }
-        .tint(.secondary)
+    }
+
+    private func answeredCard(_ question: Question, answer: Answer, number: Int) -> some View {
+        HStack(spacing: 0) {
+            Text("\(number)")
+                .font(.caption.bold().monospacedDigit())
+                .foregroundStyle(answerColor(answer))
+                .frame(width: 40)
+                .frame(maxHeight: .infinity)
+                .background(answerColor(answer).opacity(0.12))
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(question.text)
+                    .font(.subheadline)
+                Text(answerLabel(answer))
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(answerColor(answer))
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 10)
+
+            Spacer(minLength: 0)
+        }
+        .background(Theme.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: Theme.cardCornerRadius))
+        .overlay(
+            RoundedRectangle(cornerRadius: Theme.cardCornerRadius)
+                .stroke(answerColor(answer).opacity(0.2), lineWidth: 1)
+        )
     }
 
     // MARK: - Category Tab Bar
