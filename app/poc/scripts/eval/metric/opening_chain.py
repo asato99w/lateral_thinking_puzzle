@@ -6,7 +6,12 @@ init_questions で開く質問をすべて回答し、
 """
 from __future__ import annotations
 
-from common import load_data
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from common import load_data  # noqa: E402
 from engine import (
     init_game,
     init_questions,

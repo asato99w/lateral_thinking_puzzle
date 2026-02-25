@@ -3,7 +3,12 @@
 固有質問 → 共有質問 → 次パラダイムの質問 と進む中で、
 各パラダイムに対する tension と alignment がどう変化するかを追跡する。
 """
-from common import load_data, MAIN_PATH
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from common import load_data, MAIN_PATH  # noqa: E402
 from engine import (
     init_game,
     compute_effect,

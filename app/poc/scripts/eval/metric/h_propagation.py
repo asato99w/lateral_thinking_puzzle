@@ -1,5 +1,10 @@
 """H の波及を検証する。初期質問を逐次回答し、同化による H の変化と新規オープンを追跡する。"""
-from common import load_data
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from common import load_data  # noqa: E402
 from engine import (
     init_game,
     init_questions,

@@ -3,7 +3,12 @@
 init_questions が共有質問を含まない場合に、
 R(P) の同化を通じて共有質問が段階的にオープンされるかを追跡する。
 """
-from common import load_data, MAIN_PATH
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from common import load_data, MAIN_PATH  # noqa: E402
 from engine import (
     init_game,
     init_questions,

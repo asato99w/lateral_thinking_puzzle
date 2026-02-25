@@ -35,7 +35,12 @@
 """
 from __future__ import annotations
 
-from common import load_data, load_raw
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from common import load_data, load_raw  # noqa: E402
 from engine import tension, alignment, compute_effect, explained_o, _question_all_descriptors
 
 

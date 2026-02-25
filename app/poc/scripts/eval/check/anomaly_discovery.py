@@ -6,8 +6,12 @@ Part 2: 同化連鎖によるanomaly発掘シミュレーション
 from __future__ import annotations
 
 import copy
+import sys
+from pathlib import Path
 
-from common import load_data, MAIN_PATH
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from common import load_data, MAIN_PATH  # noqa: E402
 from engine import (
     compute_effect,
     init_game,

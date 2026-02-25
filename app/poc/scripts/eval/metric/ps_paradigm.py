@@ -1,5 +1,10 @@
 """Ps と Conceivable(P) の関係を検証する。"""
-from common import load_data
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from common import load_data  # noqa: E402
 
 
 def main():

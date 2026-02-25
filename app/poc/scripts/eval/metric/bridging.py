@@ -1,5 +1,10 @@
 """架橋質問・共有質問を分類する。"""
-from common import load_data, MAIN_PATH
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from common import load_data, MAIN_PATH  # noqa: E402
 from engine import compute_effect
 
 

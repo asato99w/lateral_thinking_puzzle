@@ -1,5 +1,10 @@
 """パラダイム間の共有・固有想起記述素を分析する。"""
-from common import load_data, MAIN_PATH
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from common import load_data, MAIN_PATH  # noqa: E402
 
 
 def main():

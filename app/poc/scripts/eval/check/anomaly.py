@@ -1,5 +1,10 @@
 """完全確定におけるアノマリーの単調減少を検証する。"""
-from common import load_data, load_raw, MAIN_PATH
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from common import load_data, load_raw, MAIN_PATH  # noqa: E402
 from engine import tension, alignment, compute_effect
 
 
