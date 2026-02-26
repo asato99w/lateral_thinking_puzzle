@@ -8,10 +8,14 @@ enum TestPuzzleData {
         id: String = "P1",
         name: String = "Test Paradigm",
         pPred: [String: Int] = ["d1": 1, "d2": 1, "d3": 0, "d4": 0],
-        conceivable: Set<String> = ["d1", "d2", "d3", "d4"],
-        relations: [Relation] = []
+        relations: [Relation] = [],
+        neighbors: Set<String> = [],
+        shiftThreshold: Int? = nil
     ) -> Paradigm {
-        try! Paradigm(id: id, name: name, pPred: pPred, conceivable: conceivable, relations: relations)
+        var p = Paradigm(id: id, name: name, pPred: pPred, relations: relations)
+        p.neighbors = neighbors
+        p.shiftThreshold = shiftThreshold
+        return p
     }
 
     static func makeQuestion(
@@ -24,7 +28,8 @@ enum TestPuzzleData {
         isClear: Bool = false,
         prerequisites: [String] = [],
         relatedDescriptors: [String] = [],
-        topicCategory: String = ""
+        topicCategory: String = "",
+        paradigms: [String] = []
     ) -> Question {
         Question(
             id: id,
@@ -36,7 +41,8 @@ enum TestPuzzleData {
             isClear: isClear,
             prerequisites: prerequisites,
             relatedDescriptors: relatedDescriptors,
-            topicCategory: topicCategory
+            topicCategory: topicCategory,
+            paradigms: paradigms
         )
     }
 
@@ -51,13 +57,11 @@ enum TestPuzzleData {
         let p1 = makeParadigm(
             id: "P1", name: "Initial",
             pPred: ["d1": 1, "d2": 1, "d3": 0],
-            conceivable: ["d1", "d2", "d3"],
             relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
         )
         let p2 = makeParadigm(
             id: "P2", name: "Alternative",
             pPred: ["d1": 0, "d2": 0, "d3": 1],
-            conceivable: ["d1", "d2", "d3"],
             relations: []
         )
 

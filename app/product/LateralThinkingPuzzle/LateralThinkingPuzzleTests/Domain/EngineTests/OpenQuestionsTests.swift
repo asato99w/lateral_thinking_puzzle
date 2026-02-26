@@ -3,55 +3,96 @@ import Testing
 
 struct OpenQuestionsTests {
 
-    @Test func test_openQuestions_hCloseToEffectValue_opens() {
-        // Q1 effect: d1=1. H[d1]=0.9 → |0.9-1.0| = 0.1 < epsilon(0.2) → open
-        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], correctAnswer: .yes)
-        let state = GameState(h: ["d1": 0.9], o: [:], r: [], pCurrent: "P1")
+    @Test func test_openQuestions_consistentReach_opens() {
+        // P1: d1=1, d2=1, relation d1->d2
+        // O has d1=1 (consistent), so d2 is reachable via consistent reach
+        // Q effect d2=1 matches prediction -> opens
+        let p1 = TestPuzzleData.makeParadigm(
+            pPred: ["d1": 1, "d2": 1],
+            relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
+        )
+        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d2", 1)], ansNo: [("d2", 0)], ansIrrelevant: ["d2"], correctAnswer: .yes, paradigms: ["P1"])
+        let state = GameState(h: ["d1": 1.0, "d2": 0.5], o: ["d1": 1], r: [], pCurrent: "P1")
 
-        let result = GameEngine.openQuestions(state: state, questions: [q1])
+        let result = GameEngine.openQuestions(state: state, questions: [q1], paradigms: ["P1": p1])
         #expect(result.map(\.id) == ["q1"])
     }
 
-    @Test func test_openQuestions_hFarFromEffectValue_doesNotOpen() {
-        // Q1 effect: d1=1. H[d1]=0.5 → |0.5-1.0| = 0.5 > epsilon(0.2) → not open
-        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], correctAnswer: .yes)
-        let state = GameState(h: ["d1": 0.5], o: [:], r: [], pCurrent: "P1")
+    @Test func test_openQuestions_anomalyReach_opens() {
+        // P1: d1=1, d3=0, relation d1->d3
+        // O has d1=0 (anomaly), so d3 is reachable via anomaly reach
+        // Q effect d3=1 -> opens via anomaly reach (regardless of prediction match)
+        let p1 = TestPuzzleData.makeParadigm(
+            pPred: ["d1": 1, "d3": 0],
+            relations: [Relation(src: "d1", tgt: "d3", weight: 0.8)]
+        )
+        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d3", 1)], ansNo: [("d3", 0)], ansIrrelevant: ["d3"], correctAnswer: .yes, paradigms: ["P1"])
+        let state = GameState(h: ["d1": 0.0, "d3": 0.5], o: ["d1": 0], r: [], pCurrent: "P1")
 
-        let result = GameEngine.openQuestions(state: state, questions: [q1])
-        #expect(result.isEmpty)
-    }
-
-    @Test func test_openQuestions_answeredQuestionsExcluded() {
-        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], correctAnswer: .yes)
-        let state = GameState(h: ["d1": 1.0], o: [:], r: [], pCurrent: "P1", answered: ["q1"])
-
-        let result = GameEngine.openQuestions(state: state, questions: [q1])
-        #expect(result.isEmpty)
-    }
-
-    @Test func test_openQuestions_irrelevantQuestionsNotOpened() {
-        let q1 = TestPuzzleData.makeQuestion(id: "q1", correctAnswer: .irrelevant)
-        let state = GameState(h: ["d1": 1.0], o: [:], r: [], pCurrent: "P1")
-
-        let result = GameEngine.openQuestions(state: state, questions: [q1])
-        #expect(result.isEmpty) // irrelevant has no observation pairs
-    }
-
-    @Test func test_openQuestions_missingHDefaultsToHalf() {
-        // Q1 effect: d1=0. H[d1] missing → default 0.5. |0.5-0.0| = 0.5 > epsilon → not open
-        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansNo: [("d1", 0)], correctAnswer: .no)
-        let state = GameState(h: [:], o: [:], r: [], pCurrent: "P1")
-
-        let result = GameEngine.openQuestions(state: state, questions: [q1])
-        #expect(result.isEmpty)
-    }
-
-    @Test func test_openQuestions_effectValueZero_hCloseToZero_opens() {
-        // Q1 effect: d1=0. H[d1]=0.1 → |0.1-0.0| = 0.1 < epsilon → open
-        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansNo: [("d1", 0)], correctAnswer: .no)
-        let state = GameState(h: ["d1": 0.1], o: [:], r: [], pCurrent: "P1")
-
-        let result = GameEngine.openQuestions(state: state, questions: [q1])
+        let result = GameEngine.openQuestions(state: state, questions: [q1], paradigms: ["P1": p1])
         #expect(result.map(\.id) == ["q1"])
+    }
+
+    @Test func test_openQuestions_paradigmMismatch_excluded() {
+        // Q belongs to P2 only, current paradigm is P1 -> excluded
+        let p1 = TestPuzzleData.makeParadigm(
+            pPred: ["d1": 1, "d2": 1],
+            relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
+        )
+        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d2", 1)], ansNo: [("d2", 0)], ansIrrelevant: ["d2"], correctAnswer: .yes, paradigms: ["P2"])
+        let state = GameState(h: ["d1": 1.0, "d2": 0.5], o: ["d1": 1], r: [], pCurrent: "P1")
+
+        let result = GameEngine.openQuestions(state: state, questions: [q1], paradigms: ["P1": p1])
+        #expect(result.isEmpty)
+    }
+
+    @Test func test_openQuestions_emptyParadigms_noFilter() {
+        // Q has empty paradigms array -> no paradigm filter applied
+        let p1 = TestPuzzleData.makeParadigm(
+            pPred: ["d1": 1, "d2": 1],
+            relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
+        )
+        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d2", 1)], ansNo: [("d2", 0)], ansIrrelevant: ["d2"], correctAnswer: .yes, paradigms: [])
+        let state = GameState(h: ["d1": 1.0, "d2": 0.5], o: ["d1": 1], r: [], pCurrent: "P1")
+
+        let result = GameEngine.openQuestions(state: state, questions: [q1], paradigms: ["P1": p1])
+        #expect(result.map(\.id) == ["q1"])
+    }
+
+    @Test func test_openQuestions_answeredExcluded() {
+        let p1 = TestPuzzleData.makeParadigm(
+            pPred: ["d1": 1, "d2": 1],
+            relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
+        )
+        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d2", 1)], ansNo: [("d2", 0)], ansIrrelevant: ["d2"], correctAnswer: .yes, paradigms: ["P1"])
+        let state = GameState(h: ["d1": 1.0, "d2": 0.5], o: ["d1": 1], r: [], pCurrent: "P1", answered: ["q1"])
+
+        let result = GameEngine.openQuestions(state: state, questions: [q1], paradigms: ["P1": p1])
+        #expect(result.isEmpty)
+    }
+
+    @Test func test_openQuestions_prerequisitesNotMet_excluded() {
+        let p1 = TestPuzzleData.makeParadigm(
+            pPred: ["d1": 1, "d2": 1],
+            relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
+        )
+        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d2", 1)], ansNo: [("d2", 0)], ansIrrelevant: ["d2"], correctAnswer: .yes, prerequisites: ["d3"], paradigms: ["P1"])
+        let state = GameState(h: ["d1": 1.0, "d2": 0.5], o: ["d1": 1], r: [], pCurrent: "P1")
+
+        let result = GameEngine.openQuestions(state: state, questions: [q1], paradigms: ["P1": p1])
+        #expect(result.isEmpty)
+    }
+
+    @Test func test_openQuestions_noReach_excluded() {
+        // No relation from d1, so d2 is not reachable
+        let p1 = TestPuzzleData.makeParadigm(
+            pPred: ["d1": 1, "d2": 1],
+            relations: []
+        )
+        let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d2", 1)], ansNo: [("d2", 0)], ansIrrelevant: ["d2"], correctAnswer: .yes, paradigms: ["P1"])
+        let state = GameState(h: ["d1": 1.0, "d2": 0.5], o: ["d1": 1], r: [], pCurrent: "P1")
+
+        let result = GameEngine.openQuestions(state: state, questions: [q1], paradigms: ["P1": p1])
+        #expect(result.isEmpty)
     }
 }

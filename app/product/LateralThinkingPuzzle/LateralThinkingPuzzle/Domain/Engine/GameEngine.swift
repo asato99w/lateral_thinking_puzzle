@@ -2,30 +2,14 @@ import Foundation
 
 enum GameEngine {
 
-    static let epsilon: Double = 0.2
-
-    // MARK: - Conceivable Block
-
-    /// Returns true if any descriptor referenced by the question is outside conceivable.
-    static func conceivableBlocked(_ question: Question, conceivable: Set<String>) -> Bool {
-        for d in question.allDescriptors {
-            if !conceivable.contains(d) {
-                return true
-            }
-        }
-        return false
-    }
-
     // MARK: - Tension
 
-    /// Anomaly count: Conceivable(P) ∩ O where P's prediction conflicts with O.
+    /// Anomaly count: pPred(P) ∩ O where P's prediction conflicts with O.
     static func tension(o: [String: Int], paradigm: Paradigm) -> Int {
         var count = 0
-        for d in paradigm.conceivable {
-            if let oVal = o[d] {
-                if let pred = paradigm.prediction(d), pred != oVal {
-                    count += 1
-                }
+        for (d, pred) in paradigm.pPred {
+            if let oVal = o[d], pred != oVal {
+                count += 1
             }
         }
         return count
@@ -78,7 +62,7 @@ enum GameEngine {
     }
 
     static func assimilateFromParadigm(h: inout [String: Double], o: [String: Int], paradigm: Paradigm) {
-        for dID in Set(o.keys).intersection(paradigm.conceivable) {
+        for dID in Set(o.keys).intersection(Set(paradigm.pPred.keys)) {
             if let pred = paradigm.prediction(dID), pred == o[dID] {
                 assimilateDescriptor(h: &h, dID: dID, paradigm: paradigm)
             }
@@ -113,36 +97,31 @@ enum GameEngine {
         return GameState(h: h, o: o, r: [], pCurrent: initParadigmID)
     }
 
-    // MARK: - Init Questions
+    // MARK: - Init Questions (data-driven)
 
     static func initQuestions(
-        paradigm: Paradigm,
         questions: [Question],
-        o: [String: Int]? = nil
+        initQuestionIDs: [String]
     ) -> [Question] {
-        var result = [Question]()
-        for q in questions {
-            if conceivableBlocked(q, conceivable: paradigm.conceivable) {
-                continue
-            }
-            if let o = o, !q.prerequisites.allSatisfy({ o.keys.contains($0) }) {
-                continue
-            }
-            let eff = q.effect
-            if case let .observation(pairs) = eff {
-                var hasMatch = false
-                var hasConflict = false
-                for (dID, v) in pairs {
-                    if let pred = paradigm.prediction(dID) {
-                        if pred == v {
-                            hasMatch = true
-                        } else {
-                            hasConflict = true
-                        }
-                    }
-                }
-                if hasMatch && !hasConflict {
-                    result.append(q)
+        let idSet = Set(initQuestionIDs)
+        return questions.filter { idSet.contains($0.id) }
+    }
+
+    // MARK: - Reachable (BFS via R(P))
+
+    /// R(P) で origins から到達可能な記述素を返す（多ホップ BFS）。
+    static func reachable(origins: Set<String>, paradigm: Paradigm) -> Set<String> {
+        var result = Set<String>()
+        var frontier = Array(origins)
+        var visited = Set<String>()
+        while !frontier.isEmpty {
+            let current = frontier.removeFirst()
+            if visited.contains(current) { continue }
+            visited.insert(current)
+            for rel in paradigm.relations {
+                if rel.src == current && !visited.contains(rel.tgt) {
+                    result.insert(rel.tgt)
+                    frontier.append(rel.tgt)
                 }
             }
         }
@@ -156,24 +135,38 @@ enum GameEngine {
         questions: [Question],
         paradigms: [String: Paradigm]? = nil
     ) -> [Question] {
-        var conceivable = Set<String>()
-        if let paradigms = paradigms, let p = paradigms[state.pCurrent] {
-            conceivable = p.conceivable
+        guard let paradigms = paradigms, let p = paradigms[state.pCurrent] else {
+            return []
         }
+
+        // Consistent(O, P) と Anomaly(O, P)
+        var consistent = Set<String>()
+        var anomaly = Set<String>()
+        for (d, v) in state.o {
+            if let pred = p.prediction(d) {
+                if pred == v { consistent.insert(d) }
+                else { anomaly.insert(d) }
+            }
+        }
+
+        let consistentReach = reachable(origins: consistent, paradigm: p)
+        let anomalyReach = reachable(origins: anomaly, paradigm: p)
+
         var result = [Question]()
         for q in questions {
             if state.answered.contains(q.id) { continue }
-            if !conceivable.isEmpty && conceivableBlocked(q, conceivable: conceivable) {
-                continue
-            }
-            if !q.prerequisites.allSatisfy({ state.o.keys.contains($0) }) {
-                continue
-            }
+            if !q.paradigms.isEmpty && !q.paradigms.contains(state.pCurrent) { continue }
+            if !q.prerequisites.allSatisfy({ state.o.keys.contains($0) }) { continue }
             let eff = q.effect
             if case let .observation(pairs) = eff {
                 for (dID, v) in pairs {
-                    let hVal = state.h[dID] ?? 0.5
-                    if abs(hVal - Double(v)) < epsilon {
+                    // 3a: 一致からの探索
+                    if consistentReach.contains(dID) && p.prediction(dID) == v {
+                        result.append(q)
+                        break
+                    }
+                    // 3b: 違和感からの探索
+                    if anomalyReach.contains(dID) {
                         result.append(q)
                         break
                     }
@@ -211,61 +204,97 @@ enum GameEngine {
         return oStar
     }
 
-    // MARK: - Compute Thresholds
+    // MARK: - Compute Neighborhoods
 
-    static func computeThresholds(
+    /// O* ベースの射影で各パラダイムの近傍集合を計算する。
+    static func computeNeighborhoods(
         paradigms: inout [String: Paradigm],
         oStar: [String: Int]
     ) {
-        for (pid, p) in paradigms {
-            let exclusive = exclusiveConceivableAnomalies(paradigm: p, allParadigms: paradigms, oStar: oStar)
+        let pids = Array(paradigms.keys)
 
-            var minShared: Int?
-            for (pid2, p2) in paradigms where pid2 != pid {
-                let shared = sharedConceivableAnomalies(paradigm: p, other: p2, oStar: oStar)
-                if minShared == nil || shared < minShared! {
-                    minShared = shared
+        var anomalySets = [String: Set<String>]()
+        var tensions = [String: Int]()
+        for pid in pids {
+            let p = paradigms[pid]!
+            var anom = Set<String>()
+            for (d, pred) in p.pPred {
+                if let oVal = oStar[d], pred != oVal {
+                    anom.insert(d)
+                }
+            }
+            anomalySets[pid] = anom
+            tensions[pid] = anom.count
+        }
+
+        for pidCur in pids {
+            let anomCur = anomalySets[pidCur]!
+            guard !anomCur.isEmpty else {
+                paradigms[pidCur]!.neighbors = []
+                continue
+            }
+
+            // 候補: tension strict < かつ Remaining が真部分集合
+            var remainingMap = [String: Set<String>]()
+            for pidCand in pids where pidCand != pidCur {
+                guard tensions[pidCand]! < tensions[pidCur]! else { continue }
+                let remaining = anomCur.intersection(anomalySets[pidCand]!)
+                if remaining.isStrictSubset(of: anomCur) {
+                    remainingMap[pidCand] = remaining
                 }
             }
 
-            if let minShared = minShared {
-                paradigms[pid]!.threshold = exclusive + minShared
-            } else {
-                paradigms[pid]!.threshold = nil
+            // Hasse 図: 極大 Remaining のみ（中間がないもの）
+            var neighbors = Set<String>()
+            let candPids = Array(remainingMap.keys)
+            for (i, pidA) in candPids.enumerated() {
+                let remA = remainingMap[pidA]!
+                var isCovered = false
+                for (j, pidB) in candPids.enumerated() where i != j {
+                    let remB = remainingMap[pidB]!
+                    if remA.isStrictSubset(of: remB) {
+                        isCovered = true
+                        break
+                    }
+                }
+                if !isCovered {
+                    neighbors.insert(pidA)
+                }
             }
+            paradigms[pidCur]!.neighbors = neighbors
         }
     }
 
-    /// Exclusive conceivable anomalies: descriptors unique to this paradigm's conceivable that conflict with O*.
-    private static func exclusiveConceivableAnomalies(
-        paradigm: Paradigm,
-        allParadigms: [String: Paradigm],
+    // MARK: - Compute Shift Thresholds
+
+    /// 各パラダイムの shiftThreshold N(P_target) を計算する。
+    static func computeShiftThresholds(
+        paradigms: inout [String: Paradigm],
         oStar: [String: Int]
-    ) -> Int {
-        var otherConceivable = Set<String>()
-        for (pid, p) in allParadigms where pid != paradigm.id {
-            otherConceivable.formUnion(p.conceivable)
-        }
-        let exclusive = paradigm.conceivable.subtracting(otherConceivable)
-        var count = 0
-        for d in exclusive {
-            if let pred = paradigm.prediction(d), let oVal = oStar[d], pred != oVal {
-                count += 1
+    ) {
+        for (pidTarget, _) in paradigms {
+            var minResolve: Int?
+            for (pidSource, pSource) in paradigms where pidSource != pidTarget {
+                guard pSource.neighbors.contains(pidTarget) else { continue }
+                let res = resolve(oStar: oStar, pSource: pSource, pTarget: paradigms[pidTarget]!)
+                if minResolve == nil || res < minResolve! {
+                    minResolve = res
+                }
             }
+            paradigms[pidTarget]!.shiftThreshold = minResolve
         }
-        return count
     }
 
-    /// Shared conceivable anomalies between two paradigms.
-    private static func sharedConceivableAnomalies(
-        paradigm: Paradigm,
-        other: Paradigm,
-        oStar: [String: Int]
+    /// P_source のアノマリーのうち P_target が正しく予測する数。
+    private static func resolve(
+        oStar: [String: Int],
+        pSource: Paradigm,
+        pTarget: Paradigm
     ) -> Int {
-        let shared = paradigm.conceivable.intersection(other.conceivable)
         var count = 0
-        for d in shared {
-            if let pred = paradigm.prediction(d), let oVal = oStar[d], pred != oVal {
+        for (d, predSrc) in pSource.pPred {
+            guard let oVal = oStar[d], predSrc != oVal else { continue }
+            if let predTgt = pTarget.prediction(d), predTgt == oVal {
                 count += 1
             }
         }
@@ -278,7 +307,6 @@ enum GameEngine {
         paradigms: inout [String: Paradigm],
         oStar: [String: Int]
     ) {
-        // Compute Explained(P) for each paradigm
         var explained = [String: Set<String>]()
         for (pid, p) in paradigms {
             var exp = Set<String>()
@@ -292,7 +320,6 @@ enum GameEngine {
 
         let pids = Array(paradigms.keys)
 
-        // Build containment DAG: a → b means Explained(a) ⊂ Explained(b)
         var strictlyContained = [String: Set<String>]()
         for pid in pids { strictlyContained[pid] = [] }
 
@@ -304,7 +331,6 @@ enum GameEngine {
             }
         }
 
-        // Topological sort for depth assignment
         var depthMap = [String: Int]()
 
         func computeDepth(_ pid: String, _ visited: inout Set<String>) -> Int {
@@ -330,6 +356,60 @@ enum GameEngine {
         for (pid, _) in paradigms {
             paradigms[pid]!.depth = depthMap[pid] ?? 0
         }
+    }
+
+    // MARK: - Select Shift Target
+
+    /// 近傍 + resolve 閾値に基づくシフト先選択。
+    ///
+    /// 3条件全てを満たす候補のみ:
+    ///   1. 近傍: pid ∈ pCurrent.neighbors
+    ///   2. tension strict <: tension(O, P') < tension(O, P_current)
+    ///   3. resolve >= N: P' の shiftThreshold 以上の resolve
+    ///
+    /// 選択: resolve DESC → attention DESC → pid ASC
+    static func selectShiftTarget(
+        o: [String: Int],
+        pCurrent: Paradigm,
+        paradigms: [String: Paradigm]
+    ) -> String? {
+        let anomalies = Set(
+            pCurrent.pPred.filter { d, pred in
+                if let oVal = o[d] { return pred != oVal }
+                return false
+            }.keys
+        )
+        let curTension = tension(o: o, paradigm: pCurrent)
+
+        struct Candidate {
+            let pid: String
+            let tension: Int
+            let attention: Int
+            let resolve: Int
+        }
+        var candidates = [Candidate]()
+
+        for (pid, p) in paradigms {
+            if pid == pCurrent.id { continue }
+            guard pCurrent.neighbors.contains(pid) else { continue }
+            let t = tension(o: o, paradigm: p)
+            guard t < curTension else { continue }
+            let res = anomalies.filter { d in
+                if let pred = p.prediction(d), let oVal = o[d] { return pred == oVal }
+                return false
+            }.count
+            if let threshold = p.shiftThreshold, res < threshold { continue }
+            let att = anomalies.filter { p.pPred[$0] != nil }.count
+            candidates.append(Candidate(pid: pid, tension: t, attention: att, resolve: res))
+        }
+
+        guard !candidates.isEmpty else { return nil }
+        candidates.sort { a, b in
+            if a.resolve != b.resolve { return a.resolve > b.resolve }
+            if a.attention != b.attention { return a.attention > b.attention }
+            return a.pid < b.pid
+        }
+        return candidates[0].pid
     }
 
     // MARK: - Update
@@ -371,29 +451,11 @@ enum GameEngine {
             }
         }
 
-        // Step 3: Paradigm shift
-        let currentTension = tension(o: state.o, paradigm: pCurrent)
-        if let threshold = pCurrent.threshold, currentTension > threshold {
-            let currentExplained = explainedO(o: state.o, paradigm: pCurrent)
-            let candidates = paradigms.keys.filter { pID in
-                pID != state.pCurrent
-                    && explainedO(o: state.o, paradigm: paradigms[pID]!) > currentExplained
-            }
-
-            if !candidates.isEmpty {
-                var bestID = candidates[0]
-                var bestScore = alignment(h: state.h, paradigm: paradigms[candidates[0]]!)
-                for pID in candidates.dropFirst() {
-                    let score = alignment(h: state.h, paradigm: paradigms[pID]!)
-                    if score > bestScore {
-                        bestScore = score
-                        bestID = pID
-                    }
-                }
-                state.pCurrent = bestID
-                let pNew = paradigms[bestID]!
-                assimilateFromParadigm(h: &state.h, o: state.o, paradigm: pNew)
-            }
+        // Step 3: Paradigm shift (neighbors + resolve threshold)
+        if let bestID = selectShiftTarget(o: state.o, pCurrent: pCurrent, paradigms: paradigms) {
+            state.pCurrent = bestID
+            let pNew = paradigms[bestID]!
+            assimilateFromParadigm(h: &state.h, o: state.o, paradigm: pNew)
         }
 
         // Step 4: Open questions update

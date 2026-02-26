@@ -8,7 +8,6 @@ struct GameViewModelTests {
         let p1 = TestPuzzleData.makeParadigm(
             id: "P1",
             pPred: ["d1": 1, "d2": 1, "d3": 0],
-            conceivable: ["d1", "d2", "d3"],
             relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
         )
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes)
@@ -18,7 +17,8 @@ struct GameViewModelTests {
             initParadigm: "P1", psValues: [("d1", 1)],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
-            topicCategories: []
+            topicCategories: [],
+            initQuestionIDs: ["q1"]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -32,7 +32,6 @@ struct GameViewModelTests {
         let p1 = TestPuzzleData.makeParadigm(
             id: "P1",
             pPred: ["d1": 1, "d2": 1, "d3": 0],
-            conceivable: ["d1", "d2", "d3"],
             relations: []
         )
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes)
@@ -42,7 +41,8 @@ struct GameViewModelTests {
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
-            topicCategories: []
+            topicCategories: [],
+            initQuestionIDs: ["q1"]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -60,7 +60,6 @@ struct GameViewModelTests {
         let p1 = TestPuzzleData.makeParadigm(
             id: "P1",
             pPred: ["d1": 1, "d2": 1, "d3": 0],
-            conceivable: ["d1", "d2", "d3"],
             relations: []
         )
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes, topicCategory: "A")
@@ -71,7 +70,8 @@ struct GameViewModelTests {
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1, q2], tier: .free,
-            topicCategories: [TopicCategory(id: "A", name: "Cat A"), TopicCategory(id: "B", name: "Cat B")]
+            topicCategories: [TopicCategory(id: "A", name: "Cat A"), TopicCategory(id: "B", name: "Cat B")],
+            initQuestionIDs: ["q1", "q2"]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -84,7 +84,6 @@ struct GameViewModelTests {
         let p1 = TestPuzzleData.makeParadigm(
             id: "P1",
             pPred: ["d1": 1, "d2": 1, "d3": 0],
-            conceivable: ["d1", "d2", "d3"],
             relations: []
         )
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes, topicCategory: "A")
@@ -95,7 +94,8 @@ struct GameViewModelTests {
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1, q2], tier: .free,
-            topicCategories: [TopicCategory(id: "A", name: "Cat A"), TopicCategory(id: "B", name: "Cat B")]
+            topicCategories: [TopicCategory(id: "A", name: "Cat A"), TopicCategory(id: "B", name: "Cat B")],
+            initQuestionIDs: ["q1", "q2"]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -109,7 +109,6 @@ struct GameViewModelTests {
         let p1 = TestPuzzleData.makeParadigm(
             id: "P1",
             pPred: ["d1": 1, "d2": 1, "d3": 1],
-            conceivable: ["d1", "d2", "d3"],
             relations: []
         )
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes, topicCategory: "A")
@@ -121,7 +120,8 @@ struct GameViewModelTests {
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1, q2, q3], tier: .free,
-            topicCategories: [TopicCategory(id: "A", name: "Cat A"), TopicCategory(id: "B", name: "Cat B")]
+            topicCategories: [TopicCategory(id: "A", name: "Cat A"), TopicCategory(id: "B", name: "Cat B")],
+            initQuestionIDs: ["q1", "q2", "q3"]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -139,7 +139,6 @@ struct GameViewModelTests {
         let p1 = TestPuzzleData.makeParadigm(
             id: "P1",
             pPred: ["d1": 1, "d2": 1, "d3": 0],
-            conceivable: ["d1", "d2", "d3"],
             relations: []
         )
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes, topicCategory: "A")
@@ -149,7 +148,8 @@ struct GameViewModelTests {
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
-            topicCategories: [TopicCategory(id: "A", name: "Cat A")]
+            topicCategories: [TopicCategory(id: "A", name: "Cat A")],
+            initQuestionIDs: ["q1"]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -164,7 +164,6 @@ struct GameViewModelTests {
         let p1 = TestPuzzleData.makeParadigm(
             id: "P1",
             pPred: ["d1": 1, "d3": 0],
-            conceivable: ["d1", "d3"],
             relations: []
         )
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes, isClear: true)
@@ -174,7 +173,8 @@ struct GameViewModelTests {
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
-            topicCategories: []
+            topicCategories: [],
+            initQuestionIDs: ["q1"]
         )
 
         let vm = GameViewModel(puzzle: puzzle)

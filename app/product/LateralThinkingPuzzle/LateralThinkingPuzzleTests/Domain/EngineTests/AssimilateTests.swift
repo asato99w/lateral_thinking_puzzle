@@ -8,7 +8,6 @@ struct AssimilateTests {
         // h[d2] = 0.5 + 0.8 * (1.0 - 0.5) = 0.5 + 0.4 = 0.9
         let paradigm = TestPuzzleData.makeParadigm(
             pPred: ["d1": 1, "d2": 1],
-            conceivable: ["d1", "d2"],
             relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
         )
         var h: [String: Double] = ["d1": 1.0, "d2": 0.5]
@@ -19,7 +18,6 @@ struct AssimilateTests {
     @Test func test_assimilateDescriptor_noRelation_noChange() {
         let paradigm = TestPuzzleData.makeParadigm(
             pPred: ["d1": 1, "d2": 1],
-            conceivable: ["d1", "d2"],
             relations: []
         )
         var h: [String: Double] = ["d1": 1.0, "d2": 0.5]
@@ -32,7 +30,6 @@ struct AssimilateTests {
         // h[d3] = 0.5 + 0.8 * (0.0 - 0.5) = 0.5 - 0.4 = 0.1
         let paradigm = TestPuzzleData.makeParadigm(
             pPred: ["d1": 1, "d3": 0],
-            conceivable: ["d1", "d3"],
             relations: [Relation(src: "d1", tgt: "d3", weight: 0.8)]
         )
         var h: [String: Double] = ["d1": 1.0, "d3": 0.5]
@@ -43,7 +40,6 @@ struct AssimilateTests {
     @Test func test_assimilateFromParadigm_appliesMatchingObservations() {
         let paradigm = TestPuzzleData.makeParadigm(
             pPred: ["d1": 1, "d2": 1, "d3": 0],
-            conceivable: ["d1", "d2", "d3"],
             relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
         )
         var h: [String: Double] = ["d1": 0.5, "d2": 0.5, "d3": 0.5]
@@ -60,7 +56,6 @@ struct AssimilateTests {
     @Test func test_assimilateFromParadigm_nonMatchingObservation_noAssimilation() {
         let paradigm = TestPuzzleData.makeParadigm(
             pPred: ["d1": 1, "d2": 1, "d3": 0],
-            conceivable: ["d1", "d2", "d3"],
             relations: [Relation(src: "d1", tgt: "d2", weight: 0.8)]
         )
         var h: [String: Double] = ["d1": 0.5, "d2": 0.5]

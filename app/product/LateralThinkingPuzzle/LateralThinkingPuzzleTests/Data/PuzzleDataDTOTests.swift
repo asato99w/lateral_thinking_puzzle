@@ -55,6 +55,7 @@ struct PuzzleDataDTOTests {
         #expect(puzzle.paradigms["P1"]!.pPred["d2"] == 0)
         #expect(puzzle.questions.count == 1)
         #expect(puzzle.questions[0].correctAnswer == .yes)
+        // conceivable is now optional in DTO - should decode without error
     }
 }
 

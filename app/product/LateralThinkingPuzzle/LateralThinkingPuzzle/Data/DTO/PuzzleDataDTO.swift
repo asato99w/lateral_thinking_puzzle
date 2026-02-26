@@ -20,6 +20,7 @@ struct PuzzleDataDTO: Codable {
     let paradigms: [ParadigmDTO]
     let questions: [QuestionDTO]
     let topicCategories: [TopicCategoryDTO]?
+    let initQuestionIds: [String]?
 
     enum CodingKeys: String, CodingKey {
         case title, statement
@@ -30,12 +31,13 @@ struct PuzzleDataDTO: Codable {
         case allDescriptorIds = "all_descriptor_ids"
         case paradigms, questions
         case topicCategories = "topic_categories"
+        case initQuestionIds = "init_question_ids"
     }
 
     func toDomain() throws -> PuzzleData {
         var paradigmMap = [String: Paradigm]()
         for dto in paradigms {
-            let p = try dto.toDomain()
+            let p = dto.toDomain()
             paradigmMap[p.id] = p
         }
 
@@ -48,7 +50,8 @@ struct PuzzleDataDTO: Codable {
         }
 
         let oStar = GameEngine.buildOStar(questions: domainQuestions, psValues: ps)
-        GameEngine.computeThresholds(paradigms: &paradigmMap, oStar: oStar)
+        GameEngine.computeNeighborhoods(paradigms: &paradigmMap, oStar: oStar)
+        GameEngine.computeShiftThresholds(paradigms: &paradigmMap, oStar: oStar)
         GameEngine.computeDepths(paradigms: &paradigmMap, oStar: oStar)
 
         return PuzzleData(
@@ -60,7 +63,8 @@ struct PuzzleDataDTO: Codable {
             paradigms: paradigmMap,
             questions: domainQuestions,
             tier: .free,
-            topicCategories: (topicCategories ?? []).map { $0.toDomain() }
+            topicCategories: (topicCategories ?? []).map { $0.toDomain() },
+            initQuestionIDs: initQuestionIds
         )
     }
 }
@@ -110,7 +114,7 @@ struct ParadigmDTO: Codable {
     let id: String
     let name: String
     let pPred: [[PPredElement]]
-    let conceivable: [String]
+    let conceivable: [String]?
     let relations: [[RelationElement]]
 
     enum CodingKeys: String, CodingKey {
@@ -120,7 +124,7 @@ struct ParadigmDTO: Codable {
         case relations
     }
 
-    func toDomain() throws -> Paradigm {
+    func toDomain() -> Paradigm {
         let predDict = Dictionary(uniqueKeysWithValues: pPred.map { pair -> (String, Int) in
             (pair[0].stringValue!, pair[1].intValue!)
         })
@@ -130,11 +134,10 @@ struct ParadigmDTO: Codable {
             let weight = arr[2].doubleValue!
             return Relation(src: src, tgt: tgt, weight: weight)
         }
-        return try Paradigm(
+        return Paradigm(
             id: id,
             name: name,
             pPred: predDict,
-            conceivable: Set(conceivable),
             relations: rels
         )
     }
@@ -227,6 +230,7 @@ struct QuestionDTO: Codable {
     let prerequisites: [String]?
     let relatedDescriptors: [String]?
     let topicCategory: String?
+    let paradigms: [String]?
 
     enum CodingKeys: String, CodingKey {
         case id, text
@@ -238,6 +242,7 @@ struct QuestionDTO: Codable {
         case prerequisites
         case relatedDescriptors = "related_descriptors"
         case topicCategory = "topic_category"
+        case paradigms
     }
 
     func toDomain() -> Question {
@@ -263,7 +268,8 @@ struct QuestionDTO: Codable {
             isClear: isClear ?? false,
             prerequisites: prerequisites ?? [],
             relatedDescriptors: relatedDescriptors ?? [],
-            topicCategory: topicCategory ?? ""
+            topicCategory: topicCategory ?? "",
+            paradigms: paradigms ?? []
         )
     }
 }
