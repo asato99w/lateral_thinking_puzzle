@@ -1,12 +1,10 @@
-"""同化接続性検証スクリプト（S1 Step 2 対応）。
+"""同化接続性検証スクリプト（L2-2）。
 
-各遷移 P_i → P_{i+1} について:
-  1. P_i フェーズの全質問回答後の推定 O_i を計算
-  2. Consistent(O_i, P_{i+1}) と Anomaly(O_i, P_{i+1}) を計算
-  3. R(P_{i+1}) で Consistent と Anomaly の両方から到達可能なターゲット記述素 T_reach を計算
+各近傍ペア (P, P') について:
+  1. P フェーズの全質問回答後の推定 O_P を計算
+  2. Consistent(O_P, P') と Anomaly(O_P, P') を計算
+  3. R(P') で Consistent と Anomaly の両方から到達可能なターゲット記述素 T_reach を計算
   4. T_reach の各 t について、t を effect に含む未回答質問の存在を確認
-     - 3a 経路（Consistent からの到達）: P_pred 一致が必要
-     - 3b 経路（Anomaly からの到達）: P_pred 一致は不要
   5. OK/NG と診断情報を出力
 
 使い方:
@@ -20,70 +18,27 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from common import load_data  # noqa: E402
-from engine import compute_effect, init_game, select_shift_target, _reachable  # noqa: E402
-
-# shift_direction の helpers を再利用
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from shift_direction import compute_main_path, derive_qp, classify_questions  # noqa: E402
+from common import load_data, derive_qp, neighbor_pairs  # noqa: E402
+from engine import compute_effect, _reachable  # noqa: E402
 
 
-def compute_estimated_o(
-    paradigm,
-    questions,
-    ps_values,
-):
-    """P_i フェーズの全質問を回答した推定 O_i を計算する。"""
+def compute_estimated_o(paradigm, questions, ps_values):
+    """P フェーズの全質問を回答した推定 O_P を計算する。"""
     qp = derive_qp(questions, paradigm)
-    o_i = dict(ps_values)
+    o_p = dict(ps_values)
     for q in qp:
         if q.correct_answer == "irrelevant":
             continue
         eff = compute_effect(q)
         for d, v in eff:
-            o_i[d] = v
-    return o_i
-
-
-def compute_assimilation_origins(o_i, paradigm_next):
-    """同化起点を特定する。
-
-    {d ∈ O_i : P_pred(P_{i+1}, d) ∈ {0,1} かつ P_pred(P_{i+1}, d) == O_i[d]}
-    """
-    origins = set()
-    for d, v in o_i.items():
-        pred = paradigm_next.prediction(d)
-        if pred is not None and pred == v:
-            origins.add(d)
-    return origins
-
-
-def compute_reachable_targets(origins, paradigm_next):
-    """R(P_{i+1}) で同化起点から到達可能なターゲット記述素を計算する。"""
-    reachable = set()
-    frontier = set(origins)
-    visited = set()
-
-    while frontier:
-        current = frontier.pop()
-        if current in visited:
-            continue
-        visited.add(current)
-        for src, tgt, w in paradigm_next.relations:
-            if src == current and tgt not in visited:
-                reachable.add(tgt)
-                frontier.add(tgt)
-
-    return reachable
+            o_p[d] = v
+    return o_p
 
 
 def check_question_coverage(
     consistent_reach, anomaly_reach, paradigm_next, questions, answered_ids,
 ):
     """到達可能ターゲットの各 t について、t を effect に含む未回答質問の存在を確認する。
-
-    3a 経路（Consistent からの到達）: P_pred 一致が必要
-    3b 経路（Anomaly からの到達）: P_pred 一致は不要（到達可能であれば十分）
 
     Returns:
         covered: {t: [q.id, ...]} - カバーされたターゲット記述素と質問
@@ -103,13 +58,11 @@ def check_question_coverage(
             eff = compute_effect(q)
             for d, v in eff:
                 if d == t:
-                    # 3a: Consistent からの到達 → P_pred 一致が必要
                     if t in consistent_reach:
                         pred = paradigm_next.prediction(t)
                         if pred is not None and pred == v:
                             covering_qs.append(q.id)
                             break
-                    # 3b: Anomaly からの到達 → P_pred 一致は不要
                     if t in anomaly_reach:
                         covering_qs.append(q.id)
                         break
@@ -124,48 +77,46 @@ def check_question_coverage(
 def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
 
-    main_path = compute_main_path(init_pid, paradigms, questions)
+    pairs = neighbor_pairs(paradigms)
 
     print("=" * 65)
-    print("同化接続性検証 (S1 Step 2)")
+    print("同化接続性検証 (L2-2)")
     print("=" * 65)
-    print(f"メインパス: {' → '.join(main_path)}")
+    print(f"近傍ペア数: {len(pairs)}")
     print()
 
     all_ok = True
 
-    for i in range(len(main_path) - 1):
-        pid_from = main_path[i]
-        pid_to = main_path[i + 1]
+    for pid_from, pid_to in pairs:
         p_from = paradigms[pid_from]
         p_to = paradigms[pid_to]
 
         print(f"-" * 50)
-        print(f"遷移: {pid_from} → {pid_to}")
+        print(f"近傍ペア: {pid_from} → {pid_to}")
         print(f"-" * 50)
 
-        # Step 1: P_i フェーズ終了時の推定 O_i
-        o_i = compute_estimated_o(p_from, questions, ps_values)
+        # Step 1: P フェーズ終了時の推定 O_P
+        o_p = compute_estimated_o(p_from, questions, ps_values)
 
-        # P_i フェーズで回答済みの質問 ID
+        # P フェーズで回答済みの質問 ID
         qp_from = derive_qp(questions, p_from)
         answered_ids = {q.id for q in qp_from}
 
-        print(f"  |O_i| = {len(o_i)} (P_{pid_from} 全質問回答後)")
+        print(f"  |O_P| = {len(o_p)} ({pid_from} 全質問回答後)")
 
-        # Step 2: Consistent(O_i, P_{i+1}) と Anomaly(O_i, P_{i+1})
-        consistent = compute_assimilation_origins(o_i, p_to)
-        anomaly_origins = {d for d, v in o_i.items()
-                          if p_to.prediction(d) is not None
-                          and p_to.prediction(d) != v}
-        print(f"  Consistent(O_i, P_{pid_to}): {len(consistent)}個")
+        # Step 2: Consistent(O_P, P') と Anomaly(O_P, P')
+        consistent = {d for d, v in o_p.items()
+                      if p_to.prediction(d) is not None and p_to.prediction(d) == v}
+        anomaly_origins = {d for d, v in o_p.items()
+                          if p_to.prediction(d) is not None and p_to.prediction(d) != v}
+        print(f"  Consistent(O_P, {pid_to}): {len(consistent)}個")
         if consistent:
             c_list = sorted(consistent)
             if len(c_list) <= 10:
                 print(f"    {c_list}")
             else:
                 print(f"    {c_list[:10]} ... (他{len(c_list)-10}個)")
-        print(f"  Anomaly(O_i, P_{pid_to}): {len(anomaly_origins)}個")
+        print(f"  Anomaly(O_P, {pid_to}): {len(anomaly_origins)}個")
         if anomaly_origins:
             a_list = sorted(anomaly_origins)
             if len(a_list) <= 10:
@@ -173,7 +124,7 @@ def main():
             else:
                 print(f"    {a_list[:10]} ... (他{len(a_list)-10}個)")
 
-        # Step 3: 到達可能ターゲット（Consistent と Anomaly の両方から）
+        # Step 3: 到達可能ターゲット
         consistent_reach = _reachable(consistent, p_to)
         anomaly_reach = _reachable(anomaly_origins, p_to)
         t_reach = consistent_reach | anomaly_reach
@@ -214,7 +165,7 @@ def main():
 
     # サマリ
     print("=" * 65)
-    print(f"総合結果: {'OK — 全遷移で同化接続性あり' if all_ok else 'NG — 接続性不足あり'}")
+    print(f"総合結果: {'OK — 全近傍ペアで同化接続性あり' if all_ok else 'NG — 接続性不足あり'}")
     print("=" * 65)
 
 

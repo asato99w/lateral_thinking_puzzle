@@ -1,4 +1,4 @@
-"""動的発掘連鎖検証スクリプト（S1 Step 3 対応）。
+"""動的発掘連鎖検証スクリプト（L2-3）。
 
 ゲーム全体をシミュレーションし:
   1. データ駆動の init_questions（なければ Q(P_init) の safe 質問で代替）から開始
@@ -8,7 +8,6 @@
      - アノマリー導入質問が実際にオープンされたか
      - シフト発動のタイミングと遷移先
   4. 全パラダイムを通じて全アノマリーが発掘されたかの最終確認
-     （完全性＋横方向探索の動的検証）
 
 使い方:
   python excavation_chain.py                       # turtle_soup.json
@@ -22,26 +21,24 @@ from collections import defaultdict
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from common import load_data, load_raw, resolve_data_path  # noqa: E402
+from common import (  # noqa: E402
+    load_data,
+    load_raw,
+    derive_qp,
+    classify_questions,
+    compute_reachability_path,
+)
 from engine import (  # noqa: E402
     compute_effect,
     init_game,
-    open_questions,
     update,
     tension,
     select_shift_target,
 )
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from shift_direction import compute_main_path, derive_qp, classify_questions  # noqa: E402
-
 
 def get_init_open(data_raw, paradigms, questions, init_pid, ps_values, all_ids):
-    """初期オープン質問を決定する。
-
-    データに init_question_ids フィールドがあればそれを使用。
-    なければ Q(P_init) の safe 質問で代替。
-    """
+    """初期オープン質問を決定する。"""
     if "init_question_ids" in data_raw:
         id_set = set(data_raw["init_question_ids"])
         return [q for q in questions if q.id in id_set], "data-driven"
@@ -72,12 +69,12 @@ def compute_anomaly_descriptors(paradigm, questions):
 def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
     data_raw = load_raw()
-    main_path = compute_main_path(init_pid, paradigms, questions)
+    reach_path = compute_reachability_path(init_pid, paradigms, questions)
 
     print("=" * 65)
-    print("動的発掘連鎖検証 (S1 Step 3)")
+    print("動的発掘連鎖検証 (L2-3)")
     print("=" * 65)
-    print(f"メインパス: {' → '.join(main_path)}")
+    print(f"到達パス: {' → '.join(reach_path)}")
     print()
 
     # ゲーム初期化
@@ -100,11 +97,7 @@ def main():
         "shift_target": None,
     })
     step = 0
-    all_discovered_anomalies = set()  # O に入ったアノマリー記述素
-
-    # 各パラダイムフェーズの情報
-    current_phase_idx = 0
-    current_pid = init_pid
+    all_discovered_anomalies = set()
 
     # 回答キュー
     answer_queue = list(current_open)
@@ -112,7 +105,7 @@ def main():
 
     # フェーズごとのアノマリー質問 ID
     phase_anomaly_qids = {}
-    for pid in main_path:
+    for pid in reach_path:
         p = paradigms[pid]
         qp = derive_qp(questions, p)
         _, anomaly_qs = classify_questions(qp, p)
@@ -131,13 +124,13 @@ def main():
         if q.id in phase_anomaly_qids.get(pid_before, set()):
             phase_log[pid_before]["anomaly_opened"].append(q.id)
 
-        # 回答 → O 更新 → 同化 → H 更新 → 新規オープン
+        # 回答 → O 更新 → 同化 → 新規オープン
         state, current_open = update(
             state, q, paradigms, questions, current_open,
         )
 
         # アノマリー記述素の発掘追跡
-        for pid in main_path:
+        for pid in reach_path:
             p = paradigms[pid]
             for d, pred in p.p_pred.items():
                 if d in state.o and pred != state.o[d]:
@@ -157,7 +150,7 @@ def main():
     # 結果出力
     all_ok = True
 
-    for pid in main_path:
+    for pid in reach_path:
         p = paradigms[pid]
         log = phase_log[pid]
         anomaly_ds = compute_anomaly_descriptors(p, questions)
@@ -187,7 +180,7 @@ def main():
                 print(f"    全アノマリー質問オープン: OK")
 
         # アノマリー記述素の発掘状況
-        discovered_for_pid = {d for (p, d) in all_discovered_anomalies if p == pid}
+        discovered_for_pid = {d for (p2, d) in all_discovered_anomalies if p2 == pid}
         undiscovered = anomaly_ds - discovered_for_pid
         print(f"  アノマリー記述素:")
         print(f"    全体: {len(anomaly_ds)}個 {sorted(anomaly_ds)}")
@@ -203,7 +196,7 @@ def main():
         if log["shift_step"] is not None:
             print(f"  シフト: step {log['shift_step']} → {log['shift_target']}")
         else:
-            if pid != main_path[-1]:
+            if pid != reach_path[-1]:
                 print(f"  シフト: 未発動")
 
         print()
@@ -218,7 +211,7 @@ def main():
     # 全パラダイムのアノマリー記述素の合計
     total_anomaly_ds = set()
     total_discovered = set()
-    for pid in main_path:
+    for pid in reach_path:
         p = paradigms[pid]
         anomaly_ds = compute_anomaly_descriptors(p, questions)
         for d in anomaly_ds:

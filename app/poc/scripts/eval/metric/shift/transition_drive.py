@@ -1,9 +1,9 @@
-"""遷移駆動集合の静的分析スクリプト。
+"""遷移駆動集合の静的分析スクリプト（L3-1, L3-2, L3-3）。
 
 P_pred の比較だけでパラダイム間の構造的な方向性を測定する。
-shift_direction.py（動的検証）とは相補的な静的分析。
+shift_direction.py（動的検証 L2-5）とは相補的な静的分析。
 
-メインパス遷移とサブパラダイム遷移の両方を分析する。
+到達パス遷移とサブパラダイム遷移の両方を分析する。
 
 各遷移 P_from → P_to について:
   1. Q(P_from) の各質問を effect(q) の (d, v) ごとに P_from / P_to と比較
@@ -20,11 +20,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "check"))
 
-from common import load_data  # noqa: E402
+from common import load_data, derive_qp, compute_reachability_path  # noqa: E402
 from engine import compute_effect  # noqa: E402
-from shift_direction import derive_qp, compute_main_path  # noqa: E402
 
 
 # ── 質問レベルの量 ───────────────────────────────────
@@ -45,12 +43,10 @@ def compute_question_metrics(q, p_from, p_to):
     oppose = 0
 
     for d, v in eff:
-        # P_from にアノマリーを生むか
         pred_from = p_from.prediction(d)
         if pred_from is not None and pred_from != v:
             anomaly_count += 1
 
-        # P_to と整合するか / 矛盾するか
         pred_to = p_to.prediction(d)
         if pred_to is not None:
             if pred_to == v:
@@ -187,10 +183,7 @@ def analyze_transition(pid_from, pid_to, paradigms, questions, detail=True):
 
 
 def print_candidate_summary(pid_from, paradigms, questions, expected_to=None):
-    """pid_from から全候補パラダイムへの方向スコア・駆動率のサマリ表を出力する。
-
-    expected_to が指定された場合、その遷移先に ★ マーカーを付ける。
-    """
+    """pid_from から全候補パラダイムへの方向スコア・駆動率のサマリ表を出力する。"""
     candidates = [pid for pid in paradigms if pid != pid_from]
 
     print("  【全候補サマリ】")
@@ -204,7 +197,6 @@ def print_candidate_summary(pid_from, paradigms, questions, expected_to=None):
         )
         results.append((pid_to, ds, dr, nd, qs))
 
-    # 方向スコア降順でソート
     results.sort(key=lambda x: -x[1])
     for pid_to, ds, dr, nd, qs in results:
         dr_str = f"{dr:.4f}" if nd > 0 or dr == dr else "N/A"
@@ -221,29 +213,29 @@ def print_candidate_summary(pid_from, paradigms, questions, expected_to=None):
 def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
 
-    # メインパスを導出
-    main_path = compute_main_path(init_pid, paradigms, questions)
-    main_set = set(main_path)
-    sub_pids = sorted(pid for pid in paradigms if pid not in main_set)
+    # 到達パスを導出（L2-0 と同じ計算）
+    reach_path = compute_reachability_path(init_pid, paradigms, questions)
+    reach_set = set(reach_path)
+    sub_pids = sorted(pid for pid in paradigms if pid not in reach_set)
 
     print("=" * 65)
-    print("遷移駆動集合の静的分析")
+    print("遷移駆動集合の静的分析 (L3-1, L3-2, L3-3)")
     print("=" * 65)
-    print(f"メインパス: {' → '.join(main_path)}")
+    print(f"到達パス: {' → '.join(reach_path)}")
     if sub_pids:
         print(f"サブパラダイム: {', '.join(sub_pids)}")
     print()
 
-    # ── メインパス遷移 ──
+    # ── 到達パス遷移 ──
 
     print("=" * 65)
-    print("■ メインパス遷移")
+    print("■ 到達パス遷移")
     print("=" * 65)
     print()
 
-    for i in range(len(main_path) - 1):
-        pid_from = main_path[i]
-        pid_to = main_path[i + 1]
+    for i in range(len(reach_path) - 1):
+        pid_from = reach_path[i]
+        pid_to = reach_path[i + 1]
 
         print("-" * 50)
         print(f"遷移: {pid_from} → {pid_to}")

@@ -1,6 +1,6 @@
-"""シフト方向検証スクリプト。
+"""シフト方向検証スクリプト（L2-5）。
 
-各メインパス遷移 P_i → P_{i+1} について:
+到達パス（L2-0）の各遷移 P_i → P_{i+1} について:
   1. P_i フェーズの質問を順に回答するシミュレーション
   2. 各回答後に select_shift_target（近傍 + tension strict < + resolve >= N）を適用
   3. 選択結果が P_{i+1} と一致することを検証
@@ -11,85 +11,25 @@
 """
 from __future__ import annotations
 
-import copy
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from common import load_data  # noqa: E402
+from common import (  # noqa: E402
+    load_data,
+    derive_qp,
+    classify_questions,
+    compute_reachability_path,
+)
 from engine import (  # noqa: E402
     compute_effect,
     init_game,
     open_questions,
     update,
     tension,
-    alignment,
-    explained_o,
     select_shift_target,
 )
-
-
-# ── helpers ──────────────────────────────────────────
-
-
-def derive_qp(questions, paradigm):
-    """p_pred(P) から Q(P) を導出する。"""
-    qp = []
-    for q in questions:
-        if q.correct_answer == "irrelevant":
-            continue
-        eff = compute_effect(q)
-        eff_ds = {d for d, v in eff}
-        if eff_ds & set(paradigm.p_pred.keys()):
-            qp.append(q)
-    return qp
-
-
-def classify_questions(questions, paradigm):
-    """質問を safe / anomaly に分類する。"""
-    safe, anomaly = [], []
-    for q in questions:
-        eff = compute_effect(q)
-        if q.correct_answer == "irrelevant":
-            safe.append(q)
-            continue
-        has_anomaly = False
-        for d_id, v in eff:
-            pred = paradigm.prediction(d_id)
-            if pred is not None and pred != v:
-                has_anomaly = True
-                break
-        if has_anomaly:
-            anomaly.append(q)
-        else:
-            safe.append(q)
-    return safe, anomaly
-
-
-def compute_main_path(init_pid, paradigms, questions):
-    """O* ベースの遷移グラフからメインパスを導出する（最小緩和原理）。"""
-    o_star = {}
-    for q in questions:
-        if q.correct_answer == "irrelevant":
-            continue
-        eff = compute_effect(q)
-        for d_id, v in eff:
-            o_star[d_id] = v
-
-    path = [init_pid]
-    visited = {init_pid}
-    current = init_pid
-    while True:
-        p_cur = paradigms[current]
-        nxt = select_shift_target(o_star, p_cur, paradigms)
-        if nxt is None or nxt in visited:
-            break
-        path.append(nxt)
-        visited.add(nxt)
-        current = nxt
-
-    return path
 
 
 # ── simulation ───────────────────────────────────────
@@ -131,7 +71,6 @@ def simulate_shift_direction(
     safe_qs, anomaly_qs = classify_questions(qp, p_from)
 
     # シミュレーション用: Q(P_from) の safe 質問を初期オープンとする
-    # （データ駆動の init_questions に依存しない独立したシミュレーション）
     current_open = list(safe_qs)
     anomaly_ids = {q.id for q in anomaly_qs}
 
@@ -212,20 +151,20 @@ def simulate_shift_direction(
 def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
 
-    # メインパスを導出
-    main_path = compute_main_path(init_pid, paradigms, questions)
+    # 到達パスを導出（L2-0 と同じ計算）
+    reach_path = compute_reachability_path(init_pid, paradigms, questions)
 
     print("=" * 65)
-    print("シフト方向検証")
+    print("シフト方向検証 (L2-5)")
     print("=" * 65)
-    print(f"メインパス: {' → '.join(main_path)}")
+    print(f"到達パス: {' → '.join(reach_path)}")
     print()
 
     all_ok = True
 
-    for i in range(len(main_path) - 1):
-        pid_from = main_path[i]
-        pid_to = main_path[i + 1]
+    for i in range(len(reach_path) - 1):
+        pid_from = reach_path[i]
+        pid_to = reach_path[i + 1]
         p_from = paradigms[pid_from]
 
         print(f"-" * 50)
