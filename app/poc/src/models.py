@@ -14,33 +14,10 @@ class Paradigm:
     id: str
     name: str
     p_pred: Dict[str, int] = field(default_factory=dict)  # {d_id: 0|1}, unknown=キー不在
-    conceivable: Set[str] = field(default_factory=set)  # 想起可能集合
     relations: List[Tuple[str, str, float]] = field(default_factory=list)
     neighbors: Set[str] = field(default_factory=set)  # 近傍パラダイム集合（静的計算）
     shift_threshold: Optional[int] = None  # resolve 閾値 N(P)（自動計算）
     depth: Optional[int] = None  # Explained(P)包含関係から自動導出
-
-    def __post_init__(self):
-        self.validate()
-
-    def validate(self):
-        # conceivable は p_pred のキーの部分集合でなければならない
-        pred_keys = set(self.p_pred.keys())
-        if not self.conceivable.issubset(pred_keys):
-            invalid = sorted(self.conceivable - pred_keys)
-            raise ValueError(
-                f"Paradigm {self.id}: conceivable に p_pred に存在しない記述素: {invalid}"
-            )
-        # relations の src/tgt は conceivable に含まれる必要がある
-        for src, tgt, w in self.relations:
-            if src not in self.conceivable:
-                raise ValueError(
-                    f"Paradigm {self.id}: relation の src '{src}' が conceivable に含まれない"
-                )
-            if tgt not in self.conceivable:
-                raise ValueError(
-                    f"Paradigm {self.id}: relation の tgt '{tgt}' が conceivable に含まれない"
-                )
 
     def prediction(self, d_id: str) -> Optional[int]:
         return self.p_pred.get(d_id)

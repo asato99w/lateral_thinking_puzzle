@@ -41,8 +41,7 @@ def parse_formalization(text: str) -> dict:
     paradigm_pattern = re.compile(
         r"### (\w+)[:：]「(.+?)」\n\n"
         r"- id: (\w+)\n"
-        r"- name: (.+?)\n"
-        r"- threshold: (\w+)\n",
+        r"- name: (.+?)\n",
         re.MULTILINE,
     )
     # Split by paradigm headers
@@ -63,12 +62,6 @@ def parse_formalization(text: str) -> dict:
                 if len(parts) == 2:
                     p_pred.append([parts[0], int(parts[1])])
 
-        # Parse conceivable
-        conc_match = re.search(r"\*\*conceivable:\*\*\s*(.+)", section)
-        conceivable = []
-        if conc_match:
-            conceivable = [x.strip() for x in conc_match.group(1).split(",") if x.strip()]
-
         # Parse relations table
         rel_match = re.search(r"\*\*relations:\*\*\n\n(?:\|.*\n){2}((?:\|.*\n)*)", section)
         relations = []
@@ -78,21 +71,11 @@ def parse_formalization(text: str) -> dict:
                 if len(parts) == 3:
                     relations.append([parts[0], parts[1], float(parts[2])])
 
-        # Filter relations: src and tgt must be in conceivable
-        conc_set = set(conceivable)
-        filtered_relations = []
-        for r in relations:
-            if r[0] in conc_set and r[1] in conc_set:
-                filtered_relations.append(r)
-            else:
-                print(f"  [WARN] {pid}: relation [{r[0]}→{r[1]}] filtered (not in conceivable)")
-
         paradigms.append({
             "id": pid,
             "name": pname,
             "p_pred": p_pred,
-            "conceivable": conceivable,
-            "relations": filtered_relations,
+            "relations": relations,
         })
 
     result["paradigms"] = paradigms
@@ -153,6 +136,10 @@ def parse_formalization(text: str) -> dict:
         tc = re.search(r"- topic_category:\s*(\w+)", qs)
         q["topic_category"] = tc.group(1) if tc else ""
 
+        # paradigms
+        pm = re.search(r"- paradigms:\s*(\[.*?\])", qs)
+        q["paradigms"] = parse_id_list(pm.group(1)) if pm else []
+
         questions.append(q)
 
     result["questions"] = questions
@@ -201,7 +188,7 @@ def main():
     print(f"all_descriptor_ids: {len(result['all_descriptor_ids'])} 件")
     print(f"paradigms: {len(result['paradigms'])} 件")
     for p in result["paradigms"]:
-        print(f"  {p['id']}: p_pred={len(p['p_pred'])}, conceivable={len(p['conceivable'])}, relations={len(p['relations'])}")
+        print(f"  {p['id']}: p_pred={len(p['p_pred'])}, relations={len(p['relations'])}")
     print(f"topic_categories: {len(result['topic_categories'])} 件")
     print(f"questions: {len(result['questions'])} 件")
 

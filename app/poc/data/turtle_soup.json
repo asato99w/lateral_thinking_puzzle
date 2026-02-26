@@ -279,30 +279,6 @@
           0
         ]
       ],
-      "conceivable": [
-        "Fs-01",
-        "Fs-03",
-        "Fs-05",
-        "Fs-07",
-        "Fs-17",
-        "Fs-19",
-        "Fs-21",
-        "Fs-23",
-        "Fs-24",
-        "Fs-32",
-        "Fs-33",
-        "Ft-03",
-        "Ft-09",
-        "Ft-11",
-        "Ft-22",
-        "Ft-37",
-        "Fs-26",
-        "Fs-39",
-        "Fs-40",
-        "Fs-43",
-        "B-01",
-        "B-02"
-      ],
       "relations": [
         [
           "Fs-01",
@@ -358,6 +334,11 @@
           "Fs-19",
           "Fs-26",
           0.7
+        ],
+        [
+          "Ps-6",
+          "Fs-39",
+          0.8
         ]
       ]
     },
@@ -426,23 +407,6 @@
           0
         ]
       ],
-      "conceivable": [
-        "Fs-12",
-        "Fs-14",
-        "Fs-19",
-        "Fs-24",
-        "Fs-25",
-        "Fs-26",
-        "Fs-27",
-        "Fs-28",
-        "Ft-36",
-        "Ft-38",
-        "Ft-03",
-        "Ft-09",
-        "Ft-11",
-        "Ft-37",
-        "B-01"
-      ],
       "relations": [
         [
           "Fs-26",
@@ -480,9 +444,19 @@
           0.7
         ],
         [
+          "Fs-27",
+          "Ft-50",
+          0.7
+        ],
+        [
           "Fs-26",
           "Fs-27",
           0.8
+        ],
+        [
+          "Ft-50",
+          "Ft-03",
+          0.7
         ]
       ]
     },
@@ -550,23 +524,6 @@
           "B-01",
           0
         ]
-      ],
-      "conceivable": [
-        "Fs-39",
-        "Fs-40",
-        "Fs-41",
-        "Fs-42",
-        "Fs-43",
-        "Fs-44",
-        "Ft-21",
-        "Ft-22",
-        "Ft-24",
-        "Ft-26",
-        "Ft-27",
-        "Ft-37",
-        "Ft-03",
-        "Ft-09",
-        "B-01"
       ],
       "relations": [
         [
@@ -704,30 +661,6 @@
           0
         ]
       ],
-      "conceivable": [
-        "Ft-01",
-        "Ft-02",
-        "Ft-03",
-        "Ft-07",
-        "Ft-09",
-        "Ft-10",
-        "Ft-11",
-        "Ft-14",
-        "Ft-16",
-        "Ft-20",
-        "Ft-21",
-        "Ft-22",
-        "Ft-24",
-        "Ft-26",
-        "Ft-28",
-        "Ft-47",
-        "Ft-32",
-        "Pt-1",
-        "Pt-2",
-        "Pt-3",
-        "Pt-4",
-        "B-01"
-      ],
       "relations": [
         [
           "Ft-03",
@@ -835,18 +768,6 @@
           "B-02",
           0
         ]
-      ],
-      "conceivable": [
-        "Ft-23",
-        "Ft-29",
-        "Ft-30",
-        "Ft-31",
-        "Ft-40",
-        "Ft-42",
-        "Ft-43",
-        "Pt-6",
-        "B-01",
-        "B-02"
       ],
       "relations": [
         [
@@ -963,30 +884,6 @@
           "B-02",
           0
         ]
-      ],
-      "conceivable": [
-        "Fs-01",
-        "Fs-03",
-        "Fs-05",
-        "Fs-07",
-        "Fs-17",
-        "Fs-19",
-        "Fs-21",
-        "Fs-23",
-        "Fs-24",
-        "Fs-32",
-        "Fs-33",
-        "B-01",
-        "Ft-03",
-        "Ft-09",
-        "Ft-11",
-        "Ft-22",
-        "Ft-37",
-        "Fs-26",
-        "Fs-39",
-        "Fs-40",
-        "Fs-43",
-        "B-02"
       ],
       "relations": [
         [
@@ -1144,30 +1041,6 @@
           0
         ]
       ],
-      "conceivable": [
-        "Fs-01",
-        "Fs-03",
-        "Fs-05",
-        "Fs-07",
-        "Fs-17",
-        "Fs-19",
-        "Fs-21",
-        "Fs-23",
-        "Fs-24",
-        "Fs-32",
-        "Fs-33",
-        "B-02",
-        "Ft-03",
-        "Ft-09",
-        "Ft-11",
-        "Ft-22",
-        "Ft-37",
-        "Fs-26",
-        "Fs-39",
-        "Fs-40",
-        "Fs-43",
-        "B-01"
-      ],
       "relations": [
         [
           "Fs-01",
@@ -1259,7 +1132,12 @@
       "related_descriptors": [
         "Fs-01"
       ],
-      "topic_category": "A"
+      "topic_category": "A",
+      "paradigms": [
+        "P1",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q002",
@@ -1285,7 +1163,12 @@
       "related_descriptors": [
         "Fs-03"
       ],
-      "topic_category": "A"
+      "topic_category": "A",
+      "paradigms": [
+        "P1",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q003",
@@ -1321,7 +1204,12 @@
         "Fs-05",
         "Fs-04"
       ],
-      "topic_category": "A"
+      "topic_category": "A",
+      "paradigms": [
+        "P1",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q004",
@@ -1357,7 +1245,12 @@
         "Fs-07",
         "Fs-02"
       ],
-      "topic_category": "A"
+      "topic_category": "A",
+      "paradigms": [
+        "P1",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q005",
@@ -1393,7 +1286,8 @@
         "Fs-08",
         "Fs-10"
       ],
-      "topic_category": "A"
+      "topic_category": "A",
+      "paradigms": []
     },
     {
       "id": "q006",
@@ -1429,7 +1323,10 @@
         "Fs-09",
         "Fs-14"
       ],
-      "topic_category": "A"
+      "topic_category": "A",
+      "paradigms": [
+        "P2"
+      ]
     },
     {
       "id": "q007",
@@ -1455,7 +1352,8 @@
       "related_descriptors": [
         "Fs-11"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q008",
@@ -1491,7 +1389,10 @@
         "Fs-12",
         "Fs-06"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": [
+        "P2"
+      ]
     },
     {
       "id": "q009",
@@ -1517,7 +1418,8 @@
       "related_descriptors": [
         "Fs-13"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": []
     },
     {
       "id": "q010",
@@ -1543,7 +1445,8 @@
       "related_descriptors": [
         "Fs-15"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q011",
@@ -1569,7 +1472,8 @@
       "related_descriptors": [
         "Fs-16"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q012",
@@ -1595,7 +1499,12 @@
       "related_descriptors": [
         "Fs-17"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": [
+        "P1",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q013",
@@ -1621,7 +1530,8 @@
       "related_descriptors": [
         "Fs-18"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": []
     },
     {
       "id": "q014",
@@ -1647,7 +1557,13 @@
       "related_descriptors": [
         "Fs-19"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": [
+        "P1",
+        "P2",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q015",
@@ -1673,7 +1589,8 @@
       "related_descriptors": [
         "Fs-20"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q016",
@@ -1709,7 +1626,12 @@
         "Fs-22",
         "Fs-21"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": [
+        "P1",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q017",
@@ -1745,7 +1667,12 @@
         "Fs-23",
         "Fs-29"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P1",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q018",
@@ -1771,7 +1698,13 @@
       "related_descriptors": [
         "Fs-24"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P1",
+        "P2",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q019",
@@ -1799,7 +1732,10 @@
       "related_descriptors": [
         "Fs-25"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P2"
+      ]
     },
     {
       "id": "q020",
@@ -1825,7 +1761,13 @@
       "related_descriptors": [
         "Fs-26"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P1",
+        "P2",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q021",
@@ -1853,7 +1795,10 @@
       "related_descriptors": [
         "Fs-27"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P2"
+      ]
     },
     {
       "id": "q022",
@@ -1879,7 +1824,10 @@
       "related_descriptors": [
         "Fs-28"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P2"
+      ]
     },
     {
       "id": "q023",
@@ -1915,7 +1863,8 @@
         "Fs-30",
         "Fs-34"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": []
     },
     {
       "id": "q024",
@@ -1941,7 +1890,8 @@
       "related_descriptors": [
         "Fs-31"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": []
     },
     {
       "id": "q025",
@@ -1967,7 +1917,12 @@
       "related_descriptors": [
         "Fs-32"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P1",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q026",
@@ -2003,7 +1958,12 @@
         "Fs-33",
         "Pt-7"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": [
+        "P1",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q027",
@@ -2029,7 +1989,8 @@
       "related_descriptors": [
         "Fs-35"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": []
     },
     {
       "id": "q028",
@@ -2065,7 +2026,8 @@
         "Fs-36",
         "Fs-37"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": []
     },
     {
       "id": "q029",
@@ -2091,7 +2053,8 @@
       "related_descriptors": [
         "Fs-38"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q030",
@@ -2117,7 +2080,13 @@
       "related_descriptors": [
         "Fs-39"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P1",
+        "P3",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q031",
@@ -2155,7 +2124,13 @@
         "Fs-40",
         "Fs-41"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P1",
+        "P3",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q032",
@@ -2193,7 +2168,10 @@
         "Fs-42",
         "Pt-10"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P3"
+      ]
     },
     {
       "id": "q033",
@@ -2221,7 +2199,13 @@
       "related_descriptors": [
         "Fs-43"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P1",
+        "P3",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q034",
@@ -2249,7 +2233,10 @@
       "related_descriptors": [
         "Fs-44"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P3"
+      ]
     },
     {
       "id": "q035",
@@ -2277,7 +2264,8 @@
       "related_descriptors": [
         "Fs-45"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q036",
@@ -2303,7 +2291,8 @@
       "related_descriptors": [
         "Fs-46"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q037",
@@ -2329,7 +2318,8 @@
       "related_descriptors": [
         "Fs-47"
       ],
-      "topic_category": "A"
+      "topic_category": "A",
+      "paradigms": []
     },
     {
       "id": "q038",
@@ -2355,7 +2345,8 @@
       "related_descriptors": [
         "Fs-48"
       ],
-      "topic_category": "A"
+      "topic_category": "A",
+      "paradigms": []
     },
     {
       "id": "q039",
@@ -2381,7 +2372,8 @@
       "related_descriptors": [
         "Fs-49"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q040",
@@ -2407,7 +2399,8 @@
       "related_descriptors": [
         "Fs-50"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q041",
@@ -2433,7 +2426,8 @@
       "related_descriptors": [
         "Fs-51"
       ],
-      "topic_category": "A"
+      "topic_category": "A",
+      "paradigms": []
     },
     {
       "id": "q042",
@@ -2459,7 +2453,8 @@
       "related_descriptors": [
         "Fs-52"
       ],
-      "topic_category": "A"
+      "topic_category": "A",
+      "paradigms": []
     },
     {
       "id": "q043",
@@ -2485,7 +2480,8 @@
       "related_descriptors": [
         "Fs-53"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q044",
@@ -2511,7 +2507,8 @@
       "related_descriptors": [
         "Fs-54"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q045",
@@ -2537,7 +2534,8 @@
       "related_descriptors": [
         "Fs-55"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q046",
@@ -2563,7 +2561,8 @@
       "related_descriptors": [
         "Fs-56"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q047",
@@ -2589,7 +2588,8 @@
       "related_descriptors": [
         "Fs-57"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q048",
@@ -2615,7 +2615,8 @@
       "related_descriptors": [
         "Fs-58"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q049",
@@ -2641,7 +2642,8 @@
       "related_descriptors": [
         "Fs-59"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q050",
@@ -2667,7 +2669,8 @@
       "related_descriptors": [
         "Fs-60"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q051",
@@ -2693,7 +2696,8 @@
       "related_descriptors": [
         "Fs-61"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q052",
@@ -2719,7 +2723,8 @@
       "related_descriptors": [
         "Fs-62"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q053",
@@ -2745,7 +2750,8 @@
       "related_descriptors": [
         "Fs-63"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q054",
@@ -2771,7 +2777,10 @@
       "related_descriptors": [
         "Pt-1"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q055",
@@ -2799,7 +2808,10 @@
       "related_descriptors": [
         "Pt-2"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q056",
@@ -2827,7 +2839,10 @@
       "related_descriptors": [
         "Pt-3"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q057",
@@ -2855,7 +2870,10 @@
       "related_descriptors": [
         "Pt-4"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q058",
@@ -2883,7 +2901,8 @@
       "related_descriptors": [
         "Pt-5"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q059",
@@ -2909,7 +2928,10 @@
       "related_descriptors": [
         "Pt-6"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P5"
+      ]
     },
     {
       "id": "q060",
@@ -2937,7 +2959,10 @@
       "related_descriptors": [
         "Ft-01"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q061",
@@ -2965,7 +2990,10 @@
       "related_descriptors": [
         "Ft-02"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q062",
@@ -2991,7 +3019,15 @@
       "related_descriptors": [
         "Ft-03"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q063",
@@ -3019,7 +3055,8 @@
       "related_descriptors": [
         "Ft-04"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q064",
@@ -3047,7 +3084,8 @@
       "related_descriptors": [
         "Ft-05"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q065",
@@ -3075,7 +3113,8 @@
       "related_descriptors": [
         "Ft-06"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q066",
@@ -3103,7 +3142,10 @@
       "related_descriptors": [
         "Ft-07"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q067",
@@ -3131,7 +3173,8 @@
       "related_descriptors": [
         "Ft-08"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q068",
@@ -3179,7 +3222,15 @@
         "Ft-12",
         "Ft-13"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q069",
@@ -3207,7 +3258,10 @@
       "related_descriptors": [
         "Ft-10"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q070",
@@ -3235,7 +3289,14 @@
       "related_descriptors": [
         "Ft-11"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P1",
+        "P2",
+        "P4",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q071",
@@ -3283,7 +3344,10 @@
         "Ft-14",
         "Ft-16"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q072",
@@ -3311,7 +3375,8 @@
       "related_descriptors": [
         "Ft-17"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q073",
@@ -3339,7 +3404,8 @@
       "related_descriptors": [
         "Ft-18"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q074",
@@ -3367,7 +3433,8 @@
       "related_descriptors": [
         "Ft-19"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q075",
@@ -3405,7 +3472,11 @@
         "Ft-20",
         "Ft-21"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P3",
+        "P4"
+      ]
     },
     {
       "id": "q076",
@@ -3453,7 +3524,14 @@
         "Ft-24",
         "Ft-27"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P1",
+        "P3",
+        "P4",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q077",
@@ -3481,7 +3559,10 @@
       "related_descriptors": [
         "Ft-23"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P5"
+      ]
     },
     {
       "id": "q078",
@@ -3509,7 +3590,8 @@
       "related_descriptors": [
         "Ft-25"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q079",
@@ -3537,7 +3619,11 @@
       "related_descriptors": [
         "Ft-26"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P3",
+        "P4"
+      ]
     },
     {
       "id": "q080",
@@ -3563,7 +3649,10 @@
       "related_descriptors": [
         "Ft-29"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P5"
+      ]
     },
     {
       "id": "q081",
@@ -3591,7 +3680,10 @@
       "related_descriptors": [
         "Ft-30"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P5"
+      ]
     },
     {
       "id": "q082",
@@ -3619,7 +3711,10 @@
       "related_descriptors": [
         "Ft-31"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P5"
+      ]
     },
     {
       "id": "q083",
@@ -3647,7 +3742,10 @@
       "related_descriptors": [
         "Ft-32"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q084",
@@ -3675,7 +3773,8 @@
       "related_descriptors": [
         "Ft-33"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q085",
@@ -3713,7 +3812,8 @@
         "Ft-34",
         "Ft-35"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q086",
@@ -3741,7 +3841,10 @@
       "related_descriptors": [
         "Ft-36"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P2"
+      ]
     },
     {
       "id": "q087",
@@ -3779,7 +3882,14 @@
         "Ft-37",
         "Pt-8"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": [
+        "P1",
+        "P2",
+        "P3",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q088",
@@ -3807,7 +3917,10 @@
       "related_descriptors": [
         "Ft-38"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": [
+        "P2"
+      ]
     },
     {
       "id": "q089",
@@ -3835,7 +3948,8 @@
       "related_descriptors": [
         "Ft-39"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q090",
@@ -3883,7 +3997,10 @@
         "Ft-41",
         "Pt-9"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P5"
+      ]
     },
     {
       "id": "q091",
@@ -3921,7 +4038,10 @@
         "Ft-42",
         "Ft-43"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": [
+        "P5"
+      ]
     },
     {
       "id": "q092",
@@ -3949,7 +4069,8 @@
       "related_descriptors": [
         "Ft-44"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q093",
@@ -3977,7 +4098,8 @@
       "related_descriptors": [
         "Ft-45"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q094",
@@ -4015,7 +4137,8 @@
         "Ft-46",
         "Ft-48"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q095",
@@ -4043,7 +4166,10 @@
       "related_descriptors": [
         "Ft-47"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": [
+        "P4"
+      ]
     },
     {
       "id": "q096",
@@ -4071,7 +4197,8 @@
       "related_descriptors": [
         "Ft-49"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": []
     },
     {
       "id": "q097",
@@ -4097,7 +4224,8 @@
       "related_descriptors": [
         "Ft-50"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": []
     },
     {
       "id": "q098",
@@ -4123,7 +4251,8 @@
       "related_descriptors": [
         "Ft-51"
       ],
-      "topic_category": "E"
+      "topic_category": "E",
+      "paradigms": []
     },
     {
       "id": "q099",
@@ -4149,7 +4278,16 @@
       "related_descriptors": [
         "B-01"
       ],
-      "topic_category": "D"
+      "topic_category": "D",
+      "paradigms": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q100",
@@ -4175,7 +4313,13 @@
       "related_descriptors": [
         "B-02"
       ],
-      "topic_category": "C"
+      "topic_category": "C",
+      "paradigms": [
+        "P1",
+        "P5",
+        "S1",
+        "S2"
+      ]
     },
     {
       "id": "q101",
@@ -4203,7 +4347,10 @@
       "related_descriptors": [
         "Ft-28"
       ],
-      "topic_category": "B"
+      "topic_category": "B",
+      "paradigms": [
+        "P4"
+      ]
     }
   ]
 }

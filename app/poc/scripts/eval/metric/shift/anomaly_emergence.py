@@ -20,7 +20,7 @@ from engine import (
 
 
 def classify_effect(q, paradigms):
-    """質問の effect 記述素がどのパラダイムの Conceivable に属するかを返す。"""
+    """質問の effect 記述素がどのパラダイムの p_pred に属するかを返す。"""
     eff = compute_effect(q)
     if q.correct_answer == "irrelevant":
         return {}

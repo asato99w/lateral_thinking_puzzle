@@ -62,7 +62,7 @@ def main():
         prev_anomalies = t
 
         print(f"  {pid} ({p.name})")
-        print(f"    anomalies={t}, alignment={a:.3f}, |Conceivable∩O*|={len(overlap)}")
+        print(f"    anomalies={t}, alignment={a:.3f}, |p_pred∩O*|={len(overlap)}")
         if anomaly_ds:
             print(f"    アノマリー記述素: {sorted(anomaly_ds)}")
         if mark:

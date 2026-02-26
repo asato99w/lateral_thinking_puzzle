@@ -66,7 +66,6 @@ def build_paradigms(data: dict) -> dict[str, Paradigm]:
             id=p["id"],
             name=p["name"],
             p_pred={d: v for d, v in p["p_pred"]},
-            conceivable=set(p["conceivable"]),
             relations=[(r[0], r[1], r[2]) for r in p["relations"]],
         )
     return paradigms
@@ -89,24 +88,6 @@ def build_questions(data: dict) -> list[Question]:
             paradigms=q.get("paradigms", []),
         ))
     return questions
-
-
-def fill_question_paradigms(
-    questions: list[Question],
-    paradigms: dict[str, Paradigm],
-) -> None:
-    """paradigms フィールドが空の質問に、p_pred 重なりから自動計算して付与する。"""
-    from engine import compute_effect
-    for q in questions:
-        if q.paradigms:
-            continue
-        eff = compute_effect(q)
-        if q.correct_answer == "irrelevant":
-            continue
-        eff_ds = {d for d, v in eff}
-        for pid, p in paradigms.items():
-            if eff_ds & set(p.p_pred.keys()):
-                q.paradigms.append(pid)
 
 
 def print_history(questions: list[Question], answered: set[str]):
@@ -148,7 +129,6 @@ def main():
 
     paradigms = build_paradigms(data)
     questions = build_questions(data)
-    fill_question_paradigms(questions, paradigms)
     all_descriptor_ids = data["all_descriptor_ids"]
     ps_values = {d[0]: d[1] for d in data["ps_values"]}
     init_paradigm_id = data["init_paradigm"]

@@ -1,4 +1,4 @@
-"""Ps と Conceivable(P) の関係を検証する。"""
+"""Ps と p_pred(P) の関係を検証する。"""
 import sys
 from pathlib import Path
 
@@ -31,7 +31,7 @@ def main():
     no_home = ps_ids - set().union(*(set(p.p_pred.keys()) for p in paradigms.values()))
     if no_home:
         print()
-        print(f"どの Conceivable(P) にも含まれない Ps: {sorted(no_home)}")
+        print(f"どの p_pred(P) にも含まれない Ps: {sorted(no_home)}")
 
 
 if __name__ == "__main__":

@@ -38,25 +38,6 @@ def load_raw(data_path: Path | None = None) -> dict:
         return json.load(f)
 
 
-def _fill_question_paradigms(
-    questions: list[Question],
-    paradigms: dict[str, Paradigm],
-) -> None:
-    """paradigms フィールドが空の質問に、p_pred 重なりから自動計算して付与する。"""
-    from engine import compute_effect  # noqa: E402
-
-    for q in questions:
-        if q.paradigms:
-            continue
-        eff = compute_effect(q)
-        if q.correct_answer == "irrelevant":
-            continue
-        eff_ds = {d for d, v in eff}
-        for pid, p in paradigms.items():
-            if eff_ds & set(p.p_pred.keys()):
-                q.paradigms.append(pid)
-
-
 def load_data(data_path: Path | None = None):
     """データを読み込む。
 
@@ -77,7 +58,6 @@ def load_data(data_path: Path | None = None):
             id=p["id"],
             name=p["name"],
             p_pred={d: v for d, v in p["p_pred"]},
-            conceivable=set(p["conceivable"]),
             relations=[(r[0], r[1], r[2]) for r in p["relations"]],
         )
 
@@ -96,9 +76,6 @@ def load_data(data_path: Path | None = None):
             topic_category=q.get("topic_category", ""),
             paradigms=q.get("paradigms", []),
         ))
-
-    # paradigms フィールドが未定義なら p_pred 重なりから自動計算
-    _fill_question_paradigms(questions, paradigms)
 
     ps_values = {d[0]: d[1] for d in data["ps_values"]}
 

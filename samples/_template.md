@@ -31,7 +31,7 @@ samples/NNN_YYYYMMDD_タイトル/
 | 01_入力.md | Ps・Pt の定義 |
 | 02_記述素展開.md | 記述素空間の生成結果 |
 | 03_パラダイム発見.md | メインパス・サブパスの発見結果 |
-| 04_内部構造分析.md | 各パラダイムの P_pred, Conceivable, R(P) |
+| 04_内部構造分析.md | 各パラダイムの P_pred, R(P) |
 | 05_質問生成.md | 質問群の生成結果 |
 | 06_形式化.md | POC JSON データに変換可能な形式の整理 |
 | 07_補充検証.md | 検証結果と補充内容 |
@@ -62,7 +62,6 @@ samples/NNN_YYYYMMDD_タイトル/
 | id | パラダイム ID |
 | name | パラダイム名 |
 | p_pred | D⁺・D⁻ の完全リスト（論理的予測の全体） |
-| conceivable | Conceivable(P) の完全リスト |
 | relations | R(P) の完全リスト（横辺＋ゲート辺、[ソース, ターゲット, w]） |
 
 「前パラダイムと大部分が重複」等の省略は不可。全パラダイムを完全に記載する。
@@ -83,6 +82,7 @@ samples/NNN_YYYYMMDD_タイトル/
 | prerequisites | 前提記述素の ID リスト（なければ空リスト） |
 | related_descriptors | 関連記述素の ID リスト |
 | topic_category | トピックカテゴリ ID |
+| paradigms | 所属パラダイムの ID リスト |
 
 prerequisites は「類型 A が 6 問」のような集約ではなく、各質問に対する具体的な割り当てを記載する。
 
