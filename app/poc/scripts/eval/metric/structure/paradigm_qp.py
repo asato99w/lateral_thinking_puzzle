@@ -23,14 +23,14 @@ from engine import compute_effect, _assimilate_descriptor, EPSILON  # noqa: E402
 # ---------------------------------------------------------------------------
 
 def derive_qp(questions, paradigm):
-    """conceivable(P) から Q(P) を導出する。"""
+    """p_pred(P) から Q(P) を導出する。"""
     qp = []
     for q in questions:
         if q.correct_answer == "irrelevant":
             continue
         eff = compute_effect(q)
         eff_ds = {d for d, v in eff}
-        if eff_ds & paradigm.conceivable:
+        if eff_ds & set(paradigm.p_pred.keys()):
             qp.append(q)
     return qp
 
@@ -210,7 +210,7 @@ def analyze_rp_spread(paradigm, qp, layers, truth, ps_values):
 
         # 層 k の質問を全て回答した際の R(P) 同化による波及先
         # 簡易シミュレーション: H を構築して同化を適用
-        h = {d: 0.5 for d in paradigm.conceivable}
+        h = {d: 0.5 for d in paradigm.p_pred}
         for d, v in ps_values.items():
             if d in h:
                 h[d] = float(v)

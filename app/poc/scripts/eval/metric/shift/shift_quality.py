@@ -91,16 +91,14 @@ def update_with_shift_tracking(state, question, paradigms, all_questions, curren
     if best_id is not None:
         # P_current のアノマリー集合（attention/resolve 計算用）
         anomalies = {
-            d for d in p_current.conceivable
-            if d in state.o and p_current.prediction(d) is not None
-            and p_current.prediction(d) != state.o[d]
+            d for d, pred in p_current.p_pred.items()
+            if d in state.o and pred != state.o[d]
         }
         p_new = paradigms[best_id]
         new_tension_val = tension(state.o, p_new)
-        attention = len({d for d in anomalies if d in p_new.conceivable})
+        attention = len({d for d in anomalies if d in p_new.p_pred})
         resolve = len({d for d in anomalies
-                       if d in p_new.conceivable
-                       and p_new.prediction(d) is not None
+                       if p_new.prediction(d) is not None
                        and p_new.prediction(d) == state.o[d]})
 
         # シフト前の状態を記録

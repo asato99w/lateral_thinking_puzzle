@@ -41,7 +41,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from common import load_data, load_raw  # noqa: E402
-from engine import tension, alignment, compute_effect, explained_o, select_shift_target, _question_all_descriptors
+from engine import tension, alignment, compute_effect, explained_o, select_shift_target
 from threshold import _anomaly_set
 
 
@@ -90,9 +90,8 @@ def select_shift_target_with_details(pid_cur, paradigms, o_star):
     p_cur = paradigms[pid_cur]
     # P_current のアノマリー集合
     anomalies = {
-        d for d in p_cur.conceivable
-        if d in o_star and p_cur.prediction(d) is not None
-        and p_cur.prediction(d) != o_star[d]
+        d for d, pred in p_cur.p_pred.items()
+        if d in o_star and pred != o_star[d]
     }
     cur_tension = tension(o_star, p_cur)
 
@@ -102,10 +101,9 @@ def select_shift_target_with_details(pid_cur, paradigms, o_star):
         if pid == pid_cur:
             continue
         t = tension(o_star, p)
-        att = len({d for d in anomalies if d in p.conceivable})
+        att = len({d for d in anomalies if d in p.p_pred})
         res = len({d for d in anomalies
-                   if d in p.conceivable
-                   and p.prediction(d) is not None and p.prediction(d) == o_star[d]})
+                   if p.prediction(d) is not None and p.prediction(d) == o_star[d]})
         is_neighbor = pid in p_cur.neighbors
         meets_threshold = (p.shift_threshold is None or res >= p.shift_threshold)
         tension_ok = t < cur_tension
@@ -176,14 +174,14 @@ def check_tension_ordering(paradigms, main_path, o_star, all_ids):
         p = paradigms[pid]
         a = alignment(h_star, p)
         t = tension(o_star, p)
-        overlap = len(p.conceivable & set(o_star.keys()))
+        overlap = len(set(p.p_pred.keys()) & set(o_star.keys()))
         all_scores.append((pid, t, a, overlap))
 
     print("tension(O*, P) — 全パラダイム:")
     all_scores.sort(key=lambda x: -x[1])
     for pid, t, a, ov in all_scores:
         marker = " ◀ main" if pid in main_set else ""
-        print(f"  {pid:4s}: tension={t}  alignment={a:.4f}  |Conceivable∩O*|={ov}{marker}")
+        print(f"  {pid:4s}: tension={t}  alignment={a:.4f}  |p_pred∩O*|={ov}{marker}")
     print()
 
     # メインパスの tension 順序
@@ -375,8 +373,7 @@ def check_shift_driver_reachability(paradigms, main_path, questions, o_star):
     1. eo ドライバー記述素を特定
        - Pi+1 が正しく予測し、Pi が不正解 or 予測なし
        - これが O に追加されると eo(Pi+1) > eo(Pi) になりうる
-    2. ドライバーに紐づく質問が Pi active 時にオープン可能か
-       - _conceivable_blocked で判定
+    2. ドライバーに紐づく質問を特定
     3. 同時に、Pi+2 のドライバー質問が Pi からオープン可能かも検査
        - Pi+1 のドライバーが到達不能で Pi+2 のドライバーが到達可能なら
          Pi+1 がスキップされる構造的リスク
@@ -422,16 +419,12 @@ def check_shift_driver_reachability(paradigms, main_path, questions, o_star):
                 eff = compute_effect(q)
                 if not any(d_id == d for d_id, v in eff):
                     continue
-                # Pi からオープン可能か
-                all_descs = _question_all_descriptors(q)
-                blocked = any(dd not in p_cur.conceivable for dd in all_descs)
-                driver_questions[d].append((q.id, not blocked))
-                if not blocked:
-                    openable_qs.add(q.id)
+                driver_questions[d].append(q.id)
+                openable_qs.add(q.id)
 
         openable_driver_ds = set()
         for d, qs in driver_questions.items():
-            if any(ok for _, ok in qs):
+            if qs:
                 openable_driver_ds.add(d)
 
         print(f"  {pid_cur} → {pid_next}:")
@@ -444,16 +437,12 @@ def check_shift_driver_reachability(paradigms, main_path, questions, o_star):
             print(f"    NG: {pid_cur} active 時に {pid_next} の eo ドライバーに到達する質問がない")
             print(f"    → 部分 O で eo({pid_next}) > eo({pid_cur}) が実現不可能")
 
-            # 詳細: ブロックされているドライバー記述素
-            print(f"    ブロック詳細:")
+            # 詳細: 質問のないドライバー記述素
+            print(f"    詳細:")
             for d in all_drivers[:10]:  # 上位10個
                 d_type = "Pi不正解" if d in drivers_wrong else "Pi予測なし"
                 qs_info = driver_questions.get(d, [])
-                if qs_info:
-                    qs_str = ", ".join(f"{qid}({'open' if ok else 'blocked'})"
-                                       for qid, ok in qs_info)
-                else:
-                    qs_str = "(質問なし)"
+                qs_str = ", ".join(qs_info) if qs_info else "(質問なし)"
                 print(f"      {d} [{d_type}]: {qs_str}")
             if len(all_drivers) > 10:
                 print(f"      ... 他 {len(all_drivers) - 10} 個")
@@ -462,10 +451,10 @@ def check_shift_driver_reachability(paradigms, main_path, questions, o_star):
         else:
             print(f"    OK")
 
-            # オープン可能なドライバーの内訳
+            # ドライバーの内訳
             for d in sorted(openable_driver_ds):
                 d_type = "Pi不正解" if d in drivers_wrong else "Pi予測なし"
-                qs_str = ", ".join(f"{qid}" for qid, ok in driver_questions[d] if ok)
+                qs_str = ", ".join(driver_questions[d])
                 print(f"      {d} [{d_type}]: {qs_str}")
 
         # スキップリスク: Pi+2 のドライバーが Pi からオープン可能か
@@ -492,10 +481,8 @@ def check_shift_driver_reachability(paradigms, main_path, questions, o_star):
                     eff = compute_effect(q)
                     if not any(d_id == d for d_id, v in eff):
                         continue
-                    all_descs = _question_all_descriptors(q)
-                    if not any(dd not in p_cur.conceivable for dd in all_descs):
-                        skip_openable.add(d)
-                        break
+                    skip_openable.add(d)
+                    break
 
             if skip_openable and not openable_driver_ds:
                 print(f"    スキップリスク: {pid_skip} のドライバー {len(skip_openable)}個が"
@@ -554,8 +541,7 @@ def check_neighborhood_structure(paradigms, o_star):
                 nb_anom = _anomaly_set(nb_p, o_star)
                 remaining = anom & nb_anom
                 resolve = len({d for d in anom
-                               if d in nb_p.conceivable
-                               and nb_p.prediction(d) is not None
+                               if nb_p.prediction(d) is not None
                                and nb_p.prediction(d) == o_star[d]})
                 print(f"    → {nb_pid}: |Remaining|={len(remaining)}"
                       f" resolve={resolve}"

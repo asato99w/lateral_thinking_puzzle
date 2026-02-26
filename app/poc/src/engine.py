@@ -19,13 +19,6 @@ def _question_all_descriptors(q: Question) -> set[str]:
     return ds
 
 
-def _conceivable_blocked(q: Question, conceivable: set[str]) -> bool:
-    """質問の参照記述素のいずれかが Conceivable(P) 外ならブロック。"""
-    for d in _question_all_descriptors(q):
-        if d not in conceivable:
-            return True
-    return False
-
 
 def compute_effect(question: Question) -> list[tuple[str, int]] | list[str]:
     return question.effect
@@ -64,8 +57,6 @@ def init_questions(
 ) -> list[Question]:
     result = []
     for q in questions:
-        if _conceivable_blocked(q, paradigm.conceivable):
-            continue
         if o is not None and not all(d in o for d in q.prerequisites):
             continue
         eff = compute_effect(q)
@@ -163,9 +154,8 @@ def select_shift_target(
     """
     # P_current のアノマリー集合
     anomalies = {
-        d for d in p_current.conceivable
-        if d in o and p_current.prediction(d) is not None
-        and p_current.prediction(d) != o[d]
+        d for d, pred in p_current.p_pred.items()
+        if d in o and pred != o[d]
     }
     cur_tension = tension(o, p_current)
 
@@ -179,11 +169,10 @@ def select_shift_target(
         if t >= cur_tension:  # 条件2: tension strict <
             continue
         res = len({d for d in anomalies
-                   if d in p.conceivable
-                   and p.prediction(d) is not None and p.prediction(d) == o[d]})
+                   if p.prediction(d) is not None and p.prediction(d) == o[d]})
         if p.shift_threshold is not None and res < p.shift_threshold:  # 条件3: resolve >= N
             continue
-        att = len({d for d in anomalies if d in p.conceivable})
+        att = len({d for d in anomalies if d in p.p_pred})
         candidates.append((pid, t, att, res))
 
     if not candidates:
@@ -195,13 +184,11 @@ def select_shift_target(
 
 
 def tension(o: dict[str, int], paradigm: Paradigm) -> int:
-    """アノマリーの数。Conceivable(P) ∩ O で P の予測と矛盾するものを数える。"""
+    """アノマリーの数。P_pred ∩ O で P の予測と矛盾するものを数える。"""
     count = 0
-    for d in paradigm.conceivable:
-        if d in o:
-            pred = paradigm.prediction(d)
-            if pred is not None and pred != o[d]:
-                count += 1
+    for d, pred in paradigm.p_pred.items():
+        if d in o and pred != o[d]:
+            count += 1
     return count
 
 
@@ -231,14 +218,9 @@ def open_questions(
     questions: list[Question],
     paradigms: dict[str, Paradigm] | None = None,
 ) -> list[Question]:
-    conceivable = set()
-    if paradigms and state.p_current in paradigms:
-        conceivable = paradigms[state.p_current].conceivable
     result = []
     for q in questions:
         if q.id in state.answered:
-            continue
-        if conceivable and _conceivable_blocked(q, conceivable):
             continue
         if not all(d in state.o for d in q.prerequisites):
             continue
@@ -268,7 +250,7 @@ def _assimilate_from_paradigm(
     o: dict[str, int],
     paradigm: Paradigm,
 ):
-    for d_id in set(o.keys()) & paradigm.conceivable:
+    for d_id in set(o.keys()) & set(paradigm.p_pred.keys()):
         pred = paradigm.prediction(d_id)
         if pred is not None and pred == o[d_id]:
             _assimilate_descriptor(h, d_id, paradigm)

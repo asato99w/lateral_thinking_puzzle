@@ -14,9 +14,9 @@ def main():
 
     for i, (pid1, p1) in enumerate(main_paradigms):
         for pid2, p2 in main_paradigms[i+1:]:
-            shared = p1.conceivable & p2.conceivable
-            excl_1 = p1.conceivable - p2.conceivable
-            excl_2 = p2.conceivable - p1.conceivable
+            shared = set(p1.p_pred.keys()) & set(p2.p_pred.keys())
+            excl_1 = set(p1.p_pred.keys()) - set(p2.p_pred.keys())
+            excl_2 = set(p2.p_pred.keys()) - set(p1.p_pred.keys())
             if shared or True:  # 隣接でなくても表示
                 print(f"{pid1} vs {pid2}:")
                 print(f"  共有想起: {sorted(shared) if shared else '(なし)'}")

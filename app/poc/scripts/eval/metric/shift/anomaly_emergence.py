@@ -29,16 +29,16 @@ def classify_effect(q, paradigms):
     for pid in MAIN_PATH:
         if pid not in paradigms:
             continue
-        overlap = eff_ds & paradigms[pid].conceivable
+        overlap = eff_ds & set(paradigms[pid].p_pred.keys())
         if overlap:
             homes[pid] = overlap
     return homes
 
 
 def check_anomaly_detail(o, paradigm):
-    """アノマリーの詳細を返す。Conceivable ∩ O で予測と矛盾するもの。"""
+    """アノマリーの詳細を返す。p_pred ∩ O で予測と矛盾するもの。"""
     anomalies = []
-    for d in paradigm.conceivable & set(o.keys()):
+    for d in set(paradigm.p_pred.keys()) & set(o.keys()):
         pred = paradigm.prediction(d)
         if pred is not None and pred != o[d]:
             anomalies.append((d, o[d], pred))
@@ -113,7 +113,7 @@ def main():
         p = paradigms[pid]
         pred_1 = sum(1 for v in p.p_pred.values() if v == 1)
         pred_0 = sum(1 for v in p.p_pred.values() if v == 0)
-        print(f"  {pid}: |Conceivable|={len(p.conceivable)}, |p_pred|={len(p.p_pred)} (1:{pred_1}, 0:{pred_0}), |R(P)|={len(p.relations)}")
+        print(f"  {pid}: |p_pred|={len(p.p_pred)} (1:{pred_1}, 0:{pred_0}), |R(P)|={len(p.relations)}")
     print()
 
     def show_state(label):
@@ -124,9 +124,9 @@ def main():
             p = paradigms[pid]
             t = tension(state.o, p)
             a = alignment(state.h, p)
-            overlap = len(p.conceivable & set(state.o.keys()))
+            overlap = len(set(p.p_pred.keys()) & set(state.o.keys()))
             anomaly_detail = check_anomaly_detail(state.o, p)
-            line = f"    {pid}: t={t} a={a:.3f} |Conceivable∩O|={overlap}"
+            line = f"    {pid}: t={t} a={a:.3f} |p_pred∩O|={overlap}"
             if anomaly_detail:
                 ads = [f"{d}(O={ov},P={pv})" for d, ov, pv in anomaly_detail]
                 line += f" anomaly={ads}"

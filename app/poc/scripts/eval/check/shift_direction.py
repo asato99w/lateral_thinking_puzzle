@@ -35,14 +35,14 @@ from engine import (  # noqa: E402
 
 
 def derive_qp(questions, paradigm):
-    """conceivable(P) から Q(P) を導出する。"""
+    """p_pred(P) から Q(P) を導出する。"""
     qp = []
     for q in questions:
         if q.correct_answer == "irrelevant":
             continue
         eff = compute_effect(q)
         eff_ds = {d for d, v in eff}
-        if eff_ds & paradigm.conceivable:
+        if eff_ds & set(paradigm.p_pred.keys()):
             qp.append(q)
     return qp
 
@@ -174,9 +174,8 @@ def simulate_shift_direction(
 
                 # 候補詳細を計算（表示用）
                 anomalies = {
-                    d for d in p_from.conceivable
-                    if d in state.o and p_from.prediction(d) is not None
-                    and p_from.prediction(d) != state.o[d]
+                    d for d, pred in p_from.p_pred.items()
+                    if d in state.o and pred != state.o[d]
                 }
                 details = []
                 for pid, p in paradigms.items():
@@ -187,10 +186,9 @@ def simulate_shift_direction(
                     t = tension(state.o, p)
                     if t >= current_tension:
                         continue
-                    att = len({d for d in anomalies if d in p.conceivable})
+                    att = len({d for d in anomalies if d in p.p_pred})
                     res = len({d for d in anomalies
-                               if d in p.conceivable
-                               and p.prediction(d) is not None and p.prediction(d) == state.o[d]})
+                               if p.prediction(d) is not None and p.prediction(d) == state.o[d]})
                     meets_th = p.shift_threshold is None or res >= p.shift_threshold
                     details.append((pid, t, att, res, meets_th))
                 details.sort(key=lambda x: (-x[3], -x[2], x[0]))

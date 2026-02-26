@@ -25,7 +25,7 @@ def main():
 
         homes = {}
         for pid, p in main_paradigms.items():
-            overlap = eff_ds & p.conceivable
+            overlap = eff_ds & set(p.p_pred.keys())
             if overlap:
                 homes[pid] = overlap
 
@@ -40,8 +40,8 @@ def main():
             for pid2 in all_pids[idx+1:]:
                 p1 = main_paradigms[pid1]
                 p2 = main_paradigms[pid2]
-                excl_1 = homes[pid1] - p2.conceivable
-                excl_2 = homes[pid2] - p1.conceivable
+                excl_1 = homes[pid1] - set(p2.p_pred.keys())
+                excl_2 = homes[pid2] - set(p1.p_pred.keys())
                 if excl_1 and excl_2:
                     is_bridge = True
         if is_bridge:

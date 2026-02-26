@@ -30,12 +30,12 @@ from threshold import build_o_star
 
 
 def compute_exclusive_descriptors(paradigm, all_paradigms):
-    """P_i の固有想起記述素: Conceivable(P_i) にのみ属し他のどの Conceivable(P_j) にも属さない。"""
-    other_conceivable = set()
+    """P_i の固有記述素: p_pred(P_i) にのみ属し他のどの p_pred(P_j) にも属さない。"""
+    other_pred_keys = set()
     for pid, p in all_paradigms.items():
         if pid != paradigm.id:
-            other_conceivable |= p.conceivable
-    return paradigm.conceivable - other_conceivable
+            other_pred_keys |= set(p.p_pred.keys())
+    return set(paradigm.p_pred.keys()) - other_pred_keys
 
 
 def compute_reachable(seeds, relations):
@@ -58,13 +58,13 @@ def analyze_paradigm(pid, paradigms, questions, o_star):
 
     # Step 1: 固有想起記述素
     exclusive = compute_exclusive_descriptors(paradigm, paradigms)
-    shared = paradigm.conceivable - exclusive
+    pred_keys = set(paradigm.p_pred.keys())
+    shared = pred_keys - exclusive
 
     pred_1 = sum(1 for v in paradigm.p_pred.values() if v == 1)
     pred_0 = sum(1 for v in paradigm.p_pred.values() if v == 0)
-    print(f"  |Conceivable|={len(paradigm.conceivable)}, "
-          f"|p_pred|={len(paradigm.p_pred)} (1:{pred_1}, 0:{pred_0})")
-    print(f"  固有想起記述素: {len(exclusive)}, 共有想起記述素: {len(shared)}")
+    print(f"  |p_pred|={len(paradigm.p_pred)} (1:{pred_1}, 0:{pred_0})")
+    print(f"  固有記述素: {len(exclusive)}, 共有記述素: {len(shared)}")
 
     # Step 2: R(P) による到達可能性
     reachable = compute_reachable(exclusive, paradigm.relations)

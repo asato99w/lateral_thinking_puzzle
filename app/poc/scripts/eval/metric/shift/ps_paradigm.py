@@ -15,7 +15,7 @@ def main():
     print()
 
     for pid, p in paradigms.items():
-        overlap = ps_ids & p.conceivable
+        overlap = ps_ids & set(p.p_pred.keys())
         if overlap:
             pred_1 = sorted(d for d in overlap if p.p_pred.get(d) == 1)
             pred_0 = sorted(d for d in overlap if p.p_pred.get(d) == 0)
@@ -28,7 +28,7 @@ def main():
         else:
             print(f"  {pid}: (なし)")
 
-    no_home = ps_ids - set().union(*(p.conceivable for p in paradigms.values()))
+    no_home = ps_ids - set().union(*(set(p.p_pred.keys()) for p in paradigms.values()))
     if no_home:
         print()
         print(f"どの Conceivable(P) にも含まれない Ps: {sorted(no_home)}")

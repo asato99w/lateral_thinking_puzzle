@@ -21,11 +21,10 @@ def build_o_star(
 
 
 def _anomaly_set(paradigm: Paradigm, o_star: dict[str, int]) -> set[str]:
-    """Anomaly(P, O*): Conceivable(P) 内で P_pred(d) ≠ O*(d) の記述素集合。"""
+    """Anomaly(P, O*): P_pred(d) ≠ O*(d) の記述素集合。"""
     return {
-        d for d in paradigm.conceivable
-        if d in o_star and paradigm.prediction(d) is not None
-        and paradigm.prediction(d) != o_star[d]
+        d for d, pred in paradigm.p_pred.items()
+        if d in o_star and pred != o_star[d]
     }
 
 
@@ -100,11 +99,10 @@ def _resolve(
 ) -> int:
     """P_source のアノマリーのうち P_target が正しく予測する数。"""
     count = 0
-    for d in p_source.conceivable:
+    for d, pred_src in p_source.p_pred.items():
         if d not in o_star:
             continue
-        pred_src = p_source.prediction(d)
-        if pred_src is None or pred_src == o_star[d]:
+        if pred_src == o_star[d]:
             continue
         # d は P_source のアノマリー
         pred_tgt = p_target.prediction(d)

@@ -52,7 +52,7 @@ def main():
         p = paradigms[pid]
         t = tension(o_star, p)
         a = alignment(h_star, p)
-        overlap = p.conceivable & set(o_star.keys())
+        overlap = set(p.p_pred.keys()) & set(o_star.keys())
         anomaly_ds = [d for d in overlap if p.prediction(d) != o_star[d]]
 
         mark = ""
