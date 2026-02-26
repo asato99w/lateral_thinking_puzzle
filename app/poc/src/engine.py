@@ -51,30 +51,15 @@ def init_game(
 
 
 def init_questions(
-    paradigm: Paradigm,
     questions: list[Question],
-    o: dict[str, int] | None = None,
+    init_question_ids: list[str],
 ) -> list[Question]:
-    result = []
-    for q in questions:
-        if q.paradigms and paradigm.id not in q.paradigms:
-            continue
-        if o is not None and not all(d in o for d in q.prerequisites):
-            continue
-        eff = compute_effect(q)
-        if isinstance(eff, list) and len(eff) > 0 and isinstance(eff[0], tuple):
-            has_match = False
-            has_conflict = False
-            for d_id, v in eff:
-                pred = paradigm.prediction(d_id)
-                if pred is not None:
-                    if pred == v:
-                        has_match = True
-                    else:
-                        has_conflict = True
-            if has_match and not has_conflict:
-                result.append(q)
-    return result
+    """初期オープン質問を決定する（データ駆動）。
+
+    init_question_ids はパズルデータで明示的に指定される。
+    """
+    id_set = set(init_question_ids)
+    return [q for q in questions if q.id in id_set]
 
 
 def get_answer(question: Question) -> str:
