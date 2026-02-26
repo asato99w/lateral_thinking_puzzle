@@ -2,7 +2,7 @@
 
 各メインパス遷移 P_i → P_{i+1} について:
   1. P_i フェーズの質問を順に回答するシミュレーション
-  2. tension > threshold 時点で select_shift_target（最小緩和原理）を適用
+  2. 各回答後に select_shift_target（近傍 + tension strict < + resolve >= N）を適用
   3. 選択結果が P_{i+1} と一致することを検証
 
 使い方:
@@ -21,7 +21,6 @@ from common import load_data  # noqa: E402
 from engine import (  # noqa: E402
     compute_effect,
     init_game,
-    init_questions,
     open_questions,
     update,
     tension,
@@ -131,8 +130,9 @@ def simulate_shift_direction(
     qp = derive_qp(questions, p_from)
     safe_qs, anomaly_qs = classify_questions(qp, p_from)
 
-    # safe 質問から初期オープンを構成
-    current_open = init_questions(p_from, questions, state.o)
+    # シミュレーション用: Q(P_from) の safe 質問を初期オープンとする
+    # （データ駆動の init_questions に依存しない独立したシミュレーション）
+    current_open = list(safe_qs)
     anomaly_ids = {q.id for q in anomaly_qs}
 
     # 回答キュー: safe 質問から開始

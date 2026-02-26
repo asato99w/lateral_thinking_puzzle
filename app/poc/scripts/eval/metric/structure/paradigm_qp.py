@@ -347,6 +347,35 @@ def analyze_paradigm(pid, paradigm, questions, ps_values, truth):
     else:
         print("    （単層のため波及分析なし）")
 
+    # --- 完全性検証 ---
+    print()
+    print("  [完全性検証]")
+    # パラダイムの全アノマリー記述素を列挙
+    anomaly_descriptors = {
+        d for d, pred in paradigm.p_pred.items()
+        if truth.get(d) is not None and pred != truth[d]
+    }
+    # 各アノマリー記述素が Q(P) のいずれかの質問の effect に含まれるかを確認
+    covered_anomalies = set()
+    for q in qp:
+        eff = compute_effect(q)
+        if q.correct_answer == "irrelevant":
+            continue
+        for d, v in eff:
+            if d in anomaly_descriptors:
+                covered_anomalies.add(d)
+    uncovered = anomaly_descriptors - covered_anomalies
+    if anomaly_descriptors:
+        print(f"    アノマリー記述素: {len(anomaly_descriptors)}個")
+        print(f"    質問でカバー済み: {len(covered_anomalies)}個")
+        if uncovered:
+            print(f"    未カバー: {sorted(uncovered)}")
+            print(f"    完全性: NG")
+        else:
+            print(f"    完全性: OK")
+    else:
+        print("    アノマリー記述素なし（最終パラダイム）")
+
     # --- R(P) 関係構造 ---
     print()
     print("  [R(P) 関係]")
