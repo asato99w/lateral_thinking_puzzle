@@ -17,7 +17,7 @@ from engine import (
     alignment,
     open_questions,
 )
-from threshold import build_o_star, compute_thresholds, compute_depths
+from threshold import build_o_star, compute_neighborhoods, compute_shift_thresholds, compute_depths
 
 ANSWER_DISPLAY = {"yes": "YES", "no": "NO", "irrelevant": "関係ない"}
 
@@ -57,7 +57,8 @@ def load_and_build(data_path: Path):
     init_paradigm_id = data["init_paradigm"]
 
     o_star = build_o_star(questions, ps_values)
-    compute_thresholds(paradigms, o_star)
+    compute_neighborhoods(paradigms, o_star)
+    compute_shift_thresholds(paradigms, o_star)
     compute_depths(paradigms, o_star)
 
     return data, paradigms, questions, all_descriptor_ids, ps_values, init_paradigm_id
@@ -70,7 +71,7 @@ def print_paradigm_state(state: GameState, paradigms: dict[str, Paradigm]):
         t = tension(state.o, p)
         a = alignment(state.h, p)
         marker = " ◀" if pid == current else ""
-        th_str = f"th={p.threshold}" if p.threshold is not None else "th=–"
+        th_str = f"th={p.shift_threshold}" if p.shift_threshold is not None else "th=–"
         d_str = f"depth={p.depth}" if p.depth is not None else "depth=–"
         print(f"    {pid} ({p.name}): tension={t} {th_str} {d_str} alignment={a:.3f}{marker}")
 
@@ -103,12 +104,13 @@ def main():
     print(f"記述素数: {len(all_descriptor_ids)}")
     print()
 
-    # 閾値と深度の表示
-    print("── 閾値・深度 ──")
+    # 近傍・閾値・深度の表示
+    print("── 近傍・閾値・深度 ──")
     for pid, p in paradigms.items():
-        th_str = str(p.threshold) if p.threshold is not None else "–(シフト元にならない)"
+        nb_str = ", ".join(sorted(p.neighbors)) if p.neighbors else "–"
+        th_str = str(p.shift_threshold) if p.shift_threshold is not None else "–"
         d_str = str(p.depth) if p.depth is not None else "–"
-        print(f"  {pid} ({p.name}): threshold = {th_str}, depth = {d_str}")
+        print(f"  {pid} ({p.name}): neighbors=[{nb_str}], N={th_str}, depth={d_str}")
     print()
 
     # 初期状態

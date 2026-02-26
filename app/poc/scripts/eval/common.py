@@ -8,7 +8,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from models import Paradigm, Question  # noqa: E402
-from threshold import build_o_star, compute_thresholds, compute_depths  # noqa: E402
+from threshold import build_o_star, compute_neighborhoods, compute_shift_thresholds, compute_depths  # noqa: E402
 
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
@@ -79,9 +79,10 @@ def load_data(data_path: Path | None = None):
 
     ps_values = {d[0]: d[1] for d in data["ps_values"]}
 
-    # 完全確定 O* から threshold と depth を導出
+    # 完全確定 O* から近傍・閾値・深度を導出
     o_star = build_o_star(questions, ps_values)
-    compute_thresholds(paradigms, o_star)
+    compute_neighborhoods(paradigms, o_star)
+    compute_shift_thresholds(paradigms, o_star)
     compute_depths(paradigms, o_star)
 
     return (

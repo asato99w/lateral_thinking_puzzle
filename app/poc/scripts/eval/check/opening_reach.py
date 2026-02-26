@@ -107,7 +107,7 @@ def analyze_paradigm(pid, paradigms, questions, o_star):
 
     print(f"  到達可能な anomaly 生成質問: {len(openable_via_reach)}問")
     print(f"  anomaly 上界: {len(all_anomaly_ds)}記述素")
-    print(f"  threshold: {paradigm.threshold}")
+    print(f"  shift_threshold (N): {paradigm.shift_threshold}")
     print(f"  (参考) O* での anomaly: {o_star_anomalies}")
 
     if openable_via_reach:
@@ -117,14 +117,14 @@ def analyze_paradigm(pid, paradigms, questions, o_star):
 
     # 判定
     ok = False
-    if paradigm.threshold is None:
-        print(f"  → シフト元にならない（threshold なし）")
+    if paradigm.shift_threshold is None:
+        print(f"  → シフト元にならない（shift_threshold なし）")
         ok = True
-    elif len(all_anomaly_ds) >= paradigm.threshold:
-        print(f"  → anomaly 上界({len(all_anomaly_ds)}) >= threshold({paradigm.threshold}): OK")
+    elif len(all_anomaly_ds) >= paradigm.shift_threshold:
+        print(f"  → anomaly 上界({len(all_anomaly_ds)}) >= N({paradigm.shift_threshold}): OK")
         ok = True
     else:
-        print(f"  → anomaly 上界({len(all_anomaly_ds)}) < threshold({paradigm.threshold}): NG")
+        print(f"  → anomaly 上界({len(all_anomaly_ds)}) < N({paradigm.shift_threshold}): NG")
 
     # 到達不能な共有記述素の内訳（NG の場合の診断情報）
     if not ok:

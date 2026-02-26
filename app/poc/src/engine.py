@@ -129,14 +129,12 @@ def update(
         for d, v in state.o.items():
             state.h[d] = float(v)
 
-    # Step 3: パラダイムシフト判定（最小緩和原理）
-    current_tension = tension(state.o, p_current)
-    if p_current.threshold is not None and current_tension > p_current.threshold:
-        best_id = select_shift_target(state.o, p_current, paradigms)
-        if best_id is not None:
-            state.p_current = best_id
-            p_new = paradigms[best_id]
-            _assimilate_from_paradigm(state.h, state.o, p_new)
+    # Step 3: パラダイムシフト判定（近傍 + resolve 閾値）
+    best_id = select_shift_target(state.o, p_current, paradigms)
+    if best_id is not None:
+        state.p_current = best_id
+        p_new = paradigms[best_id]
+        _assimilate_from_paradigm(state.h, state.o, p_new)
 
     # Step 4: オープン更新（追加のみ、回答済みを除外）
     remaining = [q for q in current_open if q.id != question.id]
@@ -154,14 +152,14 @@ def select_shift_target(
     p_current: Paradigm,
     paradigms: dict[str, Paradigm],
 ) -> str | None:
-    """最小緩和原理に基づくシフト先選択。
+    """近傍 + resolve 閾値に基づくシフト先選択。
 
-    候補: tension(O, P') <= tension(O, P_current) かつ P' != P_current
-    多段タイブレーク:
-      1. tension DESC（最小緩和 = tension が最大の候補を優先）
-      2. attention DESC（P_current のアノマリーのうち P' の Conceivable に含まれる数）
-      3. resolve ASC（P_current のアノマリーのうち P' が正しく予測する数が少ない方）
-      4. pid ASC（決定的にするため）
+    3条件全てを満たす候補のみ:
+      1. 近傍: pid ∈ p_current.neighbors
+      2. tension strict <: tension(O, P') < tension(O, P_current)
+      3. resolve >= N: P' の shift_threshold 以上の resolve
+
+    選択: resolve DESC → attention DESC → pid ASC
     """
     # P_current のアノマリー集合
     anomalies = {
@@ -175,19 +173,24 @@ def select_shift_target(
     for pid, p in paradigms.items():
         if pid == p_current.id:
             continue
+        if pid not in p_current.neighbors:  # 条件1: 近傍
+            continue
         t = tension(o, p)
-        if t <= cur_tension:
-            att = len({d for d in anomalies if d in p.conceivable})
-            res = len({d for d in anomalies
-                       if d in p.conceivable
-                       and p.prediction(d) is not None and p.prediction(d) == o[d]})
-            candidates.append((pid, t, att, res))
+        if t >= cur_tension:  # 条件2: tension strict <
+            continue
+        res = len({d for d in anomalies
+                   if d in p.conceivable
+                   and p.prediction(d) is not None and p.prediction(d) == o[d]})
+        if p.shift_threshold is not None and res < p.shift_threshold:  # 条件3: resolve >= N
+            continue
+        att = len({d for d in anomalies if d in p.conceivable})
+        candidates.append((pid, t, att, res))
 
     if not candidates:
         return None
 
-    # tension DESC → attention DESC → resolve ASC → pid ASC
-    candidates.sort(key=lambda x: (-x[1], -x[2], x[3], x[0]))
+    # resolve DESC → attention DESC → pid ASC
+    candidates.sort(key=lambda x: (-x[3], -x[2], x[0]))
     return candidates[0][0]
 
 

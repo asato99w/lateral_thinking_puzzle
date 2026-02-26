@@ -16,7 +16,8 @@ class Paradigm:
     p_pred: Dict[str, int] = field(default_factory=dict)  # {d_id: 0|1}, unknown=キー不在
     conceivable: Set[str] = field(default_factory=set)  # 想起可能集合
     relations: List[Tuple[str, str, float]] = field(default_factory=list)
-    threshold: Optional[int] = None  # 自動計算
+    neighbors: Set[str] = field(default_factory=set)  # 近傍パラダイム集合（静的計算）
+    shift_threshold: Optional[int] = None  # resolve 閾値 N(P)（自動計算）
     depth: Optional[int] = None  # Explained(P)包含関係から自動導出
 
     def __post_init__(self):

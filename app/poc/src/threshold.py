@@ -1,4 +1,4 @@
-"""パラダイムの閾値と深度を Conceivable と O* から導出する。"""
+"""パラダイムの近傍・閾値・深度を O* から導出する。"""
 from __future__ import annotations
 
 from models import Paradigm, Question
@@ -20,67 +20,123 @@ def build_o_star(
     return o_star
 
 
-def _exclusive_conceivable_anomalies(
-    paradigm: Paradigm,
-    all_paradigms: dict[str, Paradigm],
-    o_star: dict[str, int],
-) -> int:
-    """固有想起アノマリー: Conceivable(P) 固有の記述素のうち P_pred(d) ≠ O*(d) の数。"""
-    # 他の全パラダイムの conceivable の和集合
-    other_conceivable = set()
-    for pid, p in all_paradigms.items():
-        if pid != paradigm.id:
-            other_conceivable |= p.conceivable
-
-    exclusive = paradigm.conceivable - other_conceivable
-    count = 0
-    for d in exclusive:
-        pred = paradigm.prediction(d)
-        if pred is not None and d in o_star and pred != o_star[d]:
-            count += 1
-    return count
+def _anomaly_set(paradigm: Paradigm, o_star: dict[str, int]) -> set[str]:
+    """Anomaly(P, O*): Conceivable(P) 内で P_pred(d) ≠ O*(d) の記述素集合。"""
+    return {
+        d for d in paradigm.conceivable
+        if d in o_star and paradigm.prediction(d) is not None
+        and paradigm.prediction(d) != o_star[d]
+    }
 
 
-def _shared_conceivable_anomalies(
-    paradigm: Paradigm,
-    other: Paradigm,
-    o_star: dict[str, int],
-) -> int:
-    """共有想起アノマリー(P, P'): Conceivable(P) ∩ Conceivable(P') 内で P_pred(d) ≠ O*(d) の数。"""
-    shared = paradigm.conceivable & other.conceivable
-    count = 0
-    for d in shared:
-        pred = paradigm.prediction(d)
-        if pred is not None and d in o_star and pred != o_star[d]:
-            count += 1
-    return count
+def _tension(paradigm: Paradigm, o_star: dict[str, int]) -> int:
+    """tension(O*, P) = |Anomaly(P, O*)|。"""
+    return len(_anomaly_set(paradigm, o_star))
 
 
-def compute_thresholds(
+def compute_neighborhoods(
     paradigms: dict[str, Paradigm],
     o_star: dict[str, int],
 ) -> None:
-    """各パラダイムの threshold を固有想起アノマリー + min共有想起アノマリーから導出。
+    """各パラダイムの近傍集合を O* ベースの射影で計算する。
 
-    threshold(P) = |固有想起アノマリー(P)| + min_{P'} |共有想起アノマリー(P, P')|
+    P' が P_current の近傍 ⟺
+      1. tension(O*, P') < tension(O*, P_current)（strict <）
+      2. Remaining(P', P_current) ⊂ Anomaly(P_current)（真部分集合）
+      3. Hasse 図で直接後続（中間がない）
+
+    Remaining(P', P_current) = Anomaly(P_current, O*) ∩ Anomaly(P', O*)
     """
-    for pid, p in paradigms.items():
-        exclusive = _exclusive_conceivable_anomalies(p, paradigms, o_star)
+    pids = list(paradigms.keys())
+    anomaly_sets: dict[str, set[str]] = {
+        pid: _anomaly_set(paradigms[pid], o_star) for pid in pids
+    }
+    tensions: dict[str, int] = {
+        pid: len(anomaly_sets[pid]) for pid in pids
+    }
 
-        # 共有アノマリーが最小のパラダイムとの値を採用
-        min_shared = None
-        for pid2, p2 in paradigms.items():
-            if pid2 == pid:
+    for pid_cur in pids:
+        anom_cur = anomaly_sets[pid_cur]
+        if not anom_cur:
+            paradigms[pid_cur].neighbors = set()
+            continue
+
+        # 候補: tension strict < かつ Remaining が真部分集合
+        remaining_map: dict[str, frozenset[str]] = {}
+        for pid_cand in pids:
+            if pid_cand == pid_cur:
                 continue
-            shared_anomalies = _shared_conceivable_anomalies(p, p2, o_star)
-            if min_shared is None or shared_anomalies < min_shared:
-                min_shared = shared_anomalies
+            if tensions[pid_cand] >= tensions[pid_cur]:
+                continue
+            remaining = anom_cur & anomaly_sets[pid_cand]
+            if remaining < anom_cur:  # 真部分集合
+                remaining_map[pid_cand] = frozenset(remaining)
 
-        if min_shared is not None:
-            p.threshold = exclusive + min_shared
-        else:
-            # 他のパラダイムが存在しない場合
-            p.threshold = None
+        # Hasse 図: 直接後続のみ（中間がない）
+        # P_a が P_b を覆う ⟺ Remaining(P_a) ⊃ Remaining(P_b) かつ中間なし
+        # 近傍 = Remaining が極大（他の候補の Remaining に真に含まれない）
+        neighbors: set[str] = set()
+        cand_pids = list(remaining_map.keys())
+        for i, pid_a in enumerate(cand_pids):
+            rem_a = remaining_map[pid_a]
+            is_covered = False
+            for j, pid_b in enumerate(cand_pids):
+                if i == j:
+                    continue
+                rem_b = remaining_map[pid_b]
+                if rem_a < rem_b:  # rem_a ⊂ rem_b（rem_b のほうが大きい = 中間）
+                    is_covered = True
+                    break
+            if not is_covered:
+                neighbors.add(pid_a)
+
+        paradigms[pid_cur].neighbors = neighbors
+
+
+def _resolve(
+    o_star: dict[str, int],
+    p_source: Paradigm,
+    p_target: Paradigm,
+) -> int:
+    """P_source のアノマリーのうち P_target が正しく予測する数。"""
+    count = 0
+    for d in p_source.conceivable:
+        if d not in o_star:
+            continue
+        pred_src = p_source.prediction(d)
+        if pred_src is None or pred_src == o_star[d]:
+            continue
+        # d は P_source のアノマリー
+        pred_tgt = p_target.prediction(d)
+        if pred_tgt is not None and pred_tgt == o_star[d]:
+            count += 1
+    return count
+
+
+def compute_shift_thresholds(
+    paradigms: dict[str, Paradigm],
+    o_star: dict[str, int],
+) -> None:
+    """各パラダイムの shift_threshold N(P_target) を計算する。
+
+    N(P_target) = min over { P_source | P_target ∈ neighbors(P_source) }
+                  of resolve(O*, P_source, P_target)
+
+    P_target を近傍に持つ全 P_source からの resolve の最小値。
+    """
+    # 逆引き: 各 P_target について、それを近傍に持つ P_source の一覧
+    for pid_target, p_target in paradigms.items():
+        min_resolve = None
+        for pid_source, p_source in paradigms.items():
+            if pid_source == pid_target:
+                continue
+            if pid_target not in p_source.neighbors:
+                continue
+            res = _resolve(o_star, p_source, p_target)
+            if min_resolve is None or res < min_resolve:
+                min_resolve = res
+
+        p_target.shift_threshold = min_resolve
 
 
 def compute_depths(

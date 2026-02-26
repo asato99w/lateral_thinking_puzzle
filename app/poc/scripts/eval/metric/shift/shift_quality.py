@@ -83,69 +83,68 @@ def update_with_shift_tracking(state, question, paradigms, all_questions, curren
         for d, v in state.o.items():
             state.h[d] = float(v)
 
-    # === Phase 3: パラダイムシフト判定（最小緩和原理、詳細記録付き）===
+    # === Phase 3: パラダイムシフト判定（近傍 + resolve 閾値、詳細記録付き）===
     shift_info = None
     current_tension = tension(state.o, p_current)
-    if p_current.threshold is not None and current_tension > p_current.threshold:
-        best_id = select_shift_target(state.o, p_current, paradigms)
+    best_id = select_shift_target(state.o, p_current, paradigms)
 
-        if best_id is not None:
-            # P_current のアノマリー集合（attention/resolve 計算用）
-            anomalies = {
-                d for d in p_current.conceivable
-                if d in state.o and p_current.prediction(d) is not None
-                and p_current.prediction(d) != state.o[d]
-            }
-            p_new = paradigms[best_id]
-            new_tension_val = tension(state.o, p_new)
-            attention = len({d for d in anomalies if d in p_new.conceivable})
-            resolve = len({d for d in anomalies
-                           if d in p_new.conceivable
-                           and p_new.prediction(d) is not None
-                           and p_new.prediction(d) == state.o[d]})
+    if best_id is not None:
+        # P_current のアノマリー集合（attention/resolve 計算用）
+        anomalies = {
+            d for d in p_current.conceivable
+            if d in state.o and p_current.prediction(d) is not None
+            and p_current.prediction(d) != state.o[d]
+        }
+        p_new = paradigms[best_id]
+        new_tension_val = tension(state.o, p_new)
+        attention = len({d for d in anomalies if d in p_new.conceivable})
+        resolve = len({d for d in anomalies
+                       if d in p_new.conceivable
+                       and p_new.prediction(d) is not None
+                       and p_new.prediction(d) == state.o[d]})
 
-            # シフト前の状態を記録
-            old_pid = state.p_current
-            old_alignment = alignment(state.h, p_current)
-            old_explained = explained_o(state.o, p_current)
-            old_tension = current_tension
-            h_before_shift = dict(state.h)
+        # シフト前の状態を記録
+        old_pid = state.p_current
+        old_alignment = alignment(state.h, p_current)
+        old_explained = explained_o(state.o, p_current)
+        old_tension = current_tension
+        h_before_shift = dict(state.h)
 
-            # シフト実行
-            state.p_current = best_id
-            _assimilate_from_paradigm(state.h, state.o, p_new)
+        # シフト実行
+        state.p_current = best_id
+        _assimilate_from_paradigm(state.h, state.o, p_new)
 
-            # シフト後の状態を記録
-            new_alignment = alignment(state.h, p_new)
-            new_explained = explained_o(state.o, p_new)
-            new_tension = tension(state.o, p_new)
-            h_disruption = _h_l1(h_before_shift, state.h)
-            h_changed_count = _count_changed(h_before_shift, state.h)
+        # シフト後の状態を記録
+        new_alignment = alignment(state.h, p_new)
+        new_explained = explained_o(state.o, p_new)
+        new_tension = tension(state.o, p_new)
+        h_disruption = _h_l1(h_before_shift, state.h)
+        h_changed_count = _count_changed(h_before_shift, state.h)
 
-            tension_resolution = 0.0
-            if old_tension > 0:
-                tension_resolution = (old_tension - new_tension) / old_tension * 100
+        tension_resolution = 0.0
+        if old_tension > 0:
+            tension_resolution = (old_tension - new_tension) / old_tension * 100
 
-            shift_info = {
-                "old_pid": old_pid,
-                "new_pid": best_id,
-                "old_p_name": p_current.name,
-                "new_p_name": p_new.name,
-                "new_tension_at_select": new_tension_val,
-                "attention": attention,
-                "resolve": resolve,
-                "old_alignment": old_alignment,
-                "new_alignment": new_alignment,
-                "margin": new_alignment - old_alignment,
-                "old_explained": old_explained,
-                "new_explained": new_explained,
-                "gain": new_explained - old_explained,
-                "h_disruption": h_disruption,
-                "h_changed_count": h_changed_count,
-                "old_tension": old_tension,
-                "new_tension": new_tension,
-                "tension_resolution_rate": tension_resolution,
-            }
+        shift_info = {
+            "old_pid": old_pid,
+            "new_pid": best_id,
+            "old_p_name": p_current.name,
+            "new_p_name": p_new.name,
+            "new_tension_at_select": new_tension_val,
+            "attention": attention,
+            "resolve": resolve,
+            "old_alignment": old_alignment,
+            "new_alignment": new_alignment,
+            "margin": new_alignment - old_alignment,
+            "old_explained": old_explained,
+            "new_explained": new_explained,
+            "gain": new_explained - old_explained,
+            "h_disruption": h_disruption,
+            "h_changed_count": h_changed_count,
+            "old_tension": old_tension,
+            "new_tension": new_tension,
+            "tension_resolution_rate": tension_resolution,
+        }
 
     # Step 4: オープン更新
     remaining = [q for q in current_open if q.id != question.id]

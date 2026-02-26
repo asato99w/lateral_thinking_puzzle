@@ -112,9 +112,9 @@ def simulate_shift_direction(
             "shift_triggered": bool,
             "shift_step": int | None,
             "tension_at_shift": int | None,
-            "threshold": int | None,
+            "shift_threshold": int | None,
             "selected_pid": str | None,
-            "candidate_details": [(pid, tension, attention, resolve)],
+            "candidate_details": [(pid, tension, attention, resolve, meets_threshold)],
             "target_matches": bool,
             "total_steps": int,
         }
@@ -143,7 +143,7 @@ def simulate_shift_direction(
         "shift_triggered": False,
         "shift_step": None,
         "tension_at_shift": None,
-        "threshold": p_from.threshold,
+        "shift_threshold": p_from.shift_threshold,
         "selected_pid": None,
         "candidate_details": [],
         "target_matches": False,
@@ -162,40 +162,40 @@ def simulate_shift_direction(
             state, q, paradigms, questions, current_open,
         )
 
-        # tension チェック（P_from に対して）
-        current_tension = tension(state.o, p_from)
-        if (p_from.threshold is not None
-                and current_tension > p_from.threshold
-                and not result["shift_triggered"]):
-            result["shift_triggered"] = True
-            result["shift_step"] = step
-            result["tension_at_shift"] = current_tension
-
-            # select_shift_target で選択を再現
+        # シフト判定: select_shift_target で候補が見つかるかチェック
+        if not result["shift_triggered"]:
+            current_tension = tension(state.o, p_from)
             selected = select_shift_target(state.o, p_from, paradigms)
-            result["selected_pid"] = selected
+            if selected is not None:
+                result["shift_triggered"] = True
+                result["shift_step"] = step
+                result["tension_at_shift"] = current_tension
+                result["selected_pid"] = selected
 
-            # 候補詳細を計算（表示用）
-            anomalies = {
-                d for d in p_from.conceivable
-                if d in state.o and p_from.prediction(d) is not None
-                and p_from.prediction(d) != state.o[d]
-            }
-            details = []
-            for pid, p in paradigms.items():
-                if pid == pid_from:
-                    continue
-                t = tension(state.o, p)
-                if t <= current_tension:
+                # 候補詳細を計算（表示用）
+                anomalies = {
+                    d for d in p_from.conceivable
+                    if d in state.o and p_from.prediction(d) is not None
+                    and p_from.prediction(d) != state.o[d]
+                }
+                details = []
+                for pid, p in paradigms.items():
+                    if pid == pid_from:
+                        continue
+                    if pid not in p_from.neighbors:
+                        continue
+                    t = tension(state.o, p)
+                    if t >= current_tension:
+                        continue
                     att = len({d for d in anomalies if d in p.conceivable})
                     res = len({d for d in anomalies
                                if d in p.conceivable
                                and p.prediction(d) is not None and p.prediction(d) == state.o[d]})
-                    details.append((pid, t, att, res))
-            details.sort(key=lambda x: (-x[1], -x[2], x[3], x[0]))
-            result["candidate_details"] = details
+                    meets_th = p.shift_threshold is None or res >= p.shift_threshold
+                    details.append((pid, t, att, res, meets_th))
+                details.sort(key=lambda x: (-x[3], -x[2], x[0]))
+                result["candidate_details"] = details
 
-            if selected is not None:
                 result["target_matches"] = selected == pid_to
 
         # 新規オープンの anomaly 質問をキューに追加
@@ -237,8 +237,10 @@ def main():
         # Q(P) サイズ
         qp = derive_qp(questions, p_from)
         safe_qs, anomaly_qs = classify_questions(qp, p_from)
+        nb_str = ", ".join(sorted(p_from.neighbors)) if p_from.neighbors else "–"
         print(f"  |Q({pid_from})| = {len(qp)} (safe: {len(safe_qs)}, anomaly: {len(anomaly_qs)})")
-        print(f"  threshold({pid_from}) = {p_from.threshold}")
+        print(f"  neighbors({pid_from}) = [{nb_str}]")
+        print(f"  shift_threshold({pid_from}) = {p_from.shift_threshold}")
 
         result = simulate_shift_direction(
             pid_from, pid_to, paradigms, questions, all_ids, ps_values, init_pid,
@@ -247,7 +249,7 @@ def main():
         print(f"  回答ステップ数: {result['total_steps']}")
 
         if not result["shift_triggered"]:
-            print(f"  シフト未発動: tension が threshold を超えなかった")
+            print(f"  シフト未発動: 近傍候補が3条件（近傍・tension<・resolve>=N）を満たさなかった")
             print(f"  結果: NG")
             all_ok = False
         else:
@@ -255,11 +257,13 @@ def main():
                   f"tension={result['tension_at_shift']}")
 
             if result["candidate_details"]:
-                print(f"  候補（シフト時点、最小緩和原理）:")
-                for pid, t, att, res in result["candidate_details"]:
+                print(f"  候補（近傍 + resolve 閾値）:")
+                for item in result["candidate_details"]:
+                    pid, t, att, res, meets_th = item
                     marker = " ★" if pid == result["selected_pid"] else ""
                     target = " (想定シフト先)" if pid == pid_to else ""
-                    print(f"    {pid}: tension={t} attention={att} resolve={res}{marker}{target}")
+                    th_flag = "" if meets_th else " [resolve<N]"
+                    print(f"    {pid}: tension={t} att={att} res={res}{th_flag}{marker}{target}")
             else:
                 print(f"  候補パラダイムなし")
 

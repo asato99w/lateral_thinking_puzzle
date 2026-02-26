@@ -87,7 +87,7 @@ def simulate_update_phases(state, question, paradigms, all_questions, current_op
     # === Phase 3: パラダイムシフト判定 ===
     shifted = False
     current_tension = tension(state.o, p_current)
-    if p_current.threshold is not None and current_tension > p_current.threshold:
+    if p_current.shift_threshold is not None and current_tension > p_current.shift_threshold:
         current_explained = explained_o(state.o, p_current)
         candidates = [
             p_id for p_id in paradigms

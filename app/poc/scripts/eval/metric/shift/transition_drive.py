@@ -101,7 +101,7 @@ def analyze_transition(pid_from, pid_to, paradigms, questions, detail=True):
 
     if detail:
         print(f"  |Q({pid_from})| = {len(qp)}")
-        print(f"  threshold({pid_from}) = {p_from.threshold}")
+        print(f"  N({pid_from}) = {p_from.shift_threshold}")
         print()
 
     # 各質問を分類
@@ -159,11 +159,11 @@ def analyze_transition(pid_from, pid_to, paradigms, questions, detail=True):
         # 遷移駆動集合のサイズ vs threshold
         print("  【遷移の十分性】")
         print(f"    遷移駆動集合サイズ: {n_drive}")
-        if p_from.threshold is not None:
-            if n_drive > p_from.threshold:
-                print(f"    > threshold({p_from.threshold}): 十分")
+        if p_from.shift_threshold is not None:
+            if n_drive > p_from.shift_threshold:
+                print(f"    > N({p_from.shift_threshold}): 十分")
             else:
-                print(f"    ≤ threshold({p_from.threshold}): 不十分")
+                print(f"    ≤ N({p_from.shift_threshold}): 不十分")
         else:
             print(f"    threshold 未定義")
         print()
@@ -275,7 +275,7 @@ def main():
 
         print("-" * 50)
         print(f"起点: {sid} ({s_para.name})")
-        print(f"  |Q({sid})| = {len(qp)}, threshold = {s_para.threshold}")
+        print(f"  |Q({sid})| = {len(qp)}, shift_threshold = {s_para.shift_threshold}")
         print("-" * 50)
         print()
 

@@ -42,6 +42,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from common import load_data, load_raw  # noqa: E402
 from engine import tension, alignment, compute_effect, explained_o, select_shift_target, _question_all_descriptors
+from threshold import _anomaly_set
 
 
 def build_o_star(questions) -> tuple[dict[str, int], set[str]]:
@@ -79,11 +80,12 @@ def build_virtual_h(paradigm, all_ids):
 
 
 def select_shift_target_with_details(pid_cur, paradigms, o_star):
-    """engine の select_shift_target を呼び出し、詳細情報も返す。
+    """engine の select_shift_target と同じロジックで詳細情報も返す。
 
-    方式: 最小緩和原理（tension → attention → resolve → pid）。
+    方式: 近傍 + tension strict < + resolve >= N(P_target)。
+    選択: resolve DESC → attention DESC → pid ASC。
 
-    返り値: (選択先ID or None, 候補リスト[(pid, tension, attention, resolve)])
+    返り値: (選択先ID or None, 候補リスト[(pid, tension, attention, resolve, is_neighbor, meets_threshold)])
     """
     p_cur = paradigms[pid_cur]
     # P_current のアノマリー集合
@@ -94,24 +96,31 @@ def select_shift_target_with_details(pid_cur, paradigms, o_star):
     }
     cur_tension = tension(o_star, p_cur)
 
-    candidates = []
+    all_details = []  # 全候補（フィルタ前）の詳細
+    valid_candidates = []  # 3条件を満たす候補
     for pid, p in paradigms.items():
         if pid == pid_cur:
             continue
         t = tension(o_star, p)
-        if t <= cur_tension:
-            att = len({d for d in anomalies if d in p.conceivable})
-            res = len({d for d in anomalies
-                       if d in p.conceivable
-                       and p.prediction(d) is not None and p.prediction(d) == o_star[d]})
-            candidates.append((pid, t, att, res))
+        att = len({d for d in anomalies if d in p.conceivable})
+        res = len({d for d in anomalies
+                   if d in p.conceivable
+                   and p.prediction(d) is not None and p.prediction(d) == o_star[d]})
+        is_neighbor = pid in p_cur.neighbors
+        meets_threshold = (p.shift_threshold is None or res >= p.shift_threshold)
+        tension_ok = t < cur_tension
 
-    if not candidates:
-        return None, []
+        all_details.append((pid, t, att, res, is_neighbor, meets_threshold))
 
-    # tension DESC → attention DESC → resolve ASC → pid ASC
-    candidates.sort(key=lambda x: (-x[1], -x[2], x[3], x[0]))
-    return candidates[0][0], candidates
+        if is_neighbor and tension_ok and meets_threshold:
+            valid_candidates.append((pid, t, att, res))
+
+    if not valid_candidates:
+        return None, all_details
+
+    # resolve DESC → attention DESC → pid ASC
+    valid_candidates.sort(key=lambda x: (-x[3], -x[2], x[0]))
+    return valid_candidates[0][0], all_details
 
 
 def compute_main_path(
@@ -206,12 +215,12 @@ def check_tension_ordering(paradigms, main_path, o_star, all_ids):
 def check_shift_selection(paradigms, main_path, transitions, o_star):
     """テーマ2: 全パラダイムからの遷移先と T への到達性を検証する。
 
-    1. 全パラダイム（サブ含む）の遷移先を最小緩和原理で表示
+    1. 全パラダイム（サブ含む）の遷移先を近傍+resolve閾値で表示
     2. 遷移グラフを構築
     3. 全パラダイムから T に到達可能か検証
     """
     print("=" * 65)
-    print("テーマ2: シフト先選択と到達性（最小緩和原理）")
+    print("テーマ2: シフト先選択と到達性（近傍 + resolve 閾値）")
     print("=" * 65)
     print()
 
@@ -222,19 +231,30 @@ def check_shift_selection(paradigms, main_path, transitions, o_star):
     for pid in sorted(paradigms.keys()):
         if pid == p_goal:
             continue
-        target, candidate_details = select_shift_target_with_details(
+        p = paradigms[pid]
+        target, all_details = select_shift_target_with_details(
             pid, paradigms, o_star,
         )
 
         is_main = "main" if pid in main_set else "sub"
-        t = tension(o_star, paradigms[pid])
-        print(f"  {pid} [{is_main}] (tension={t}):")
+        t = tension(o_star, p)
+        nb_str = ", ".join(sorted(p.neighbors)) if p.neighbors else "–"
+        print(f"  {pid} [{is_main}] (tension={t}, neighbors=[{nb_str}]):")
         if target is None:
-            print(f"    → 候補なし（危機状態）")
+            print(f"    → 候補なし")
         else:
-            for c_pid, c_t, c_att, c_res in candidate_details:
+            for c_pid, c_t, c_att, c_res, c_nb, c_th in all_details:
+                flags = []
+                if not c_nb:
+                    flags.append("非近傍")
+                if c_t >= t:
+                    flags.append("tension≥")
+                if not c_th:
+                    p_c = paradigms[c_pid]
+                    flags.append(f"resolve<N({p_c.shift_threshold})")
+                flag_str = f" [{', '.join(flags)}]" if flags else ""
                 marker = " ★" if c_pid == target else ""
-                print(f"    {c_pid}: tension={c_t} attention={c_att} resolve={c_res}{marker}")
+                print(f"    {c_pid}: tension={c_t} att={c_att} res={c_res}{flag_str}{marker}")
             print(f"    → {target}")
         print()
 
@@ -505,6 +525,46 @@ def check_shift_driver_reachability(paradigms, main_path, questions, o_star):
     return not bool(issues)
 
 
+def check_neighborhood_structure(paradigms, o_star):
+    """テーマ5: 近傍構造の表示。
+
+    各パラダイムについて:
+    - neighbors 集合
+    - 各近傍への Remaining 集合
+    - N(P) (shift_threshold)
+    """
+    print("=" * 65)
+    print("テーマ5: 近傍構造")
+    print("=" * 65)
+    print()
+
+    for pid in sorted(paradigms.keys()):
+        p = paradigms[pid]
+        anom = _anomaly_set(p, o_star)
+        t = tension(o_star, p)
+        nb_str = ", ".join(sorted(p.neighbors)) if p.neighbors else "–"
+        th_str = str(p.shift_threshold) if p.shift_threshold is not None else "–"
+        print(f"  {pid} (tension={t}, |Anomaly|={len(anom)}):")
+        print(f"    neighbors: [{nb_str}]")
+        print(f"    N({pid}) = {th_str}")
+
+        if p.neighbors:
+            for nb_pid in sorted(p.neighbors):
+                nb_p = paradigms[nb_pid]
+                nb_anom = _anomaly_set(nb_p, o_star)
+                remaining = anom & nb_anom
+                resolve = len({d for d in anom
+                               if d in nb_p.conceivable
+                               and nb_p.prediction(d) is not None
+                               and nb_p.prediction(d) == o_star[d]})
+                print(f"    → {nb_pid}: |Remaining|={len(remaining)}"
+                      f" resolve={resolve}"
+                      f" N({nb_pid})={nb_p.shift_threshold}")
+                if remaining:
+                    print(f"      Remaining: {sorted(remaining)}")
+        print()
+
+
 def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
     data = load_raw()
@@ -536,6 +596,7 @@ def main():
     check_shift_selection(paradigms, main_path, transitions, o_star)
     check_eo_inclusion(paradigms, main_path, o_star)
     check_shift_driver_reachability(paradigms, main_path, questions, o_star)
+    check_neighborhood_structure(paradigms, o_star)
 
 
 if __name__ == "__main__":
