@@ -254,8 +254,8 @@ def _assimilate_descriptor(h: dict[str, float], d_id: str, paradigm: Paradigm):
 
 
 def _reachable(origins: set[str], paradigm: Paradigm) -> set[str]:
-    """R(P) で origins から到達可能な記述素を返す（多ホップ BFS）。"""
-    reachable = set()
+    """R(P) で origins から到達可能な記述素を返す（origins 自身を含む）。"""
+    reachable = set(origins)
     frontier = set(origins)
     visited: set[str] = set()
     while frontier:
