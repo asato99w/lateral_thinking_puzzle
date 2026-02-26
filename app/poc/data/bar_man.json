@@ -1,12 +1,6 @@
 {
   "title": "バーの男",
   "statement": "ある男がバーに入り、バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた。男は「ありがとう」と言って帰った。なぜだろう？",
-  "main_path": [
-    "P1",
-    "P2",
-    "P3",
-    "P4"
-  ],
   "init_paradigm": "P1",
   "tension_threshold": 1,
   "shift_candidates": {

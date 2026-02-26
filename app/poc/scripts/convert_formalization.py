@@ -174,7 +174,6 @@ def main():
     result = {
         "title": "ウミガメのスープ",
         "statement": "男がレストランに入り、ウミガメのスープを注文した。一口食べた男は店を出て、自殺した。なぜか？",
-        "main_path": ["P1", "P2", "P3", "P4", "P5"],
         "init_paradigm": data["init_paradigm"],
         "ps_values": data["ps_values"],
         "all_descriptor_ids": data["all_descriptor_ids"],

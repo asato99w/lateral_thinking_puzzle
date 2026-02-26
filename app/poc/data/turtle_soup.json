@@ -1,13 +1,6 @@
 {
   "title": "ウミガメのスープ",
   "statement": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口飲んだ男は店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜだろう？",
-  "main_path": [
-    "P1",
-    "P2",
-    "P3",
-    "P4",
-    "P5"
-  ],
   "init_paradigm": "P1",
   "tension_threshold": 1,
   "shift_candidates": {
@@ -324,15 +317,7 @@
           1
         ],
         [
-          "Fs-24",
-          0
-        ],
-        [
           "Fs-25",
-          0
-        ],
-        [
-          "Fs-26",
           0
         ],
         [
@@ -372,27 +357,11 @@
           0
         ],
         [
-          "Fs-37",
-          0
-        ],
-        [
-          "Fs-38",
-          0
-        ],
-        [
           "Fs-39",
           1
         ],
         [
-          "Fs-40",
-          0
-        ],
-        [
           "Fs-41",
-          0
-        ],
-        [
-          "Fs-42",
           0
         ],
         [
@@ -609,27 +578,17 @@
         ],
         [
           "Fs-33",
+          "Fs-30",
+          0.8
+        ],
+        [
+          "Fs-33",
           "Fs-35",
           0.8
         ],
         [
           "Fs-33",
           "Fs-36",
-          0.8
-        ],
-        [
-          "Fs-33",
-          "Fs-37",
-          0.8
-        ],
-        [
-          "Fs-33",
-          "Fs-38",
-          0.7
-        ],
-        [
-          "Fs-33",
-          "Fs-40",
           0.8
         ]
       ]
@@ -783,10 +742,6 @@
           0
         ],
         [
-          "Fs-37",
-          0
-        ],
-        [
           "Fs-38",
           1
         ],
@@ -795,15 +750,7 @@
           1
         ],
         [
-          "Fs-40",
-          0
-        ],
-        [
           "Fs-41",
-          0
-        ],
-        [
-          "Fs-42",
           0
         ],
         [
@@ -993,16 +940,6 @@
         [
           "Fs-38",
           "Fs-35",
-          0.7
-        ],
-        [
-          "Fs-38",
-          "Fs-40",
-          0.7
-        ],
-        [
-          "Fs-38",
-          "Fs-42",
           0.7
         ],
         [
@@ -3350,7 +3287,9 @@
       "correct_answer": "yes",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3372,7 +3311,9 @@
       "correct_answer": "yes",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3394,7 +3335,9 @@
       "correct_answer": "yes",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3416,7 +3359,9 @@
       "correct_answer": "yes",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3438,7 +3383,9 @@
       "correct_answer": "yes",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3460,7 +3407,9 @@
       "correct_answer": "yes",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3484,7 +3433,9 @@
         "Fs-17"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3508,7 +3459,9 @@
         "Fs-23"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3532,7 +3485,9 @@
         "Fs-23"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3556,7 +3511,9 @@
         "Fs-33"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3578,7 +3535,9 @@
       "correct_answer": "no",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3600,7 +3559,9 @@
       "correct_answer": "no",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3622,7 +3583,9 @@
       "correct_answer": "no",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3644,7 +3607,9 @@
       "correct_answer": "no",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3666,7 +3631,9 @@
       "correct_answer": "no",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3688,7 +3655,9 @@
       "correct_answer": "no",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3710,7 +3679,9 @@
       "correct_answer": "no",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3738,7 +3709,9 @@
         "Fs-14"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3766,7 +3739,9 @@
         "Fs-14"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3802,7 +3777,9 @@
         "Fs-14"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3838,7 +3815,9 @@
         "Fs-17"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3866,7 +3845,9 @@
         "Fs-17"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3894,7 +3875,9 @@
         "Fs-21"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3922,7 +3905,9 @@
         "Fs-12"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1"
+      ],
       "is_clear": false
     },
     {
@@ -3946,7 +3931,9 @@
         "Fs-12"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P2"
+      ],
       "is_clear": false
     },
     {
@@ -3970,7 +3957,9 @@
         "Fs-26"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P2"
+      ],
       "is_clear": false
     },
     {
@@ -3994,7 +3983,9 @@
         "Fs-24"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P2"
+      ],
       "is_clear": false
     },
     {
@@ -4018,7 +4009,9 @@
         "Fs-06"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P2"
+      ],
       "is_clear": false
     },
     {
@@ -4046,7 +4039,9 @@
         "Fs-26"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P2"
+      ],
       "is_clear": false
     },
     {
@@ -4074,7 +4069,10 @@
         "Fs-34"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1",
+        "P2"
+      ],
       "is_clear": false
     },
     {
@@ -4102,7 +4100,10 @@
         "Fs-38"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1",
+        "P2"
+      ],
       "is_clear": false
     },
     {
@@ -4130,7 +4131,10 @@
         "Fs-34"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1",
+        "P2"
+      ],
       "is_clear": false
     },
     {
@@ -4154,7 +4158,9 @@
         "Fs-27"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4178,7 +4184,9 @@
         "Fs-27"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4202,7 +4210,9 @@
         "Ft-22"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4226,7 +4236,9 @@
         "Fs-38"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4250,7 +4262,9 @@
         "D-01"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4274,7 +4288,9 @@
         "D-02"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4298,7 +4314,9 @@
         "D-03"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4322,7 +4340,9 @@
         "D-02"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4346,7 +4366,9 @@
         "D-06"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4370,7 +4392,9 @@
         "D-05"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4394,7 +4418,9 @@
         "Fs-40"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4422,7 +4448,9 @@
         "D-03"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4450,7 +4478,9 @@
         "Fs-61"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P3"
+      ],
       "is_clear": false
     },
     {
@@ -4474,7 +4504,9 @@
         "Ft-50"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4498,7 +4530,9 @@
         "Pt-1"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4522,7 +4556,9 @@
         "Pt-2"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4546,7 +4582,9 @@
         "Pt-3"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4570,7 +4608,9 @@
         "Pt-4"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4594,7 +4634,9 @@
         "Ft-22"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4618,7 +4660,9 @@
         "Pt-4"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4642,7 +4686,9 @@
         "D-04"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4666,7 +4712,9 @@
         "D-07"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4690,7 +4738,9 @@
         "Ft-21"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4714,7 +4764,9 @@
         "Pt-3"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4738,7 +4790,9 @@
         "Ft-28"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4766,7 +4820,9 @@
         "Ft-28"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P4"
+      ],
       "is_clear": false
     },
     {
@@ -4790,7 +4846,9 @@
         "Ft-34"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P5"
+      ],
       "is_clear": false
     },
     {
@@ -4814,7 +4872,9 @@
         "Pt-6"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P5"
+      ],
       "is_clear": false
     },
     {
@@ -4838,7 +4898,9 @@
         "Ft-29"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P5"
+      ],
       "is_clear": false
     },
     {
@@ -4862,7 +4924,9 @@
         "Ft-29"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P5"
+      ],
       "is_clear": false
     },
     {
@@ -4886,7 +4950,9 @@
         "Ft-40"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P5"
+      ],
       "is_clear": false
     },
     {
@@ -4910,7 +4976,9 @@
         "D-11"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P5"
+      ],
       "is_clear": false
     },
     {
@@ -4934,7 +5002,9 @@
         "D-14"
       ],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P5"
+      ],
       "is_clear": false
     },
     {
@@ -4951,7 +5021,15 @@
       "correct_answer": "yes",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5",
+        "S1",
+        "S2"
+      ],
       "is_clear": true
     },
     {
@@ -4973,7 +5051,10 @@
       "correct_answer": "no",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1",
+        "S1"
+      ],
       "is_clear": false
     },
     {
@@ -4995,7 +5076,10 @@
       "correct_answer": "no",
       "prerequisites": [],
       "related_descriptors": [],
-      "paradigms": [],
+      "paradigms": [
+        "P1",
+        "S2"
+      ],
       "is_clear": false
     }
   ]

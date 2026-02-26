@@ -43,6 +43,7 @@ def compute_neighborhoods(
       1. tension(O*, P') < tension(O*, P_current)（strict <）
       2. Remaining(P', P_current) ⊂ Anomaly(P_current)（真部分集合）
       3. Hasse 図で直接後続（中間がない）
+      4. Explained 包含で冗長でない（Explained(A) ⊂ Explained(B) なら B を除外）
 
     Remaining(P', P_current) = Anomaly(P_current, O*) ∩ Anomaly(P', O*)
     """
@@ -53,6 +54,13 @@ def compute_neighborhoods(
     tensions: dict[str, int] = {
         pid: len(anomaly_sets[pid]) for pid in pids
     }
+    # Explained(P) = {d | P_pred(d) == O*(d)}
+    explained: dict[str, set[str]] = {}
+    for pid in pids:
+        explained[pid] = {
+            d for d, pred in paradigms[pid].p_pred.items()
+            if d in o_star and pred == o_star[d]
+        }
 
     for pid_cur in pids:
         anom_cur = anomaly_sets[pid_cur]
@@ -89,7 +97,17 @@ def compute_neighborhoods(
             if not is_covered:
                 neighbors.add(pid_a)
 
-        paradigms[pid_cur].neighbors = neighbors
+        # Explained 包含フィルタ:
+        # Explained(A) ⊂ Explained(B) のとき B を除外し、より近い A のみ残す。
+        # （Explained が大きいパラダイムは、小さいパラダイムを経由して到達すべき）
+        filtered = set(neighbors)
+        for pid_a in neighbors:
+            for pid_b in neighbors:
+                if pid_a == pid_b:
+                    continue
+                if explained[pid_a] < explained[pid_b]:  # Explained(A) ⊂ Explained(B)
+                    filtered.discard(pid_b)
+        paradigms[pid_cur].neighbors = filtered
 
 
 def _resolve(

@@ -1,12 +1,6 @@
 {
   "title": "砂漠の男",
   "statement": "砂漠の真ん中で裸の男が死んでいた。手には折れたマッチ棒を握りしめている。",
-  "main_path": [
-    "P1",
-    "P2",
-    "P3",
-    "P4"
-  ],
   "init_paradigm": "P1",
   "tension_threshold": 1,
   "shift_candidates": {
