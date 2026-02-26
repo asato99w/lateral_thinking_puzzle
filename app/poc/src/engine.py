@@ -205,6 +205,20 @@ def open_questions(
     questions: list[Question],
     paradigms: dict[str, Paradigm] | None = None,
 ) -> list[Question]:
+    p = paradigms[state.p_current] if paradigms else None
+    if p is None:
+        return []
+
+    # Consistent(O, P) と Anomaly(O, P) を計算
+    consistent = {d for d, v in state.o.items()
+                  if p.prediction(d) is not None and p.prediction(d) == v}
+    anomaly = {d for d, v in state.o.items()
+               if p.prediction(d) is not None and p.prediction(d) != v}
+
+    # R(P) による到達可能記述素を計算（多ホップ BFS）
+    consistent_reach = _reachable(consistent, p)
+    anomaly_reach = _reachable(anomaly, p)
+
     result = []
     for q in questions:
         if q.id in state.answered:
@@ -216,7 +230,12 @@ def open_questions(
         eff = compute_effect(q)
         if isinstance(eff, list) and len(eff) > 0 and isinstance(eff[0], tuple):
             for d_id, v in eff:
-                if abs(state.h.get(d_id, 0.5) - v) < EPSILON:
+                # 3a: 一致からの探索
+                if d_id in consistent_reach and p.prediction(d_id) == v:
+                    result.append(q)
+                    break
+                # 3b: 違和感からの探索
+                if d_id in anomaly_reach:
                     result.append(q)
                     break
     return result
@@ -232,6 +251,23 @@ def _assimilate_descriptor(h: dict[str, float], d_id: str, paradigm: Paradigm):
             pred = paradigm.prediction(tgt)
             if pred is not None:
                 h[tgt] = h.get(tgt, 0.5) + w * (float(pred) - h.get(tgt, 0.5))
+
+
+def _reachable(origins: set[str], paradigm: Paradigm) -> set[str]:
+    """R(P) で origins から到達可能な記述素を返す（多ホップ BFS）。"""
+    reachable = set()
+    frontier = set(origins)
+    visited: set[str] = set()
+    while frontier:
+        current = frontier.pop()
+        if current in visited:
+            continue
+        visited.add(current)
+        for src, tgt, w in paradigm.relations:
+            if src == current and tgt not in visited:
+                reachable.add(tgt)
+                frontier.add(tgt)
+    return reachable
 
 
 def _assimilate_from_paradigm(

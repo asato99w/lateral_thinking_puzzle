@@ -2,9 +2,11 @@
 
 各遷移 P_i → P_{i+1} について:
   1. P_i フェーズの全質問回答後の推定 O_i を計算
-  2. 同化起点 = {d ∈ O_i : P_pred(P_{i+1}, d) ∈ {0,1} かつ P_pred(P_{i+1}, d) == O_i[d]}
-  3. R(P_{i+1}) で同化起点から到達可能なターゲット記述素 T_reach を計算
+  2. Consistent(O_i, P_{i+1}) と Anomaly(O_i, P_{i+1}) を計算
+  3. R(P_{i+1}) で Consistent と Anomaly の両方から到達可能なターゲット記述素 T_reach を計算
   4. T_reach の各 t について、t を effect に含む未回答質問の存在を確認
+     - 3a 経路（Consistent からの到達）: P_pred 一致が必要
+     - 3b 経路（Anomaly からの到達）: P_pred 一致は不要
   5. OK/NG と診断情報を出力
 
 使い方:
@@ -19,7 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from common import load_data  # noqa: E402
-from engine import compute_effect, init_game, select_shift_target  # noqa: E402
+from engine import compute_effect, init_game, select_shift_target, _reachable  # noqa: E402
 
 # shift_direction の helpers を再利用
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -75,13 +77,19 @@ def compute_reachable_targets(origins, paradigm_next):
     return reachable
 
 
-def check_question_coverage(t_reach, paradigm_next, questions, answered_ids):
-    """T_reach の各 t について、t を effect に含む未回答質問の存在を確認する。
+def check_question_coverage(
+    consistent_reach, anomaly_reach, paradigm_next, questions, answered_ids,
+):
+    """到達可能ターゲットの各 t について、t を effect に含む未回答質問の存在を確認する。
+
+    3a 経路（Consistent からの到達）: P_pred 一致が必要
+    3b 経路（Anomaly からの到達）: P_pred 一致は不要（到達可能であれば十分）
 
     Returns:
         covered: {t: [q.id, ...]} - カバーされたターゲット記述素と質問
         uncovered: set - カバーされないターゲット記述素
     """
+    t_reach = consistent_reach | anomaly_reach
     covered = {}
     uncovered = set()
 
@@ -95,11 +103,16 @@ def check_question_coverage(t_reach, paradigm_next, questions, answered_ids):
             eff = compute_effect(q)
             for d, v in eff:
                 if d == t:
-                    # effect(q)[t] の値が P_pred(P_{i+1}, t) と一致するか確認
-                    pred = paradigm_next.prediction(t)
-                    if pred is not None and pred == v:
+                    # 3a: Consistent からの到達 → P_pred 一致が必要
+                    if t in consistent_reach:
+                        pred = paradigm_next.prediction(t)
+                        if pred is not None and pred == v:
+                            covering_qs.append(q.id)
+                            break
+                    # 3b: Anomaly からの到達 → P_pred 一致は不要
+                    if t in anomaly_reach:
                         covering_qs.append(q.id)
-                    break
+                        break
         if covering_qs:
             covered[t] = covering_qs
         else:
@@ -140,19 +153,32 @@ def main():
 
         print(f"  |O_i| = {len(o_i)} (P_{pid_from} 全質問回答後)")
 
-        # Step 2: 同化起点
-        origins = compute_assimilation_origins(o_i, p_to)
-        print(f"  同化起点: {len(origins)}個")
-        if origins:
-            origin_list = sorted(origins)
-            if len(origin_list) <= 10:
-                print(f"    {origin_list}")
+        # Step 2: Consistent(O_i, P_{i+1}) と Anomaly(O_i, P_{i+1})
+        consistent = compute_assimilation_origins(o_i, p_to)
+        anomaly_origins = {d for d, v in o_i.items()
+                          if p_to.prediction(d) is not None
+                          and p_to.prediction(d) != v}
+        print(f"  Consistent(O_i, P_{pid_to}): {len(consistent)}個")
+        if consistent:
+            c_list = sorted(consistent)
+            if len(c_list) <= 10:
+                print(f"    {c_list}")
             else:
-                print(f"    {origin_list[:10]} ... (他{len(origin_list)-10}個)")
+                print(f"    {c_list[:10]} ... (他{len(c_list)-10}個)")
+        print(f"  Anomaly(O_i, P_{pid_to}): {len(anomaly_origins)}個")
+        if anomaly_origins:
+            a_list = sorted(anomaly_origins)
+            if len(a_list) <= 10:
+                print(f"    {a_list}")
+            else:
+                print(f"    {a_list[:10]} ... (他{len(a_list)-10}個)")
 
-        # Step 3: 到達可能ターゲット
-        t_reach = compute_reachable_targets(origins, p_to)
+        # Step 3: 到達可能ターゲット（Consistent と Anomaly の両方から）
+        consistent_reach = _reachable(consistent, p_to)
+        anomaly_reach = _reachable(anomaly_origins, p_to)
+        t_reach = consistent_reach | anomaly_reach
         print(f"  到達可能ターゲット (T_reach): {len(t_reach)}個")
+        print(f"    Consistent経由: {len(consistent_reach)}個, Anomaly経由: {len(anomaly_reach)}個")
         if t_reach:
             t_list = sorted(t_reach)
             if len(t_list) <= 10:
@@ -162,7 +188,7 @@ def main():
 
         # Step 4: 質問カバレッジ
         covered, uncovered = check_question_coverage(
-            t_reach, p_to, questions, answered_ids,
+            consistent_reach, anomaly_reach, p_to, questions, answered_ids,
         )
 
         if covered:
@@ -174,8 +200,8 @@ def main():
             print(f"  未カバーターゲット: {sorted(uncovered)}")
 
         if not t_reach:
-            print(f"  警告: 同化起点からの到達可能ターゲットが空")
-            print(f"  → R({pid_to}) に同化起点からの関係が不足")
+            print(f"  警告: Consistent/Anomaly からの到達可能ターゲットが空")
+            print(f"  → R({pid_to}) に Consistent/Anomaly からの関係が不足")
             print(f"  結果: NG")
             all_ok = False
         elif uncovered:

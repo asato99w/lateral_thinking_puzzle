@@ -15,7 +15,7 @@ from collections import defaultdict
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from common import load_data  # noqa: E402
-from engine import compute_effect, _assimilate_descriptor, EPSILON  # noqa: E402
+from engine import compute_effect, _reachable  # noqa: E402
 
 
 # ---------------------------------------------------------------------------
@@ -178,65 +178,60 @@ def find_bottlenecks(all_paths):
 # ---------------------------------------------------------------------------
 
 def analyze_rp_spread(paradigm, qp, layers, truth, ps_values):
-    """各層での R(P) 同化による波及を分析する。
+    """各層での R(P) 到達性によるゲート開放を分析する。
 
-    返り値: {layer: {gate_open_count, gate_total, spread_descriptors}}
+    Consistent(O, P) と Anomaly(O, P) から R(P) 経由で到達可能な記述素を計算し、
+    次の層の質問の effect 記述素がゲート開放条件を満たすかを判定する。
+
+    返り値: {layer: {gate_total, gate_opened, rate}}
     """
-    q_by_id = {q.id: q for q in qp}
     max_layer = max(layers.values()) if layers else 0
 
-    # 各層の質問が生む記述素
-    layer_effects = defaultdict(set)
-    for q in qp:
-        eff = compute_effect(q)
-        for d, v in eff:
-            layer_effects[layers[q.id]].add(d)
-
-    # 次の層のゲート条件 = 次の層の質問の effect 記述素
-    # ゲートが開く = H がその記述素の真理値に近づく
     results = {}
     for layer_k in range(max_layer):
         layer_k1_qs = [q for q in qp if layers[q.id] == layer_k + 1]
         if not layer_k1_qs:
             continue
 
-        # 層 k+1 のゲート = 層 k+1 の質問の effect 記述素のうち、
-        # 閾値条件 |H(d) - v| < EPSILON が必要なもの
+        # 層 k+1 の質問の effect 記述素（ゲート対象）
         gate_ds = set()
         for q in layer_k1_qs:
             eff = compute_effect(q)
             for d, v in eff:
-                gate_ds.add(d)
+                gate_ds.add((d, v))
 
-        # 層 k の質問を全て回答した際の R(P) 同化による波及先
-        # 簡易シミュレーション: H を構築して同化を適用
-        h = {d: 0.5 for d in paradigm.p_pred}
-        for d, v in ps_values.items():
-            if d in h:
-                h[d] = float(v)
-
-        # 層 0..k の質問を全て回答
+        # 層 0..k の質問を全て回答した推定 O を構築
+        o_est = dict(ps_values)
         for lk in range(layer_k + 1):
             for q in qp:
                 if layers[q.id] != lk:
                     continue
                 eff = compute_effect(q)
                 for d, v in eff:
-                    h[d] = float(v)
-                # 同化
-                for d, v in eff:
-                    pred = paradigm.prediction(d)
-                    if pred is not None and pred == v:
-                        _assimilate_descriptor(h, d, paradigm)
+                    o_est[d] = v
 
-        # ゲートの開放状態をチェック
+        # Consistent(O, P) と Anomaly(O, P) を計算
+        consistent = {d for d, v in o_est.items()
+                      if paradigm.prediction(d) is not None
+                      and paradigm.prediction(d) == v}
+        anomaly = {d for d, v in o_est.items()
+                   if paradigm.prediction(d) is not None
+                   and paradigm.prediction(d) != v}
+
+        # R(P) による到達可能記述素
+        consistent_reach = _reachable(consistent, paradigm)
+        anomaly_reach = _reachable(anomaly, paradigm)
+
+        # ゲート開放判定
         gates_opened = 0
-        spread_ds = set()
-        for d in gate_ds:
-            tv = truth.get(d)
-            if tv is not None and abs(h.get(d, 0.5) - tv) < EPSILON:
+        for d, v in gate_ds:
+            # 3a: 一致からの探索
+            if d in consistent_reach and paradigm.prediction(d) == v:
                 gates_opened += 1
-                spread_ds.add(d)
+                continue
+            # 3b: 違和感からの探索
+            if d in anomaly_reach:
+                gates_opened += 1
 
         results[layer_k] = {
             "gate_total": len(gate_ds),
