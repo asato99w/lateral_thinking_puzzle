@@ -58,6 +58,7 @@ class Question:
     prerequisites: List[str] = field(default_factory=list)
     related_descriptors: List[str] = field(default_factory=list)
     topic_category: str = ""
+    paradigms: List[str] = field(default_factory=list)  # 所属パラダイム
 
     @property
     def effect(self) -> Union[List[Tuple[str, int]], List[str]]:

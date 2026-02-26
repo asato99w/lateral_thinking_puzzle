@@ -50,7 +50,19 @@ def load_and_build(data_path: Path):
             prerequisites=q.get("prerequisites", []),
             related_descriptors=q.get("related_descriptors", []),
             topic_category=q.get("topic_category", ""),
+            paradigms=q.get("paradigms", []),
         ))
+
+    # paradigms フィールドが未定義なら p_pred 重なりから自動計算
+    from engine import compute_effect
+    for q in questions:
+        if q.paradigms or q.correct_answer == "irrelevant":
+            continue
+        eff = compute_effect(q)
+        eff_ds = {d for d, v in eff}
+        for pid, p in paradigms.items():
+            if eff_ds & set(p.p_pred.keys()):
+                q.paradigms.append(pid)
 
     ps_values = {d[0]: d[1] for d in data["ps_values"]}
     all_descriptor_ids = data["all_descriptor_ids"]

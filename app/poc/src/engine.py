@@ -57,6 +57,8 @@ def init_questions(
 ) -> list[Question]:
     result = []
     for q in questions:
+        if q.paradigms and paradigm.id not in q.paradigms:
+            continue
         if o is not None and not all(d in o for d in q.prerequisites):
             continue
         eff = compute_effect(q)
@@ -221,6 +223,8 @@ def open_questions(
     result = []
     for q in questions:
         if q.id in state.answered:
+            continue
+        if q.paradigms and state.p_current not in q.paradigms:
             continue
         if not all(d in state.o for d in q.prerequisites):
             continue
