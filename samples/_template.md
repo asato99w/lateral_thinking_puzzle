@@ -61,7 +61,7 @@ samples/NNN_YYYYMMDD_タイトル/
 |------|------|
 | id | パラダイム ID |
 | name | パラダイム名 |
-| p_pred | D⁺・D⁻ の完全リスト（Conceivable スコープ、Rule 4 参照） |
+| p_pred | D⁺・D⁻ の完全リスト（論理的予測の全体） |
 | conceivable | Conceivable(P) の完全リスト |
 | relations | R(P) の完全リスト（横辺＋ゲート辺、[ソース, ターゲット, w]） |
 
