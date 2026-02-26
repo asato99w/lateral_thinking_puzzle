@@ -2,7 +2,7 @@
 
 ## 概要
 
-各パラダイム P_i（シフト元となるもの）について、固有記述素からの同化連鎖によって anomaly を threshold 以上生成できることを保証する規則。
+各パラダイム P_i（シフト元となるもの）について、固有記述素からの同化連鎖によって anomaly を遷移先の resolve 閾値 N 以上生成できることを保証する規則。
 
 関係構造の構成 Rule 3 の定量的強化として位置づけられる。Rule 3 は「固有→共有の関係が存在すること」を要求するが、本規則は「anomaly 生成に十分な量であること」を要求する。
 
@@ -35,9 +35,11 @@ anomaly_upper_bound(P_i) = |⋃_{q ∈ Q_anomaly(P_i)} anomaly_ds(q, P_i)|
 
 ```
 ∀ P_i ∈ メインパス（最終パラダイムを除く）:
-  threshold(P_i) が定義されている場合:
-    anomaly_upper_bound(P_i) >= threshold(P_i)
+  P_i の近傍 P_{i+1} について N(P_{i+1}) が定義されている場合:
+    anomaly_upper_bound(P_i) >= N(P_{i+1})
 ```
+
+ここで N(P_{i+1}) は遷移先パラダイム P_{i+1} の resolve 閾値である。anomaly 上界は resolve の上界でもあるため、この条件は resolve >= N の充足可能性の必要条件となる。
 
 ## 不充足時の対処
 
