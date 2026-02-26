@@ -5,6 +5,8 @@
   2. 各回答後に select_shift_target（近傍 + tension strict < + resolve >= N）を適用
   3. 選択結果が P_{i+1} と一致することを検証
 
+ゲーム状態は到達パス全体でチェーンする（前パラダイムの蓄積を引き継ぐ）。
+
 使い方:
   python shift_direction.py                       # turtle_soup.json
   python shift_direction.py --data bar_man.json   # bar_man.json
@@ -40,11 +42,13 @@ def simulate_shift_direction(
     pid_to: str,
     paradigms: dict,
     questions: list,
-    all_ids: list,
-    ps_values: dict,
-    init_pid: str,
+    state,
+    current_open: list,
 ) -> dict:
     """P_from フェーズの質問を順に回答し、シフト時点で select_shift_target を適用する。
+
+    state と current_open は呼び出し元から引き継ぐ（チェーン方式）。
+    state は破壊的に更新されるため、呼び出し後に次の遷移でそのまま使える。
 
     Returns:
         {
@@ -60,23 +64,29 @@ def simulate_shift_direction(
     """
     p_from = paradigms[pid_from]
 
-    # ゲーム初期化
-    state = init_game(ps_values, paradigms, init_pid, all_ids)
-
-    # P_from がアクティブな状態を想定
+    # P_from がアクティブな状態を設定
     state.p_current = pid_from
 
     # Q(P_from) の質問を分類
     qp = derive_qp(questions, p_from)
     safe_qs, anomaly_qs = classify_questions(qp, p_from)
 
-    # シミュレーション用: Q(P_from) の safe 質問を初期オープンとする
-    current_open = list(safe_qs)
-    anomaly_ids = {q.id for q in anomaly_qs}
+    # current_open を更新: Q(P_from) のうち未回答の質問を open_questions で判定
+    newly_opened = open_questions(state, questions, paradigms)
+    for oq in newly_opened:
+        if oq not in current_open:
+            current_open.append(oq)
 
-    # 回答キュー: safe 質問から開始
-    answer_queue = [q for q in current_open if q.id not in anomaly_ids]
+    # Q(P_from) の safe 質問のうち未回答をキューに投入
+    anomaly_ids = {q.id for q in anomaly_qs}
+    answer_queue = [q for q in qp if q.id not in state.answered and q.id not in anomaly_ids]
     queued_ids = {q.id for q in answer_queue}
+
+    # anomaly 質問のうち既にオープンしているものもキューに追加
+    for q in anomaly_qs:
+        if q.id not in state.answered and q in current_open and q.id not in queued_ids:
+            answer_queue.append(q)
+            queued_ids.add(q.id)
 
     result = {
         "shift_triggered": False,
@@ -135,7 +145,7 @@ def simulate_shift_direction(
 
                 result["target_matches"] = selected == pid_to
 
-        # 新規オープンの anomaly 質問をキューに追加
+        # 新規オープンの質問をキューに追加
         for oq in current_open:
             if oq.id not in queued_ids and oq.id not in state.answered:
                 answer_queue.append(oq)
@@ -160,6 +170,10 @@ def main():
     print(f"到達パス: {' → '.join(reach_path)}")
     print()
 
+    # ゲーム状態を初期化し、到達パス全体でチェーンする
+    state = init_game(ps_values, paradigms, init_pid, all_ids)
+    current_open = open_questions(state, questions, paradigms)
+
     all_ok = True
 
     for i in range(len(reach_path) - 1):
@@ -178,9 +192,10 @@ def main():
         print(f"  |Q({pid_from})| = {len(qp)} (safe: {len(safe_qs)}, anomaly: {len(anomaly_qs)})")
         print(f"  neighbors({pid_from}) = [{nb_str}]")
         print(f"  shift_threshold({pid_from}) = {p_from.shift_threshold}")
+        print(f"  |O| at start = {len(state.o)}")
 
         result = simulate_shift_direction(
-            pid_from, pid_to, paradigms, questions, all_ids, ps_values, init_pid,
+            pid_from, pid_to, paradigms, questions, state, current_open,
         )
 
         print(f"  回答ステップ数: {result['total_steps']}")
