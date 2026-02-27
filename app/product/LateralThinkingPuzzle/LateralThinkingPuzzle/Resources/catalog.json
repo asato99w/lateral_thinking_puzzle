@@ -37,6 +37,18 @@
       "bundled": true
     },
     {
+      "id": "poisonous_mushroom",
+      "odr_tag": "puzzle-poisonous-mushroom",
+      "title_ja": "毒キノコ",
+      "title_en": "Poisonous Mushroom",
+      "statement_preview_ja": "Aさんは、辺りに毒キノコしかないのを見て安堵した…",
+      "statement_preview_en": "She felt relieved to see only poisonous mushrooms around…",
+      "icon": "🍄",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": true
+    },
+    {
       "id": "underground",
       "odr_tag": "puzzle-underground",
       "title_ja": "禁じられた地下室",
@@ -81,7 +93,7 @@
       "description_ja": "人気の水平思考パズル3問セット",
       "description_en": "3 popular lateral thinking puzzles",
       "icon": "\ud83d\udce6",
-      "puzzle_ids": ["turtle_soup", "bar_man", "desert_man"],
+      "puzzle_ids": ["turtle_soup", "bar_man", "desert_man", "poisonous_mushroom"],
       "tier": "free"
     },
     {
