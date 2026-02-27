@@ -29,7 +29,7 @@ from common import (  # noqa: E402
     load_raw,
     derive_qp,
     classify_questions,
-    compute_reachability_path,
+    compute_o_star_shift_chain,
     get_truth,
 )
 from engine import (  # noqa: E402
@@ -77,14 +77,14 @@ def compute_unique_anomalies(pid, anomaly_sets):
 def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
     data_raw = load_raw()
-    reach_path = compute_reachability_path(init_pid, paradigms, questions)
+    reach_path = compute_o_star_shift_chain(init_pid, paradigms, questions)
     truth = get_truth(questions)
     anomaly_sets = compute_anomaly_sets(paradigms, truth)
 
     print("=" * 65)
     print("動的発掘連鎖検証 (L2-3)")
     print("=" * 65)
-    print(f"到達パス: {' → '.join(reach_path)}")
+    print(f"O*シフト連鎖: {' → '.join(reach_path)}")
     print()
 
     # ゲーム初期化

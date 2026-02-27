@@ -21,9 +21,9 @@ from common import load_data, derive_qp, get_truth  # noqa: E402
 from engine import compute_effect  # noqa: E402
 
 # 閾値
-LAYER0_ANOMALY_THRESHOLD = 0.3
-BOTTLENECK_LIMIT = 1
-MIN_ANOMALY_LAYERS = 2
+LAYER0_ANOMALY_THRESHOLD = 0.7
+BOTTLENECK_LIMIT = 3
+MIN_ANOMALY_LAYERS = 1
 
 
 def count_anomalies(question, paradigm):

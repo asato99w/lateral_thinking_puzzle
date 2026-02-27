@@ -139,8 +139,8 @@ def neighbor_pairs(paradigms):
     return pairs
 
 
-def compute_reachability_path(init_pid, paradigms, questions):
-    """O* のもとでシフト連鎖を計算し、到達パスの一つを返す（L2-0）。"""
+def compute_o_star_shift_chain(init_pid, paradigms, questions):
+    """O*（全質問回答の理想観測）のもとでシフト連鎖を計算する。"""
     o_star = {}
     for q in questions:
         if q.correct_answer == "irrelevant":

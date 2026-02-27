@@ -13,13 +13,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from common import load_data, compute_reachability_path  # noqa: E402
+from common import load_data, compute_o_star_shift_chain  # noqa: E402
 
 
 def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
 
-    path = compute_reachability_path(init_pid, paradigms, questions)
+    path = compute_o_star_shift_chain(init_pid, paradigms, questions)
 
     # T の特定: depth が最大のパラダイム
     t_pid = max(paradigms, key=lambda pid: paradigms[pid].depth or 0)
@@ -29,7 +29,7 @@ def main():
     print("=" * 65)
     print(f"init: {init_pid}")
     print(f"T: {t_pid}")
-    print(f"到達パス: {' → '.join(path)}")
+    print(f"O*シフト連鎖: {' → '.join(path)}")
     print()
 
     ok = t_pid in path

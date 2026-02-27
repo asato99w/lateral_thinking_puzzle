@@ -3,7 +3,7 @@
 P_pred の比較だけでパラダイム間の構造的な方向性を測定する。
 shift_direction.py（動的検証 L2-5）とは相補的な静的分析。
 
-到達パス遷移とサブパラダイム遷移の両方を分析する。
+O*シフト連鎖遷移とサブパラダイム遷移の両方を分析する。
 
 各遷移 P_from → P_to について:
   1. Q(P_from) の各質問を effect(q) の (d, v) ごとに P_from / P_to と比較
@@ -21,7 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from common import load_data, derive_qp, compute_reachability_path  # noqa: E402
+from common import load_data, derive_qp, compute_o_star_shift_chain  # noqa: E402
 from engine import compute_effect  # noqa: E402
 
 
@@ -213,23 +213,23 @@ def print_candidate_summary(pid_from, paradigms, questions, expected_to=None):
 def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
 
-    # 到達パスを導出（L2-0 と同じ計算）
-    reach_path = compute_reachability_path(init_pid, paradigms, questions)
+    # O*シフト連鎖を導出（L2-0 と同じ計算）
+    reach_path = compute_o_star_shift_chain(init_pid, paradigms, questions)
     reach_set = set(reach_path)
     sub_pids = sorted(pid for pid in paradigms if pid not in reach_set)
 
     print("=" * 65)
     print("遷移駆動集合の静的分析 (L3-1, L3-2, L3-3)")
     print("=" * 65)
-    print(f"到達パス: {' → '.join(reach_path)}")
+    print(f"O*シフト連鎖: {' → '.join(reach_path)}")
     if sub_pids:
         print(f"サブパラダイム: {', '.join(sub_pids)}")
     print()
 
-    # ── 到達パス遷移 ──
+    # ── O*シフト連鎖遷移 ──
 
     print("=" * 65)
-    print("■ 到達パス遷移")
+    print("■ O*シフト連鎖遷移")
     print("=" * 65)
     print()
 
