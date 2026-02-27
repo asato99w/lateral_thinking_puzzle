@@ -24,6 +24,9 @@ env/
 xcuserdata/
 *.pbxproj
 
+# Screenshots
+app/product/docs/apple/screenshots/
+
 # OS
 .DS_Store
 Thumbs.db
