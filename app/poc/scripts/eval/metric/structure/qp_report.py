@@ -207,7 +207,7 @@ def report_paradigm(pid, paradigm, questions, ps_values):
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, _caps = load_data()
 
     print("=" * 65)
     print("Q(P) 構造レポート (L3-4, L3-5)")

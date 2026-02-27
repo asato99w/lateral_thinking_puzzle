@@ -16,7 +16,7 @@ class Paradigm:
     p_pred: Dict[str, int] = field(default_factory=dict)  # {d_id: 0|1}, unknown=キー不在
     relations: List[Tuple[str, str, float]] = field(default_factory=list)
     neighbors: Set[str] = field(default_factory=set)  # 近傍パラダイム集合（静的計算）
-    shift_threshold: Optional[int] = None  # resolve 閾値 N(P)（自動計算）
+    shift_threshold: Optional[int] = None  # resolve 閾値 N(P)（JSON で手動設定、未設定時は O* resolve がフォールバック）
     depth: Optional[int] = None  # Explained(P)包含関係から自動導出
 
     def prediction(self, d_id: str) -> Optional[int]:

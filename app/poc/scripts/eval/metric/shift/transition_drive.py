@@ -211,7 +211,7 @@ def print_candidate_summary(pid_from, paradigms, questions, expected_to=None):
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, _caps = load_data()
 
     # O*シフト連鎖を導出（L2-0 と同じ計算）
     reach_path = compute_o_star_shift_chain(init_pid, paradigms, questions)

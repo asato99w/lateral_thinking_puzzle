@@ -17,7 +17,7 @@ from common import load_data, compute_o_star_shift_chain  # noqa: E402
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, _caps = load_data()
 
     path = compute_o_star_shift_chain(init_pid, paradigms, questions)
 

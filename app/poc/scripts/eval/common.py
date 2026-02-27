@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from models import Paradigm, Question  # noqa: E402
 from engine import compute_effect, select_shift_target  # noqa: E402
-from threshold import build_o_star, compute_neighborhoods, compute_shift_thresholds, compute_depths  # noqa: E402
+from threshold import build_o_star, compute_neighborhoods, compute_resolve_caps, compute_depths  # noqa: E402
 
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
@@ -71,10 +71,17 @@ def load_data(data_path: Path | None = None):
 
     ps_values = {d[0]: d[1] for d in data["ps_values"]}
 
-    # 完全確定 O* から近傍・閾値・深度を導出
+    # JSON に shift_threshold があれば読み込む
+    paradigm_map = {p["id"]: p for p in data["paradigms"]}
+    for pid, p in paradigms.items():
+        raw = paradigm_map.get(pid, {})
+        if "shift_threshold" in raw:
+            p.shift_threshold = raw["shift_threshold"]
+
+    # 完全確定 O* から近傍・resolve上限・深度を導出
     o_star = build_o_star(questions, ps_values)
     compute_neighborhoods(paradigms, o_star)
-    compute_shift_thresholds(paradigms, o_star)
+    resolve_caps = compute_resolve_caps(paradigms, o_star)
     compute_depths(paradigms, o_star)
 
     return (
@@ -83,6 +90,7 @@ def load_data(data_path: Path | None = None):
         data["all_descriptor_ids"],
         ps_values,
         data["init_paradigm"],
+        resolve_caps,
     )
 
 
@@ -139,7 +147,7 @@ def neighbor_pairs(paradigms):
     return pairs
 
 
-def compute_o_star_shift_chain(init_pid, paradigms, questions):
+def compute_o_star_shift_chain(init_pid, paradigms, questions, resolve_caps=None):
     """O*（全質問回答の理想観測）のもとでシフト連鎖を計算する。"""
     o_star = {}
     for q in questions:
@@ -154,7 +162,7 @@ def compute_o_star_shift_chain(init_pid, paradigms, questions):
     current = init_pid
     while True:
         p_cur = paradigms[current]
-        nxt = select_shift_target(o_star, p_cur, paradigms)
+        nxt = select_shift_target(o_star, p_cur, paradigms, resolve_caps)
         if nxt is None or nxt in visited:
             break
         path.append(nxt)

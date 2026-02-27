@@ -75,7 +75,7 @@ def check_question_coverage(
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, _caps = load_data()
 
     pairs = neighbor_pairs(paradigms)
 

@@ -1,4 +1,4 @@
-"""パラダイムの近傍・閾値・深度を O* から導出する。"""
+"""パラダイムの近傍・resolve上限・深度を O* から導出する。"""
 from __future__ import annotations
 
 from models import Paradigm, Question
@@ -21,7 +21,7 @@ def build_o_star(
 
 
 def _anomaly_set(paradigm: Paradigm, o_star: dict[str, int]) -> set[str]:
-    """Anomaly(P, O*): P_pred(d) ≠ O*(d) の記述素集合。"""
+    """Anomaly(P, O*): P_pred(d) != O*(d) の記述素集合。"""
     return {
         d for d, pred in paradigm.p_pred.items()
         if d in o_star and pred != o_star[d]
@@ -80,7 +80,6 @@ def compute_neighborhoods(
                 remaining_map[pid_cand] = frozenset(remaining)
 
         # Hasse 図: 直接後続のみ（中間がない）
-        # P_a が P_b を覆う ⟺ Remaining(P_a) ⊃ Remaining(P_b) かつ中間なし
         # 近傍 = Remaining が極大（他の候補の Remaining に真に含まれない）
         neighbors: set[str] = set()
         cand_pids = list(remaining_map.keys())
@@ -99,7 +98,6 @@ def compute_neighborhoods(
 
         # Explained 包含フィルタ:
         # Explained(A) ⊂ Explained(B) のとき B を除外し、より近い A のみ残す。
-        # （Explained が大きいパラダイムは、小さいパラダイムを経由して到達すべき）
         filtered = set(neighbors)
         for pid_a in neighbors:
             for pid_b in neighbors:
@@ -110,12 +108,12 @@ def compute_neighborhoods(
         paradigms[pid_cur].neighbors = filtered
 
 
-def _resolve(
+def resolve_o_star(
     o_star: dict[str, int],
     p_source: Paradigm,
     p_target: Paradigm,
 ) -> int:
-    """P_source のアノマリーのうち P_target が正しく予測する数。"""
+    """P_source のアノマリーのうち P_target が正しく予測する数（O* ベース）。"""
     count = 0
     for d, pred_src in p_source.p_pred.items():
         if d not in o_star:
@@ -129,30 +127,23 @@ def _resolve(
     return count
 
 
-def compute_shift_thresholds(
+def compute_resolve_caps(
     paradigms: dict[str, Paradigm],
     o_star: dict[str, int],
-) -> None:
-    """各パラダイムの shift_threshold N(P_target) を計算する。
+) -> dict[tuple[str, str], int]:
+    """近傍ペアごとの resolve(O*, P_source, P_target) を事前計算する。
 
-    N(P_target) = min over { P_source | P_target ∈ neighbors(P_source) }
-                  of resolve(O*, P_source, P_target)
-
-    P_target を近傍に持つ全 P_source からの resolve の最小値。
+    Returns:
+        {(source_pid, target_pid): resolve_value} — 近傍関係にあるペアのみ
     """
-    # 逆引き: 各 P_target について、それを近傍に持つ P_source の一覧
-    for pid_target, p_target in paradigms.items():
-        min_resolve = None
-        for pid_source, p_source in paradigms.items():
-            if pid_source == pid_target:
-                continue
-            if pid_target not in p_source.neighbors:
-                continue
-            res = _resolve(o_star, p_source, p_target)
-            if min_resolve is None or res < min_resolve:
-                min_resolve = res
-
-        p_target.shift_threshold = min_resolve
+    caps: dict[tuple[str, str], int] = {}
+    for pid_source, p_source in paradigms.items():
+        for pid_target in p_source.neighbors:
+            p_target = paradigms[pid_target]
+            caps[(pid_source, pid_target)] = resolve_o_star(
+                o_star, p_source, p_target,
+            )
+    return caps
 
 
 def compute_depths(
@@ -176,9 +167,7 @@ def compute_depths(
         explained[pid] = exp
 
     # 包含関係 DAG を構築: pid1 → pid2 means Explained(pid1) ⊂ Explained(pid2)
-    # (pid1 のほうが浅い)
     pids = list(paradigms.keys())
-    # strictly_contained[a] = set of b where Explained(a) ⊂ Explained(b)
     strictly_contained: dict[str, set[str]] = {pid: set() for pid in pids}
 
     for i, a in enumerate(pids):
@@ -189,7 +178,6 @@ def compute_depths(
                 strictly_contained[a].add(b)
 
     # トポロジカルソートで depth 割り当て
-    # depth = 最長到達パスの長さ（比較不能なものは同じ depth になりうる）
     depth_map: dict[str, int] = {}
 
     def compute_depth(pid: str, visited: set[str]) -> int:
@@ -199,9 +187,6 @@ def compute_depths(
             return 0  # 循環（あってはならないが安全策）
         visited.add(pid)
 
-        # このパラダイムを含むものが存在しなければ depth は最大
-        # depth は「自分より小さい Explained を持つものの最大 depth + 1」
-        # ただし、自分が最小なら depth = 0
         parents = [
             p for p in pids
             if pid in strictly_contained[p]  # p ⊂ pid → p は pid より浅い

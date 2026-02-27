@@ -1,10 +1,12 @@
 """完全性検証スクリプト（L2-1）。
 
 2段階で検証する:
-  局所条件: 各 P の固有アノマリーが Q(P) でカバーされること
+  局所条件: 各 P の RequiredAnomaly が Q(P) でカバーされること
   大域条件: 全アノマリー記述素がいずれかの Q(P') でカバーされること
 
-固有アノマリー = Anomaly(P) - Union of Anomaly(P') for all P' != P
+RequiredAnomaly(P) = Anomaly(P) - UpperShared(P)
+  - UpperShared(P): より深いパラダイムと共有するアノマリー（免除対象）
+  - 固有・下位共有・同一depth共有はカバー必須
 
 使い方:
   python completeness.py                       # turtle_soup.json
@@ -32,17 +34,52 @@ def compute_anomaly_sets(paradigms, truth):
     }
 
 
-def compute_unique_anomalies(pid, anomaly_sets):
-    """固有アノマリー = Anomaly(P) のうち他のどのパラダイムにも属さないもの。"""
-    others = set()
+def classify_anomalies(pid, paradigms, anomaly_sets):
+    """アノマリーを 固有 / 上位共有 / 下位共有 / 同一depth共有 に分類する。
+
+    Returns:
+        (unique, upper_shared, lower_shared, same_depth_shared)
+    """
+    p = paradigms[pid]
+    my_anom = anomaly_sets[pid]
+    my_depth = p.depth or 0
+
+    upper_shared = set()  # より深いパラダイムと共有
+    lower_shared = set()  # より浅いパラダイムと共有
+    same_depth_shared = set()  # 同一depthと共有
+
     for other_pid, other_anom in anomaly_sets.items():
-        if other_pid != pid:
-            others |= other_anom
-    return anomaly_sets[pid] - others
+        if other_pid == pid:
+            continue
+        other_depth = paradigms[other_pid].depth or 0
+        shared = my_anom & other_anom
+        if not shared:
+            continue
+        if other_depth > my_depth:
+            upper_shared |= shared
+        elif other_depth < my_depth:
+            lower_shared |= shared
+        else:
+            same_depth_shared |= shared
+
+    # 重複除去（複数カテゴリに該当する場合の優先: upper > lower > same_depth）
+    lower_shared -= upper_shared
+    same_depth_shared -= upper_shared | lower_shared
+
+    unique = my_anom - upper_shared - lower_shared - same_depth_shared
+    return unique, upper_shared, lower_shared, same_depth_shared
+
+
+def compute_required_anomalies(pid, paradigms, anomaly_sets):
+    """RequiredAnomaly(P) = Anomaly(P) - UpperShared(P)。"""
+    unique, upper_shared, lower_shared, same_depth_shared = classify_anomalies(
+        pid, paradigms, anomaly_sets,
+    )
+    return anomaly_sets[pid] - upper_shared
 
 
 def compute_covered_by_qp(paradigm, questions):
-    """Q(P) の effect でカバーされるアノマリー記述素を返す。"""
+    """Q(P) の effect でカバーされる記述素を返す。"""
     qp = derive_qp(questions, paradigm)
     covered = set()
     for q in qp:
@@ -55,7 +92,7 @@ def compute_covered_by_qp(paradigm, questions):
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, _caps = load_data()
     truth = get_truth(questions)
     anomaly_sets = compute_anomaly_sets(paradigms, truth)
 
@@ -75,8 +112,10 @@ def main():
     # --- 局所条件 ---
     for pid, paradigm in paradigms.items():
         all_anom = anomaly_sets[pid]
-        unique_anom = compute_unique_anomalies(pid, anomaly_sets)
-        shared = all_anom - unique_anom
+        unique, upper_shared, lower_shared, same_depth_shared = classify_anomalies(
+            pid, paradigms, anomaly_sets,
+        )
+        required = all_anom - upper_shared
 
         print(f"-" * 50)
         print(f"{pid}: {paradigm.name} (depth={paradigm.depth})")
@@ -88,23 +127,35 @@ def main():
             continue
 
         print(f"  アノマリー記述素: {len(all_anom)}個")
-        if shared:
-            print(f"    共有: {len(shared)}個 {sorted(shared)}")
-        print(f"    固有: {len(unique_anom)}個 {sorted(unique_anom)}")
+        print(f"    固有: {len(unique)}個", end="")
+        if unique:
+            print(f" {sorted(unique)}")
+        else:
+            print()
+        print(f"    上位共有（免除）: {len(upper_shared)}個", end="")
+        if upper_shared:
+            print(f" {sorted(upper_shared)}")
+        else:
+            print()
+        if lower_shared:
+            print(f"    下位共有: {len(lower_shared)}個 {sorted(lower_shared)}")
+        if same_depth_shared:
+            print(f"    同一depth共有: {len(same_depth_shared)}個 {sorted(same_depth_shared)}")
+        print(f"  カバー必須 (Required): {len(required)}個")
 
-        if not unique_anom:
-            print(f"  局所条件: OK（固有アノマリーなし）")
+        if not required:
+            print(f"  局所条件: OK（カバー必須アノマリーなし）")
             print()
             continue
 
-        # Q(P) でカバーされる固有アノマリー
+        # Q(P) でカバーされる Required アノマリー
         qp_covered = compute_covered_by_qp(paradigm, questions)
-        covered_unique = unique_anom & qp_covered
-        uncovered_unique = unique_anom - qp_covered
+        covered_required = required & qp_covered
+        uncovered_required = required - qp_covered
 
-        print(f"  固有カバー済み: {len(covered_unique)}個")
-        if uncovered_unique:
-            print(f"  未カバー固有: {sorted(uncovered_unique)}")
+        print(f"  カバー済み: {len(covered_required)}個")
+        if uncovered_required:
+            print(f"  未カバー: {sorted(uncovered_required)}")
             print(f"  局所条件: NG")
             local_ok = False
         else:

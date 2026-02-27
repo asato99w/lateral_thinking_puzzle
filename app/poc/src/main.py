@@ -13,7 +13,7 @@ from engine import (
     alignment,
     open_questions,
 )
-from threshold import build_o_star, compute_neighborhoods, compute_shift_thresholds, compute_depths
+from threshold import build_o_star, compute_neighborhoods, compute_resolve_caps, compute_depths
 
 ANSWER_DISPLAY = {
     "yes": "YES",
@@ -133,10 +133,10 @@ def main():
     ps_values = {d[0]: d[1] for d in data["ps_values"]}
     init_paradigm_id = data["init_paradigm"]
 
-    # 完全確定 O* から近傍・閾値・深度を導出
+    # 完全確定 O* から近傍・resolve上限・深度を導出
     o_star = build_o_star(questions, ps_values)
     compute_neighborhoods(paradigms, o_star)
-    compute_shift_thresholds(paradigms, o_star)
+    resolve_caps = compute_resolve_caps(paradigms, o_star)
     compute_depths(paradigms, o_star)
 
     # ゲーム初期化
@@ -235,7 +235,7 @@ def main():
         p_before = state.p_current
 
         # 状態更新
-        state, current_open = update(state, selected, paradigms, questions, current_open)
+        state, current_open = update(state, selected, paradigms, questions, current_open, resolve_caps)
 
         # パラダイムシフトの演出
         if state.p_current != p_before:

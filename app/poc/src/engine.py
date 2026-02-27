@@ -82,6 +82,7 @@ def update(
     paradigms: dict[str, Paradigm],
     all_questions: list[Question],
     current_open: list[Question],
+    resolve_caps: dict[tuple[str, str], int] | None = None,
 ) -> tuple[GameState, list[Question]]:
     # Step 1: 直接更新
     eff = compute_effect(question)
@@ -108,7 +109,7 @@ def update(
             state.h[d] = float(v)
 
     # Step 3: パラダイムシフト判定（近傍 + resolve 閾値）
-    best_id = select_shift_target(state.o, p_current, paradigms)
+    best_id = select_shift_target(state.o, p_current, paradigms, resolve_caps)
     if best_id is not None:
         state.p_current = best_id
         p_new = paradigms[best_id]
@@ -129,13 +130,19 @@ def select_shift_target(
     o: dict[str, int],
     p_current: Paradigm,
     paradigms: dict[str, Paradigm],
+    resolve_caps: dict[tuple[str, str], int] | None = None,
 ) -> str | None:
     """近傍 + resolve 閾値に基づくシフト先選択。
 
     3条件全てを満たす候補のみ:
       1. 近傍: pid ∈ p_current.neighbors
       2. tension strict <: tension(O, P') < tension(O, P_current)
-      3. resolve >= N: P' の shift_threshold 以上の resolve
+      3. resolve >= N: 実効閾値以上の resolve
+
+    実効閾値の決定:
+      - shift_threshold（手動設定）があればそれを使う
+      - resolve_caps（O* ベースの上限）があれば上限でキャップ
+      - どちらもなければ閾値なし（条件3 スキップ）
 
     選択: resolve DESC → attention DESC → pid ASC
     """
@@ -157,8 +164,22 @@ def select_shift_target(
             continue
         res = len({d for d in anomalies
                    if p.prediction(d) is not None and p.prediction(d) == o[d]})
-        if p.shift_threshold is not None and res < p.shift_threshold:  # 条件3: resolve >= N
+
+        # 条件3: resolve >= 実効閾値
+        cap = resolve_caps.get((p_current.id, pid)) if resolve_caps else None
+        threshold = p.shift_threshold  # 手動設定値
+        if threshold is not None and cap is not None:
+            effective_n = min(threshold, cap)
+        elif threshold is not None:
+            effective_n = threshold
+        elif cap is not None:
+            effective_n = cap
+        else:
+            effective_n = None  # 閾値なし
+
+        if effective_n is not None and res < effective_n:
             continue
+
         att = len({d for d in anomalies if d in p.p_pred})
         candidates.append((pid, t, att, res))
 

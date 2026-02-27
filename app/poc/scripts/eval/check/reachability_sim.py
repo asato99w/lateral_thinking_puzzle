@@ -46,7 +46,7 @@ def find_truth_paradigm(paradigms):
 
 
 def simulate_game(paradigms, questions, ps_values, all_ids, init_pid, t_pid,
-                  init_open, order="sequential", seed=None):
+                  init_open, resolve_caps=None, order="sequential", seed=None):
     """ゲームを1回シミュレーションする。
 
     Args:
@@ -85,7 +85,7 @@ def simulate_game(paradigms, questions, ps_values, all_ids, init_pid, t_pid,
         pid_before = state.p_current
 
         state, current_open = update(
-            state, q, paradigms, questions, current_open,
+            state, q, paradigms, questions, current_open, resolve_caps,
         )
 
         # パラダイムシフト検出
@@ -108,7 +108,7 @@ def simulate_game(paradigms, questions, ps_values, all_ids, init_pid, t_pid,
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, resolve_caps = load_data()
     data_raw = load_raw()
     t_pid = find_truth_paradigm(paradigms)
     init_open = get_init_open(data_raw, questions)
@@ -128,7 +128,7 @@ def main():
     print("先頭順シミュレーション")
     print("-" * 50)
     r = simulate_game(paradigms, questions, ps_values, all_ids, init_pid, t_pid,
-                      init_open, order="sequential")
+                      init_open, resolve_caps, order="sequential")
     results.append(r)
     status = "OK" if r["reached_t"] else "NG"
     print(f"  結果: {status}")
@@ -145,7 +145,7 @@ def main():
     paths_seen = {}
     for i in range(N_RANDOM):
         r = simulate_game(paradigms, questions, ps_values, all_ids, init_pid, t_pid,
-                          init_open, order="random", seed=i)
+                          init_open, resolve_caps, order="random", seed=i)
         results.append(r)
         if r["reached_t"]:
             reached_count += 1
