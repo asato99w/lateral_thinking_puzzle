@@ -65,16 +65,13 @@ def compute_anomaly_sets(paradigms, truth):
     }
 
 
-def compute_unique_anomalies(pid, paradigms, anomaly_sets):
-    """固有アノマリー = Anomaly(P) - SharedAnomaly(P)。"""
-    my_depth = paradigms[pid].depth
-    shared = set()
-    for other_pid, other_p in paradigms.items():
-        if other_pid == pid:
-            continue
-        if other_p.depth < my_depth:
-            shared |= anomaly_sets[other_pid]
-    return anomaly_sets[pid] - shared
+def compute_unique_anomalies(pid, anomaly_sets):
+    """固有アノマリー = Anomaly(P) のうち他のどのパラダイムにも属さないもの。"""
+    others = set()
+    for other_pid, other_anom in anomaly_sets.items():
+        if other_pid != pid:
+            others |= other_anom
+    return anomaly_sets[pid] - others
 
 
 def main():
@@ -167,7 +164,7 @@ def main():
         p = paradigms[pid]
         log = phase_log[pid]
         all_anom = anomaly_sets[pid]
-        unique_anom = compute_unique_anomalies(pid, paradigms, anomaly_sets)
+        unique_anom = compute_unique_anomalies(pid, anomaly_sets)
 
         print(f"-" * 50)
         print(f"パラダイム: {pid} ({p.name})")
@@ -230,7 +227,7 @@ def main():
     total_unique = set()
     total_discovered_unique = set()
     for pid in reach_path:
-        unique = compute_unique_anomalies(pid, paradigms, anomaly_sets)
+        unique = compute_unique_anomalies(pid, anomaly_sets)
         for d in unique:
             total_unique.add((pid, d))
         discovered_for_pid = {d for (p2, d) in all_discovered_anomalies if p2 == pid}
