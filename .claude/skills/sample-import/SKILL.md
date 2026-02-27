@@ -2,7 +2,7 @@
 
 ## 概要
 
-形式化済みサンプル（06_形式化.md）から JSON を生成し、`app/poc/data/` に配置した上で全検証スクリプトを実行する。
+形式化済みサンプルから JSON を生成し、`app/poc/data/` に配置した上で全検証スクリプトを実行する。
 
 ## 引数
 
@@ -10,21 +10,19 @@
 
 ## 事前条件
 
-- 対象反復ディレクトリに `06_形式化.md` が存在すること
-- `07_検証.md` で Phase 4 検証が通過済みであること（推奨）
+- 対象反復ディレクトリに形式化ファイルが存在すること
 
 ## 手順
 
 ### 1. 形式化ファイルの確認
 
-`06_形式化.md` の存在を確認し、`samples/_template.md` の完全性基準を満たしているか簡易チェックする。
+形式化ファイルの存在を確認し、`app/poc/src/models.py` のデータ構造が要求する全フィールドが揃っているか検証する。
 
 ### 2. JSON 変換
 
-`06_形式化.md` の内容を `app/poc/data/` 配下の JSON ファイルに変換する。
+形式化ファイルの内容を `app/poc/data/` 配下の JSON ファイルに変換する。
 
 - 変換スクリプト: `app/poc/scripts/convert_formalization.py`（存在する場合）
-- 手動変換の場合: `_template.md` の必須セクション構造に従い機械的に変換
 - 出力先: `app/poc/data/{パズル名}.json`
 
 ### 3. 検証スクリプト実行
@@ -82,7 +80,7 @@
 
 ## 参照ファイル
 
-- `samples/_template.md` — 形式化の要件
+- `app/poc/src/models.py` — データ構造の定義元
 - `app/poc/scripts/eval/` — 検証スクリプト群
 - `theory/integration/algorithms/統合アルゴリズム.md` — Phase 4 の検証定義
 
