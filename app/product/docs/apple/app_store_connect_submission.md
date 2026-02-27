@@ -1,7 +1,7 @@
 # App Store Connect 提出内容（コピペ用）
 
 各値を App Store Connect の対応フィールドにそのままコピペしてください。
-`[要変更]` のある箇所は実際の情報に置き換えてください。
+`[要変更]` のある箇所は実際の情報に置き換えてください（氏名・電話番号）。
 
 ---
 
@@ -26,6 +26,7 @@
 |---|---|
 | 名前 | `LateralQ` |
 | サブタイトル | 日本語: `質問で謎を解く水平思考パズル` / 英語: `Think Beyond Assumptions.` |
+| 著作権 | `© 2026 Kazu Asato` |
 
 ### カテゴリ
 
@@ -127,7 +128,7 @@ LateralQは、水平思考パズル（ウミガメのスープ）を手軽に楽
 ### サポート URL
 
 ```
-[要変更] https://your-domain.com/support
+https://lateralq-puzzle.github.io/web/ja/support.html
 ```
 
 ### マーケティング URL（任意）
@@ -247,7 +248,7 @@ App Store Connect の年齢制限質問票への回答。
 | 名 | `[要変更]` |
 | 姓 | `[要変更]` |
 | 電話番号 | `[要変更]` |
-| メールアドレス | `[要変更]` |
+| メールアドレス | `lateralq.puzzle@gmail.com` |
 
 ### 審査に関するメモ
 
@@ -284,7 +285,7 @@ App Store Connect の年齢制限質問票への回答。
 ### プライバシーポリシー URL
 
 ```
-[要変更] https://your-domain.com/lateralq/privacy-policy
+https://lateralq-puzzle.github.io/web/ja/privacy_policy.html
 ```
 
 ### データ収集
@@ -319,17 +320,29 @@ App Store Connect の年齢制限質問票への回答。
 
 ---
 
-## 補足: URL の準備
+## 補足: URL とアカウント情報
 
-App Store Connect 提出前に、以下の URL を用意する必要があります。
+### 公開 URL（GitHub Pages）
 
-| 用途 | URL | 備考 |
-|---|---|---|
-| サポート URL | 必須 | 問い合わせ先を記載したページ |
-| プライバシーポリシー URL | 必須 | 別ファイル `privacy_policy.html` を参照 |
-| 利用規約 URL | 任意（EULA） | 別ファイル `terms_of_use.html` を参照 |
+| 用途 | URL |
+|---|---|
+| サポート（日本語） | `https://lateralq-puzzle.github.io/web/ja/support.html` |
+| プライバシーポリシー（日本語） | `https://lateralq-puzzle.github.io/web/ja/privacy_policy.html` |
+| 利用規約（日本語） | `https://lateralq-puzzle.github.io/web/ja/terms_of_use.html` |
+| Support (English) | `https://lateralq-puzzle.github.io/web/en/support.html` |
+| Privacy Policy (English) | `https://lateralq-puzzle.github.io/web/en/privacy_policy.html` |
+| Terms of Use (English) | `https://lateralq-puzzle.github.io/web/en/terms_of_use.html` |
 
-ホスティング方法の例:
-- **GitHub Pages**: リポジトリの `docs/` ディレクトリを公開
-- **Netlify / Vercel**: 静的 HTML をデプロイ
-- **独自ドメイン**: 任意の Web サーバに配置
+### GitHub アカウント
+
+| 項目 | 値 |
+|---|---|
+| Organization | `lateralq-puzzle` |
+| Web リポジトリ | `https://github.com/lateralq-puzzle/web` |
+| ホスティング | GitHub Pages（main ブランチ / root） |
+
+### 連絡先
+
+| 項目 | 値 |
+|---|---|
+| メールアドレス | `lateralq.puzzle@gmail.com` |
