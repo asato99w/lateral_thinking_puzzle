@@ -1,10 +1,10 @@
 """到達パス検証スクリプト（L2-5）。
 
-ゲームシミュレーションにより、init_paradigm から T に到達するパスが
-存在するかを検証する。
+ゲームシミュレーションにより、行き詰まり（T に到達する前に
+オープン質問が尽きる状態）が存在しないことを検証する。
 
-オープンされた質問を選択・回答し続ける手続きで T に到達できるかを
-複数の質問選択順で試行する:
+全ての質問選択順で T に到達すべきであり、1つでも行き詰まりが
+あれば NG とする。複数の選択順で試行する:
   - 先頭順（決定的）
   - ランダムシャッフル（確率的、N_RANDOM 回）
 
@@ -166,15 +166,15 @@ def main():
     print()
 
     # 総合結果
-    any_reached = any(r["reached_t"] for r in results)
     total_reached = sum(1 for r in results if r["reached_t"])
     total_trials = len(results)
+    deadlocks = total_trials - total_reached
 
     print("=" * 65)
-    if any_reached:
-        print(f"総合結果: OK — T に到達するパスが存在 ({total_reached}/{total_trials} 試行で到達)")
+    if deadlocks == 0:
+        print(f"総合結果: OK — 全試行で T に到達 ({total_trials}/{total_trials})")
     else:
-        print(f"総合結果: NG — T に到達するパスが見つからなかった ({total_trials} 試行)")
+        print(f"総合結果: NG — 行き詰まりあり ({deadlocks}/{total_trials} 試行で T 未到達)")
     print("=" * 65)
 
 
