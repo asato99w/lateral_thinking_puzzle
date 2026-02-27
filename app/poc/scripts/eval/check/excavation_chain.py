@@ -7,7 +7,10 @@
      - オープンされた質問の順序
      - アノマリー導入質問が実際にオープンされたか
      - シフト発動のタイミングと遷移先
-  4. 全パラダイムを通じて全アノマリーが発掘されたかの最終確認
+  4. 全パラダイムを通じて固有アノマリーが発掘されたかの最終確認
+
+固有アノマリー = Anomaly(P) - SharedAnomaly(P)
+上位パラダイムと共有されたアノマリーは先行フェーズで O に入るため除外する。
 
 使い方:
   python excavation_chain.py                       # turtle_soup.json
@@ -27,6 +30,7 @@ from common import (  # noqa: E402
     derive_qp,
     classify_questions,
     compute_reachability_path,
+    get_truth,
 )
 from engine import (  # noqa: E402
     compute_effect,
@@ -50,26 +54,35 @@ def get_init_open(data_raw, paradigms, questions, init_pid, ps_values, all_ids):
     return safe_qs, "fallback (Q(P_init) safe)"
 
 
-def compute_anomaly_descriptors(paradigm, questions):
-    """パラダイムのアノマリー記述素を列挙する。"""
-    truth = {}
-    for q in questions:
-        if q.correct_answer == "irrelevant":
-            continue
-        eff = compute_effect(q)
-        for d, v in eff:
-            truth[d] = v
-
+def compute_anomaly_sets(paradigms, truth):
+    """各パラダイムのアノマリー記述素集合を計算する。"""
     return {
-        d for d, pred in paradigm.p_pred.items()
-        if truth.get(d) is not None and pred != truth[d]
+        pid: {
+            d for d, pred in p.p_pred.items()
+            if truth.get(d) is not None and pred != truth[d]
+        }
+        for pid, p in paradigms.items()
     }
+
+
+def compute_unique_anomalies(pid, paradigms, anomaly_sets):
+    """固有アノマリー = Anomaly(P) - SharedAnomaly(P)。"""
+    my_depth = paradigms[pid].depth
+    shared = set()
+    for other_pid, other_p in paradigms.items():
+        if other_pid == pid:
+            continue
+        if other_p.depth < my_depth:
+            shared |= anomaly_sets[other_pid]
+    return anomaly_sets[pid] - shared
 
 
 def main():
     paradigms, questions, all_ids, ps_values, init_pid = load_data()
     data_raw = load_raw()
     reach_path = compute_reachability_path(init_pid, paradigms, questions)
+    truth = get_truth(questions)
+    anomaly_sets = compute_anomaly_sets(paradigms, truth)
 
     print("=" * 65)
     print("動的発掘連鎖検証 (L2-3)")
@@ -153,7 +166,8 @@ def main():
     for pid in reach_path:
         p = paradigms[pid]
         log = phase_log[pid]
-        anomaly_ds = compute_anomaly_descriptors(p, questions)
+        all_anom = anomaly_sets[pid]
+        unique_anom = compute_unique_anomalies(pid, paradigms, anomaly_sets)
 
         print(f"-" * 50)
         print(f"パラダイム: {pid} ({p.name})")
@@ -174,23 +188,27 @@ def main():
         print(f"    実際にオープン: {sorted(actual_anomaly)}")
         if missed_anomaly:
             print(f"    未オープン: {sorted(missed_anomaly)}")
-            all_ok = False
         else:
             if expected_anomaly:
                 print(f"    全アノマリー質問オープン: OK")
 
-        # アノマリー記述素の発掘状況
+        # アノマリー記述素の発掘状況（固有アノマリーのみ判定）
         discovered_for_pid = {d for (p2, d) in all_discovered_anomalies if p2 == pid}
-        undiscovered = anomaly_ds - discovered_for_pid
+        discovered_unique = discovered_for_pid & unique_anom
+        undiscovered_unique = unique_anom - discovered_for_pid
+        shared = all_anom - unique_anom
         print(f"  アノマリー記述素:")
-        print(f"    全体: {len(anomaly_ds)}個 {sorted(anomaly_ds)}")
-        print(f"    発掘済み: {len(discovered_for_pid)}個 {sorted(discovered_for_pid)}")
-        if undiscovered:
-            print(f"    未発掘: {sorted(undiscovered)}")
+        print(f"    全体: {len(all_anom)}個 {sorted(all_anom)}")
+        if shared:
+            print(f"    上位共有: {len(shared)}個 {sorted(shared)}")
+        print(f"    固有: {len(unique_anom)}個 {sorted(unique_anom)}")
+        print(f"    固有発掘済み: {len(discovered_unique)}個 {sorted(discovered_unique)}")
+        if undiscovered_unique:
+            print(f"    未発掘固有: {sorted(undiscovered_unique)}")
             all_ok = False
         else:
-            if anomaly_ds:
-                print(f"    完全性: OK")
+            if unique_anom:
+                print(f"    固有完全性: OK")
 
         # シフト
         if log["shift_step"] is not None:
@@ -208,26 +226,25 @@ def main():
     print(f"  総回答ステップ: {step}")
     print(f"  オープンした質問総数: {len(queued_ids)}")
 
-    # 全パラダイムのアノマリー記述素の合計
-    total_anomaly_ds = set()
-    total_discovered = set()
+    # 全パラダイムの固有アノマリー記述素の合計
+    total_unique = set()
+    total_discovered_unique = set()
     for pid in reach_path:
-        p = paradigms[pid]
-        anomaly_ds = compute_anomaly_descriptors(p, questions)
-        for d in anomaly_ds:
-            total_anomaly_ds.add((pid, d))
+        unique = compute_unique_anomalies(pid, paradigms, anomaly_sets)
+        for d in unique:
+            total_unique.add((pid, d))
         discovered_for_pid = {d for (p2, d) in all_discovered_anomalies if p2 == pid}
-        for d in discovered_for_pid:
-            total_discovered.add((pid, d))
+        for d in (discovered_for_pid & unique):
+            total_discovered_unique.add((pid, d))
 
-    total_undiscovered = total_anomaly_ds - total_discovered
-    print(f"  全アノマリー記述素: {len(total_anomaly_ds)}個")
-    print(f"  発掘済み: {len(total_discovered)}個")
+    total_undiscovered = total_unique - total_discovered_unique
+    print(f"  固有アノマリー記述素: {len(total_unique)}個")
+    print(f"  発掘済み: {len(total_discovered_unique)}個")
     if total_undiscovered:
         print(f"  未発掘: {sorted(total_undiscovered)}")
         all_ok = False
     else:
-        print(f"  全アノマリー発掘: OK")
+        print(f"  全固有アノマリー発掘: OK")
 
     print()
 
