@@ -1,12 +1,15 @@
+---
+name: sample-import
+description: 形式化済みサンプルからJSONを生成し、app/poc/data/に配置した上で全検証スクリプトを実行する。
+argument-hint: [サンプル反復ディレクトリパス]
+disable-model-invocation: true
+allowed-tools: Read, Bash, Glob, Grep
+---
+
 # /sample-import — データ取り込み
 
-## 概要
-
-形式化済みサンプルから JSON を生成し、`app/poc/data/` に配置した上で全検証スクリプトを実行する。
-
-## 引数
-
-- `$ARGUMENTS`: 対象サンプルのパス（例: `samples/001_ウミガメのスープ/09_20260219_統合アルゴリズム適用`）
+引数: `$ARGUMENTS`（対象サンプルの反復ディレクトリパス）
+- 例: `/sample-import samples/005_禁じられた地下室/01_20260227_統合アルゴリズム適用`
 
 ## 事前条件
 
@@ -16,13 +19,13 @@
 
 ### 1. 形式化ファイルの確認
 
-形式化ファイルの存在を確認し、`app/poc/src/models.py` のデータ構造が要求する全フィールドが揃っているか検証する。
+`$ARGUMENTS` ディレクトリ内の形式化ファイルの存在を確認し、`app/poc/src/models.py` のデータ構造が要求する全フィールドが揃っているか検証する。
 
 ### 2. JSON 変換
 
 形式化ファイルの内容を `app/poc/data/` 配下の JSON ファイルに変換する。
 
-- 変換スクリプト: `app/poc/scripts/convert_formalization.py`（存在する場合）
+- 変換スクリプト: `.claude/skills/sample-import/scripts/convert_formalization.py`
 - 出力先: `app/poc/data/{パズル名}.json`
 
 ### 3. 検証スクリプト実行

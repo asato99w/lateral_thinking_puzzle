@@ -1,13 +1,16 @@
+---
+name: sample-generate
+description: 指定されたアルゴリズムに従いサンプル文書を生成する。新規生成・中断からの再開・理論変更に伴う再生成に使う。
+argument-hint: [パズルタイトル] [アルゴリズムパス]
+disable-model-invocation: true
+allowed-tools: Read, Write, Glob, Grep, Bash, Edit
+---
+
 # /sample-generate — サンプル生成
 
-## 概要
-
-指定されたアルゴリズムに従い、サンプル文書を生成する。新規生成・中断からの再開・理論変更に伴う再生成に使う。
-
-## 引数
-
-- `$ARGUMENTS`: パズルのタイトルとアルゴリズムのパス
-  - 例: `ウミガメのスープ theory/integration/algorithms/統合アルゴリズム.md`
+引数: `$ARGUMENTS`（パズルのタイトルとアルゴリズムのパス）
+- 例: `/sample-generate ウミガメのスープ theory/integration/algorithms/統合アルゴリズム.md`
+- `$0` = パズルタイトル、`$1` = アルゴリズムパス
 - アルゴリズムが指定されていない場合、ユーザーに確認する
 
 ## 事前条件

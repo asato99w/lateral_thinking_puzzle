@@ -1,12 +1,24 @@
-"""08_形式化.md を turtle_soup.json に変換するスクリプト。"""
+"""08_形式化.md を JSON に変換するスクリプト。
+
+使い方:
+  python convert_formalization.py --input <形式化.md> --output <出力.json> --title <タイトル> --statement <問題文>
+
+引数を省略した場合はウミガメのスープのデフォルト値を使用する。
+"""
+import argparse
 import json
 import re
 import sys
 from pathlib import Path
 
-SAMPLE_DIR = Path(__file__).parent.parent.parent.parent / "samples" / "001_20260219_ウミガメのスープ" / "09_統合アルゴリズム適用"
-INPUT_FILE = SAMPLE_DIR / "08_形式化.md"
-OUTPUT_FILE = Path(__file__).parent.parent / "data" / "turtle_soup.json"
+PROJ_ROOT = Path(__file__).parent.parent.parent.parent  # .claude/skills/sample-import/scripts/ → repo root
+DATA_DIR = PROJ_ROOT / "app" / "poc" / "data"
+
+# デフォルト値（後方互換性）
+DEFAULT_INPUT = PROJ_ROOT / "samples" / "001_ウミガメのスープ" / "09_20260219_統合アルゴリズム適用" / "08_形式化.md"
+DEFAULT_OUTPUT = DATA_DIR / "turtle_soup.json"
+DEFAULT_TITLE = "ウミガメのスープ"
+DEFAULT_STATEMENT = "男がレストランに入り、ウミガメのスープを注文した。一口食べた男は店を出て、自殺した。なぜか？"
 
 
 def parse_formalization(text: str) -> dict:
@@ -143,6 +155,13 @@ def parse_formalization(text: str) -> dict:
         questions.append(q)
 
     result["questions"] = questions
+
+    # --- Section 7: init_question_ids ---
+    iq_match = re.search(r"init_question_ids:\s*(.+)", text)
+    if iq_match:
+        ids_text = iq_match.group(1).strip()
+        result["init_question_ids"] = [x.strip() for x in ids_text.split(",") if x.strip()]
+
     return result
 
 
@@ -167,13 +186,24 @@ def parse_id_list(s: str) -> list:
 
 
 def main():
-    text = INPUT_FILE.read_text(encoding="utf-8")
+    parser = argparse.ArgumentParser(description="形式化ファイルを JSON に変換する")
+    parser.add_argument("--input", type=Path, default=DEFAULT_INPUT,
+                        help="形式化ファイルのパス")
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT,
+                        help="出力 JSON ファイルのパス")
+    parser.add_argument("--title", type=str, default=DEFAULT_TITLE,
+                        help="パズルのタイトル")
+    parser.add_argument("--statement", type=str, default=DEFAULT_STATEMENT,
+                        help="問題文")
+    args = parser.parse_args()
+
+    text = args.input.read_text(encoding="utf-8")
     data = parse_formalization(text)
 
-    # Add metadata
+    # Build result
     result = {
-        "title": "ウミガメのスープ",
-        "statement": "男がレストランに入り、ウミガメのスープを注文した。一口食べた男は店を出て、自殺した。なぜか？",
+        "title": args.title,
+        "statement": args.statement,
         "init_paradigm": data["init_paradigm"],
         "ps_values": data["ps_values"],
         "all_descriptor_ids": data["all_descriptor_ids"],
@@ -181,8 +211,10 @@ def main():
         "topic_categories": data["topic_categories"],
         "questions": data["questions"],
     }
+    if "init_question_ids" in data:
+        result["init_question_ids"] = data["init_question_ids"]
 
-    # Validation
+    # Validation summary
     print(f"ps_values: {len(result['ps_values'])} 件")
     print(f"all_descriptor_ids: {len(result['all_descriptor_ids'])} 件")
     print(f"paradigms: {len(result['paradigms'])} 件")
@@ -201,11 +233,14 @@ def main():
     irr_count = sum(1 for q in result["questions"] if q["correct_answer"] == "irrelevant")
     print(f"  yes={yes_count}, no={no_count}, irrelevant={irr_count}")
 
+    if "init_question_ids" in result:
+        print(f"  init_question_ids: {result['init_question_ids']}")
+
     # Write JSON
-    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    with open(args.output, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
-    print(f"\n出力: {OUTPUT_FILE}")
+    print(f"\n出力: {args.output}")
 
 
 if __name__ == "__main__":

@@ -1,13 +1,16 @@
+---
+name: sample-fix
+description: 既存サンプルを指定されたアルゴリズムと突き合わせ、乖離を特定し、影響範囲を再生成する。
+argument-hint: [サンプルパス] [アルゴリズムパス]
+disable-model-invocation: true
+allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+---
+
 # /sample-fix — サンプル修正
 
-## 概要
-
-既存サンプルを指定されたアルゴリズムと突き合わせ、乖離を特定し、影響範囲を再生成する。修復完了後、まだ先の生成が必要であれば `/sample-generate` に引き渡す。
-
-## 引数
-
-- `$ARGUMENTS`: 対象サンプルのパスとアルゴリズムのパス
-  - 例: `samples/001_ウミガメのスープ/09_20260219_統合アルゴリズム適用 theory/integration/algorithms/統合アルゴリズム.md`
+引数: `$ARGUMENTS`（対象サンプルのパスとアルゴリズムのパス）
+- 例: `/sample-fix samples/001_ウミガメのスープ/09_20260219_統合アルゴリズム適用 theory/integration/algorithms/統合アルゴリズム.md`
+- `$0` = サンプルパス、`$1` = アルゴリズムパス
 - アルゴリズムが指定されていない場合、ユーザーに確認する
 - 問題箇所が明示されている場合はそれも受け付ける
 
