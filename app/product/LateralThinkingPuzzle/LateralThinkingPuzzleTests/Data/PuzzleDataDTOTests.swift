@@ -19,8 +19,59 @@ struct PuzzleDataDTOTests {
 
         #expect(dto.title == "バーの男")
         #expect(dto.initParadigm == "P1")
+        #expect(dto.paradigms.count == 5)
+        #expect(dto.questions.count == 21)
+    }
+
+    @Test func test_decodeDesertManJSON_succeeds() throws {
+        let url = Bundle(for: BundleMarker.self).url(
+            forResource: "desert_man", withExtension: "json", subdirectory: "Puzzles"
+        )
+        let resolvedURL = url ?? Bundle.main.url(forResource: "desert_man", withExtension: "json", subdirectory: "Puzzles")
+        guard let jsonURL = resolvedURL else {
+            return
+        }
+        let data = try Data(contentsOf: jsonURL)
+        let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
+
+        #expect(dto.title == "砂漠の男")
+        #expect(dto.initParadigm == "P1")
         #expect(dto.paradigms.count == 6)
-        #expect(dto.questions.count == 69)
+        #expect(dto.questions.count == 26)
+    }
+
+    @Test func test_barManToDomain_succeeds() throws {
+        let url = Bundle(for: BundleMarker.self).url(
+            forResource: "bar_man", withExtension: "json", subdirectory: "Puzzles"
+        )
+        let resolvedURL = url ?? Bundle.main.url(forResource: "bar_man", withExtension: "json", subdirectory: "Puzzles")
+        guard let jsonURL = resolvedURL else {
+            return
+        }
+        let data = try Data(contentsOf: jsonURL)
+        let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
+        let puzzle = try dto.toDomain()
+
+        #expect(puzzle.title == "バーの男")
+        #expect(puzzle.paradigms.count == 5)
+        #expect(puzzle.questions.count == 21)
+    }
+
+    @Test func test_desertManToDomain_succeeds() throws {
+        let url = Bundle(for: BundleMarker.self).url(
+            forResource: "desert_man", withExtension: "json", subdirectory: "Puzzles"
+        )
+        let resolvedURL = url ?? Bundle.main.url(forResource: "desert_man", withExtension: "json", subdirectory: "Puzzles")
+        guard let jsonURL = resolvedURL else {
+            return
+        }
+        let data = try Data(contentsOf: jsonURL)
+        let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
+        let puzzle = try dto.toDomain()
+
+        #expect(puzzle.title == "砂漠の男")
+        #expect(puzzle.paradigms.count == 6)
+        #expect(puzzle.questions.count == 26)
     }
 
     @Test func test_dtoToDomain_succeeds() throws {
