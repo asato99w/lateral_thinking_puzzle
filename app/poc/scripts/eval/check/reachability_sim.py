@@ -41,7 +41,7 @@ MAX_STEPS = 500
 
 
 def find_truth_paradigm(paradigms):
-    """T（depth 最大のパラダイム）を返す。"""
+    """後方互換用。load_data の truth_paradigm を使うことを推奨。"""
     return max(paradigms, key=lambda pid: paradigms[pid].depth or 0)
 
 
@@ -108,9 +108,8 @@ def simulate_game(paradigms, questions, ps_values, all_ids, init_pid, t_pid,
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid, resolve_caps = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, resolve_caps, t_pid = load_data()
     data_raw = load_raw()
-    t_pid = find_truth_paradigm(paradigms)
     init_open = get_init_open(data_raw, questions)
 
     print("=" * 65)

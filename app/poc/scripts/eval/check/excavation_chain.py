@@ -75,7 +75,7 @@ def compute_unique_anomalies(pid, anomaly_sets):
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid, _caps = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, _caps, _tp = load_data()
     data_raw = load_raw()
     reach_path = compute_o_star_shift_chain(init_pid, paradigms, questions)
     truth = get_truth(questions)

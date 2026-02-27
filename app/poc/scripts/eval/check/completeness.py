@@ -92,7 +92,7 @@ def compute_covered_by_qp(paradigm, questions):
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid, _caps = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, _caps, _tp = load_data()
     truth = get_truth(questions)
     anomaly_sets = compute_anomaly_sets(paradigms, truth)
 

@@ -17,12 +17,9 @@ from common import load_data, compute_o_star_shift_chain  # noqa: E402
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid, _caps = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, _caps, t_pid = load_data()
 
     path = compute_o_star_shift_chain(init_pid, paradigms, questions)
-
-    # T の特定: depth が最大のパラダイム
-    t_pid = max(paradigms, key=lambda pid: paradigms[pid].depth or 0)
 
     print("=" * 65)
     print("到達性検証 (L2-0)")

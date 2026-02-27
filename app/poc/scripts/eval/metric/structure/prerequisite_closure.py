@@ -91,7 +91,7 @@ def report_paradigm(pid, paradigm, questions, ps_values):
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid, _caps = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, _caps, _tp = load_data()
 
     print("=" * 65)
     print("前提閉包性レポート (L3-6)")

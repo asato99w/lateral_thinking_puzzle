@@ -179,7 +179,7 @@ def check_paradigm(pid, paradigm, questions, ps_values, truth):
 
 
 def main():
-    paradigms, questions, all_ids, ps_values, init_pid, _caps = load_data()
+    paradigms, questions, all_ids, ps_values, init_pid, _caps, _tp = load_data()
     truth = get_truth(questions)
 
     print("=" * 65)

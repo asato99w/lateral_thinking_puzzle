@@ -40,7 +40,7 @@ def load_data(data_path: Path | None = None):
     """データを読み込む。
 
     data_path を省略すると --data 引数 → デフォルト(turtle_soup.json) の順で決定。
-    返り値: (paradigms, questions, all_descriptor_ids, ps_values, init_paradigm)
+    返り値: (paradigms, questions, all_descriptor_ids, ps_values, init_paradigm, resolve_caps, truth_paradigm)
     """
     data = load_raw(data_path)
 
@@ -84,6 +84,8 @@ def load_data(data_path: Path | None = None):
     resolve_caps = compute_resolve_caps(paradigms, o_star)
     compute_depths(paradigms, o_star)
 
+    truth_paradigm = data.get("truth_paradigm")
+
     return (
         paradigms,
         questions,
@@ -91,6 +93,7 @@ def load_data(data_path: Path | None = None):
         ps_values,
         data["init_paradigm"],
         resolve_caps,
+        truth_paradigm,
     )
 
 
