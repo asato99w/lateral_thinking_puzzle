@@ -28,6 +28,8 @@ from engine import compute_effect, _reachable  # noqa: E402
 
 def count_anomalies(question, paradigm):
     """質問が P に対して生むアノマリー数を返す。"""
+    if question.correct_answer == "irrelevant":
+        return 0
     eff = compute_effect(question)
     count = 0
     for d, v in eff:
@@ -47,6 +49,8 @@ def build_layer_structure(qp, ps_values):
 
     producer = defaultdict(set)
     for q in qp:
+        if q.correct_answer == "irrelevant":
+            continue
         eff = compute_effect(q)
         for d, v in eff:
             producer[d].add(q.id)
@@ -107,6 +111,8 @@ def analyze_gate_opening(paradigm, qp, layers, ps_values):
         # 層 k+1 の質問の effect 記述素
         gate_ds = set()
         for q in layer_k1_qs:
+            if q.correct_answer == "irrelevant":
+                continue
             eff = compute_effect(q)
             for d, v in eff:
                 gate_ds.add((d, v))
@@ -116,6 +122,8 @@ def analyze_gate_opening(paradigm, qp, layers, ps_values):
         for lk in range(layer_k + 1):
             for q in qp:
                 if layers[q.id] != lk:
+                    continue
+                if q.correct_answer == "irrelevant":
                     continue
                 eff = compute_effect(q)
                 for d, v in eff:
@@ -177,7 +185,10 @@ def report_paradigm(pid, paradigm, questions, ps_values):
             ac = count_anomalies(q, paradigm)
             marker = f" *anomaly({ac})" if ac > 0 else ""
             eff = compute_effect(q)
-            eff_str = ", ".join(f"{d}={v}" for d, v in eff)
+            if q.correct_answer == "irrelevant":
+                eff_str = ", ".join(eff)
+            else:
+                eff_str = ", ".join(f"{d}={v}" for d, v in eff)
             print(f"      {q.id}({q.correct_answer}) [{eff_str}]{marker}")
 
     # --- L3-4: ゲート開放率 ---

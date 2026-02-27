@@ -28,6 +28,8 @@ MIN_ANOMALY_LAYERS = 1
 
 def count_anomalies(question, paradigm):
     """質問が P に対して生むアノマリー数を返す。"""
+    if question.correct_answer == "irrelevant":
+        return 0
     eff = compute_effect(question)
     count = 0
     for d, v in eff:
@@ -43,6 +45,8 @@ def build_layer_structure(qp, ps_values):
 
     producer = defaultdict(set)
     for q in qp:
+        if q.correct_answer == "irrelevant":
+            continue
         eff = compute_effect(q)
         for d, v in eff:
             producer[d].add(q.id)
