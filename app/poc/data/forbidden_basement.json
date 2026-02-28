@@ -2230,12 +2230,28 @@
           "Fs-35",
           "Fs-34",
           0.8
+        ],
+        [
+          "Fs-87",
+          "Fs-86",
+          0.7
+        ],
+        [
+          "Fs-87",
+          "Fs-56",
+          0.7
+        ],
+        [
+          "Fs-87",
+          "Fs-35",
+          0.7
         ]
       ],
       "neighbors": [
         "P2",
         "P4"
-      ]
+      ],
+      "shift_threshold": 8
     },
     {
       "id": "P4",
@@ -2609,6 +2625,14 @@
         [
           "Fs-89",
           0
+        ],
+        [
+          "Pt-1",
+          1
+        ],
+        [
+          "Ft-21",
+          1
         ]
       ],
       "relations": [
@@ -2791,12 +2815,63 @@
           "D-2",
           "Fs-43",
           0.7
+        ],
+        [
+          "D-7",
+          "D-6",
+          0.7
+        ],
+        [
+          "D-7",
+          "Ft-20",
+          0.7
+        ],
+        [
+          "D-7",
+          "Fs-88",
+          0.7
+        ],
+        [
+          "Ft-20",
+          "M-4",
+          0.7
+        ],
+        [
+          "Ft-20",
+          "Ft-22",
+          0.7
+        ],
+        [
+          "Ft-22",
+          "M-1",
+          0.7
+        ],
+        [
+          "M-1",
+          "Pt-1",
+          0.7
+        ],
+        [
+          "Pt-1",
+          "Ft-21",
+          0.7
+        ],
+        [
+          "Ft-22",
+          "M-5",
+          0.7
+        ],
+        [
+          "Fs-51",
+          "Ft-15",
+          0.7
         ]
       ],
       "neighbors": [
         "P3",
         "P5"
-      ]
+      ],
+      "shift_threshold": 1
     },
     {
       "id": "P5",
@@ -3911,7 +3986,8 @@
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
-        "P1"
+        "P1",
+        "P2"
       ]
     },
     {
@@ -3936,7 +4012,9 @@
       ],
       "ans_irrelevant": [],
       "is_clear": false,
-      "prerequisites": [],
+      "prerequisites": [
+        "Fs-54"
+      ],
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
@@ -3963,7 +4041,9 @@
       ],
       "ans_irrelevant": [],
       "is_clear": false,
-      "prerequisites": [],
+      "prerequisites": [
+        "Fs-54"
+      ],
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
@@ -4107,6 +4187,7 @@
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
+        "P1",
         "P2",
         "P3",
         "P4"
@@ -4196,6 +4277,7 @@
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
+        "P2",
         "P3",
         "P4"
       ]
@@ -4257,6 +4339,7 @@
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
+        "P2",
         "P3",
         "P4",
         "P5"
@@ -4295,6 +4378,7 @@
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
+        "P2",
         "P3",
         "P4"
       ]
@@ -4331,6 +4415,7 @@
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
+        "P2",
         "P3",
         "P4"
       ]
@@ -4360,6 +4445,8 @@
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
+        "P2",
+        "P3",
         "P4",
         "P5"
       ]
@@ -4389,6 +4476,8 @@
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
+        "P2",
+        "P3",
         "P4",
         "P5"
       ]
@@ -4426,6 +4515,8 @@
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
+        "P2",
+        "P3",
         "P4",
         "P5"
       ]
@@ -4454,6 +4545,8 @@
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
+        "P2",
+        "P3",
         "P4",
         "P5"
       ]
@@ -4487,6 +4580,8 @@
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
+        "P2",
+        "P3",
         "P4",
         "P5"
       ]
@@ -4524,6 +4619,8 @@
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
+        "P2",
+        "P3",
         "P4",
         "P5"
       ]
@@ -4560,6 +4657,8 @@
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
+        "P2",
+        "P3",
         "P5"
       ]
     },
@@ -4596,6 +4695,8 @@
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
+        "P2",
+        "P3",
         "P5"
       ]
     }
