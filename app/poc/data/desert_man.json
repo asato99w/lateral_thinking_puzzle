@@ -511,6 +511,7 @@
     {
       "id": "P4",
       "name": "くじ引きと犠牲",
+      "shift_threshold": 2,
       "p_pred": [
         [
           "Ps-1",
