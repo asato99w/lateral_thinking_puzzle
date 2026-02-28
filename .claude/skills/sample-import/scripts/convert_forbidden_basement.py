@@ -9,7 +9,7 @@ import re
 import sys
 from pathlib import Path
 
-PROJ_ROOT = Path(__file__).parent.parent.parent.parent  # .claude/skills/sample-import/scripts/ → repo root
+PROJ_ROOT = Path(__file__).parent.parent.parent.parent.parent  # .claude/skills/sample-import/scripts/ → repo root
 DATA_DIR = PROJ_ROOT / "app" / "poc" / "data"
 
 DEFAULT_INPUT = PROJ_ROOT / "samples" / "005_禁じられた地下室" / "01_20260227_統合アルゴリズム適用" / "25_形式化.md"
@@ -114,8 +114,10 @@ def parse_paradigms(text: str) -> list[dict]:
         paradigm = {
             "id": pid,
             "name": pname,
+            "depth": depth,
             "p_pred": p_pred,
             "relations": relations,
+            "neighbors": neighbors,
         }
         if shift_threshold is not None:
             paradigm["shift_threshold"] = shift_threshold
@@ -253,14 +255,15 @@ def main():
             topic_categories[q["id"]] = q["topic_category"]
     print(f"topic_categories: {len(topic_categories)} 件")
 
-    # Q(P) の自動計算: 質問の effect がパラダイムのアノマリーを含む場合、その質問を Q(P) に追加
-    # 加えて、safe 質問（effect が P の予測と矛盾しない）も P に割り当てる
-    # → 結果として全質問が全パラダイムに割り当てられる。prerequisites が実質的なゲーティングを担う。
+    # Q(P): 形式化ファイルの paradigms フィールドから読み取り済み
     paradigm_ids = [p["id"] for p in paradigms]
+    empty_paradigm_qs = [q["id"] for q in questions if not q.get("paradigms") or q["paradigms"] == []]
+    if empty_paradigm_qs:
+        print(f"警告: paradigms が空の質問があります: {empty_paradigm_qs}")
+        sys.exit(1)
     for q in questions:
-        if not q.get("paradigms") or q["paradigms"] == []:
-            q["paradigms"] = paradigm_ids[:]
-    print(f"Q(P) 自動計算: 全質問を全パラダイムに割当（prerequisites によるゲーティング）")
+        qp = q["paradigms"]
+        print(f"  {q['id']}: paradigms={qp}")
 
     # JSON 構築
     result = {

@@ -200,6 +200,7 @@
     {
       "id": "P1",
       "name": "禁じられた部屋に恐ろしいものがある",
+      "depth": 0,
       "p_pred": [
         [
           "Ps-1",
@@ -886,11 +887,15 @@
           "B-1",
           0.9
         ]
+      ],
+      "neighbors": [
+        "P2"
       ]
     },
     {
       "id": "P2",
       "name": "異常なものは事後に消えた",
+      "depth": 1,
       "p_pred": [
         [
           "Ps-1",
@@ -1617,11 +1622,16 @@
           "Pt-4",
           0.8
         ]
+      ],
+      "neighbors": [
+        "P1",
+        "P3"
       ]
     },
     {
       "id": "P3",
       "name": "女性の主観と客観が異なる",
+      "depth": 2,
       "p_pred": [
         [
           "Ps-1",
@@ -2221,11 +2231,16 @@
           "Fs-34",
           0.8
         ]
+      ],
+      "neighbors": [
+        "P2",
+        "P4"
       ]
     },
     {
       "id": "P4",
       "name": "女性は嘘をつかれていた・操られていた",
+      "depth": 3,
       "p_pred": [
         [
           "Ps-1",
@@ -2777,11 +2792,16 @@
           "Fs-43",
           0.7
         ]
+      ],
+      "neighbors": [
+        "P3",
+        "P5"
       ]
     },
     {
       "id": "P5",
       "name": "女性は監禁されていた",
+      "depth": 4,
       "p_pred": [
         [
           "Ps-1",
@@ -3625,6 +3645,9 @@
           "Fs-89",
           0.9
         ]
+      ],
+      "neighbors": [
+        "P4"
       ]
     }
   ],
@@ -3704,9 +3727,7 @@
       "paradigms": [
         "P1",
         "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P3"
       ]
     },
     {
@@ -3744,10 +3765,7 @@
       "topic_category": "I",
       "paradigms": [
         "P1",
-        "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P2"
       ]
     },
     {
@@ -3773,10 +3791,7 @@
       "topic_category": "I",
       "paradigms": [
         "P1",
-        "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P2"
       ]
     },
     {
@@ -3810,10 +3825,7 @@
       "topic_category": "I",
       "paradigms": [
         "P1",
-        "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P2"
       ]
     },
     {
@@ -3841,8 +3853,7 @@
         "P1",
         "P2",
         "P3",
-        "P4",
-        "P5"
+        "P4"
       ]
     },
     {
@@ -3875,11 +3886,7 @@
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P1"
       ]
     },
     {
@@ -3904,11 +3911,7 @@
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P1"
       ]
     },
     {
@@ -3939,9 +3942,7 @@
       "paradigms": [
         "P1",
         "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P3"
       ]
     },
     {
@@ -3968,9 +3969,7 @@
       "paradigms": [
         "P1",
         "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P3"
       ]
     },
     {
@@ -3998,8 +3997,7 @@
         "P1",
         "P2",
         "P3",
-        "P4",
-        "P5"
+        "P4"
       ]
     },
     {
@@ -4021,16 +4019,13 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-54:0"
+        "Fs-54"
       ],
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
-        "P1",
         "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P3"
       ]
     },
     {
@@ -4052,16 +4047,13 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-54:0"
+        "Fs-54"
       ],
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
-        "P1",
         "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P3"
       ]
     },
     {
@@ -4083,16 +4075,12 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-54:0"
+        "Fs-54"
       ],
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P2"
       ]
     },
     {
@@ -4114,16 +4102,14 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-39:0"
+        "Fs-39"
       ],
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
-        "P1",
         "P2",
         "P3",
-        "P4",
-        "P5"
+        "P4"
       ]
     },
     {
@@ -4145,16 +4131,13 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-54:0"
+        "Fs-54"
       ],
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
-        "P1",
         "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P3"
       ]
     },
     {
@@ -4176,16 +4159,12 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-54:0"
+        "Fs-54"
       ],
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "P4",
-        "P5"
+        "P2"
       ]
     },
     {
@@ -4211,17 +4190,14 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-87:0",
-        "Fs-86:1"
+        "Fs-87",
+        "Fs-86"
       ],
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
-        "P1",
-        "P2",
         "P3",
-        "P4",
-        "P5"
+        "P4"
       ]
     },
     {
@@ -4243,17 +4219,14 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-87:0",
-        "Fs-86:1"
+        "Fs-87",
+        "Fs-86"
       ],
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
-        "P1",
-        "P2",
         "P3",
-        "P4",
-        "P5"
+        "P4"
       ]
     },
     {
@@ -4279,13 +4252,11 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-100:1"
+        "Fs-100"
       ],
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
-        "P1",
-        "P2",
         "P3",
         "P4",
         "P5"
@@ -4318,17 +4289,14 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-88:0",
-        "Fs-100:1"
+        "Fs-88",
+        "Fs-100"
       ],
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
-        "P1",
-        "P2",
         "P3",
-        "P4",
-        "P5"
+        "P4"
       ]
     },
     {
@@ -4358,16 +4326,13 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-35:1"
+        "Fs-35"
       ],
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
-        "P1",
-        "P2",
         "P3",
-        "P4",
-        "P5"
+        "P4"
       ]
     },
     {
@@ -4389,15 +4354,12 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "M-4:1",
-        "Fs-14:0"
+        "M-4",
+        "Fs-14"
       ],
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
         "P4",
         "P5"
       ]
@@ -4421,15 +4383,12 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "M-1:1",
-        "M-4:1"
+        "M-1",
+        "M-4"
       ],
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
         "P4",
         "P5"
       ]
@@ -4461,15 +4420,12 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "M-4:1",
-        "Ft-20:1"
+        "M-4",
+        "Ft-20"
       ],
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
         "P4",
         "P5"
       ]
@@ -4493,14 +4449,11 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Pt-1:1"
+        "Pt-1"
       ],
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
         "P4",
         "P5"
       ]
@@ -4528,15 +4481,12 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "M-4:1",
-        "M-1:1"
+        "M-4",
+        "M-1"
       ],
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
         "P4",
         "P5"
       ]
@@ -4568,15 +4518,12 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Pt-1:1",
-        "Ft-20:1"
+        "Pt-1",
+        "Ft-20"
       ],
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
         "P4",
         "P5"
       ]
@@ -4608,15 +4555,11 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Fs-51:0"
+        "Fs-51"
       ],
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "P4",
         "P5"
       ]
     },
@@ -4647,16 +4590,12 @@
       "ans_irrelevant": [],
       "is_clear": false,
       "prerequisites": [
-        "Pt-1:1",
-        "M-5:1"
+        "Pt-1",
+        "M-5"
       ],
       "related_descriptors": [],
       "topic_category": "III",
       "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "P4",
         "P5"
       ]
     }
