@@ -46,9 +46,9 @@ allowed-tools: Read, Write, Glob, Grep, Bash, Edit
 
 形式化ファイルから JSON への変換は、内容の解釈や推測を一切必要としない機械的操作でなければならない。
 
-### 4. 反復判定
-
-検証で NG が出た場合はユーザーに報告し、反復の要否を確認する。
+形式化完了後:
+1. `/sample-import` で JSON 変換と初回検証を実行する
+2. 検証 NG がある場合は `/data-tune` で JSON を直接調律する
 
 ## 参照ファイル
 
