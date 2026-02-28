@@ -1,15 +1,17 @@
 ---
 name: data-tune
 description: 検証スクリプトの結果に基づきJSONデータを直接調律する反復改善スキル
-argument-hint: [JSONデータパス]
+argument-hint: [JSONデータパス] [アルゴリズムパス]
 disable-model-invocation: true
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # /data-tune — データ調律
 
-引数: `$ARGUMENTS`（対象 JSON データのパス）
-- 例: `/data-tune app/poc/data/forbidden_basement.json`
+引数: `$ARGUMENTS`（JSON データのパスとアルゴリズムのパス）
+- 例: `/data-tune app/poc/data/forbidden_basement.json theory/integration/algorithms/データ調律アルゴリズム.md`
+- `$0` = JSON データパス、`$1` = アルゴリズムパス
+- アルゴリズムが指定されていない場合、ユーザーに確認する
 
 ## 事前条件
 
@@ -30,7 +32,7 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 
 ### 2. NG の診断
 
-アルゴリズムの対応表と優先順位（L2-0 > L2-1 > L2-4 > L2-5）に従い、NG の根本原因を特定する。
+指定されたアルゴリズムの対応表と優先順位に従い、NG の根本原因を特定する。
 
 L2-5 が NG の場合は、L3-6（前提閉包性）と L3-7（層間連鎖性）の結果を確認し、不足記述素を特定する。
 
@@ -61,7 +63,7 @@ L2-5 が NG の場合は、L3-6（前提閉包性）と L3-7（層間連鎖性�
 
 ## 参照ファイル
 
-- `theory/integration/algorithms/データ調律アルゴリズム.md` — 手順の定義元
+- 指定されたアルゴリズム — 手順の定義元
 - `theory/integration/evaluation/メトリクス.md` — メトリクス定義
 - `app/poc/src/models.py` — データ構造
 - `app/poc/scripts/eval/` — 検証スクリプト群（実行対象）
