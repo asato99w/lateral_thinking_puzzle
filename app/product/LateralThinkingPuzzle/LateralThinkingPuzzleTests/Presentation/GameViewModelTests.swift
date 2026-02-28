@@ -18,7 +18,8 @@ struct GameViewModelTests {
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
             topicCategories: [],
-            initQuestionIDs: ["q1"]
+            initQuestionIDs: ["q1"],
+            resolveCaps: [:]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -42,7 +43,8 @@ struct GameViewModelTests {
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
             topicCategories: [],
-            initQuestionIDs: ["q1"]
+            initQuestionIDs: ["q1"],
+            resolveCaps: [:]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -71,7 +73,8 @@ struct GameViewModelTests {
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1, q2], tier: .free,
             topicCategories: [TopicCategory(id: "A", name: "Cat A"), TopicCategory(id: "B", name: "Cat B")],
-            initQuestionIDs: ["q1", "q2"]
+            initQuestionIDs: ["q1", "q2"],
+            resolveCaps: [:]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -95,7 +98,8 @@ struct GameViewModelTests {
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1, q2], tier: .free,
             topicCategories: [TopicCategory(id: "A", name: "Cat A"), TopicCategory(id: "B", name: "Cat B")],
-            initQuestionIDs: ["q1", "q2"]
+            initQuestionIDs: ["q1", "q2"],
+            resolveCaps: [:]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -121,7 +125,8 @@ struct GameViewModelTests {
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1, q2, q3], tier: .free,
             topicCategories: [TopicCategory(id: "A", name: "Cat A"), TopicCategory(id: "B", name: "Cat B")],
-            initQuestionIDs: ["q1", "q2", "q3"]
+            initQuestionIDs: ["q1", "q2", "q3"],
+            resolveCaps: [:]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -149,7 +154,8 @@ struct GameViewModelTests {
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
             topicCategories: [TopicCategory(id: "A", name: "Cat A")],
-            initQuestionIDs: ["q1"]
+            initQuestionIDs: ["q1"],
+            resolveCaps: [:]
         )
 
         let vm = GameViewModel(puzzle: puzzle)
@@ -174,7 +180,8 @@ struct GameViewModelTests {
             allDescriptorIDs: ["d1", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
             topicCategories: [],
-            initQuestionIDs: ["q1"]
+            initQuestionIDs: ["q1"],
+            resolveCaps: [:]
         )
 
         let vm = GameViewModel(puzzle: puzzle)

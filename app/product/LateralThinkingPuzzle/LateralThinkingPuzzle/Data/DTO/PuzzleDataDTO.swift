@@ -51,7 +51,7 @@ struct PuzzleDataDTO: Codable {
 
         let oStar = GameEngine.buildOStar(questions: domainQuestions, psValues: ps)
         GameEngine.computeNeighborhoods(paradigms: &paradigmMap, oStar: oStar)
-        GameEngine.computeShiftThresholds(paradigms: &paradigmMap, oStar: oStar)
+        let resolveCaps = GameEngine.computeResolveCaps(paradigms: paradigmMap, oStar: oStar)
         GameEngine.computeDepths(paradigms: &paradigmMap, oStar: oStar)
 
         return PuzzleData(
@@ -64,7 +64,8 @@ struct PuzzleDataDTO: Codable {
             questions: domainQuestions,
             tier: .free,
             topicCategories: (topicCategories ?? []).map { $0.toDomain() },
-            initQuestionIDs: initQuestionIds
+            initQuestionIDs: initQuestionIds,
+            resolveCaps: resolveCaps
         )
     }
 }
@@ -116,12 +117,14 @@ struct ParadigmDTO: Codable {
     let pPred: [[PPredElement]]
     let conceivable: [String]?
     let relations: [[RelationElement]]
+    let shiftThreshold: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, name
         case pPred = "p_pred"
         case conceivable
         case relations
+        case shiftThreshold = "shift_threshold"
     }
 
     func toDomain() -> Paradigm {
@@ -138,7 +141,8 @@ struct ParadigmDTO: Codable {
             id: id,
             name: name,
             pPred: predDict,
-            relations: rels
+            relations: rels,
+            shiftThreshold: shiftThreshold
         )
     }
 }

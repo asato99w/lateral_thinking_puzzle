@@ -58,7 +58,7 @@
       "icon": "\ud83d\udeaa",
       "difficulty": 2,
       "tier": "free",
-      "bundled": false
+      "bundled": true
     },
     {
       "id": "cassette",

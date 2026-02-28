@@ -109,9 +109,9 @@ enum GameEngine {
 
     // MARK: - Reachable (BFS via R(P))
 
-    /// R(P) で origins から到達可能な記述素を返す（多ホップ BFS）。
+    /// R(P) で origins から到達可能な記述素を返す（origins 自身を含む、多ホップ BFS）。
     static func reachable(origins: Set<String>, paradigm: Paradigm) -> Set<String> {
-        var result = Set<String>()
+        var result = origins
         var frontier = Array(origins)
         var visited = Set<String>()
         while !frontier.isEmpty {
@@ -215,16 +215,23 @@ enum GameEngine {
 
         var anomalySets = [String: Set<String>]()
         var tensions = [String: Int]()
+        var explained = [String: Set<String>]()
         for pid in pids {
             let p = paradigms[pid]!
             var anom = Set<String>()
+            var exp = Set<String>()
             for (d, pred) in p.pPred {
-                if let oVal = oStar[d], pred != oVal {
-                    anom.insert(d)
+                if let oVal = oStar[d] {
+                    if pred != oVal {
+                        anom.insert(d)
+                    } else {
+                        exp.insert(d)
+                    }
                 }
             }
             anomalySets[pid] = anom
             tensions[pid] = anom.count
+            explained[pid] = exp
         }
 
         for pidCur in pids {
@@ -261,32 +268,45 @@ enum GameEngine {
                     neighbors.insert(pidA)
                 }
             }
-            paradigms[pidCur]!.neighbors = neighbors
-        }
-    }
 
-    // MARK: - Compute Shift Thresholds
-
-    /// 各パラダイムの shiftThreshold N(P_target) を計算する。
-    static func computeShiftThresholds(
-        paradigms: inout [String: Paradigm],
-        oStar: [String: Int]
-    ) {
-        for (pidTarget, _) in paradigms {
-            var minResolve: Int?
-            for (pidSource, pSource) in paradigms where pidSource != pidTarget {
-                guard pSource.neighbors.contains(pidTarget) else { continue }
-                let res = resolve(oStar: oStar, pSource: pSource, pTarget: paradigms[pidTarget]!)
-                if minResolve == nil || res < minResolve! {
-                    minResolve = res
+            // Explained 包含フィルタ:
+            // Explained(A) ⊂ Explained(B) のとき B を除外し、より近い A のみ残す。
+            var filtered = neighbors
+            for pidA in neighbors {
+                for pidB in neighbors where pidA != pidB {
+                    let expA = explained[pidA]!
+                    let expB = explained[pidB]!
+                    if expA.isStrictSubset(of: expB) {
+                        filtered.remove(pidB)
+                    }
                 }
             }
-            paradigms[pidTarget]!.shiftThreshold = minResolve
+            paradigms[pidCur]!.neighbors = filtered
         }
     }
 
-    /// P_source のアノマリーのうち P_target が正しく予測する数。
-    private static func resolve(
+    // MARK: - Compute Resolve Caps
+
+    /// 近傍ペアごとの resolve(O*, P_source, P_target) を事前計算する。
+    ///
+    /// Returns: [source_pid: [target_pid: resolve_value]] — 近傍関係にあるペアのみ
+    static func computeResolveCaps(
+        paradigms: [String: Paradigm],
+        oStar: [String: Int]
+    ) -> [String: [String: Int]] {
+        var caps = [String: [String: Int]]()
+        for (pidSource, pSource) in paradigms {
+            for pidTarget in pSource.neighbors {
+                let pTarget = paradigms[pidTarget]!
+                let res = resolveOStar(oStar: oStar, pSource: pSource, pTarget: pTarget)
+                caps[pidSource, default: [:]][pidTarget] = res
+            }
+        }
+        return caps
+    }
+
+    /// P_source のアノマリーのうち P_target が正しく予測する数（O* ベース）。
+    static func resolveOStar(
         oStar: [String: Int],
         pSource: Paradigm,
         pTarget: Paradigm
@@ -365,13 +385,19 @@ enum GameEngine {
     /// 3条件全てを満たす候補のみ:
     ///   1. 近傍: pid ∈ pCurrent.neighbors
     ///   2. tension strict <: tension(O, P') < tension(O, P_current)
-    ///   3. resolve >= N: P' の shiftThreshold 以上の resolve
+    ///   3. resolve >= N: 実効閾値以上の resolve
+    ///
+    /// 実効閾値の決定:
+    ///   - shiftThreshold（手動設定）があればそれを使う
+    ///   - resolveCaps（O* ベースの上限）があれば上限でキャップ
+    ///   - どちらもなければ閾値なし（条件3 スキップ）
     ///
     /// 選択: resolve DESC → attention DESC → pid ASC
     static func selectShiftTarget(
         o: [String: Int],
         pCurrent: Paradigm,
-        paradigms: [String: Paradigm]
+        paradigms: [String: Paradigm],
+        resolveCaps: [String: [String: Int]]? = nil
     ) -> String? {
         let anomalies = Set(
             pCurrent.pPred.filter { d, pred in
@@ -398,7 +424,22 @@ enum GameEngine {
                 if let pred = p.prediction(d), let oVal = o[d] { return pred == oVal }
                 return false
             }.count
-            if let threshold = p.shiftThreshold, res < threshold { continue }
+
+            // 条件3: resolve >= 実効閾値
+            let cap = resolveCaps?[pCurrent.id]?[pid]
+            let threshold = p.shiftThreshold
+            let effectiveN: Int?
+            if let threshold = threshold, let cap = cap {
+                effectiveN = min(threshold, cap)
+            } else if let threshold = threshold {
+                effectiveN = threshold
+            } else if let cap = cap {
+                effectiveN = cap
+            } else {
+                effectiveN = nil
+            }
+            if let effectiveN = effectiveN, res < effectiveN { continue }
+
             let att = anomalies.filter { p.pPred[$0] != nil }.count
             candidates.append(Candidate(pid: pid, tension: t, attention: att, resolve: res))
         }
@@ -419,7 +460,8 @@ enum GameEngine {
         question: Question,
         paradigms: [String: Paradigm],
         allQuestions: [Question],
-        currentOpen: [Question]
+        currentOpen: [Question],
+        resolveCaps: [String: [String: Int]]? = nil
     ) -> [Question] {
         // Step 1: Direct update
         let eff = question.effect
@@ -452,7 +494,7 @@ enum GameEngine {
         }
 
         // Step 3: Paradigm shift (neighbors + resolve threshold)
-        if let bestID = selectShiftTarget(o: state.o, pCurrent: pCurrent, paradigms: paradigms) {
+        if let bestID = selectShiftTarget(o: state.o, pCurrent: pCurrent, paradigms: paradigms, resolveCaps: resolveCaps) {
             state.pCurrent = bestID
             let pNew = paradigms[bestID]!
             assimilateFromParadigm(h: &state.h, o: state.o, paradigm: pNew)

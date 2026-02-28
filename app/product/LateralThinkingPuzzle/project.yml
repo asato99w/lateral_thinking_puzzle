@@ -65,3 +65,15 @@ targets:
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  LateralThinkingPuzzle:
+    build:
+      targets:
+        LateralThinkingPuzzle: all
+        LateralThinkingPuzzleTests: [test]
+        LateralThinkingPuzzleUITests: [test]
+    test:
+      targets:
+        - LateralThinkingPuzzleTests
+        - LateralThinkingPuzzleUITests

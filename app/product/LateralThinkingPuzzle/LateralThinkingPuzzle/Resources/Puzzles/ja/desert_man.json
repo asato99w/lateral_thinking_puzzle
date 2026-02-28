@@ -511,6 +511,7 @@
     {
       "id": "P4",
       "name": "くじ引きと犠牲",
+      "shift_threshold": 2,
       "p_pred": [
         [
           "Ps-1",
@@ -1782,5 +1783,6 @@
   "init_question_ids": [
     "q01",
     "q02"
-  ]
+  ],
+  "truth_paradigm": "P4"
 }

@@ -22,7 +22,8 @@ struct StartGameUseCaseTests {
             questions: [q1, q2],
             tier: .free,
             topicCategories: [],
-            initQuestionIDs: ["q1"]
+            initQuestionIDs: ["q1"],
+            resolveCaps: [:]
         )
 
         let useCase = StartGameUseCase()
@@ -52,7 +53,8 @@ struct StartGameUseCaseTests {
             questions: [q1],
             tier: .free,
             topicCategories: [],
-            initQuestionIDs: nil
+            initQuestionIDs: nil,
+            resolveCaps: [:]
         )
 
         let useCase = StartGameUseCase()

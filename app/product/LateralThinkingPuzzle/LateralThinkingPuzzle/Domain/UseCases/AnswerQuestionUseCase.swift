@@ -43,7 +43,8 @@ struct AnswerQuestionUseCase: Sendable {
             question: question,
             paradigms: puzzle.paradigms,
             allQuestions: puzzle.questions,
-            currentOpen: currentOpen
+            currentOpen: currentOpen,
+            resolveCaps: puzzle.resolveCaps
         )
 
         if state.pCurrent != previousParadigm {

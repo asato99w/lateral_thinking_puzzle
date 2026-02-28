@@ -14,6 +14,7 @@ struct PuzzleData: Equatable, Sendable {
     let tier: PuzzleTier
     let topicCategories: [TopicCategory]
     let initQuestionIDs: [String]?
+    let resolveCaps: [String: [String: Int]]
 
     static func == (lhs: PuzzleData, rhs: PuzzleData) -> Bool {
         lhs.title == rhs.title
