@@ -2257,7 +2257,8 @@
         "P1",
         "P2",
         "P3",
-        "P4"
+        "P4",
+        "S2"
       ]
     },
     {
@@ -2278,7 +2279,9 @@
       "ans_irrelevant": [],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": [],
+      "prerequisites": [
+        "Fs-95"
+      ],
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
@@ -2304,7 +2307,9 @@
       "ans_irrelevant": [],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": [],
+      "prerequisites": [
+        "Fs-95"
+      ],
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
@@ -2325,17 +2330,25 @@
         [
           "Fs-48",
           0
+        ],
+        [
+          "Fs-79",
+          1
         ]
       ],
       "ans_irrelevant": [],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": [],
+      "prerequisites": [
+        "Fs-47"
+      ],
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
         "P0",
-        "P1"
+        "P1",
+        "S1",
+        "S3"
       ]
     },
     {
@@ -2387,12 +2400,15 @@
       "ans_irrelevant": [],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": [],
+      "prerequisites": [
+        "Fs-3"
+      ],
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
         "P0",
-        "P1"
+        "P1",
+        "S2"
       ]
     },
     {
@@ -2627,6 +2643,7 @@
       "related_descriptors": [],
       "topic_category": "I",
       "paradigms": [
+        "P0",
         "P1",
         "P2",
         "P3",
@@ -2688,7 +2705,7 @@
       "correct_answer": "yes",
       "is_clear": false,
       "prerequisites": [
-        "Fs-59"
+        "Fs-27"
       ],
       "related_descriptors": [],
       "topic_category": "II",
@@ -2759,6 +2776,7 @@
       "related_descriptors": [],
       "topic_category": "II",
       "paradigms": [
+        "P0",
         "P2",
         "P3",
         "P4"
@@ -2826,7 +2844,8 @@
       "topic_category": "II",
       "paradigms": [
         "P3",
-        "P4"
+        "P4",
+        "S3"
       ]
     },
     {
@@ -2938,6 +2957,10 @@
         [
           "Fs-104",
           0
+        ],
+        [
+          "Ft-152",
+          1
         ]
       ],
       "ans_irrelevant": [],
@@ -3503,14 +3526,31 @@
     "q40"
   ],
   "shift_candidates": {
-    "P0": ["P1", "S1", "S2", "S3"],
-    "P1": ["P2"],
-    "P2": ["P3"],
-    "P3": ["P4"],
+    "P0": [
+      "P1",
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "P1": [
+      "P2"
+    ],
+    "P2": [
+      "P3"
+    ],
+    "P3": [
+      "P4"
+    ],
     "P4": [],
-    "S1": ["P0"],
-    "S2": ["P0"],
-    "S3": ["P0"]
+    "S1": [
+      "P0"
+    ],
+    "S2": [
+      "P0"
+    ],
+    "S3": [
+      "P0"
+    ]
   },
   "tension_threshold": 1
 }
