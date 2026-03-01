@@ -9,7 +9,8 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 # /sample-fix — サンプル修正
 
 引数: `$ARGUMENTS`（対象サンプルのパスとアルゴリズムのパス）
-- 例: `/sample-fix samples/001_ウミガメのスープ/09_20260219_統合アルゴリズム適用 theory/integration/algorithms/統合アルゴリズム.md`
+- 例: `/sample-fix samples/ja/001_ウミガメのスープ/09_20260219_統合アルゴリズム適用 theory/integration/algorithms/統合アルゴリズム.md`
+- 例: `/sample-fix samples/en/001_turtle_soup/01_20260301_統合アルゴリズム適用 theory/integration/algorithms/統合アルゴリズム.md`
 - `$0` = サンプルパス、`$1` = アルゴリズムパス
 - アルゴリズムが指定されていない場合、ユーザーに確認する
 - 問題箇所が明示されている場合はそれも受け付ける
@@ -51,4 +52,4 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 
 ## 禁止事項
 
-**既存サンプル・既存データの参照禁止**: 再生成時に、他のサンプルや `app/poc/data/` 内の JSON データを参考にしてはならない。入力は理論（`theory/`）と対象反復ディレクトリ内の上流ファイルのみ。
+**既存サンプル・既存データの参照禁止**: 再生成時に、他のサンプル（他言語を含む）や `app/poc/data/` 内の JSON データを参考にしてはならない。入力は理論（`theory/`）と対象反復ディレクトリ内の上流ファイルのみ。

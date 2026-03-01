@@ -9,7 +9,8 @@ allowed-tools: Read, Bash, Glob, Grep
 # /sample-import — データ取り込み
 
 引数: `$ARGUMENTS`（対象サンプルの反復ディレクトリパス）
-- 例: `/sample-import samples/005_禁じられた地下室/01_20260227_統合アルゴリズム適用`
+- 例: `/sample-import samples/ja/005_禁じられた地下室/01_20260227_統合アルゴリズム適用`
+- 例: `/sample-import samples/en/001_turtle_soup/01_20260301_統合アルゴリズム適用`
 
 ## 事前条件
 
@@ -17,22 +18,32 @@ allowed-tools: Read, Bash, Glob, Grep
 
 ## 手順
 
-### 1. 形式化ファイルの確認
+### 1. 言語の判定
+
+パスから言語コードを判定する（`samples/{lang}/...` の `{lang}` 部分）。
+
+### 2. 形式化ファイルの確認
 
 `$ARGUMENTS` ディレクトリ内の形式化ファイルの存在を確認し、`app/poc/src/models.py` のデータ構造が要求する全フィールドが揃っているか検証する。
 
-### 2. JSON 変換
+### 3. JSON 変換
 
 形式化ファイルの内容を `app/poc/data/` 配下の JSON ファイルに変換する。
 
 - 変換スクリプト: `.claude/skills/sample-import/scripts/convert_formalization.py`
 - 出力先: `app/poc/data/{パズル名}.json`
 
-### 3. 検証スクリプト実行
+### 4. 製品データへのコピー
+
+生成した JSON を製品アプリの対応ロケールディレクトリにもコピーする。
+
+- 出力先: `app/product/LateralThinkingPuzzle/LateralThinkingPuzzle/Resources/Puzzles/{lang}/{パズル名}.json`
+
+### 5. 検証スクリプト実行
 
 `app/poc/scripts/eval/` 配下の全スクリプトを実行する。`check/` は OK/NG 判定、`metric/` は定量報告。実行はすべて `app/poc/scripts/` をカレントディレクトリとして行う。
 
-### 4. 結果サマリの報告
+### 6. 結果サマリの報告
 
 各スクリプトの実行結果をまとめて報告する。NG がある場合は要修正箇所と差し戻し先を提示する。
 

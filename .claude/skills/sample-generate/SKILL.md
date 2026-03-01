@@ -1,16 +1,18 @@
 ---
 name: sample-generate
 description: 指定されたアルゴリズムに従いサンプル文書を生成する。新規生成・中断からの再開・理論変更に伴う再生成に使う。
-argument-hint: [パズルタイトル] [アルゴリズムパス]
+argument-hint: [言語コード] [パズルタイトル] [アルゴリズムパス]
 disable-model-invocation: true
 allowed-tools: Read, Write, Glob, Grep, Bash, Edit
 ---
 
 # /sample-generate — サンプル生成
 
-引数: `$ARGUMENTS`（パズルのタイトルとアルゴリズムのパス）
-- 例: `/sample-generate ウミガメのスープ theory/integration/algorithms/統合アルゴリズム.md`
-- `$0` = パズルタイトル、`$1` = アルゴリズムパス
+引数: `$ARGUMENTS`（言語コード、パズルのタイトル、アルゴリズムのパス）
+- 例: `/sample-generate ja ウミガメのスープ theory/integration/algorithms/統合アルゴリズム.md`
+- 例: `/sample-generate en turtle_soup theory/integration/algorithms/統合アルゴリズム.md`
+- `$0` = 言語コード（ja/en）、`$1` = パズルタイトル、`$2` = アルゴリズムパス
+- 言語コードが省略された場合、ユーザーに確認する
 - アルゴリズムが指定されていない場合、ユーザーに確認する
 
 ## 事前条件
@@ -27,7 +29,7 @@ allowed-tools: Read, Write, Glob, Grep, Bash, Edit
 - **ディレクトリが存在しない**: 新規生成。ディレクトリを作成して手順2へ
 - **ディレクトリが存在し、ファイルがある**: 再開。生成済みファイルからアルゴリズムのどの段階まで完了しているかを判断し、続きから手順2へ
 
-ディレクトリ命名: `samples/NNN_タイトル/NN_YYYYMMDD_アルゴリズム名適用/`
+ディレクトリ命名: `samples/{lang}/NNN_タイトル/NN_YYYYMMDD_アルゴリズム名適用/`
 
 ### 2. アルゴリズム適用
 
@@ -88,7 +90,7 @@ allowed-tools: Read, Write, Glob, Grep, Bash, Edit
 
 ## 禁止事項
 
-**既存サンプル・既存データの参照禁止**: サンプル生成時に、既存の `samples/` 内の他のサンプルや `app/poc/data/` 内の JSON データを参考にしてはならない。入力は理論（`theory/`）と問題文（S, T）のみ。既存サンプルを参照すると、過去の誤りや構造的欠陥が伝播する。形式化ステップ（手順3）では内容の生成は完了しているため、フォーマット確認目的での既存データ参照による内容汚染リスクは低いが、既存データが正しい保証はない点に注意すること。
+**既存サンプル・既存データの参照禁止**: サンプル生成時に、既存の `samples/` 内の他のサンプル（他言語を含む）や `app/poc/data/` 内の JSON データを参考にしてはならない。入力は理論（`theory/`）と問題文（S, T）のみ。既存サンプルを参照すると、過去の誤りや構造的欠陥が伝播する。形式化ステップ（手順3）では内容の生成は完了しているため、フォーマット確認目的での既存データ参照による内容汚染リスクは低いが、既存データが正しい保証はない点に注意すること。
 
 ## 注意事項
 
