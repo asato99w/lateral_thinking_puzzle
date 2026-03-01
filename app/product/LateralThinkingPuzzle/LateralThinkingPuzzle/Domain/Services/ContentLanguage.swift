@@ -9,7 +9,13 @@ enum ContentLanguage {
         if let override = DebugSettings.shared.languageOverride {
             return override
         }
-        let systemLang = Locale.current.language.languageCode?.identifier ?? fallback
-        return supportedLanguages.contains(systemLang) ? systemLang : fallback
+        // Use preferredLanguages (respects -AppleLanguages launch arg)
+        for preferred in Locale.preferredLanguages {
+            let lang = Locale(identifier: preferred).language.languageCode?.identifier ?? ""
+            if supportedLanguages.contains(lang) {
+                return lang
+            }
+        }
+        return fallback
     }
 }

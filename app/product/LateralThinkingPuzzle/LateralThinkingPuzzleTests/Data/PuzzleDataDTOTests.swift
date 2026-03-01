@@ -4,17 +4,21 @@ import Foundation
 
 struct PuzzleDataDTOTests {
 
-    @Test func test_decodeBarManJSON_succeeds() throws {
-        let url = Bundle(for: BundleMarker.self).url(
-            forResource: "bar_man", withExtension: "json", subdirectory: "Puzzles"
-        )
-        // If running in test target, try main bundle
-        let resolvedURL = url ?? Bundle.main.url(forResource: "bar_man", withExtension: "json", subdirectory: "Puzzles")
-        guard let jsonURL = resolvedURL else {
-            // Skip if resource not available in test context
-            return
+    private func loadPuzzleJSON(name: String) throws -> Data {
+        // Try app bundle with subdirectory (folder reference preserves ja/ structure)
+        if let url = Bundle.main.url(forResource: name, withExtension: "json", subdirectory: "Puzzles/ja") {
+            return try Data(contentsOf: url)
         }
-        let data = try Data(contentsOf: jsonURL)
+        // Fallback: test bundle
+        if let url = Bundle(for: BundleMarker.self).url(forResource: name, withExtension: "json", subdirectory: "Puzzles/ja") {
+            return try Data(contentsOf: url)
+        }
+        Issue.record("JSON file \(name).json not found in bundle")
+        throw PuzzleRepositoryError.puzzleNotFound(id: name)
+    }
+
+    @Test func test_decodeBarManJSON_succeeds() throws {
+        let data = try loadPuzzleJSON(name: "bar_man")
         let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
 
         #expect(dto.title == "バーの男")
@@ -24,14 +28,7 @@ struct PuzzleDataDTOTests {
     }
 
     @Test func test_decodeDesertManJSON_succeeds() throws {
-        let url = Bundle(for: BundleMarker.self).url(
-            forResource: "desert_man", withExtension: "json", subdirectory: "Puzzles"
-        )
-        let resolvedURL = url ?? Bundle.main.url(forResource: "desert_man", withExtension: "json", subdirectory: "Puzzles")
-        guard let jsonURL = resolvedURL else {
-            return
-        }
-        let data = try Data(contentsOf: jsonURL)
+        let data = try loadPuzzleJSON(name: "desert_man")
         let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
 
         #expect(dto.title == "砂漠の男")
@@ -41,14 +38,7 @@ struct PuzzleDataDTOTests {
     }
 
     @Test func test_barManToDomain_succeeds() throws {
-        let url = Bundle(for: BundleMarker.self).url(
-            forResource: "bar_man", withExtension: "json", subdirectory: "Puzzles"
-        )
-        let resolvedURL = url ?? Bundle.main.url(forResource: "bar_man", withExtension: "json", subdirectory: "Puzzles")
-        guard let jsonURL = resolvedURL else {
-            return
-        }
-        let data = try Data(contentsOf: jsonURL)
+        let data = try loadPuzzleJSON(name: "bar_man")
         let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
         let puzzle = try dto.toDomain()
 
@@ -58,20 +48,60 @@ struct PuzzleDataDTOTests {
     }
 
     @Test func test_desertManToDomain_succeeds() throws {
-        let url = Bundle(for: BundleMarker.self).url(
-            forResource: "desert_man", withExtension: "json", subdirectory: "Puzzles"
-        )
-        let resolvedURL = url ?? Bundle.main.url(forResource: "desert_man", withExtension: "json", subdirectory: "Puzzles")
-        guard let jsonURL = resolvedURL else {
-            return
-        }
-        let data = try Data(contentsOf: jsonURL)
+        let data = try loadPuzzleJSON(name: "desert_man")
         let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
         let puzzle = try dto.toDomain()
 
         #expect(puzzle.title == "砂漠の男")
         #expect(puzzle.paradigms.count == 6)
         #expect(puzzle.questions.count == 26)
+    }
+
+    @Test func test_allBundledPuzzles_toDomain_succeeds() throws {
+        let names = ["bar_man", "desert_man", "turtle_soup", "poisonous_mushroom", "underground"]
+        for name in names {
+            let data = try loadPuzzleJSON(name: name)
+            let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
+            let puzzle = try dto.toDomain()
+            #expect(!puzzle.title.isEmpty, "Puzzle \(name) has empty title")
+            #expect(!puzzle.paradigms.isEmpty, "Puzzle \(name) has no paradigms")
+            #expect(!puzzle.questions.isEmpty, "Puzzle \(name) has no questions")
+        }
+    }
+
+    @Test func test_allBundledPuzzles_fullGameFlow() throws {
+        let names = ["bar_man", "desert_man", "turtle_soup", "poisonous_mushroom", "underground"]
+        for name in names {
+            let data = try loadPuzzleJSON(name: name)
+            let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
+            let puzzle = try dto.toDomain()
+
+            // Simulate StartGameUseCase
+            let startGame = StartGameUseCase()
+            let result = startGame.execute(puzzle: puzzle)
+
+            #expect(!result.state.pCurrent.isEmpty, "Puzzle \(name): pCurrent should be set")
+
+            // Simulate answering each open question
+            let answerUseCase = AnswerQuestionUseCase()
+            var state = result.state
+            var openQs = result.openQuestions
+
+            // Answer up to 5 questions to verify no crash
+            var answeredCount = 0
+            while answeredCount < 5 && !openQs.isEmpty {
+                let q = openQs[0]
+                let ansResult = answerUseCase.execute(
+                    state: &state,
+                    question: q,
+                    puzzle: puzzle,
+                    currentOpen: openQs
+                )
+                state = ansResult.state
+                openQs = ansResult.openQuestions
+                answeredCount += 1
+            }
+        }
     }
 
     @Test func test_dtoToDomain_succeeds() throws {
