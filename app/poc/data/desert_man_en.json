@@ -1,0 +1,3324 @@
+{
+  "title": "The Desert Man",
+  "statement": "A naked man was found dead in the middle of the desert, gripping a matchstick in his hand.",
+  "init_paradigm": "P0",
+  "ps_values": [
+    [
+      "Ps-1",
+      1
+    ],
+    [
+      "Ps-2",
+      1
+    ],
+    [
+      "Ps-3",
+      1
+    ],
+    [
+      "Ps-4",
+      1
+    ]
+  ],
+  "all_descriptor_ids": [
+    "Ps-1",
+    "Ps-2",
+    "Ps-3",
+    "Ps-4",
+    "Fs-1",
+    "Fs-2",
+    "Fs-3",
+    "Fs-4",
+    "Fs-5",
+    "Fs-6",
+    "Fs-7",
+    "Fs-8",
+    "Fs-9",
+    "Fs-10",
+    "Fs-11",
+    "Fs-12",
+    "Fs-13",
+    "Fs-14",
+    "Fs-15",
+    "Fs-16",
+    "Fs-17",
+    "Fs-18",
+    "Fs-19",
+    "Fs-20",
+    "Fs-21",
+    "Fs-22",
+    "Fs-23",
+    "Fs-24",
+    "Fs-25",
+    "Fs-26",
+    "Fs-27",
+    "Fs-28",
+    "Fs-29",
+    "Fs-30",
+    "Fs-31",
+    "Fs-32",
+    "Fs-33",
+    "Fs-34",
+    "Fs-35",
+    "Fs-36",
+    "Fs-37",
+    "Fs-38",
+    "Fs-39",
+    "Fs-40",
+    "Fs-41",
+    "Fs-42",
+    "Fs-43",
+    "Fs-44",
+    "Fs-45",
+    "Fs-46",
+    "Fs-47",
+    "Fs-48",
+    "Fs-49",
+    "Fs-50",
+    "Fs-51",
+    "Fs-52",
+    "Fs-53",
+    "Fs-54",
+    "Fs-55",
+    "Fs-56",
+    "Fs-57",
+    "Fs-58",
+    "Fs-59",
+    "Fs-60",
+    "Fs-61",
+    "Fs-62",
+    "Fs-63",
+    "Fs-64",
+    "Fs-65",
+    "Fs-66",
+    "Fs-67",
+    "Fs-68",
+    "Fs-69",
+    "Fs-70",
+    "Fs-71",
+    "Fs-72",
+    "Fs-73",
+    "Fs-74",
+    "Fs-75",
+    "Fs-76",
+    "Fs-77",
+    "Fs-78",
+    "Fs-79",
+    "Fs-80",
+    "Fs-81",
+    "Fs-82",
+    "Fs-83",
+    "Fs-84",
+    "Fs-85",
+    "Fs-86",
+    "Fs-87",
+    "Fs-88",
+    "Fs-89",
+    "Fs-90",
+    "Fs-91",
+    "Fs-92",
+    "Fs-93",
+    "Pt-1",
+    "Pt-2",
+    "Pt-3",
+    "Pt-4",
+    "Pt-5",
+    "Pt-6",
+    "Pt-7",
+    "Pt-8",
+    "Pt-9",
+    "Ft-1",
+    "Ft-2",
+    "Ft-3",
+    "Ft-4",
+    "Ft-5",
+    "Ft-6",
+    "Ft-7",
+    "Ft-8",
+    "Ft-9",
+    "Ft-10",
+    "Ft-11",
+    "Ft-12",
+    "Ft-13",
+    "Ft-14",
+    "Ft-15",
+    "Ft-16",
+    "Ft-17",
+    "Ft-18",
+    "Ft-19",
+    "Ft-20",
+    "Ft-21",
+    "Ft-22",
+    "Ft-23",
+    "Ft-24",
+    "Ft-25",
+    "Ft-26",
+    "Ft-27",
+    "Ft-28",
+    "Ft-29",
+    "Ft-30",
+    "Ft-31",
+    "Ft-32",
+    "Ft-33",
+    "Ft-34",
+    "Ft-35",
+    "Ft-36",
+    "Ft-37",
+    "Ft-38",
+    "Ft-39",
+    "Ft-40",
+    "Ft-41",
+    "Ft-42",
+    "Ft-43",
+    "Ft-44",
+    "Ft-45",
+    "Ft-46",
+    "Ft-47",
+    "Ft-48",
+    "Ft-49",
+    "Ft-50",
+    "Ft-51",
+    "Ft-52",
+    "Ft-53",
+    "Ft-54",
+    "Ft-55",
+    "Ft-56",
+    "Ft-57",
+    "Ft-58",
+    "Ft-59",
+    "Ft-60",
+    "Ft-61",
+    "Ft-62",
+    "Ft-63",
+    "Ft-64",
+    "Ft-65",
+    "Ft-66",
+    "Ft-67",
+    "Ft-68",
+    "Ft-69",
+    "Ft-70",
+    "Ft-71",
+    "Ft-72",
+    "Ft-73",
+    "Ft-74",
+    "Ft-75",
+    "Ft-76",
+    "Ft-77",
+    "Ft-78",
+    "Ft-79",
+    "Ft-80",
+    "Ft-81",
+    "Ft-82",
+    "Ft-83",
+    "Ft-84",
+    "Ft-85",
+    "Ft-86",
+    "Ft-87",
+    "Ft-88",
+    "Ft-89",
+    "Ft-90",
+    "Ft-91",
+    "Ft-92",
+    "Ft-93",
+    "Ft-94",
+    "Ft-95",
+    "D-1",
+    "D-2",
+    "D-3",
+    "D-4",
+    "D-5",
+    "D-6",
+    "D-7",
+    "D-8",
+    "D-9",
+    "D-10",
+    "D-11",
+    "D-12",
+    "D-13",
+    "D-14",
+    "B-1",
+    "B-2",
+    "B-3",
+    "B-4",
+    "B-5",
+    "M-1",
+    "M-2",
+    "M-3",
+    "M-4",
+    "M-5",
+    "M-6",
+    "M-7",
+    "M-8",
+    "M-9",
+    "M-10"
+  ],
+  "paradigms": [
+    {
+      "id": "P0",
+      "name": "Anomalous Desert Death",
+      "p_pred": [
+        [
+          "Ps-1",
+          1
+        ],
+        [
+          "Ps-2",
+          1
+        ],
+        [
+          "Ps-3",
+          1
+        ],
+        [
+          "Ps-4",
+          1
+        ],
+        [
+          "Fs-1",
+          1
+        ],
+        [
+          "Fs-2",
+          1
+        ],
+        [
+          "Fs-4",
+          1
+        ],
+        [
+          "Fs-7",
+          1
+        ],
+        [
+          "Fs-10",
+          1
+        ],
+        [
+          "Fs-40",
+          1
+        ],
+        [
+          "Fs-46",
+          1
+        ],
+        [
+          "Fs-79",
+          1
+        ],
+        [
+          "Fs-80",
+          1
+        ],
+        [
+          "Fs-81",
+          1
+        ],
+        [
+          "Fs-93",
+          1
+        ],
+        [
+          "Fs-17",
+          1
+        ],
+        [
+          "Fs-91",
+          0
+        ],
+        [
+          "Fs-88",
+          0
+        ],
+        [
+          "Fs-69",
+          0
+        ],
+        [
+          "Fs-49",
+          0
+        ],
+        [
+          "Fs-48",
+          0
+        ],
+        [
+          "Ft-8",
+          0
+        ]
+      ],
+      "relations": [
+        [
+          "Fs-7",
+          "Fs-4",
+          0.7
+        ],
+        [
+          "Fs-7",
+          "Fs-79",
+          0.7
+        ],
+        [
+          "Fs-40",
+          "Fs-46",
+          0.7
+        ],
+        [
+          "Fs-40",
+          "Fs-10",
+          0.6
+        ],
+        [
+          "Fs-79",
+          "Fs-80",
+          0.7
+        ],
+        [
+          "Fs-80",
+          "Fs-81",
+          0.7
+        ],
+        [
+          "Fs-10",
+          "Fs-91",
+          0.6
+        ],
+        [
+          "Fs-10",
+          "Fs-48",
+          0.5
+        ],
+        [
+          "Fs-17",
+          "Fs-88",
+          0.5
+        ]
+      ]
+    },
+    {
+      "id": "P1",
+      "name": "Group Emergency",
+      "p_pred": [
+        [
+          "Ps-1",
+          1
+        ],
+        [
+          "Ps-2",
+          1
+        ],
+        [
+          "Ps-3",
+          1
+        ],
+        [
+          "Ps-4",
+          1
+        ],
+        [
+          "Fs-1",
+          1
+        ],
+        [
+          "Fs-2",
+          1
+        ],
+        [
+          "Fs-7",
+          1
+        ],
+        [
+          "Fs-9",
+          1
+        ],
+        [
+          "Fs-26",
+          1
+        ],
+        [
+          "Fs-27",
+          1
+        ],
+        [
+          "Fs-28",
+          1
+        ],
+        [
+          "Fs-29",
+          1
+        ],
+        [
+          "Fs-40",
+          1
+        ],
+        [
+          "Fs-46",
+          1
+        ],
+        [
+          "Fs-88",
+          1
+        ],
+        [
+          "Fs-91",
+          1
+        ],
+        [
+          "Fs-92",
+          1
+        ],
+        [
+          "M-1",
+          1
+        ],
+        [
+          "M-2",
+          1
+        ],
+        [
+          "Fs-10",
+          0
+        ],
+        [
+          "Fs-17",
+          0
+        ],
+        [
+          "Fs-55",
+          0
+        ],
+        [
+          "Fs-38",
+          0
+        ],
+        [
+          "Fs-16",
+          0
+        ],
+        [
+          "Fs-36",
+          0
+        ],
+        [
+          "Ft-8",
+          0
+        ],
+        [
+          "Fs-49",
+          0
+        ]
+      ],
+      "relations": [
+        [
+          "Fs-91",
+          "M-1",
+          0.8
+        ],
+        [
+          "M-1",
+          "Fs-92",
+          0.8
+        ],
+        [
+          "Fs-92",
+          "M-2",
+          0.7
+        ],
+        [
+          "Fs-92",
+          "Fs-9",
+          0.7
+        ],
+        [
+          "Fs-88",
+          "Fs-28",
+          0.8
+        ],
+        [
+          "Fs-28",
+          "Fs-29",
+          0.8
+        ],
+        [
+          "Fs-91",
+          "Fs-10",
+          0.7
+        ],
+        [
+          "Fs-92",
+          "Fs-17",
+          0.6
+        ],
+        [
+          "Fs-91",
+          "Fs-55",
+          0.6
+        ],
+        [
+          "Fs-88",
+          "Fs-38",
+          0.6
+        ],
+        [
+          "Fs-88",
+          "Fs-36",
+          0.6
+        ]
+      ]
+    },
+    {
+      "id": "P2",
+      "name": "Descent from Above",
+      "p_pred": [
+        [
+          "Ps-1",
+          1
+        ],
+        [
+          "Ps-2",
+          1
+        ],
+        [
+          "Ps-3",
+          1
+        ],
+        [
+          "Ps-4",
+          1
+        ],
+        [
+          "Fs-1",
+          1
+        ],
+        [
+          "Fs-2",
+          1
+        ],
+        [
+          "Fs-7",
+          1
+        ],
+        [
+          "Fs-9",
+          1
+        ],
+        [
+          "Fs-26",
+          1
+        ],
+        [
+          "Fs-27",
+          1
+        ],
+        [
+          "Fs-28",
+          1
+        ],
+        [
+          "Fs-29",
+          1
+        ],
+        [
+          "Fs-40",
+          1
+        ],
+        [
+          "Fs-49",
+          1
+        ],
+        [
+          "Fs-88",
+          1
+        ],
+        [
+          "Fs-89",
+          1
+        ],
+        [
+          "Fs-91",
+          1
+        ],
+        [
+          "Fs-92",
+          1
+        ],
+        [
+          "Ft-8",
+          1
+        ],
+        [
+          "M-1",
+          1
+        ],
+        [
+          "M-2",
+          1
+        ],
+        [
+          "M-4",
+          1
+        ],
+        [
+          "D-1",
+          1
+        ],
+        [
+          "D-4",
+          1
+        ],
+        [
+          "B-3",
+          1
+        ],
+        [
+          "B-4",
+          1
+        ],
+        [
+          "Fs-10",
+          0
+        ],
+        [
+          "Fs-17",
+          0
+        ],
+        [
+          "Fs-55",
+          0
+        ],
+        [
+          "Fs-44",
+          0
+        ],
+        [
+          "Fs-58",
+          0
+        ],
+        [
+          "Fs-50",
+          0
+        ],
+        [
+          "Fs-38",
+          0
+        ],
+        [
+          "Ft-14",
+          0
+        ],
+        [
+          "Fs-69",
+          0
+        ],
+        [
+          "Fs-66",
+          1
+        ],
+        [
+          "M-3",
+          1
+        ]
+      ],
+      "relations": [
+        [
+          "Ft-8",
+          "D-1",
+          0.9
+        ],
+        [
+          "D-1",
+          "Fs-49",
+          0.8
+        ],
+        [
+          "D-1",
+          "D-4",
+          0.8
+        ],
+        [
+          "D-1",
+          "B-3",
+          0.7
+        ],
+        [
+          "Fs-49",
+          "M-4",
+          0.9
+        ],
+        [
+          "M-4",
+          "B-4",
+          0.8
+        ],
+        [
+          "Fs-92",
+          "M-2",
+          0.7
+        ],
+        [
+          "Fs-88",
+          "Fs-29",
+          0.8
+        ],
+        [
+          "Ft-8",
+          "Fs-44",
+          0.8
+        ],
+        [
+          "Ft-8",
+          "Fs-58",
+          0.7
+        ],
+        [
+          "M-4",
+          "Fs-17",
+          0.8
+        ],
+        [
+          "Fs-91",
+          "Fs-10",
+          0.7
+        ],
+        [
+          "Fs-89",
+          "Fs-55",
+          0.7
+        ],
+        [
+          "Fs-88",
+          "Ft-8",
+          0.7
+        ],
+        [
+          "Fs-91",
+          "Fs-92",
+          0.6
+        ],
+        [
+          "Fs-66",
+          "M-3",
+          0.5
+        ]
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "Chosen by Lot",
+      "p_pred": [
+        [
+          "Ps-1",
+          1
+        ],
+        [
+          "Ps-2",
+          1
+        ],
+        [
+          "Ps-3",
+          1
+        ],
+        [
+          "Ps-4",
+          1
+        ],
+        [
+          "Fs-1",
+          1
+        ],
+        [
+          "Fs-7",
+          1
+        ],
+        [
+          "Fs-9",
+          1
+        ],
+        [
+          "Fs-26",
+          1
+        ],
+        [
+          "Fs-27",
+          1
+        ],
+        [
+          "Fs-28",
+          1
+        ],
+        [
+          "Fs-29",
+          1
+        ],
+        [
+          "Fs-49",
+          1
+        ],
+        [
+          "Fs-65",
+          1
+        ],
+        [
+          "Fs-66",
+          1
+        ],
+        [
+          "Fs-67",
+          1
+        ],
+        [
+          "Fs-69",
+          1
+        ],
+        [
+          "Fs-88",
+          1
+        ],
+        [
+          "Fs-89",
+          1
+        ],
+        [
+          "Fs-90",
+          1
+        ],
+        [
+          "Fs-91",
+          1
+        ],
+        [
+          "Fs-92",
+          1
+        ],
+        [
+          "Ft-8",
+          1
+        ],
+        [
+          "Ft-34",
+          1
+        ],
+        [
+          "Ft-57",
+          1
+        ],
+        [
+          "Ft-58",
+          1
+        ],
+        [
+          "Ft-62",
+          1
+        ],
+        [
+          "Ft-66",
+          1
+        ],
+        [
+          "Ft-67",
+          1
+        ],
+        [
+          "Ft-69",
+          1
+        ],
+        [
+          "Ft-84",
+          1
+        ],
+        [
+          "Ft-90",
+          1
+        ],
+        [
+          "Ft-91",
+          1
+        ],
+        [
+          "Ft-92",
+          1
+        ],
+        [
+          "Ft-93",
+          1
+        ],
+        [
+          "Ft-94",
+          1
+        ],
+        [
+          "Ft-95",
+          1
+        ],
+        [
+          "M-1",
+          1
+        ],
+        [
+          "M-2",
+          1
+        ],
+        [
+          "M-3",
+          1
+        ],
+        [
+          "M-4",
+          1
+        ],
+        [
+          "M-8",
+          1
+        ],
+        [
+          "D-1",
+          1
+        ],
+        [
+          "D-3",
+          1
+        ],
+        [
+          "D-4",
+          1
+        ],
+        [
+          "D-11",
+          1
+        ],
+        [
+          "D-14",
+          1
+        ],
+        [
+          "B-2",
+          1
+        ],
+        [
+          "B-5",
+          1
+        ],
+        [
+          "Fs-10",
+          0
+        ],
+        [
+          "Fs-17",
+          0
+        ],
+        [
+          "Fs-55",
+          0
+        ],
+        [
+          "Fs-44",
+          0
+        ],
+        [
+          "Fs-76",
+          0
+        ],
+        [
+          "Fs-77",
+          0
+        ],
+        [
+          "Fs-78",
+          0
+        ],
+        [
+          "Fs-70",
+          0
+        ],
+        [
+          "Fs-15",
+          0
+        ],
+        [
+          "Ft-2",
+          0
+        ]
+      ],
+      "relations": [
+        [
+          "Ft-90",
+          "Ft-34",
+          0.9
+        ],
+        [
+          "Ft-34",
+          "Ft-91",
+          0.8
+        ],
+        [
+          "Ft-91",
+          "Ft-57",
+          0.9
+        ],
+        [
+          "Ft-57",
+          "Ft-58",
+          0.9
+        ],
+        [
+          "Ft-58",
+          "Ft-62",
+          0.9
+        ],
+        [
+          "Ft-62",
+          "Ft-66",
+          0.9
+        ],
+        [
+          "Ft-66",
+          "Ft-94",
+          0.9
+        ],
+        [
+          "Ft-62",
+          "Ft-67",
+          0.8
+        ],
+        [
+          "Ft-67",
+          "Ft-69",
+          0.8
+        ],
+        [
+          "Ft-69",
+          "Ft-93",
+          0.9
+        ],
+        [
+          "Ft-66",
+          "Ft-84",
+          0.8
+        ],
+        [
+          "Ft-84",
+          "Ft-95",
+          0.9
+        ],
+        [
+          "Ft-62",
+          "Fs-76",
+          0.8
+        ],
+        [
+          "Ft-62",
+          "Fs-77",
+          0.8
+        ],
+        [
+          "Ft-62",
+          "Fs-78",
+          0.8
+        ],
+        [
+          "Ft-62",
+          "Fs-70",
+          0.8
+        ],
+        [
+          "Ft-92",
+          "M-8",
+          0.8
+        ],
+        [
+          "Ft-91",
+          "D-11",
+          0.8
+        ],
+        [
+          "D-3",
+          "B-2",
+          0.7
+        ]
+      ]
+    },
+    {
+      "id": "P4",
+      "name": "Hot Air Balloon Sacrifice",
+      "p_pred": [
+        [
+          "Ps-1",
+          1
+        ],
+        [
+          "Ps-2",
+          1
+        ],
+        [
+          "Ps-3",
+          1
+        ],
+        [
+          "Ps-4",
+          1
+        ],
+        [
+          "Pt-1",
+          1
+        ],
+        [
+          "Pt-2",
+          1
+        ],
+        [
+          "Pt-3",
+          1
+        ],
+        [
+          "Pt-4",
+          1
+        ],
+        [
+          "Pt-5",
+          1
+        ],
+        [
+          "Pt-6",
+          1
+        ],
+        [
+          "Pt-7",
+          1
+        ],
+        [
+          "Pt-8",
+          1
+        ],
+        [
+          "Pt-9",
+          1
+        ],
+        [
+          "Ft-1",
+          1
+        ],
+        [
+          "Ft-2",
+          1
+        ],
+        [
+          "Ft-8",
+          1
+        ],
+        [
+          "Ft-9",
+          1
+        ],
+        [
+          "Ft-18",
+          1
+        ],
+        [
+          "Ft-23",
+          1
+        ],
+        [
+          "Ft-24",
+          1
+        ],
+        [
+          "Ft-28",
+          1
+        ],
+        [
+          "Ft-33",
+          1
+        ],
+        [
+          "Ft-34",
+          1
+        ],
+        [
+          "Ft-35",
+          1
+        ],
+        [
+          "Ft-38",
+          1
+        ],
+        [
+          "Ft-39",
+          1
+        ],
+        [
+          "Ft-42",
+          1
+        ],
+        [
+          "Ft-43",
+          1
+        ],
+        [
+          "Ft-46",
+          1
+        ],
+        [
+          "Ft-47",
+          1
+        ],
+        [
+          "Ft-50",
+          1
+        ],
+        [
+          "Ft-51",
+          1
+        ],
+        [
+          "Ft-54",
+          1
+        ],
+        [
+          "Ft-55",
+          1
+        ],
+        [
+          "Ft-57",
+          1
+        ],
+        [
+          "Ft-58",
+          1
+        ],
+        [
+          "Ft-59",
+          1
+        ],
+        [
+          "Ft-61",
+          1
+        ],
+        [
+          "Ft-62",
+          1
+        ],
+        [
+          "Ft-65",
+          1
+        ],
+        [
+          "Ft-66",
+          1
+        ],
+        [
+          "Ft-67",
+          1
+        ],
+        [
+          "Ft-68",
+          1
+        ],
+        [
+          "Ft-69",
+          1
+        ],
+        [
+          "Ft-72",
+          1
+        ],
+        [
+          "Ft-73",
+          1
+        ],
+        [
+          "Ft-75",
+          1
+        ],
+        [
+          "Ft-76",
+          1
+        ],
+        [
+          "Ft-79",
+          1
+        ],
+        [
+          "Ft-80",
+          1
+        ],
+        [
+          "Ft-81",
+          1
+        ],
+        [
+          "Ft-84",
+          1
+        ],
+        [
+          "Ft-85",
+          1
+        ],
+        [
+          "Ft-86",
+          1
+        ],
+        [
+          "Ft-87",
+          1
+        ],
+        [
+          "Ft-90",
+          1
+        ],
+        [
+          "Ft-91",
+          1
+        ],
+        [
+          "Ft-92",
+          1
+        ],
+        [
+          "Ft-93",
+          1
+        ],
+        [
+          "Ft-94",
+          1
+        ],
+        [
+          "Ft-95",
+          1
+        ],
+        [
+          "Fs-26",
+          1
+        ],
+        [
+          "Fs-27",
+          1
+        ],
+        [
+          "Fs-28",
+          1
+        ],
+        [
+          "Fs-29",
+          1
+        ],
+        [
+          "Fs-49",
+          1
+        ],
+        [
+          "Fs-65",
+          1
+        ],
+        [
+          "Fs-66",
+          1
+        ],
+        [
+          "Fs-67",
+          1
+        ],
+        [
+          "Fs-69",
+          1
+        ],
+        [
+          "Fs-88",
+          1
+        ],
+        [
+          "Fs-89",
+          1
+        ],
+        [
+          "Fs-90",
+          1
+        ],
+        [
+          "Fs-91",
+          1
+        ],
+        [
+          "Fs-92",
+          1
+        ],
+        [
+          "M-1",
+          1
+        ],
+        [
+          "M-2",
+          1
+        ],
+        [
+          "M-3",
+          1
+        ],
+        [
+          "M-4",
+          1
+        ],
+        [
+          "M-8",
+          1
+        ],
+        [
+          "M-9",
+          1
+        ],
+        [
+          "M-10",
+          1
+        ],
+        [
+          "D-1",
+          1
+        ],
+        [
+          "D-2",
+          1
+        ],
+        [
+          "D-3",
+          1
+        ],
+        [
+          "D-4",
+          1
+        ],
+        [
+          "D-5",
+          1
+        ],
+        [
+          "D-6",
+          1
+        ],
+        [
+          "D-7",
+          1
+        ],
+        [
+          "D-8",
+          1
+        ],
+        [
+          "D-11",
+          1
+        ],
+        [
+          "D-12",
+          1
+        ],
+        [
+          "D-13",
+          1
+        ],
+        [
+          "D-14",
+          1
+        ],
+        [
+          "B-1",
+          1
+        ],
+        [
+          "B-2",
+          1
+        ],
+        [
+          "B-3",
+          1
+        ],
+        [
+          "B-4",
+          1
+        ],
+        [
+          "B-5",
+          1
+        ],
+        [
+          "Fs-1",
+          1
+        ],
+        [
+          "Fs-7",
+          1
+        ],
+        [
+          "Fs-9",
+          1
+        ],
+        [
+          "Fs-40",
+          1
+        ],
+        [
+          "Fs-10",
+          0
+        ],
+        [
+          "Fs-15",
+          0
+        ],
+        [
+          "Fs-16",
+          0
+        ],
+        [
+          "Fs-17",
+          0
+        ],
+        [
+          "Fs-18",
+          0
+        ],
+        [
+          "Fs-19",
+          0
+        ],
+        [
+          "Fs-30",
+          0
+        ],
+        [
+          "Fs-32",
+          0
+        ],
+        [
+          "Fs-36",
+          0
+        ],
+        [
+          "Fs-37",
+          0
+        ],
+        [
+          "Fs-38",
+          0
+        ],
+        [
+          "Fs-39",
+          0
+        ],
+        [
+          "Fs-44",
+          0
+        ],
+        [
+          "Fs-50",
+          0
+        ],
+        [
+          "Fs-55",
+          0
+        ],
+        [
+          "Fs-56",
+          0
+        ],
+        [
+          "Fs-57",
+          0
+        ],
+        [
+          "Fs-58",
+          0
+        ],
+        [
+          "Fs-70",
+          0
+        ],
+        [
+          "Fs-76",
+          0
+        ],
+        [
+          "Fs-77",
+          0
+        ],
+        [
+          "Fs-78",
+          0
+        ],
+        [
+          "Ft-16",
+          0
+        ],
+        [
+          "Ft-17",
+          0
+        ],
+        [
+          "Ft-74",
+          0
+        ]
+      ],
+      "relations": [
+        [
+          "Pt-1",
+          "Ft-2",
+          0.9
+        ],
+        [
+          "Ft-2",
+          "Ft-1",
+          0.9
+        ],
+        [
+          "Ft-1",
+          "Ft-8",
+          0.9
+        ],
+        [
+          "Ft-8",
+          "D-1",
+          0.9
+        ],
+        [
+          "Pt-3",
+          "Ft-28",
+          0.9
+        ],
+        [
+          "Ft-28",
+          "Ft-33",
+          0.9
+        ],
+        [
+          "Ft-33",
+          "Ft-34",
+          0.9
+        ],
+        [
+          "Pt-4",
+          "Ft-38",
+          0.9
+        ],
+        [
+          "Ft-38",
+          "Ft-39",
+          0.9
+        ],
+        [
+          "Ft-39",
+          "Ft-42",
+          0.8
+        ],
+        [
+          "Ft-42",
+          "Ft-43",
+          0.9
+        ],
+        [
+          "Pt-5",
+          "Ft-46",
+          0.9
+        ],
+        [
+          "Ft-46",
+          "Ft-47",
+          0.9
+        ],
+        [
+          "Ft-47",
+          "Ft-51",
+          0.9
+        ],
+        [
+          "Ft-51",
+          "D-2",
+          0.9
+        ],
+        [
+          "Pt-6",
+          "Ft-54",
+          0.9
+        ],
+        [
+          "Ft-54",
+          "Ft-55",
+          0.9
+        ],
+        [
+          "Ft-55",
+          "Ft-57",
+          0.9
+        ],
+        [
+          "Ft-57",
+          "Ft-58",
+          0.9
+        ],
+        [
+          "Ft-58",
+          "Ft-59",
+          0.9
+        ],
+        [
+          "Pt-7",
+          "Ft-61",
+          0.9
+        ],
+        [
+          "Ft-61",
+          "Ft-62",
+          0.9
+        ],
+        [
+          "Ft-62",
+          "Ft-67",
+          0.8
+        ],
+        [
+          "Ft-67",
+          "Ft-69",
+          0.8
+        ],
+        [
+          "Ft-62",
+          "Ft-66",
+          0.9
+        ],
+        [
+          "Pt-8",
+          "Ft-72",
+          0.9
+        ],
+        [
+          "Ft-72",
+          "Ft-73",
+          0.9
+        ],
+        [
+          "Ft-73",
+          "Ft-75",
+          0.8
+        ],
+        [
+          "Ft-66",
+          "Ft-94",
+          0.9
+        ],
+        [
+          "Pt-9",
+          "Ft-79",
+          0.9
+        ],
+        [
+          "Ft-79",
+          "Ft-80",
+          0.9
+        ],
+        [
+          "Ft-80",
+          "Ft-84",
+          0.9
+        ],
+        [
+          "Ft-84",
+          "Ft-85",
+          0.9
+        ],
+        [
+          "Ft-86",
+          "Ft-24",
+          0.9
+        ],
+        [
+          "Ft-79",
+          "Ft-87",
+          0.9
+        ],
+        [
+          "Ft-34",
+          "Ft-91",
+          0.8
+        ],
+        [
+          "Ft-91",
+          "D-11",
+          0.8
+        ],
+        [
+          "Ft-62",
+          "Ft-92",
+          0.8
+        ],
+        [
+          "Ft-69",
+          "Ft-93",
+          0.9
+        ],
+        [
+          "Ft-84",
+          "Ft-95",
+          0.9
+        ],
+        [
+          "D-1",
+          "Fs-44",
+          0.9
+        ],
+        [
+          "D-1",
+          "Fs-58",
+          0.8
+        ],
+        [
+          "Ft-51",
+          "Fs-38",
+          0.9
+        ],
+        [
+          "Ft-51",
+          "Fs-37",
+          0.9
+        ],
+        [
+          "Ft-62",
+          "Fs-76",
+          0.8
+        ],
+        [
+          "Ft-62",
+          "Fs-77",
+          0.8
+        ],
+        [
+          "Ft-18",
+          "Fs-10",
+          0.9
+        ],
+        [
+          "Ft-84",
+          "Fs-17",
+          0.9
+        ],
+        [
+          "Ft-75",
+          "Fs-18",
+          0.7
+        ],
+        [
+          "Ft-92",
+          "Fs-15",
+          0.7
+        ]
+      ]
+    },
+    {
+      "id": "S1",
+      "name": "Desert Crime",
+      "p_pred": [
+        [
+          "Fs-11",
+          1
+        ],
+        [
+          "Fs-30",
+          1
+        ],
+        [
+          "Fs-32",
+          1
+        ],
+        [
+          "Fs-88",
+          0
+        ],
+        [
+          "Fs-91",
+          1
+        ],
+        [
+          "Fs-28",
+          1
+        ],
+        [
+          "Fs-31",
+          1
+        ]
+      ],
+      "relations": [
+        [
+          "Fs-91",
+          "Fs-88",
+          0.4
+        ],
+        [
+          "Fs-91",
+          "Fs-30",
+          0.4
+        ],
+        [
+          "Fs-91",
+          "Fs-28",
+          0.3
+        ]
+      ]
+    },
+    {
+      "id": "S2",
+      "name": "Desert Survival",
+      "p_pred": [
+        [
+          "Fs-55",
+          1
+        ],
+        [
+          "Fs-77",
+          1
+        ],
+        [
+          "Fs-10",
+          1
+        ],
+        [
+          "Fs-91",
+          0
+        ],
+        [
+          "Fs-88",
+          0
+        ],
+        [
+          "Fs-15",
+          0
+        ]
+      ],
+      "relations": [
+        [
+          "Fs-15",
+          "Fs-10",
+          0.3
+        ],
+        [
+          "Fs-15",
+          "Fs-91",
+          0.3
+        ],
+        [
+          "Fs-91",
+          "Fs-30",
+          0.3
+        ]
+      ]
+    }
+  ],
+  "topic_categories": {
+    "I": "Surface Exploration",
+    "II": "Crisis Discovery",
+    "III": "Full Truth"
+  },
+  "questions": [
+    {
+      "id": "q01",
+      "text": "Was the man murdered?",
+      "ans_yes": [
+        [
+          "Fs-15",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-15",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1",
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "q02",
+      "text": "Did the man die of natural causes such as disease, heat stroke, or dehydration?",
+      "ans_yes": [
+        [
+          "Fs-16",
+          1
+        ],
+        [
+          "Fs-17",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-16",
+          0
+        ],
+        [
+          "Fs-17",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1",
+        "S2"
+      ]
+    },
+    {
+      "id": "q03",
+      "text": "Is the man's nakedness important to the story?",
+      "ans_yes": [
+        [
+          "Fs-26",
+          1
+        ],
+        [
+          "Fs-27",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-26",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "S1"
+      ]
+    },
+    {
+      "id": "q04",
+      "text": "Is the matchstick important to the story?",
+      "ans_yes": [
+        [
+          "Fs-65",
+          1
+        ],
+        [
+          "Fs-66",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-65",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q05",
+      "text": "Did the man remove his own clothes?",
+      "ans_yes": [
+        [
+          "Fs-31",
+          1
+        ],
+        [
+          "Fs-24",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-30",
+          1
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q06",
+      "text": "Was the man trying to light a fire with the matchstick?",
+      "ans_yes": [
+        [
+          "Fs-70",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-70",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "S2"
+      ]
+    },
+    {
+      "id": "q07",
+      "text": "Was the man a smoker, and the matchstick is just a random object?",
+      "ans_yes": [
+        [
+          "Fs-76",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-76",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0"
+      ]
+    },
+    {
+      "id": "q08",
+      "text": "Is there a vehicle or transportation near the body?",
+      "ans_yes": [
+        [
+          "Fs-53",
+          0
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-53",
+          1
+        ],
+        [
+          "Fs-41",
+          1
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1",
+        "P2"
+      ]
+    },
+    {
+      "id": "q09",
+      "text": "Were there any tracks or footprints leading to the body?",
+      "ans_yes": [
+        [
+          "Fs-45",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-45",
+          0
+        ],
+        [
+          "Fs-47",
+          1
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1",
+        "P2"
+      ]
+    },
+    {
+      "id": "q10",
+      "text": "Was the man alone when he died?",
+      "ans_yes": [
+        [
+          "Fs-10",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-10",
+          0
+        ],
+        [
+          "Fs-91",
+          1
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-15"
+      ],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "S2"
+      ]
+    },
+    {
+      "id": "q11",
+      "text": "Were other people involved in the man's death?",
+      "ans_yes": [
+        [
+          "Fs-91",
+          1
+        ],
+        [
+          "Ft-18",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-91",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q12",
+      "text": "Was the man stripped of his clothes by someone else?",
+      "ans_yes": [
+        [
+          "Fs-30",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-30",
+          0
+        ],
+        [
+          "Fs-31",
+          1
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-91"
+      ],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P1",
+        "P2",
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "q13",
+      "text": "Was the clothing removed because of a crisis or emergency?",
+      "ans_yes": [
+        [
+          "Fs-88",
+          1
+        ],
+        [
+          "Fs-28",
+          1
+        ],
+        [
+          "Fs-29",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-88",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-27"
+      ],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "q14",
+      "text": "Was the man part of a group that was in danger?",
+      "ans_yes": [
+        [
+          "M-1",
+          1
+        ],
+        [
+          "Fs-92",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "M-1",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-91"
+      ],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q15",
+      "text": "Was the man walking or driving through the desert?",
+      "ans_yes": [
+        [
+          "Fs-44",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-44",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-41"
+      ],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P1",
+        "P2"
+      ]
+    },
+    {
+      "id": "q16",
+      "text": "Did the man arrive at the desert location from the air?",
+      "ans_yes": [
+        [
+          "Ft-8",
+          1
+        ],
+        [
+          "Fs-89",
+          1
+        ],
+        [
+          "D-1",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-8",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-47"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q17",
+      "text": "Did the man fall from a great height?",
+      "ans_yes": [
+        [
+          "Fs-49",
+          1
+        ],
+        [
+          "M-4",
+          1
+        ],
+        [
+          "D-4",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-49",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-8"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q18",
+      "text": "Was the man in an airplane?",
+      "ans_yes": [
+        [
+          "Ft-16",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-16",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-8"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q19",
+      "text": "Did the vehicle the man was in continue flying after he left it?",
+      "ans_yes": [
+        [
+          "B-3",
+          1
+        ],
+        [
+          "Ft-86",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "B-3",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-8"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q20",
+      "text": "Were clothes removed to make the vehicle lighter?",
+      "ans_yes": [
+        [
+          "D-2",
+          1
+        ],
+        [
+          "Ft-51",
+          1
+        ],
+        [
+          "D-8",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "D-2",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-8",
+        "Fs-28"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q21",
+      "text": "Was the matchstick used as part of a lottery or drawing?",
+      "ans_yes": [
+        [
+          "Fs-69",
+          1
+        ],
+        [
+          "Fs-90",
+          1
+        ],
+        [
+          "Ft-62",
+          1
+        ],
+        [
+          "M-3",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-69",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Fs-66"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q22",
+      "text": "Was someone chosen to die so the others could survive?",
+      "ans_yes": [
+        [
+          "Ft-58",
+          1
+        ],
+        [
+          "Ft-69",
+          1
+        ],
+        [
+          "Ft-93",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-58",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-62"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q23",
+      "text": "Did the man draw the short match — the losing one?",
+      "ans_yes": [
+        [
+          "Ft-72",
+          1
+        ],
+        [
+          "Ft-73",
+          1
+        ],
+        [
+          "Ft-75",
+          1
+        ],
+        [
+          "Ft-94",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-72",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-62"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q24",
+      "text": "Did the man jump from the vehicle voluntarily?",
+      "ans_yes": [
+        [
+          "Ft-79",
+          1
+        ],
+        [
+          "Ft-87",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-79",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-69"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q25",
+      "text": "Was the vehicle a hot air balloon?",
+      "ans_yes": [
+        [
+          "Ft-2",
+          1
+        ],
+        [
+          "Pt-1",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-2",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-8"
+      ],
+      "related_descriptors": [],
+      "topic_category": "III",
+      "paradigms": [
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q26",
+      "text": "Did they discard cargo before removing their clothes?",
+      "ans_yes": [
+        [
+          "Ft-39",
+          1
+        ],
+        [
+          "Ft-42",
+          1
+        ],
+        [
+          "Ft-91",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-39",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-51"
+      ],
+      "related_descriptors": [],
+      "topic_category": "III",
+      "paradigms": [
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q27",
+      "text": "Was there enough fuel or gas to keep the balloon aloft?",
+      "ans_yes": [
+        [
+          "Ft-36",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-36",
+          0
+        ],
+        [
+          "Ft-35",
+          1
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-2"
+      ],
+      "related_descriptors": [],
+      "topic_category": "III",
+      "paradigms": [
+        "P4"
+      ]
+    },
+    {
+      "id": "q28",
+      "text": "Did the remaining passengers survive after the man jumped?",
+      "ans_yes": [
+        [
+          "Ft-24",
+          1
+        ],
+        [
+          "Ft-86",
+          1
+        ],
+        [
+          "D-7",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-24",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-79"
+      ],
+      "related_descriptors": [],
+      "topic_category": "III",
+      "paradigms": [
+        "P4"
+      ]
+    },
+    {
+      "id": "q29",
+      "text": "Was the matchstick planted on the body after death?",
+      "ans_yes": [
+        [
+          "Fs-78",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-78",
+          0
+        ],
+        [
+          "Ft-76",
+          1
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0"
+      ]
+    },
+    {
+      "id": "q30",
+      "text": "Was the man an escaped prisoner?",
+      "ans_yes": [
+        [
+          "Fs-56",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-56",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "S1"
+      ]
+    },
+    {
+      "id": "q31",
+      "text": "Was the man involved in military operations?",
+      "ans_yes": [
+        [
+          "Fs-57",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-57",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0"
+      ]
+    },
+    {
+      "id": "q32",
+      "text": "Did the man undress because of the desert heat?",
+      "ans_yes": [
+        [
+          "Fs-38",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Fs-38",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "S2"
+      ]
+    },
+    {
+      "id": "q33",
+      "text": "Was the man parachuting?",
+      "ans_yes": [
+        [
+          "Ft-17",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-17",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "no",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-8"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P2",
+        "P3"
+      ]
+    },
+    {
+      "id": "q34",
+      "text": "Was the matchstick the man held the short one — the losing draw?",
+      "ans_yes": [
+        [
+          "D-3",
+          1
+        ],
+        [
+          "Ft-66",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "D-3",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-62"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q35",
+      "text": "Did the man die because he drew the short match and had to jump from the balloon?",
+      "ans_yes": [
+        [
+          "Ft-87",
+          1
+        ],
+        [
+          "Ft-84",
+          1
+        ],
+        [
+          "Ft-68",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-87",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": true,
+      "prerequisites": [
+        "Ft-2",
+        "Ft-72"
+      ],
+      "related_descriptors": [],
+      "topic_category": "III",
+      "paradigms": [
+        "P4"
+      ]
+    },
+    {
+      "id": "q36",
+      "text": "Was the death caused by falling?",
+      "ans_yes": [
+        [
+          "Ft-84",
+          1
+        ],
+        [
+          "Ft-80",
+          1
+        ],
+        [
+          "Ft-95",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-84",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "M-4"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q37",
+      "text": "Was the matchstick used or unused?",
+      "ans_yes": [
+        [
+          "Fs-62",
+          1
+        ]
+      ],
+      "ans_no": [],
+      "ans_irrelevant": [
+        "Fs-62"
+      ],
+      "correct_answer": "irrelevant",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0",
+        "P1"
+      ]
+    },
+    {
+      "id": "q38",
+      "text": "Is the desert location significant, or could the story have taken place anywhere?",
+      "ans_yes": [
+        [
+          "Fs-40",
+          1
+        ]
+      ],
+      "ans_no": [],
+      "ans_irrelevant": [
+        "Fs-40"
+      ],
+      "correct_answer": "irrelevant",
+      "is_clear": false,
+      "prerequisites": [],
+      "related_descriptors": [],
+      "topic_category": "I",
+      "paradigms": [
+        "P0"
+      ]
+    },
+    {
+      "id": "q39",
+      "text": "Did the group try everything else before resorting to the lottery?",
+      "ans_yes": [
+        [
+          "Ft-91",
+          1
+        ],
+        [
+          "M-2",
+          1
+        ],
+        [
+          "D-11",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-91",
+          0
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-62"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "q40",
+      "text": "Was the drawing fair and random?",
+      "ans_yes": [
+        [
+          "Ft-65",
+          1
+        ]
+      ],
+      "ans_no": [
+        [
+          "Ft-74",
+          1
+        ]
+      ],
+      "ans_irrelevant": [],
+      "correct_answer": "yes",
+      "is_clear": false,
+      "prerequisites": [
+        "Ft-62"
+      ],
+      "related_descriptors": [],
+      "topic_category": "II",
+      "paradigms": [
+        "P3",
+        "P4"
+      ]
+    }
+  ],
+  "init_question_ids": [
+    "q01",
+    "q02",
+    "q03",
+    "q04",
+    "q05",
+    "q06",
+    "q07",
+    "q08",
+    "q09",
+    "q10",
+    "q11",
+    "q29",
+    "q30",
+    "q31",
+    "q32",
+    "q37",
+    "q38"
+  ],
+  "truth_paradigm": "P4"
+}
