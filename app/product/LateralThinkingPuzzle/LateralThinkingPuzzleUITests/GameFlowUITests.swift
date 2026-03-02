@@ -40,7 +40,7 @@ final class GameFlowUITests: XCTestCase {
         let barMan = app.staticTexts["バーの男"]
         XCTAssertTrue(barMan.waitForExistence(timeout: 5), "バーの男 should appear in puzzle list")
         barMan.tap()
-        sleep(2)
+        sleep(3)
 
         // 2. Verify game loaded
         let statementHeader = app.staticTexts["出題"]

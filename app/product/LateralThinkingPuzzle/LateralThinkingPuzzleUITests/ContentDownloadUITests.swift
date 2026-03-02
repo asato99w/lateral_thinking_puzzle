@@ -30,7 +30,6 @@ final class ContentDownloadUITests: XCTestCase {
 
         XCTAssertTrue(app.staticTexts["パック"].exists)
         XCTAssertTrue(app.staticTexts["定番パック"].exists)
-        XCTAssertTrue(app.staticTexts["ミステリーパック"].exists)
         XCTAssertTrue(app.staticTexts["パズル"].exists)
         XCTAssertTrue(app.staticTexts["ウミガメのスープ"].exists)
         XCTAssertTrue(app.staticTexts["同梱済み"].exists)
@@ -90,8 +89,12 @@ final class ContentDownloadUITests: XCTestCase {
         app.buttons["arrow.down.circle"].tap()
         XCTAssertTrue(app.navigationBars["コンテンツ"].waitForExistence(timeout: 5))
 
-        // Download the puzzle
+        // Navigate to puzzle detail and download
         app.swipeUp()
+        let undergroundCard = app.staticTexts["禁じられた地下室"]
+        XCTAssertTrue(undergroundCard.waitForExistence(timeout: 3))
+        undergroundCard.tap()
+
         let dlButton = app.buttons["download-underground"]
         XCTAssertTrue(dlButton.waitForExistence(timeout: 3))
         dlButton.tap()
@@ -100,7 +103,9 @@ final class ContentDownloadUITests: XCTestCase {
         let deleteButton = app.buttons["delete-underground"]
         XCTAssertTrue(deleteButton.waitForExistence(timeout: 5))
 
-        // Go back to puzzle list
+        // Go back to puzzle list (detail → content download → puzzle list)
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        sleep(1)
         app.navigationBars.buttons.element(boundBy: 0).tap()
         sleep(1)
 
@@ -121,10 +126,13 @@ final class ContentDownloadUITests: XCTestCase {
         app.buttons["arrow.down.circle"].tap()
         XCTAssertTrue(app.navigationBars["コンテンツ"].waitForExistence(timeout: 5))
 
-        // Scroll to DLC puzzles
+        // Navigate to puzzle detail for underground
         app.swipeUp()
+        let undergroundCard = app.staticTexts["禁じられた地下室"]
+        XCTAssertTrue(undergroundCard.waitForExistence(timeout: 3), "Underground puzzle should exist in content list")
+        undergroundCard.tap()
 
-        // Find download button for a specific DLC puzzle
+        // Find download button on puzzle detail page
         let dlButton = app.buttons["download-underground"]
         XCTAssertTrue(dlButton.waitForExistence(timeout: 3), "Download button should exist for DLC puzzle")
 

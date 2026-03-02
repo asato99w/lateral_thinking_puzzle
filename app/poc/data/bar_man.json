@@ -776,7 +776,7 @@
         "T",
         "S1"
       ],
-      "category": "purpose"
+      "topic_category": "purpose"
     },
     {
       "id": "q02",
@@ -804,7 +804,7 @@
         "T",
         "S1"
       ],
-      "category": "purpose"
+      "topic_category": "purpose"
     },
     {
       "id": "q03",
@@ -832,7 +832,7 @@
         "T",
         "S1"
       ],
-      "category": "purpose"
+      "topic_category": "purpose"
     },
     {
       "id": "q04",
@@ -860,7 +860,7 @@
         "T",
         "S1"
       ],
-      "category": "events"
+      "topic_category": "events"
     },
     {
       "id": "q05",
@@ -888,7 +888,7 @@
         "T",
         "S1"
       ],
-      "category": "resolution"
+      "topic_category": "resolution"
     },
     {
       "id": "q06",
@@ -922,7 +922,7 @@
         "T",
         "S1"
       ],
-      "category": "events"
+      "topic_category": "events"
     },
     {
       "id": "q07",
@@ -956,7 +956,7 @@
         "T",
         "S1"
       ],
-      "category": "events"
+      "topic_category": "events"
     },
     {
       "id": "q08",
@@ -986,7 +986,7 @@
         "T",
         "S1"
       ],
-      "category": "events"
+      "topic_category": "events"
     },
     {
       "id": "q09",
@@ -1016,7 +1016,7 @@
         "T",
         "S1"
       ],
-      "category": "events"
+      "topic_category": "events"
     },
     {
       "id": "q10",
@@ -1046,7 +1046,7 @@
         "T",
         "S1"
       ],
-      "category": "purpose"
+      "topic_category": "purpose"
     },
     {
       "id": "q11",
@@ -1076,7 +1076,7 @@
         "T",
         "S1"
       ],
-      "category": "events"
+      "topic_category": "events"
     },
     {
       "id": "q12",
@@ -1106,7 +1106,7 @@
         "T",
         "S1"
       ],
-      "category": "resolution"
+      "topic_category": "resolution"
     },
     {
       "id": "q13",
@@ -1135,7 +1135,7 @@
         "P3",
         "T"
       ],
-      "category": "purpose"
+      "topic_category": "purpose"
     },
     {
       "id": "q14",
@@ -1163,7 +1163,7 @@
         "P3",
         "T"
       ],
-      "category": "resolution"
+      "topic_category": "resolution"
     },
     {
       "id": "q15",
@@ -1190,7 +1190,7 @@
         "P3",
         "T"
       ],
-      "category": "purpose"
+      "topic_category": "purpose"
     },
     {
       "id": "q16",
@@ -1217,7 +1217,7 @@
         "P3",
         "T"
       ],
-      "category": "purpose"
+      "topic_category": "purpose"
     },
     {
       "id": "q17",
@@ -1244,7 +1244,7 @@
         "P3",
         "T"
       ],
-      "category": "events"
+      "topic_category": "events"
     },
     {
       "id": "q18",
@@ -1275,7 +1275,7 @@
         "P3",
         "T"
       ],
-      "category": "resolution"
+      "topic_category": "resolution"
     },
     {
       "id": "q19",
@@ -1302,7 +1302,7 @@
         "P3",
         "T"
       ],
-      "category": "resolution"
+      "topic_category": "resolution"
     },
     {
       "id": "q20",
@@ -1337,7 +1337,7 @@
         "P3",
         "T"
       ],
-      "category": "resolution"
+      "topic_category": "resolution"
     },
     {
       "id": "q21",
@@ -1362,14 +1362,23 @@
       "paradigms": [
         "T"
       ],
-      "category": "resolution"
+      "topic_category": "resolution"
     }
   ],
-  "topic_categories": {
-    "I": "日常の理解",
-    "II": "善意と隠れた問題",
-    "III": "真相"
-  },
+  "topic_categories": [
+    {
+      "id": "I",
+      "name": "日常の理解"
+    },
+    {
+      "id": "II",
+      "name": "善意と隠れた問題"
+    },
+    {
+      "id": "III",
+      "name": "真相"
+    }
+  ],
   "init_question_ids": [
     "q01",
     "q02",

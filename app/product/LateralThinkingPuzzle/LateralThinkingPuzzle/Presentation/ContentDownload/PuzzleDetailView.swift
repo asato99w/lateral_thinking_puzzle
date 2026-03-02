@@ -68,6 +68,7 @@ struct PuzzleDetailView: View {
                 }
                 .buttonStyle(.bordered)
                 .tint(.secondary)
+                .accessibilityIdentifier("delete-\(puzzle.id)")
             }
         case .downloading(let progress):
             HStack(spacing: 8) {
@@ -86,6 +87,7 @@ struct PuzzleDetailView: View {
             }
             .buttonStyle(.borderedProminent)
             .tint(Theme.accent)
+            .accessibilityIdentifier("download-\(puzzle.id)")
         }
     }
 

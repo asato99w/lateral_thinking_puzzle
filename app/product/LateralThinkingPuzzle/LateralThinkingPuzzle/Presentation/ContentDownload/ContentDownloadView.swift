@@ -170,7 +170,8 @@ struct ContentDownloadView: View {
     private func puzzleStateBadge(_ state: PuzzleDownloadState) -> some View {
         switch state {
         case .bundled:
-            Image(systemName: "checkmark.circle.fill")
+            Label(Strings.bundled, systemImage: "checkmark.circle.fill")
+                .font(.caption.weight(.medium))
                 .foregroundStyle(Theme.solvedBadge)
         case .downloaded:
             Image(systemName: "checkmark.circle.fill")
