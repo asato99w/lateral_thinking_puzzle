@@ -1,7 +1,6 @@
 {
   "title": "毒キノコ",
   "statement": "Aさんは、辺りに毒キノコしかないのを見て安堵した。なぜだろうか。",
-  "truth": "Aさんはキノコ狩りの初心者で、毒キノコと食用キノコの区別がつかなかった。辺りに毒キノコしかなければ、間違えて採る心配がないので安堵した。",
   "init_paradigm": "P1",
   "ps_values": [
     [
@@ -1085,7 +1084,8 @@
       "paradigms": [
         "P1",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q02",
@@ -1111,7 +1111,8 @@
       "paradigms": [
         "P1",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q03",
@@ -1138,7 +1139,8 @@
         "P1",
         "P2",
         "P3"
-      ]
+      ],
+      "category": "situation"
     },
     {
       "id": "q04",
@@ -1166,7 +1168,8 @@
       "paradigms": [
         "P1",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q05",
@@ -1193,7 +1196,8 @@
       ],
       "paradigms": [
         "P1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q06",
@@ -1219,7 +1223,8 @@
       "paradigms": [
         "P1",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q07",
@@ -1245,7 +1250,8 @@
       "paradigms": [
         "P1",
         "P2"
-      ]
+      ],
+      "category": "clues"
     },
     {
       "id": "q08",
@@ -1270,7 +1276,8 @@
       "prerequisites": [],
       "paradigms": [
         "P1"
-      ]
+      ],
+      "category": "clues"
     },
     {
       "id": "q09",
@@ -1298,7 +1305,8 @@
       "paradigms": [
         "P1",
         "P2"
-      ]
+      ],
+      "category": "clues"
     },
     {
       "id": "q10",
@@ -1326,7 +1334,8 @@
       "paradigms": [
         "P1",
         "P2"
-      ]
+      ],
+      "category": "clues"
     },
     {
       "id": "q11",
@@ -1354,7 +1363,8 @@
       "paradigms": [
         "P2",
         "S1"
-      ]
+      ],
+      "category": "clues"
     },
     {
       "id": "q12",
@@ -1381,7 +1391,8 @@
       ],
       "paradigms": [
         "P2"
-      ]
+      ],
+      "category": "clues"
     },
     {
       "id": "q13",
@@ -1409,7 +1420,8 @@
       "paradigms": [
         "P1",
         "P2"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q14",
@@ -1435,7 +1447,8 @@
       "paradigms": [
         "P2",
         "P1"
-      ]
+      ],
+      "category": "situation"
     },
     {
       "id": "q15",
@@ -1462,7 +1475,8 @@
       ],
       "paradigms": [
         "P2"
-      ]
+      ],
+      "category": "situation"
     },
     {
       "id": "q16",
@@ -1489,7 +1503,8 @@
       ],
       "paradigms": [
         "P2"
-      ]
+      ],
+      "category": "situation"
     },
     {
       "id": "q17",
@@ -1518,7 +1533,8 @@
         "P1",
         "P2",
         "P3"
-      ]
+      ],
+      "category": "situation"
     },
     {
       "id": "q18",
@@ -1547,7 +1563,8 @@
       "paradigms": [
         "P2",
         "P3"
-      ]
+      ],
+      "category": "situation"
     },
     {
       "id": "q19",
@@ -1576,7 +1593,8 @@
       "paradigms": [
         "P2",
         "P3"
-      ]
+      ],
+      "category": "situation"
     },
     {
       "id": "q20",
@@ -1603,7 +1621,8 @@
       ],
       "paradigms": [
         "P2"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q21",
@@ -1631,7 +1650,8 @@
       "paradigms": [
         "P1",
         "P3"
-      ]
+      ],
+      "category": "situation"
     },
     {
       "id": "q22",
@@ -1659,7 +1679,8 @@
       "paradigms": [
         "P1",
         "P2"
-      ]
+      ],
+      "category": "clues"
     },
     {
       "id": "q23",
@@ -1692,7 +1713,8 @@
       "paradigms": [
         "P2",
         "P3"
-      ]
+      ],
+      "category": "situation"
     },
     {
       "id": "q24",
@@ -1724,7 +1746,8 @@
       "paradigms": [
         "P1",
         "P2"
-      ]
+      ],
+      "category": "clues"
     },
     {
       "id": "q25",
@@ -1764,7 +1787,8 @@
       ],
       "paradigms": [
         "P3"
-      ]
+      ],
+      "category": "situation"
     }
   ],
   "truth_paradigm": "P3",
@@ -1776,5 +1800,19 @@
     "q07",
     "q08",
     "q14"
+  ],
+  "question_categories": [
+    {
+      "id": "purpose",
+      "name": "Aさんの目的"
+    },
+    {
+      "id": "clues",
+      "name": "キノコの手がかり"
+    },
+    {
+      "id": "situation",
+      "name": "Aさんの状況"
+    }
   ]
 }
