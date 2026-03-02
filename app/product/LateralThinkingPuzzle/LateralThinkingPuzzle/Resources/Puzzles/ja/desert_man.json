@@ -1,7 +1,6 @@
 {
   "title": "砂漠の男",
   "statement": "砂漠の真ん中で裸の男が死んでいた。手にはマッチ棒を握りしめている。",
-  "truth": "男は数人で気球に乗っていたが、気球が墜落しそうになった。重量を減らすために荷物や服を捨て、最後にくじ引きのマッチで負けた者が飛び降りることになった。男はくじに負け、気球から飛び降りて死んだ。",
   "init_paradigm": "P1",
   "ps_values": [
     [
@@ -918,7 +917,8 @@
         "S1",
         "S2"
       ],
-      "topic_category": "I"
+      "topic_category": "I",
+      "category": "cause"
     },
     {
       "id": "q02",
@@ -951,7 +951,8 @@
         "P1",
         "S1"
       ],
-      "topic_category": "I"
+      "topic_category": "I",
+      "category": "cause"
     },
     {
       "id": "q03",
@@ -985,15 +986,14 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": [
-        "Fs-10"
-      ],
+      "prerequisites": [],
       "paradigms": [
         "P1",
         "S1",
         "S2"
       ],
-      "topic_category": "I"
+      "topic_category": "I",
+      "category": "situation"
     },
     {
       "id": "q04",
@@ -1019,13 +1019,12 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": [
-        "Fs-01"
-      ],
+      "prerequisites": [],
       "paradigms": [
         "P1"
       ],
-      "topic_category": "I"
+      "topic_category": "I",
+      "category": "situation"
     },
     {
       "id": "q05",
@@ -1062,7 +1061,8 @@
         "P1",
         "S1"
       ],
-      "topic_category": "I-II"
+      "topic_category": "I-II",
+      "category": "cause"
     },
     {
       "id": "q06",
@@ -1099,7 +1099,8 @@
         "P1",
         "S1"
       ],
-      "topic_category": "I"
+      "topic_category": "I",
+      "category": "situation"
     },
     {
       "id": "q07",
@@ -1125,13 +1126,12 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": [
-        "Fs-02"
-      ],
+      "prerequisites": [],
       "paradigms": [
         "P1"
       ],
-      "topic_category": "I"
+      "topic_category": "I",
+      "category": "clues"
     },
     {
       "id": "q08",
@@ -1161,15 +1161,14 @@
       ],
       "correct_answer": "no",
       "is_clear": false,
-      "prerequisites": [
-        "Fs-01"
-      ],
+      "prerequisites": [],
       "paradigms": [
         "P1",
         "P2",
         "P3"
       ],
-      "topic_category": "I"
+      "topic_category": "I",
+      "category": "clues"
     },
     {
       "id": "q09",
@@ -1201,7 +1200,8 @@
         "P3",
         "P4"
       ],
-      "topic_category": "II"
+      "topic_category": "II",
+      "category": "cause"
     },
     {
       "id": "q10",
@@ -1235,7 +1235,8 @@
         "P3",
         "P4"
       ],
-      "topic_category": "II"
+      "topic_category": "II",
+      "category": "situation"
     },
     {
       "id": "q11",
@@ -1268,7 +1269,8 @@
         "P2",
         "P3"
       ],
-      "topic_category": "II"
+      "topic_category": "II",
+      "category": "situation"
     },
     {
       "id": "q12",
@@ -1308,7 +1310,8 @@
       "paradigms": [
         "P2"
       ],
-      "topic_category": "II"
+      "topic_category": "II",
+      "category": "situation"
     },
     {
       "id": "q13",
@@ -1340,7 +1343,8 @@
       "paradigms": [
         "P2"
       ],
-      "topic_category": "II"
+      "topic_category": "II",
+      "category": "clues"
     },
     {
       "id": "q14",
@@ -1377,7 +1381,8 @@
         "P2",
         "P3"
       ],
-      "topic_category": "II"
+      "topic_category": "II",
+      "category": "clues"
     },
     {
       "id": "q15",
@@ -1406,7 +1411,8 @@
         "P3",
         "P4"
       ],
-      "topic_category": "II-III"
+      "topic_category": "II-III",
+      "category": "situation"
     },
     {
       "id": "q16",
@@ -1434,7 +1440,8 @@
       "paradigms": [
         "P3"
       ],
-      "topic_category": "III"
+      "topic_category": "III",
+      "category": "clues"
     },
     {
       "id": "q17",
@@ -1462,7 +1469,8 @@
       "paradigms": [
         "P3"
       ],
-      "topic_category": "III"
+      "topic_category": "III",
+      "category": "clues"
     },
     {
       "id": "q18",
@@ -1494,7 +1502,8 @@
       "paradigms": [
         "P3"
       ],
-      "topic_category": "III"
+      "topic_category": "III",
+      "category": "situation"
     },
     {
       "id": "q19",
@@ -1527,7 +1536,8 @@
         "P3",
         "P4"
       ],
-      "topic_category": "III-IV"
+      "topic_category": "III-IV",
+      "category": "cause"
     },
     {
       "id": "q20",
@@ -1559,7 +1569,8 @@
       "paradigms": [
         "P4"
       ],
-      "topic_category": "IV"
+      "topic_category": "IV",
+      "category": "clues"
     },
     {
       "id": "q21",
@@ -1587,7 +1598,8 @@
       "paradigms": [
         "P4"
       ],
-      "topic_category": "IV"
+      "topic_category": "IV",
+      "category": "clues"
     },
     {
       "id": "q22",
@@ -1615,7 +1627,8 @@
       "paradigms": [
         "P4"
       ],
-      "topic_category": "IV"
+      "topic_category": "IV",
+      "category": "cause"
     },
     {
       "id": "q23",
@@ -1652,7 +1665,8 @@
       "paradigms": [
         "P4"
       ],
-      "topic_category": "IV"
+      "topic_category": "IV",
+      "category": "cause"
     },
     {
       "id": "q24",
@@ -1684,7 +1698,8 @@
       "paradigms": [
         "S2"
       ],
-      "topic_category": "I"
+      "topic_category": "I",
+      "category": "cause"
     },
     {
       "id": "q25",
@@ -1716,7 +1731,8 @@
       "paradigms": [
         "S2"
       ],
-      "topic_category": "I"
+      "topic_category": "I",
+      "category": "situation"
     },
     {
       "id": "q26",
@@ -1748,7 +1764,8 @@
       "paradigms": [
         "S2"
       ],
-      "topic_category": "I"
+      "topic_category": "I",
+      "category": "clues"
     }
   ],
   "topic_categories": [
@@ -1785,5 +1802,19 @@
     "q01",
     "q02"
   ],
-  "truth_paradigm": "P4"
+  "truth_paradigm": "P4",
+  "question_categories": [
+    {
+      "id": "cause",
+      "name": "死因"
+    },
+    {
+      "id": "situation",
+      "name": "砂漠の状況"
+    },
+    {
+      "id": "clues",
+      "name": "手がかり"
+    }
+  ]
 }
