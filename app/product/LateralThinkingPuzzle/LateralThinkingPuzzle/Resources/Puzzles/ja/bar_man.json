@@ -1,7 +1,6 @@
 {
   "title": "バーの男",
   "statement": "ある男がバーに入り、バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた。男は「ありがとう」と言って帰った。なぜだろう？",
-  "truth": "男はしゃっくりが止まらなかったので水を求めた。バーテンダーはそれに気づき、驚かせてしゃっくりを止めるために銃を向けた。しゃっくりが止まった男は感謝して帰った。",
   "init_paradigm": "P1",
   "ps_values": [
     [
@@ -776,7 +775,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q02",
@@ -803,7 +803,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q03",
@@ -830,7 +831,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q04",
@@ -857,7 +859,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q05",
@@ -884,7 +887,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q06",
@@ -917,7 +921,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q07",
@@ -950,7 +955,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q08",
@@ -979,7 +985,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q09",
@@ -1008,7 +1015,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q10",
@@ -1037,7 +1045,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q11",
@@ -1066,7 +1075,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q12",
@@ -1095,7 +1105,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q13",
@@ -1123,7 +1134,8 @@
         "P2",
         "P3",
         "T"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q14",
@@ -1150,7 +1162,8 @@
         "P2",
         "P3",
         "T"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q15",
@@ -1176,7 +1189,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q16",
@@ -1202,7 +1216,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q17",
@@ -1228,7 +1243,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q18",
@@ -1258,7 +1274,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q19",
@@ -1284,7 +1301,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q20",
@@ -1318,7 +1336,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q21",
@@ -1342,23 +1361,15 @@
       ],
       "paradigms": [
         "T"
-      ]
+      ],
+      "category": "resolution"
     }
   ],
-  "topic_categories": [
-    {
-      "id": "I",
-      "name": "日常の理解"
-    },
-    {
-      "id": "II",
-      "name": "善意と隠れた問題"
-    },
-    {
-      "id": "III",
-      "name": "真相"
-    }
-  ],
+  "topic_categories": {
+    "I": "日常の理解",
+    "II": "善意と隠れた問題",
+    "III": "真相"
+  },
   "init_question_ids": [
     "q01",
     "q02",
@@ -1366,5 +1377,19 @@
     "q04",
     "q05"
   ],
-  "truth_paradigm": "T"
+  "truth_paradigm": "T",
+  "question_categories": [
+    {
+      "id": "purpose",
+      "name": "男の目的"
+    },
+    {
+      "id": "events",
+      "name": "バーの出来事"
+    },
+    {
+      "id": "resolution",
+      "name": "結末"
+    }
+  ]
 }

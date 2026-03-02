@@ -775,7 +775,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q02",
@@ -802,7 +803,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q03",
@@ -829,7 +831,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q04",
@@ -856,7 +859,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q05",
@@ -883,7 +887,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q06",
@@ -916,7 +921,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q07",
@@ -949,7 +955,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q08",
@@ -978,7 +985,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q09",
@@ -1007,7 +1015,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q10",
@@ -1036,7 +1045,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q11",
@@ -1065,7 +1075,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q12",
@@ -1094,7 +1105,8 @@
         "P3",
         "T",
         "S1"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q13",
@@ -1122,7 +1134,8 @@
         "P2",
         "P3",
         "T"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q14",
@@ -1149,7 +1162,8 @@
         "P2",
         "P3",
         "T"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q15",
@@ -1175,7 +1189,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q16",
@@ -1201,7 +1216,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "purpose"
     },
     {
       "id": "q17",
@@ -1227,7 +1243,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "events"
     },
     {
       "id": "q18",
@@ -1257,7 +1274,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q19",
@@ -1283,7 +1301,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q20",
@@ -1317,7 +1336,8 @@
       "paradigms": [
         "P3",
         "T"
-      ]
+      ],
+      "category": "resolution"
     },
     {
       "id": "q21",
@@ -1341,7 +1361,8 @@
       ],
       "paradigms": [
         "T"
-      ]
+      ],
+      "category": "resolution"
     }
   ],
   "topic_categories": {
@@ -1356,5 +1377,19 @@
     "q04",
     "q05"
   ],
-  "truth_paradigm": "T"
+  "truth_paradigm": "T",
+  "question_categories": [
+    {
+      "id": "purpose",
+      "name": "男の目的"
+    },
+    {
+      "id": "events",
+      "name": "バーの出来事"
+    },
+    {
+      "id": "resolution",
+      "name": "結末"
+    }
+  ]
 }
