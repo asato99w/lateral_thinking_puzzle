@@ -2005,11 +2005,20 @@
       ]
     }
   ],
-  "topic_categories": {
-    "I": "Surface Exploration",
-    "II": "Crisis Discovery",
-    "III": "Full Truth"
-  },
+  "topic_categories": [
+    {
+      "id": "I",
+      "name": "Surface Exploration"
+    },
+    {
+      "id": "II",
+      "name": "Crisis Discovery"
+    },
+    {
+      "id": "III",
+      "name": "Full Truth"
+    }
+  ],
   "questions": [
     {
       "id": "q01",
@@ -2037,8 +2046,7 @@
         "P1",
         "S1",
         "S2"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q02",
@@ -2073,8 +2081,7 @@
         "P0",
         "P1",
         "S2"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q03",
@@ -2108,8 +2115,7 @@
         "P3",
         "P4",
         "S1"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q04",
@@ -2142,8 +2148,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q05",
@@ -2176,8 +2181,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q06",
@@ -2203,8 +2207,7 @@
       "paradigms": [
         "P0",
         "S2"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q07",
@@ -2229,8 +2232,7 @@
       "topic_category": "I",
       "paradigms": [
         "P0"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q08",
@@ -2261,8 +2263,7 @@
         "P0",
         "P1",
         "P2"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q09",
@@ -2293,8 +2294,7 @@
         "P0",
         "P1",
         "P2"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q10",
@@ -2330,8 +2330,7 @@
         "P3",
         "P4",
         "S2"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q11",
@@ -2364,8 +2363,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q12",
@@ -2399,8 +2397,7 @@
         "P2",
         "S1",
         "S2"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q13",
@@ -2441,8 +2438,7 @@
         "P4",
         "S1",
         "S2"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q14",
@@ -2476,8 +2472,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q15",
@@ -2505,8 +2500,7 @@
       "paradigms": [
         "P1",
         "P2"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q16",
@@ -2544,8 +2538,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q17",
@@ -2583,8 +2576,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q18",
@@ -2613,8 +2605,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q19",
@@ -2647,8 +2638,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q20",
@@ -2686,8 +2676,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q21",
@@ -2728,8 +2717,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q22",
@@ -2765,8 +2753,7 @@
       "paradigms": [
         "P3",
         "P4"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q23",
@@ -2806,8 +2793,7 @@
       "paradigms": [
         "P3",
         "P4"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q24",
@@ -2839,8 +2825,7 @@
       "paradigms": [
         "P3",
         "P4"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q25",
@@ -2872,8 +2857,7 @@
       "paradigms": [
         "P3",
         "P4"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q26",
@@ -2909,8 +2893,7 @@
       "paradigms": [
         "P3",
         "P4"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q27",
@@ -2941,8 +2924,7 @@
       "topic_category": "III",
       "paradigms": [
         "P4"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q28",
@@ -2977,8 +2959,7 @@
       "topic_category": "III",
       "paradigms": [
         "P4"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q29",
@@ -3007,8 +2988,7 @@
       "topic_category": "I",
       "paradigms": [
         "P0"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q30",
@@ -3034,8 +3014,7 @@
       "paradigms": [
         "P0",
         "S1"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q31",
@@ -3060,8 +3039,7 @@
       "topic_category": "I",
       "paradigms": [
         "P0"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q32",
@@ -3087,8 +3065,7 @@
       "paradigms": [
         "P0",
         "S2"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q33",
@@ -3116,8 +3093,7 @@
       "paradigms": [
         "P2",
         "P3"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q34",
@@ -3149,8 +3125,7 @@
       "paradigms": [
         "P3",
         "P4"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q35",
@@ -3186,8 +3161,7 @@
       "topic_category": "III",
       "paradigms": [
         "P4"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q36",
@@ -3224,8 +3198,7 @@
         "P2",
         "P3",
         "P4"
-      ],
-      "category": "cause"
+      ]
     },
     {
       "id": "q37",
@@ -3248,8 +3221,7 @@
       "paradigms": [
         "P0",
         "P1"
-      ],
-      "category": "objects"
+      ]
     },
     {
       "id": "q38",
@@ -3271,8 +3243,7 @@
       "topic_category": "I",
       "paradigms": [
         "P0"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q39",
@@ -3308,8 +3279,7 @@
       "paradigms": [
         "P3",
         "P4"
-      ],
-      "category": "scene"
+      ]
     },
     {
       "id": "q40",
@@ -3337,8 +3307,7 @@
       "paradigms": [
         "P3",
         "P4"
-      ],
-      "category": "scene"
+      ]
     }
   ],
   "init_question_ids": [

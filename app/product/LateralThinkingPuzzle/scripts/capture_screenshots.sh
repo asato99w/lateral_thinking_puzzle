@@ -111,6 +111,7 @@ cleanup() {
         fi
     done
     rm -rf "$TEMP_DIR"
+    rm -f /tmp/.screenshot_lang
 }
 trap cleanup EXIT
 
@@ -150,6 +151,9 @@ run_tests() {
     log "  🧪 UIテスト実行中... (数分かかります)"
 
     rm -rf "$result_path"
+
+    # テストプロセスに言語を渡す（xcodebuild は環境変数を転送しないため）
+    echo "$lang" > /tmp/.screenshot_lang
 
     local test_exit=0
     SCREENSHOT_LANG="$lang" xcodebuild test \

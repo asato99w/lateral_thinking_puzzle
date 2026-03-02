@@ -35,22 +35,27 @@ final class AppStoreScreenshotTests: XCTestCase {
 
     // MARK: - 言語設定
 
-    /// 環境変数 SCREENSHOT_LANG から言語を取得（デフォルト: ja）
+    /// 言語を取得（一時ファイル → 環境変数 → デフォルト ja の順で確認）
     private var lang: String {
-        ProcessInfo.processInfo.environment["SCREENSHOT_LANG"] ?? "ja"
+        // xcodebuild は環境変数をテストプロセスに転送しないため、
+        // 一時ファイル経由で言語を受け取る
+        if let fileLang = try? String(contentsOfFile: "/tmp/.screenshot_lang", encoding: .utf8) {
+            let trimmed = fileLang.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !trimmed.isEmpty { return trimmed }
+        }
+        return ProcessInfo.processInfo.environment["SCREENSHOT_LANG"] ?? "ja"
     }
 
     /// パズル一覧・コンテンツダウンロード用パズル名
-    /// 英語・日本語ともに turtle_soup を使用（英語版は turtle_soup のみ利用可能）
     private var listPuzzleTitle: String {
-        "ウミガメのスープ"
+        lang == "en" ? "Turtle Soup" : "ウミガメのスープ"
     }
 
     /// ゲームフロー・クリア画面用パズル名
     /// 日本語: bar_man（質問が初期表示されるため撮影に適している）
     /// 英語: turtle_soup（bar_man が英語版に存在しないため）
     private var gamePuzzleTitle: String {
-        lang == "en" ? "ウミガメのスープ" : "バーの男"
+        lang == "en" ? "Turtle Soup" : "バーの男"
     }
 
     /// UI文字列: 出題ラベル
@@ -58,9 +63,9 @@ final class AppStoreScreenshotTests: XCTestCase {
         lang == "en" ? "Statement" : "出題"
     }
 
-    /// UI文字列: クリアラベル
+    /// UI文字列: クリアラベル（真相画面のヘッダー）
     private var clearedLabel: String {
-        lang == "en" ? "Cleared!" : "クリア!"
+        lang == "en" ? "Truth" : "真相"
     }
 
     /// UI文字列: コンテンツナビゲーションバータイトル
@@ -175,7 +180,7 @@ final class AppStoreScreenshotTests: XCTestCase {
         takeScreenshot("AppStore_04_GameScreen_InProgress")
     }
 
-    // MARK: - 5. クリア画面
+    // MARK: - 5. 真相画面（クリア画面）
     // 注意: パズルデータに is_clear: true の質問が必要。
     // 未設定の場合、このテストはスキップされます。
 

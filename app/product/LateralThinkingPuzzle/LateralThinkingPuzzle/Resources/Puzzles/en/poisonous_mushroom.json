@@ -1587,11 +1587,20 @@
       ]
     }
   ],
-  "topic_categories": {
-    "I": "Surface Exploration",
-    "II": "Pattern Discovery",
-    "III": "Full Truth"
-  },
+  "topic_categories": [
+    {
+      "id": "I",
+      "name": "Surface Exploration"
+    },
+    {
+      "id": "II",
+      "name": "Pattern Discovery"
+    },
+    {
+      "id": "III",
+      "name": "Full Truth"
+    }
+  ],
   "questions": [
     {
       "id": "q01",
@@ -1625,8 +1634,7 @@
       "paradigms": [
         "P0",
         "P1"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q02",
@@ -1659,8 +1667,7 @@
       "topic_category": "I",
       "paradigms": [
         "P0"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q03",
@@ -1685,8 +1692,7 @@
       "topic_category": "I",
       "paradigms": [
         "P0"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q04",
@@ -1722,8 +1728,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q05",
@@ -1755,8 +1760,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q06",
@@ -1784,8 +1788,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q07",
@@ -1817,8 +1820,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "relief"
+      ]
     },
     {
       "id": "q08",
@@ -1860,8 +1862,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q09",
@@ -1899,8 +1900,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q10",
@@ -1933,8 +1933,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q11",
@@ -1966,8 +1965,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q12",
@@ -1995,8 +1993,7 @@
       "paradigms": [
         "P0",
         "P1"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q13",
@@ -2018,8 +2015,7 @@
       "topic_category": "I",
       "paradigms": [
         "P0"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q14",
@@ -2056,8 +2052,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q15",
@@ -2090,8 +2085,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q16",
@@ -2127,8 +2121,7 @@
       "paradigms": [
         "P2",
         "P3"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q17",
@@ -2165,8 +2158,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q18",
@@ -2203,8 +2195,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q19",
@@ -2245,8 +2236,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "relief"
+      ]
     },
     {
       "id": "q20",
@@ -2282,8 +2272,7 @@
       "paradigms": [
         "P2",
         "P3"
-      ],
-      "category": "relief"
+      ]
     },
     {
       "id": "q21",
@@ -2319,8 +2308,7 @@
       "paradigms": [
         "P2",
         "P3"
-      ],
-      "category": "relief"
+      ]
     },
     {
       "id": "q22",
@@ -2351,8 +2339,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q23",
@@ -2388,8 +2375,7 @@
       "paradigms": [
         "P2",
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q24",
@@ -2425,8 +2411,7 @@
       "paradigms": [
         "P2",
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q25",
@@ -2458,8 +2443,7 @@
       "paradigms": [
         "P2",
         "P3"
-      ],
-      "category": "relief"
+      ]
     },
     {
       "id": "q26",
@@ -2491,8 +2475,7 @@
       "paradigms": [
         "P2",
         "P3"
-      ],
-      "category": "relief"
+      ]
     },
     {
       "id": "q27",
@@ -2532,8 +2515,7 @@
       "topic_category": "III",
       "paradigms": [
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q28",
@@ -2570,8 +2552,7 @@
         "P1",
         "P2",
         "P3"
-      ],
-      "category": "mushrooms"
+      ]
     },
     {
       "id": "q29",
@@ -2610,8 +2591,7 @@
       "topic_category": "III",
       "paradigms": [
         "P3"
-      ],
-      "category": "relief"
+      ]
     },
     {
       "id": "q30",
@@ -2646,8 +2626,7 @@
       "topic_category": "III",
       "paradigms": [
         "P3"
-      ],
-      "category": "background"
+      ]
     },
     {
       "id": "q31",
@@ -2687,8 +2666,7 @@
       "topic_category": "III",
       "paradigms": [
         "P3"
-      ],
-      "category": "relief"
+      ]
     }
   ],
   "init_question_ids": [
