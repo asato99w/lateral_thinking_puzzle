@@ -1,4 +1,4 @@
-"""v2 POC: 探索領域ベースのパズルエンジン - CLI シミュレーション"""
+"""v2 POC: パズルエンジン - CLI シミュレーション"""
 
 from __future__ import annotations
 
@@ -31,6 +31,13 @@ def display_state(state: GameState, puzzle: PuzzleData) -> None:
         marker = "S" if fid.startswith("Ps") else "T"
         print(f"  [{marker}] {fact.label}")
 
+    # 形成済み仮説
+    if state.formed_hypotheses:
+        print(f"\n💭 形成済み仮説 ({len(state.formed_hypotheses)}件):")
+        for hid in sorted(state.formed_hypotheses):
+            hyp = puzzle.hypotheses[hid]
+            print(f"  {hyp.label}")
+
     # 発見済みピース
     if state.discovered_pieces:
         print(f"\n🧩 発見済みピース ({len(state.discovered_pieces)}/{len(puzzle.pieces)}):")
@@ -39,13 +46,6 @@ def display_state(state: GameState, puzzle: PuzzleData) -> None:
             print(f"  [{pid}] {piece.label}")
     else:
         print(f"\n🧩 発見済みピース (0/{len(puzzle.pieces)})")
-
-    # 開かれた探索領域
-    if state.opened_domains:
-        print(f"\n🔭 開かれた探索領域 ({len(state.opened_domains)}/{len(puzzle.domains)}):")
-        for did in sorted(state.opened_domains):
-            domain = puzzle.domains[did]
-            print(f"  [{did}] {domain.name}")
 
     print()
 
@@ -62,6 +62,12 @@ def display_answer_result(
             fact = puzzle.facts[fid]
             print(f"  💡 新事実: {fact.label}")
 
+    # 新たに形成された仮説
+    if result.new_hypotheses:
+        for hid in result.new_hypotheses:
+            hyp = puzzle.hypotheses[hid]
+            print(f"  💭 仮説形成: {hyp.label}")
+
     # メカニズム表示
     if result.is_link:
         print("  🔗 【リンク】複数の事実が結びつきました！")
@@ -75,13 +81,7 @@ def display_answer_result(
             dep_type = "独立" if not piece.depends_on else "依存"
             print(f"  🧩 ピース発見 [{pid}] {piece.label} ({dep_type})")
 
-    # 新たに開かれた探索領域
-    if result.new_domains:
-        for did in result.new_domains:
-            domain = puzzle.domains[did]
-            print(f"  🔭 探索領域が開きました: {domain.name}")
-
-    if not result.new_facts and not result.new_pieces:
+    if not result.new_facts and not result.new_pieces and not result.new_hypotheses:
         print("  （新しい発見はありませんでした）")
 
 
@@ -114,12 +114,10 @@ def run_simulation(puzzle_path: str | Path) -> None:
 
         print(f"❓ 利用可能な質問 ({len(questions)}件):")
         for i, q in enumerate(questions, 1):
-            strategy = puzzle.strategies[q.strategy]
             mech_icon = {"observation": "👁", "link": "🔗", "anomaly": "⚡"}.get(
                 q.mechanism, "?"
             )
-            print(f"  {i}. {q.text}")
-            print(f"     [{strategy.name}] {mech_icon} {q.mechanism}")
+            print(f"  {i}. {q.text}  {mech_icon}")
 
         print(f"  0. 終了")
 
@@ -160,18 +158,26 @@ def run_auto_simulation(puzzle_path: str | Path) -> None:
     print("=" * 60)
     print(f"\n{puzzle.statement}\n")
 
+    # 初期仮説の表示
+    if state.formed_hypotheses:
+        print("💭 初期仮説:")
+        for hid in sorted(state.formed_hypotheses):
+            hyp = puzzle.hypotheses[hid]
+            print(f"  {hyp.label}")
+        print()
+
     step = 0
     while not check_complete(state, puzzle):
         questions = available_questions(state, puzzle)
         if not questions:
             print("⚠️  行き詰まり: 利用可能な質問がありません。")
             print(f"  観測済み事実: {sorted(state.observed_facts)}")
+            print(f"  形成済み仮説: {sorted(state.formed_hypotheses)}")
             print(f"  発見済みピース: {sorted(state.discovered_pieces)}")
             break
 
         q = questions[0]
         step += 1
-        strategy = puzzle.strategies[q.strategy]
 
         print(f"--- Step {step} ---")
         print(f"Q: {q.text}")

@@ -71,34 +71,47 @@
     }
   ],
 
-  "exploration_domains": [
+  "hypotheses": [
     {
-      "id": "domain_a",
-      "name": "遭難と仲間の死",
-      "root_piece": "a",
-      "reachable_facts": ["Pt-1", "Pt-2", "Pt-3"]
+      "id": "h_soup_ok",
+      "label": "スープに問題はない",
+      "formation_conditions": [["Ps-3", "Ps-5"]]
     },
     {
-      "id": "domain_c",
-      "name": "偽りのラベル",
-      "root_piece": "c",
-      "reachable_facts": ["Pt-4", "Pt-5"]
+      "id": "h_not_sick",
+      "label": "病気ではない",
+      "formation_conditions": [["Ps-6"], ["Ps-1"]]
     },
     {
-      "id": "domain_e",
-      "name": "味の違い",
-      "root_piece": "e",
-      "reachable_facts": ["Pt-7", "Pt-8"]
+      "id": "h_honest_staff",
+      "label": "店員は正直",
+      "formation_conditions": [["Ps-5"]]
+    },
+    {
+      "id": "h_not_daily",
+      "label": "自殺の原因は日常的なものではない",
+      "formation_conditions": [["h_soup_ok", "h_not_sick"], ["h_soup_ok", "h_honest_staff"]]
+    },
+    {
+      "id": "h_past_matters",
+      "label": "男の過去が関係する",
+      "formation_conditions": [["Ps-4"], ["h_not_daily", "Ps-6"]]
+    },
+    {
+      "id": "h_soup_origin",
+      "label": "スープの由来が重要",
+      "formation_conditions": [["Ps-4", "Ps-2"]]
+    },
+    {
+      "id": "h_special_past",
+      "label": "特殊な過去がある",
+      "formation_conditions": [["h_not_daily"], ["h_past_matters"]]
+    },
+    {
+      "id": "h_others_involved",
+      "label": "他の人物が関与する",
+      "formation_conditions": [["Ps-4"], ["h_special_past"]]
     }
-  ],
-
-  "strategies": [
-    {"id": "situation_narrowing", "name": "状況の絞り込み"},
-    {"id": "character_exploration", "name": "登場人物の探索"},
-    {"id": "timeline_confirmation", "name": "時間軸の確認"},
-    {"id": "hypothesis_elimination", "name": "常識的仮説の排除"},
-    {"id": "motive_exploration", "name": "動機の探索"},
-    {"id": "anomaly_identification", "name": "異常性の特定"}
   ],
 
   "questions": [
@@ -106,8 +119,7 @@
       "id": "q_h01",
       "text": "スープに毒や異物が入っていた？",
       "answer": "いいえ。スープ自体には問題ありません。",
-      "strategy": "hypothesis_elimination",
-      "preconditions": ["Ps-3", "Ps-6"],
+      "recall_conditions": [["Ps-3", "Ps-6"]],
       "reveals": [],
       "mechanism": "observation"
     },
@@ -115,8 +127,7 @@
       "id": "q_h02",
       "text": "男は病気だった？",
       "answer": "いいえ。身体的な問題ではありません。",
-      "strategy": "hypothesis_elimination",
-      "preconditions": ["Ps-6"],
+      "recall_conditions": [["Ps-6"]],
       "reveals": [],
       "mechanism": "observation"
     },
@@ -124,8 +135,7 @@
       "id": "q_h03",
       "text": "店員が何か隠していた？",
       "answer": "いいえ。店員は正直に答えています。",
-      "strategy": "hypothesis_elimination",
-      "preconditions": ["Ps-4", "Ps-5"],
+      "recall_conditions": [["Ps-4", "Ps-5"]],
       "reveals": [],
       "mechanism": "observation"
     },
@@ -133,8 +143,7 @@
       "id": "q_e01",
       "text": "男は以前にもスープを飲んだことがある？",
       "answer": "はい。過去にもスープを飲んだことがあります。",
-      "strategy": "timeline_confirmation",
-      "preconditions": ["Ps-4"],
+      "recall_conditions": [["h_soup_origin"], ["Ps-4"]],
       "reveals": ["Pt-7"],
       "mechanism": "observation"
     },
@@ -142,8 +151,7 @@
       "id": "q_e02",
       "text": "今のスープの味が記憶と違った？",
       "answer": "はい！レストランのスープは、記憶のスープとは味が違いました。",
-      "strategy": "anomaly_identification",
-      "preconditions": ["Pt-7"],
+      "recall_conditions": [["Pt-7"]],
       "reveals": ["Pt-8"],
       "mechanism": "observation"
     },
@@ -151,8 +159,7 @@
       "id": "q_a01",
       "text": "男の過去に危険な出来事があった？",
       "answer": "はい。男は過去に命に関わる出来事を経験しています。",
-      "strategy": "situation_narrowing",
-      "preconditions": ["Ps-1"],
+      "recall_conditions": [["h_past_matters"], ["h_special_past"]],
       "reveals": ["Pt-1"],
       "mechanism": "observation"
     },
@@ -160,8 +167,7 @@
       "id": "q_a02",
       "text": "遭難中に食料が尽きた？",
       "answer": "はい。食料が完全に尽きました。",
-      "strategy": "situation_narrowing",
-      "preconditions": ["Pt-1"],
+      "recall_conditions": [["Pt-1"]],
       "reveals": ["Pt-2"],
       "mechanism": "observation"
     },
@@ -169,8 +175,7 @@
       "id": "q_a03",
       "text": "仲間が死んだ？",
       "answer": "はい。仲間の一人が死にました。",
-      "strategy": "character_exploration",
-      "preconditions": ["Pt-1"],
+      "recall_conditions": [["Pt-1"]],
       "reveals": ["Pt-3"],
       "mechanism": "observation"
     },
@@ -178,8 +183,7 @@
       "id": "q_c01",
       "text": "遭難中に仲間からスープを飲まされた？",
       "answer": "はい。残った仲間が男にスープを飲ませました。",
-      "strategy": "timeline_confirmation",
-      "preconditions": ["Pt-1"],
+      "recall_conditions": [["Pt-1"]],
       "reveals": ["Pt-4"],
       "mechanism": "observation"
     },
@@ -187,8 +191,7 @@
       "id": "q_c02",
       "text": "そのスープは「ウミガメのスープだ」と言われた？",
       "answer": "はい！仲間はそのスープを「ウミガメのスープだ」と言いました。",
-      "strategy": "anomaly_identification",
-      "preconditions": ["Pt-4"],
+      "recall_conditions": [["Pt-4"]],
       "reveals": ["Pt-5"],
       "mechanism": "observation"
     },
@@ -196,8 +199,7 @@
       "id": "q_c03",
       "text": "過去のスープは実際にはウミガメのスープではなかった？",
       "answer": "はい！あのスープは本物のウミガメのスープではありませんでした。味の違いがその証拠です。",
-      "strategy": "anomaly_identification",
-      "preconditions": ["Pt-5", "Pt-8"],
+      "recall_conditions": [["Pt-5", "Pt-8"]],
       "reveals": ["Pt-9"],
       "mechanism": "anomaly"
     },
@@ -205,8 +207,7 @@
       "id": "q_b01",
       "text": "スープの正体は仲間の肉だった？",
       "answer": "はい…。死んだ仲間の肉で作ったスープでした。",
-      "strategy": "motive_exploration",
-      "preconditions": ["Pt-3", "Pt-5"],
+      "recall_conditions": [["Pt-3", "Pt-5"]],
       "reveals": ["Pt-6"],
       "mechanism": "link"
     },
@@ -214,8 +215,7 @@
       "id": "q_g01",
       "text": "男はその正体を悟って自殺した？",
       "answer": "はい。自分が人肉を食べていたことを悟り、絶望して自殺しました。",
-      "strategy": "motive_exploration",
-      "preconditions": ["Pt-9"],
+      "recall_conditions": [["Pt-9"]],
       "reveals": ["Pt-10"],
       "mechanism": "link"
     }

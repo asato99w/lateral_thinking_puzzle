@@ -1,4 +1,4 @@
-"""v2 POC: 探索領域ベースのパズルエンジン - データモデル"""
+"""v2 POC: パズルエンジン - データモデル"""
 
 from __future__ import annotations
 
@@ -22,40 +22,30 @@ class Piece:
 
 
 @dataclass
-class ExplorationDomain:
-    """独立ピースが開く探索領域"""
+class Hypothesis:
+    """仮説。形成条件は事実/仮説の族（OR of AND）"""
 
     id: str
-    name: str
-    root_piece: str  # この領域を開く独立ピースの ID
-    reachable_facts: list[str]  # この領域内で発見可能な事実
-
-
-@dataclass
-class Strategy:
-    """汎用探索戦略"""
-
-    id: str
-    name: str
+    label: str
+    formation_conditions: list[list[str]]  # OR of AND: 各内側リストは事実/仮説IDの集合
 
 
 @dataclass
 class Question:
-    """観測事実 × 戦略から導かれる質問"""
+    """質問。想起条件は事実/仮説の族（OR of AND）"""
 
     id: str
     text: str
-    answer: str  # Yes/No 回答テキスト
-    strategy: str  # 戦略 ID
-    preconditions: list[str]  # この質問が生まれるために必要な観測事実 ID 群
+    answer: str
+    recall_conditions: list[list[str]]  # OR of AND: 想起条件
     reveals: list[str]  # 回答で明らかになる事実 ID 群
-    mechanism: str  # "observation" | "link" | "anomaly"
+    mechanism: str  # ラベル: "observation" | "link" | "anomaly"
 
 
 @dataclass
 class GameState:
     observed_facts: set[str] = field(default_factory=set)
+    formed_hypotheses: set[str] = field(default_factory=set)
     discovered_pieces: set[str] = field(default_factory=set)
-    opened_domains: set[str] = field(default_factory=set)
     answered: set[str] = field(default_factory=set)
     history: list[str] = field(default_factory=list)
