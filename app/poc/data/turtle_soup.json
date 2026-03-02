@@ -3302,7 +3302,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "男について"
     },
     {
       "id": "q02",
@@ -3326,7 +3327,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q03",
@@ -3350,7 +3352,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q04",
@@ -3374,7 +3377,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q05",
@@ -3398,7 +3402,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q06",
@@ -3422,7 +3427,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q07",
@@ -3448,7 +3454,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q08",
@@ -3474,7 +3481,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q09",
@@ -3500,7 +3508,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q10",
@@ -3526,7 +3535,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q11",
@@ -3550,7 +3560,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q12",
@@ -3574,7 +3585,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q13",
@@ -3598,7 +3610,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q14",
@@ -3622,7 +3635,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q15",
@@ -3646,7 +3660,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q16",
@@ -3670,7 +3685,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q17",
@@ -3694,7 +3710,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q18",
@@ -3724,7 +3741,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "男について"
     },
     {
       "id": "q19",
@@ -3754,7 +3772,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "男について"
     },
     {
       "id": "q20",
@@ -3792,7 +3811,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "男について"
     },
     {
       "id": "q21",
@@ -3830,7 +3850,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q22",
@@ -3860,7 +3881,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q23",
@@ -3890,7 +3912,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "男について"
     },
     {
       "id": "q24",
@@ -3920,7 +3943,8 @@
       "paradigms": [
         "P1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "男について"
     },
     {
       "id": "q25",
@@ -3946,7 +3970,8 @@
       "paradigms": [
         "P2"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q26",
@@ -3972,7 +3997,8 @@
       "paradigms": [
         "P2"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q27",
@@ -3998,7 +4024,8 @@
       "paradigms": [
         "P2"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q28",
@@ -4024,7 +4051,8 @@
       "paradigms": [
         "P2"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q29",
@@ -4054,7 +4082,8 @@
       "paradigms": [
         "P2"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q30",
@@ -4085,7 +4114,8 @@
         "P1",
         "P2"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q31",
@@ -4116,7 +4146,8 @@
         "P1",
         "P2"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q32",
@@ -4147,7 +4178,8 @@
         "P1",
         "P2"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q33",
@@ -4173,7 +4205,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q34",
@@ -4199,7 +4232,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q35",
@@ -4225,7 +4259,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q36",
@@ -4251,7 +4286,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q37",
@@ -4277,7 +4313,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q38",
@@ -4303,7 +4340,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q39",
@@ -4329,7 +4367,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q40",
@@ -4355,7 +4394,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "スープの味"
     },
     {
       "id": "q41",
@@ -4381,7 +4421,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q42",
@@ -4407,7 +4448,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q43",
@@ -4433,7 +4475,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q44",
@@ -4463,7 +4506,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q45",
@@ -4493,7 +4537,8 @@
       "paradigms": [
         "P3"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q46",
@@ -4519,7 +4564,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q47",
@@ -4545,7 +4591,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q48",
@@ -4571,7 +4618,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q49",
@@ -4597,7 +4645,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q50",
@@ -4623,7 +4672,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q51",
@@ -4649,7 +4699,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q52",
@@ -4675,7 +4726,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q53",
@@ -4701,7 +4753,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q54",
@@ -4727,7 +4780,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q55",
@@ -4753,7 +4807,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q56",
@@ -4779,7 +4834,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "出来事"
     },
     {
       "id": "q57",
@@ -4805,7 +4861,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q58",
@@ -4835,7 +4892,8 @@
       "paradigms": [
         "P4"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q59",
@@ -4861,7 +4919,8 @@
       "paradigms": [
         "P5"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q60",
@@ -4887,7 +4946,8 @@
       "paradigms": [
         "P5"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q61",
@@ -4913,7 +4973,8 @@
       "paradigms": [
         "P5"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "食材・品質"
     },
     {
       "id": "q62",
@@ -4939,7 +5000,8 @@
       "paradigms": [
         "P5"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q63",
@@ -4965,7 +5027,8 @@
       "paradigms": [
         "P5"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q64",
@@ -4991,7 +5054,8 @@
       "paradigms": [
         "P5"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q65",
@@ -5017,7 +5081,8 @@
       "paradigms": [
         "P5"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "動機・原因"
     },
     {
       "id": "q66",
@@ -5042,7 +5107,8 @@
         "S1",
         "S2"
       ],
-      "is_clear": true
+      "is_clear": true,
+      "category": "出来事"
     },
     {
       "id": "q67",
@@ -5067,7 +5133,8 @@
         "P1",
         "S1"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "男について"
     },
     {
       "id": "q68",
@@ -5092,8 +5159,31 @@
         "P1",
         "S2"
       ],
-      "is_clear": false
+      "is_clear": false,
+      "category": "男について"
     }
   ],
-  "truth_paradigm": "P5"
+  "truth_paradigm": "P5",
+  "question_categories": [
+    {
+      "id": "taste",
+      "name": "スープの味"
+    },
+    {
+      "id": "ingredients",
+      "name": "食材・品質"
+    },
+    {
+      "id": "man",
+      "name": "男について"
+    },
+    {
+      "id": "events",
+      "name": "出来事"
+    },
+    {
+      "id": "motive",
+      "name": "動機・原因"
+    }
+  ]
 }
