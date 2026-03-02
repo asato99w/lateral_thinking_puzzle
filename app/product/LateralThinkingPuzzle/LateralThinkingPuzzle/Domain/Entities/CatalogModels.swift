@@ -11,6 +11,7 @@ struct PuzzleCatalogEntry: Codable, Identifiable, Sendable {
     let difficulty: Int
     let tier: String
     let bundled: Bool
+    let locales: [String]?
 }
 
 struct PackCatalogEntry: Codable, Identifiable, Sendable {

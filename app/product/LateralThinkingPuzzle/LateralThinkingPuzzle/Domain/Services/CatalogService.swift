@@ -23,6 +23,29 @@ enum CatalogService {
         return catalog
     }
 
+    static func loadForCurrentLocale() throws -> PuzzleCatalog {
+        try filtered(try load(), locale: ContentLanguage.current)
+    }
+
+    nonisolated static func filtered(_ catalog: PuzzleCatalog, locale: String) -> PuzzleCatalog {
+        let filteredPuzzles = catalog.puzzles.filter { entry in
+            guard let locales = entry.locales else { return true }
+            return locales.contains(locale)
+        }
+        let filteredPuzzleIds = Set(filteredPuzzles.map(\.id))
+        let filteredPacks = catalog.packs.compactMap { pack -> PackCatalogEntry? in
+            let ids = pack.puzzleIds.filter { filteredPuzzleIds.contains($0) }
+            guard !ids.isEmpty else { return nil }
+            return PackCatalogEntry(
+                id: pack.id,
+                titleJa: pack.titleJa, titleEn: pack.titleEn,
+                descriptionJa: pack.descriptionJa, descriptionEn: pack.descriptionEn,
+                icon: pack.icon, puzzleIds: ids, tier: pack.tier
+            )
+        }
+        return PuzzleCatalog(puzzles: filteredPuzzles, packs: filteredPacks)
+    }
+
     static func localizedTitle(_ entry: PuzzleCatalogEntry) -> String {
         ContentLanguage.current == "ja" ? entry.titleJa : entry.titleEn
     }

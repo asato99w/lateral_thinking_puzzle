@@ -33,7 +33,7 @@ final class ContentDownloadViewModel {
 
     func load() async {
         do {
-            let catalog = try CatalogService.load()
+            let catalog = try CatalogService.loadForCurrentLocale()
             self.catalog = catalog
 
             for puzzle in catalog.puzzles {

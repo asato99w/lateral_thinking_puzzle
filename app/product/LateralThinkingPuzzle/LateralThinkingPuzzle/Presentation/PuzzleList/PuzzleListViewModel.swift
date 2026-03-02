@@ -17,7 +17,7 @@ final class PuzzleListViewModel {
         isLoading = true
         error = nil
         do {
-            let catalog = try CatalogService.load()
+            let catalog = try CatalogService.loadForCurrentLocale()
             var summaries: [PuzzleSummary] = []
             for entry in catalog.puzzles {
                 let isDownloaded: Bool
