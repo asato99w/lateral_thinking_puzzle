@@ -4,41 +4,24 @@ import XCTest
 ///
 /// ## 実行方法
 ///
+/// ### スクリプトから（推奨）:
+/// ```
+/// ./scripts/capture_screenshots.sh 6.5 ja   # 6.5インチ・日本語
+/// ./scripts/capture_screenshots.sh 6.7 en   # 6.7インチ・英語
+/// ./scripts/capture_screenshots.sh 6.5      # 6.5インチ・全言語
+/// ./scripts/capture_screenshots.sh           # 全サイズ・全言語
+/// ```
+///
 /// ### Xcode から:
-/// 1. シミュレータを選択（下記参照）
-/// 2. Test Navigator でこのクラスを右クリック → "Run"
-///
-/// ### コマンドラインから:
-/// ```
-/// # 6.7インチ (必須)
-/// xcodebuild test \
-///   -project LateralThinkingPuzzle.xcodeproj \
-///   -scheme LateralThinkingPuzzle \
-///   -destination 'platform=iOS Simulator,name=iPhone 16 Pro Max' \
-///   -only-testing:LateralThinkingPuzzleUITests/AppStoreScreenshotTests \
-///   -resultBundlePath screenshots_6_7.xcresult
-///
-/// # 6.5インチ (必須)
-/// xcodebuild test \
-///   -project LateralThinkingPuzzle.xcodeproj \
-///   -scheme LateralThinkingPuzzle \
-///   -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max' \
-///   -only-testing:LateralThinkingPuzzleUITests/AppStoreScreenshotTests \
-///   -resultBundlePath screenshots_6_5.xcresult
-/// ```
-///
-/// ## スクリーンショットの取り出し
-/// Xcode → Report Navigator → テスト結果 → 各テスト展開 → Attachments を右クリック → Export
+/// 1. シミュレータを選択
+/// 2. 環境変数 `SCREENSHOT_LANG` を設定（省略時は日本語）
+/// 3. Test Navigator でこのクラスを右クリック → "Run"
 ///
 /// ## 必要なデバイスサイズ
 /// | デバイス                | サイズ          | 解像度         |
 /// |------------------------|----------------|---------------|
 /// | iPhone 16 Pro Max      | 6.7インチ       | 1320 × 2868   |
-/// | iPhone 15 Pro Max      | 6.7インチ       | 1290 × 2796   |
 /// | iPhone 11 Pro Max      | 6.5インチ       | 1242 × 2688   |
-///
-/// ## 言語切り替え
-/// setUp 内の launchArguments を変更して英語版スクリーンショットも撮影可能。
 ///
 /// ## 注意
 /// クリア画面のスクリーンショットは、パズルデータに `is_clear: true` の質問が
@@ -50,19 +33,51 @@ final class AppStoreScreenshotTests: XCTestCase {
     /// 新規シミュレータの初回起動は時間がかかるため長めに設定
     private let elementTimeout: TimeInterval = 20
 
+    // MARK: - 言語設定
+
+    /// 環境変数 SCREENSHOT_LANG から言語を取得（デフォルト: ja）
+    private var lang: String {
+        ProcessInfo.processInfo.environment["SCREENSHOT_LANG"] ?? "ja"
+    }
+
+    /// パズル一覧・コンテンツダウンロード用パズル名
+    /// 英語・日本語ともに turtle_soup を使用（英語版は turtle_soup のみ利用可能）
+    private var listPuzzleTitle: String {
+        "ウミガメのスープ"
+    }
+
+    /// ゲームフロー・クリア画面用パズル名
+    /// 日本語: bar_man（質問が初期表示されるため撮影に適している）
+    /// 英語: turtle_soup（bar_man が英語版に存在しないため）
+    private var gamePuzzleTitle: String {
+        lang == "en" ? "ウミガメのスープ" : "バーの男"
+    }
+
+    /// UI文字列: 出題ラベル
+    private var statementLabel: String {
+        lang == "en" ? "Statement" : "出題"
+    }
+
+    /// UI文字列: クリアラベル
+    private var clearedLabel: String {
+        lang == "en" ? "Cleared!" : "クリア!"
+    }
+
+    /// UI文字列: コンテンツナビゲーションバータイトル
+    private var contentNavTitle: String {
+        lang == "en" ? "Content" : "コンテンツ"
+    }
+
     override func setUpWithError() throws {
         continueAfterFailure = true
 
-        // ── 日本語スクリーンショット ──
-        // ContentLanguage は DebugSettings.languageOverride → Locale.current の順で言語を決定する。
-        // シミュレータでは -AppleLanguages が Locale.current に反映されない場合があるため、
-        // アプリ側の DebugSettings を直接オーバーライドする。
-        app.launchArguments += ["-AppleLanguages", "(ja)", "-AppleLocale", "ja_JP"]
-        app.launchArguments += ["-debug_languageOverride", "ja"]
-
-        // ── 英語スクリーンショットの場合は上を以下に差し替え ──
-        // app.launchArguments += ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
-        // app.launchArguments += ["-debug_languageOverride", "en"]
+        if lang == "en" {
+            app.launchArguments += ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
+            app.launchArguments += ["-debug_languageOverride", "en"]
+        } else {
+            app.launchArguments += ["-AppleLanguages", "(ja)", "-AppleLocale", "ja_JP"]
+            app.launchArguments += ["-debug_languageOverride", "ja"]
+        }
 
         app.launch()
     }
@@ -117,7 +132,7 @@ final class AppStoreScreenshotTests: XCTestCase {
     // MARK: - 1. パズル一覧画面
 
     func test_screenshot_01_puzzleList() throws {
-        let puzzle = app.staticTexts["ウミガメのスープ"]
+        let puzzle = app.staticTexts[listPuzzleTitle]
         XCTAssertTrue(puzzle.waitForExistence(timeout: elementTimeout), "パズル一覧が表示されるべき")
 
         takeScreenshot("AppStore_01_PuzzleList")
@@ -126,14 +141,13 @@ final class AppStoreScreenshotTests: XCTestCase {
     // MARK: - 2〜4. ゲーム画面（初期 → フィードバック → 途中経過）
 
     func test_screenshot_02_gameFlow() throws {
-        // 「バーの男」は初期状態で質問が表示されるためゲーム画面撮影に使用
-        let barMan = app.staticTexts["バーの男"]
-        XCTAssertTrue(barMan.waitForExistence(timeout: elementTimeout))
-        barMan.tap()
+        let puzzle = app.staticTexts[gamePuzzleTitle]
+        XCTAssertTrue(puzzle.waitForExistence(timeout: elementTimeout))
+        puzzle.tap()
         sleep(2)
 
         XCTAssertTrue(
-            app.staticTexts["出題"].waitForExistence(timeout: elementTimeout),
+            app.staticTexts[statementLabel].waitForExistence(timeout: elementTimeout),
             "ゲーム画面が表示されるべき"
         )
 
@@ -166,20 +180,19 @@ final class AppStoreScreenshotTests: XCTestCase {
     // 未設定の場合、このテストはスキップされます。
 
     func test_screenshot_03_clearScreen() throws {
-        // 「バーの男」で全問回答してクリア画面を撮影
-        let barMan = app.staticTexts["バーの男"]
-        XCTAssertTrue(barMan.waitForExistence(timeout: elementTimeout))
-        barMan.tap()
+        let puzzle = app.staticTexts[gamePuzzleTitle]
+        XCTAssertTrue(puzzle.waitForExistence(timeout: elementTimeout))
+        puzzle.tap()
         sleep(2)
 
         // 全質問を回答
         for _ in 0..<30 {
-            if app.staticTexts["クリア!"].exists { break }
+            if app.staticTexts[clearedLabel].exists { break }
             if !tapQuestionWithScroll() { break }
             sleep(1)
         }
 
-        let cleared = app.staticTexts["クリア!"]
+        let cleared = app.staticTexts[clearedLabel]
         if cleared.waitForExistence(timeout: 5) {
             takeScreenshot("AppStore_05_ClearScreen")
         } else {
@@ -195,13 +208,13 @@ final class AppStoreScreenshotTests: XCTestCase {
     // MARK: - 6. コンテンツダウンロード画面
 
     func test_screenshot_04_contentDownload() throws {
-        let puzzle = app.staticTexts["ウミガメのスープ"]
+        let puzzle = app.staticTexts[listPuzzleTitle]
         XCTAssertTrue(puzzle.waitForExistence(timeout: elementTimeout))
 
         app.buttons["arrow.down.circle"].tap()
 
         XCTAssertTrue(
-            app.navigationBars["コンテンツ"].waitForExistence(timeout: elementTimeout),
+            app.navigationBars[contentNavTitle].waitForExistence(timeout: elementTimeout),
             "コンテンツ画面が表示されるべき"
         )
 
