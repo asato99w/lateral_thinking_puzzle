@@ -14,7 +14,7 @@ struct StartGameUseCaseTests {
 
         let puzzle = PuzzleData(
             title: "Test",
-            statement: "Test statement",
+            statement: "Test statement", truth: nil,
             initParadigm: "P1",
             psValues: [("d1", 1)],
             allDescriptorIDs: ["d1", "d2", "d3"],
@@ -45,7 +45,7 @@ struct StartGameUseCaseTests {
 
         let puzzle = PuzzleData(
             title: "Test",
-            statement: "Test statement",
+            statement: "Test statement", truth: nil,
             initParadigm: "P1",
             psValues: [("d1", 1)],
             allDescriptorIDs: ["d1", "d2", "d3"],

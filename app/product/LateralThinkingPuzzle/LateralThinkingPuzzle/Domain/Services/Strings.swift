@@ -12,6 +12,9 @@ enum Strings {
     static var chooseQuestion: String { s("質問を選んでください", "Choose a question") }
     static var answered: String { s("回答済み", "Answered") }
     static var cleared: String { s("クリア!", "Cleared!") }
+    static var truth: String { s("真相", "Truth") }
+    static var questionsAsked: String { s("質問数", "Questions") }
+    static var viewHistory: String { s("質問履歴を見る", "View History") }
     static var backToList: String { s("パズル一覧に戻る", "Back to puzzles") }
     static var answerYes: String { "YES" }
     static var answerNo: String { "NO" }

@@ -12,6 +12,7 @@ struct TopicCategoryDTO: Codable {
 struct PuzzleDataDTO: Codable {
     let title: String
     let statement: String
+    let truth: String?
     let initParadigm: String
     let tensionThreshold: Int?
     let shiftCandidates: [String: [String]]?
@@ -23,7 +24,7 @@ struct PuzzleDataDTO: Codable {
     let initQuestionIds: [String]?
 
     enum CodingKeys: String, CodingKey {
-        case title, statement
+        case title, statement, truth
         case initParadigm = "init_paradigm"
         case tensionThreshold = "tension_threshold"
         case shiftCandidates = "shift_candidates"
@@ -57,6 +58,7 @@ struct PuzzleDataDTO: Codable {
         return PuzzleData(
             title: title,
             statement: statement,
+            truth: truth,
             initParadigm: initParadigm,
             psValues: ps,
             allDescriptorIDs: allDescriptorIds,

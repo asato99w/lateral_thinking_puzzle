@@ -1,6 +1,7 @@
 {
   "title": "ウミガメのスープ",
   "statement": "ある男がレストランに入り、ウミガメのスープを注文した。一口飲んで店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜか？",
+  "truth": "The man had once been shipwrecked and was told he was eating turtle soup, but it was actually the flesh of a dead companion. When he tasted real turtle soup at the restaurant, he realized the truth and took his own life in despair.",
   "init_paradigm": "P1",
   "topic_categories": [
     {

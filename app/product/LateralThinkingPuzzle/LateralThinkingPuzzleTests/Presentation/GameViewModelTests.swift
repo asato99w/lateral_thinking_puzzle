@@ -13,7 +13,7 @@ struct GameViewModelTests {
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes)
 
         let puzzle = PuzzleData(
-            title: "Test", statement: "Test",
+            title: "Test", statement: "Test", truth: nil,
             initParadigm: "P1", psValues: [("d1", 1)],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
@@ -38,7 +38,7 @@ struct GameViewModelTests {
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes)
 
         let puzzle = PuzzleData(
-            title: "Test", statement: "Test",
+            title: "Test", statement: "Test", truth: nil,
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
@@ -68,7 +68,7 @@ struct GameViewModelTests {
         let q2 = TestPuzzleData.makeQuestion(id: "q2", text: "Q2?", ansYes: [("d2", 1)], ansNo: [("d2", 0)], ansIrrelevant: ["d2"], correctAnswer: .yes, topicCategory: "B")
 
         let puzzle = PuzzleData(
-            title: "Test", statement: "Test",
+            title: "Test", statement: "Test", truth: nil,
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1, q2], tier: .free,
@@ -93,7 +93,7 @@ struct GameViewModelTests {
         let q2 = TestPuzzleData.makeQuestion(id: "q2", text: "Q2?", ansYes: [("d2", 1)], ansNo: [("d2", 0)], ansIrrelevant: ["d2"], correctAnswer: .yes, topicCategory: "B")
 
         let puzzle = PuzzleData(
-            title: "Test", statement: "Test",
+            title: "Test", statement: "Test", truth: nil,
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1, q2], tier: .free,
@@ -120,7 +120,7 @@ struct GameViewModelTests {
         let q3 = TestPuzzleData.makeQuestion(id: "q3", text: "Q3?", ansYes: [("d3", 1)], ansNo: [("d3", 0)], ansIrrelevant: ["d3"], correctAnswer: .yes, topicCategory: "A")
 
         let puzzle = PuzzleData(
-            title: "Test", statement: "Test",
+            title: "Test", statement: "Test", truth: nil,
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1, q2, q3], tier: .free,
@@ -149,7 +149,7 @@ struct GameViewModelTests {
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes, topicCategory: "A")
 
         let puzzle = PuzzleData(
-            title: "Test", statement: "Test",
+            title: "Test", statement: "Test", truth: nil,
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d2", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,
@@ -175,7 +175,7 @@ struct GameViewModelTests {
         let q1 = TestPuzzleData.makeQuestion(id: "q1", ansYes: [("d1", 1)], ansNo: [("d1", 0)], ansIrrelevant: ["d1"], correctAnswer: .yes, isClear: true)
 
         let puzzle = PuzzleData(
-            title: "Test", statement: "Test",
+            title: "Test", statement: "Test", truth: nil,
             initParadigm: "P1", psValues: [],
             allDescriptorIDs: ["d1", "d3"],
             paradigms: ["P1": p1], questions: [q1], tier: .free,

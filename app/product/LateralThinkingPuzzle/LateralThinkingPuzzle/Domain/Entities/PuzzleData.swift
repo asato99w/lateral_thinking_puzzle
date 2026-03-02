@@ -6,6 +6,7 @@ struct TopicCategory: Equatable, Sendable, Identifiable {
 struct PuzzleData: Equatable, Sendable {
     let title: String
     let statement: String
+    let truth: String?
     let initParadigm: String
     let psValues: [(String, Int)]
     let allDescriptorIDs: [String]
