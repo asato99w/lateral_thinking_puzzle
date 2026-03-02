@@ -186,7 +186,6 @@ struct PuzzleListView: View {
                 Text(puzzle.statementPreview)
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.5))
-                    .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
 
                 if solved {
