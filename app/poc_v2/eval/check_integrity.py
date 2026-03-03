@@ -66,13 +66,14 @@ def check_hypothesis_refs(data: dict) -> list[str]:
     errors = []
     fact_ids = {f["id"] for f in data.get("facts", [])}
     hypo_ids = {h["id"] for h in data.get("hypotheses", [])}
-    valid_ids = fact_ids | hypo_ids
     for hypo in data.get("hypotheses", []):
         hid = hypo["id"]
         for cond_group in hypo.get("formation_conditions", []):
             for ref in cond_group:
-                if ref not in valid_ids:
-                    errors.append(f"hypothesis '{hid}' の formation_conditions 参照 '{ref}' が facts/hypotheses に存在しない")
+                if ref in fact_ids:
+                    errors.append(f"hypothesis '{hid}' の formation_conditions に事実 '{ref}' が含まれている（仮説のみ許可）")
+                elif ref not in hypo_ids:
+                    errors.append(f"hypothesis '{hid}' の formation_conditions 参照 '{ref}' が hypotheses に存在しない")
     return errors
 
 
@@ -80,13 +81,14 @@ def check_question_refs(data: dict) -> list[str]:
     errors = []
     fact_ids = {f["id"] for f in data.get("facts", [])}
     hypo_ids = {h["id"] for h in data.get("hypotheses", [])}
-    valid_recall_ids = fact_ids | hypo_ids
     for q in data.get("questions", []):
         qid = q["id"]
         for cond_group in q.get("recall_conditions", []):
             for ref in cond_group:
-                if ref not in valid_recall_ids:
-                    errors.append(f"question '{qid}' の recall_conditions 参照 '{ref}' が facts/hypotheses に存在しない")
+                if ref in fact_ids:
+                    errors.append(f"question '{qid}' の recall_conditions に事実 '{ref}' が含まれている（仮説のみ許可）")
+                elif ref not in hypo_ids:
+                    errors.append(f"question '{qid}' の recall_conditions 参照 '{ref}' が hypotheses に存在しない")
         for ref in q.get("reveals", []):
             if ref not in fact_ids:
                 errors.append(f"question '{qid}' の reveals 参照 '{ref}' が facts に存在しない")

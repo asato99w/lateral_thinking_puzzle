@@ -61,33 +61,49 @@ def init_game(puzzle: PuzzleData) -> GameState:
 
 
 def evaluate_hypotheses(state: GameState, puzzle: PuzzleData) -> list[str]:
-    """f(facts) -> hypotheses: 観測事実から仮説を評価し、新たに形成された仮説を返す"""
+    """f(facts) -> derived: 観測事実から導出済み集合を計算し、新たに形成された仮説を返す。
+
+    導出ロジック（structure/仮説導出.md）:
+    1. 導出済み集合を観測事実集合で初期化
+    2. 仮説が導出済み集合内の事実と一致 → 導出
+    3. 形成条件（仮説のみ）のいずれかのグループが全て導出済み → 導出
+    4. 変化がなくなるまで繰り返す
+    """
     newly_formed: list[str] = []
+    derived = set(state.observed_facts)
     changed = True
     while changed:
         changed = False
         for h in puzzle.hypotheses.values():
-            if h.id in state.formed_hypotheses:
+            if h.id in derived:
                 continue
-            for condition_set in h.formation_conditions:
-                if all(
-                    c in state.observed_facts or c in state.formed_hypotheses
-                    for c in condition_set
-                ):
+            # 仮説が観測事実と一致する場合
+            if h.id in state.observed_facts:
+                derived.add(h.id)
+                if h.id not in state.formed_hypotheses:
                     state.formed_hypotheses.add(h.id)
                     newly_formed.append(h.id)
+                changed = True
+                continue
+            # 形成条件（仮説のみ）が全て導出済みの場合
+            for condition_set in h.formation_conditions:
+                if all(c in derived for c in condition_set):
+                    derived.add(h.id)
+                    if h.id not in state.formed_hypotheses:
+                        state.formed_hypotheses.add(h.id)
+                        newly_formed.append(h.id)
                     changed = True
                     break
     return newly_formed
 
 
 def _check_conditions(conditions: list[list[str]], state: GameState) -> bool:
-    """OR of AND の条件判定: いずれかの条件セットが全て満たされていれば True"""
+    """OR of AND の条件判定: いずれかの条件セットが全て導出済みであれば True。
+
+    想起条件は仮説のみで構成されるため、formed_hypotheses で判定する。
+    """
     return any(
-        all(
-            c in state.observed_facts or c in state.formed_hypotheses
-            for c in condition_set
-        )
+        all(c in state.formed_hypotheses for c in condition_set)
         for condition_set in conditions
     )
 

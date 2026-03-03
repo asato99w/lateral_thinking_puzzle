@@ -58,27 +58,42 @@ def _transitive_deps(pid: str, piece_deps: dict[str, set[str]]) -> set[str]:
 
 
 def _derivable_hypotheses(allowed_facts: set[str], hypotheses: dict[str, list[list[str]]]) -> set[str]:
-    """allowed_facts から導出可能な全仮説を不動点計算で求める。"""
-    known = set(allowed_facts)
+    """allowed_facts から導出可能な全仮説を不動点計算で求める。
+
+    導出ロジック（structure/仮説導出.md）:
+    1. 導出済み集合を allowed_facts で初期化
+    2. 仮説が導出済み集合内の事実と一致 → 導出
+    3. 形成条件（仮説のみ）のいずれかのグループが全て導出済み → 導出
+    4. 変化がなくなるまで繰り返す
+    """
+    derived = set(allowed_facts)
     changed = True
     while changed:
         changed = False
         for hid, conditions in hypotheses.items():
-            if hid in known:
+            if hid in derived:
                 continue
+            # 仮説が事実と一致する場合
+            if hid in allowed_facts:
+                derived.add(hid)
+                changed = True
+                continue
+            # 形成条件が全て導出済みの場合
             for cond_group in conditions:
-                if all(ref in known for ref in cond_group):
-                    known.add(hid)
+                if all(ref in derived for ref in cond_group):
+                    derived.add(hid)
                     changed = True
                     break
-    return known - allowed_facts
+    return derived - allowed_facts
 
 
 def check_recall_scope(data: dict) -> list[str]:
     """各ピースの想起スコープの検証。
 
-    独立ピース: recall_conditions は S の事実 + 自身の事実 + 導出可能な仮説のみ
-    依存ピース: 上記 + 依存先ピース（推移的）の事実 + 導出可能な仮説
+    recall_conditions は仮説のみで構成される。
+    各ピースのスコープ内の事実集合から導出可能な仮説のみが許可される。
+    独立ピース: S の事実 + 自身の事実から導出可能な仮説
+    依存ピース: 上記 + 依存先ピース（推移的）の事実から導出可能な仮説
     """
     errors = []
     initial = set(data.get("initial_facts", []))
@@ -114,7 +129,7 @@ def check_recall_scope(data: dict) -> list[str]:
 
         # derivable hypotheses from allowed facts
         derivable = _derivable_hypotheses(allowed_facts, hypotheses)
-        allowed = allowed_facts | derivable
+        allowed = derivable
 
         # check each question that reveals this piece's facts
         for fid in piece.get("facts", []):
@@ -123,17 +138,10 @@ def check_recall_scope(data: dict) -> list[str]:
                 for i, cond_group in enumerate(q.get("recall_conditions", [])):
                     for ref in cond_group:
                         if ref not in allowed:
-                            if ref in hypotheses:
-                                errors.append(
-                                    f"{piece_type}ピース '{pid}': question '{qid}' の "
-                                    f"recall_conditions[{i}] の仮説 '{ref}' がスコープ外"
-                                )
-                            else:
-                                owner = fact_to_piece.get(ref, "?")
-                                errors.append(
-                                    f"{piece_type}ピース '{pid}': question '{qid}' の "
-                                    f"recall_conditions[{i}] の事実 '{ref}'（ピース '{owner}'）がスコープ外"
-                                )
+                            errors.append(
+                                f"{piece_type}ピース '{pid}': question '{qid}' の "
+                                f"recall_conditions[{i}] の仮説 '{ref}' がスコープ外"
+                            )
     return errors
 
 
