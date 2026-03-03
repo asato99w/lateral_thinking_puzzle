@@ -107,6 +107,12 @@ def check_piece_dag(data: dict) -> list[str]:
     errors = []
     pieces = {p["id"]: p.get("depends_on", []) for p in data.get("pieces", [])}
 
+    # 独立ピース = depends_on が空（他のどのピースにも依存しない）
+    independent = [pid for pid, deps in pieces.items() if len(deps) == 0]
+    dependent = [pid for pid, deps in pieces.items() if len(deps) > 0]
+    print(f"    独立ピース（依存なし）: {independent}")
+    print(f"    依存ピース: {[f'{pid} → {pieces[pid]}' for pid in dependent]}")
+
     def has_cycle(node: str, visiting: set, visited: set) -> bool:
         if node in visiting:
             return True

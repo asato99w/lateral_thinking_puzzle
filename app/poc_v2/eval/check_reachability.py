@@ -45,6 +45,98 @@ def check_piece_fact_reachability(data: dict) -> list[str]:
     return errors
 
 
+def _transitive_deps(pid: str, piece_deps: dict[str, set[str]]) -> set[str]:
+    """depends_on の推移的閉包を計算する。"""
+    visited: set[str] = set()
+    stack = list(piece_deps.get(pid, set()))
+    while stack:
+        dep = stack.pop()
+        if dep not in visited:
+            visited.add(dep)
+            stack.extend(piece_deps.get(dep, set()) - visited)
+    return visited
+
+
+def _derivable_hypotheses(allowed_facts: set[str], hypotheses: dict[str, list[list[str]]]) -> set[str]:
+    """allowed_facts から導出可能な全仮説を不動点計算で求める。"""
+    known = set(allowed_facts)
+    changed = True
+    while changed:
+        changed = False
+        for hid, conditions in hypotheses.items():
+            if hid in known:
+                continue
+            for cond_group in conditions:
+                if all(ref in known for ref in cond_group):
+                    known.add(hid)
+                    changed = True
+                    break
+    return known - allowed_facts
+
+
+def check_recall_scope(data: dict) -> list[str]:
+    """各ピースの想起スコープの検証。
+
+    独立ピース: recall_conditions は S の事実 + 自身の事実 + 導出可能な仮説のみ
+    依存ピース: 上記 + 依存先ピース（推移的）の事実 + 導出可能な仮説
+    """
+    errors = []
+    initial = set(data.get("initial_facts", []))
+
+    # fact → piece mapping
+    fact_to_piece: dict[str, str] = {}
+    for piece in data.get("pieces", []):
+        for fid in piece.get("facts", []):
+            fact_to_piece[fid] = piece["id"]
+
+    piece_deps = {p["id"]: set(p.get("depends_on", [])) for p in data.get("pieces", [])}
+    piece_facts = {p["id"]: set(p.get("facts", [])) for p in data.get("pieces", [])}
+
+    # question reveals mapping: fact_id → [question, ...]
+    reveals_map: dict[str, list[dict]] = {}
+    for q in data.get("questions", []):
+        for fid in q.get("reveals", []):
+            reveals_map.setdefault(fid, []).append(q)
+
+    hypotheses = {h["id"]: h.get("formation_conditions", []) for h in data.get("hypotheses", [])}
+
+    for piece in data.get("pieces", []):
+        pid = piece["id"]
+        deps = _transitive_deps(pid, piece_deps)
+        is_independent = len(piece.get("depends_on", [])) == 0
+        piece_type = "独立" if is_independent else "依存"
+
+        # allowed facts = initial + own + transitive deps
+        allowed_facts = set(initial)
+        allowed_facts.update(piece_facts.get(pid, set()))
+        for dep_pid in deps:
+            allowed_facts.update(piece_facts.get(dep_pid, set()))
+
+        # derivable hypotheses from allowed facts
+        derivable = _derivable_hypotheses(allowed_facts, hypotheses)
+        allowed = allowed_facts | derivable
+
+        # check each question that reveals this piece's facts
+        for fid in piece.get("facts", []):
+            for q in reveals_map.get(fid, []):
+                qid = q["id"]
+                for i, cond_group in enumerate(q.get("recall_conditions", [])):
+                    for ref in cond_group:
+                        if ref not in allowed:
+                            if ref in hypotheses:
+                                errors.append(
+                                    f"{piece_type}ピース '{pid}': question '{qid}' の "
+                                    f"recall_conditions[{i}] の仮説 '{ref}' がスコープ外"
+                                )
+                            else:
+                                owner = fact_to_piece.get(ref, "?")
+                                errors.append(
+                                    f"{piece_type}ピース '{pid}': question '{qid}' の "
+                                    f"recall_conditions[{i}] の事実 '{ref}'（ピース '{owner}'）がスコープ外"
+                                )
+    return errors
+
+
 def check_orphan_facts(data: dict) -> list[str]:
     """孤立事実の検出。"""
     warnings = []
@@ -65,6 +157,7 @@ def run(path: str) -> tuple[bool, list[str]]:
     checks = [
         ("T 事実の到達可能性", check_truth_fact_reachability),
         ("ピース構成事実の到達可能性", check_piece_fact_reachability),
+        ("想起スコープの整合性", check_recall_scope),
         ("孤立事実の検出", check_orphan_facts),
     ]
 
