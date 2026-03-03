@@ -1,6 +1,6 @@
 """到達可能性チェック
 
-initial_facts 以外の全事実が question の reveals 経由で到達可能かを検証する。
+initial_confirmed 以外の全記述素が question の reveals 経由で到達可能かを検証する。
 """
 
 import json
@@ -13,25 +13,37 @@ def load_data(path: str) -> dict:
         return json.load(f)
 
 
-def check_truth_fact_reachability(data: dict) -> list[str]:
-    """initial_facts に含まれない全事実が、いずれかの question の reveals に含まれるか。"""
+def _is_base(d: dict) -> bool:
+    """基礎記述素かどうか（formation_conditions を持たない）"""
+    return "formation_conditions" not in d
+
+
+def _is_derived(d: dict) -> bool:
+    """導出記述素かどうか（formation_conditions を持つ）"""
+    return "formation_conditions" in d
+
+
+def check_base_descriptor_reachability(data: dict) -> list[str]:
+    """initial_confirmed に含まれない全基礎記述素が、いずれかの question の reveals に含まれるか。"""
     errors = []
-    initial = set(data.get("initial_facts", []))
+    initial = set(data.get("initial_confirmed", []))
     revealed: set[str] = set()
     for q in data.get("questions", []):
         revealed.update(q.get("reveals", []))
 
-    for f in data.get("facts", []):
-        fid = f["id"]
-        if fid not in initial and fid not in revealed:
-            errors.append(f"事実 '{fid}' ({f.get('label', '')}) が到達不能（initial_facts にも reveals にも含まれない）")
+    for d in data.get("descriptors", []):
+        if not _is_base(d):
+            continue
+        did = d["id"]
+        if did not in initial and did not in revealed:
+            errors.append(f"基礎記述素 '{did}' ({d.get('label', '')}) が到達不能（initial_confirmed にも reveals にも含まれない）")
     return errors
 
 
-def check_piece_fact_reachability(data: dict) -> list[str]:
-    """各ピースの facts が全て到達可能か。"""
+def check_piece_member_reachability(data: dict) -> list[str]:
+    """各ピースの members が全て到達可能か。"""
     errors = []
-    initial = set(data.get("initial_facts", []))
+    initial = set(data.get("initial_confirmed", []))
     revealed: set[str] = set()
     for q in data.get("questions", []):
         revealed.update(q.get("reveals", []))
@@ -39,9 +51,9 @@ def check_piece_fact_reachability(data: dict) -> list[str]:
 
     for piece in data.get("pieces", []):
         pid = piece["id"]
-        for fref in piece.get("facts", []):
-            if fref not in reachable:
-                errors.append(f"piece '{pid}' の構成事実 '{fref}' が到達不能")
+        for mref in piece.get("members", []):
+            if mref not in reachable:
+                errors.append(f"piece '{pid}' の構成記述素 '{mref}' が到達不能")
     return errors
 
 
@@ -57,65 +69,65 @@ def _transitive_deps(pid: str, piece_deps: dict[str, set[str]]) -> set[str]:
     return visited
 
 
-def _derivable_hypotheses(allowed_facts: set[str], hypotheses: dict[str, list[list[str]]]) -> set[str]:
-    """allowed_facts から導出可能な全仮説を不動点計算で求める。
+def _derivable_descriptors(allowed_confirmed: set[str], descriptors: dict[str, list[list[str]]]) -> set[str]:
+    """allowed_confirmed から導出可能な全記述素を不動点計算で求める。
 
-    導出ロジック（structure/仮説導出.md）:
-    1. 導出済み集合を allowed_facts で初期化
-    2. 仮説が導出済み集合内の事実と一致 → 導出
-    3. 形成条件（仮説のみ）のいずれかのグループが全て導出済み → 導出
+    導出ロジック:
+    1. 導出済み集合を allowed_confirmed で初期化
+    2. 記述素が導出済み集合内と一致 → 導出
+    3. 形成条件のいずれかのグループが全て導出済み → 導出
     4. 変化がなくなるまで繰り返す
     """
-    derived = set(allowed_facts)
+    derived = set(allowed_confirmed)
     changed = True
     while changed:
         changed = False
-        for hid, conditions in hypotheses.items():
-            if hid in derived:
+        for did, conditions in descriptors.items():
+            if did in derived:
                 continue
-            # 仮説が事実と一致する場合
-            if hid in allowed_facts:
-                derived.add(hid)
+            # 記述素が confirmed と一致する場合
+            if did in allowed_confirmed:
+                derived.add(did)
                 changed = True
                 continue
             # 形成条件が全て導出済みの場合
             for cond_group in conditions:
                 if all(ref in derived for ref in cond_group):
-                    derived.add(hid)
+                    derived.add(did)
                     changed = True
                     break
-    # 導出済み集合のうち仮説IDに該当するものを返す。
-    # H-* が事実と仮説の両方のIDを持つ場合、allowed_facts にあっても仮説として返す。
-    return {hid for hid in derived if hid in hypotheses}
+    # 導出済み集合のうち導出記述素IDに該当するものを返す
+    return {did for did in derived if did in descriptors}
 
 
 def check_recall_scope(data: dict) -> list[str]:
     """各ピースの想起スコープの検証。
 
-    recall_conditions は仮説のみで構成される。
-    各ピースのスコープ内の事実集合から導出可能な仮説のみが許可される。
-    独立ピース: S の事実 + 自身の事実から導出可能な仮説
-    依存ピース: 上記 + 依存先ピース（推移的）の事実から導出可能な仮説
+    recall_conditions は記述素IDで構成される。
+    各ピースのスコープ内の記述素集合から導出可能な記述素のみが許可される。
+    独立ピース: S の記述素 + 自身の記述素から導出可能
+    依存ピース: 上記 + 依存先ピース（推移的）の記述素から導出可能
     """
     errors = []
-    initial = set(data.get("initial_facts", []))
+    initial = set(data.get("initial_confirmed", []))
 
-    # fact → piece mapping
-    fact_to_piece: dict[str, str] = {}
+    # descriptor → piece mapping
+    descriptor_to_piece: dict[str, str] = {}
     for piece in data.get("pieces", []):
-        for fid in piece.get("facts", []):
-            fact_to_piece[fid] = piece["id"]
+        for mid in piece.get("members", []):
+            descriptor_to_piece[mid] = piece["id"]
 
     piece_deps = {p["id"]: set(p.get("depends_on", [])) for p in data.get("pieces", [])}
-    piece_facts = {p["id"]: set(p.get("facts", [])) for p in data.get("pieces", [])}
+    piece_members = {p["id"]: set(p.get("members", [])) for p in data.get("pieces", [])}
 
-    # question reveals mapping: fact_id → [question, ...]
+    # question reveals mapping: descriptor_id → [question, ...]
     reveals_map: dict[str, list[dict]] = {}
     for q in data.get("questions", []):
-        for fid in q.get("reveals", []):
-            reveals_map.setdefault(fid, []).append(q)
+        for did in q.get("reveals", []):
+            reveals_map.setdefault(did, []).append(q)
 
-    hypotheses = {h["id"]: h.get("formation_conditions", []) for h in data.get("hypotheses", [])}
+    # 導出記述素: formation_conditions を持つもの
+    derived_descriptors = {d["id"]: d.get("formation_conditions", []) for d in data.get("descriptors", []) if _is_derived(d)}
 
     for piece in data.get("pieces", []):
         pid = piece["id"]
@@ -123,52 +135,54 @@ def check_recall_scope(data: dict) -> list[str]:
         is_independent = len(piece.get("depends_on", [])) == 0
         piece_type = "独立" if is_independent else "依存"
 
-        # allowed facts = initial + own + transitive deps
-        allowed_facts = set(initial)
-        allowed_facts.update(piece_facts.get(pid, set()))
+        # allowed confirmed = initial + own + transitive deps
+        allowed_confirmed = set(initial)
+        allowed_confirmed.update(piece_members.get(pid, set()))
         for dep_pid in deps:
-            allowed_facts.update(piece_facts.get(dep_pid, set()))
+            allowed_confirmed.update(piece_members.get(dep_pid, set()))
 
-        # derivable hypotheses from allowed facts
-        derivable = _derivable_hypotheses(allowed_facts, hypotheses)
-        allowed = derivable
+        # allowed = base descriptors in scope + derived descriptors from scope
+        derivable = _derivable_descriptors(allowed_confirmed, derived_descriptors)
+        allowed = allowed_confirmed | derivable
 
-        # check each question that reveals this piece's facts
-        for fid in piece.get("facts", []):
-            for q in reveals_map.get(fid, []):
+        # check each question that reveals this piece's members
+        for mid in piece.get("members", []):
+            for q in reveals_map.get(mid, []):
                 qid = q["id"]
                 for i, cond_group in enumerate(q.get("recall_conditions", [])):
                     for ref in cond_group:
                         if ref not in allowed:
                             errors.append(
                                 f"{piece_type}ピース '{pid}': question '{qid}' の "
-                                f"recall_conditions[{i}] の仮説 '{ref}' がスコープ外"
+                                f"recall_conditions[{i}] の記述素 '{ref}' がスコープ外"
                             )
     return errors
 
 
-def check_orphan_facts(data: dict) -> list[str]:
-    """孤立事実の検出。"""
+def check_orphan_descriptors(data: dict) -> list[str]:
+    """孤立基礎記述素の検出。"""
     warnings = []
-    initial = set(data.get("initial_facts", []))
+    initial = set(data.get("initial_confirmed", []))
     revealed: set[str] = set()
     for q in data.get("questions", []):
         revealed.update(q.get("reveals", []))
 
-    for f in data.get("facts", []):
-        fid = f["id"]
-        if fid not in initial and fid not in revealed:
-            warnings.append(f"孤立事実: '{fid}' ({f.get('label', '')})")
+    for d in data.get("descriptors", []):
+        if not _is_base(d):
+            continue
+        did = d["id"]
+        if did not in initial and did not in revealed:
+            warnings.append(f"孤立記述素: '{did}' ({d.get('label', '')})")
     return warnings
 
 
 def run(path: str) -> tuple[bool, list[str]]:
     data = load_data(path)
     checks = [
-        ("T 事実の到達可能性", check_truth_fact_reachability),
-        ("ピース構成事実の到達可能性", check_piece_fact_reachability),
+        ("基礎記述素の到達可能性", check_base_descriptor_reachability),
+        ("ピース構成記述素の到達可能性", check_piece_member_reachability),
         ("想起スコープの整合性", check_recall_scope),
-        ("孤立事実の検出", check_orphan_facts),
+        ("孤立記述素の検出", check_orphan_descriptors),
     ]
 
     all_errors: list[str] = []

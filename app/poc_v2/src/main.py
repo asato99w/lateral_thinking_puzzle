@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 from engine import (
@@ -15,8 +16,6 @@ from engine import (
 )
 from models import GameState
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
-
 
 def display_state(state: GameState, puzzle: PuzzleData) -> None:
     """現在の状態を表示"""
@@ -24,19 +23,29 @@ def display_state(state: GameState, puzzle: PuzzleData) -> None:
     print("【現在の状態】")
     print("-" * 60)
 
-    # 観測済み事実
-    print(f"\n📋 観測済み事実 ({len(state.observed_facts)}件):")
-    for fid in sorted(state.observed_facts):
-        fact = puzzle.facts[fid]
-        marker = "S" if fid.startswith("Ps") else "T"
-        print(f"  [{marker}] {fact.label}")
+    # confirmed（基礎記述素 = reveals 等で直接確認されたもの）
+    base_confirmed = [did for did in sorted(state.confirmed)
+                      if puzzle.descriptors[did].formation_conditions is None]
+    derived_confirmed = [did for did in sorted(state.confirmed)
+                         if puzzle.descriptors[did].formation_conditions is not None]
 
-    # 形成済み仮説
-    if state.formed_hypotheses:
-        print(f"\n💭 形成済み仮説 ({len(state.formed_hypotheses)}件):")
-        for hid in sorted(state.formed_hypotheses):
-            hyp = puzzle.hypotheses[hid]
-            print(f"  {hyp.label}")
+    print(f"\n📋 確認済み記述素 ({len(base_confirmed)}件):")
+    for did in base_confirmed:
+        d = puzzle.descriptors[did]
+        if did.startswith("Ps"):
+            marker = "S"
+        elif did.startswith("Pt"):
+            marker = "T"
+        else:
+            marker = "H"
+        print(f"  [{marker}] {d.label}")
+
+    # 導出で confirmed になった記述素
+    if derived_confirmed:
+        print(f"\n💭 導出済み記述素 ({len(derived_confirmed)}件):")
+        for did in derived_confirmed:
+            d = puzzle.descriptors[did]
+            print(f"  {d.label}")
 
     # 発見済みピース
     if state.discovered_pieces:
@@ -56,17 +65,17 @@ def display_answer_result(
     """回答結果を表示"""
     print()
 
-    # 新たに判明した事実
-    if result.new_facts:
-        for fid in result.new_facts:
-            fact = puzzle.facts[fid]
-            print(f"  💡 新事実: {fact.label}")
+    # 新たに確認された記述素
+    if result.new_confirmed:
+        for did in result.new_confirmed:
+            d = puzzle.descriptors[did]
+            print(f"  💡 新記述素: {d.label}")
 
-    # 新たに形成された仮説
-    if result.new_hypotheses:
-        for hid in result.new_hypotheses:
-            hyp = puzzle.hypotheses[hid]
-            print(f"  💭 仮説形成: {hyp.label}")
+    # 新たに導出された記述素
+    if result.new_derived:
+        for did in result.new_derived:
+            d = puzzle.descriptors[did]
+            print(f"  💭 導出: {d.label}")
 
     # メカニズム表示
     if result.is_link:
@@ -81,7 +90,7 @@ def display_answer_result(
             dep_type = "独立" if not piece.depends_on else "依存"
             print(f"  🧩 ピース発見 [{pid}] {piece.label} ({dep_type})")
 
-    if not result.new_facts and not result.new_pieces and not result.new_hypotheses:
+    if not result.new_confirmed and not result.new_pieces and not result.new_derived:
         print("  （新しい発見はありませんでした）")
 
 
@@ -158,12 +167,15 @@ def run_auto_simulation(puzzle_path: str | Path) -> None:
     print("=" * 60)
     print(f"\n{puzzle.statement}\n")
 
-    # 初期仮説の表示
-    if state.formed_hypotheses:
-        print("💭 初期仮説:")
-        for hid in sorted(state.formed_hypotheses):
-            hyp = puzzle.hypotheses[hid]
-            print(f"  {hyp.label}")
+    # 初期導出の表示
+    derived_at_start = [did for did in sorted(state.confirmed)
+                        if did not in puzzle.initial_confirmed
+                        and puzzle.descriptors[did].formation_conditions is not None]
+    if derived_at_start:
+        print("💭 初期導出:")
+        for did in derived_at_start:
+            d = puzzle.descriptors[did]
+            print(f"  {d.label}")
         print()
 
     step = 0
@@ -171,8 +183,7 @@ def run_auto_simulation(puzzle_path: str | Path) -> None:
         questions = available_questions(state, puzzle)
         if not questions:
             print("⚠️  行き詰まり: 利用可能な質問がありません。")
-            print(f"  観測済み事実: {sorted(state.observed_facts)}")
-            print(f"  形成済み仮説: {sorted(state.formed_hypotheses)}")
+            print(f"  確認済み記述素: {sorted(state.confirmed)}")
             print(f"  発見済みピース: {sorted(state.discovered_pieces)}")
             break
 
@@ -196,11 +207,16 @@ def run_auto_simulation(puzzle_path: str | Path) -> None:
 
 
 if __name__ == "__main__":
-    import sys
+    if len(sys.argv) < 2:
+        print("Usage: python main.py <data.json> [--auto]", file=sys.stderr)
+        sys.exit(2)
 
-    puzzle_path = DATA_DIR / "turtle_soup.json"
+    puzzle_path = sys.argv[1]
+    if not Path(puzzle_path).exists():
+        print(f"Error: {puzzle_path} が見つかりません", file=sys.stderr)
+        sys.exit(2)
 
-    if len(sys.argv) > 1 and sys.argv[1] == "--auto":
+    if "--auto" in sys.argv:
         run_auto_simulation(puzzle_path)
     else:
         run_simulation(puzzle_path)

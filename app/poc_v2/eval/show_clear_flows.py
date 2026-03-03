@@ -21,15 +21,19 @@ def load_data(path: str) -> dict:
 
 def build_indices(data: dict) -> tuple:
     questions = {q["id"]: q for q in data["questions"]}
-    hypo_conds = {h["id"]: h["formation_conditions"] for h in data["hypotheses"]}
-    hypo_labels = {h["id"]: h["label"] for h in data["hypotheses"]}
-    fact_labels = {f["id"]: f["label"] for f in data["facts"]}
-    # fact_id → 質問（question_set 内のもののみ後で絞る）
-    fact_to_q: dict[str, list[str]] = {}
+    # 導出記述素の formation_conditions
+    derived_conds: dict[str, list[list[str]]] = {}
+    descriptor_labels: dict[str, str] = {}
+    for d in data["descriptors"]:
+        descriptor_labels[d["id"]] = d["label"]
+        if "formation_conditions" in d:
+            derived_conds[d["id"]] = d["formation_conditions"]
+    # descriptor_id → 質問（question_set 内のもののみ後で絞る）
+    descriptor_to_q: dict[str, list[str]] = {}
     for q in data["questions"]:
-        for fid in q["reveals"]:
-            fact_to_q.setdefault(fid, []).append(q["id"])
-    return questions, hypo_conds, hypo_labels, fact_labels, fact_to_q
+        for did in q["reveals"]:
+            descriptor_to_q.setdefault(did, []).append(q["id"])
+    return questions, derived_conds, descriptor_labels, descriptor_to_q
 
 
 def show_tree(
@@ -37,64 +41,64 @@ def show_tree(
     qset: frozenset[str],
 ):
     """クリア条件から逆算した依存ツリーを表示"""
-    questions, hypo_conds, hypo_labels, fact_labels, fact_to_q = build_indices(data)
+    questions, derived_conds, descriptor_labels, descriptor_to_q = build_indices(data)
     clear_conditions = data["clear_conditions"]
 
     shown: set[str] = set()  # 重複表示を防ぐ
 
     def label(id_: str) -> str:
-        return fact_labels.get(id_, hypo_labels.get(id_, id_))
+        return descriptor_labels.get(id_, id_)
 
-    def find_q_for_fact(fact_id: str) -> Optional[str]:
-        """qset 内で fact_id を reveals する質問を返す"""
-        for qid in fact_to_q.get(fact_id, []):
+    def find_q_for_descriptor(descriptor_id: str) -> Optional[str]:
+        """qset 内で descriptor_id を reveals する質問を返す"""
+        for qid in descriptor_to_q.get(descriptor_id, []):
             if qid in qset:
                 return qid
         return None
 
-    def find_how_hypo_formed(hid: str) -> tuple[str, list[str] | None]:
-        """仮説がどう形成されるか: ("fact_match", None) or ("formation", [条件仮説群])"""
-        # fact match 経由の質問が qset にあるか
-        qid = find_q_for_fact(hid)
+    def find_how_derived(did: str) -> tuple[str, list[str] | None]:
+        """記述素がどう形成されるか: ("reveals_match", qid) or ("formation", [条件記述素群])"""
+        # reveals match 経由の質問が qset にあるか
+        qid = find_q_for_descriptor(did)
         if qid is not None:
-            return ("fact_match", qid)
+            return ("reveals_match", qid)
         # formation_conditions 経由
-        for cond_group in hypo_conds.get(hid, []):
-            if all(is_reachable(h) for h in cond_group):
+        for cond_group in derived_conds.get(did, []):
+            if all(is_reachable(d) for d in cond_group):
                 return ("formation", cond_group)
         return ("unknown", None)
 
-    def is_reachable(hid: str) -> bool:
-        kind, detail = find_how_hypo_formed(hid)
+    def is_reachable(did: str) -> bool:
+        kind, detail = find_how_derived(did)
         return kind != "unknown"
 
-    def print_hypo(hid: str, indent: int):
-        if hid in shown:
+    def print_derived(did: str, indent: int):
+        if did in shown:
             prefix = "  " * indent
-            print(f"{prefix}  ({hid} は上述)")
+            print(f"{prefix}  ({did} は上述)")
             return
-        shown.add(hid)
+        shown.add(did)
 
-        kind, detail = find_how_hypo_formed(hid)
+        kind, detail = find_how_derived(did)
         prefix = "  " * indent
 
-        if kind == "fact_match":
+        if kind == "reveals_match":
             qid = detail
             q = questions[qid]
             recall = q["recall_conditions"]
             recall_str = format_recall(recall)
             print(f"{prefix}  ← {qid}「{q['text']}」{recall_str}")
-            # recall の仮説を再帰
+            # recall の記述素を再帰
             for cond_group in recall:
-                for dep_hid in cond_group:
-                    print(f"{prefix}    requires ★{dep_hid}({hypo_labels.get(dep_hid, '')})")
-                    print_hypo(dep_hid, indent + 2)
+                for dep_did in cond_group:
+                    print(f"{prefix}    requires ★{dep_did}({descriptor_labels.get(dep_did, '')})")
+                    print_derived(dep_did, indent + 2)
         elif kind == "formation":
             cond_group = detail
-            cond_str = " + ".join(f"★{h}" for h in cond_group)
+            cond_str = " + ".join(f"★{d}" for d in cond_group)
             print(f"{prefix}  ← formation: [{cond_str}]")
-            for dep_hid in cond_group:
-                print_hypo(dep_hid, indent + 1)
+            for dep_did in cond_group:
+                print_derived(dep_did, indent + 1)
 
     def format_recall(recall: list[list[str]]) -> str:
         if not recall:
@@ -104,32 +108,32 @@ def show_tree(
             if not cg:
                 groups.append("入口")
             else:
-                groups.append(" + ".join(f"★{h}" for h in cg))
+                groups.append(" + ".join(f"★{d}" for d in cg))
         return "  [recall: " + " | ".join(groups) + "]"
 
     # メイン表示
     for cond_group in clear_conditions:
-        facts_str = " AND ".join(f"{f}({label(f)})" for f in cond_group)
-        print(f"  クリア条件: {facts_str}")
+        descriptors_str = " AND ".join(f"{d}({label(d)})" for d in cond_group)
+        print(f"  クリア条件: {descriptors_str}")
         print()
 
-        for fact_id in cond_group:
-            qid = find_q_for_fact(fact_id)
+        for descriptor_id in cond_group:
+            qid = find_q_for_descriptor(descriptor_id)
             if qid is None:
-                print(f"  {fact_id}: 到達不能")
+                print(f"  {descriptor_id}: 到達不能")
                 continue
 
             q = questions[qid]
             recall = q["recall_conditions"]
             recall_str = format_recall(recall)
-            print(f"  {fact_id}({label(fact_id)})")
+            print(f"  {descriptor_id}({label(descriptor_id)})")
             print(f"    ← {qid}「{q['text']}」{recall_str}")
 
-            # recall の仮説を展開
+            # recall の記述素を展開
             for cond_group_r in recall:
-                for hid in cond_group_r:
-                    print(f"      requires ★{hid}({hypo_labels.get(hid, '')})")
-                    print_hypo(hid, 3)
+                for did in cond_group_r:
+                    print(f"      requires ★{did}({descriptor_labels.get(did, '')})")
+                    print_derived(did, 3)
 
         print()
 

@@ -15,40 +15,41 @@ def load_data(path: str) -> dict:
 
 def build_indices(data: dict) -> tuple:
     """逆算に必要なインデックスを構築"""
-    # fact_id → それを reveals する質問のリスト
-    fact_to_questions: dict[str, list[dict]] = {}
+    # descriptor_id → それを reveals する質問のリスト
+    descriptor_to_questions: dict[str, list[dict]] = {}
     for q in data.get("questions", []):
-        for fid in q.get("reveals", []):
-            fact_to_questions.setdefault(fid, []).append(q)
+        for did in q.get("reveals", []):
+            descriptor_to_questions.setdefault(did, []).append(q)
 
-    # hypothesis_id → formation_conditions
-    hypo_conditions: dict[str, list[list[str]]] = {}
-    for h in data.get("hypotheses", []):
-        hypo_conditions[h["id"]] = h.get("formation_conditions", [])
+    # 導出記述素の formation_conditions
+    derived_conditions: dict[str, list[list[str]]] = {}
+    for d in data.get("descriptors", []):
+        if "formation_conditions" in d:
+            derived_conditions[d["id"]] = d["formation_conditions"]
 
-    return fact_to_questions, hypo_conditions
+    return descriptor_to_questions, derived_conditions
 
 
-def find_question_sets_for_fact(
-    fact_id: str,
-    fact_to_questions: dict[str, list[dict]],
-    hypo_conditions: dict[str, list[list[str]]],
+def find_question_sets_for_descriptor(
+    descriptor_id: str,
+    descriptor_to_questions: dict[str, list[dict]],
+    derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
 ) -> list[frozenset[str]]:
-    """ある事実を observed にするために必要な質問集合の候補を全て返す。
+    """ある記述素を confirmed にするために必要な質問集合の候補を全て返す。
 
     戻り値: frozenset[質問ID] のリスト（OR: いずれかの集合があれば十分）
     """
-    if fact_id in memo:
-        return memo[fact_id]
+    if descriptor_id in memo:
+        return memo[descriptor_id]
 
     # 循環防止用にまず空を入れる
-    memo[fact_id] = []
+    memo[descriptor_id] = []
 
-    questions = fact_to_questions.get(fact_id, [])
+    questions = descriptor_to_questions.get(descriptor_id, [])
     if not questions:
-        # どの質問でも reveals されない（initial_facts なら不要、そうでなければ到達不能）
-        memo[fact_id] = []
+        # どの質問でも reveals されない（initial_confirmed なら不要、そうでなければ到達不能）
+        memo[descriptor_id] = []
         return []
 
     results: list[frozenset[str]] = []
@@ -59,21 +60,21 @@ def find_question_sets_for_fact(
 
         # recall の各グループ（OR）について、必要な質問集合を求める
         recall_options = find_question_sets_for_recall(
-            recall_conds, fact_to_questions, hypo_conditions, memo
+            recall_conds, descriptor_to_questions, derived_conditions, memo
         )
 
         # 各 recall オプションに自身の質問を追加
         for option in recall_options:
             results.append(option | frozenset([qid]))
 
-    memo[fact_id] = results
+    memo[descriptor_id] = results
     return results
 
 
 def find_question_sets_for_recall(
     recall_conditions: list[list[str]],
-    fact_to_questions: dict[str, list[dict]],
-    hypo_conditions: dict[str, list[list[str]]],
+    descriptor_to_questions: dict[str, list[dict]],
+    derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
 ) -> list[frozenset[str]]:
     """recall_conditions（OR of AND）を満たすための質問集合候補を返す"""
@@ -88,49 +89,49 @@ def find_question_sets_for_recall(
             results.append(frozenset())
             continue
 
-        # AND: グループ内の全仮説を形成する必要がある
-        group_options = find_question_sets_for_hypothesis_group(
-            cond_group, fact_to_questions, hypo_conditions, memo
+        # AND: グループ内の全記述素を形成する必要がある
+        group_options = find_question_sets_for_derived_group(
+            cond_group, descriptor_to_questions, derived_conditions, memo
         )
         results.extend(group_options)
 
     return results
 
 
-def find_question_sets_for_hypothesis_group(
-    hypo_ids: list[str],
-    fact_to_questions: dict[str, list[dict]],
-    hypo_conditions: dict[str, list[list[str]]],
+def find_question_sets_for_derived_group(
+    descriptor_ids: list[str],
+    descriptor_to_questions: dict[str, list[dict]],
+    derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
 ) -> list[frozenset[str]]:
-    """仮説グループ（AND）を全て形成するための質問集合候補を返す"""
-    # 各仮説について必要な質問集合を求め、直積を取る
-    per_hypo_options: list[list[frozenset[str]]] = []
-    for hid in hypo_ids:
-        options = find_question_sets_for_hypothesis(
-            hid, fact_to_questions, hypo_conditions, memo
+    """記述素グループ（AND）を全て形成するための質問集合候補を返す"""
+    # 各記述素について必要な質問集合を求め、直積を取る
+    per_descriptor_options: list[list[frozenset[str]]] = []
+    for did in descriptor_ids:
+        options = find_question_sets_for_derived(
+            did, descriptor_to_questions, derived_conditions, memo
         )
         if not options:
             return []  # 1つでも到達不能なら全体が不可能
-        per_hypo_options.append(options)
+        per_descriptor_options.append(options)
 
-    # 直積: 各仮説から1つずつ選んで和集合を取る
-    return cartesian_union(per_hypo_options)
+    # 直積: 各記述素から1つずつ選んで和集合を取る
+    return cartesian_union(per_descriptor_options)
 
 
-def find_question_sets_for_hypothesis(
-    hypo_id: str,
-    fact_to_questions: dict[str, list[dict]],
-    hypo_conditions: dict[str, list[list[str]]],
+def find_question_sets_for_derived(
+    descriptor_id: str,
+    descriptor_to_questions: dict[str, list[dict]],
+    derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
 ) -> list[frozenset[str]]:
-    """ある仮説を形成するための質問集合候補を返す。
+    """ある導出記述素を形成するための質問集合候補を返す。
 
-    仮説は2つの方法で形成される:
-    1. fact match: hypo_id と同じ ID の事実が observed → 質問で reveals
-    2. formation_conditions: 条件仮説が全て形成済み
+    記述素は2つの方法で形成される:
+    1. reveals match: descriptor_id を reveals する質問経由で直接 confirmed
+    2. formation_conditions: 条件記述素が全て confirmed/形成済み
     """
-    cache_key = f"hypo:{hypo_id}"
+    cache_key = f"derived:{descriptor_id}"
     if cache_key in memo:
         return memo[cache_key]
 
@@ -138,17 +139,17 @@ def find_question_sets_for_hypothesis(
 
     results: list[frozenset[str]] = []
 
-    # 方法1: fact match（H-* 事実を reveals する質問経由）
-    fact_options = find_question_sets_for_fact(
-        hypo_id, fact_to_questions, hypo_conditions, memo
+    # 方法1: reveals match（記述素を reveals する質問経由）
+    descriptor_options = find_question_sets_for_descriptor(
+        descriptor_id, descriptor_to_questions, derived_conditions, memo
     )
-    results.extend(fact_options)
+    results.extend(descriptor_options)
 
     # 方法2: formation_conditions 経由
-    conditions = hypo_conditions.get(hypo_id, [])
+    conditions = derived_conditions.get(descriptor_id, [])
     for cond_group in conditions:
-        group_options = find_question_sets_for_hypothesis_group(
-            cond_group, fact_to_questions, hypo_conditions, memo
+        group_options = find_question_sets_for_derived_group(
+            cond_group, descriptor_to_questions, derived_conditions, memo
         )
         results.extend(group_options)
 
@@ -187,7 +188,7 @@ def minimize(sets: list[frozenset[str]]) -> list[frozenset[str]]:
 
 def run(path: str) -> list[frozenset[str]]:
     data = load_data(path)
-    fact_to_questions, hypo_conditions = build_indices(data)
+    descriptor_to_questions, derived_conditions = build_indices(data)
     clear_conditions = data.get("clear_conditions", [])
 
     if not clear_conditions:
@@ -199,18 +200,18 @@ def run(path: str) -> list[frozenset[str]]:
 
     # 各クリア条件グループ（OR）
     for cond_group in clear_conditions:
-        # AND: グループ内の全事実を観測する
-        per_fact_options: list[list[frozenset[str]]] = []
-        for fact_id in cond_group:
-            options = find_question_sets_for_fact(
-                fact_id, fact_to_questions, hypo_conditions, memo
+        # AND: グループ内の全記述素を confirmed にする
+        per_descriptor_options: list[list[frozenset[str]]] = []
+        for descriptor_id in cond_group:
+            options = find_question_sets_for_descriptor(
+                descriptor_id, descriptor_to_questions, derived_conditions, memo
             )
             if not options:
-                break  # この事実が到達不能ならこのグループは不可能
-            per_fact_options.append(options)
+                break  # この記述素が到達不能ならこのグループは不可能
+            per_descriptor_options.append(options)
         else:
-            # 全事実について選択肢がある場合、直積を取る
-            group_options = cartesian_union(per_fact_options)
+            # 全記述素について選択肢がある場合、直積を取る
+            group_options = cartesian_union(per_descriptor_options)
             all_options.extend(group_options)
 
     # 極小化

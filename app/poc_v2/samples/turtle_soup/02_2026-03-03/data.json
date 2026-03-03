@@ -4,7 +4,7 @@
   "statement": "ある男がレストランに入り、ウミガメのスープを注文した。一口飲んで店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜか？",
   "truth": "男はかつて仲間と船で遭難し、食料が尽きた。仲間の一人が死に、残った者はその肉でスープを作り「ウミガメのスープだ」と偽って男に飲ませた。レストランで本物のウミガメのスープを飲み、味が違うことに気づいた男は、あのとき飲まされたものの正体を悟り、絶望して自殺した。",
 
-  "facts": [
+  "descriptors": [
     {"id": "Ps-1", "label": "男がレストランに入った"},
     {"id": "Ps-2", "label": "ウミガメのスープを注文した"},
     {"id": "Ps-3", "label": "一口飲んだ"},
@@ -31,34 +31,24 @@
     {"id": "H-fed-soup", "label": "過去にスープを飲まされた"},
     {"id": "H-labeled-turtle", "label": "そのスープはウミガメのスープと呼ばれていた"},
     {"id": "H-trust-broken", "label": "信頼していた人に裏切られた"},
-    {"id": "H-hidden-truth", "label": "男が知らない真実がある"}
+    {"id": "H-hidden-truth", "label": "男が知らない真実がある"},
+
+    {"id": "H-past-event", "label": "男の過去に重大な体験がある",
+     "formation_conditions": [["H-shipwreck"], ["H-food-shortage"], ["H-companion-death"], ["H-lost-someone"], ["H-sailor", "H-occupation-important"]]},
+    {"id": "H-deceived", "label": "男は何かを騙された経験がある",
+     "formation_conditions": [["H-trust-broken"], ["H-hidden-truth"], ["H-fed-soup", "H-labeled-turtle"]]},
+    {"id": "H-forced-soup", "label": "危機的状況で、ウミガメのスープと偽って何かを飲まされた",
+     "formation_conditions": [["H-food-shortage", "H-fed-soup", "H-labeled-turtle"], ["H-companion-death", "H-fed-soup", "H-labeled-turtle"], ["H-companion-death", "H-trust-broken"], ["H-food-shortage", "H-trust-broken"], ["H-lost-someone", "H-trust-broken"]]}
   ],
 
-  "initial_facts": ["Ps-1", "Ps-2", "Ps-3", "Ps-4", "Ps-5", "Ps-6"],
+  "initial_confirmed": ["Ps-1", "Ps-2", "Ps-3", "Ps-4", "Ps-5", "Ps-6"],
 
   "clear_conditions": [["Pt-6", "Pt-8"]],
 
   "pieces": [
-    {"id": "P-past", "label": "過去の遭難", "facts": ["Pt-1", "Pt-2", "Pt-3", "H-sailor", "H-shipwreck", "H-lost-someone", "H-food-shortage"], "depends_on": []},
-    {"id": "P-deception", "label": "スープの偽装", "facts": ["Pt-4", "Pt-5", "H-fed-soup", "H-labeled-turtle"], "depends_on": []},
-    {"id": "P-realization", "label": "気づきと絶望", "facts": ["Pt-6", "Pt-7", "Pt-8", "Pt-9"], "depends_on": ["P-past", "P-deception"]}
-  ],
-
-  "hypotheses": [
-    {"id": "H-past-event", "label": "男の過去に重大な体験がある", "formation_conditions": [["H-shipwreck"], ["H-food-shortage"], ["H-companion-death"], ["H-lost-someone"], ["H-sailor", "H-occupation-important"]]},
-    {"id": "H-deceived", "label": "男は何かを騙された経験がある", "formation_conditions": [["H-trust-broken"], ["H-hidden-truth"], ["H-fed-soup", "H-labeled-turtle"]]},
-    {"id": "H-forced-soup", "label": "危機的状況で、ウミガメのスープと偽って何かを飲まされた", "formation_conditions": [["H-food-shortage", "H-fed-soup", "H-labeled-turtle"], ["H-companion-death", "H-fed-soup", "H-labeled-turtle"], ["H-companion-death", "H-trust-broken"], ["H-food-shortage", "H-trust-broken"], ["H-lost-someone", "H-trust-broken"]]},
-
-    {"id": "H-sailor", "label": "男は船乗りだった", "formation_conditions": []},
-    {"id": "H-occupation-important", "label": "男の職業が重要", "formation_conditions": []},
-    {"id": "H-shipwreck", "label": "男は遭難したことがある", "formation_conditions": []},
-    {"id": "H-food-shortage", "label": "食料が尽きた", "formation_conditions": []},
-    {"id": "H-companion-death", "label": "仲間が死んだ", "formation_conditions": []},
-    {"id": "H-lost-someone", "label": "男は誰かを失った", "formation_conditions": []},
-    {"id": "H-fed-soup", "label": "過去にスープを飲まされた", "formation_conditions": []},
-    {"id": "H-labeled-turtle", "label": "そのスープはウミガメのスープと呼ばれていた", "formation_conditions": []},
-    {"id": "H-trust-broken", "label": "信頼していた人に裏切られた", "formation_conditions": []},
-    {"id": "H-hidden-truth", "label": "男が知らない真実がある", "formation_conditions": []}
+    {"id": "P-past", "label": "過去の遭難", "members": ["Pt-1", "Pt-2", "Pt-3", "H-sailor", "H-shipwreck", "H-lost-someone", "H-food-shortage"], "depends_on": []},
+    {"id": "P-deception", "label": "スープの偽装", "members": ["Pt-4", "Pt-5", "H-fed-soup", "H-labeled-turtle"], "depends_on": []},
+    {"id": "P-realization", "label": "気づきと絶望", "members": ["Pt-6", "Pt-7", "Pt-8", "Pt-9"], "depends_on": ["P-past", "P-deception"]}
   ],
 
   "questions": [

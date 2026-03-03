@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 
-REQUIRED_KEYS = ["id", "title", "statement", "truth", "facts", "initial_facts", "clear_conditions", "pieces", "hypotheses", "questions"]
+REQUIRED_KEYS = ["id", "title", "statement", "truth", "descriptors", "initial_confirmed", "clear_conditions", "pieces", "questions"]
 VALID_MECHANISMS = {"observation", "link", "anomaly"}
 
 
@@ -27,7 +27,7 @@ def check_required_keys(data: dict) -> list[str]:
 
 def check_unique_ids(data: dict) -> list[str]:
     errors = []
-    for collection_name in ("facts", "pieces", "hypotheses", "questions"):
+    for collection_name in ("descriptors", "pieces", "questions"):
         items = data.get(collection_name, [])
         ids = [item["id"] for item in items]
         seen = set()
@@ -38,18 +38,18 @@ def check_unique_ids(data: dict) -> list[str]:
     return errors
 
 
-def check_initial_facts(data: dict) -> list[str]:
+def check_initial_confirmed(data: dict) -> list[str]:
     errors = []
-    fact_ids = {f["id"] for f in data.get("facts", [])}
-    for ref in data.get("initial_facts", []):
-        if ref not in fact_ids:
-            errors.append(f"initial_facts の '{ref}' が facts に存在しない")
+    descriptor_ids = {d["id"] for d in data.get("descriptors", [])}
+    for ref in data.get("initial_confirmed", []):
+        if ref not in descriptor_ids:
+            errors.append(f"initial_confirmed の '{ref}' が descriptors に存在しない")
     return errors
 
 
 def check_clear_conditions(data: dict) -> list[str]:
     errors = []
-    fact_ids = {f["id"] for f in data.get("facts", [])}
+    descriptor_ids = {d["id"] for d in data.get("descriptors", [])}
     clear_conds = data.get("clear_conditions", [])
     if not clear_conds:
         errors.append("clear_conditions が空（クリア不可能）")
@@ -58,56 +58,53 @@ def check_clear_conditions(data: dict) -> list[str]:
         if not cond_group:
             errors.append(f"clear_conditions[{i}] が空グループ")
         for ref in cond_group:
-            if ref not in fact_ids:
-                errors.append(f"clear_conditions[{i}] の参照 '{ref}' が facts に存在しない")
+            if ref not in descriptor_ids:
+                errors.append(f"clear_conditions[{i}] の参照 '{ref}' が descriptors に存在しない")
     return errors
 
 
 def check_piece_refs(data: dict) -> list[str]:
     errors = []
-    fact_ids = {f["id"] for f in data.get("facts", [])}
+    descriptor_ids = {d["id"] for d in data.get("descriptors", [])}
     piece_ids = {p["id"] for p in data.get("pieces", [])}
     for piece in data.get("pieces", []):
         pid = piece["id"]
-        for fref in piece.get("facts", []):
-            if fref not in fact_ids:
-                errors.append(f"piece '{pid}' の facts 参照 '{fref}' が facts に存在しない")
+        for mref in piece.get("members", []):
+            if mref not in descriptor_ids:
+                errors.append(f"piece '{pid}' の members 参照 '{mref}' が descriptors に存在しない")
         for dep in piece.get("depends_on", []):
             if dep not in piece_ids:
                 errors.append(f"piece '{pid}' の depends_on 参照 '{dep}' が pieces に存在しない")
     return errors
 
 
-def check_hypothesis_refs(data: dict) -> list[str]:
+def check_formation_refs(data: dict) -> list[str]:
     errors = []
-    fact_ids = {f["id"] for f in data.get("facts", [])}
-    hypo_ids = {h["id"] for h in data.get("hypotheses", [])}
-    for hypo in data.get("hypotheses", []):
-        hid = hypo["id"]
-        for cond_group in hypo.get("formation_conditions", []):
+    descriptor_ids = {d["id"] for d in data.get("descriptors", [])}
+    for d in data.get("descriptors", []):
+        did = d["id"]
+        for cond_group in d.get("formation_conditions", []):
             for ref in cond_group:
-                if ref not in hypo_ids:
-                    errors.append(f"hypothesis '{hid}' の formation_conditions 参照 '{ref}' が hypotheses に存在しない")
-                elif ref in fact_ids and ref not in hypo_ids:
-                    errors.append(f"hypothesis '{hid}' の formation_conditions に事実のみの参照 '{ref}' が含まれている（仮説IDが必要）")
+                if ref not in descriptor_ids:
+                    errors.append(f"descriptor '{did}' の formation_conditions 参照 '{ref}' が descriptors に存在しない")
     return errors
 
 
 def check_question_refs(data: dict) -> list[str]:
     errors = []
-    fact_ids = {f["id"] for f in data.get("facts", [])}
-    hypo_ids = {h["id"] for h in data.get("hypotheses", [])}
+    descriptor_ids = {d["id"] for d in data.get("descriptors", [])}
+    # formation_conditions を持つ記述素のID集合（導出記述素 = 仮説的なもの）
+    derivable_ids = {d["id"] for d in data.get("descriptors", []) if "formation_conditions" in d}
+    # recall_conditions で使われるのは導出可能な記述素のみ（基礎記述素は reveals で直接確認される）
     for q in data.get("questions", []):
         qid = q["id"]
         for cond_group in q.get("recall_conditions", []):
             for ref in cond_group:
-                if ref not in hypo_ids:
-                    errors.append(f"question '{qid}' の recall_conditions 参照 '{ref}' が hypotheses に存在しない")
-                elif ref in fact_ids and ref not in hypo_ids:
-                    errors.append(f"question '{qid}' の recall_conditions に事実のみの参照 '{ref}' が含まれている（仮説IDが必要）")
+                if ref not in descriptor_ids:
+                    errors.append(f"question '{qid}' の recall_conditions 参照 '{ref}' が descriptors に存在しない")
         for ref in q.get("reveals", []):
-            if ref not in fact_ids:
-                errors.append(f"question '{qid}' の reveals 参照 '{ref}' が facts に存在しない")
+            if ref not in descriptor_ids:
+                errors.append(f"question '{qid}' の reveals 参照 '{ref}' が descriptors に存在しない")
     return errors
 
 
@@ -157,10 +154,10 @@ def run(path: str) -> tuple[bool, list[str]]:
     checks = [
         ("必須キーの存在", check_required_keys),
         ("ID の一意性", check_unique_ids),
-        ("initial_facts の妥当性", check_initial_facts),
+        ("initial_confirmed の妥当性", check_initial_confirmed),
         ("clear_conditions の妥当性", check_clear_conditions),
         ("pieces の参照整合", check_piece_refs),
-        ("hypotheses の参照整合", check_hypothesis_refs),
+        ("formation_conditions の参照整合", check_formation_refs),
         ("questions の参照整合", check_question_refs),
         ("mechanism の値域", check_mechanism_values),
         ("ピース依存の非循環", check_piece_dag),
