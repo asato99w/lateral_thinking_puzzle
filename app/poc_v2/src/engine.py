@@ -86,52 +86,38 @@ def init_game(puzzle: PuzzleData) -> GameState:
 
 
 def evaluate_derivations(state: GameState, puzzle: PuzzleData) -> list[str]:
-    """confirmed 集合から導出可能な記述素を不動点計算で求め、新たに confirmed に追加された記述素を返す。
+    """confirmed 集合から導出可能な記述素を不動点計算で求め、state.derived を更新する。
 
-    導出ロジック:
-    1. 導出済み集合を confirmed で初期化
-    2. 記述素が confirmed と一致 → 導出
-    3. formation_conditions のいずれかのグループが全て導出済み → 導出
-    4. 変化がなくなるまで繰り返す
+    state.confirmed は変更しない。導出結果は state.derived に格納される。
+    戻り値: 新たに導出された記述素のリスト。
     """
-    newly_confirmed: list[str] = []
-    derived = set(state.confirmed)
+    known = set(state.confirmed)  # confirmed を起点に導出を計算
+    newly_derived: list[str] = []
     changed = True
     while changed:
         changed = False
         for d in puzzle.descriptors.values():
             if d.formation_conditions is None:
-                continue  # 基礎記述素はスキップ
-            if d.id in derived:
-                # derived にあっても confirmed 未登録なら登録する
-                if d.id not in state.confirmed:
-                    state.confirmed.add(d.id)
-                    newly_confirmed.append(d.id)
                 continue
-            # 記述素が confirmed と一致する場合
-            if d.id in state.confirmed:
-                derived.add(d.id)
-                if d.id not in state.confirmed:
-                    state.confirmed.add(d.id)
-                    newly_confirmed.append(d.id)
-                changed = True
+            if d.id in known:
                 continue
-            # 形成条件のいずれかのグループが全て導出済みの場合
             for condition_set in d.formation_conditions:
-                if all(c in derived for c in condition_set):
-                    derived.add(d.id)
-                    if d.id not in state.confirmed:
-                        state.confirmed.add(d.id)
-                        newly_confirmed.append(d.id)
+                if all(c in known for c in condition_set):
+                    known.add(d.id)
                     changed = True
                     break
-    return newly_confirmed
+    # derived = known から confirmed を除いた部分
+    new_derived_set = known - state.confirmed
+    newly_derived = sorted(new_derived_set - state.derived)
+    state.derived = new_derived_set
+    return newly_derived
 
 
 def _check_conditions(conditions: list[list[str]], state: GameState) -> bool:
-    """OR of AND の条件判定: いずれかの条件セットが全て confirmed であれば True。"""
+    """OR of AND の条件判定: いずれかの条件セットが全て known（confirmed ∪ derived）であれば True。"""
+    known = state.known
     return any(
-        all(c in state.confirmed for c in condition_set)
+        all(c in known for c in condition_set)
         for condition_set in conditions
     )
 
@@ -175,11 +161,12 @@ def answer_question(
     # 導出の再評価
     new_derived = evaluate_derivations(state, puzzle)
 
-    # ピースの構成記述素がすべて揃ったかチェック
+    # ピースの構成記述素がすべて揃ったかチェック（confirmed ∪ derived で判定）
+    known = state.known
     for piece in puzzle.pieces.values():
         if piece.id in state.discovered_pieces:
             continue
-        if not all(m in state.confirmed for m in piece.members):
+        if not all(m in known for m in piece.members):
             continue
         if not all(dep in state.discovered_pieces for dep in piece.depends_on):
             continue

@@ -36,7 +36,13 @@ class Question:
 
 @dataclass
 class GameState:
-    confirmed: set[str] = field(default_factory=set)
+    confirmed: set[str] = field(default_factory=set)  # 観測で確定した記述素
+    derived: set[str] = field(default_factory=set)  # 仮説導出された記述素
     discovered_pieces: set[str] = field(default_factory=set)
     answered: set[str] = field(default_factory=set)
     history: list[str] = field(default_factory=list)
+
+    @property
+    def known(self) -> set[str]:
+        """confirmed ∪ derived: 想起やピース判定に使用"""
+        return self.confirmed | self.derived

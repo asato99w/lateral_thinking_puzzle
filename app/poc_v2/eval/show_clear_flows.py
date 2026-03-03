@@ -43,6 +43,7 @@ def show_tree(
     """クリア条件から逆算した依存ツリーを表示"""
     questions, derived_conds, descriptor_labels, descriptor_to_q = build_indices(data)
     clear_conditions = data["clear_conditions"]
+    initial = set(data.get("initial_confirmed", []))
 
     shown: set[str] = set()  # 重複表示を防ぐ
 
@@ -57,7 +58,10 @@ def show_tree(
         return None
 
     def find_how_derived(did: str) -> tuple[str, list[str] | None]:
-        """記述素がどう形成されるか: ("reveals_match", qid) or ("formation", [条件記述素群])"""
+        """記述素がどう形成されるか"""
+        # initial_confirmed は無条件で到達済み
+        if did in initial:
+            return ("initial", None)
         # reveals match 経由の質問が qset にあるか
         qid = find_q_for_descriptor(did)
         if qid is not None:
@@ -82,7 +86,9 @@ def show_tree(
         kind, detail = find_how_derived(did)
         prefix = "  " * indent
 
-        if kind == "reveals_match":
+        if kind == "initial":
+            print(f"{prefix}  ← [初期確認済み]")
+        elif kind == "reveals_match":
             qid = detail
             q = questions[qid]
             recall = q["recall_conditions"]
@@ -118,22 +124,25 @@ def show_tree(
         print()
 
         for descriptor_id in cond_group:
-            qid = find_q_for_descriptor(descriptor_id)
-            if qid is None:
-                print(f"  {descriptor_id}: 到達不能")
-                continue
-
-            q = questions[qid]
-            recall = q["recall_conditions"]
-            recall_str = format_recall(recall)
             print(f"  {descriptor_id}({label(descriptor_id)})")
-            print(f"    ← {qid}「{q['text']}」{recall_str}")
-
-            # recall の記述素を展開
-            for cond_group_r in recall:
-                for did in cond_group_r:
-                    print(f"      requires ★{did}({descriptor_labels.get(did, '')})")
-                    print_derived(did, 3)
+            kind, detail = find_how_derived(descriptor_id)
+            if kind == "reveals_match":
+                qid = detail
+                q = questions[qid]
+                recall = q["recall_conditions"]
+                recall_str = format_recall(recall)
+                print(f"    ← {qid}「{q['text']}」{recall_str}")
+                for cond_group_r in recall:
+                    for did in cond_group_r:
+                        print(f"      requires ★{did}({descriptor_labels.get(did, '')})")
+                        print_derived(did, 3)
+            elif kind == "formation":
+                cond_str = " + ".join(f"★{d}({label(d)})" for d in detail)
+                print(f"    ← formation: [{cond_str}]")
+                for dep_did in detail:
+                    print_derived(dep_did, 2)
+            else:
+                print(f"    到達不能")
 
         print()
 

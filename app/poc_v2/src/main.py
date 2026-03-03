@@ -23,27 +23,14 @@ def display_state(state: GameState, puzzle: PuzzleData) -> None:
     print("【現在の状態】")
     print("-" * 60)
 
-    # confirmed（基礎記述素 = reveals 等で直接確認されたもの）
-    base_confirmed = [did for did in sorted(state.confirmed)
-                      if puzzle.descriptors[did].formation_conditions is None]
-    derived_confirmed = [did for did in sorted(state.confirmed)
-                         if puzzle.descriptors[did].formation_conditions is not None]
-
-    print(f"\n📋 確認済み記述素 ({len(base_confirmed)}件):")
-    for did in base_confirmed:
+    print(f"\n📋 確認済み記述素 ({len(state.confirmed)}件):")
+    for did in sorted(state.confirmed):
         d = puzzle.descriptors[did]
-        if did.startswith("Ps"):
-            marker = "S"
-        elif did.startswith("Pt"):
-            marker = "T"
-        else:
-            marker = "H"
-        print(f"  [{marker}] {d.label}")
+        print(f"  {d.label}")
 
-    # 導出で confirmed になった記述素
-    if derived_confirmed:
-        print(f"\n💭 導出済み記述素 ({len(derived_confirmed)}件):")
-        for did in derived_confirmed:
+    if state.derived:
+        print(f"\n💭 導出済み記述素 ({len(state.derived)}件):")
+        for did in sorted(state.derived):
             d = puzzle.descriptors[did]
             print(f"  {d.label}")
 
@@ -167,13 +154,9 @@ def run_auto_simulation(puzzle_path: str | Path) -> None:
     print("=" * 60)
     print(f"\n{puzzle.statement}\n")
 
-    # 初期導出の表示
-    derived_at_start = [did for did in sorted(state.confirmed)
-                        if did not in puzzle.initial_confirmed
-                        and puzzle.descriptors[did].formation_conditions is not None]
-    if derived_at_start:
+    if state.derived:
         print("💭 初期導出:")
-        for did in derived_at_start:
+        for did in sorted(state.derived):
             d = puzzle.descriptors[did]
             print(f"  {d.label}")
         print()

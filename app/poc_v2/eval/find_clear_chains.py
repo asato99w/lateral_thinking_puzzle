@@ -27,7 +27,9 @@ def build_indices(data: dict) -> tuple:
         if "formation_conditions" in d:
             derived_conditions[d["id"]] = d["formation_conditions"]
 
-    return descriptor_to_questions, derived_conditions
+    initial_confirmed: set[str] = set(data.get("initial_confirmed", []))
+
+    return descriptor_to_questions, derived_conditions, initial_confirmed
 
 
 def find_question_sets_for_descriptor(
@@ -35,6 +37,7 @@ def find_question_sets_for_descriptor(
     descriptor_to_questions: dict[str, list[dict]],
     derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
+    initial_confirmed: set[str],
 ) -> list[frozenset[str]]:
     """ある記述素を confirmed にするために必要な質問集合の候補を全て返す。
 
@@ -60,13 +63,15 @@ def find_question_sets_for_descriptor(
 
         # recall の各グループ（OR）について、必要な質問集合を求める
         recall_options = find_question_sets_for_recall(
-            recall_conds, descriptor_to_questions, derived_conditions, memo
+            recall_conds, descriptor_to_questions, derived_conditions, memo,
+            initial_confirmed,
         )
 
         # 各 recall オプションに自身の質問を追加
         for option in recall_options:
             results.append(option | frozenset([qid]))
 
+    results = minimize(list(set(results)))
     memo[descriptor_id] = results
     return results
 
@@ -76,6 +81,7 @@ def find_question_sets_for_recall(
     descriptor_to_questions: dict[str, list[dict]],
     derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
+    initial_confirmed: set[str],
 ) -> list[frozenset[str]]:
     """recall_conditions（OR of AND）を満たすための質問集合候補を返す"""
     if not recall_conditions:
@@ -91,7 +97,8 @@ def find_question_sets_for_recall(
 
         # AND: グループ内の全記述素を形成する必要がある
         group_options = find_question_sets_for_derived_group(
-            cond_group, descriptor_to_questions, derived_conditions, memo
+            cond_group, descriptor_to_questions, derived_conditions, memo,
+            initial_confirmed,
         )
         results.extend(group_options)
 
@@ -103,13 +110,15 @@ def find_question_sets_for_derived_group(
     descriptor_to_questions: dict[str, list[dict]],
     derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
+    initial_confirmed: set[str],
 ) -> list[frozenset[str]]:
     """記述素グループ（AND）を全て形成するための質問集合候補を返す"""
     # 各記述素について必要な質問集合を求め、直積を取る
     per_descriptor_options: list[list[frozenset[str]]] = []
     for did in descriptor_ids:
         options = find_question_sets_for_derived(
-            did, descriptor_to_questions, derived_conditions, memo
+            did, descriptor_to_questions, derived_conditions, memo,
+            initial_confirmed,
         )
         if not options:
             return []  # 1つでも到達不能なら全体が不可能
@@ -124,13 +133,19 @@ def find_question_sets_for_derived(
     descriptor_to_questions: dict[str, list[dict]],
     derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
+    initial_confirmed: set[str],
 ) -> list[frozenset[str]]:
     """ある導出記述素を形成するための質問集合候補を返す。
 
-    記述素は2つの方法で形成される:
+    記述素は3つの方法で形成される:
+    0. initial_confirmed: 初期確認済み（質問不要）
     1. reveals match: descriptor_id を reveals する質問経由で直接 confirmed
     2. formation_conditions: 条件記述素が全て confirmed/形成済み
     """
+    # 初期確認済みの記述素は質問不要
+    if descriptor_id in initial_confirmed:
+        return [frozenset()]
+
     cache_key = f"derived:{descriptor_id}"
     if cache_key in memo:
         return memo[cache_key]
@@ -141,7 +156,8 @@ def find_question_sets_for_derived(
 
     # 方法1: reveals match（記述素を reveals する質問経由）
     descriptor_options = find_question_sets_for_descriptor(
-        descriptor_id, descriptor_to_questions, derived_conditions, memo
+        descriptor_id, descriptor_to_questions, derived_conditions, memo,
+        initial_confirmed,
     )
     results.extend(descriptor_options)
 
@@ -149,10 +165,12 @@ def find_question_sets_for_derived(
     conditions = derived_conditions.get(descriptor_id, [])
     for cond_group in conditions:
         group_options = find_question_sets_for_derived_group(
-            cond_group, descriptor_to_questions, derived_conditions, memo
+            cond_group, descriptor_to_questions, derived_conditions, memo,
+            initial_confirmed,
         )
         results.extend(group_options)
 
+    results = minimize(list(set(results)))
     memo[cache_key] = results
     return results
 
@@ -160,17 +178,19 @@ def find_question_sets_for_derived(
 def cartesian_union(
     options_list: list[list[frozenset[str]]],
 ) -> list[frozenset[str]]:
-    """複数の選択肢リストの直積を取り、各組の和集合を返す"""
+    """複数の選択肢リストの直積を取り、各組の和集合を返す。
+    各ステップで重複排除と極小化を行い、組み合わせ爆発を抑制する。"""
     if not options_list:
         return [frozenset()]
 
-    result = options_list[0]
+    result = minimize(list(set(options_list[0])))
     for next_options in options_list[1:]:
-        new_result: list[frozenset[str]] = []
+        next_min = minimize(list(set(next_options)))
+        new_result: set[frozenset[str]] = set()
         for existing in result:
-            for addition in next_options:
-                new_result.append(existing | addition)
-        result = new_result
+            for addition in next_min:
+                new_result.add(existing | addition)
+        result = minimize(list(new_result))
 
     return result
 
@@ -188,7 +208,7 @@ def minimize(sets: list[frozenset[str]]) -> list[frozenset[str]]:
 
 def run(path: str) -> list[frozenset[str]]:
     data = load_data(path)
-    descriptor_to_questions, derived_conditions = build_indices(data)
+    descriptor_to_questions, derived_conditions, initial_confirmed = build_indices(data)
     clear_conditions = data.get("clear_conditions", [])
 
     if not clear_conditions:
@@ -203,8 +223,9 @@ def run(path: str) -> list[frozenset[str]]:
         # AND: グループ内の全記述素を confirmed にする
         per_descriptor_options: list[list[frozenset[str]]] = []
         for descriptor_id in cond_group:
-            options = find_question_sets_for_descriptor(
-                descriptor_id, descriptor_to_questions, derived_conditions, memo
+            options = find_question_sets_for_derived(
+                descriptor_id, descriptor_to_questions, derived_conditions, memo,
+                initial_confirmed,
             )
             if not options:
                 break  # この記述素が到達不能ならこのグループは不可能
