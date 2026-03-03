@@ -45,18 +45,24 @@ app/poc_v2/samples/{puzzle}/
 
 ### 2. アルゴリズムの段階的適用
 
-`theory_v2/統合アルゴリズム.md` の Phase 1〜7 に従い、data.json を **段階的に** 構築する。
+`theory_v2/integration/algorithms/統合アルゴリズム.md` の Phase 1〜7 に従い、data.json を **段階的に** 構築する。
 
-各ステップで:
-1. アルゴリズムの該当 Phase を適用する
-2. 結果を data.json に追加・更新する（形式は `app/poc_v2/src/models.py` に準拠）
-3. history/ にそのステップの実施記録を書く
+各 Phase で:
+1. アルゴリズムの該当 Phase と対応する規則（`theory_v2/integration/rules/`）を読む
+2. 規則に従い Phase を適用する
+3. 結果を data.json に追加・更新する（形式は `app/poc_v2/src/models.py` に準拠）
+4. history/ にそのステップの実施記録を書く
 
-ステップの粒度はアルゴリズムの Phase に概ね対応する。準備段階の記録を含めてもよい。
+### 3. 制約の確認
+
+- formation_conditions, recall_conditions には仮説 ID のみ。事実 ID を含めない
+- 仮説導出は `theory_v2/structure/仮説導出.md` の不動点計算に従う
 
 ## 参照ファイル
 
-- `theory_v2/統合アルゴリズム.md` — Phase 定義
+- `theory_v2/integration/algorithms/統合アルゴリズム.md` — Phase 定義
+- `theory_v2/integration/rules/` — 各 Phase の規則（7 ファイル）
 - `theory_v2/terms.md` — 用語定義
-- `theory_v2/structure/汎用戦略.md` — 汎用戦略リスト
+- `theory_v2/structure/汎用戦術.md` — 汎用戦術リスト
+- `theory_v2/structure/仮説導出.md` — 仮説導出の不動点計算
 - `app/poc_v2/src/models.py` — データ形式の定義元

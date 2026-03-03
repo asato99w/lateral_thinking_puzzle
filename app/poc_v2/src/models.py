@@ -23,11 +23,11 @@ class Piece:
 
 @dataclass
 class Hypothesis:
-    """仮説。形成条件は事実/仮説の族（OR of AND）"""
+    """仮説。形成条件は仮説の族（OR of AND）"""
 
     id: str
     label: str
-    formation_conditions: list[list[str]]  # OR of AND: 各内側リストは事実/仮説IDの集合
+    formation_conditions: list[list[str]]  # OR of AND: 各内側リストは仮説IDの集合
 
 
 @dataclass
