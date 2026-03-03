@@ -38,8 +38,36 @@ def check_chain_question_coverage(data: dict) -> list[str]:
     return errors
 
 
-def check_reveals_consistency(data: dict) -> list[str]:
-    """reveals が対応ステップの output を含むか"""
+def check_output_coverage(data: dict) -> list[str]:
+    """ステップの output が質問群の reveals 合集合で全カバーされるか"""
+    errors = []
+    question_map = {q["id"]: q for q in data.get("questions", [])}
+
+    for chain in data.get("_piece_chains", []):
+        chain_id = chain.get("id", "?")
+        for i, step in enumerate(chain.get("steps", [])):
+            outputs = set(step.get("output", []))
+            if not outputs:
+                continue
+            # 質問群の reveals を合集合にする
+            collective_reveals: set[str] = set()
+            for qid in step.get("questions", []):
+                q = question_map.get(qid)
+                if q is None:
+                    continue
+                collective_reveals.update(q.get("reveals", []))
+            uncovered = outputs - collective_reveals
+            if uncovered:
+                errors.append(
+                    f"_piece_chains '{chain_id}' step[{i}]: "
+                    f"output のうち質問群が reveals しない記述素がある: {sorted(uncovered)}"
+                )
+
+    return errors
+
+
+def check_reveals_scope(data: dict) -> list[str]:
+    """質問が reveals する記述素がステップの output 範囲内か"""
     errors = []
     question_map = {q["id"]: q for q in data.get("questions", [])}
 
@@ -52,15 +80,12 @@ def check_reveals_consistency(data: dict) -> list[str]:
                 if q is None:
                     continue
                 reveals = set(q.get("reveals", []))
-                missing = outputs - reveals
-                if missing and outputs:
-                    # output の一部が reveals に含まれていれば OK（全体一致は不要）
-                    if not (outputs & reveals):
-                        errors.append(
-                            f"_piece_chains '{chain_id}' step[{i}]: "
-                            f"質問 '{qid}' の reveals が output を含まない "
-                            f"(output: {outputs}, reveals: {reveals})"
-                        )
+                overflow = reveals - outputs
+                if overflow:
+                    errors.append(
+                        f"_piece_chains '{chain_id}' step[{i}]: "
+                        f"質問 '{qid}' が output 外の記述素を reveals: {sorted(overflow)}"
+                    )
 
     return errors
 
@@ -169,7 +194,8 @@ def run(path: str) -> tuple[bool, list[str]]:
 
     checks = [
         ("連鎖ステップの質問存在", check_chain_question_coverage),
-        ("reveals と output の整合", check_reveals_consistency),
+        ("output の網羅性", check_output_coverage),
+        ("reveals のステップ範囲", check_reveals_scope),
         ("recall_conditions の導出可能性", check_recall_derivability),
         ("reveals のピース帰属", check_reveals_piece_membership),
     ]
