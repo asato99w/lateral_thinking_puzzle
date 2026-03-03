@@ -84,7 +84,9 @@ def _derivable_hypotheses(allowed_facts: set[str], hypotheses: dict[str, list[li
                     derived.add(hid)
                     changed = True
                     break
-    return derived - allowed_facts
+    # 導出済み集合のうち仮説IDに該当するものを返す。
+    # H-* が事実と仮説の両方のIDを持つ場合、allowed_facts にあっても仮説として返す。
+    return {hid for hid in derived if hid in hypotheses}
 
 
 def check_recall_scope(data: dict) -> list[str]:

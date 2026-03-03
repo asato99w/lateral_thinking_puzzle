@@ -25,6 +25,7 @@ class PuzzleData:
     truth: str
     facts: dict[str, Fact]
     initial_facts: list[str]
+    clear_conditions: list[list[str]]  # OR of AND: クリア条件（事実IDの族）
     pieces: dict[str, Piece]
     hypotheses: dict[str, Hypothesis]
     questions: dict[str, Question]
@@ -47,6 +48,7 @@ def load_puzzle(path: str | Path) -> PuzzleData:
         truth=raw["truth"],
         facts=facts,
         initial_facts=raw["initial_facts"],
+        clear_conditions=raw.get("clear_conditions", []),
         pieces=pieces,
         hypotheses=hypotheses,
         questions=questions,
@@ -76,6 +78,10 @@ def evaluate_hypotheses(state: GameState, puzzle: PuzzleData) -> list[str]:
         changed = False
         for h in puzzle.hypotheses.values():
             if h.id in derived:
+                # derived にあっても formed_hypotheses 未登録なら登録する
+                if h.id not in state.formed_hypotheses:
+                    state.formed_hypotheses.add(h.id)
+                    newly_formed.append(h.id)
                 continue
             # 仮説が観測事実と一致する場合
             if h.id in state.observed_facts:
@@ -173,5 +179,8 @@ def answer_question(
 
 
 def check_complete(state: GameState, puzzle: PuzzleData) -> bool:
-    """全ピース発見でクリア判定"""
-    return all(p_id in state.discovered_pieces for p_id in puzzle.pieces)
+    """クリア判定: clear_conditions（事実の族）のいずれかのグループが全て観測済み"""
+    return any(
+        all(fact_id in state.observed_facts for fact_id in condition_set)
+        for condition_set in puzzle.clear_conditions
+    )

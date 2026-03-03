@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 
-REQUIRED_KEYS = ["id", "title", "statement", "truth", "facts", "initial_facts", "pieces", "hypotheses", "questions"]
+REQUIRED_KEYS = ["id", "title", "statement", "truth", "facts", "initial_facts", "clear_conditions", "pieces", "hypotheses", "questions"]
 VALID_MECHANISMS = {"observation", "link", "anomaly"}
 
 
@@ -47,6 +47,22 @@ def check_initial_facts(data: dict) -> list[str]:
     return errors
 
 
+def check_clear_conditions(data: dict) -> list[str]:
+    errors = []
+    fact_ids = {f["id"] for f in data.get("facts", [])}
+    clear_conds = data.get("clear_conditions", [])
+    if not clear_conds:
+        errors.append("clear_conditions が空（クリア不可能）")
+        return errors
+    for i, cond_group in enumerate(clear_conds):
+        if not cond_group:
+            errors.append(f"clear_conditions[{i}] が空グループ")
+        for ref in cond_group:
+            if ref not in fact_ids:
+                errors.append(f"clear_conditions[{i}] の参照 '{ref}' が facts に存在しない")
+    return errors
+
+
 def check_piece_refs(data: dict) -> list[str]:
     errors = []
     fact_ids = {f["id"] for f in data.get("facts", [])}
@@ -70,10 +86,10 @@ def check_hypothesis_refs(data: dict) -> list[str]:
         hid = hypo["id"]
         for cond_group in hypo.get("formation_conditions", []):
             for ref in cond_group:
-                if ref in fact_ids:
-                    errors.append(f"hypothesis '{hid}' の formation_conditions に事実 '{ref}' が含まれている（仮説のみ許可）")
-                elif ref not in hypo_ids:
+                if ref not in hypo_ids:
                     errors.append(f"hypothesis '{hid}' の formation_conditions 参照 '{ref}' が hypotheses に存在しない")
+                elif ref in fact_ids and ref not in hypo_ids:
+                    errors.append(f"hypothesis '{hid}' の formation_conditions に事実のみの参照 '{ref}' が含まれている（仮説IDが必要）")
     return errors
 
 
@@ -85,10 +101,10 @@ def check_question_refs(data: dict) -> list[str]:
         qid = q["id"]
         for cond_group in q.get("recall_conditions", []):
             for ref in cond_group:
-                if ref in fact_ids:
-                    errors.append(f"question '{qid}' の recall_conditions に事実 '{ref}' が含まれている（仮説のみ許可）")
-                elif ref not in hypo_ids:
+                if ref not in hypo_ids:
                     errors.append(f"question '{qid}' の recall_conditions 参照 '{ref}' が hypotheses に存在しない")
+                elif ref in fact_ids and ref not in hypo_ids:
+                    errors.append(f"question '{qid}' の recall_conditions に事実のみの参照 '{ref}' が含まれている（仮説IDが必要）")
         for ref in q.get("reveals", []):
             if ref not in fact_ids:
                 errors.append(f"question '{qid}' の reveals 参照 '{ref}' が facts に存在しない")
@@ -142,6 +158,7 @@ def run(path: str) -> tuple[bool, list[str]]:
         ("必須キーの存在", check_required_keys),
         ("ID の一意性", check_unique_ids),
         ("initial_facts の妥当性", check_initial_facts),
+        ("clear_conditions の妥当性", check_clear_conditions),
         ("pieces の参照整合", check_piece_refs),
         ("hypotheses の参照整合", check_hypothesis_refs),
         ("questions の参照整合", check_question_refs),
