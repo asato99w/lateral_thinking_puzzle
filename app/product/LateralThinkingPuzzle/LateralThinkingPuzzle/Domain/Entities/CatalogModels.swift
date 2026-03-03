@@ -2,6 +2,7 @@ import Foundation
 
 struct PuzzleCatalogEntry: Codable, Identifiable, Sendable {
     let id: String
+    let engineVersion: String?
     let odrTag: String
     let titleJa: String
     let titleEn: String

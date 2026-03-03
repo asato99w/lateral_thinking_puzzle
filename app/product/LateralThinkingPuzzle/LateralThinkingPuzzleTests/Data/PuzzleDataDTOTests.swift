@@ -58,7 +58,8 @@ struct PuzzleDataDTOTests {
     }
 
     @Test func test_allBundledPuzzles_toDomain_succeeds() throws {
-        let names = ["bar_man", "desert_man", "turtle_soup", "poisonous_mushroom", "underground"]
+        // turtle_soup is now v2 engine format; tested separately via V2 engine tests
+        let names = ["bar_man", "desert_man", "poisonous_mushroom", "underground"]
         for name in names {
             let data = try loadPuzzleJSON(name: name)
             let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
@@ -70,7 +71,8 @@ struct PuzzleDataDTOTests {
     }
 
     @Test func test_allBundledPuzzles_fullGameFlow() throws {
-        let names = ["bar_man", "desert_man", "turtle_soup", "poisonous_mushroom", "underground"]
+        // turtle_soup is now v2 engine format; tested separately via V2 engine tests
+        let names = ["bar_man", "desert_man", "poisonous_mushroom", "underground"]
         for name in names {
             let data = try loadPuzzleJSON(name: name)
             let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)

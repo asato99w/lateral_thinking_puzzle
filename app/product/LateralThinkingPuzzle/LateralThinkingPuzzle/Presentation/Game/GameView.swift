@@ -13,7 +13,7 @@ struct GameView: View {
 
     var body: some View {
         if viewModel.isCleared {
-            ClearView(puzzle: viewModel.puzzle, answeredQuestions: viewModel.answeredQuestions)
+            ClearView(puzzleInfo: viewModel.puzzleInfo, answeredQuestions: viewModel.answeredQuestions)
                 .transition(.opacity)
         } else {
             VStack(spacing: 0) {
@@ -38,7 +38,7 @@ struct GameView: View {
                 Divider().opacity(0.3)
 
                 // Category filter tabs
-                if !viewModel.puzzle.topicCategories.isEmpty {
+                if !viewModel.puzzleInfo.topicCategories.isEmpty {
                     categoryTabBar
                 }
 
@@ -75,7 +75,7 @@ struct GameView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 12))
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(viewModel.puzzle.title)
+                        Text(viewModel.puzzleInfo.title)
                             .font(.headline)
                         difficultyStars(PuzzleMetadata.difficulty(for: viewModel.puzzleID))
                     }
@@ -93,7 +93,7 @@ struct GameView: View {
             if statementExpanded {
                 sectionLabel(Strings.statement)
 
-                Text(viewModel.puzzle.statement)
+                Text(viewModel.puzzleInfo.statement)
                     .font(.body)
                     .lineSpacing(4)
             }
@@ -308,7 +308,7 @@ struct GameView: View {
                     viewModel.selectedCategory = nil
                 }
 
-                ForEach(viewModel.puzzle.topicCategories) { cat in
+                ForEach(viewModel.puzzleInfo.topicCategories) { cat in
                     categoryTab(
                         label: cat.name,
                         count: viewModel.openCountForCategory(cat.id),

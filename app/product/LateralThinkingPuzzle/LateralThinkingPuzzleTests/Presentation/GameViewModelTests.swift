@@ -22,7 +22,7 @@ struct GameViewModelTests {
             resolveCaps: [:]
         )
 
-        let vm = GameViewModel(puzzle: puzzle)
+        let vm = GameViewModel(session: V1GameSession(puzzle: puzzle))
 
         #expect(!vm.isCleared)
         #expect(vm.answeredQuestions.isEmpty)
@@ -47,7 +47,7 @@ struct GameViewModelTests {
             resolveCaps: [:]
         )
 
-        let vm = GameViewModel(puzzle: puzzle)
+        let vm = GameViewModel(session: V1GameSession(puzzle: puzzle))
         let questionToAnswer = vm.openQuestions.first!
 
         vm.selectQuestion(questionToAnswer)
@@ -77,7 +77,7 @@ struct GameViewModelTests {
             resolveCaps: [:]
         )
 
-        let vm = GameViewModel(puzzle: puzzle)
+        let vm = GameViewModel(session: V1GameSession(puzzle: puzzle))
         vm.selectedCategory = nil
 
         #expect(vm.filteredOpenQuestions.count == vm.openQuestions.count)
@@ -102,7 +102,7 @@ struct GameViewModelTests {
             resolveCaps: [:]
         )
 
-        let vm = GameViewModel(puzzle: puzzle)
+        let vm = GameViewModel(session: V1GameSession(puzzle: puzzle))
         vm.selectedCategory = "A"
 
         let filtered = vm.filteredOpenQuestions
@@ -129,7 +129,7 @@ struct GameViewModelTests {
             resolveCaps: [:]
         )
 
-        let vm = GameViewModel(puzzle: puzzle)
+        let vm = GameViewModel(session: V1GameSession(puzzle: puzzle))
         let openA = vm.openCountForCategory("A")
         let openB = vm.openCountForCategory("B")
         let openC = vm.openCountForCategory("C")
@@ -158,7 +158,7 @@ struct GameViewModelTests {
             resolveCaps: [:]
         )
 
-        let vm = GameViewModel(puzzle: puzzle)
+        let vm = GameViewModel(session: V1GameSession(puzzle: puzzle))
         vm.selectedCategory = "Z"
 
         #expect(vm.filteredOpenQuestions.isEmpty)
@@ -184,7 +184,7 @@ struct GameViewModelTests {
             resolveCaps: [:]
         )
 
-        let vm = GameViewModel(puzzle: puzzle)
+        let vm = GameViewModel(session: V1GameSession(puzzle: puzzle))
         guard let question = vm.openQuestions.first else {
             Issue.record("No open questions")
             return

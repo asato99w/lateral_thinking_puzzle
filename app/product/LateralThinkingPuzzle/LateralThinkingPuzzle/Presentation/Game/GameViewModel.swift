@@ -4,8 +4,7 @@ import Observation
 @MainActor @Observable
 final class GameViewModel {
     let puzzleID: String
-    let puzzle: PuzzleData
-    private(set) var state: GameState
+    let puzzleInfo: PuzzleInfo
     private(set) var openQuestions: [Question]
     private(set) var answeredQuestions: [(question: Question, answer: Answer)] = []
     private(set) var isCleared = false
@@ -45,42 +44,32 @@ final class GameViewModel {
         openQuestions.contains { $0.topicCategory == categoryID && newQuestionIDs.contains($0.id) }
     }
 
-    private let startGame = StartGameUseCase()
-    private let answerQuestion = AnswerQuestionUseCase()
+    private var session: any GameSession
 
-    init(puzzleID: String = "", puzzle: PuzzleData) {
+    init(puzzleID: String = "", session: any GameSession) {
         self.puzzleID = puzzleID
-        self.puzzle = puzzle
-        let result = startGame.execute(puzzle: puzzle)
-        self.state = result.state
+        self.puzzleInfo = session.puzzleInfo
+        var s = session
+        let result = s.start()
         self.openQuestions = result.openQuestions
+        self.session = s
     }
 
     func selectQuestion(_ question: Question) {
         answeredQuestions.append((question: question, answer: question.correctAnswer))
 
-        let result = answerQuestion.execute(
-            state: &state,
-            question: question,
-            puzzle: puzzle,
-            currentOpen: openQuestions
-        )
+        var s = session
+        let result = s.selectQuestion(question)
+        session = s
 
-        state = result.state
         openQuestions = result.openQuestions
-
-        newQuestionIDs = []
-        for event in result.events {
-            if case .questionsOpened(let ids) = event {
-                newQuestionIDs = Set(ids)
-            }
-        }
+        newQuestionIDs = result.newQuestionIDs
 
         if !newQuestionIDs.isEmpty {
             selectedCategory = nil
         }
 
-        if result.events.contains(.puzzleCleared) {
+        if result.isCleared {
             isCleared = true
             SolvedPuzzleStore.shared.markSolved(puzzleID)
             saveHistory()
@@ -91,7 +80,7 @@ final class GameViewModel {
         let entries = answeredQuestions.map {
             GameHistoryEntry(questionText: $0.question.text, answer: $0.answer.rawValue)
         }
-        let history = GameHistory(puzzleID: puzzleID, puzzleTitle: puzzle.title, entries: entries)
+        let history = GameHistory(puzzleID: puzzleID, puzzleTitle: puzzleInfo.title, entries: entries)
         GameHistoryStore.shared.save(history)
     }
 }

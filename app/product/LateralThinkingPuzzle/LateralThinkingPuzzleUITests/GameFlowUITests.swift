@@ -24,9 +24,9 @@ final class GameFlowUITests: XCTestCase {
         let statementHeader = app.staticTexts["出題"]
         XCTAssertTrue(statementHeader.waitForExistence(timeout: 5), "Statement header should appear")
 
-        // 3. turtle_soup has no topic_categories, so no category tabs
+        // 3. turtle_soup (v2 engine) has topic_categories, so category tabs appear
         let allTab = app.buttons.containing(NSPredicate(format: "label CONTAINS %@", "すべて")).firstMatch
-        XCTAssertFalse(allTab.exists, "'すべて' tab should NOT appear (no topic_categories)")
+        XCTAssertTrue(allTab.waitForExistence(timeout: 3), "'すべて' tab should appear (v2 puzzle has topic_categories)")
 
         let screenshot = app.screenshot()
         let attach = XCTAttachment(screenshot: screenshot)

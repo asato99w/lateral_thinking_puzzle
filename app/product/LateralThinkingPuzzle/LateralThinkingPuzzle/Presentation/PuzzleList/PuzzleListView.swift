@@ -39,8 +39,8 @@ struct PuzzleListView: View {
                     puzzleList
                 }
             }
-            .navigationDestination(for: String.self) { puzzleID in
-                GameContainerView(puzzleID: puzzleID)
+            .navigationDestination(for: PuzzleNavigation.self) { nav in
+                GameContainerView(puzzleID: nav.id, engineVersion: nav.engineVersion)
             }
             .onAppear {
                 Task { await viewModel.loadPuzzles() }
@@ -143,7 +143,7 @@ struct PuzzleListView: View {
         LazyVStack(spacing: 14) {
             ForEach(viewModel.puzzles, id: \.id) { puzzle in
                 if puzzle.isDownloaded {
-                    NavigationLink(value: puzzle.id) {
+                    NavigationLink(value: PuzzleNavigation(id: puzzle.id, engineVersion: puzzle.engineVersion)) {
                         puzzleCard(puzzle)
                     }
                     .buttonStyle(.plain)
@@ -269,17 +269,31 @@ struct PuzzleListView: View {
     }
 }
 
+// MARK: - Navigation Model
+
+struct PuzzleNavigation: Hashable {
+    let id: String
+    let engineVersion: String
+}
+
 // MARK: - Game Container
 
 struct GameContainerView: View {
     let puzzleID: String
-    @State private var puzzle: PuzzleData?
+    let engineVersion: String
+
+    @State private var session: (any GameSession)?
     @State private var error: String?
+
+    init(puzzleID: String, engineVersion: String = "v1") {
+        self.puzzleID = puzzleID
+        self.engineVersion = engineVersion
+    }
 
     var body: some View {
         Group {
-            if let puzzle {
-                GameView(viewModel: GameViewModel(puzzleID: puzzleID, puzzle: puzzle))
+            if let session {
+                GameView(viewModel: GameViewModel(puzzleID: puzzleID, session: session))
             } else if let error {
                 Text(Strings.errorDetail(error))
             } else {
@@ -288,7 +302,8 @@ struct GameContainerView: View {
         }
         .task {
             do {
-                puzzle = try await JSONPuzzleRepository().fetchPuzzle(id: puzzleID)
+                let repo = JSONPuzzleRepository()
+                session = try await repo.fetchSession(id: puzzleID, engineVersion: engineVersion)
             } catch {
                 self.error = error.localizedDescription
             }

@@ -10,4 +10,5 @@ struct PuzzleSummary: Equatable, Sendable {
     let difficulty: Int
     let tier: PuzzleTier
     let isDownloaded: Bool
+    let engineVersion: String
 }

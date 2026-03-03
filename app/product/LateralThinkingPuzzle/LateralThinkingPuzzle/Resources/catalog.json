@@ -2,6 +2,7 @@
   "puzzles": [
     {
       "id": "turtle_soup",
+      "engine_version": "v2",
       "odr_tag": "puzzle-turtle-soup",
       "title_ja": "ウミガメのスープ",
       "title_en": "Turtle Soup",

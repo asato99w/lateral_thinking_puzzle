@@ -5,19 +5,19 @@ struct CatalogFilterTests {
 
     private func makeCatalog() -> PuzzleCatalog {
         let puzzles: [PuzzleCatalogEntry] = [
-            .init(id: "turtle_soup", odrTag: "", titleJa: "ウミガメ", titleEn: "Turtle Soup",
+            .init(id: "turtle_soup", engineVersion: nil, odrTag: "", titleJa: "ウミガメ", titleEn: "Turtle Soup",
                   statementPreviewJa: "", statementPreviewEn: "", icon: "", difficulty: 1,
                   tier: "free", bundled: true, locales: ["ja", "en"]),
-            .init(id: "bar_man", odrTag: "", titleJa: "バーの男", titleEn: "The Bar Man",
+            .init(id: "bar_man", engineVersion: nil, odrTag: "", titleJa: "バーの男", titleEn: "The Bar Man",
                   statementPreviewJa: "", statementPreviewEn: "", icon: "", difficulty: 2,
                   tier: "free", bundled: true, locales: ["ja"]),
-            .init(id: "desert_man", odrTag: "", titleJa: "砂漠の男", titleEn: "The Desert Man",
+            .init(id: "desert_man", engineVersion: nil, odrTag: "", titleJa: "砂漠の男", titleEn: "The Desert Man",
                   statementPreviewJa: "", statementPreviewEn: "", icon: "", difficulty: 3,
                   tier: "free", bundled: true, locales: ["ja", "en"]),
-            .init(id: "poisonous_mushroom", odrTag: "", titleJa: "毒キノコ", titleEn: "Mushroom",
+            .init(id: "poisonous_mushroom", engineVersion: nil, odrTag: "", titleJa: "毒キノコ", titleEn: "Mushroom",
                   statementPreviewJa: "", statementPreviewEn: "", icon: "", difficulty: 2,
                   tier: "free", bundled: false, locales: ["ja", "en"]),
-            .init(id: "underground", odrTag: "", titleJa: "地下室", titleEn: "Underground",
+            .init(id: "underground", engineVersion: nil, odrTag: "", titleJa: "地下室", titleEn: "Underground",
                   statementPreviewJa: "", statementPreviewEn: "", icon: "", difficulty: 2,
                   tier: "free", bundled: false, locales: ["ja"]),
         ]

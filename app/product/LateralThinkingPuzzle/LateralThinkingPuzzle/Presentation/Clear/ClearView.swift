@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ClearView: View {
-    let puzzle: PuzzleData
+    let puzzleInfo: PuzzleInfo
     let answeredQuestions: [(question: Question, answer: Answer)]
     @Environment(\.dismiss) private var dismiss
     @State private var showHistory = false
@@ -18,14 +18,14 @@ struct ClearView: View {
                     Text(Strings.truth)
                         .font(.title2.weight(.bold))
 
-                    Text(puzzle.title)
+                    Text(puzzleInfo.title)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
                 .padding(.top, 40)
 
                 // Truth card
-                if let truth = puzzle.truth {
+                if let truth = puzzleInfo.truth {
                     Text(truth)
                         .font(.body)
                         .lineSpacing(6)

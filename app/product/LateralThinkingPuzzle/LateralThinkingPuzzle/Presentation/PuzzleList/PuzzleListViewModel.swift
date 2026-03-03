@@ -34,7 +34,8 @@ final class PuzzleListViewModel {
                     icon: entry.icon,
                     difficulty: entry.difficulty,
                     tier: tier,
-                    isDownloaded: isDownloaded
+                    isDownloaded: isDownloaded,
+                    engineVersion: entry.engineVersion ?? "v1"
                 ))
             }
             puzzles = summaries
