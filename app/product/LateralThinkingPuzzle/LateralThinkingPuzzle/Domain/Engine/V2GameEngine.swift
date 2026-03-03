@@ -1,21 +1,16 @@
 // MARK: - V2 Domain Models
 
-struct V2Fact: Equatable, Sendable {
+struct V2Descriptor: Equatable, Sendable {
     let id: String
     let label: String
+    let formationConditions: [[String]]?  // nil = 基礎記述素
 }
 
 struct V2Piece: Equatable, Sendable {
     let id: String
     let label: String
-    let facts: [String]
+    let members: [String]
     let dependsOn: [String]
-}
-
-struct V2Hypothesis: Equatable, Sendable {
-    let id: String
-    let label: String
-    let formationConditions: [[String]]
 }
 
 struct V2Question: Equatable, Sendable {
@@ -34,17 +29,16 @@ struct V2PuzzleData: Sendable {
     let title: String
     let statement: String
     let truth: String
-    let facts: [String: V2Fact]
-    let initialFacts: [String]
+    let descriptors: [String: V2Descriptor]
+    let initialConfirmed: [String]
+    let clearConditions: [[String]]
     let pieces: [String: V2Piece]
-    let hypotheses: [String: V2Hypothesis]
     let questions: [String: V2Question]
     let topicCategories: [TopicCategory]
 }
 
 struct V2GameState: Equatable, Sendable {
-    var observedFacts: Set<String>
-    var formedHypotheses: Set<String>
+    var confirmed: Set<String>
     var discoveredPieces: Set<String>
     var answered: Set<String>
 }
@@ -52,8 +46,8 @@ struct V2GameState: Equatable, Sendable {
 // MARK: - V2 Engine
 
 struct V2AnswerResult: Sendable {
-    let newFacts: [String]
-    let newHypotheses: [String]
+    let newConfirmed: [String]
+    let newDerived: [String]
     let newPieces: [String]
     let mechanism: String
 }
@@ -62,44 +56,43 @@ enum V2GameEngine {
 
     static func initGame(puzzle: V2PuzzleData) -> V2GameState {
         var state = V2GameState(
-            observedFacts: Set(puzzle.initialFacts),
-            formedHypotheses: [],
+            confirmed: Set(puzzle.initialConfirmed),
             discoveredPieces: [],
             answered: []
         )
-        _ = evaluateHypotheses(state: &state, puzzle: puzzle)
+        _ = evaluateDerivations(state: &state, puzzle: puzzle)
         return state
     }
 
     @discardableResult
-    static func evaluateHypotheses(state: inout V2GameState, puzzle: V2PuzzleData) -> [String] {
-        var newlyFormed: [String] = []
-        var derived = state.observedFacts
-
+    static func evaluateDerivations(state: inout V2GameState, puzzle: V2PuzzleData) -> [String] {
+        var newlyConfirmed: [String] = []
+        var derived = Set(state.confirmed)
         var changed = true
         while changed {
             changed = false
-            for h in puzzle.hypotheses.values {
-                if derived.contains(h.id) { continue }
-
-                // Hypothesis matches an observed fact
-                if state.observedFacts.contains(h.id) {
-                    derived.insert(h.id)
-                    if !state.formedHypotheses.contains(h.id) {
-                        state.formedHypotheses.insert(h.id)
-                        newlyFormed.append(h.id)
+            for d in puzzle.descriptors.values {
+                guard let conditions = d.formationConditions else {
+                    continue  // 基礎記述素はスキップ
+                }
+                if derived.contains(d.id) {
+                    if !state.confirmed.contains(d.id) {
+                        state.confirmed.insert(d.id)
+                        newlyConfirmed.append(d.id)
                     }
+                    continue
+                }
+                if state.confirmed.contains(d.id) {
+                    derived.insert(d.id)
                     changed = true
                     continue
                 }
-
-                // Formation conditions (OR of AND) met
-                for conditionSet in h.formationConditions {
+                for conditionSet in conditions {
                     if conditionSet.allSatisfy({ derived.contains($0) }) {
-                        derived.insert(h.id)
-                        if !state.formedHypotheses.contains(h.id) {
-                            state.formedHypotheses.insert(h.id)
-                            newlyFormed.append(h.id)
+                        derived.insert(d.id)
+                        if !state.confirmed.contains(d.id) {
+                            state.confirmed.insert(d.id)
+                            newlyConfirmed.append(d.id)
                         }
                         changed = true
                         break
@@ -107,7 +100,7 @@ enum V2GameEngine {
                 }
             }
         }
-        return newlyFormed
+        return newlyConfirmed
     }
 
     static func availableQuestions(state: V2GameState, puzzle: V2PuzzleData) -> [V2Question] {
@@ -117,24 +110,24 @@ enum V2GameEngine {
     }
 
     static func answerQuestion(state: inout V2GameState, question: V2Question, puzzle: V2PuzzleData) -> V2AnswerResult {
-        var newFacts: [String] = []
+        var newConfirmed: [String] = []
         var newPieces: [String] = []
 
-        // Add revealed facts
-        for factID in question.reveals {
-            if !state.observedFacts.contains(factID) {
-                state.observedFacts.insert(factID)
-                newFacts.append(factID)
+        // reveals の記述素を confirmed に追加
+        for descriptorID in question.reveals {
+            if !state.confirmed.contains(descriptorID) {
+                state.confirmed.insert(descriptorID)
+                newConfirmed.append(descriptorID)
             }
         }
 
-        // Re-evaluate hypotheses
-        let newHypotheses = evaluateHypotheses(state: &state, puzzle: puzzle)
+        // 導出の再評価
+        let newDerived = evaluateDerivations(state: &state, puzzle: puzzle)
 
-        // Check piece completion
+        // ピースの構成記述素がすべて揃ったかチェック
         for piece in puzzle.pieces.values {
             if state.discoveredPieces.contains(piece.id) { continue }
-            guard piece.facts.allSatisfy({ state.observedFacts.contains($0) }) else { continue }
+            guard piece.members.allSatisfy({ state.confirmed.contains($0) }) else { continue }
             guard piece.dependsOn.allSatisfy({ state.discoveredPieces.contains($0) }) else { continue }
             state.discoveredPieces.insert(piece.id)
             newPieces.append(piece.id)
@@ -143,22 +136,24 @@ enum V2GameEngine {
         state.answered.insert(question.id)
 
         return V2AnswerResult(
-            newFacts: newFacts,
-            newHypotheses: newHypotheses,
+            newConfirmed: newConfirmed,
+            newDerived: newDerived,
             newPieces: newPieces,
             mechanism: question.mechanism
         )
     }
 
     static func checkComplete(state: V2GameState, puzzle: V2PuzzleData) -> Bool {
-        puzzle.pieces.keys.allSatisfy { state.discoveredPieces.contains($0) }
+        puzzle.clearConditions.contains { conditionSet in
+            conditionSet.allSatisfy { state.confirmed.contains($0) }
+        }
     }
 
     // MARK: - Private
 
     private static func checkConditions(_ conditions: [[String]], state: V2GameState) -> Bool {
         conditions.contains { conditionSet in
-            conditionSet.allSatisfy { state.formedHypotheses.contains($0) }
+            conditionSet.allSatisfy { state.confirmed.contains($0) }
         }
     }
 }

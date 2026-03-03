@@ -1,30 +1,25 @@
 import Foundation
 
-struct V2FactDTO: Codable {
+struct V2DescriptorDTO: Codable {
     let id: String
     let label: String
+    let formationConditions: [[String]]?
+
+    enum CodingKeys: String, CodingKey {
+        case id, label
+        case formationConditions = "formation_conditions"
+    }
 }
 
 struct V2PieceDTO: Codable {
     let id: String
     let label: String
-    let facts: [String]
+    let members: [String]
     let dependsOn: [String]
 
     enum CodingKeys: String, CodingKey {
-        case id, label, facts
+        case id, label, members
         case dependsOn = "depends_on"
-    }
-}
-
-struct V2HypothesisDTO: Codable {
-    let id: String
-    let label: String
-    let formationConditions: [[String]]
-
-    enum CodingKeys: String, CodingKey {
-        case id, label
-        case formationConditions = "formation_conditions"
     }
 }
 
@@ -52,31 +47,28 @@ struct V2PuzzleDataDTO: Codable {
     let title: String
     let statement: String
     let truth: String
-    let facts: [V2FactDTO]
-    let initialFacts: [String]
+    let descriptors: [V2DescriptorDTO]
+    let initialConfirmed: [String]
+    let clearConditions: [[String]]
     let pieces: [V2PieceDTO]
-    let hypotheses: [V2HypothesisDTO]
     let questions: [V2QuestionDTO]
     let topicCategories: [TopicCategoryDTO]?
 
     enum CodingKeys: String, CodingKey {
-        case id, title, statement, truth, facts
-        case initialFacts = "initial_facts"
-        case pieces, hypotheses, questions
+        case id, title, statement, truth, descriptors
+        case initialConfirmed = "initial_confirmed"
+        case clearConditions = "clear_conditions"
+        case pieces, questions
         case topicCategories = "topic_categories"
     }
 
     func toDomain() -> V2PuzzleData {
-        let factsMap = Dictionary(uniqueKeysWithValues: facts.map {
-            ($0.id, V2Fact(id: $0.id, label: $0.label))
+        let descriptorsMap = Dictionary(uniqueKeysWithValues: descriptors.map {
+            ($0.id, V2Descriptor(id: $0.id, label: $0.label, formationConditions: $0.formationConditions))
         })
 
         let piecesMap = Dictionary(uniqueKeysWithValues: pieces.map {
-            ($0.id, V2Piece(id: $0.id, label: $0.label, facts: $0.facts, dependsOn: $0.dependsOn))
-        })
-
-        let hypothesesMap = Dictionary(uniqueKeysWithValues: hypotheses.map {
-            ($0.id, V2Hypothesis(id: $0.id, label: $0.label, formationConditions: $0.formationConditions))
+            ($0.id, V2Piece(id: $0.id, label: $0.label, members: $0.members, dependsOn: $0.dependsOn))
         })
 
         let questionsMap = Dictionary(uniqueKeysWithValues: questions.map { q in
@@ -86,7 +78,6 @@ struct V2PuzzleDataDTO: Codable {
             case "no": answer = .no
             case "irrelevant": answer = .irrelevant
             default:
-                // Derive from answer text if not explicitly set
                 answer = q.answer.hasPrefix("はい") || q.answer.lowercased().hasPrefix("yes") ? .yes : .no
             }
 
@@ -107,10 +98,10 @@ struct V2PuzzleDataDTO: Codable {
             title: title,
             statement: statement,
             truth: truth,
-            facts: factsMap,
-            initialFacts: initialFacts,
+            descriptors: descriptorsMap,
+            initialConfirmed: initialConfirmed,
+            clearConditions: clearConditions,
             pieces: piecesMap,
-            hypotheses: hypothesesMap,
             questions: questionsMap,
             topicCategories: (topicCategories ?? []).map { $0.toDomain() }
         )

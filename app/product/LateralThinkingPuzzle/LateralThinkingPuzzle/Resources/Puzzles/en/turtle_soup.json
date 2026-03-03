@@ -3,129 +3,278 @@
   "title": "Turtle Soup",
   "statement": "A man entered a restaurant and ordered turtle soup. After one sip, he asked the waiter, 'Is this really turtle soup?' The waiter replied, 'Yes, it is definitely turtle soup.' That night, the man took his own life. Why?",
   "truth": "The man was once shipwrecked with his companions, and their food ran out. One companion died, and the survivors made soup from his flesh, telling the man it was 'turtle soup.' When he tasted real turtle soup at the restaurant and noticed the difference, he realized the truth about what he had been fed, and in despair, took his own life.",
-
   "topic_categories": [
-    {"id": "hypothesis", "name": "Hypothesis"},
-    {"id": "discovery", "name": "Discovery"},
-    {"id": "connection", "name": "Connection"}
+    {
+      "id": "hypothesis",
+      "name": "Hypothesis"
+    },
+    {
+      "id": "discovery",
+      "name": "Discovery"
+    },
+    {
+      "id": "connection",
+      "name": "Connection"
+    }
   ],
-
-  "facts": [
-    {"id": "Ps-1", "label": "A man entered a restaurant"},
-    {"id": "Ps-2", "label": "He ordered turtle soup"},
-    {"id": "Ps-3", "label": "He took one sip"},
-    {"id": "Ps-4", "label": "He asked the waiter if it was really turtle soup"},
-    {"id": "Ps-5", "label": "The waiter confirmed it was turtle soup"},
-    {"id": "Ps-6", "label": "The man took his own life that night"},
-
-    {"id": "Pt-1", "label": "The man was once shipwrecked with companions"},
-    {"id": "Pt-2", "label": "Their food ran out"},
-    {"id": "Pt-3", "label": "One companion died"},
-    {"id": "Pt-4", "label": "The survivors gave the man soup to drink"},
-    {"id": "Pt-5", "label": "They told him it was turtle soup"},
-    {"id": "Pt-6", "label": "The soup was actually made from the dead companion's flesh"},
-    {"id": "Pt-7", "label": "He drank real turtle soup at the restaurant"},
-    {"id": "Pt-8", "label": "He noticed the taste was different"},
-    {"id": "Pt-9", "label": "He realized the truth about what he had been fed"},
-    {"id": "Pt-10", "label": "He took his own life in despair"}
+  "descriptors": [
+    {
+      "id": "Ps-1",
+      "label": "A man entered a restaurant"
+    },
+    {
+      "id": "Ps-2",
+      "label": "He ordered turtle soup"
+    },
+    {
+      "id": "Ps-3",
+      "label": "He took one sip"
+    },
+    {
+      "id": "Ps-4",
+      "label": "He asked the waiter if it was really turtle soup"
+    },
+    {
+      "id": "Ps-5",
+      "label": "The waiter confirmed it was turtle soup"
+    },
+    {
+      "id": "Ps-6",
+      "label": "The man took his own life that night"
+    },
+    {
+      "id": "Pt-1",
+      "label": "The man was once shipwrecked with companions"
+    },
+    {
+      "id": "Pt-2",
+      "label": "Their food ran out"
+    },
+    {
+      "id": "Pt-3",
+      "label": "One companion died"
+    },
+    {
+      "id": "Pt-4",
+      "label": "The survivors gave the man soup to drink"
+    },
+    {
+      "id": "Pt-5",
+      "label": "They told him it was turtle soup"
+    },
+    {
+      "id": "Pt-6",
+      "label": "The soup was actually made from the dead companion's flesh"
+    },
+    {
+      "id": "Pt-7",
+      "label": "He drank real turtle soup at the restaurant"
+    },
+    {
+      "id": "Pt-8",
+      "label": "He noticed the taste was different"
+    },
+    {
+      "id": "Pt-9",
+      "label": "He realized the truth about what he had been fed"
+    },
+    {
+      "id": "Pt-10",
+      "label": "He took his own life in despair"
+    },
+    {
+      "id": "h_soup_ok",
+      "label": "The soup itself is fine",
+      "formation_conditions": [
+        [
+          "Ps-3",
+          "Ps-5"
+        ]
+      ]
+    },
+    {
+      "id": "h_not_sick",
+      "label": "Not a medical issue",
+      "formation_conditions": [
+        [
+          "Ps-6"
+        ],
+        [
+          "Ps-1"
+        ]
+      ]
+    },
+    {
+      "id": "h_honest_staff",
+      "label": "The waiter was honest",
+      "formation_conditions": [
+        [
+          "Ps-5"
+        ]
+      ]
+    },
+    {
+      "id": "h_not_daily",
+      "label": "Cause is not something ordinary",
+      "formation_conditions": [
+        [
+          "h_soup_ok",
+          "h_not_sick"
+        ],
+        [
+          "h_soup_ok",
+          "h_honest_staff"
+        ]
+      ]
+    },
+    {
+      "id": "h_past_matters",
+      "label": "The man's past is relevant",
+      "formation_conditions": [
+        [
+          "Ps-4"
+        ],
+        [
+          "h_not_daily",
+          "Ps-6"
+        ]
+      ]
+    },
+    {
+      "id": "h_soup_origin",
+      "label": "The origin of the soup matters",
+      "formation_conditions": [
+        [
+          "Ps-4",
+          "Ps-2"
+        ]
+      ]
+    },
+    {
+      "id": "h_special_past",
+      "label": "Something unusual happened in the past",
+      "formation_conditions": [
+        [
+          "h_not_daily"
+        ],
+        [
+          "h_past_matters"
+        ]
+      ]
+    },
+    {
+      "id": "h_others_involved",
+      "label": "Other people were involved",
+      "formation_conditions": [
+        [
+          "Ps-4"
+        ],
+        [
+          "h_special_past"
+        ]
+      ]
+    }
   ],
-
-  "initial_facts": ["Ps-1", "Ps-2", "Ps-3", "Ps-4", "Ps-5", "Ps-6"],
-
+  "initial_confirmed": [
+    "Ps-1",
+    "Ps-2",
+    "Ps-3",
+    "Ps-4",
+    "Ps-5",
+    "Ps-6"
+  ],
+  "clear_conditions": [
+    [
+      "Pt-10"
+    ]
+  ],
   "pieces": [
     {
       "id": "a",
       "label": "Food ran out and a companion died",
-      "facts": ["Pt-1", "Pt-2", "Pt-3"],
+      "members": [
+        "Pt-1",
+        "Pt-2",
+        "Pt-3"
+      ],
       "depends_on": []
     },
     {
       "id": "b",
       "label": "Soup was made from human flesh",
-      "facts": ["Pt-6"],
-      "depends_on": ["a", "c"]
+      "members": [
+        "Pt-6"
+      ],
+      "depends_on": [
+        "a",
+        "c"
+      ]
     },
     {
       "id": "c",
       "label": "It was falsely called turtle soup",
-      "facts": ["Pt-5"],
+      "members": [
+        "Pt-5"
+      ],
       "depends_on": []
     },
     {
       "id": "d",
       "label": "The man drank it (taste memory)",
-      "facts": ["Pt-4"],
-      "depends_on": ["c"]
+      "members": [
+        "Pt-4"
+      ],
+      "depends_on": [
+        "c"
+      ]
     },
     {
       "id": "e",
       "label": "Real soup tasted different",
-      "facts": ["Pt-7", "Pt-8"],
+      "members": [
+        "Pt-7",
+        "Pt-8"
+      ],
       "depends_on": []
     },
     {
       "id": "f",
       "label": "Past soup was not genuine",
-      "facts": ["Pt-9"],
-      "depends_on": ["d", "e"]
+      "members": [
+        "Pt-9"
+      ],
+      "depends_on": [
+        "d",
+        "e"
+      ]
     },
     {
       "id": "g",
       "label": "Realized truth and took his life",
-      "facts": ["Pt-10"],
-      "depends_on": ["a", "b", "c", "d", "e", "f"]
+      "members": [
+        "Pt-10"
+      ],
+      "depends_on": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ]
     }
   ],
-
-  "hypotheses": [
-    {
-      "id": "h_soup_ok",
-      "label": "The soup itself is fine",
-      "formation_conditions": [["Ps-3", "Ps-5"]]
-    },
-    {
-      "id": "h_not_sick",
-      "label": "Not a medical issue",
-      "formation_conditions": [["Ps-6"], ["Ps-1"]]
-    },
-    {
-      "id": "h_honest_staff",
-      "label": "The waiter was honest",
-      "formation_conditions": [["Ps-5"]]
-    },
-    {
-      "id": "h_not_daily",
-      "label": "Cause is not something ordinary",
-      "formation_conditions": [["h_soup_ok", "h_not_sick"], ["h_soup_ok", "h_honest_staff"]]
-    },
-    {
-      "id": "h_past_matters",
-      "label": "The man's past is relevant",
-      "formation_conditions": [["Ps-4"], ["h_not_daily", "Ps-6"]]
-    },
-    {
-      "id": "h_soup_origin",
-      "label": "The origin of the soup matters",
-      "formation_conditions": [["Ps-4", "Ps-2"]]
-    },
-    {
-      "id": "h_special_past",
-      "label": "Something unusual happened in the past",
-      "formation_conditions": [["h_not_daily"], ["h_past_matters"]]
-    },
-    {
-      "id": "h_others_involved",
-      "label": "Other people were involved",
-      "formation_conditions": [["Ps-4"], ["h_special_past"]]
-    }
-  ],
-
   "questions": [
     {
       "id": "q_h01",
       "text": "Was the soup poisoned or contaminated?",
       "answer": "No. There was nothing wrong with the soup itself.",
-      "recall_conditions": [["Ps-3", "Ps-6"]],
+      "recall_conditions": [
+        [
+          "Ps-3",
+          "Ps-6"
+        ]
+      ],
       "reveals": [],
       "mechanism": "observation",
       "correct_answer": "no",
@@ -135,7 +284,11 @@
       "id": "q_h02",
       "text": "Was the man ill?",
       "answer": "No. It was not a physical health issue.",
-      "recall_conditions": [["Ps-6"]],
+      "recall_conditions": [
+        [
+          "Ps-6"
+        ]
+      ],
       "reveals": [],
       "mechanism": "observation",
       "correct_answer": "no",
@@ -145,7 +298,12 @@
       "id": "q_h03",
       "text": "Was the waiter hiding something?",
       "answer": "No. The waiter answered honestly.",
-      "recall_conditions": [["Ps-4", "Ps-5"]],
+      "recall_conditions": [
+        [
+          "Ps-4",
+          "Ps-5"
+        ]
+      ],
       "reveals": [],
       "mechanism": "observation",
       "correct_answer": "no",
@@ -155,8 +313,17 @@
       "id": "q_e01",
       "text": "Had the man drunk this soup before?",
       "answer": "Yes. He had drunk soup called 'turtle soup' in the past.",
-      "recall_conditions": [["h_soup_origin"], ["Ps-4"]],
-      "reveals": ["Pt-7"],
+      "recall_conditions": [
+        [
+          "h_soup_origin"
+        ],
+        [
+          "Ps-4"
+        ]
+      ],
+      "reveals": [
+        "Pt-7"
+      ],
       "mechanism": "observation",
       "correct_answer": "yes",
       "topic_category": "discovery"
@@ -165,8 +332,14 @@
       "id": "q_e02",
       "text": "Did the current soup taste different from his memory?",
       "answer": "Yes! The restaurant's soup tasted different from the soup in his memory.",
-      "recall_conditions": [["Pt-7"]],
-      "reveals": ["Pt-8"],
+      "recall_conditions": [
+        [
+          "Pt-7"
+        ]
+      ],
+      "reveals": [
+        "Pt-8"
+      ],
       "mechanism": "observation",
       "correct_answer": "yes",
       "topic_category": "discovery"
@@ -175,8 +348,17 @@
       "id": "q_a01",
       "text": "Did something dangerous happen to the man in the past?",
       "answer": "Yes. The man experienced a life-threatening event.",
-      "recall_conditions": [["h_past_matters"], ["h_special_past"]],
-      "reveals": ["Pt-1"],
+      "recall_conditions": [
+        [
+          "h_past_matters"
+        ],
+        [
+          "h_special_past"
+        ]
+      ],
+      "reveals": [
+        "Pt-1"
+      ],
       "mechanism": "observation",
       "correct_answer": "yes",
       "topic_category": "discovery"
@@ -185,8 +367,14 @@
       "id": "q_a02",
       "text": "Did they run out of food during the shipwreck?",
       "answer": "Yes. Their food supply was completely exhausted.",
-      "recall_conditions": [["Pt-1"]],
-      "reveals": ["Pt-2"],
+      "recall_conditions": [
+        [
+          "Pt-1"
+        ]
+      ],
+      "reveals": [
+        "Pt-2"
+      ],
       "mechanism": "observation",
       "correct_answer": "yes",
       "topic_category": "discovery"
@@ -195,8 +383,14 @@
       "id": "q_a03",
       "text": "Did a companion die?",
       "answer": "Yes. One of his companions died.",
-      "recall_conditions": [["Pt-1"]],
-      "reveals": ["Pt-3"],
+      "recall_conditions": [
+        [
+          "Pt-1"
+        ]
+      ],
+      "reveals": [
+        "Pt-3"
+      ],
       "mechanism": "observation",
       "correct_answer": "yes",
       "topic_category": "discovery"
@@ -205,8 +399,14 @@
       "id": "q_c01",
       "text": "Was the man given soup by his companions during the shipwreck?",
       "answer": "Yes. The surviving companions gave him soup to drink.",
-      "recall_conditions": [["Pt-1"]],
-      "reveals": ["Pt-4"],
+      "recall_conditions": [
+        [
+          "Pt-1"
+        ]
+      ],
+      "reveals": [
+        "Pt-4"
+      ],
       "mechanism": "observation",
       "correct_answer": "yes",
       "topic_category": "connection"
@@ -215,8 +415,14 @@
       "id": "q_c02",
       "text": "Was that soup called 'turtle soup'?",
       "answer": "Yes! His companions told him it was turtle soup.",
-      "recall_conditions": [["Pt-4"]],
-      "reveals": ["Pt-5"],
+      "recall_conditions": [
+        [
+          "Pt-4"
+        ]
+      ],
+      "reveals": [
+        "Pt-5"
+      ],
       "mechanism": "observation",
       "correct_answer": "yes",
       "topic_category": "connection"
@@ -225,8 +431,15 @@
       "id": "q_c03",
       "text": "Was the past soup not actually turtle soup?",
       "answer": "Yes! That soup was not real turtle soup. The taste difference proved it.",
-      "recall_conditions": [["Pt-5", "Pt-8"]],
-      "reveals": ["Pt-9"],
+      "recall_conditions": [
+        [
+          "Pt-5",
+          "Pt-8"
+        ]
+      ],
+      "reveals": [
+        "Pt-9"
+      ],
       "mechanism": "anomaly",
       "correct_answer": "yes",
       "topic_category": "connection"
@@ -235,8 +448,15 @@
       "id": "q_b01",
       "text": "Was the soup made from human flesh?",
       "answer": "Yes... It was soup made from the dead companion's flesh.",
-      "recall_conditions": [["Pt-3", "Pt-5"]],
-      "reveals": ["Pt-6"],
+      "recall_conditions": [
+        [
+          "Pt-3",
+          "Pt-5"
+        ]
+      ],
+      "reveals": [
+        "Pt-6"
+      ],
       "mechanism": "link",
       "correct_answer": "yes",
       "topic_category": "connection"
@@ -245,8 +465,14 @@
       "id": "q_g01",
       "text": "Did the man realize the truth and take his own life?",
       "answer": "Yes. He realized he had eaten human flesh, and in despair, took his own life.",
-      "recall_conditions": [["Pt-9"]],
-      "reveals": ["Pt-10"],
+      "recall_conditions": [
+        [
+          "Pt-9"
+        ]
+      ],
+      "reveals": [
+        "Pt-10"
+      ],
       "mechanism": "link",
       "correct_answer": "yes",
       "topic_category": "connection"

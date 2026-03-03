@@ -3,49 +3,51 @@ import Testing
 
 struct V2CheckCompleteTests {
 
-    @Test func test_notComplete_whenPiecesMissing() {
+    @Test func test_notComplete_whenClearConditionsNotMet() {
         let puzzle = V2PuzzleData(
             id: "test", title: "", statement: "", truth: "",
-            facts: ["f1": V2Fact(id: "f1", label: "")],
-            initialFacts: ["f1"],
-            pieces: [
-                "p1": V2Piece(id: "p1", label: "", facts: ["f1"], dependsOn: []),
+            descriptors: [
+                "f1": V2Descriptor(id: "f1", label: "", formationConditions: nil),
+                "f2": V2Descriptor(id: "f2", label: "", formationConditions: nil),
             ],
-            hypotheses: [:],
+            initialConfirmed: ["f1"],
+            clearConditions: [["f1", "f2"]],
+            pieces: [:],
             questions: [:],
             topicCategories: []
         )
-        let state = V2GameState(observedFacts: ["f1"], formedHypotheses: [], discoveredPieces: [], answered: [])
+        let state = V2GameState(confirmed: ["f1"], discoveredPieces: [], answered: [])
         #expect(!V2GameEngine.checkComplete(state: state, puzzle: puzzle))
     }
 
-    @Test func test_complete_whenAllPiecesDiscovered() {
+    @Test func test_complete_whenClearConditionsMet() {
         let puzzle = V2PuzzleData(
             id: "test", title: "", statement: "", truth: "",
-            facts: ["f1": V2Fact(id: "f1", label: "")],
-            initialFacts: ["f1"],
-            pieces: [
-                "p1": V2Piece(id: "p1", label: "", facts: ["f1"], dependsOn: []),
+            descriptors: [
+                "f1": V2Descriptor(id: "f1", label: "", formationConditions: nil),
+                "f2": V2Descriptor(id: "f2", label: "", formationConditions: nil),
             ],
-            hypotheses: [:],
+            initialConfirmed: ["f1"],
+            clearConditions: [["f1", "f2"]],
+            pieces: [:],
             questions: [:],
             topicCategories: []
         )
-        let state = V2GameState(observedFacts: ["f1"], formedHypotheses: [], discoveredPieces: ["p1"], answered: [])
+        let state = V2GameState(confirmed: ["f1", "f2"], discoveredPieces: [], answered: [])
         #expect(V2GameEngine.checkComplete(state: state, puzzle: puzzle))
     }
 
     @Test func test_complete_emptyPuzzle() {
         let puzzle = V2PuzzleData(
             id: "test", title: "", statement: "", truth: "",
-            facts: [:],
-            initialFacts: [],
+            descriptors: [:],
+            initialConfirmed: [],
+            clearConditions: [[]],
             pieces: [:],
-            hypotheses: [:],
             questions: [:],
             topicCategories: []
         )
-        let state = V2GameState(observedFacts: [], formedHypotheses: [], discoveredPieces: [], answered: [])
+        let state = V2GameState(confirmed: [], discoveredPieces: [], answered: [])
         #expect(V2GameEngine.checkComplete(state: state, puzzle: puzzle))
     }
 }

@@ -10,17 +10,16 @@ struct V2GameSessionTests {
             title: "Test Puzzle",
             statement: "Test statement",
             truth: "Test truth",
-            facts: [
-                "f1": V2Fact(id: "f1", label: "Fact 1"),
-                "f2": V2Fact(id: "f2", label: "Fact 2"),
-                "f3": V2Fact(id: "f3", label: "Fact 3"),
+            descriptors: [
+                "f1": V2Descriptor(id: "f1", label: "Fact 1", formationConditions: nil),
+                "f2": V2Descriptor(id: "f2", label: "Fact 2", formationConditions: nil),
+                "f3": V2Descriptor(id: "f3", label: "Fact 3", formationConditions: nil),
+                "h1": V2Descriptor(id: "h1", label: "Hyp 1", formationConditions: [["f1"]]),
             ],
-            initialFacts: ["f1"],
+            initialConfirmed: ["f1"],
+            clearConditions: [["f1", "f2", "f3"]],
             pieces: [
-                "p1": V2Piece(id: "p1", label: "Piece 1", facts: ["f1", "f2", "f3"], dependsOn: []),
-            ],
-            hypotheses: [
-                "h1": V2Hypothesis(id: "h1", label: "Hyp 1", formationConditions: [["f1"]]),
+                "p1": V2Piece(id: "p1", label: "Piece 1", members: ["f1", "f2", "f3"], dependsOn: []),
             ],
             questions: [
                 "q1": V2Question(id: "q1", text: "First question?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f2"], mechanism: "observation", correctAnswer: .yes, topicCategory: "cat1"),

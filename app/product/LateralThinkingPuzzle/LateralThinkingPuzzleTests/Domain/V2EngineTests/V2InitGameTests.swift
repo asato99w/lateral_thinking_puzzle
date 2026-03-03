@@ -9,17 +9,16 @@ struct V2InitGameTests {
             title: "Test",
             statement: "Test statement",
             truth: "Test truth",
-            facts: [
-                "f1": V2Fact(id: "f1", label: "Fact 1"),
-                "f2": V2Fact(id: "f2", label: "Fact 2"),
-                "f3": V2Fact(id: "f3", label: "Fact 3"),
+            descriptors: [
+                "f1": V2Descriptor(id: "f1", label: "Fact 1", formationConditions: nil),
+                "f2": V2Descriptor(id: "f2", label: "Fact 2", formationConditions: nil),
+                "f3": V2Descriptor(id: "f3", label: "Fact 3", formationConditions: nil),
+                "h1": V2Descriptor(id: "h1", label: "Hyp 1", formationConditions: [["f1", "f2"]]),
             ],
-            initialFacts: ["f1", "f2"],
+            initialConfirmed: ["f1", "f2"],
+            clearConditions: [["f3"]],
             pieces: [
-                "p1": V2Piece(id: "p1", label: "Piece 1", facts: ["f3"], dependsOn: []),
-            ],
-            hypotheses: [
-                "h1": V2Hypothesis(id: "h1", label: "Hyp 1", formationConditions: [["f1", "f2"]]),
+                "p1": V2Piece(id: "p1", label: "Piece 1", members: ["f3"], dependsOn: []),
             ],
             questions: [
                 "q1": V2Question(id: "q1", text: "Q1?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f3"], mechanism: "observation", correctAnswer: .yes, topicCategory: ""),
@@ -28,19 +27,19 @@ struct V2InitGameTests {
         )
     }
 
-    @Test func test_initGame_setsInitialFacts() {
+    @Test func test_initGame_setsInitialConfirmed() {
         let puzzle = makeMinimalPuzzle()
         let state = V2GameEngine.initGame(puzzle: puzzle)
-        #expect(state.observedFacts.contains("f1"))
-        #expect(state.observedFacts.contains("f2"))
-        #expect(!state.observedFacts.contains("f3"))
+        #expect(state.confirmed.contains("f1"))
+        #expect(state.confirmed.contains("f2"))
+        #expect(!state.confirmed.contains("f3"))
     }
 
-    @Test func test_initGame_evaluatesHypothesesFromInitialFacts() {
+    @Test func test_initGame_evaluatesDerivationsFromInitialConfirmed() {
         let puzzle = makeMinimalPuzzle()
         let state = V2GameEngine.initGame(puzzle: puzzle)
-        // h1 has formation_conditions [["f1", "f2"]] — both are initial facts
-        #expect(state.formedHypotheses.contains("h1"))
+        // h1 has formation_conditions [["f1", "f2"]] — both are initial confirmed
+        #expect(state.confirmed.contains("h1"))
     }
 
     @Test func test_initGame_emptyDiscoveredPieces() {
