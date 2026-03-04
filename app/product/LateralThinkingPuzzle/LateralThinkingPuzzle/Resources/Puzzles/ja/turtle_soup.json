@@ -1,481 +1,431 @@
 {
   "id": "turtle_soup",
   "title": "ウミガメのスープ",
-  "statement": "ある男がレストランに入り、ウミガメのスープを注文した。一口飲んで店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜか？",
-  "truth": "男はかつて仲間と船で遭難し、食料が尽きた。仲間の一人が死に、残った者はその肉でスープを作り「ウミガメのスープだ」と偽って男に飲ませた。レストランで本物のウミガメのスープを飲み、味が違うことに気づいた男は、あのとき飲まされたものの正体を悟り、絶望して自殺した。",
-  "topic_categories": [
-    {
-      "id": "hypothesis",
-      "name": "仮説確認"
-    },
-    {
-      "id": "discovery",
-      "name": "事実発見"
-    },
-    {
-      "id": "connection",
-      "name": "真相解明"
-    }
-  ],
+  "statement": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口食べた男は店員を呼び、「これは本当にウミガメのスープですか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男は会計を済ませ、帰宅後、自殺した。",
+  "truth": "男はかつて乗っていた船が遭難し、仲間と無人島に漂着した。食糧が尽き、仲間が一人死んだ。残った者たちはその肉でスープを作り、男には「ウミガメのスープだ」と偽って食べさせた。レストランで本物のウミガメのスープを飲んだ男は味が記憶と全く違うことに気づき、あの時のスープが仲間の人肉だったと悟り、絶望して自殺した。",
   "descriptors": [
     {
-      "id": "Ps-1",
-      "label": "ある男がレストランに入った"
+      "id": "D-1",
+      "label": "男がレストランに入った"
     },
     {
-      "id": "Ps-2",
-      "label": "男はウミガメのスープを注文した"
+      "id": "D-2",
+      "label": "ウミガメのスープを注文した"
     },
     {
-      "id": "Ps-3",
-      "label": "男は一口飲んだ"
+      "id": "D-3",
+      "label": "一口食べて店員に「本当にウミガメのスープか」と尋ねた"
     },
     {
-      "id": "Ps-4",
-      "label": "男は店員に「これは本当にウミガメのスープか？」と尋ねた"
+      "id": "D-4",
+      "label": "店員は「間違いなくウミガメのスープです」と答えた"
     },
     {
-      "id": "Ps-5",
-      "label": "店員は「はい、間違いなくウミガメのスープです」と答えた"
+      "id": "D-5",
+      "label": "男は帰宅後、自殺した"
     },
     {
-      "id": "Ps-6",
-      "label": "男はその夜、自殺した"
+      "id": "D-6",
+      "label": "男はかつて船が遭難した"
     },
     {
-      "id": "Pt-1",
-      "label": "男はかつて仲間と船で遭難した"
+      "id": "D-7",
+      "label": "漂着した",
+      "formation_conditions": [
+        [
+          "D-6"
+        ]
+      ]
     },
     {
-      "id": "Pt-2",
-      "label": "食料が尽きた"
+      "id": "D-8",
+      "label": "食糧が尽きた"
     },
     {
-      "id": "Pt-3",
-      "label": "仲間の一人が死んだ"
+      "id": "D-9",
+      "label": "仲間が一人死んだ"
     },
     {
-      "id": "Pt-4",
-      "label": "残った仲間が男にスープを飲ませた"
+      "id": "D-10",
+      "label": "残った者たちがその肉でスープを作った"
     },
     {
-      "id": "Pt-5",
-      "label": "仲間は「ウミガメのスープだ」と言った"
+      "id": "D-11",
+      "label": "男には「ウミガメのスープだ」と偽って食べさせた"
     },
     {
-      "id": "Pt-6",
-      "label": "実際にはそれは死んだ仲間の肉で作ったスープだった"
+      "id": "D-12",
+      "label": "本物のウミガメのスープと味が全く違った"
     },
     {
-      "id": "Pt-7",
-      "label": "レストランで本物のウミガメのスープを飲んだ"
+      "id": "D-13",
+      "label": "あの時のスープが仲間の人肉だったと悟った"
     },
     {
-      "id": "Pt-8",
-      "label": "味が違うことに気づいた"
-    },
-    {
-      "id": "Pt-9",
-      "label": "あのとき飲まされたものの正体を悟った"
-    },
-    {
-      "id": "Pt-10",
+      "id": "D-14",
       "label": "絶望して自殺した"
     },
     {
-      "id": "h_soup_ok",
-      "label": "スープに問題はない",
-      "formation_conditions": [
-        [
-          "Ps-3",
-          "Ps-5"
-        ]
-      ]
+      "id": "D-15",
+      "label": "過去に船に乗っていた"
     },
     {
-      "id": "h_not_sick",
-      "label": "病気ではない",
-      "formation_conditions": [
-        [
-          "Ps-6"
-        ],
-        [
-          "Ps-1"
-        ]
-      ]
+      "id": "D-16",
+      "label": "過去に危機的な体験があった"
     },
     {
-      "id": "h_honest_staff",
-      "label": "店員は正直",
-      "formation_conditions": [
-        [
-          "Ps-5"
-        ]
-      ]
+      "id": "D-17",
+      "label": "仲間がいた"
     },
     {
-      "id": "h_not_daily",
-      "label": "自殺の原因は日常的なものではない",
-      "formation_conditions": [
-        [
-          "h_soup_ok",
-          "h_not_sick"
-        ],
-        [
-          "h_soup_ok",
-          "h_honest_staff"
-        ]
-      ]
+      "id": "D-18",
+      "label": "男は過去にスープを飲まされたことがある"
     },
     {
-      "id": "h_past_matters",
-      "label": "男の過去が関係する",
-      "formation_conditions": [
-        [
-          "Ps-4"
-        ],
-        [
-          "h_not_daily",
-          "Ps-6"
-        ]
-      ]
+      "id": "D-19",
+      "label": "そのスープは偽りの名前だった"
     },
     {
-      "id": "h_soup_origin",
-      "label": "スープの由来が重要",
-      "formation_conditions": [
-        [
-          "Ps-4",
-          "Ps-2"
-        ]
-      ]
+      "id": "D-20",
+      "label": "偽装に悪意はなかった"
     },
     {
-      "id": "h_special_past",
-      "label": "特殊な過去がある",
-      "formation_conditions": [
-        [
-          "h_not_daily"
-        ],
-        [
-          "h_past_matters"
-        ]
-      ]
+      "id": "D-21",
+      "label": "男は過去に欺かれた"
     },
     {
-      "id": "h_others_involved",
-      "label": "他の人物が関与する",
+      "id": "D-22",
+      "label": "男は過去にもスープを飲んだことがある",
       "formation_conditions": [
         [
-          "Ps-4"
-        ],
-        [
-          "h_special_past"
+          "D-3"
         ]
       ]
     }
   ],
   "initial_confirmed": [
-    "Ps-1",
-    "Ps-2",
-    "Ps-3",
-    "Ps-4",
-    "Ps-5",
-    "Ps-6"
-  ],
-  "clear_conditions": [
-    [
-      "Pt-10"
-    ]
+    "D-1",
+    "D-2",
+    "D-3",
+    "D-4",
+    "D-5"
   ],
   "pieces": [
     {
-      "id": "a",
-      "label": "食料が尽き、仲間が死んだ",
+      "id": "P-shipwreck",
+      "label": "遭難",
       "members": [
-        "Pt-1",
-        "Pt-2",
-        "Pt-3"
+        "D-6",
+        "D-7",
+        "D-8",
+        "D-9"
+      ],
+      "trigger": [
+        [
+          "D-15"
+        ],
+        [
+          "D-16"
+        ],
+        [
+          "D-17"
+        ]
       ],
       "depends_on": []
     },
     {
-      "id": "b",
-      "label": "仲間の肉でスープを作った",
+      "id": "P-deception",
+      "label": "偽装",
       "members": [
-        "Pt-6"
+        "D-18",
+        "D-19",
+        "D-20"
       ],
-      "depends_on": [
-        "a",
-        "c"
-      ]
-    },
-    {
-      "id": "c",
-      "label": "「ウミガメのスープ」と偽って提供された",
-      "members": [
-        "Pt-5"
-      ],
-      "depends_on": []
-    },
-    {
-      "id": "d",
-      "label": "男はそれを飲んだ（味の記憶がある）",
-      "members": [
-        "Pt-4"
-      ],
-      "depends_on": [
-        "c"
-      ]
-    },
-    {
-      "id": "e",
-      "label": "本物を飲んだら味が違った",
-      "members": [
-        "Pt-7",
-        "Pt-8"
+      "trigger": [
+        [
+          "D-21"
+        ],
+        [
+          "D-22"
+        ]
       ],
       "depends_on": []
     },
     {
-      "id": "f",
-      "label": "過去のものは本物ではなかったと判明した",
+      "id": "P-realization",
+      "label": "発覚と結末",
       "members": [
-        "Pt-9"
+        "D-10",
+        "D-11",
+        "D-12",
+        "D-13",
+        "D-14"
+      ],
+      "trigger": [
+        [
+          "D-6",
+          "D-8",
+          "D-9",
+          "D-18",
+          "D-19"
+        ],
+        [
+          "D-7",
+          "D-9",
+          "D-18",
+          "D-19",
+          "D-20"
+        ]
       ],
       "depends_on": [
-        "d",
-        "e"
-      ]
-    },
-    {
-      "id": "g",
-      "label": "正体を悟り自殺した",
-      "members": [
-        "Pt-10"
-      ],
-      "depends_on": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f"
+        "P-shipwreck",
+        "P-deception"
       ]
     }
   ],
+  "clear_conditions": [
+    [
+      "D-13",
+      "D-14"
+    ]
+  ],
   "questions": [
     {
-      "id": "q_h01",
-      "text": "スープに毒や異物が入っていた？",
-      "answer": "いいえ。スープ自体には問題ありません。",
+      "id": "Q-1",
+      "text": "男は過去に船に乗ったことがありますか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "Ps-3",
-          "Ps-6"
+          "D-16"
         ]
       ],
-      "reveals": [],
-      "mechanism": "observation",
-      "correct_answer": "no",
-      "topic_category": "hypothesis"
+      "reveals": [
+        "D-15"
+      ],
+      "mechanism": "observation"
     },
     {
-      "id": "q_h02",
-      "text": "男は病気だった？",
-      "answer": "いいえ。身体的な問題ではありません。",
+      "id": "Q-2",
+      "text": "男は過去に危機的な体験をしましたか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "Ps-6"
+          "D-5"
         ]
       ],
-      "reveals": [],
-      "mechanism": "observation",
-      "correct_answer": "no",
-      "topic_category": "hypothesis"
+      "reveals": [
+        "D-16"
+      ],
+      "mechanism": "link"
     },
     {
-      "id": "q_h03",
-      "text": "店員が何か隠していた？",
-      "answer": "いいえ。店員は正直に答えています。",
+      "id": "Q-3",
+      "text": "男には仲間がいましたか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "Ps-4",
-          "Ps-5"
+          "D-15"
         ]
       ],
-      "reveals": [],
-      "mechanism": "observation",
-      "correct_answer": "no",
-      "topic_category": "hypothesis"
+      "reveals": [
+        "D-17"
+      ],
+      "mechanism": "observation"
     },
     {
-      "id": "q_e01",
-      "text": "男は以前にもスープを飲んだことがある？",
-      "answer": "はい。過去にもスープを飲んだことがあります。",
+      "id": "Q-4",
+      "text": "男は過去に誰かに欺かれたことがありますか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "h_soup_origin"
+          "D-18"
+        ]
+      ],
+      "reveals": [
+        "D-21"
+      ],
+      "mechanism": "link"
+    },
+    {
+      "id": "Q-5",
+      "text": "男は以前にもスープを飲まされたことがありますか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-22"
         ],
         [
-          "Ps-4"
+          "D-2",
+          "D-3"
         ]
       ],
       "reveals": [
-        "Pt-7"
+        "D-18"
       ],
-      "mechanism": "observation",
-      "correct_answer": "yes",
-      "topic_category": "discovery"
+      "mechanism": "observation"
     },
     {
-      "id": "q_e02",
-      "text": "今のスープの味が記憶と違った？",
-      "answer": "はい！レストランのスープは、記憶のスープとは味が違いました。",
+      "id": "Q-6",
+      "text": "男が乗っていた船は遭難しましたか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "Pt-7"
+          "D-15"
         ]
       ],
       "reveals": [
-        "Pt-8"
+        "D-6"
       ],
-      "mechanism": "observation",
-      "correct_answer": "yes",
-      "topic_category": "discovery"
+      "mechanism": "observation"
     },
     {
-      "id": "q_a01",
-      "text": "男の過去に危険な出来事があった？",
-      "answer": "はい。男は過去に命に関わる出来事を経験しています。",
+      "id": "Q-7",
+      "text": "遭難して漂着しましたか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "h_past_matters"
-        ],
-        [
-          "h_special_past"
+          "D-6"
         ]
       ],
       "reveals": [
-        "Pt-1"
+        "D-7"
       ],
-      "mechanism": "observation",
-      "correct_answer": "yes",
-      "topic_category": "discovery"
+      "mechanism": "observation"
     },
     {
-      "id": "q_a02",
-      "text": "遭難中に食料が尽きた？",
-      "answer": "はい。食料が完全に尽きました。",
+      "id": "Q-8",
+      "text": "漂着先で食糧が尽きましたか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "Pt-1"
+          "D-7"
         ]
       ],
       "reveals": [
-        "Pt-2"
+        "D-8"
       ],
-      "mechanism": "observation",
-      "correct_answer": "yes",
-      "topic_category": "discovery"
+      "mechanism": "observation"
     },
     {
-      "id": "q_a03",
-      "text": "仲間が死んだ？",
-      "answer": "はい。仲間の一人が死にました。",
+      "id": "Q-9",
+      "text": "仲間の一人が亡くなりましたか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "Pt-1"
+          "D-8",
+          "D-17"
         ]
       ],
       "reveals": [
-        "Pt-3"
+        "D-9"
       ],
-      "mechanism": "observation",
-      "correct_answer": "yes",
-      "topic_category": "discovery"
+      "mechanism": "link"
     },
     {
-      "id": "q_c01",
-      "text": "遭難中に仲間からスープを飲まされた？",
-      "answer": "はい。残った仲間が男にスープを飲ませました。",
+      "id": "Q-10",
+      "text": "飲まされたスープの名前は偽りでしたか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "Pt-1"
+          "D-18",
+          "D-21"
         ]
       ],
       "reveals": [
-        "Pt-4"
+        "D-19"
       ],
-      "mechanism": "observation",
-      "correct_answer": "yes",
-      "topic_category": "connection"
+      "mechanism": "anomaly"
     },
     {
-      "id": "q_c02",
-      "text": "そのスープは「ウミガメのスープだ」と言われた？",
-      "answer": "はい！仲間はそのスープを「ウミガメのスープだ」と言いました。",
+      "id": "Q-11",
+      "text": "スープの名前を偽ったのは悪意からですか？",
+      "answer": "No",
       "recall_conditions": [
         [
-          "Pt-4"
+          "D-19"
         ]
       ],
       "reveals": [
-        "Pt-5"
+        "D-20"
       ],
-      "mechanism": "observation",
-      "correct_answer": "yes",
-      "topic_category": "connection"
+      "mechanism": "observation"
     },
     {
-      "id": "q_c03",
-      "text": "過去のスープは実際にはウミガメのスープではなかった？",
-      "answer": "はい！あのスープは本物のウミガメのスープではありませんでした。味の違いがその証拠です。",
+      "id": "Q-12",
+      "text": "亡くなった仲間の肉でスープを作りましたか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "Pt-5",
-          "Pt-8"
+          "D-8",
+          "D-9",
+          "D-18",
+          "D-19"
         ]
       ],
       "reveals": [
-        "Pt-9"
+        "D-10"
       ],
-      "mechanism": "anomaly",
-      "correct_answer": "yes",
-      "topic_category": "connection"
+      "mechanism": "link"
     },
     {
-      "id": "q_b01",
-      "text": "スープの正体は仲間の肉だった？",
-      "answer": "はい…。死んだ仲間の肉で作ったスープでした。",
+      "id": "Q-13",
+      "text": "そのスープを「ウミガメのスープ」と偽って男に食べさせましたか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "Pt-3",
-          "Pt-5"
+          "D-10",
+          "D-19"
         ]
       ],
       "reveals": [
-        "Pt-6"
+        "D-11"
       ],
-      "mechanism": "link",
-      "correct_answer": "yes",
-      "topic_category": "connection"
+      "mechanism": "anomaly"
     },
     {
-      "id": "q_g01",
-      "text": "男はその正体を悟って自殺した？",
-      "answer": "はい。自分が人肉を食べていたことを悟り、絶望して自殺しました。",
+      "id": "Q-14",
+      "text": "レストランのスープと過去に飲んだスープは味が違いましたか？",
+      "answer": "Yes",
       "recall_conditions": [
         [
-          "Pt-9"
+          "D-10",
+          "D-2",
+          "D-22"
         ]
       ],
       "reveals": [
-        "Pt-10"
+        "D-12"
       ],
-      "mechanism": "link",
-      "correct_answer": "yes",
-      "topic_category": "connection"
+      "mechanism": "anomaly"
+    },
+    {
+      "id": "Q-15",
+      "text": "男はあの時のスープが仲間の人肉だったと悟りましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-10",
+          "D-12"
+        ]
+      ],
+      "reveals": [
+        "D-13"
+      ],
+      "mechanism": "link"
+    },
+    {
+      "id": "Q-16",
+      "text": "男は真実を知って絶望し、自殺しましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-13"
+        ]
+      ],
+      "reveals": [
+        "D-14"
+      ],
+      "mechanism": "link"
     }
   ]
 }

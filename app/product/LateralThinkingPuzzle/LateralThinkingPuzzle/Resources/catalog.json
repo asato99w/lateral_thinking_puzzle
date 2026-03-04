@@ -12,10 +12,11 @@
       "difficulty": 1,
       "tier": "free",
       "bundled": true,
-      "locales": ["ja", "en"]
+      "locales": ["ja"]
     },
     {
       "id": "bar_man",
+      "engine_version": "v2",
       "odr_tag": "puzzle-bar-man",
       "title_ja": "バーの男",
       "title_en": "The Bar Man",
@@ -29,6 +30,7 @@
     },
     {
       "id": "desert_man",
+      "engine_version": "v2",
       "odr_tag": "puzzle-desert-man",
       "title_ja": "砂漠の男",
       "title_en": "The Desert Man",
@@ -38,32 +40,6 @@
       "difficulty": 3,
       "tier": "free",
       "bundled": true,
-      "locales": ["ja", "en"]
-    },
-    {
-      "id": "poisonous_mushroom",
-      "odr_tag": "puzzle-poisonous-mushroom",
-      "title_ja": "毒キノコ",
-      "title_en": "Poisonous Mushroom",
-      "statement_preview_ja": "Aさんは、辺りに毒キノコしかないのを見て安堵した。なぜだろうか。",
-      "statement_preview_en": "She felt relieved to see only poisonous mushrooms around. Why?",
-      "icon": "🍄",
-      "difficulty": 2,
-      "tier": "free",
-      "bundled": false,
-      "locales": ["ja", "en"]
-    },
-    {
-      "id": "underground",
-      "odr_tag": "puzzle-underground",
-      "title_ja": "禁じられた地下室",
-      "title_en": "The Forbidden Basement",
-      "statement_preview_ja": "絶対に開けてはいけないと言われていた地下室のドアを開けた女性。中に入って見たものに驚き、すぐに警察に駆け込んだ。しかし地下室の中には何も異常なものはなかった。",
-      "statement_preview_en": "A woman opened the basement door she was told never to open. Shocked by what she saw inside, she ran to the police. Yet there was nothing unusual in the basement.",
-      "icon": "🚪",
-      "difficulty": 2,
-      "tier": "free",
-      "bundled": false,
       "locales": ["ja"]
     }
   ],
