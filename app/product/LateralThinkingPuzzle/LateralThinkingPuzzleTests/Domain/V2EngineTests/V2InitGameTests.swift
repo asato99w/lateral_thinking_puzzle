@@ -39,7 +39,10 @@ struct V2InitGameTests {
         let puzzle = makeMinimalPuzzle()
         let state = V2GameEngine.initGame(puzzle: puzzle)
         // h1 has formation_conditions [["f1", "f2"]] — both are initial confirmed
-        #expect(state.confirmed.contains("h1"))
+        // h1 は derived に入る（confirmed ではない）
+        #expect(state.derived.contains("h1"))
+        #expect(state.known.contains("h1"))
+        #expect(!state.confirmed.contains("h1"))
     }
 
     @Test func test_initGame_emptyDiscoveredPieces() {
