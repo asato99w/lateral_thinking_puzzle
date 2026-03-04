@@ -47,7 +47,7 @@ def display_state(state: GameState, puzzle: PuzzleData) -> None:
 
 
 def display_answer_result(
-    result: AnswerResult, puzzle: PuzzleData
+    result: AnswerResult, puzzle: PuzzleData, *, show_ids: bool = True
 ) -> None:
     """回答結果を表示"""
     print()
@@ -75,7 +75,10 @@ def display_answer_result(
         for pid in result.new_pieces:
             piece = puzzle.pieces[pid]
             dep_type = "独立" if not piece.depends_on else "依存"
-            print(f"  🧩 ピース発見 [{pid}] {piece.label} ({dep_type})")
+            if show_ids:
+                print(f"  🧩 ピース発見 [{pid}] {piece.label} ({dep_type})")
+            else:
+                print(f"  🧩 ピース発見: {piece.label}（{dep_type}）")
 
     if not result.new_confirmed and not result.new_pieces and not result.new_derived:
         print("  （新しい発見はありませんでした）")
@@ -144,7 +147,7 @@ def run_simulation(puzzle_path: str | Path) -> None:
         display_answer_result(result, puzzle)
 
 
-def run_auto_simulation(puzzle_path: str | Path) -> None:
+def run_auto_simulation(puzzle_path: str | Path, *, show_ids: bool = True) -> None:
     """自動シミュレーション: 利用可能な質問を順に全て回答"""
     puzzle = load_puzzle(puzzle_path)
     state = init_game(puzzle)
@@ -162,31 +165,36 @@ def run_auto_simulation(puzzle_path: str | Path) -> None:
         print()
 
     step = 0
+    answered_texts: list[str] = []
     while not check_complete(state, puzzle):
         questions = available_questions(state, puzzle)
         if not questions:
             print("⚠️  行き詰まり: 利用可能な質問がありません。")
-            print(f"  確認済み記述素: {sorted(state.confirmed)}")
-            print(f"  発見済みピース: {sorted(state.discovered_pieces)}")
+            if show_ids:
+                print(f"  確認済み記述素: {sorted(state.confirmed)}")
+                print(f"  発見済みピース: {sorted(state.discovered_pieces)}")
             break
 
         q = questions[0]
         step += 1
+        answered_texts.append(q.text)
 
         print(f"--- Step {step} ---")
         print(f"Q: {q.text}")
         print(f"A: {q.answer}")
 
         result = answer_question(state, q, puzzle)
-        display_answer_result(result, puzzle)
+        display_answer_result(result, puzzle, show_ids=show_ids)
         print()
 
     if check_complete(state, puzzle):
         print("=" * 60)
         print(f"🎉 クリア！ ({step}問で解決)")
-        print(f"回答順: {' → '.join(state.history)}")
+        if show_ids:
+            print(f"回答順: {' → '.join(state.history)}")
     else:
-        print(f"\n未発見ピース: {set(puzzle.pieces.keys()) - state.discovered_pieces}")
+        if show_ids:
+            print(f"\n未発見ピース: {set(puzzle.pieces.keys()) - state.discovered_pieces}")
 
 
 if __name__ == "__main__":
@@ -199,7 +207,8 @@ if __name__ == "__main__":
         print(f"Error: {puzzle_path} が見つかりません", file=sys.stderr)
         sys.exit(2)
 
+    show_ids = "--no-id" not in sys.argv
     if "--auto" in sys.argv:
-        run_auto_simulation(puzzle_path)
+        run_auto_simulation(puzzle_path, show_ids=show_ids)
     else:
         run_simulation(puzzle_path)
