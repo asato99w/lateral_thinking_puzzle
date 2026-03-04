@@ -1,0 +1,153 @@
+{
+  "title": "砂漠の男",
+  "S": "砂漠の真ん中で裸の男が死んでいた。手にはマッチ棒を握りしめている。",
+  "T": "男は数人で熱気球に乗っていたが、高度が下がり始めた。荷物を全て捨て、服も脱いで軽量化したが足りず、くじ引き（マッチの長さ）で一人が飛び降りることになった。短いマッチを引いた男が飛び降りて死亡した。",
+  "initial_confirmed": ["D-1", "D-2", "D-3", "D-4"],
+  "clear_conditions": [["D-12", "D-14"]],
+  "descriptors": [
+    {"id": "D-1", "label": "砂漠の真ん中で発見された", "_phase1": {"source": "s_descriptors"}},
+    {"id": "D-2", "label": "男が死んでいた", "_phase1": {"source": "s_descriptors"}},
+    {"id": "D-3", "label": "男は裸だった", "_phase1": {"source": "s_descriptors"}},
+    {"id": "D-4", "label": "手にマッチ棒を握りしめていた", "_phase1": {"source": "s_descriptors"}},
+    {"id": "D-5", "label": "男は熱気球に乗っていた", "_phase1": {"source": "t_descriptors"}},
+    {"id": "D-6", "label": "熱気球には他にも数人が乗っていた", "_phase1": {"source": "t_descriptors"}},
+    {"id": "D-7", "label": "熱気球の高度が下がり始めた", "_phase1": {"source": "t_descriptors"}},
+    {"id": "D-8", "label": "荷物を全て捨てて軽量化した", "_phase1": {"source": "t_descriptors"}},
+    {"id": "D-9", "label": "服も脱いで軽量化した", "_phase1": {"source": "t_descriptors"}},
+    {"id": "D-10", "label": "軽量化が足りなかった", "_phase1": {"source": "t_descriptors"}},
+    {"id": "D-11", "label": "一人が飛び降りることになった", "_phase1": {"source": "t_descriptors"}},
+    {"id": "D-12", "label": "マッチの長さでくじ引きをした", "_phase1": {"source": "t_descriptors"}},
+    {"id": "D-13", "label": "男は短いマッチを引いた", "_phase1": {"source": "t_descriptors"}},
+    {"id": "D-14", "label": "男は熱気球から飛び降りて死亡した", "_phase1": {"source": "t_descriptors"}},
+    {"id": "D-15", "label": "男は地上からこの場所に来たのではない", "_phase2": {"generated": true}},
+    {"id": "D-16", "label": "裸になったのには理由があった", "_phase2": {"generated": true}}
+  ],
+  "pieces": [
+    {
+      "id": "P-balloon",
+      "label": "熱気球と軽量化",
+      "type": "support",
+      "members": ["D-5", "D-6", "D-7", "D-8", "D-9", "D-10", "D-15", "D-16"],
+      "triggers": [["D-15"], ["D-16"]],
+      "depends_on": []
+    },
+    {
+      "id": "P-lottery",
+      "label": "くじ引きと結末",
+      "type": "key",
+      "members": ["D-11", "D-12", "D-13", "D-14"],
+      "triggers": [["D-10"]],
+      "depends_on": ["P-balloon"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "男は地上からこの場所に来ましたか？",
+      "answer": "No",
+      "recall_conditions": [["D-1"]],
+      "reveals": ["D-15"],
+      "mechanism": "observation",
+      "_chain_ref": "terminal/D-15"
+    },
+    {
+      "id": "Q-2",
+      "text": "男が裸でいたことには特別な理由がありますか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-3"]],
+      "reveals": ["D-16"],
+      "mechanism": "observation",
+      "_chain_ref": "terminal/D-16"
+    },
+    {
+      "id": "Q-3",
+      "text": "男は熱気球に乗っていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-15"], ["D-7"]],
+      "reveals": ["D-5"],
+      "mechanism": "observation",
+      "_chain_ref": "P-balloon/step(D-15→D-5, D-7→D-5)"
+    },
+    {
+      "id": "Q-4",
+      "text": "熱気球には男以外にも数人が乗っていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-5"]],
+      "reveals": ["D-6"],
+      "mechanism": "observation",
+      "_chain_ref": "P-balloon/step(D-5→D-6)"
+    },
+    {
+      "id": "Q-5",
+      "text": "熱気球の高度が下がり始めましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-5"], ["D-8"]],
+      "reveals": ["D-7"],
+      "mechanism": "observation",
+      "_chain_ref": "P-balloon/step(D-5→D-7, D-8→D-7)"
+    },
+    {
+      "id": "Q-6",
+      "text": "高度を上げるために荷物を全て捨てましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-7"], ["D-9"]],
+      "reveals": ["D-8"],
+      "mechanism": "link",
+      "_chain_ref": "P-balloon/step(D-7→D-8, D-9→D-8)"
+    },
+    {
+      "id": "Q-7",
+      "text": "軽量化のために服も脱ぎましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-8"], ["D-16"]],
+      "reveals": ["D-9"],
+      "mechanism": "link",
+      "_chain_ref": "P-balloon/step(D-8→D-9, D-16→D-9)"
+    },
+    {
+      "id": "Q-8",
+      "text": "軽量化は十分でしたか？",
+      "answer": "No",
+      "recall_conditions": [["D-8"]],
+      "reveals": ["D-10"],
+      "mechanism": "observation",
+      "_chain_ref": "P-balloon/step(D-8→D-10)"
+    },
+    {
+      "id": "Q-9",
+      "text": "一人が熱気球から飛び降りることになりましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-10"]],
+      "reveals": ["D-11"],
+      "mechanism": "link",
+      "_chain_ref": "P-lottery/step1(D-10→D-11)"
+    },
+    {
+      "id": "Q-10",
+      "text": "マッチの長さでくじ引きをしましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-11"]],
+      "reveals": ["D-12"],
+      "mechanism": "observation",
+      "_chain_ref": "P-lottery/step2(D-11→D-12)"
+    },
+    {
+      "id": "Q-11",
+      "text": "男は短いマッチを引きましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-12"]],
+      "reveals": ["D-13"],
+      "mechanism": "observation",
+      "_chain_ref": "P-lottery/step3(D-12→D-13)"
+    },
+    {
+      "id": "Q-12",
+      "text": "男は熱気球から飛び降りて死亡しましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-13"]],
+      "reveals": ["D-14"],
+      "mechanism": "link",
+      "_chain_ref": "P-lottery/step4(D-13→D-14)"
+    }
+  ]
+}
