@@ -30,7 +30,12 @@
     },
     {
       "id": "D-7",
-      "label": "仲間と漂着した"
+      "label": "漂着した",
+      "formation_conditions": [
+        [
+          "D-6"
+        ]
+      ]
     },
     {
       "id": "D-8",
@@ -191,7 +196,7 @@
       "answer": "Yes",
       "recall_conditions": [
         [
-          "D-1"
+          "D-16"
         ]
       ],
       "reveals": [
@@ -219,7 +224,7 @@
       "answer": "Yes",
       "recall_conditions": [
         [
-          "D-1"
+          "D-15"
         ]
       ],
       "reveals": [
@@ -233,7 +238,7 @@
       "answer": "Yes",
       "recall_conditions": [
         [
-          "D-3"
+          "D-18"
         ]
       ],
       "reveals": [
@@ -275,7 +280,7 @@
     },
     {
       "id": "Q-7",
-      "text": "遭難して仲間と一緒に漂着しましたか？",
+      "text": "遭難して漂着しましたか？",
       "answer": "Yes",
       "recall_conditions": [
         [
@@ -307,7 +312,8 @@
       "answer": "Yes",
       "recall_conditions": [
         [
-          "D-8"
+          "D-8",
+          "D-17"
         ]
       ],
       "reveals": [
@@ -383,7 +389,8 @@
       "recall_conditions": [
         [
           "D-10",
-          "D-2"
+          "D-2",
+          "D-22"
         ]
       ],
       "reveals": [

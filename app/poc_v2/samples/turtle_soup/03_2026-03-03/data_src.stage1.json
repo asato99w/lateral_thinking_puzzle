@@ -10,7 +10,7 @@
     {"id": "D-4", "label": "店員は「間違いなくウミガメのスープです」と答えた"},
     {"id": "D-5", "label": "男は帰宅後、自殺した"},
     {"id": "D-6", "label": "男はかつて船が遭難した"},
-    {"id": "D-7", "label": "漂着した", "formation_conditions": [["D-6"]]},
+    {"id": "D-7", "label": "仲間と漂着した"},
     {"id": "D-8", "label": "食糧が尽きた"},
     {"id": "D-9", "label": "仲間が一人死んだ"},
     {"id": "D-10", "label": "残った者たちがその肉でスープを作った"},
@@ -72,18 +72,17 @@
   "clear_conditions": [["D-13", "D-14"]],
   "_phase3": {
     "formation_conditions": {
-      "D-22": [["D-3"]],
-      "D-7": [["D-6"]]
+      "D-22": [["D-3"]]
     },
-    "terminal_descriptors": ["D-6", "D-8", "D-9", "D-10", "D-11", "D-12", "D-13", "D-14", "D-15", "D-16", "D-17", "D-18", "D-19", "D-20", "D-21"]
+    "terminal_descriptors": ["D-6", "D-7", "D-8", "D-9", "D-10", "D-11", "D-12", "D-13", "D-14", "D-15", "D-16", "D-17", "D-18", "D-19", "D-20", "D-21"]
   },
   "_phase4": {
     "chains_to_terminals": {
+      "D-15": [{"input": ["D-1"], "tactic": 9, "tactic_name": "人物像の探索", "output": ["D-15"]}],
       "D-16": [{"input": ["D-5"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-16"]}],
-      "D-15": [{"input": ["D-16"], "tactic": 10, "tactic_name": "段階的絞り込み", "output": ["D-15"]}],
-      "D-17": [{"input": ["D-15"], "tactic": 4, "tactic_name": "登場人物の探索", "output": ["D-17"]}],
-      "D-18": [{"input": ["D-22"], "tactic": 2, "tactic_name": "観測事実の深掘り", "output": ["D-18"]}],
-      "D-21": [{"input": ["D-18"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-21"]}]
+      "D-17": [{"input": ["D-1"], "tactic": 4, "tactic_name": "登場人物の探索", "output": ["D-17"]}],
+      "D-21": [{"input": ["D-3"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-21"]}],
+      "D-18": [{"input": ["D-22"], "tactic": 2, "tactic_name": "観測事実の深掘り", "output": ["D-18"]}]
     },
     "internal_chains": {
       "P-shipwreck": [
@@ -111,7 +110,7 @@
       "id": "Q-1",
       "text": "男は過去に船に乗ったことがありますか？",
       "answer": "Yes",
-      "recall_conditions": [["D-16"]],
+      "recall_conditions": [["D-1"]],
       "reveals": ["D-15"],
       "mechanism": "observation",
       "_chain_ref": ["terminal:D-15"]
@@ -129,7 +128,7 @@
       "id": "Q-3",
       "text": "男には仲間がいましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-15"]],
+      "recall_conditions": [["D-1"]],
       "reveals": ["D-17"],
       "mechanism": "observation",
       "_chain_ref": ["terminal:D-17"]
@@ -138,7 +137,7 @@
       "id": "Q-4",
       "text": "男は過去に誰かに欺かれたことがありますか？",
       "answer": "Yes",
-      "recall_conditions": [["D-18"]],
+      "recall_conditions": [["D-3"]],
       "reveals": ["D-21"],
       "mechanism": "link",
       "_chain_ref": ["terminal:D-21"]
@@ -163,7 +162,7 @@
     },
     {
       "id": "Q-7",
-      "text": "遭難して漂着しましたか？",
+      "text": "遭難して仲間と一緒に漂着しましたか？",
       "answer": "Yes",
       "recall_conditions": [["D-6"]],
       "reveals": ["D-7"],
@@ -183,7 +182,7 @@
       "id": "Q-9",
       "text": "仲間の一人が亡くなりましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-8", "D-17"]],
+      "recall_conditions": [["D-8"]],
       "reveals": ["D-9"],
       "mechanism": "link",
       "_chain_ref": ["internal:P-shipwreck:4"]
@@ -228,7 +227,7 @@
       "id": "Q-14",
       "text": "レストランのスープと過去に飲んだスープは味が違いましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-10", "D-2", "D-22"]],
+      "recall_conditions": [["D-10", "D-2"]],
       "reveals": ["D-12"],
       "mechanism": "anomaly",
       "_chain_ref": ["internal:P-realization:3"]
