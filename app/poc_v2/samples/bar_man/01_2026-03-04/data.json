@@ -20,14 +20,15 @@
     {"id": "D-12", "label": "水が不要になった"},
     {"id": "D-13", "label": "「ありがとう」はしゃっくりを止めてくれたことへの感謝"},
     {"id": "D-14", "label": "男が水を求めたのは喉の渇きのためではない"},
-    {"id": "D-15", "label": "男の様子に通常と異なる点があった"}
+    {"id": "D-15", "label": "男の様子に通常と異なる点があった"},
+    {"id": "D-16", "label": "男は体の不調を抱えていた"}
   ],
   "pieces": [
     {
       "id": "P-hiccup",
       "label": "男のしゃっくり",
       "type": "support",
-      "members": ["D-6", "D-7", "D-8", "D-14", "D-15"],
+      "members": ["D-6", "D-7", "D-8", "D-14", "D-15", "D-16"],
       "triggers": [["D-14"], ["D-15"]],
       "depends_on": []
     },
@@ -61,7 +62,7 @@
       "id": "Q-3",
       "text": "男はしゃっくりを止めるために水を求めましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-14"], ["D-6"]],
+      "recall_conditions": [["D-16"], ["D-6"]],
       "reveals": ["D-7"],
       "mechanism": "observation"
     },
@@ -69,7 +70,7 @@
       "id": "Q-4",
       "text": "男はしゃっくりが止まらなくて困っていましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-7"], ["D-15"]],
+      "recall_conditions": [["D-7"], ["D-16"]],
       "reveals": ["D-6"],
       "mechanism": "observation"
     },
@@ -112,6 +113,14 @@
       "recall_conditions": [["D-11"]],
       "reveals": ["D-13"],
       "mechanism": "link"
+    },
+    {
+      "id": "Q-10",
+      "text": "男は体に何か問題を抱えていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-14"], ["D-15"]],
+      "reveals": ["D-16"],
+      "mechanism": "observation"
     }
   ]
 }
