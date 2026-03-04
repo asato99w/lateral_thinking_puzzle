@@ -21,14 +21,15 @@
     {"id": "D-13", "label": "男は短いマッチを引いた"},
     {"id": "D-14", "label": "男は熱気球から飛び降りて死亡した"},
     {"id": "D-15", "label": "男は地上からこの場所に来たのではない"},
-    {"id": "D-16", "label": "裸になったのには理由があった"}
+    {"id": "D-16", "label": "裸になったのには理由があった"},
+    {"id": "D-17", "label": "男は空からこの場所に来た", "formation_conditions": [["D-1", "D-15"]]}
   ],
   "pieces": [
     {
       "id": "P-balloon",
       "label": "熱気球と軽量化",
       "type": "support",
-      "members": ["D-5", "D-6", "D-7", "D-8", "D-9", "D-10", "D-15", "D-16"],
+      "members": ["D-5", "D-6", "D-7", "D-8", "D-9", "D-10", "D-15", "D-16", "D-17"],
       "triggers": [["D-15"], ["D-16"]],
       "depends_on": []
     },
@@ -62,7 +63,7 @@
       "id": "Q-3",
       "text": "男は熱気球に乗っていましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-15"], ["D-7"], ["D-8"]],
+      "recall_conditions": [["D-17"], ["D-7"]],
       "reveals": ["D-5"],
       "mechanism": "observation"
     },
@@ -136,6 +137,14 @@
       "answer": "Yes",
       "recall_conditions": [["D-13", "D-5"]],
       "reveals": ["D-14"],
+      "mechanism": "link"
+    },
+    {
+      "id": "Q-13",
+      "text": "男は空から来ましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-8"]],
+      "reveals": ["D-17"],
       "mechanism": "link"
     }
   ]
