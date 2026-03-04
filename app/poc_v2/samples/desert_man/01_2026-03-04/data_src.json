@@ -63,10 +63,10 @@
       "id": "Q-3",
       "text": "男は熱気球に乗っていましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-15"], ["D-7"]],
+      "recall_conditions": [["D-15"], ["D-7"], ["D-8"]],
       "reveals": ["D-5"],
       "mechanism": "observation",
-      "_chain_ref": "P-balloon/step(D-15→D-5, D-7→D-5)"
+      "_chain_ref": "P-balloon/step(D-15→D-5, D-7→D-5, D-8→D-5)"
     },
     {
       "id": "Q-4",
@@ -81,14 +81,14 @@
       "id": "Q-5",
       "text": "熱気球の高度が下がり始めましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-5"], ["D-8"]],
+      "recall_conditions": [["D-5"]],
       "reveals": ["D-7"],
       "mechanism": "observation",
-      "_chain_ref": "P-balloon/step(D-5→D-7, D-8→D-7)"
+      "_chain_ref": "P-balloon/step(D-5→D-7)"
     },
     {
       "id": "Q-6",
-      "text": "高度を上げるために荷物を全て捨てましたか？",
+      "text": "軽量化のために荷物を全て捨てましたか？",
       "answer": "Yes",
       "recall_conditions": [["D-7"], ["D-9"]],
       "reveals": ["D-8"],
@@ -115,7 +115,7 @@
     },
     {
       "id": "Q-9",
-      "text": "一人が熱気球から飛び降りることになりましたか？",
+      "text": "一人が飛び降りることになりましたか？",
       "answer": "Yes",
       "recall_conditions": [["D-10"]],
       "reveals": ["D-11"],
@@ -144,10 +144,10 @@
       "id": "Q-12",
       "text": "男は熱気球から飛び降りて死亡しましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-13"]],
+      "recall_conditions": [["D-13", "D-5"]],
       "reveals": ["D-14"],
       "mechanism": "link",
-      "_chain_ref": "P-lottery/step4(D-13→D-14)"
+      "_chain_ref": "P-lottery/step4(D-13+D-5→D-14)"
     }
   ]
 }
