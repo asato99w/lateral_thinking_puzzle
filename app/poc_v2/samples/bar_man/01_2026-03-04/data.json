@@ -1,0 +1,117 @@
+{
+  "id": "bar_man",
+  "title": "バーの男",
+  "statement": "ある男がバーに入り、バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた。男は「ありがとう」と言って帰った。",
+  "truth": "男はしゃっくりが止まらなくて困っていた。水を飲めば治ると思いバーに立ち寄ったが、バーテンダーはしゃっくりに気づき、驚かせて止めてやろうと銃を向けた。しゃっくりが止まった男は水が不要になり、「ありがとう」と言って帰った。",
+  "initial_confirmed": ["D-1", "D-2", "D-3", "D-4", "D-5"],
+  "clear_conditions": [["D-10", "D-13"]],
+  "descriptors": [
+    {"id": "D-1", "label": "男がバーに入った"},
+    {"id": "D-2", "label": "バーテンダーに「水をください」と頼んだ"},
+    {"id": "D-3", "label": "バーテンダーは男に銃を向けた"},
+    {"id": "D-4", "label": "男は「ありがとう」と言った"},
+    {"id": "D-5", "label": "男は帰った"},
+    {"id": "D-6", "label": "男はしゃっくりが止まらなくて困っていた"},
+    {"id": "D-7", "label": "水を飲めばしゃっくりが治ると思った"},
+    {"id": "D-8", "label": "バーテンダーは男のしゃっくりに気づいた"},
+    {"id": "D-9", "label": "バーテンダーは驚かせてしゃっくりを止めようとした"},
+    {"id": "D-10", "label": "銃を向けたのは驚かせる手段だった"},
+    {"id": "D-11", "label": "しゃっくりが止まった"},
+    {"id": "D-12", "label": "水が不要になった"},
+    {"id": "D-13", "label": "「ありがとう」はしゃっくりを止めてくれたことへの感謝"},
+    {"id": "D-14", "label": "男が水を求めたのは喉の渇きのためではない"},
+    {"id": "D-15", "label": "男の様子に通常と異なる点があった"}
+  ],
+  "pieces": [
+    {
+      "id": "P-hiccup",
+      "label": "男のしゃっくり",
+      "type": "support",
+      "members": ["D-6", "D-7", "D-8", "D-14", "D-15"],
+      "triggers": [["D-14"], ["D-15"]],
+      "depends_on": []
+    },
+    {
+      "id": "P-resolution",
+      "label": "バーテンダーの真意と結末",
+      "type": "key",
+      "members": ["D-9", "D-10", "D-11", "D-12", "D-13"],
+      "triggers": [["D-8"]],
+      "depends_on": ["P-hiccup"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "男は喉が渇いていたのですか？",
+      "answer": "No",
+      "recall_conditions": [["D-2"]],
+      "reveals": ["D-14"],
+      "mechanism": "observation"
+    },
+    {
+      "id": "Q-2",
+      "text": "男の様子に何か変わったところはありましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1"]],
+      "reveals": ["D-15"],
+      "mechanism": "observation"
+    },
+    {
+      "id": "Q-3",
+      "text": "男はしゃっくりを止めるために水を求めましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-14"], ["D-6"]],
+      "reveals": ["D-7"],
+      "mechanism": "observation"
+    },
+    {
+      "id": "Q-4",
+      "text": "男はしゃっくりが止まらなくて困っていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-7"], ["D-15"]],
+      "reveals": ["D-6"],
+      "mechanism": "observation"
+    },
+    {
+      "id": "Q-5",
+      "text": "バーテンダーは男のしゃっくりに気づいていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-6"]],
+      "reveals": ["D-8"],
+      "mechanism": "observation"
+    },
+    {
+      "id": "Q-6",
+      "text": "バーテンダーは男を驚かせてしゃっくりを止めようとして銃を向けたのですか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-8"]],
+      "reveals": ["D-9", "D-10"],
+      "mechanism": "link"
+    },
+    {
+      "id": "Q-7",
+      "text": "それでしゃっくりは止まりましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-9"], ["D-10"]],
+      "reveals": ["D-11"],
+      "mechanism": "observation"
+    },
+    {
+      "id": "Q-8",
+      "text": "しゃっくりが止まったので水は不要になりましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-11"]],
+      "reveals": ["D-12"],
+      "mechanism": "link"
+    },
+    {
+      "id": "Q-9",
+      "text": "男が「ありがとう」と言ったのはしゃっくりを止めてくれたことへの感謝ですか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-11"]],
+      "reveals": ["D-13"],
+      "mechanism": "link"
+    }
+  ]
+}
