@@ -118,7 +118,13 @@ def check_recall_scope(data: dict) -> list[str]:
             descriptor_to_piece[mid] = piece["id"]
 
     piece_deps = {p["id"]: set(p.get("depends_on", [])) for p in data.get("pieces", [])}
-    piece_members = {p["id"]: set(p.get("members", [])) for p in data.get("pieces", [])}
+    # members + trigger の全記述素をピースの記述素とする
+    piece_members: dict[str, set[str]] = {}
+    for p in data.get("pieces", []):
+        ids = set(p.get("members", []))
+        for group in p.get("trigger", []):
+            ids.update(group)
+        piece_members[p["id"]] = ids
 
     # question reveals mapping: descriptor_id → [question, ...]
     reveals_map: dict[str, list[dict]] = {}

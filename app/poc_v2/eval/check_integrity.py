@@ -72,6 +72,10 @@ def check_piece_refs(data: dict) -> list[str]:
         for mref in piece.get("members", []):
             if mref not in descriptor_ids:
                 errors.append(f"piece '{pid}' の members 参照 '{mref}' が descriptors に存在しない")
+        for trigger_group in piece.get("trigger", []):
+            for tref in trigger_group:
+                if tref not in descriptor_ids:
+                    errors.append(f"piece '{pid}' の trigger 参照 '{tref}' が descriptors に存在しない")
         for dep in piece.get("depends_on", []):
             if dep not in piece_ids:
                 errors.append(f"piece '{pid}' の depends_on 参照 '{dep}' が pieces に存在しない")
