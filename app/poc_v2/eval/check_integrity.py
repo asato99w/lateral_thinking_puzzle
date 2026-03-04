@@ -94,6 +94,18 @@ def check_formation_refs(data: dict) -> list[str]:
     return errors
 
 
+def check_rejection_refs(data: dict) -> list[str]:
+    errors = []
+    descriptor_ids = {d["id"] for d in data.get("descriptors", [])}
+    for d in data.get("descriptors", []):
+        did = d["id"]
+        for cond_group in d.get("rejection_conditions", []):
+            for ref in cond_group:
+                if ref not in descriptor_ids:
+                    errors.append(f"descriptor '{did}' の rejection_conditions 参照 '{ref}' が descriptors に存在しない")
+    return errors
+
+
 def check_question_refs(data: dict) -> list[str]:
     errors = []
     descriptor_ids = {d["id"] for d in data.get("descriptors", [])}
@@ -162,6 +174,7 @@ def run(path: str) -> tuple[bool, list[str]]:
         ("clear_conditions の妥当性", check_clear_conditions),
         ("pieces の参照整合", check_piece_refs),
         ("formation_conditions の参照整合", check_formation_refs),
+        ("rejection_conditions の参照整合", check_rejection_refs),
         ("questions の参照整合", check_question_refs),
         ("mechanism の値域", check_mechanism_values),
         ("ピース依存の非循環", check_piece_dag),

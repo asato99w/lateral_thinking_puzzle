@@ -10,6 +10,7 @@ class Descriptor:
     id: str
     label: str
     formation_conditions: list[list[str]] | None = None  # None = 基礎記述素
+    rejection_conditions: list[list[str]] | None = None  # confirmed により棄却される条件
 
 
 @dataclass

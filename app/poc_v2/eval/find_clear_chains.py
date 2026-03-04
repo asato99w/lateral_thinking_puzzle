@@ -3,6 +3,8 @@
 クリア条件から逆算し、必要な質問の最小集合を全て求める。
 """
 
+from __future__ import annotations
+
 import json
 import sys
 from pathlib import Path
@@ -27,9 +29,16 @@ def build_indices(data: dict) -> tuple:
         if "formation_conditions" in d:
             derived_conditions[d["id"]] = d["formation_conditions"]
 
+    # 棄却条件
+    rejection_conditions: dict[str, list[list[str]]] = {}
+    for d in data.get("descriptors", []):
+        rc = d.get("rejection_conditions")
+        if rc is not None:
+            rejection_conditions[d["id"]] = rc
+
     initial_confirmed: set[str] = set(data.get("initial_confirmed", []))
 
-    return descriptor_to_questions, derived_conditions, initial_confirmed
+    return descriptor_to_questions, derived_conditions, initial_confirmed, rejection_conditions
 
 
 def find_question_sets_for_descriptor(
@@ -38,6 +47,7 @@ def find_question_sets_for_descriptor(
     derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
     initial_confirmed: set[str],
+    rejection_conditions: dict[str, list[list[str]]] | None = None,
 ) -> list[frozenset[str]]:
     """ある記述素を confirmed にするために必要な質問集合の候補を全て返す。
 
@@ -64,7 +74,7 @@ def find_question_sets_for_descriptor(
         # recall の各グループ（OR）について、必要な質問集合を求める
         recall_options = find_question_sets_for_recall(
             recall_conds, descriptor_to_questions, derived_conditions, memo,
-            initial_confirmed,
+            initial_confirmed, rejection_conditions,
         )
 
         # 各 recall オプションに自身の質問を追加
@@ -82,6 +92,7 @@ def find_question_sets_for_recall(
     derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
     initial_confirmed: set[str],
+    rejection_conditions: dict[str, list[list[str]]] | None = None,
 ) -> list[frozenset[str]]:
     """recall_conditions（OR of AND）を満たすための質問集合候補を返す"""
     if not recall_conditions:
@@ -98,7 +109,7 @@ def find_question_sets_for_recall(
         # AND: グループ内の全記述素を形成する必要がある
         group_options = find_question_sets_for_derived_group(
             cond_group, descriptor_to_questions, derived_conditions, memo,
-            initial_confirmed,
+            initial_confirmed, rejection_conditions,
         )
         results.extend(group_options)
 
@@ -111,6 +122,7 @@ def find_question_sets_for_derived_group(
     derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
     initial_confirmed: set[str],
+    rejection_conditions: dict[str, list[list[str]]] | None = None,
 ) -> list[frozenset[str]]:
     """記述素グループ（AND）を全て形成するための質問集合候補を返す"""
     # 各記述素について必要な質問集合を求め、直積を取る
@@ -118,7 +130,7 @@ def find_question_sets_for_derived_group(
     for did in descriptor_ids:
         options = find_question_sets_for_derived(
             did, descriptor_to_questions, derived_conditions, memo,
-            initial_confirmed,
+            initial_confirmed, rejection_conditions,
         )
         if not options:
             return []  # 1つでも到達不能なら全体が不可能
@@ -134,6 +146,7 @@ def find_question_sets_for_derived(
     derived_conditions: dict[str, list[list[str]]],
     memo: dict[str, list[frozenset[str]]],
     initial_confirmed: set[str],
+    rejection_conditions: dict[str, list[list[str]]] | None = None,
 ) -> list[frozenset[str]]:
     """ある導出記述素を形成するための質問集合候補を返す。
 
@@ -157,7 +170,7 @@ def find_question_sets_for_derived(
     # 方法1: reveals match（記述素を reveals する質問経由）
     descriptor_options = find_question_sets_for_descriptor(
         descriptor_id, descriptor_to_questions, derived_conditions, memo,
-        initial_confirmed,
+        initial_confirmed, rejection_conditions,
     )
     results.extend(descriptor_options)
 
@@ -166,7 +179,7 @@ def find_question_sets_for_derived(
     for cond_group in conditions:
         group_options = find_question_sets_for_derived_group(
             cond_group, descriptor_to_questions, derived_conditions, memo,
-            initial_confirmed,
+            initial_confirmed, rejection_conditions,
         )
         results.extend(group_options)
 
@@ -206,9 +219,32 @@ def minimize(sets: list[frozenset[str]]) -> list[frozenset[str]]:
     return minimal
 
 
+def _would_reject(
+    descriptor_id: str,
+    question_set: frozenset[str],
+    questions_by_id: dict[str, dict],
+    initial_confirmed: set[str],
+    rejection_conditions: dict[str, list[list[str]]],
+) -> bool:
+    """質問集合の reveals の和集合が descriptor_id の rejection_conditions を満たすか判定"""
+    if descriptor_id not in rejection_conditions:
+        return False
+    # 質問集合が confirms する記述素の和集合
+    all_confirmed = set(initial_confirmed)
+    for qid in question_set:
+        q = questions_by_id.get(qid)
+        if q:
+            all_confirmed.update(q.get("reveals", []))
+    # rejection_conditions の OR of AND 判定（confirmed のみ参照）
+    return any(
+        all(c in all_confirmed for c in group)
+        for group in rejection_conditions[descriptor_id]
+    )
+
+
 def run(path: str) -> list[frozenset[str]]:
     data = load_data(path)
-    descriptor_to_questions, derived_conditions, initial_confirmed = build_indices(data)
+    descriptor_to_questions, derived_conditions, initial_confirmed, rejection_conditions = build_indices(data)
     clear_conditions = data.get("clear_conditions", [])
 
     if not clear_conditions:
@@ -225,7 +261,7 @@ def run(path: str) -> list[frozenset[str]]:
         for descriptor_id in cond_group:
             options = find_question_sets_for_derived(
                 descriptor_id, descriptor_to_questions, derived_conditions, memo,
-                initial_confirmed,
+                initial_confirmed, rejection_conditions or None,
             )
             if not options:
                 break  # この記述素が到達不能ならこのグループは不可能
@@ -234,6 +270,38 @@ def run(path: str) -> list[frozenset[str]]:
             # 全記述素について選択肢がある場合、直積を取る
             group_options = cartesian_union(per_descriptor_options)
             all_options.extend(group_options)
+
+    # 棄却ポストフィルタ: 質問集合の reveals が rejection_conditions を満たし、
+    # formation_conditions 経由で導出される記述素を棄却してしまう場合は除外
+    if rejection_conditions:
+        questions_by_id = {q["id"]: q for q in data.get("questions", [])}
+        filtered: list[frozenset[str]] = []
+        for qset in all_options:
+            # この質問集合で棄却される記述素を計算
+            all_confirmed = set(initial_confirmed)
+            for qid in qset:
+                q = questions_by_id.get(qid)
+                if q:
+                    all_confirmed.update(q.get("reveals", []))
+            rejected_ids = set()
+            for did, conds in rejection_conditions.items():
+                if any(all(c in all_confirmed for c in group) for group in conds):
+                    rejected_ids.add(did)
+            # クリア条件の記述素が棄却されないか確認
+            clear_blocked = False
+            for cg in clear_conditions:
+                if any(did in rejected_ids for did in cg):
+                    # このクリア条件グループ内の記述素が棄却される
+                    continue
+                # 棄却されないグループがあれば OK
+                break
+            else:
+                # 全クリア条件グループが棄却の影響を受ける場合は除外
+                if rejected_ids:
+                    clear_blocked = True
+            if not clear_blocked:
+                filtered.append(qset)
+        all_options = filtered
 
     # 極小化
     minimal = minimize(all_options)

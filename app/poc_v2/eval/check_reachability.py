@@ -3,6 +3,8 @@
 initial_confirmed 以外の全記述素が question の reveals 経由で到達可能かを検証する。
 """
 
+from __future__ import annotations
+
 import json
 import sys
 from pathlib import Path
@@ -69,21 +71,33 @@ def _transitive_deps(pid: str, piece_deps: dict[str, set[str]]) -> set[str]:
     return visited
 
 
-def _derivable_descriptors(allowed_confirmed: set[str], descriptors: dict[str, list[list[str]]]) -> set[str]:
+def _derivable_descriptors(
+    allowed_confirmed: set[str],
+    descriptors: dict[str, list[list[str]]],
+    rejection_conditions: dict[str, list[list[str]]] | None = None,
+) -> set[str]:
     """allowed_confirmed から導出可能な全記述素を不動点計算で求める。
 
     導出ロジック:
-    1. 導出済み集合を allowed_confirmed で初期化
-    2. 記述素が導出済み集合内と一致 → 導出
-    3. 形成条件のいずれかのグループが全て導出済み → 導出
-    4. 変化がなくなるまで繰り返す
+    1. 棄却集合を計算（rejection_conditions が confirmed で満たされるもの）
+    2. 導出済み集合を allowed_confirmed で初期化
+    3. 記述素が導出済み集合内と一致 → 導出（棄却済みを除く）
+    4. 形成条件のいずれかのグループが全て導出済み → 導出（棄却済みを除く）
+    5. 変化がなくなるまで繰り返す
     """
+    # 棄却集合の計算
+    rejected = set()
+    if rejection_conditions:
+        for did, conditions in rejection_conditions.items():
+            if any(all(c in allowed_confirmed for c in group) for group in conditions):
+                rejected.add(did)
+
     derived = set(allowed_confirmed)
     changed = True
     while changed:
         changed = False
         for did, conditions in descriptors.items():
-            if did in derived:
+            if did in derived or did in rejected:
                 continue
             # 記述素が confirmed と一致する場合
             if did in allowed_confirmed:
@@ -135,6 +149,13 @@ def check_recall_scope(data: dict) -> list[str]:
     # 導出記述素: formation_conditions を持つもの
     derived_descriptors = {d["id"]: d.get("formation_conditions", []) for d in data.get("descriptors", []) if _is_derived(d)}
 
+    # 棄却条件: rejection_conditions を持つもの
+    rejection_conds: dict[str, list[list[str]]] = {}
+    for d in data.get("descriptors", []):
+        rc = d.get("rejection_conditions")
+        if rc is not None:
+            rejection_conds[d["id"]] = rc
+
     for piece in data.get("pieces", []):
         pid = piece["id"]
         deps = _transitive_deps(pid, piece_deps)
@@ -148,7 +169,7 @@ def check_recall_scope(data: dict) -> list[str]:
             allowed_confirmed.update(piece_members.get(dep_pid, set()))
 
         # allowed = base descriptors in scope + derived descriptors from scope
-        derivable = _derivable_descriptors(allowed_confirmed, derived_descriptors)
+        derivable = _derivable_descriptors(allowed_confirmed, derived_descriptors, rejection_conds or None)
         allowed = allowed_confirmed | derivable
 
         # check each question that reveals this piece's members

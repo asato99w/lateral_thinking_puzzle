@@ -40,6 +40,7 @@ def load_puzzle(path: str | Path) -> PuzzleData:
             id=item["id"],
             label=item["label"],
             formation_conditions=item.get("formation_conditions"),
+            rejection_conditions=item.get("rejection_conditions"),
         )
         descriptors[d.id] = d
 
@@ -85,21 +86,30 @@ def init_game(puzzle: PuzzleData) -> GameState:
     return state
 
 
-def evaluate_derivations(state: GameState, puzzle: PuzzleData) -> list[str]:
+def evaluate_derivations(state: GameState, puzzle: PuzzleData) -> tuple[list[str], list[str]]:
     """confirmed 集合から導出可能な記述素を不動点計算で求め、state.derived を更新する。
 
     state.confirmed は変更しない。導出結果は state.derived に格納される。
-    戻り値: 新たに導出された記述素のリスト。
+    戻り値: (newly_derived, newly_rejected)
+    - newly_derived: 新たに導出された記述素のリスト
+    - newly_rejected: 今回棄却された（derived から除去された）記述素のリスト
     """
-    known = set(state.confirmed)  # confirmed を起点に導出を計算
-    newly_derived: list[str] = []
+    # Step 1: 棄却集合の計算（confirmed のみ参照、O(n)）
+    rejected = set()
+    for d in puzzle.descriptors.values():
+        if d.rejection_conditions is not None:
+            if any(all(c in state.confirmed for c in group) for group in d.rejection_conditions):
+                rejected.add(d.id)
+
+    # Step 2: 不動点計算（rejected をスキップ）
+    known = set(state.confirmed)
     changed = True
     while changed:
         changed = False
         for d in puzzle.descriptors.values():
             if d.formation_conditions is None:
                 continue
-            if d.id in known:
+            if d.id in known or d.id in rejected:
                 continue
             for condition_set in d.formation_conditions:
                 if all(c in known for c in condition_set):
@@ -109,8 +119,9 @@ def evaluate_derivations(state: GameState, puzzle: PuzzleData) -> list[str]:
     # derived = known から confirmed を除いた部分
     new_derived_set = known - state.confirmed
     newly_derived = sorted(new_derived_set - state.derived)
+    newly_rejected = sorted((state.derived - new_derived_set) - state.confirmed)
     state.derived = new_derived_set
-    return newly_derived
+    return newly_derived, newly_rejected
 
 
 def _check_conditions(conditions: list[list[str]], state: GameState) -> bool:
@@ -139,6 +150,7 @@ class AnswerResult:
 
     new_confirmed: list[str]
     new_derived: list[str]
+    new_rejected: list[str]
     new_pieces: list[str]
     mechanism: str
     is_link: bool
@@ -159,7 +171,7 @@ def answer_question(
             new_confirmed.append(descriptor_id)
 
     # 導出の再評価
-    new_derived = evaluate_derivations(state, puzzle)
+    new_derived, new_rejected = evaluate_derivations(state, puzzle)
 
     # ピースの構成記述素がすべて揃ったかチェック（confirmed ∪ derived で判定）
     known = state.known
@@ -180,6 +192,7 @@ def answer_question(
     return AnswerResult(
         new_confirmed=new_confirmed,
         new_derived=new_derived,
+        new_rejected=new_rejected,
         new_pieces=new_pieces,
         mechanism=question.mechanism,
         is_link=question.mechanism == "link",

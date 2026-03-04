@@ -64,6 +64,12 @@ def display_answer_result(
             d = puzzle.descriptors[did]
             print(f"  💭 導出: {d.label}")
 
+    # 棄却された記述素
+    if result.new_rejected:
+        for did in result.new_rejected:
+            d = puzzle.descriptors[did]
+            print(f"  ❌ 棄却: {d.label}")
+
     # メカニズム表示
     if result.is_link:
         print("  🔗 【リンク】複数の事実が結びつきました！")
@@ -80,7 +86,7 @@ def display_answer_result(
             else:
                 print(f"  🧩 ピース発見: {piece.label}（{dep_type}）")
 
-    if not result.new_confirmed and not result.new_pieces and not result.new_derived:
+    if not result.new_confirmed and not result.new_pieces and not result.new_derived and not result.new_rejected:
         print("  （新しい発見はありませんでした）")
 
 
