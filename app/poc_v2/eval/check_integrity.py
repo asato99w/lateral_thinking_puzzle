@@ -8,7 +8,8 @@ import sys
 from pathlib import Path
 
 
-REQUIRED_KEYS = ["id", "title", "statement", "truth", "descriptors", "initial_confirmed", "clear_conditions", "pieces", "questions"]
+REQUIRED_KEYS_DATA = ["id", "title", "statement", "truth", "descriptors", "initial_confirmed", "clear_conditions", "pieces", "questions"]
+REQUIRED_KEYS_SRC_STRUCTURAL = ["title", "descriptors", "initial_confirmed", "clear_conditions", "pieces", "questions"]
 VALID_MECHANISMS = {"observation", "link", "anomaly"}
 
 
@@ -17,11 +18,34 @@ def load_data(path: str) -> dict:
         return json.load(f)
 
 
+def _is_src(data: dict) -> bool:
+    """data_src.json かどうかを _ プレフィックス付きフィールドの有無で判定"""
+    for d in data.get("descriptors", []):
+        for key in d:
+            if key.startswith("_"):
+                return True
+    for q in data.get("questions", []):
+        for key in q:
+            if key.startswith("_"):
+                return True
+    return False
+
+
 def check_required_keys(data: dict) -> list[str]:
     errors = []
-    for key in REQUIRED_KEYS:
-        if key not in data:
-            errors.append(f"必須キー '{key}' が存在しない")
+    if _is_src(data):
+        for key in REQUIRED_KEYS_SRC_STRUCTURAL:
+            if key not in data:
+                errors.append(f"必須キー '{key}' が存在しない")
+        # 問題文/真相: (S, T) または (statement, truth) のいずれか
+        has_st = "S" in data and "T" in data
+        has_full = "statement" in data and "truth" in data
+        if not has_st and not has_full:
+            errors.append("問題文/真相キーが不足: (S, T) または (statement, truth) が必要")
+    else:
+        for key in REQUIRED_KEYS_DATA:
+            if key not in data:
+                errors.append(f"必須キー '{key}' が存在しない")
     return errors
 
 
