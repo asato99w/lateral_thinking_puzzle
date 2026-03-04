@@ -21,14 +21,15 @@
     {"id": "D-14", "label": "男は熱気球から飛び降りて死亡した", "_phase1": {"source": "t_descriptors"}},
     {"id": "D-15", "label": "男は地上からこの場所に来たのではない", "_phase2": {"generated": true}},
     {"id": "D-16", "label": "裸になったのには理由があった", "_phase2": {"generated": true}},
-    {"id": "D-17", "label": "男は空からこの場所に来た", "formation_conditions": [["D-1", "D-15"]], "_phase8": {"added": true, "reason": "Q-3の段階的絞り込みの欠如を解消するための中間記述素"}}
+    {"id": "D-17", "label": "男は空からこの場所に来た", "formation_conditions": [["D-1", "D-15"]], "_phase8": {"added": true, "reason": "Q-3の段階的絞り込みの欠如を解消するための中間記述素"}},
+    {"id": "D-18", "label": "男がこの場所にいること自体が不可解", "formation_conditions": [["D-1", "D-2"]], "_phase8": {"added": true, "reason": "Q-1の想起の認知的妥当性を改善するための異常認識記述素"}}
   ],
   "pieces": [
     {
       "id": "P-balloon",
       "label": "熱気球と軽量化",
       "type": "support",
-      "members": ["D-5", "D-6", "D-7", "D-8", "D-9", "D-10", "D-15", "D-16", "D-17"],
+      "members": ["D-5", "D-6", "D-7", "D-8", "D-9", "D-10", "D-15", "D-16", "D-17", "D-18"],
       "triggers": [["D-15"], ["D-16"]],
       "depends_on": []
     },
@@ -46,7 +47,7 @@
       "id": "Q-1",
       "text": "男は地上からこの場所に来ましたか？",
       "answer": "No",
-      "recall_conditions": [["D-1"]],
+      "recall_conditions": [["D-18"]],
       "reveals": ["D-15"],
       "mechanism": "observation",
       "_chain_ref": "terminal/D-15"
@@ -127,10 +128,10 @@
       "id": "Q-10",
       "text": "マッチの長さでくじ引きをしましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-11"]],
+      "recall_conditions": [["D-11", "D-4"]],
       "reveals": ["D-12"],
       "mechanism": "observation",
-      "_chain_ref": "P-lottery/step2(D-11→D-12)"
+      "_chain_ref": "P-lottery/step2(D-11+D-4→D-12)"
     },
     {
       "id": "Q-11",

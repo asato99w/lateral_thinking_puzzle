@@ -28,6 +28,14 @@ def export(src_path: str) -> str:
 
     cleaned = strip_underscore_fields(data)
 
+    # data_src の短縮キーをエンジン互換に変換
+    if "S" in cleaned and "statement" not in cleaned:
+        cleaned["statement"] = cleaned.pop("S")
+    if "T" in cleaned and "truth" not in cleaned:
+        cleaned["truth"] = cleaned.pop("T")
+    if "id" not in cleaned and "title" in cleaned:
+        cleaned["id"] = cleaned["title"]
+
     dst = src.parent / "data.json"
     with open(dst, "w", encoding="utf-8") as f:
         json.dump(cleaned, f, ensure_ascii=False, indent=2)

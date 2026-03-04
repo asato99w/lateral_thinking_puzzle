@@ -43,13 +43,25 @@ def check_base_descriptor_reachability(data: dict) -> list[str]:
 
 
 def check_piece_member_reachability(data: dict) -> list[str]:
-    """各ピースの members が全て到達可能か。"""
+    """各ピースの members が全て到達可能か。
+
+    到達可能 = initial_confirmed | reveals | formation_conditions による導出。
+    """
     errors = []
     initial = set(data.get("initial_confirmed", []))
     revealed: set[str] = set()
     for q in data.get("questions", []):
         revealed.update(q.get("reveals", []))
-    reachable = initial | revealed
+
+    # formation_conditions による導出記述素も到達可能とみなす
+    derived_descriptors = {d["id"]: d.get("formation_conditions", []) for d in data.get("descriptors", []) if _is_derived(d)}
+    rejection_conds: dict[str, list[list[str]]] = {}
+    for d in data.get("descriptors", []):
+        rc = d.get("rejection_conditions")
+        if rc is not None:
+            rejection_conds[d["id"]] = rc
+    derivable = _derivable_descriptors(initial | revealed, derived_descriptors, rejection_conds or None)
+    reachable = initial | revealed | derivable
 
     for piece in data.get("pieces", []):
         pid = piece["id"]
