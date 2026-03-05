@@ -2,7 +2,6 @@
 name: v2-generate
 description: v2統合アルゴリズムを適用し、パズルのサンプルデータを段階的に生成する。
 argument-hint: [パズル名]
-disable-model-invocation: true
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
