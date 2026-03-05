@@ -116,7 +116,7 @@
   },
   "_phase4": {
     "chains_to_terminals": {
-      "D-16": [{"input": ["D-5"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-16"]}],
+      "D-16": [{"input": ["D-18", "D-5"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-16"]}],
       "D-15": [{"input": ["D-16"], "tactic": 10, "tactic_name": "段階的絞り込み", "output": ["D-15"]}],
       "D-17": [{"input": ["D-15"], "tactic": 4, "tactic_name": "登場人物の探索", "output": ["D-17"]}],
       "D-18": [{"input": ["D-22"], "tactic": 2, "tactic_name": "観測事実の深掘り", "output": ["D-18"]}],
@@ -151,15 +151,17 @@
       "recall_conditions": [["D-16"]],
       "reveals": ["D-15"],
       "mechanism": "observation",
+      "category": "状況の詳細",
       "_chain_ref": ["terminal:D-15"]
     },
     {
       "id": "Q-2",
       "text": "男は過去に危機的な体験をしましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-5"]],
+      "recall_conditions": [["D-18", "D-5"]],
       "reveals": ["D-16"],
       "mechanism": "link",
+      "category": "原因と動機",
       "_chain_ref": ["terminal:D-16"]
     },
     {
@@ -169,6 +171,7 @@
       "recall_conditions": [["D-15"]],
       "reveals": ["D-17"],
       "mechanism": "observation",
+      "category": "人物と過去",
       "_chain_ref": ["terminal:D-17"]
     },
     {
@@ -178,6 +181,7 @@
       "recall_conditions": [["D-18"]],
       "reveals": ["D-21"],
       "mechanism": "link",
+      "category": "原因と動機",
       "_chain_ref": ["terminal:D-21"]
     },
     {
@@ -187,6 +191,7 @@
       "recall_conditions": [["D-22"], ["D-2", "D-3"]],
       "reveals": ["D-18"],
       "mechanism": "observation",
+      "category": "状況の詳細",
       "_chain_ref": ["terminal:D-18", "internal:P-deception:1"]
     },
     {
