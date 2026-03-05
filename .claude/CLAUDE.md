@@ -10,7 +10,7 @@
 | エンジン | `app/poc/` | `app/poc_v2/src/` |
 | データ | `app/poc/data/` | `app/poc_v2/samples/{puzzle}/` |
 | 評価 | なし | `app/poc_v2/eval/` |
-| 理論 | `theory/` | `theory/` + `app/poc_v2/` 内の設計 |
+| 理論 | `theory/` | `theory_v2/` |
 
 ## 用語
 
@@ -20,6 +20,7 @@
 - 依存方向: **アルゴリズム → サンプル → アプリデータ**
 
 ### v2 体系
+- **v2 アルゴリズム**: `theory_v2/` 内の理論的手順群。統合アルゴリズム（`theory_v2/integration/algorithms/統合アルゴリズム.md`）と各 Phase の規則（`theory_v2/integration/rules/`）から成る
 - **v2 データ**: `app/poc_v2/samples/{puzzle}/{iteration}/` 内の JSON ファイル群。v1 のサンプルとは無関係
 - **v2 エンジン**: `app/poc_v2/src/` 内のコード。v1 エンジンとは独立
 - **v2 eval**: `app/poc_v2/eval/` 内の検証スクリプト群
