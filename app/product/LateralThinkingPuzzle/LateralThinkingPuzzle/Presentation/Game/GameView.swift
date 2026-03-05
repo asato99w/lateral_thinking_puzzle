@@ -17,12 +17,6 @@ struct GameView: View {
                 .transition(.opacity)
         } else {
             VStack(spacing: 0) {
-                // Category filter tabs (pinned at top)
-                if !viewModel.puzzleInfo.topicCategories.isEmpty {
-                    categoryTabBar
-                    Divider().opacity(0.3)
-                }
-
                 // Single scroll for all content
                 ScrollView {
                     VStack(alignment: .leading, spacing: 12) {
@@ -36,6 +30,11 @@ struct GameView: View {
 
                         if !viewModel.openQuestions.isEmpty {
                             sectionLabel(Strings.chooseQuestion)
+                        }
+
+                        // Category filter tabs (above question list)
+                        if !viewModel.puzzleInfo.topicCategories.isEmpty {
+                            categoryTabBar
                         }
 
                         if !viewModel.filteredOpenQuestions.isEmpty {

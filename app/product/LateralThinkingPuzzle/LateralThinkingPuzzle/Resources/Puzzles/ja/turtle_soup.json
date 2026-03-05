@@ -549,7 +549,8 @@
       "reveals": [
         "D-15"
       ],
-      "mechanism": "observation"
+      "mechanism": "observation",
+      "topic_category": "状況の確認"
     },
     {
       "id": "Q-2",
@@ -557,13 +558,15 @@
       "answer": "Yes",
       "recall_conditions": [
         [
+          "D-18",
           "D-5"
         ]
       ],
       "reveals": [
         "D-16"
       ],
-      "mechanism": "link"
+      "mechanism": "link",
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q-3",
@@ -577,7 +580,8 @@
       "reveals": [
         "D-17"
       ],
-      "mechanism": "observation"
+      "mechanism": "observation",
+      "topic_category": "人物と背景"
     },
     {
       "id": "Q-4",
@@ -591,7 +595,8 @@
       "reveals": [
         "D-21"
       ],
-      "mechanism": "link"
+      "mechanism": "link",
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q-5",
@@ -609,7 +614,8 @@
       "reveals": [
         "D-18"
       ],
-      "mechanism": "observation"
+      "mechanism": "observation",
+      "topic_category": "状況の確認"
     },
     {
       "id": "Q-6",
@@ -623,7 +629,8 @@
       "reveals": [
         "D-6"
       ],
-      "mechanism": "observation"
+      "mechanism": "observation",
+      "topic_category": "人物と背景"
     },
     {
       "id": "Q-7",
@@ -637,7 +644,8 @@
       "reveals": [
         "D-7"
       ],
-      "mechanism": "observation"
+      "mechanism": "observation",
+      "topic_category": "状況の確認"
     },
     {
       "id": "Q-8",
@@ -651,7 +659,8 @@
       "reveals": [
         "D-8"
       ],
-      "mechanism": "observation"
+      "mechanism": "observation",
+      "topic_category": "状況の確認"
     },
     {
       "id": "Q-9",
@@ -666,7 +675,8 @@
       "reveals": [
         "D-9"
       ],
-      "mechanism": "link"
+      "mechanism": "link",
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q-10",
@@ -681,7 +691,8 @@
       "reveals": [
         "D-19"
       ],
-      "mechanism": "anomaly"
+      "mechanism": "anomaly",
+      "topic_category": "前提の確認"
     },
     {
       "id": "Q-11",
@@ -695,7 +706,8 @@
       "reveals": [
         "D-20"
       ],
-      "mechanism": "observation"
+      "mechanism": "observation",
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q-12",
@@ -712,7 +724,8 @@
       "reveals": [
         "D-10"
       ],
-      "mechanism": "link"
+      "mechanism": "link",
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q-13",
@@ -727,7 +740,8 @@
       "reveals": [
         "D-11"
       ],
-      "mechanism": "anomaly"
+      "mechanism": "anomaly",
+      "topic_category": "前提の確認"
     },
     {
       "id": "Q-14",
@@ -743,7 +757,8 @@
       "reveals": [
         "D-12"
       ],
-      "mechanism": "anomaly"
+      "mechanism": "anomaly",
+      "topic_category": "前提の確認"
     },
     {
       "id": "Q-15",
@@ -758,7 +773,8 @@
       "reveals": [
         "D-13"
       ],
-      "mechanism": "link"
+      "mechanism": "link",
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q-16",
@@ -772,7 +788,8 @@
       "reveals": [
         "D-14"
       ],
-      "mechanism": "link"
+      "mechanism": "link",
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q-17",
@@ -790,7 +807,8 @@
       "reveals": [
         "D-N1"
       ],
-      "mechanism": "rejection"
+      "mechanism": "rejection",
+      "topic_category": "状況の確認"
     },
     {
       "id": "Q-18",
@@ -805,7 +823,8 @@
       "reveals": [
         "D-N2"
       ],
-      "mechanism": "rejection"
+      "mechanism": "rejection",
+      "topic_category": "前提の確認"
     },
     {
       "id": "Q-19",
@@ -819,7 +838,8 @@
       "reveals": [
         "D-N3"
       ],
-      "mechanism": "rejection"
+      "mechanism": "rejection",
+      "topic_category": "人物と背景"
     },
     {
       "id": "Q-20",
@@ -834,7 +854,8 @@
       "reveals": [
         "D-N4"
       ],
-      "mechanism": "rejection"
+      "mechanism": "rejection",
+      "topic_category": "状況の確認"
     },
     {
       "id": "Q-21",
@@ -848,7 +869,26 @@
       "reveals": [
         "D-N5"
       ],
-      "mechanism": "rejection"
+      "mechanism": "rejection",
+      "topic_category": "状況の確認"
+    }
+  ],
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
     }
   ]
 }
