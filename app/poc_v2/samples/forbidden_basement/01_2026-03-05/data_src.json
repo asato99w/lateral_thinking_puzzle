@@ -1,0 +1,358 @@
+{
+  "title": "禁じられた地下室",
+  "S": "絶対に開けてはいけないと言われていた地下室のドアを開けた女性。中に入って見たものに驚き、すぐに警察に駆け込んだ。しかし地下室の中には何も異常なものはなかった。",
+  "T": "女性は地下室に監禁されていた。「開けてはいけないドア」とは監禁部屋から外に出るドアのこと。ドアを開けたら普通の外の世界が見えた。「何も異常なものはなかった」のは外の世界が普通だから。彼女は自分の監禁を通報するために警察に行った。",
+  "descriptors": [
+    {"id": "D-1", "label": "女性がドアを開けた"},
+    {"id": "D-2", "label": "そのドアは「絶対に開けてはいけない」と言われていた"},
+    {"id": "D-3", "label": "そのドアは地下室のドアである"},
+    {"id": "D-4", "label": "女性はドアの先で見たものに驚いた"},
+    {"id": "D-5", "label": "女性は警察に駆け込んだ"},
+    {"id": "D-6", "label": "地下室の中には異常なものはなかった"},
+    {"id": "D-7", "label": "女性は地下室に監禁されていた"},
+    {"id": "D-8", "label": "ドアは監禁部屋から外に出るドアである"},
+    {"id": "D-9", "label": "ドアの向こうには普通の外の世界が広がっている"},
+    {"id": "D-10", "label": "女性は自分が監禁されていたと認識した"},
+    {"id": "D-11", "label": "女性は監禁を通報するために警察に行った"},
+    {"id": "D-12", "label": "女性はドアを開ける前から地下室にいた"},
+    {"id": "D-13", "label": "女性はドアを内側から開けた"},
+    {"id": "D-14", "label": "女性が驚いたものは地下室の内部にはなかった"},
+    {"id": "D-N1", "label": "地下室に女性以外の人はいなかった"}
+  ],
+  "initial_confirmed": ["D-1", "D-2", "D-3", "D-4", "D-5", "D-6"],
+  "clear_conditions": [["D-7", "D-8"]],
+  "pieces": [
+    {
+      "id": "P-1",
+      "label": "監禁とドアの正体",
+      "members": ["D-7", "D-8"],
+      "trigger": [["D-12"]],
+      "depends_on": []
+    },
+    {
+      "id": "P-2",
+      "label": "外の世界と通報",
+      "members": ["D-9", "D-10", "D-11"],
+      "trigger": [["D-8"]],
+      "depends_on": ["P-1"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "女性はドアを内側から開けましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1"]],
+      "reveals": ["D-13"],
+      "mechanism": "observation",
+      "category": "状況の確認",
+      "_chain_ref": "terminal:D-13:step1"
+    },
+    {
+      "id": "Q-2",
+      "text": "女性は地下室に監禁されていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-12", "D-2"]],
+      "reveals": ["D-7"],
+      "mechanism": "anomaly",
+      "category": "前提の確認",
+      "_chain_ref": "P-1:step1"
+    },
+    {
+      "id": "Q-3",
+      "text": "ドアは地下室から外に出るためのドアですか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-7", "D-3"]],
+      "reveals": ["D-8"],
+      "mechanism": "link",
+      "category": "前提の確認",
+      "_chain_ref": "P-1:step2"
+    },
+    {
+      "id": "Q-4",
+      "text": "女性がドアの先に見たのは外の世界でしたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-8"]],
+      "reveals": ["D-9"],
+      "mechanism": "observation",
+      "category": "状況の確認",
+      "_chain_ref": "P-2:step1"
+    },
+    {
+      "id": "Q-5",
+      "text": "女性は外を見たことで自分が監禁されていたと気づきましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-7", "D-9"]],
+      "reveals": ["D-10"],
+      "mechanism": "link",
+      "category": "原因と動機",
+      "_chain_ref": "P-2:step2"
+    },
+    {
+      "id": "Q-6",
+      "text": "女性が警察に行ったのは監禁を通報するためですか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-10", "D-5"]],
+      "reveals": ["D-11"],
+      "mechanism": "link",
+      "category": "原因と動機",
+      "_chain_ref": "P-2:step3"
+    },
+    {
+      "id": "Q-7",
+      "text": "女性はドアを開ける前、地下室の中にいましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1", "D-3", "D-6"]],
+      "reveals": ["D-12"],
+      "mechanism": "observation",
+      "category": "人物と背景",
+      "_chain_ref": "terminal:D-12_alt1:step1"
+    },
+    {
+      "id": "Q-8",
+      "text": "女性が驚いたのは地下室の中にあるものですか？",
+      "answer": "No",
+      "recall_conditions": [["D-4"]],
+      "reveals": ["D-14"],
+      "mechanism": "anomaly",
+      "category": "原因と動機",
+      "_chain_ref": "terminal:D-14:step1"
+    },
+    {
+      "id": "Q-9",
+      "text": "地下室に女性以外の人がいましたか？",
+      "answer": "No",
+      "recall_conditions": [["D-2", "D-4"]],
+      "reveals": ["D-N1"],
+      "mechanism": "observation",
+      "category": "前提の確認",
+      "_chain_ref": "rejection:D-N1:step1"
+    }
+  ],
+  "_phase11": {
+    "opposing_hypotheses": {
+      "gap-alpha": [
+        {
+          "id": "H_alpha_1",
+          "label": "女性は外から地下室に入った",
+          "descriptors": [
+            {"id": "D-C1", "label": "女性は地下室の外にいた", "rejection_conditions": [["D-12"]]},
+            {"id": "D-C2", "label": "女性はドアを開けて地下室の中に入った", "rejection_conditions": [["D-13"]]}
+          ],
+          "resolution": "通常の読解: 外から地下室に入り、中のものを見た"
+        }
+      ],
+      "gap-beta": [
+        {
+          "id": "H_beta_1",
+          "label": "地下室に犯罪の証拠があった",
+          "descriptors": [
+            {"id": "D-C3", "label": "地下室の中に犯罪行為の証拠があった", "rejection_conditions": [["D-14"]]},
+            {"id": "D-C4", "label": "女性は犯罪の証拠を見て驚いた", "rejection_conditions": [["D-14"]]}
+          ],
+          "resolution": "犯罪の痕跡を発見、警察到着時には除去済み"
+        },
+        {
+          "id": "H_beta_2",
+          "label": "地下室は空で何もなかった",
+          "descriptors": [
+            {"id": "D-C5", "label": "地下室は空っぽだった", "rejection_conditions": [["D-12"]]},
+            {"id": "D-C6", "label": "女性は禁止されていたのに何もないことに驚いた", "rejection_conditions": [["D-9"]]}
+          ],
+          "resolution": "期待外れの空っぽ。禁止の理由が不明で不審"
+        },
+        {
+          "id": "H_beta_3",
+          "label": "地下室に他の人間が閉じ込められていた",
+          "descriptors": [
+            {"id": "D-C7", "label": "地下室に別の人間が閉じ込められていた", "rejection_conditions": [["D-N1"]]},
+            {"id": "D-C8", "label": "女性は閉じ込められた人を見て驚いた", "rejection_conditions": [["D-N1"]]}
+          ],
+          "resolution": "他者の監禁を発見し通報。Tの変種だが女性自身は自由"
+        }
+      ],
+      "gap-gamma": [
+        {
+          "id": "H_gamma_1",
+          "label": "目撃した犯罪の通報",
+          "descriptors": [
+            {"id": "D-C9", "label": "女性は他者に対する犯罪行為の証拠を発見した", "rejection_conditions": [["D-N1"]]},
+            {"id": "D-C10", "label": "女性は犯罪を通報するために警察に行った", "rejection_conditions": [["D-11"]]}
+          ],
+          "resolution": "他者の犯罪を目撃し通報"
+        },
+        {
+          "id": "H_gamma_2",
+          "label": "自身の安全確保",
+          "descriptors": [
+            {"id": "D-C11", "label": "女性は身の危険を感じた", "rejection_conditions": [["D-10"]]},
+            {"id": "D-C12", "label": "女性は自身の安全のために警察に駆け込んだ", "rejection_conditions": [["D-11"]]}
+          ],
+          "resolution": "恐怖から逃げるように警察に行った"
+        }
+      ]
+    }
+  },
+  "_phase14": {
+    "rejection_question": {
+      "id": "Q-9",
+      "target_hypotheses": ["H_beta_3", "H_gamma_1"],
+      "rejection_descriptor": "D-N1",
+      "design_rationale": "D-C7, D-C8, D-C9 は他者の存在を前提とする。D-N1 で女性以外不在を確定し一括棄却"
+    },
+    "natural_rejections": [
+      {"descriptor": "D-C1", "rejected_by": "D-12", "source": "Q-7 or formation from D-13/D-14"},
+      {"descriptor": "D-C2", "rejected_by": "D-13", "source": "Q-1"},
+      {"descriptor": "D-C3", "rejected_by": "D-14", "source": "Q-8"},
+      {"descriptor": "D-C4", "rejected_by": "D-14", "source": "Q-8"},
+      {"descriptor": "D-C5", "rejected_by": "D-12", "source": "Q-7 or formation"},
+      {"descriptor": "D-C6", "rejected_by": "D-9", "source": "Q-4"},
+      {"descriptor": "D-C10", "rejected_by": "D-11", "source": "Q-6"},
+      {"descriptor": "D-C11", "rejected_by": "D-10", "source": "Q-5"},
+      {"descriptor": "D-C12", "rejected_by": "D-11", "source": "Q-6"}
+    ]
+  },
+  "_phase13": {
+    "opposing_tactical_chains": {
+      "H_alpha_1": {
+        "formation": {"D-C1": [["D-1", "D-3"]], "D-C2": [["D-C1", "D-3"]]},
+        "rationale": "S の素直な読解: ドアを開けた+地下室 → 外にいた → 中に入った"
+      },
+      "H_beta_1": {
+        "formation": {"D-C3": [["D-C2", "D-4"]], "D-C4": [["D-C3", "D-4"]]},
+        "rationale": "中に入って驚いた → 犯罪の証拠があった"
+      },
+      "H_beta_2": {
+        "formation": {"D-C5": [["D-C2", "D-6"]], "D-C6": [["D-C5", "D-2"]]},
+        "rationale": "異常なし+禁止 → 空っぽ → 禁止の理由がわからず驚き"
+      },
+      "H_beta_3": {
+        "formation": {"D-C7": [["D-C2", "D-2"]], "D-C8": [["D-C7", "D-4"]]},
+        "rationale": "禁止された場所に入る+驚き → 他者が閉じ込められていた"
+      },
+      "H_gamma_1": {
+        "formation": {"D-C9": [["D-C3", "D-5"]], "D-C10": [["D-C9", "D-5"]]},
+        "rationale": "犯罪証拠+警察 → 犯罪通報"
+      },
+      "H_gamma_2": {
+        "formation": {"D-C11": [["D-C2", "D-4"]], "D-C12": [["D-C11", "D-5"]]},
+        "rationale": "驚き+入った → 危険を感じた → 安全確保で警察"
+      }
+    }
+  },
+  "_phase12": {
+    "branch_points": [
+      {
+        "id": "BP-1",
+        "player_facts": ["D-1", "D-3"],
+        "target_hypothesis": "H_alpha_1",
+        "timing": "game_start"
+      },
+      {
+        "id": "BP-2",
+        "player_facts": ["D-1", "D-3", "D-4"],
+        "target_hypothesis": "H_beta_1",
+        "timing": "game_start"
+      },
+      {
+        "id": "BP-3",
+        "player_facts": ["D-1", "D-3", "D-2", "D-6"],
+        "target_hypothesis": "H_beta_2",
+        "timing": "game_start"
+      },
+      {
+        "id": "BP-4",
+        "player_facts": ["D-4", "D-5"],
+        "target_hypothesis": "H_gamma_2",
+        "timing": "game_start"
+      }
+    ]
+  },
+  "_phase10": {
+    "cognitive_gaps": [
+      {
+        "id": "gap-alpha",
+        "label": "ドアの方向と女性の位置",
+        "H": ["D-7", "D-8", "D-12", "D-13"],
+        "question": "ドアを開けたとき、女性はどちら側にいたのか？",
+        "type": "言葉の二重性"
+      },
+      {
+        "id": "gap-beta",
+        "label": "驚きの対象",
+        "H": ["D-9", "D-14"],
+        "question": "女性は何を見て驚いたのか？",
+        "type": "因果の錯誤"
+      },
+      {
+        "id": "gap-gamma",
+        "label": "警察に行った動機",
+        "H": ["D-10", "D-11"],
+        "question": "女性はなぜ警察に駆け込んだのか？",
+        "type": "因果の錯誤"
+      }
+    ]
+  },
+  "_phase4": {
+    "terminal_chains": {
+      "D-13": {
+        "starting_set": ["D-1"],
+        "steps": [
+          {"input": ["D-1"], "tactic": "観測事実の深掘り", "output": ["D-13"]}
+        ]
+      },
+      "D-12_alt1": {
+        "starting_set": ["D-1", "D-3"],
+        "steps": [
+          {"input": ["D-1", "D-3"], "tactic": "観測事実の深掘り", "output": ["D-12"]}
+        ]
+      },
+      "D-14": {
+        "starting_set": ["D-4", "D-6"],
+        "steps": [
+          {"input": ["D-4", "D-6"], "tactic": "矛盾の指摘", "output": ["D-14"]}
+        ]
+      }
+    },
+    "piece_internal_chains": {
+      "P-1": {
+        "trigger": ["D-12"],
+        "steps": [
+          {"input": ["D-12", "D-2"], "tactic": "矛盾の指摘", "output": ["D-7"]},
+          {"input": ["D-7", "D-3"], "tactic": "ラベルと実体の乖離", "output": ["D-8"]}
+        ]
+      },
+      "P-2": {
+        "trigger": ["D-8"],
+        "steps": [
+          {"input": ["D-8"], "tactic": "観測事実の深掘り", "output": ["D-9"]},
+          {"input": ["D-7", "D-9"], "tactic": "因果の逆転", "output": ["D-10"]},
+          {"input": ["D-10", "D-5"], "tactic": "動機の探索", "output": ["D-11"]}
+        ]
+      }
+    }
+  },
+  "_phase3": {
+    "formation_conditions": {
+      "D-12": [["D-13", "D-3"], ["D-14", "D-3"]]
+    },
+    "terminal_descriptors": ["D-13"]
+  },
+  "_phase2": {
+    "generated_descriptors": ["D-12"],
+    "triggers": {
+      "P-1": [["D-12"]],
+      "P-2": [["D-8"]]
+    }
+  },
+  "_phase1": {
+    "s_descriptors": ["D-1", "D-2", "D-3", "D-4", "D-5", "D-6"],
+    "t_descriptors": ["D-7", "D-8", "D-9", "D-10", "D-11"],
+    "chain": [
+      {"from": "D-7", "to": "D-8", "why": "監禁されていたので、ドアは外に出るためのドア"},
+      {"from": "D-8", "to": "D-9", "why": "外に出るドアの向こうは外の世界"},
+      {"from": ["D-7", "D-9"], "to": "D-10", "why": "外の世界を見て監禁の事実を認識"},
+      {"from": "D-10", "to": "D-11", "why": "監禁の認識から通報行動へ"}
+    ]
+  }
+}
