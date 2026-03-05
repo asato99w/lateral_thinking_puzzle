@@ -29,15 +29,13 @@ struct V2GameSession: GameSession {
             return GameSessionUpdateResult(openQuestions: [], isCleared: true, newQuestionIDs: [])
         }
 
-        let previousAnswered = state.answered
+        let previousOpenIDs = Set(V2GameEngine.availableQuestions(state: state, puzzle: puzzle).map(\.id))
         _ = V2GameEngine.answerQuestion(state: &state, question: v2q, puzzle: puzzle)
 
         let available = V2GameEngine.availableQuestions(state: state, puzzle: puzzle)
         let openQuestions = available.map { mapToQuestion($0) }
 
-        let newIDs = Set(openQuestions.map(\.id)).subtracting(
-            Set(openQuestions.map(\.id)).intersection(previousAnswered)
-        )
+        let newIDs = Set(openQuestions.map(\.id)).subtracting(previousOpenIDs)
 
         let isCleared = V2GameEngine.checkComplete(state: state, puzzle: puzzle)
 
