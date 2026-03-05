@@ -101,6 +101,353 @@
           "D-3"
         ]
       ]
+    },
+    {
+      "id": "D-C1",
+      "label": "スープの味が男の期待と違った",
+      "formation_conditions": [
+        [
+          "D-2",
+          "D-3"
+        ]
+      ],
+      "rejection_conditions": [
+        [
+          "D-N1"
+        ]
+      ]
+    },
+    {
+      "id": "D-C2",
+      "label": "男は味への不満から店員に確認した",
+      "formation_conditions": [
+        [
+          "D-C1"
+        ]
+      ]
+    },
+    {
+      "id": "D-C3",
+      "label": "スープの見た目が通常のウミガメのスープと異なっていた",
+      "formation_conditions": [
+        [
+          "D-2",
+          "D-3"
+        ]
+      ],
+      "rejection_conditions": [
+        [
+          "D-N1"
+        ]
+      ]
+    },
+    {
+      "id": "D-C4",
+      "label": "男は見た目の違いから店員に確認した",
+      "formation_conditions": [
+        [
+          "D-C3"
+        ]
+      ]
+    },
+    {
+      "id": "D-C5",
+      "label": "男にはウミガメに対するアレルギーがあった",
+      "formation_conditions": [
+        [
+          "D-3"
+        ]
+      ]
+    },
+    {
+      "id": "D-C6",
+      "label": "男はアレルギーの確認のために尋ねた",
+      "formation_conditions": [
+        [
+          "D-C5"
+        ]
+      ]
+    },
+    {
+      "id": "D-C7",
+      "label": "レストランで男にとって衝撃的な出来事が起きた",
+      "formation_conditions": [
+        [
+          "D-1",
+          "D-5"
+        ]
+      ]
+    },
+    {
+      "id": "D-C8",
+      "label": "レストランでの出来事が自殺の直接の原因だった",
+      "formation_conditions": [
+        [
+          "D-C7"
+        ]
+      ]
+    },
+    {
+      "id": "D-C9",
+      "label": "男はもともと精神的に不安定だった",
+      "formation_conditions": [
+        [
+          "D-5"
+        ]
+      ],
+      "rejection_conditions": [
+        [
+          "D-N3"
+        ]
+      ]
+    },
+    {
+      "id": "D-C10",
+      "label": "スープの出来事は自殺のきっかけに過ぎなかった",
+      "formation_conditions": [
+        [
+          "D-C9"
+        ]
+      ]
+    },
+    {
+      "id": "D-C11",
+      "label": "男はレストラン以外に深刻な問題を抱えていた",
+      "formation_conditions": [
+        [
+          "D-5"
+        ]
+      ]
+    },
+    {
+      "id": "D-C12",
+      "label": "自殺の原因はレストランの出来事とは別にあった",
+      "formation_conditions": [
+        [
+          "D-C11"
+        ]
+      ]
+    },
+    {
+      "id": "D-C13",
+      "label": "漂着後まもなく救助された",
+      "formation_conditions": [
+        [
+          "D-7"
+        ]
+      ],
+      "rejection_conditions": [
+        [
+          "D-N5"
+        ]
+      ]
+    },
+    {
+      "id": "D-C14",
+      "label": "遭難で深刻な飢餓状態にはならなかった",
+      "formation_conditions": [
+        [
+          "D-C13"
+        ]
+      ]
+    },
+    {
+      "id": "D-C15",
+      "label": "漂着中に仲間との間に深刻なトラブルがあった",
+      "formation_conditions": [
+        [
+          "D-7",
+          "D-17"
+        ]
+      ]
+    },
+    {
+      "id": "D-C16",
+      "label": "人間関係のトラブルが男のトラウマになった",
+      "formation_conditions": [
+        [
+          "D-C15"
+        ]
+      ]
+    },
+    {
+      "id": "D-C17",
+      "label": "遭難中に事故が起きた",
+      "formation_conditions": [
+        [
+          "D-6",
+          "D-7"
+        ]
+      ]
+    },
+    {
+      "id": "D-C18",
+      "label": "男は遭難中の事故の記憶にトラウマを持っていた",
+      "formation_conditions": [
+        [
+          "D-C17"
+        ]
+      ]
+    },
+    {
+      "id": "D-C19",
+      "label": "レストランのスープは本物のウミガメのスープではなかった",
+      "formation_conditions": [
+        [
+          "D-3",
+          "D-4"
+        ]
+      ],
+      "rejection_conditions": [
+        [
+          "D-N2"
+        ]
+      ]
+    },
+    {
+      "id": "D-C20",
+      "label": "店員は嘘をついた",
+      "formation_conditions": [
+        [
+          "D-C19"
+        ]
+      ]
+    },
+    {
+      "id": "D-C21",
+      "label": "確認行為は単なる好奇心だった",
+      "formation_conditions": [
+        [
+          "D-3"
+        ]
+      ]
+    },
+    {
+      "id": "D-C22",
+      "label": "スープの確認と自殺に因果関係はなかった",
+      "formation_conditions": [
+        [
+          "D-C21"
+        ]
+      ]
+    },
+    {
+      "id": "D-C23",
+      "label": "男は以前に別の店で偽物のウミガメのスープを出された",
+      "formation_conditions": [
+        [
+          "D-3"
+        ]
+      ]
+    },
+    {
+      "id": "D-C24",
+      "label": "過去の経験から今回も偽物を疑って確認した",
+      "formation_conditions": [
+        [
+          "D-C23"
+        ]
+      ]
+    },
+    {
+      "id": "D-C25",
+      "label": "ウミガメは絶滅危惧種だった",
+      "formation_conditions": [
+        [
+          "D-2",
+          "D-4"
+        ]
+      ],
+      "rejection_conditions": [
+        [
+          "D-N4"
+        ]
+      ]
+    },
+    {
+      "id": "D-C26",
+      "label": "男は絶滅危惧種を食べたことに強い罪悪感を感じた",
+      "formation_conditions": [
+        [
+          "D-C25"
+        ]
+      ]
+    },
+    {
+      "id": "D-C27",
+      "label": "罪悪感から自殺した",
+      "formation_conditions": [
+        [
+          "D-C26"
+        ]
+      ]
+    },
+    {
+      "id": "D-C28",
+      "label": "男の信仰ではウミガメを食べることは禁忌だった",
+      "formation_conditions": [
+        [
+          "D-2"
+        ]
+      ]
+    },
+    {
+      "id": "D-C29",
+      "label": "本物のウミガメと確認し禁忌を犯したと悟った",
+      "formation_conditions": [
+        [
+          "D-C28",
+          "D-4"
+        ]
+      ]
+    },
+    {
+      "id": "D-C30",
+      "label": "宗教的罪悪感から自殺した",
+      "formation_conditions": [
+        [
+          "D-C29"
+        ]
+      ]
+    },
+    {
+      "id": "D-C31",
+      "label": "男はウミガメのスープを食べないと誰かに約束していた",
+      "formation_conditions": [
+        [
+          "D-2"
+        ]
+      ]
+    },
+    {
+      "id": "D-C32",
+      "label": "約束を破ったことへの罪悪感から自殺した",
+      "formation_conditions": [
+        [
+          "D-C31",
+          "D-4"
+        ]
+      ]
+    },
+    {
+      "id": "D-N1",
+      "label": "スープの品質に問題はなかった"
+    },
+    {
+      "id": "D-N2",
+      "label": "店員は嘘をついていない"
+    },
+    {
+      "id": "D-N3",
+      "label": "男はもともと精神的に問題はなかった"
+    },
+    {
+      "id": "D-N4",
+      "label": "ウミガメの種としての希少性は関係ない"
+    },
+    {
+      "id": "D-N5",
+      "label": "漂着後すぐには救助されなかった"
     }
   ],
   "initial_confirmed": [
@@ -426,6 +773,82 @@
         "D-14"
       ],
       "mechanism": "link"
+    },
+    {
+      "id": "Q-17",
+      "text": "スープの品質に問題がありましたか？",
+      "answer": "No",
+      "recall_conditions": [
+        [
+          "D-3"
+        ],
+        [
+          "D-2",
+          "D-5"
+        ]
+      ],
+      "reveals": [
+        "D-N1"
+      ],
+      "mechanism": "rejection"
+    },
+    {
+      "id": "Q-18",
+      "text": "店員は嘘をつきましたか？",
+      "answer": "No",
+      "recall_conditions": [
+        [
+          "D-3",
+          "D-4"
+        ]
+      ],
+      "reveals": [
+        "D-N2"
+      ],
+      "mechanism": "rejection"
+    },
+    {
+      "id": "Q-19",
+      "text": "男はもともと精神的に問題がありましたか？",
+      "answer": "No",
+      "recall_conditions": [
+        [
+          "D-5"
+        ]
+      ],
+      "reveals": [
+        "D-N3"
+      ],
+      "mechanism": "rejection"
+    },
+    {
+      "id": "Q-20",
+      "text": "ウミガメが絶滅危惧種であることは重要ですか？",
+      "answer": "No",
+      "recall_conditions": [
+        [
+          "D-2",
+          "D-4"
+        ]
+      ],
+      "reveals": [
+        "D-N4"
+      ],
+      "mechanism": "rejection"
+    },
+    {
+      "id": "Q-21",
+      "text": "漂着先ですぐに救助されましたか？",
+      "answer": "No",
+      "recall_conditions": [
+        [
+          "D-7"
+        ]
+      ],
+      "reveals": [
+        "D-N5"
+      ],
+      "mechanism": "rejection"
     }
   ]
 }

@@ -17,39 +17,34 @@ struct GameView: View {
                 .transition(.opacity)
         } else {
             VStack(spacing: 0) {
-                // Fixed top area
-                VStack(alignment: .leading, spacing: 12) {
-                    statementSection
-
-                    if !viewModel.answeredQuestions.isEmpty {
-                        answeredSection
-                    }
-
-                    progressPill
-
-                    if !viewModel.openQuestions.isEmpty {
-                        sectionLabel(Strings.chooseQuestion)
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.top, 8)
-                .padding(.bottom, 12)
-
-                Divider().opacity(0.3)
-
-                // Category filter tabs
+                // Category filter tabs (pinned at top)
                 if !viewModel.puzzleInfo.topicCategories.isEmpty {
                     categoryTabBar
+                    Divider().opacity(0.3)
                 }
 
-                // Scrollable: question buttons only
+                // Single scroll for all content
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        statementSection
+
+                        if !viewModel.answeredQuestions.isEmpty {
+                            answeredSection
+                        }
+
+                        progressPill
+
+                        if !viewModel.openQuestions.isEmpty {
+                            sectionLabel(Strings.chooseQuestion)
+                        }
+
                         if !viewModel.filteredOpenQuestions.isEmpty {
                             questionList
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
+                    .padding(.top, 8)
+                    .padding(.bottom, 16)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
