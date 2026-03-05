@@ -151,7 +151,7 @@
       "recall_conditions": [["D-16"]],
       "reveals": ["D-15"],
       "mechanism": "observation",
-      "category": "状況の詳細",
+      "category": "状況の確認",
       "_chain_ref": ["terminal:D-15"]
     },
     {
@@ -171,7 +171,7 @@
       "recall_conditions": [["D-15"]],
       "reveals": ["D-17"],
       "mechanism": "observation",
-      "category": "人物と過去",
+      "category": "人物と背景",
       "_chain_ref": ["terminal:D-17"]
     },
     {
@@ -191,7 +191,7 @@
       "recall_conditions": [["D-22"], ["D-2", "D-3"]],
       "reveals": ["D-18"],
       "mechanism": "observation",
-      "category": "状況の詳細",
+      "category": "状況の確認",
       "_chain_ref": ["terminal:D-18", "internal:P-deception:1"]
     },
     {
@@ -201,6 +201,7 @@
       "recall_conditions": [["D-15"]],
       "reveals": ["D-6"],
       "mechanism": "observation",
+      "category": "人物と背景",
       "_chain_ref": ["internal:P-shipwreck:1"]
     },
     {
@@ -210,6 +211,7 @@
       "recall_conditions": [["D-6"]],
       "reveals": ["D-7"],
       "mechanism": "observation",
+      "category": "状況の確認",
       "_chain_ref": ["internal:P-shipwreck:2"]
     },
     {
@@ -219,6 +221,7 @@
       "recall_conditions": [["D-7"]],
       "reveals": ["D-8"],
       "mechanism": "observation",
+      "category": "状況の確認",
       "_chain_ref": ["internal:P-shipwreck:3"]
     },
     {
@@ -228,6 +231,7 @@
       "recall_conditions": [["D-8", "D-17"]],
       "reveals": ["D-9"],
       "mechanism": "link",
+      "category": "原因と動機",
       "_chain_ref": ["internal:P-shipwreck:4"]
     },
     {
@@ -237,6 +241,7 @@
       "recall_conditions": [["D-18", "D-21"]],
       "reveals": ["D-19"],
       "mechanism": "anomaly",
+      "category": "前提の確認",
       "_chain_ref": ["internal:P-deception:2"]
     },
     {
@@ -246,6 +251,7 @@
       "recall_conditions": [["D-19"]],
       "reveals": ["D-20"],
       "mechanism": "observation",
+      "category": "原因と動機",
       "_chain_ref": ["internal:P-deception:3"]
     },
     {
@@ -255,6 +261,7 @@
       "recall_conditions": [["D-8", "D-9", "D-18", "D-19"]],
       "reveals": ["D-10"],
       "mechanism": "link",
+      "category": "原因と動機",
       "_chain_ref": ["internal:P-realization:1"]
     },
     {
@@ -264,6 +271,7 @@
       "recall_conditions": [["D-10", "D-19"]],
       "reveals": ["D-11"],
       "mechanism": "anomaly",
+      "category": "前提の確認",
       "_chain_ref": ["internal:P-realization:2"]
     },
     {
@@ -273,6 +281,7 @@
       "recall_conditions": [["D-10", "D-2", "D-22"]],
       "reveals": ["D-12"],
       "mechanism": "anomaly",
+      "category": "前提の確認",
       "_chain_ref": ["internal:P-realization:3"]
     },
     {
@@ -282,6 +291,7 @@
       "recall_conditions": [["D-10", "D-12"]],
       "reveals": ["D-13"],
       "mechanism": "link",
+      "category": "原因と動機",
       "_chain_ref": ["internal:P-realization:4"]
     },
     {
@@ -291,6 +301,7 @@
       "recall_conditions": [["D-13"]],
       "reveals": ["D-14"],
       "mechanism": "link",
+      "category": "原因と動機",
       "_chain_ref": ["internal:P-realization:5"]
     },
     {
@@ -300,6 +311,7 @@
       "recall_conditions": [["D-3"], ["D-2", "D-5"]],
       "reveals": ["D-N1"],
       "mechanism": "rejection",
+      "category": "状況の確認",
       "_chain_ref": ["rejection:D-C1,D-C3"],
       "_branch_point": "BP-1"
     },
@@ -310,6 +322,7 @@
       "recall_conditions": [["D-3", "D-4"]],
       "reveals": ["D-N2"],
       "mechanism": "rejection",
+      "category": "前提の確認",
       "_chain_ref": ["rejection:D-C19"],
       "_branch_point": "BP-3"
     },
@@ -320,6 +333,7 @@
       "recall_conditions": [["D-5"]],
       "reveals": ["D-N3"],
       "mechanism": "rejection",
+      "category": "人物と背景",
       "_chain_ref": ["rejection:D-C9"],
       "_branch_point": "BP-2"
     },
@@ -330,6 +344,7 @@
       "recall_conditions": [["D-2", "D-4"]],
       "reveals": ["D-N4"],
       "mechanism": "rejection",
+      "category": "状況の確認",
       "_chain_ref": ["rejection:D-C25"],
       "_branch_point": "BP-3"
     },
@@ -340,6 +355,7 @@
       "recall_conditions": [["D-7"]],
       "reveals": ["D-N5"],
       "mechanism": "rejection",
+      "category": "状況の確認",
       "_chain_ref": ["rejection:D-C13"],
       "_branch_point": "BP-4"
     }
