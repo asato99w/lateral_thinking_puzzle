@@ -41,6 +41,20 @@
       "tier": "free",
       "bundled": true,
       "locales": ["ja"]
+    },
+    {
+      "id": "forbidden_basement",
+      "engine_version": "v2",
+      "odr_tag": "puzzle-forbidden-basement",
+      "title_ja": "禁じられた地下室",
+      "title_en": "The Forbidden Basement",
+      "statement_preview_ja": "絶対に開けてはいけないと言われていた地下室のドアを開けた女性。中に入って見たものに驚き、すぐに警察に駆け込んだ。しかし地下室の中には何も異常なものはなかった。",
+      "statement_preview_en": "A woman opened the basement door she was told never to open. Shocked by what she saw inside, she rushed to the police. But there was nothing unusual in the basement.",
+      "icon": "🚪",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": true,
+      "locales": ["ja"]
     }
   ],
   "packs": [
@@ -51,7 +65,7 @@
       "description_ja": "人気の水平思考パズル",
       "description_en": "Popular lateral thinking puzzles",
       "icon": "📦",
-      "puzzle_ids": ["turtle_soup", "bar_man", "desert_man"],
+      "puzzle_ids": ["turtle_soup", "bar_man", "desert_man", "forbidden_basement"],
       "tier": "free"
     }
   ]

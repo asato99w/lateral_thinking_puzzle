@@ -47,7 +47,17 @@
     },
     {
       "id": "D-12",
-      "label": "女性はドアを開ける前から地下室にいた"
+      "label": "女性はドアを開ける前から地下室にいた",
+      "formation_conditions": [
+        [
+          "D-13",
+          "D-3"
+        ],
+        [
+          "D-14",
+          "D-3"
+        ]
+      ]
     },
     {
       "id": "D-13",
@@ -123,7 +133,7 @@
         "D-13"
       ],
       "mechanism": "observation",
-      "category": "状況の確認"
+      "topic_category": "状況の確認"
     },
     {
       "id": "Q-2",
@@ -139,7 +149,7 @@
         "D-7"
       ],
       "mechanism": "anomaly",
-      "category": "前提の確認"
+      "topic_category": "前提の確認"
     },
     {
       "id": "Q-3",
@@ -155,7 +165,7 @@
         "D-8"
       ],
       "mechanism": "link",
-      "category": "前提の確認"
+      "topic_category": "前提の確認"
     },
     {
       "id": "Q-4",
@@ -170,7 +180,7 @@
         "D-9"
       ],
       "mechanism": "observation",
-      "category": "状況の確認"
+      "topic_category": "状況の確認"
     },
     {
       "id": "Q-5",
@@ -186,7 +196,7 @@
         "D-10"
       ],
       "mechanism": "link",
-      "category": "原因と動機"
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q-6",
@@ -202,7 +212,7 @@
         "D-11"
       ],
       "mechanism": "link",
-      "category": "原因と動機"
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q-7",
@@ -219,7 +229,7 @@
         "D-12"
       ],
       "mechanism": "observation",
-      "category": "人物と背景"
+      "topic_category": "人物と背景"
     },
     {
       "id": "Q-8",
@@ -234,7 +244,7 @@
         "D-14"
       ],
       "mechanism": "anomaly",
-      "category": "原因と動機"
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q-9",
@@ -250,7 +260,7 @@
         "D-N1"
       ],
       "mechanism": "observation",
-      "category": "前提の確認"
+      "topic_category": "前提の確認"
     }
   ],
   "statement": "絶対に開けてはいけないと言われていた地下室のドアを開けた女性。中に入って見たものに驚き、すぐに警察に駆け込んだ。しかし地下室の中には何も異常なものはなかった。",

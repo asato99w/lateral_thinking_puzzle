@@ -14,7 +14,7 @@
     {"id": "D-9", "label": "ドアの向こうには普通の外の世界が広がっている"},
     {"id": "D-10", "label": "女性は自分が監禁されていたと認識した"},
     {"id": "D-11", "label": "女性は監禁を通報するために警察に行った"},
-    {"id": "D-12", "label": "女性はドアを開ける前から地下室にいた"},
+    {"id": "D-12", "label": "女性はドアを開ける前から地下室にいた", "formation_conditions": [["D-13", "D-3"], ["D-14", "D-3"]]},
     {"id": "D-13", "label": "女性はドアを内側から開けた"},
     {"id": "D-14", "label": "女性が驚いたものは地下室の内部にはなかった"},
     {"id": "D-N1", "label": "地下室に女性以外の人はいなかった"}
@@ -45,7 +45,7 @@
       "recall_conditions": [["D-1"]],
       "reveals": ["D-13"],
       "mechanism": "observation",
-      "category": "状況の確認",
+      "topic_category": "状況の確認",
       "_chain_ref": "terminal:D-13:step1"
     },
     {
@@ -55,7 +55,7 @@
       "recall_conditions": [["D-12", "D-2"]],
       "reveals": ["D-7"],
       "mechanism": "anomaly",
-      "category": "前提の確認",
+      "topic_category": "前提の確認",
       "_chain_ref": "P-1:step1"
     },
     {
@@ -65,7 +65,7 @@
       "recall_conditions": [["D-7", "D-3"]],
       "reveals": ["D-8"],
       "mechanism": "link",
-      "category": "前提の確認",
+      "topic_category": "前提の確認",
       "_chain_ref": "P-1:step2"
     },
     {
@@ -75,7 +75,7 @@
       "recall_conditions": [["D-8"]],
       "reveals": ["D-9"],
       "mechanism": "observation",
-      "category": "状況の確認",
+      "topic_category": "状況の確認",
       "_chain_ref": "P-2:step1"
     },
     {
@@ -85,7 +85,7 @@
       "recall_conditions": [["D-7", "D-9"]],
       "reveals": ["D-10"],
       "mechanism": "link",
-      "category": "原因と動機",
+      "topic_category": "原因と動機",
       "_chain_ref": "P-2:step2"
     },
     {
@@ -95,7 +95,7 @@
       "recall_conditions": [["D-10", "D-5"]],
       "reveals": ["D-11"],
       "mechanism": "link",
-      "category": "原因と動機",
+      "topic_category": "原因と動機",
       "_chain_ref": "P-2:step3"
     },
     {
@@ -105,7 +105,7 @@
       "recall_conditions": [["D-1", "D-3", "D-6"]],
       "reveals": ["D-12"],
       "mechanism": "observation",
-      "category": "人物と背景",
+      "topic_category": "人物と背景",
       "_chain_ref": "terminal:D-12_alt1:step1"
     },
     {
@@ -115,7 +115,7 @@
       "recall_conditions": [["D-4"]],
       "reveals": ["D-14"],
       "mechanism": "anomaly",
-      "category": "原因と動機",
+      "topic_category": "原因と動機",
       "_chain_ref": "terminal:D-14:step1"
     },
     {
@@ -125,7 +125,7 @@
       "recall_conditions": [["D-2", "D-4"]],
       "reveals": ["D-N1"],
       "mechanism": "observation",
-      "category": "前提の確認",
+      "topic_category": "前提の確認",
       "_chain_ref": "rejection:D-N1:step1"
     }
   ],
