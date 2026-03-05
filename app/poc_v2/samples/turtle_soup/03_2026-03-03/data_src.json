@@ -2,7 +2,7 @@
   "id": "turtle_soup",
   "title": "ウミガメのスープ",
   "statement": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口食べた男は店員を呼び、「これは本当にウミガメのスープですか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男は会計を済ませ、帰宅後、自殺した。",
-  "truth": "男はかつて乗っていた船が遭難し、仲間と無人島に漂着した。食糧が尽き、仲間が一人死んだ。残った者たちはその肉でスープを作り、男には「ウミガメのスープだ」と偽って食べさせた。レストランで本物のウミガメのスープを飲んだ男は味が記憶と全く違うことに気づき、あの時のスープが仲間の人肉だったと悟り、絶望して自殺した。",
+  "truth": "男は船乗りで、かつて乗っていた船が遭難し、仲間と無人島に漂着した。食糧が尽き、仲間が一人死んだ。残った者たちはその肉でスープを作り、男には「ウミガメのスープだ」と偽って食べさせた。レストランで本物のウミガメのスープを飲んだ男は味が記憶と全く違うことに気づき、あの時のスープが仲間の人肉だったと悟り、絶望して自殺した。",
   "descriptors": [
     {"id": "D-1", "label": "男がレストランに入った"},
     {"id": "D-2", "label": "ウミガメのスープを注文した"},
@@ -18,14 +18,16 @@
     {"id": "D-12", "label": "本物のウミガメのスープと味が全く違った"},
     {"id": "D-13", "label": "あの時のスープが仲間の人肉だったと悟った"},
     {"id": "D-14", "label": "絶望して自殺した"},
-    {"id": "D-15", "label": "過去に船に乗っていた"},
-    {"id": "D-16", "label": "過去に危機的な体験があった"},
+    {"id": "D-15", "label": "男は船乗りだった"},
+    {"id": "D-16", "label": "過去に危機的な体験があった", "formation_conditions": [["D-6"]]},
     {"id": "D-17", "label": "仲間がいた"},
     {"id": "D-18", "label": "男は過去にスープを飲まされたことがある"},
     {"id": "D-19", "label": "そのスープは偽りの名前だった"},
     {"id": "D-20", "label": "偽装に悪意はなかった"},
     {"id": "D-21", "label": "男は過去に欺かれた"},
     {"id": "D-22", "label": "男は過去にもスープを飲んだことがある", "formation_conditions": [["D-3"]]},
+    {"id": "D-23", "label": "男の職業が事件に関係している"},
+    {"id": "D-24", "label": "男は乗り物に乗る職業だった"},
     {"id": "D-C1", "label": "スープの味が男の期待と違った", "formation_conditions": [["D-2", "D-3"]], "rejection_conditions": [["D-N1"]]},
     {"id": "D-C2", "label": "男は味への不満から店員に確認した", "formation_conditions": [["D-C1"]]},
     {"id": "D-C3", "label": "スープの見た目が通常のウミガメのスープと異なっていた", "formation_conditions": [["D-2", "D-3"]], "rejection_conditions": [["D-N1"]]},
@@ -80,14 +82,14 @@
     ]
   },
   "_phase2": {
-    "generated_descriptors": ["D-15", "D-16", "D-17", "D-18", "D-19", "D-20", "D-21", "D-22"]
+    "generated_descriptors": ["D-15", "D-16", "D-17", "D-18", "D-19", "D-20", "D-21", "D-22", "D-23", "D-24"]
   },
   "pieces": [
     {
       "id": "P-shipwreck",
       "label": "遭難",
       "members": ["D-6", "D-7", "D-8", "D-9"],
-      "trigger": [["D-15"], ["D-16"], ["D-17"]],
+      "trigger": [["D-15"], ["D-17"]],
       "depends_on": []
     },
     {
@@ -110,14 +112,18 @@
   "_phase3": {
     "formation_conditions": {
       "D-22": [["D-3"]],
-      "D-7": [["D-6"]]
+      "D-7": [["D-6"]],
+      "D-16": [["D-6"]]
     },
-    "terminal_descriptors": ["D-6", "D-8", "D-9", "D-10", "D-11", "D-12", "D-13", "D-14", "D-15", "D-16", "D-17", "D-18", "D-19", "D-20", "D-21"]
+    "terminal_descriptors": ["D-6", "D-8", "D-9", "D-10", "D-11", "D-12", "D-13", "D-14", "D-15", "D-17", "D-18", "D-19", "D-20", "D-21", "D-23", "D-24"]
   },
   "_phase4": {
     "chains_to_terminals": {
-      "D-16": [{"input": ["D-18", "D-5"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-16"]}],
-      "D-15": [{"input": ["D-16"], "tactic": 10, "tactic_name": "段階的絞り込み", "output": ["D-15"]}],
+      "D-15": [
+        {"input": ["D-5"], "tactic": 9, "tactic_name": "人物像の探索", "output": ["D-23"]},
+        {"input": ["D-23"], "tactic": 10, "tactic_name": "段階的絞り込み", "output": ["D-24"]},
+        {"input": ["D-24"], "tactic": 10, "tactic_name": "段階的絞り込み", "output": ["D-15"]}
+      ],
       "D-17": [{"input": ["D-15"], "tactic": 4, "tactic_name": "登場人物の探索", "output": ["D-17"]}],
       "D-18": [{"input": ["D-22"], "tactic": 2, "tactic_name": "観測事実の深掘り", "output": ["D-18"]}],
       "D-21": [{"input": ["D-18"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-21"]}]
@@ -146,23 +152,23 @@
   "questions": [
     {
       "id": "Q-1",
-      "text": "男は過去に船に乗ったことがありますか？",
+      "text": "船乗りですか？",
       "answer": "Yes",
-      "recall_conditions": [["D-16"]],
+      "recall_conditions": [["D-24"]],
       "reveals": ["D-15"],
       "mechanism": "observation",
       "category": "状況の確認",
-      "_chain_ref": ["terminal:D-15"]
+      "_chain_ref": ["terminal:D-15:3"]
     },
     {
       "id": "Q-2",
-      "text": "男は過去に危機的な体験をしましたか？",
+      "text": "男の職業は関係しますか？",
       "answer": "Yes",
-      "recall_conditions": [["D-18", "D-5"]],
-      "reveals": ["D-16"],
-      "mechanism": "link",
-      "category": "原因と動機",
-      "_chain_ref": ["terminal:D-16"]
+      "recall_conditions": [["D-5"]],
+      "reveals": ["D-23"],
+      "mechanism": "observation",
+      "category": "人物と背景",
+      "_chain_ref": ["terminal:D-15:1"]
     },
     {
       "id": "Q-3",
@@ -358,6 +364,16 @@
       "category": "状況の確認",
       "_chain_ref": ["rejection:D-C13"],
       "_branch_point": "BP-4"
+    },
+    {
+      "id": "Q-22",
+      "text": "乗り物に乗る職業ですか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-23"]],
+      "reveals": ["D-24"],
+      "mechanism": "observation",
+      "category": "状況の確認",
+      "_chain_ref": ["terminal:D-15:2"]
     }
   ],
   "_phase10": {
