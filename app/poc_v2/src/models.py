@@ -33,6 +33,7 @@ class Question:
     recall_conditions: list[list[str]]  # OR of AND: 想起条件
     reveals: list[str]  # 回答で明らかになる記述素 ID 群
     mechanism: str  # ラベル: "observation" | "link" | "anomaly"
+    topic_category: str = ""  # トピックカテゴリ（UI 用分類）
 
 
 @dataclass
