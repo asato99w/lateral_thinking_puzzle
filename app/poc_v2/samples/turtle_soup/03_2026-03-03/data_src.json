@@ -25,7 +25,44 @@
     {"id": "D-19", "label": "そのスープは偽りの名前だった"},
     {"id": "D-20", "label": "偽装に悪意はなかった"},
     {"id": "D-21", "label": "男は過去に欺かれた"},
-    {"id": "D-22", "label": "男は過去にもスープを飲んだことがある", "formation_conditions": [["D-3"]]}
+    {"id": "D-22", "label": "男は過去にもスープを飲んだことがある", "formation_conditions": [["D-3"]]},
+    {"id": "D-C1", "label": "スープの味が男の期待と違った", "formation_conditions": [["D-2", "D-3"]], "rejection_conditions": [["D-N1"]]},
+    {"id": "D-C2", "label": "男は味への不満から店員に確認した", "formation_conditions": [["D-C1"]]},
+    {"id": "D-C3", "label": "スープの見た目が通常のウミガメのスープと異なっていた", "formation_conditions": [["D-2", "D-3"]], "rejection_conditions": [["D-N1"]]},
+    {"id": "D-C4", "label": "男は見た目の違いから店員に確認した", "formation_conditions": [["D-C3"]]},
+    {"id": "D-C5", "label": "男にはウミガメに対するアレルギーがあった", "formation_conditions": [["D-3"]]},
+    {"id": "D-C6", "label": "男はアレルギーの確認のために尋ねた", "formation_conditions": [["D-C5"]]},
+    {"id": "D-C7", "label": "レストランで男にとって衝撃的な出来事が起きた", "formation_conditions": [["D-1", "D-5"]]},
+    {"id": "D-C8", "label": "レストランでの出来事が自殺の直接の原因だった", "formation_conditions": [["D-C7"]]},
+    {"id": "D-C9", "label": "男はもともと精神的に不安定だった", "formation_conditions": [["D-5"]], "rejection_conditions": [["D-N3"]]},
+    {"id": "D-C10", "label": "スープの出来事は自殺のきっかけに過ぎなかった", "formation_conditions": [["D-C9"]]},
+    {"id": "D-C11", "label": "男はレストラン以外に深刻な問題を抱えていた", "formation_conditions": [["D-5"]]},
+    {"id": "D-C12", "label": "自殺の原因はレストランの出来事とは別にあった", "formation_conditions": [["D-C11"]]},
+    {"id": "D-C13", "label": "漂着後まもなく救助された", "formation_conditions": [["D-7"]], "rejection_conditions": [["D-N5"]]},
+    {"id": "D-C14", "label": "遭難で深刻な飢餓状態にはならなかった", "formation_conditions": [["D-C13"]]},
+    {"id": "D-C15", "label": "漂着中に仲間との間に深刻なトラブルがあった", "formation_conditions": [["D-7", "D-17"]]},
+    {"id": "D-C16", "label": "人間関係のトラブルが男のトラウマになった", "formation_conditions": [["D-C15"]]},
+    {"id": "D-C17", "label": "遭難中に事故が起きた", "formation_conditions": [["D-6", "D-7"]]},
+    {"id": "D-C18", "label": "男は遭難中の事故の記憶にトラウマを持っていた", "formation_conditions": [["D-C17"]]},
+    {"id": "D-C19", "label": "レストランのスープは本物のウミガメのスープではなかった", "formation_conditions": [["D-3", "D-4"]], "rejection_conditions": [["D-N2"]]},
+    {"id": "D-C20", "label": "店員は嘘をついた", "formation_conditions": [["D-C19"]]},
+    {"id": "D-C21", "label": "確認行為は単なる好奇心だった", "formation_conditions": [["D-3"]]},
+    {"id": "D-C22", "label": "スープの確認と自殺に因果関係はなかった", "formation_conditions": [["D-C21"]]},
+    {"id": "D-C23", "label": "男は以前に別の店で偽物のウミガメのスープを出された", "formation_conditions": [["D-3"]]},
+    {"id": "D-C24", "label": "過去の経験から今回も偽物を疑って確認した", "formation_conditions": [["D-C23"]]},
+    {"id": "D-C25", "label": "ウミガメは絶滅危惧種だった", "formation_conditions": [["D-2", "D-4"]], "rejection_conditions": [["D-N4"]]},
+    {"id": "D-C26", "label": "男は絶滅危惧種を食べたことに強い罪悪感を感じた", "formation_conditions": [["D-C25"]]},
+    {"id": "D-C27", "label": "罪悪感から自殺した", "formation_conditions": [["D-C26"]]},
+    {"id": "D-C28", "label": "男の信仰ではウミガメを食べることは禁忌だった", "formation_conditions": [["D-2"]]},
+    {"id": "D-C29", "label": "本物のウミガメと確認し禁忌を犯したと悟った", "formation_conditions": [["D-C28", "D-4"]]},
+    {"id": "D-C30", "label": "宗教的罪悪感から自殺した", "formation_conditions": [["D-C29"]]},
+    {"id": "D-C31", "label": "男はウミガメのスープを食べないと誰かに約束していた", "formation_conditions": [["D-2"]]},
+    {"id": "D-C32", "label": "約束を破ったことへの罪悪感から自殺した", "formation_conditions": [["D-C31", "D-4"]]},
+    {"id": "D-N1", "label": "スープの品質に問題はなかった"},
+    {"id": "D-N2", "label": "店員は嘘をついていない"},
+    {"id": "D-N3", "label": "男はもともと精神的に問題はなかった"},
+    {"id": "D-N4", "label": "ウミガメの種としての希少性は関係ない"},
+    {"id": "D-N5", "label": "漂着後すぐには救助されなかった"}
   ],
   "initial_confirmed": ["D-1", "D-2", "D-3", "D-4", "D-5"],
   "_phase1": {
@@ -250,6 +287,181 @@
       "reveals": ["D-14"],
       "mechanism": "link",
       "_chain_ref": ["internal:P-realization:5"]
+    },
+    {
+      "id": "Q-17",
+      "text": "スープの品質に問題がありましたか？",
+      "answer": "No",
+      "recall_conditions": [["D-3"], ["D-2", "D-5"]],
+      "reveals": ["D-N1"],
+      "mechanism": "rejection",
+      "_chain_ref": ["rejection:D-C1,D-C3"],
+      "_branch_point": "BP-1"
+    },
+    {
+      "id": "Q-18",
+      "text": "店員は嘘をつきましたか？",
+      "answer": "No",
+      "recall_conditions": [["D-3", "D-4"]],
+      "reveals": ["D-N2"],
+      "mechanism": "rejection",
+      "_chain_ref": ["rejection:D-C19"],
+      "_branch_point": "BP-3"
+    },
+    {
+      "id": "Q-19",
+      "text": "男はもともと精神的に問題がありましたか？",
+      "answer": "No",
+      "recall_conditions": [["D-5"]],
+      "reveals": ["D-N3"],
+      "mechanism": "rejection",
+      "_chain_ref": ["rejection:D-C9"],
+      "_branch_point": "BP-2"
+    },
+    {
+      "id": "Q-20",
+      "text": "ウミガメが絶滅危惧種であることは重要ですか？",
+      "answer": "No",
+      "recall_conditions": [["D-2", "D-4"]],
+      "reveals": ["D-N4"],
+      "mechanism": "rejection",
+      "_chain_ref": ["rejection:D-C25"],
+      "_branch_point": "BP-3"
+    },
+    {
+      "id": "Q-21",
+      "text": "漂着先ですぐに救助されましたか？",
+      "answer": "No",
+      "recall_conditions": [["D-7"]],
+      "reveals": ["D-N5"],
+      "mechanism": "rejection",
+      "_chain_ref": ["rejection:D-C13"],
+      "_branch_point": "BP-4"
     }
-  ]
+  ],
+  "_phase10": {
+    "faults": [
+      {"id": "F-alpha", "label": "確認行為の意味の転換", "H": ["D-12", "D-22"], "question": "なぜ「本当にウミガメのスープか」と確認したのか？"},
+      {"id": "F-beta", "label": "過去の体験の存在", "H": ["D-16", "D-15", "D-6", "D-7"], "question": "自殺の原因はどこにあるのか？"},
+      {"id": "F-epsilon", "label": "生存の極限", "H": ["D-8", "D-9", "D-10", "D-17"], "question": "過去に何が起きたのか？"},
+      {"id": "F-gamma", "label": "「本物である」ことの反転", "H": ["D-18", "D-19", "D-11", "D-21", "D-20"], "question": "「本物である」ことは何を意味するのか？"},
+      {"id": "F-delta", "label": "自殺動機の深度", "H": ["D-13", "D-14"], "question": "なぜ自殺するほどの絶望に至ったのか？"}
+    ]
+  },
+  "_phase11": {
+    "counter_hypotheses": [
+      {"id": "H'_α_1", "label": "味への不満", "fault": "F-alpha", "members": ["D-C1", "D-C2"]},
+      {"id": "H'_α_2", "label": "見た目の違い", "fault": "F-alpha", "members": ["D-C3", "D-C4"]},
+      {"id": "H'_α_3", "label": "アレルギーの確認", "fault": "F-alpha", "members": ["D-C5", "D-C6"]},
+      {"id": "H'_β_1", "label": "レストランでの出来事が直接原因", "fault": "F-beta", "members": ["D-C7", "D-C8"]},
+      {"id": "H'_β_2", "label": "精神的問題", "fault": "F-beta", "members": ["D-C9", "D-C10"]},
+      {"id": "H'_β_3", "label": "別の問題", "fault": "F-beta", "members": ["D-C11", "D-C12"]},
+      {"id": "H'_ε_1", "label": "すぐに救助された", "fault": "F-epsilon", "members": ["D-C13", "D-C14"]},
+      {"id": "H'_ε_2", "label": "仲間との人間関係トラブル", "fault": "F-epsilon", "members": ["D-C15", "D-C16"]},
+      {"id": "H'_ε_3", "label": "遭難中の事故", "fault": "F-epsilon", "members": ["D-C17", "D-C18"]},
+      {"id": "H'_γ_1", "label": "レストランのスープが偽物", "fault": "F-gamma", "members": ["D-C19", "D-C20"]},
+      {"id": "H'_γ_2", "label": "確認は好奇心で自殺と無関係", "fault": "F-gamma", "members": ["D-C21", "D-C22"]},
+      {"id": "H'_γ_3", "label": "以前に偽物を出された経験", "fault": "F-gamma", "members": ["D-C23", "D-C24"]},
+      {"id": "H'_δ_1", "label": "絶滅危惧種の罪悪感", "fault": "F-delta", "members": ["D-C25", "D-C26", "D-C27"]},
+      {"id": "H'_δ_2", "label": "宗教的禁忌", "fault": "F-delta", "members": ["D-C28", "D-C29", "D-C30"]},
+      {"id": "H'_δ_3", "label": "約束を破った罪悪感", "fault": "F-delta", "members": ["D-C31", "D-C32"]}
+    ]
+  },
+  "_phase12": {
+    "branch_points": [
+      {"id": "BP-1", "label": "確認行為の動機", "fact_sets": [["D-2", "D-3"], ["D-3"]], "available": "start", "targets": ["H'_α_1", "H'_α_2", "H'_α_3", "H'_γ_2", "H'_γ_3"]},
+      {"id": "BP-2", "label": "自殺の原因", "fact_sets": [["D-5"], ["D-1", "D-5"]], "available": "start", "targets": ["H'_β_1", "H'_β_2", "H'_β_3"]},
+      {"id": "BP-3", "label": "「本物」の意味とウミガメの特殊性", "fact_sets": [["D-3", "D-4"], ["D-2", "D-4"], ["D-2", "D-3", "D-4"]], "available": "start", "targets": ["H'_γ_1", "H'_δ_1", "H'_δ_2", "H'_δ_3"]},
+      {"id": "BP-4", "label": "漂着後の展開", "fact_sets": [["D-7"], ["D-6", "D-7"], ["D-7", "D-17"]], "available": "mid", "targets": ["H'_ε_1", "H'_ε_2", "H'_ε_3"]}
+    ]
+  },
+  "_phase13": {
+    "chains": {
+      "BP-1": [
+        {"target": "H'_α_1", "steps": [
+          {"input": ["D-2", "D-3"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-C1"]},
+          {"input": ["D-C1", "D-3"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C2"]}
+        ]},
+        {"target": "H'_α_2", "steps": [
+          {"input": ["D-2", "D-3"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-C3"]},
+          {"input": ["D-C3", "D-3"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C4"]}
+        ]},
+        {"target": "H'_α_3", "steps": [
+          {"input": ["D-3"], "tactic": 9, "tactic_name": "人物像の探索", "output": ["D-C5"]},
+          {"input": ["D-C5", "D-3"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C6"]}
+        ]},
+        {"target": "H'_γ_2", "steps": [
+          {"input": ["D-3"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C21"]},
+          {"input": ["D-C21", "D-5"], "tactic": 6, "tactic_name": "矛盾の指摘", "output": ["D-C22"]}
+        ]},
+        {"target": "H'_γ_3", "steps": [
+          {"input": ["D-3"], "tactic": 3, "tactic_name": "時間軸の拡張", "output": ["D-C23"]},
+          {"input": ["D-C23", "D-3"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C24"]}
+        ]}
+      ],
+      "BP-2": [
+        {"target": "H'_β_1", "steps": [
+          {"input": ["D-1", "D-5"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-C7"]},
+          {"input": ["D-C7", "D-5"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C8"]}
+        ]},
+        {"target": "H'_β_2", "steps": [
+          {"input": ["D-5"], "tactic": 9, "tactic_name": "人物像の探索", "output": ["D-C9"]},
+          {"input": ["D-C9", "D-5"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-C10"]}
+        ]},
+        {"target": "H'_β_3", "steps": [
+          {"input": ["D-5"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-C11"]},
+          {"input": ["D-C11", "D-1", "D-5"], "tactic": 6, "tactic_name": "矛盾の指摘", "output": ["D-C12"]}
+        ]}
+      ],
+      "BP-3": [
+        {"target": "H'_γ_1", "steps": [
+          {"input": ["D-3", "D-4"], "tactic": 7, "tactic_name": "ラベルと実体の乖離", "output": ["D-C19"]},
+          {"input": ["D-C19", "D-4"], "tactic": 6, "tactic_name": "矛盾の指摘", "output": ["D-C20"]}
+        ]},
+        {"target": "H'_δ_1", "steps": [
+          {"input": ["D-2", "D-4"], "tactic": 10, "tactic_name": "段階的絞り込み", "output": ["D-C25"]},
+          {"input": ["D-C25", "D-4"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-C26"]},
+          {"input": ["D-C26", "D-5"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C27"]}
+        ]},
+        {"target": "H'_δ_2", "steps": [
+          {"input": ["D-2"], "tactic": 9, "tactic_name": "人物像の探索", "output": ["D-C28"]},
+          {"input": ["D-C28", "D-4"], "tactic": 6, "tactic_name": "矛盾の指摘", "output": ["D-C29"]},
+          {"input": ["D-C29", "D-5"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C30"]}
+        ]},
+        {"target": "H'_δ_3", "steps": [
+          {"input": ["D-2"], "tactic": 9, "tactic_name": "人物像の探索", "output": ["D-C31"]},
+          {"input": ["D-C31", "D-4", "D-5"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C32"]}
+        ]}
+      ],
+      "BP-4": [
+        {"target": "H'_ε_1", "steps": [
+          {"input": ["D-7"], "tactic": 2, "tactic_name": "観測事実の深掘り", "output": ["D-C13"]},
+          {"input": ["D-C13"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-C14"]}
+        ]},
+        {"target": "H'_ε_2", "steps": [
+          {"input": ["D-7", "D-17"], "tactic": 2, "tactic_name": "観測事実の深掘り", "output": ["D-C15"]},
+          {"input": ["D-C15", "D-5"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C16"]}
+        ]},
+        {"target": "H'_ε_3", "steps": [
+          {"input": ["D-6", "D-7"], "tactic": 2, "tactic_name": "観測事実の深掘り", "output": ["D-C17"]},
+          {"input": ["D-C17", "D-5"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-C18"]}
+        ]}
+      ]
+    }
+  },
+  "_phase14": {
+    "rejection_questions": ["Q-17", "Q-18", "Q-19", "Q-20", "Q-21"],
+    "negation_descriptors": ["D-N1", "D-N2", "D-N3", "D-N4", "D-N5"],
+    "natural_rejections": [
+      {"hypothesis": "H'_α_3", "trigger": "correct_chain_progress", "reason": "低確率。過去の体験が明らかになるにつれ不適合に"},
+      {"hypothesis": "H'_β_1", "trigger": "D-16", "reason": "過去の危機的体験が判明し原因はレストラン外に"},
+      {"hypothesis": "H'_β_3", "trigger": "D-16,D-22", "reason": "過去の体験とスープの接続が明確になり無関係説が崩れる"},
+      {"hypothesis": "H'_γ_2", "trigger": "D-22", "reason": "過去にもスープを飲んだと判明し好奇心ではなく比較"},
+      {"hypothesis": "H'_γ_3", "trigger": "D-6,D-7", "reason": "実際の過去（遭難）が明らかになり別の店の偽物説が不適合に"},
+      {"hypothesis": "H'_ε_2", "trigger": "D-8", "reason": "食糧枯渇が判明し問題は関係性ではなく生存の危機"},
+      {"hypothesis": "H'_ε_3", "trigger": "D-8", "reason": "食糧枯渇が判明し事故ではなく飢餓が問題"},
+      {"hypothesis": "H'_δ_2", "trigger": "correct_chain_progress", "reason": "低確率。過去の体験が明らかになるにつれ不適合に"},
+      {"hypothesis": "H'_δ_3", "trigger": "correct_chain_progress", "reason": "低確率。過去の体験が明らかになるにつれ不適合に"}
+    ]
+  }
 }

@@ -10,7 +10,7 @@ from pathlib import Path
 
 REQUIRED_KEYS_DATA = ["id", "title", "statement", "truth", "descriptors", "initial_confirmed", "clear_conditions", "pieces", "questions"]
 REQUIRED_KEYS_SRC_STRUCTURAL = ["title", "descriptors", "initial_confirmed", "clear_conditions", "pieces", "questions"]
-VALID_MECHANISMS = {"observation", "link", "anomaly"}
+VALID_MECHANISMS = {"observation", "link", "anomaly", "rejection"}
 
 
 def load_data(path: str) -> dict:
