@@ -1,0 +1,73 @@
+{
+  "title": "砂漠の男",
+  "S": "砂漠の真ん中で裸の男が死んでいた。手にはマッチ棒を握りしめている。",
+  "T": "男は数人で熱気球に乗っていたが、高度が下がり始めた。荷物を全て捨て、服も脱いで軽量化したが足りず、くじ引き（マッチの長さ）で一人が飛び降りることになった。短いマッチを引いた男が飛び降りて死亡した。",
+  "descriptors": [
+    {"id": "D-1", "label": "男は数人で熱気球に乗っていた", "_phase1": {"source": "T"}},
+    {"id": "D-2", "label": "熱気球の高度が下がり始めた", "_phase1": {"source": "T"}},
+    {"id": "D-3", "label": "荷物を全て捨てた", "_phase1": {"source": "T"}},
+    {"id": "D-4", "label": "服を脱いだ", "_phase1": {"source": "T"}},
+    {"id": "D-5", "label": "荷物を全て捨て服を脱いでも熱気球の高度低下は止まらなかった", "_phase1": {"source": "T"}},
+    {"id": "D-6", "label": "一人が飛び降りることになった", "_phase1": {"source": "T"}},
+    {"id": "D-7", "label": "マッチの長さでくじ引きをした", "_phase1": {"source": "T"}},
+    {"id": "D-8", "label": "男は短いマッチを引いた", "_phase1": {"source": "T"}},
+    {"id": "D-9", "label": "男は熱気球から飛び降りた", "_phase1": {"source": "T"}},
+    {"id": "D-10", "label": "男は死亡した", "_phase1": {"source": "T"}},
+    {"id": "D-S1", "label": "男は砂漠の真ん中にいた", "_phase1": {"source": "S"}},
+    {"id": "D-S2", "label": "男は裸だった", "_phase1": {"source": "S"}},
+    {"id": "D-S3", "label": "男はマッチ棒を握りしめていた", "_phase1": {"source": "S"}},
+    {"id": "D-S4", "label": "男は死んでいた", "_phase1": {"source": "S"}},
+    {"id": "D-11", "label": "男は上空にいた", "_phase2": {"generated": true}},
+    {"id": "D-12", "label": "男は高所から転落した", "_phase2": {"generated": true}},
+    {"id": "D-13", "label": "熱気球にトラブルが発生した", "_phase2": {"generated": true}},
+    {"id": "D-14", "label": "男は乗り物に乗っていた", "_phase2": {"generated": true, "piece_domain": "P-BAL"}},
+    {"id": "D-15", "label": "男は空を移動していた", "_phase2": {"generated": true, "piece_domain": "P-BAL"}},
+    {"id": "D-16", "label": "男は一人ではなかった", "_phase2": {"generated": true, "piece_domain": "P-BAL"}},
+    {"id": "D-17", "label": "乗り物の高度が低下した", "_phase2": {"generated": true, "piece_domain": "P-BAL"}},
+    {"id": "D-18", "label": "乗っている人たちが荷物を捨てた", "_phase2": {"generated": true, "piece_domain": "P-WGT"}},
+    {"id": "D-19", "label": "乗っている人たちが身につけているものを脱いだ", "_phase2": {"generated": true, "piece_domain": "P-WGT"}},
+    {"id": "D-20", "label": "高度低下への対処が行われた", "_phase2": {"generated": true, "piece_domain": "P-WGT"}},
+    {"id": "D-21", "label": "高度低下への対処が行われた後も高度が下がっていた", "_phase2": {"generated": true, "piece_domain": "P-WGT"}},
+    {"id": "D-22", "label": "乗っている人のうち一人が犠牲になることになった", "_phase2": {"generated": true, "piece_domain": "P-LOT"}},
+    {"id": "D-23", "label": "犠牲になる人をくじ引きで決めた", "_phase2": {"generated": true, "piece_domain": "P-LOT"}},
+    {"id": "D-24", "label": "マッチ棒がくじ引きの道具として使われた", "_phase2": {"generated": true, "piece_domain": "P-LOT"}},
+    {"id": "D-25", "label": "男がくじ引きに負けた", "_phase2": {"generated": true, "piece_domain": "P-LOT"}},
+    {"id": "D-26", "label": "男は乗り物から落下した", "_phase2": {"generated": true, "piece_domain": "P-LOT"}}
+  ],
+  "initial_confirmed": ["D-S1", "D-S2", "D-S3", "D-S4"],
+  "clear_conditions": [["D-1", "D-2", "D-3", "D-4", "D-5", "D-6", "D-7", "D-8", "D-9"]],
+  "pieces": [
+    {
+      "id": "P-BAL",
+      "label": "熱気球の危機",
+      "members": ["D-1", "D-2"],
+      "trigger": [["D-11"], ["D-12", "D-S1"]],
+      "depends_on": [],
+      "_kind": "support"
+    },
+    {
+      "id": "P-WGT",
+      "label": "軽量化の試み",
+      "members": ["D-3", "D-4", "D-5"],
+      "trigger": [["D-13"]],
+      "depends_on": ["P-BAL"],
+      "_kind": "support"
+    },
+    {
+      "id": "P-LOT",
+      "label": "くじ引きと結末",
+      "members": ["D-6", "D-7", "D-8", "D-9"],
+      "trigger": [["D-5"]],
+      "depends_on": ["P-WGT"],
+      "_kind": "key"
+    }
+  ],
+  "questions": [],
+  "_phase1": {
+    "t_descriptors": ["D-1", "D-2", "D-3", "D-4", "D-5", "D-6", "D-7", "D-8", "D-9", "D-10"],
+    "s_descriptors": ["D-S1", "D-S2", "D-S3", "D-S4"]
+  },
+  "_phase2": {
+    "generated_descriptors": ["D-11", "D-12", "D-13", "D-14", "D-15", "D-16", "D-17", "D-18", "D-19", "D-20", "D-21", "D-22", "D-23", "D-24", "D-25", "D-26"]
+  }
+}
