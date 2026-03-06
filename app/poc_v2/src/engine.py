@@ -63,6 +63,7 @@ def load_puzzle(path: str | Path) -> PuzzleData:
             recall_conditions=item["recall_conditions"],
             reveals=item["reveals"],
             mechanism=item["mechanism"],
+            prerequisites=item.get("prerequisites", []),
         )
         questions[q.id] = q
 
@@ -134,10 +135,16 @@ def _check_conditions(conditions: list[list[str]], state: GameState) -> bool:
 
 
 def available_questions(state: GameState, puzzle: PuzzleData) -> list[Question]:
-    """利用可能な質問を返す: 想起条件が満たされ、未回答のもの"""
+    """利用可能な質問を返す: 前提条件・想起条件が満たされ、未回答のもの
+
+    - 前提条件（prerequisites）: confirmed のみで判定。対話上で確立された事実。
+    - 想起条件（recall_conditions）: known（confirmed ∪ derived）で判定。仮説の導出。
+    """
     result = []
     for q in puzzle.questions.values():
         if q.id in state.answered:
+            continue
+        if q.prerequisites and not all(p in state.confirmed for p in q.prerequisites):
             continue
         if _check_conditions(q.recall_conditions, state):
             result.append(q)

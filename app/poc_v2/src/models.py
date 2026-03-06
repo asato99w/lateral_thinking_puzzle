@@ -30,9 +30,10 @@ class Question:
     id: str
     text: str
     answer: str
-    recall_conditions: list[list[str]]  # OR of AND: 想起条件
+    recall_conditions: list[list[str]]  # OR of AND: 想起条件（仮説の導出）
     reveals: list[str]  # 回答で明らかになる記述素 ID 群
     mechanism: str  # ラベル: "observation" | "link" | "anomaly"
+    prerequisites: list[str] = field(default_factory=list)  # 質問文の言語的前提（confirmed のみで判定）
     topic_category: str = ""  # トピックカテゴリ（UI 用分類）
 
 
