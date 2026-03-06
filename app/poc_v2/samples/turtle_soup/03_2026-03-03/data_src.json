@@ -21,7 +21,6 @@
     {"id": "D-15", "label": "男は船乗りだった"},
     {"id": "D-16", "label": "過去に危機的な体験があった", "formation_conditions": [["D-6"]]},
     {"id": "D-17", "label": "仲間がいた"},
-    {"id": "D-18", "label": "男は過去にスープを飲まされたことがある"},
     {"id": "D-19", "label": "そのスープは偽りの名前だった"},
     {"id": "D-20", "label": "偽装に悪意はなかった"},
     {"id": "D-21", "label": "男は過去に欺かれた"},
@@ -82,7 +81,7 @@
     ]
   },
   "_phase2": {
-    "generated_descriptors": ["D-15", "D-16", "D-17", "D-18", "D-19", "D-20", "D-21", "D-22", "D-23", "D-24"]
+    "generated_descriptors": ["D-15", "D-16", "D-17", "D-19", "D-20", "D-21", "D-22", "D-23", "D-24"]
   },
   "pieces": [
     {
@@ -95,7 +94,7 @@
     {
       "id": "P-deception",
       "label": "偽装",
-      "members": ["D-18", "D-19", "D-20"],
+      "members": ["D-19", "D-20"],
       "trigger": [["D-21"], ["D-22"]],
       "depends_on": []
     },
@@ -103,7 +102,7 @@
       "id": "P-realization",
       "label": "発覚と結末",
       "members": ["D-10", "D-11", "D-12", "D-13", "D-14"],
-      "trigger": [["D-6", "D-8", "D-9", "D-18", "D-19"], ["D-7", "D-9", "D-18", "D-19", "D-20"]],
+      "trigger": [["D-6", "D-8", "D-9", "D-19"], ["D-7", "D-9", "D-19", "D-20"]],
       "depends_on": ["P-shipwreck", "P-deception"],
       "_key_piece": true
     }
@@ -115,7 +114,7 @@
       "D-7": [["D-6"]],
       "D-16": [["D-6"]]
     },
-    "terminal_descriptors": ["D-6", "D-8", "D-9", "D-10", "D-11", "D-12", "D-13", "D-14", "D-15", "D-17", "D-18", "D-19", "D-20", "D-21", "D-23", "D-24"]
+    "terminal_descriptors": ["D-6", "D-8", "D-9", "D-10", "D-11", "D-12", "D-13", "D-14", "D-15", "D-17", "D-19", "D-20", "D-21", "D-23", "D-24"]
   },
   "_phase4": {
     "chains_to_terminals": {
@@ -125,8 +124,7 @@
         {"input": ["D-24"], "tactic": 10, "tactic_name": "段階的絞り込み", "output": ["D-15"]}
       ],
       "D-17": [{"input": ["D-15"], "tactic": 4, "tactic_name": "登場人物の探索", "output": ["D-17"]}],
-      "D-18": [{"input": ["D-22"], "tactic": 2, "tactic_name": "観測事実の深掘り", "output": ["D-18"]}],
-      "D-21": [{"input": ["D-18"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-21"]}]
+      "D-21": [{"input": ["D-5", "D-N3"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-21"]}]
     },
     "internal_chains": {
       "P-shipwreck": [
@@ -136,12 +134,11 @@
         {"input": ["D-8"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-9"]}
       ],
       "P-deception": [
-        {"input": ["D-22"], "tactic": 2, "tactic_name": "観測事実の深掘り", "output": ["D-18"]},
-        {"input": ["D-18", "D-21"], "tactic": 7, "tactic_name": "ラベルと実体の乖離", "output": ["D-19"]},
+        {"input": ["D-21", "D-22"], "tactic": 7, "tactic_name": "ラベルと実体の乖離", "output": ["D-19"]},
         {"input": ["D-19"], "tactic": 8, "tactic_name": "動機の探索", "output": ["D-20"]}
       ],
       "P-realization": [
-        {"input": ["D-8", "D-9", "D-18", "D-19"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-10"]},
+        {"input": ["D-8", "D-9", "D-19"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-10"]},
         {"input": ["D-10", "D-19"], "tactic": 7, "tactic_name": "ラベルと実体の乖離", "output": ["D-11"]},
         {"input": ["D-10", "D-2"], "tactic": 6, "tactic_name": "矛盾の指摘", "output": ["D-12"]},
         {"input": ["D-10", "D-12"], "tactic": 5, "tactic_name": "因果の逆転", "output": ["D-13"]},
@@ -184,21 +181,12 @@
       "id": "Q-4",
       "text": "男は過去に誰かに欺かれたことがありますか？",
       "answer": "Yes",
-      "recall_conditions": [["D-18"]],
+      "recall_conditions": [["D-5", "D-N3"]],
       "reveals": ["D-21"],
       "mechanism": "link",
       "category": "原因と動機",
-      "_chain_ref": ["terminal:D-21"]
-    },
-    {
-      "id": "Q-5",
-      "text": "男は以前にもスープを飲まされたことがありますか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-22"], ["D-2", "D-3"]],
-      "reveals": ["D-18"],
-      "mechanism": "observation",
-      "category": "状況の確認",
-      "_chain_ref": ["terminal:D-18", "internal:P-deception:1"]
+      "_chain_ref": ["terminal:D-21"],
+      "_design_note": "方向2: D-N3(精神的問題なし)獲得後の並列推測の一つとして欺きに到達"
     },
     {
       "id": "Q-6",
@@ -242,9 +230,9 @@
     },
     {
       "id": "Q-10",
-      "text": "飲まされたスープの名前は偽りでしたか？",
+      "text": "過去に飲んだスープの名前は偽りでしたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-18", "D-21"]],
+      "recall_conditions": [["D-21", "D-22"]],
       "reveals": ["D-19"],
       "mechanism": "anomaly",
       "category": "前提の確認",
@@ -264,7 +252,7 @@
       "id": "Q-12",
       "text": "亡くなった仲間の肉でスープを作りましたか？",
       "answer": "Yes",
-      "recall_conditions": [["D-8", "D-9", "D-18", "D-19"]],
+      "recall_conditions": [["D-8", "D-9", "D-19"]],
       "reveals": ["D-10"],
       "mechanism": "link",
       "category": "原因と動機",
@@ -381,7 +369,7 @@
       {"id": "F-alpha", "label": "確認行為の意味の転換", "H": ["D-12", "D-22"], "question": "なぜ「本当にウミガメのスープか」と確認したのか？"},
       {"id": "F-beta", "label": "過去の体験の存在", "H": ["D-16", "D-15", "D-6", "D-7"], "question": "自殺の原因はどこにあるのか？"},
       {"id": "F-epsilon", "label": "生存の極限", "H": ["D-8", "D-9", "D-10", "D-17"], "question": "過去に何が起きたのか？"},
-      {"id": "F-gamma", "label": "「本物である」ことの反転", "H": ["D-18", "D-19", "D-11", "D-21", "D-20"], "question": "「本物である」ことは何を意味するのか？"},
+      {"id": "F-gamma", "label": "「本物である」ことの反転", "H": ["D-19", "D-11", "D-21", "D-20"], "question": "「本物である」ことは何を意味するのか？"},
       {"id": "F-delta", "label": "自殺動機の深度", "H": ["D-13", "D-14"], "question": "なぜ自殺するほどの絶望に至ったのか？"}
     ]
   },
