@@ -76,7 +76,250 @@
       "_kind": "key"
     }
   ],
-  "questions": [],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "男は歩いてここに来ましたか？",
+      "answer": "No",
+      "prerequisites": ["D-S1"],
+      "recall_conditions": [["D-S1"]],
+      "reveals": ["D-36"],
+      "mechanism": "observation",
+      "_chain": "D-14"
+    },
+    {
+      "id": "Q-2",
+      "text": "男は乗り物に乗っていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-36"]],
+      "reveals": ["D-14"],
+      "mechanism": "link",
+      "_chain": "D-14"
+    },
+    {
+      "id": "Q-3",
+      "text": "男は脱水や熱中症で死にましたか？",
+      "answer": "No",
+      "prerequisites": ["D-S4"],
+      "recall_conditions": [["D-S4"]],
+      "reveals": ["D-37"],
+      "mechanism": "observation",
+      "_chain": "D-28"
+    },
+    {
+      "id": "Q-4",
+      "text": "男は外傷で死にましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-S4"],
+      "recall_conditions": [["D-37"]],
+      "reveals": ["D-38"],
+      "mechanism": "link",
+      "_chain": "D-28"
+    },
+    {
+      "id": "Q-5",
+      "text": "男は転落して死にましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-S4"],
+      "recall_conditions": [["D-38"]],
+      "reveals": ["D-28"],
+      "mechanism": "link",
+      "_chain": "D-28"
+    },
+    {
+      "id": "Q-6",
+      "text": "周囲に男の足跡はありましたか？",
+      "answer": "No",
+      "prerequisites": ["D-S1"],
+      "recall_conditions": [["D-S1"]],
+      "reveals": ["D-29"],
+      "mechanism": "observation",
+      "_chain": "D-29,D-30,D-31"
+    },
+    {
+      "id": "Q-7",
+      "text": "周囲にタイヤの跡はありましたか？",
+      "answer": "No",
+      "prerequisites": ["D-S1"],
+      "recall_conditions": [["D-S1"]],
+      "reveals": ["D-30"],
+      "mechanism": "observation",
+      "_chain": "D-29,D-30,D-31"
+    },
+    {
+      "id": "Q-8",
+      "text": "周囲にラクダの足跡はありましたか？",
+      "answer": "No",
+      "prerequisites": ["D-S1"],
+      "recall_conditions": [["D-S1"]],
+      "reveals": ["D-31"],
+      "mechanism": "observation",
+      "_chain": "D-29,D-30,D-31"
+    },
+    {
+      "id": "Q-9",
+      "text": "男は事故や自殺で転落しましたか？",
+      "answer": "No",
+      "prerequisites": ["D-28"],
+      "recall_conditions": [["D-28"]],
+      "reveals": ["D-39"],
+      "mechanism": "observation",
+      "_chain": "D-33"
+    },
+    {
+      "id": "Q-10",
+      "text": "男はやむを得ず自ら飛び降りましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-28"],
+      "recall_conditions": [["D-39"]],
+      "reveals": ["D-40"],
+      "mechanism": "link",
+      "_chain": "D-33"
+    },
+    {
+      "id": "Q-11",
+      "text": "男は飛び降りなくても死ぬ可能性がありましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-40"],
+      "recall_conditions": [["D-40"]],
+      "reveals": ["D-33"],
+      "mechanism": "anomaly",
+      "_chain": "D-33"
+    },
+    {
+      "id": "Q-12",
+      "text": "男は空を移動していましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-11"], ["D-12", "D-S1"]],
+      "reveals": ["D-15"],
+      "mechanism": "link",
+      "_chain": "P-BAL"
+    },
+    {
+      "id": "Q-13",
+      "text": "男は熱気球に乗っていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-15"]],
+      "reveals": ["D-34"],
+      "mechanism": "link",
+      "_chain": "P-BAL"
+    },
+    {
+      "id": "Q-14",
+      "text": "男は一人でしたか？",
+      "answer": "No",
+      "recall_conditions": [["D-11"], ["D-15"]],
+      "reveals": ["D-16"],
+      "mechanism": "observation",
+      "_chain": "P-BAL"
+    },
+    {
+      "id": "Q-25",
+      "text": "熱気球の高度は下がっていましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-34"],
+      "recall_conditions": [["D-17", "D-34"]],
+      "reveals": ["D-2"],
+      "mechanism": "link",
+      "_chain": "P-BAL"
+    },
+    {
+      "id": "Q-15",
+      "text": "高度低下に対して何か対処をしましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-2"],
+      "recall_conditions": [["D-2"]],
+      "reveals": ["D-20"],
+      "mechanism": "link",
+      "_chain": "P-WGT"
+    },
+    {
+      "id": "Q-16",
+      "text": "荷物を全て捨てましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-20"]],
+      "reveals": ["D-18", "D-3"],
+      "mechanism": "observation",
+      "_chain": "P-WGT"
+    },
+    {
+      "id": "Q-17",
+      "text": "服を脱ぎましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-20"]],
+      "reveals": ["D-19", "D-4"],
+      "mechanism": "observation",
+      "_chain": "P-WGT"
+    },
+    {
+      "id": "Q-18",
+      "text": "それでも高度は下がり続けましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-2", "D-20"],
+      "recall_conditions": [["D-20"]],
+      "reveals": ["D-21"],
+      "mechanism": "observation",
+      "_chain": "P-WGT"
+    },
+    {
+      "id": "Q-19",
+      "text": "誰かが犠牲にならなければなりませんでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-5"]],
+      "reveals": ["D-22"],
+      "mechanism": "link",
+      "_chain": "P-LOT"
+    },
+    {
+      "id": "Q-20",
+      "text": "一人が飛び降りることになりましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-22"]],
+      "reveals": ["D-6"],
+      "mechanism": "link",
+      "_chain": "P-LOT"
+    },
+    {
+      "id": "Q-21",
+      "text": "飛び降りる人をくじ引きで決めましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-6"],
+      "recall_conditions": [["D-6"]],
+      "reveals": ["D-23"],
+      "mechanism": "observation",
+      "_chain": "P-LOT"
+    },
+    {
+      "id": "Q-22",
+      "text": "マッチ棒でくじ引きをしましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-23"],
+      "recall_conditions": [["D-23", "D-S3"]],
+      "reveals": ["D-24"],
+      "mechanism": "anomaly",
+      "_chain": "P-LOT"
+    },
+    {
+      "id": "Q-23",
+      "text": "男はくじ引きに負けましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-23"],
+      "recall_conditions": [["D-23"]],
+      "reveals": ["D-25", "D-8"],
+      "mechanism": "observation",
+      "_chain": "P-LOT"
+    },
+    {
+      "id": "Q-24",
+      "text": "男は乗り物から落下しましたか？",
+      "answer": "Yes",
+      "prerequisites": ["D-14"],
+      "recall_conditions": [["D-6"]],
+      "reveals": ["D-26"],
+      "mechanism": "link",
+      "_chain": "P-LOT"
+    }
+  ],
   "_phase1": {
     "t_descriptors": ["D-1", "D-2", "D-3", "D-4", "D-5", "D-6", "D-7", "D-8", "D-9", "D-10"],
     "s_descriptors": ["D-S1", "D-S2", "D-S3", "D-S4"]

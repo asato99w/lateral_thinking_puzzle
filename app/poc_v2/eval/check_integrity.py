@@ -158,6 +158,33 @@ def check_mechanism_values(data: dict) -> list[str]:
     return errors
 
 
+def check_prerequisites_grounded(data: dict) -> list[str]:
+    """前提条件の記述素が対話上で確立可能か検証する。
+
+    前提条件は質問文の言語的前提（presupposition）であり、
+    導出（formation_conditions）のみで得られた記述素では対話上の前提として成立しない。
+    initial_confirmed またはいずれかの質問の reveals に含まれている必要がある。
+    """
+    errors = []
+    initial = set(data.get("initial_confirmed", []))
+    all_reveals = set()
+    for q in data.get("questions", []):
+        for ref in q.get("reveals", []):
+            all_reveals.add(ref)
+
+    grounded = initial | all_reveals
+
+    for q in data.get("questions", []):
+        qid = q["id"]
+        for ref in q.get("prerequisites", []):
+            if ref not in grounded:
+                errors.append(
+                    f"question '{qid}' の prerequisites '{ref}' が "
+                    f"initial_confirmed にも reveals にも含まれない（導出のみでは前提不成立）"
+                )
+    return errors
+
+
 def check_piece_dag(data: dict) -> list[str]:
     errors = []
     pieces = {p["id"]: p.get("depends_on", []) for p in data.get("pieces", [])}
@@ -202,6 +229,7 @@ def run(path: str) -> tuple[bool, list[str]]:
         ("questions の参照整合", check_question_refs),
         ("mechanism の値域", check_mechanism_values),
         ("ピース依存の非循環", check_piece_dag),
+        ("前提条件の対話上の確立", check_prerequisites_grounded),
     ]
 
     all_errors: list[str] = []
