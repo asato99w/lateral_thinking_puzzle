@@ -14,6 +14,7 @@ enum PuzzleMetadata {
         "desert_man": "\u{1F3DC}",   // 🏜️
         "turtle_soup": "\u{1F422}", // 🐢
         "forbidden_basement": "\u{1F6AA}", // 🚪
+        "poisonous_mushroom": "\u{1F344}", // 🍄
     ]
 
     private static let difficulties: [String: Int] = [
@@ -21,5 +22,6 @@ enum PuzzleMetadata {
         "desert_man": 3,
         "turtle_soup": 1,
         "forbidden_basement": 2,
+        "poisonous_mushroom": 2,
     ]
 }

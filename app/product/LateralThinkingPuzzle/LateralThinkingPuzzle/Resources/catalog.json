@@ -55,6 +55,20 @@
       "tier": "free",
       "bundled": true,
       "locales": ["ja"]
+    },
+    {
+      "id": "poisonous_mushroom",
+      "engine_version": "v2",
+      "odr_tag": "puzzle-poisonous-mushroom",
+      "title_ja": "毒キノコ",
+      "title_en": "Poisonous Mushroom",
+      "statement_preview_ja": "男は、辺りに毒キノコしかないのを見て安堵した。なぜだろうか。",
+      "statement_preview_en": "A man felt relieved when he saw that there were only poisonous mushrooms around. Why?",
+      "icon": "🍄",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": true,
+      "locales": ["ja"]
     }
   ],
   "packs": [
@@ -65,7 +79,7 @@
       "description_ja": "人気の水平思考パズル",
       "description_en": "Popular lateral thinking puzzles",
       "icon": "📦",
-      "puzzle_ids": ["turtle_soup", "bar_man", "desert_man", "forbidden_basement"],
+      "puzzle_ids": ["turtle_soup", "bar_man", "desert_man", "forbidden_basement", "poisonous_mushroom"],
       "tier": "free"
     }
   ]
