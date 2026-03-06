@@ -20,7 +20,14 @@
     {"id": "D-11", "label": "男は上空にいた", "_phase2": {"generated": true}},
     {"id": "D-12", "label": "男は高所から転落した", "_phase2": {"generated": true}},
     {"id": "D-13", "label": "熱気球にトラブルが発生した", "_phase2": {"generated": true}},
-    {"id": "D-14", "label": "男は乗り物に乗っていた", "_phase2": {"generated": true, "piece_domain": "P-BAL"}},
+    {"id": "D-27", "label": "男は地上の乗り物に乗っていたのではない", "_phase3": {"generated": true}},
+    {"id": "D-28", "label": "男の死因は転落死によるものだった", "_phase3": {"generated": true}},
+    {"id": "D-29", "label": "周囲に男の足跡がなかった", "_phase3": {"generated": true}},
+    {"id": "D-30", "label": "周囲にタイヤの跡がなかった", "_phase3": {"generated": true}},
+    {"id": "D-31", "label": "周囲にラクダの足跡がなかった", "_phase3": {"generated": true}},
+    {"id": "D-32", "label": "死ぬ間際に男は焦っていた", "_phase3": {"generated": true}},
+    {"id": "D-33", "label": "男は転落しなくてもそのまま死ぬ可能性があった", "_phase3": {"generated": true}},
+    {"id": "D-14", "label": "男は乗り物に乗っていた", "_phase3": {"generated": true}},
     {"id": "D-15", "label": "男は空を移動していた", "_phase2": {"generated": true, "piece_domain": "P-BAL"}},
     {"id": "D-16", "label": "男は一人ではなかった", "_phase2": {"generated": true, "piece_domain": "P-BAL"}},
     {"id": "D-17", "label": "乗り物の高度が低下した", "_phase2": {"generated": true, "piece_domain": "P-BAL"}},
@@ -68,6 +75,16 @@
     "s_descriptors": ["D-S1", "D-S2", "D-S3", "D-S4"]
   },
   "_phase2": {
-    "generated_descriptors": ["D-11", "D-12", "D-13", "D-14", "D-15", "D-16", "D-17", "D-18", "D-19", "D-20", "D-21", "D-22", "D-23", "D-24", "D-25", "D-26"]
+    "generated_descriptors": ["D-11", "D-12", "D-13", "D-15", "D-16", "D-17", "D-18", "D-19", "D-20", "D-21", "D-22", "D-23", "D-24", "D-25", "D-26"]
+  },
+  "_phase3": {
+    "generated_descriptors": ["D-14", "D-27", "D-28", "D-29", "D-30", "D-31", "D-32", "D-33"],
+    "formation_conditions": {
+      "D-11": [["D-14", "D-27"]],
+      "D-12": [["D-28"]],
+      "D-27": [["D-29", "D-30", "D-31"]],
+      "D-13": [["D-32", "D-33"]],
+      "D-5": [["D-2", "D-3", "D-4"]]
+    }
   }
 }
