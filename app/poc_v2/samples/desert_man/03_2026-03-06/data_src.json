@@ -1,6 +1,6 @@
 {
   "title": "砂漠の男",
-  "S": "砂漠の真ん中で裸の男が死んでいた。手にはマッチ棒を握りしめている。",
+  "S": "砂漠の真ん中で裸の男が死んでいた。手には折れたマッチ棒を握りしめている。",
   "T": "男は数人で熱気球に乗っていたが、高度が下がり始めた。荷物を全て捨て、服も脱いで軽量化したが足りず、くじ引き（マッチの長さ）で一人が飛び降りることになった。短いマッチを引いた男が飛び降りて死亡した。",
   "descriptors": [
     {"id": "D-1", "label": "男は数人で熱気球に乗っていた", "_phase1": {"source": "T"}},
@@ -15,7 +15,7 @@
     {"id": "D-10", "label": "男は死亡した", "_phase1": {"source": "T"}},
     {"id": "D-S1", "label": "男は砂漠の真ん中にいた", "_phase1": {"source": "S"}},
     {"id": "D-S2", "label": "男は裸だった", "_phase1": {"source": "S"}},
-    {"id": "D-S3", "label": "男はマッチ棒を握りしめていた", "_phase1": {"source": "S"}},
+    {"id": "D-S3", "label": "男は折れたマッチ棒を握りしめていた", "_phase1": {"source": "S"}},
     {"id": "D-S4", "label": "男は死んでいた", "_phase1": {"source": "S"}},
     {"id": "D-11", "label": "男は上空にいた", "_phase2": {"generated": true}},
     {"id": "D-12", "label": "男は高所から転落した", "_phase2": {"generated": true}},
@@ -39,7 +39,9 @@
     {"id": "D-23", "label": "犠牲になる人をくじ引きで決めた", "_phase2": {"generated": true, "piece_domain": "P-LOT"}},
     {"id": "D-24", "label": "マッチ棒がくじ引きの道具として使われた", "_phase2": {"generated": true, "piece_domain": "P-LOT"}},
     {"id": "D-25", "label": "男がくじ引きに負けた", "_phase2": {"generated": true, "piece_domain": "P-LOT"}},
-    {"id": "D-26", "label": "男は乗り物から落下した", "_phase2": {"generated": true, "piece_domain": "P-LOT"}}
+    {"id": "D-26", "label": "男は乗り物から落下した", "_phase2": {"generated": true, "piece_domain": "P-LOT"}},
+    {"id": "D-34", "label": "男は熱気球に乗っていた", "_phase4": {"generated": true}},
+    {"id": "D-35", "label": "乗り物にトラブルが発生した", "_phase4": {"generated": true}}
   ],
   "initial_confirmed": ["D-S1", "D-S2", "D-S3", "D-S4"],
   "clear_conditions": [["D-1", "D-2", "D-3", "D-4", "D-5", "D-6", "D-7", "D-8", "D-9"]],
@@ -56,7 +58,7 @@
       "id": "P-WGT",
       "label": "軽量化の試み",
       "members": ["D-3", "D-4", "D-5"],
-      "trigger": [["D-13"]],
+      "trigger": [["D-2"]],
       "depends_on": ["P-BAL"],
       "_kind": "support"
     },
@@ -83,8 +85,14 @@
       "D-11": [["D-14", "D-27"]],
       "D-12": [["D-28"]],
       "D-27": [["D-29", "D-30", "D-31"]],
-      "D-13": [["D-32", "D-33"]],
-      "D-5": [["D-2", "D-3", "D-4"]]
+      "D-35": [["D-32", "D-33"]],
+      "D-13": [["D-35", "D-34"]],
+      "D-17": [["D-35"]],
+      "D-5": [["D-2", "D-3", "D-4"]],
+      "D-1": [["D-34", "D-16"]],
+      "D-2": [["D-17", "D-34"]],
+      "D-7": [["D-23", "D-24"]],
+      "D-9": [["D-26", "D-34"]]
     }
   }
 }
