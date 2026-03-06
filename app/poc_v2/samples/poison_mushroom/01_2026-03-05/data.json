@@ -1,0 +1,281 @@
+{
+  "title": "毒キノコ",
+  "descriptors": [
+    {
+      "id": "D-1",
+      "label": "辺りに毒キノコしかない"
+    },
+    {
+      "id": "D-2",
+      "label": "男は安堵した"
+    },
+    {
+      "id": "D-3",
+      "label": "男はキノコ狩りをしていた"
+    },
+    {
+      "id": "D-4",
+      "label": "男は遭難していた"
+    },
+    {
+      "id": "D-5",
+      "label": "食用キノコは誰かが既に採った"
+    },
+    {
+      "id": "D-6",
+      "label": "この辺りに人が来ている"
+    },
+    {
+      "id": "D-7",
+      "label": "男は助かる見込みがある",
+      "formation_conditions": [
+        [
+          "D-6",
+          "D-4"
+        ]
+      ]
+    },
+    {
+      "id": "D-9",
+      "label": "男は山にいる",
+      "formation_conditions": [
+        [
+          "D-1"
+        ]
+      ]
+    },
+    {
+      "id": "D-10",
+      "label": "食用キノコが存在するはずの場所に食用キノコがない",
+      "formation_conditions": [
+        [
+          "D-1",
+          "D-3"
+        ]
+      ]
+    },
+    {
+      "id": "D-11",
+      "label": "男は困った状況にあった",
+      "formation_conditions": [
+        [
+          "D-2"
+        ]
+      ]
+    },
+    {
+      "id": "D-12",
+      "label": "食用キノコがないのは不自然である",
+      "formation_conditions": [
+        [
+          "D-10",
+          "D-3"
+        ]
+      ]
+    },
+    {
+      "id": "D-C1",
+      "label": "男は毒キノコを必要としていた",
+      "formation_conditions": [
+        [
+          "D-1",
+          "D-2"
+        ]
+      ],
+      "rejection_conditions": [
+        [
+          "D-N1"
+        ]
+      ]
+    },
+    {
+      "id": "D-C2",
+      "label": "毒キノコしかないこと自体が安全を意味する",
+      "formation_conditions": [
+        [
+          "D-1",
+          "D-2"
+        ]
+      ],
+      "rejection_conditions": [
+        [
+          "D-N2"
+        ]
+      ]
+    },
+    {
+      "id": "D-C3",
+      "label": "男は安全な日常的活動をしていた",
+      "formation_conditions": [
+        [
+          "D-9"
+        ]
+      ]
+    },
+    {
+      "id": "D-N1",
+      "label": "男は毒キノコを利用する目的がなかった"
+    },
+    {
+      "id": "D-N2",
+      "label": "毒キノコしかないこと自体は安堵の原因ではない"
+    }
+  ],
+  "initial_confirmed": [
+    "D-1",
+    "D-2"
+  ],
+  "clear_conditions": [
+    [
+      "D-4",
+      "D-7"
+    ]
+  ],
+  "pieces": [
+    {
+      "id": "P-SIT",
+      "label": "遭難の状況",
+      "members": [
+        "D-3",
+        "D-4"
+      ],
+      "trigger": [
+        [
+          "D-9"
+        ]
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "P-KEY",
+      "label": "人の存在と救助の推論",
+      "members": [
+        "D-5",
+        "D-6",
+        "D-7"
+      ],
+      "trigger": [
+        [
+          "D-10"
+        ]
+      ],
+      "depends_on": [
+        "P-SIT"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "男はキノコ狩りをしていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-1"
+        ]
+      ],
+      "reveals": [
+        "D-3"
+      ],
+      "mechanism": "observation",
+      "category": "状況の確認"
+    },
+    {
+      "id": "Q-2",
+      "text": "男は遭難していましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-11",
+          "D-9"
+        ]
+      ],
+      "reveals": [
+        "D-4"
+      ],
+      "mechanism": "observation",
+      "category": "人物と背景"
+    },
+    {
+      "id": "Q-3",
+      "text": "食用キノコは誰かが採りましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-12"
+        ]
+      ],
+      "reveals": [
+        "D-5"
+      ],
+      "mechanism": "observation",
+      "category": "原因と動機"
+    },
+    {
+      "id": "Q-4",
+      "text": "この辺りに他の人が来ていますか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-5"
+        ]
+      ],
+      "reveals": [
+        "D-6"
+      ],
+      "mechanism": "observation",
+      "category": "状況の確認"
+    },
+    {
+      "id": "Q-5",
+      "text": "男には助かる見込みがありますか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-6",
+          "D-4"
+        ]
+      ],
+      "reveals": [
+        "D-7"
+      ],
+      "mechanism": "link",
+      "category": "状況の確認"
+    },
+    {
+      "id": "Q-R1",
+      "text": "男は毒キノコを必要としていましたか？",
+      "answer": "No",
+      "recall_conditions": [
+        [
+          "D-1",
+          "D-2"
+        ]
+      ],
+      "reveals": [
+        "D-N1"
+      ],
+      "mechanism": "rejection",
+      "category": "原因と動機"
+    },
+    {
+      "id": "Q-R2",
+      "text": "毒キノコしかないこと自体が安堵の原因ですか？",
+      "answer": "No",
+      "recall_conditions": [
+        [
+          "D-1",
+          "D-2"
+        ]
+      ],
+      "reveals": [
+        "D-N2"
+      ],
+      "mechanism": "rejection",
+      "category": "前提の確認"
+    }
+  ],
+  "statement": "男は、辺りに毒キノコしかないのを見て安堵した。なぜだろうか。",
+  "truth": "男はキノコ狩りの最中に山で遭難していた。辺りに毒キノコしか残っていないということは、食用キノコは誰かが既に採った＝この辺りに人が来ているということ。近くに人里や他の採集者がいると分かり、助かる見込みがあると安堵した。",
+  "id": "毒キノコ"
+}

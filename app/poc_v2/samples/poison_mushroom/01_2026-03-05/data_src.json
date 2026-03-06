@@ -1,0 +1,274 @@
+{
+  "title": "毒キノコ",
+  "S": "男は、辺りに毒キノコしかないのを見て安堵した。なぜだろうか。",
+  "T": "男はキノコ狩りの最中に山で遭難していた。辺りに毒キノコしか残っていないということは、食用キノコは誰かが既に採った＝この辺りに人が来ているということ。近くに人里や他の採集者がいると分かり、助かる見込みがあると安堵した。",
+  "descriptors": [
+    {"id": "D-1", "label": "辺りに毒キノコしかない", "_phase1": {"source": "S"}},
+    {"id": "D-2", "label": "男は安堵した", "_phase1": {"source": "S"}},
+    {"id": "D-3", "label": "男はキノコ狩りをしていた", "_phase1": {"source": "T"}, "_piece": "P-SIT"},
+    {"id": "D-4", "label": "男は遭難していた", "_phase1": {"source": "T"}, "_piece": "P-SIT"},
+    {"id": "D-5", "label": "食用キノコは誰かが既に採った", "_phase1": {"source": "T"}, "_piece": "P-KEY"},
+    {"id": "D-6", "label": "この辺りに人が来ている", "_phase1": {"source": "T"}, "_piece": "P-KEY"},
+    {"id": "D-7", "label": "男は助かる見込みがある", "formation_conditions": [["D-6", "D-4"]], "_phase1": {"source": "T"}, "_piece": "P-KEY", "_phase8": "自明な帰結の導出化"},
+    {"id": "D-9", "label": "男は山にいる", "formation_conditions": [["D-1"]], "_phase2": {"generated": true}},
+    {"id": "D-10", "label": "食用キノコが存在するはずの場所に食用キノコがない", "formation_conditions": [["D-1", "D-3"]], "_phase2": {"generated": true}},
+    {"id": "D-11", "label": "男は困った状況にあった", "formation_conditions": [["D-2"]], "_phase8": "認知的経路の確保"},
+    {"id": "D-12", "label": "食用キノコがないのは不自然である", "formation_conditions": [["D-10", "D-3"]], "_phase8": "認知的経路の確保"},
+    {"id": "D-C1", "label": "男は毒キノコを必要としていた", "formation_conditions": [["D-1", "D-2"]], "rejection_conditions": [["D-N1"]], "_phase11": {"fault": "α", "hypothesis": "H'α-1"}},
+    {"id": "D-C2", "label": "毒キノコしかないこと自体が安全を意味する", "formation_conditions": [["D-1", "D-2"]], "rejection_conditions": [["D-N2"]], "_phase11": {"fault": "α", "hypothesis": "H'α-2"}},
+    {"id": "D-C3", "label": "男は安全な日常的活動をしていた", "formation_conditions": [["D-9"]], "_phase11": {"fault": "β", "hypothesis": "H'β-1", "natural_rejection": "D-4 confirmed で不適合"}},
+    {"id": "D-N1", "label": "男は毒キノコを利用する目的がなかった", "_phase14": "棄却質問 Q-R1 の reveals"},
+    {"id": "D-N2", "label": "毒キノコしかないこと自体は安堵の原因ではない", "_phase14": "棄却質問 Q-R2 の reveals"}
+  ],
+  "initial_confirmed": ["D-1", "D-2"],
+  "clear_conditions": [["D-4", "D-7"]],
+  "pieces": [
+    {
+      "id": "P-SIT",
+      "label": "遭難の状況",
+      "members": ["D-3", "D-4"],
+      "trigger": [["D-9"]],
+      "depends_on": [],
+      "_trigger": "D-9",
+      "_kind": "key"
+    },
+    {
+      "id": "P-KEY",
+      "label": "人の存在と救助の推論",
+      "members": ["D-5", "D-6", "D-7"],
+      "trigger": [["D-10"]],
+      "depends_on": ["P-SIT"],
+      "_trigger": "D-10",
+      "_kind": "key"
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "男はキノコ狩りをしていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1"]],
+      "reveals": ["D-3"],
+      "mechanism": "observation",
+      "category": "状況の確認",
+      "_chain_ref": {"chain": "PC-SIT", "step": 0}
+    },
+    {
+      "id": "Q-2",
+      "text": "男は遭難していましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-11", "D-9"]],
+      "reveals": ["D-4"],
+      "mechanism": "observation",
+      "category": "人物と背景",
+      "_chain_ref": {"chain": "PC-SIT", "step": 1}
+    },
+    {
+      "id": "Q-3",
+      "text": "食用キノコは誰かが採りましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-12"]],
+      "reveals": ["D-5"],
+      "mechanism": "observation",
+      "category": "原因と動機",
+      "_chain_ref": {"chain": "PC-KEY", "step": 0}
+    },
+    {
+      "id": "Q-4",
+      "text": "この辺りに他の人が来ていますか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-5"]],
+      "reveals": ["D-6"],
+      "mechanism": "observation",
+      "category": "状況の確認",
+      "_chain_ref": {"chain": "PC-KEY", "step": 1}
+    },
+    {
+      "id": "Q-5",
+      "text": "男には助かる見込みがありますか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-6", "D-4"]],
+      "reveals": ["D-7"],
+      "mechanism": "link",
+      "category": "状況の確認",
+      "_chain_ref": {"chain": "PC-KEY", "step": 2}
+    },
+    {
+      "id": "Q-R1",
+      "text": "男は毒キノコを必要としていましたか？",
+      "answer": "No",
+      "recall_conditions": [["D-1", "D-2"]],
+      "reveals": ["D-N1"],
+      "mechanism": "rejection",
+      "category": "原因と動機",
+      "_phase14": {"rejects": "H'α-1", "target": "D-C1"}
+    },
+    {
+      "id": "Q-R2",
+      "text": "毒キノコしかないこと自体が安堵の原因ですか？",
+      "answer": "No",
+      "recall_conditions": [["D-1", "D-2"]],
+      "reveals": ["D-N2"],
+      "mechanism": "rejection",
+      "category": "前提の確認",
+      "_phase14": {"rejects": "H'α-2", "target": "D-C2"}
+    }
+  ],
+  "_tactical_chains": [
+    {
+      "id": "TC-T1",
+      "target": "D-3",
+      "piece_id": "P-SIT",
+      "steps": [
+        {
+          "input": ["D-1"],
+          "tactic": "観測事実の深掘り",
+          "output": ["D-3"],
+          "questions": ["Q-1"]
+        }
+      ]
+    }
+  ],
+  "_piece_chains": [
+    {
+      "id": "PC-SIT",
+      "piece_id": "P-SIT",
+      "steps": [
+        {
+          "input": ["D-1"],
+          "tactic": "観測事実の深掘り",
+          "output": ["D-3"],
+          "questions": ["Q-1"]
+        },
+        {
+          "input": ["D-11", "D-9"],
+          "tactic": "段階的絞り込み",
+          "output": ["D-4"],
+          "questions": ["Q-2"]
+        }
+      ]
+    },
+    {
+      "id": "PC-KEY",
+      "piece_id": "P-KEY",
+      "steps": [
+        {
+          "input": ["D-12"],
+          "tactic": "因果の逆転",
+          "output": ["D-5"],
+          "questions": ["Q-3"]
+        },
+        {
+          "input": ["D-5"],
+          "tactic": "観測事実の深掘り",
+          "output": ["D-6"],
+          "questions": ["Q-4"]
+        },
+        {
+          "input": ["D-6", "D-4"],
+          "tactic": "観測事実の深掘り",
+          "output": ["D-7"],
+          "questions": ["Q-5"]
+        }
+      ]
+    }
+  ],
+  "_phase1": {
+    "s_descriptors": ["D-1", "D-2"],
+    "t_descriptors": ["D-3", "D-4", "D-5", "D-6", "D-7"]
+  },
+  "_phase2": {
+    "generated_descriptors": ["D-9", "D-10"]
+  },
+  "_phase3": {
+    "formation_conditions": {
+      "D-9": [["D-1"]],
+      "D-10": [["D-1", "D-3"]]
+    },
+    "terminal_descriptors": ["D-3"]
+  },
+  "_phase10": {
+    "faults": [
+      {
+        "id": "α",
+        "label": "毒キノコの意味の転換",
+        "question": "毒キノコしかないことがなぜポジティブなのか？",
+        "H": ["D-5", "D-6"]
+      },
+      {
+        "id": "β",
+        "label": "男の状況の隠蔽",
+        "question": "男はなぜ安堵する必要があったのか？",
+        "H": ["D-3", "D-4"]
+      }
+    ]
+  },
+  "_phase11": {
+    "opposing_hypotheses": {
+      "α": [
+        {"id": "H'α-1", "label": "毒キノコ自体が目的", "descriptors": ["D-C1"]},
+        {"id": "H'α-2", "label": "毒キノコが安全の印", "descriptors": ["D-C2"]}
+      ],
+      "β": [
+        {"id": "H'β-1", "label": "日常的活動", "descriptors": ["D-C3"]}
+      ]
+    }
+  },
+  "_phase12": {
+    "branch_points": [
+      {
+        "id": "BP-1",
+        "label": "初期状態の分岐",
+        "facts": ["D-1", "D-2"],
+        "available": "ゲーム開始時",
+        "leads_to": ["H'α-1", "H'α-2"]
+      },
+      {
+        "id": "BP-2",
+        "label": "山にいることの分岐",
+        "facts": ["D-9"],
+        "available": "ゲーム開始時（D-9はD-1から導出）",
+        "leads_to": ["H'β-1"]
+      }
+    ]
+  },
+  "_phase13": {
+    "opposing_chains": [
+      {
+        "branch_point": "BP-1",
+        "target": "H'α-1",
+        "chain": "{D-1, D-2} →[動機の探索]→ D-C1"
+      },
+      {
+        "branch_point": "BP-1",
+        "target": "H'α-2",
+        "chain": "{D-1, D-2} →[因果の逆転]→ D-C2"
+      },
+      {
+        "branch_point": "BP-2",
+        "target": "H'β-1",
+        "chain": "{D-9} →[人物像の探索]→ D-C3"
+      }
+    ]
+  },
+  "_phase14": {
+    "rejection_questions": ["Q-R1", "Q-R2"],
+    "natural_rejections": [
+      {"hypothesis": "H'β-1", "trigger": "D-4 confirmed", "reason": "遭難が判明し、日常的活動の仮説が不適合になる"}
+    ]
+  },
+  "_phase16": {
+    "categories": {
+      "状況の確認": ["Q-1", "Q-4", "Q-5"],
+      "原因と動機": ["Q-3", "Q-R1"],
+      "人物と背景": ["Q-2"],
+      "前提の確認": ["Q-R2"]
+    },
+    "initial_open_per_category": {
+      "状況の確認": ["Q-1"],
+      "原因と動機": ["Q-R1"],
+      "人物と背景": ["Q-2"],
+      "前提の確認": ["Q-R2"]
+    }
+  }
+}
