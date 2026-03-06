@@ -22,8 +22,8 @@ struct V2GameSessionTests {
                 "p1": V2Piece(id: "p1", label: "Piece 1", members: ["f1", "f2", "f3"], dependsOn: []),
             ],
             questions: [
-                "q1": V2Question(id: "q1", text: "First question?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f2"], mechanism: "observation", correctAnswer: .yes, topicCategory: "cat1"),
-                "q2": V2Question(id: "q2", text: "Second question?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f3"], mechanism: "link", correctAnswer: .yes, topicCategory: "cat1"),
+                "q1": V2Question(id: "q1", text: "First question?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: "cat1"),
+                "q2": V2Question(id: "q2", text: "Second question?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f3"], mechanism: "link", prerequisites: [], correctAnswer: .yes, topicCategory: "cat1"),
             ],
             topicCategories: [TopicCategory(id: "cat1", name: "Category 1")]
         )

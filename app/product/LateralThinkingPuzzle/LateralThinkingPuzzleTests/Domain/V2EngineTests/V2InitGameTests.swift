@@ -21,7 +21,7 @@ struct V2InitGameTests {
                 "p1": V2Piece(id: "p1", label: "Piece 1", members: ["f3"], dependsOn: []),
             ],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q1?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f3"], mechanism: "observation", correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q1?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f3"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )

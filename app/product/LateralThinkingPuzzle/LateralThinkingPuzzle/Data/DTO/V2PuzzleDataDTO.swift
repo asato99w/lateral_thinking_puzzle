@@ -32,13 +32,14 @@ struct V2QuestionDTO: Codable {
     let recallConditions: [[String]]
     let reveals: [String]
     let mechanism: String
+    let prerequisites: [String]?
     let correctAnswer: String?
     let topicCategory: String?
 
     enum CodingKeys: String, CodingKey {
         case id, text, answer
         case recallConditions = "recall_conditions"
-        case reveals, mechanism
+        case reveals, mechanism, prerequisites
         case correctAnswer = "correct_answer"
         case topicCategory = "topic_category"
     }
@@ -90,6 +91,7 @@ struct V2PuzzleDataDTO: Codable {
                 recallConditions: q.recallConditions,
                 reveals: q.reveals,
                 mechanism: q.mechanism,
+                prerequisites: q.prerequisites ?? [],
                 correctAnswer: answer,
                 topicCategory: q.topicCategory ?? ""
             ))

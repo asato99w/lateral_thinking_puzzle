@@ -14,7 +14,7 @@ struct V2AvailableQuestionsTests {
             clearConditions: [],
             pieces: [:],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h1"]], reveals: [], mechanism: "observation", correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h1"]], reveals: [], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )
@@ -36,7 +36,7 @@ struct V2AvailableQuestionsTests {
             clearConditions: [],
             pieces: [:],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["f1", "f2"]], reveals: [], mechanism: "observation", correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["f1", "f2"]], reveals: [], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )
@@ -57,13 +57,55 @@ struct V2AvailableQuestionsTests {
             clearConditions: [],
             pieces: [:],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h2"]], reveals: [], mechanism: "observation", correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h2"]], reveals: [], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )
         let state = V2GameEngine.initGame(puzzle: puzzle)
         let available = V2GameEngine.availableQuestions(state: state, puzzle: puzzle)
         #expect(available.isEmpty)
+    }
+
+    @Test func test_questionNotAvailable_whenPrerequisitesNotMet() {
+        // prerequisites は confirmed のみで判定（derived では不可）
+        let puzzle = V2PuzzleData(
+            id: "test", title: "", statement: "", truth: "",
+            descriptors: [
+                "f1": V2Descriptor(id: "f1", label: "", formationConditions: nil),
+                "h1": V2Descriptor(id: "h1", label: "", formationConditions: [["f1"]]),
+            ],
+            initialConfirmed: ["f1"],
+            clearConditions: [],
+            pieces: [:],
+            questions: [
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["f1"]], reveals: [], mechanism: "observation", prerequisites: ["h1"], correctAnswer: .yes, topicCategory: ""),
+            ],
+            topicCategories: []
+        )
+        // h1 is derived (not confirmed), so prerequisites ["h1"] not met
+        let state = V2GameEngine.initGame(puzzle: puzzle)
+        let available = V2GameEngine.availableQuestions(state: state, puzzle: puzzle)
+        #expect(available.isEmpty)
+    }
+
+    @Test func test_questionAvailable_whenPrerequisitesConfirmed() {
+        let puzzle = V2PuzzleData(
+            id: "test", title: "", statement: "", truth: "",
+            descriptors: [
+                "f1": V2Descriptor(id: "f1", label: "", formationConditions: nil),
+                "f2": V2Descriptor(id: "f2", label: "", formationConditions: nil),
+            ],
+            initialConfirmed: ["f1", "f2"],
+            clearConditions: [],
+            pieces: [:],
+            questions: [
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["f1"]], reveals: [], mechanism: "observation", prerequisites: ["f2"], correctAnswer: .yes, topicCategory: ""),
+            ],
+            topicCategories: []
+        )
+        let state = V2GameEngine.initGame(puzzle: puzzle)
+        let available = V2GameEngine.availableQuestions(state: state, puzzle: puzzle)
+        #expect(available.count == 1)
     }
 
     @Test func test_answeredQuestion_notAvailable() {
@@ -77,7 +119,7 @@ struct V2AvailableQuestionsTests {
             clearConditions: [],
             pieces: [:],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h1"]], reveals: [], mechanism: "observation", correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h1"]], reveals: [], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )

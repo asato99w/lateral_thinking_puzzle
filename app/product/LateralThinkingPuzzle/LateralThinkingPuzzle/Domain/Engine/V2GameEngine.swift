@@ -28,6 +28,7 @@ struct V2Question: Equatable, Sendable {
     let recallConditions: [[String]]
     let reveals: [String]
     let mechanism: String
+    let prerequisites: [String]
     let correctAnswer: Answer
     let topicCategory: String
 }
@@ -128,7 +129,13 @@ enum V2GameEngine {
 
     static func availableQuestions(state: V2GameState, puzzle: V2PuzzleData) -> [V2Question] {
         puzzle.questions.values.filter { q in
-            !state.answered.contains(q.id) && checkConditions(q.recallConditions, state: state)
+            guard !state.answered.contains(q.id) else { return false }
+            // prerequisites: confirmed のみで判定
+            if !q.prerequisites.isEmpty && !q.prerequisites.allSatisfy({ state.confirmed.contains($0) }) {
+                return false
+            }
+            // recall_conditions: known (confirmed ∪ derived) で判定
+            return checkConditions(q.recallConditions, state: state)
         }
     }
 
