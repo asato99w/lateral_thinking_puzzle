@@ -1,0 +1,240 @@
+{
+  "id": "poison_mushroom",
+  "title": "毒キノコ",
+  "statement": "男は、辺りに毒キノコしかないのを見て安堵した。なぜだろうか。",
+  "truth": "男はキノコ狩りの最中に山で遭難していた。辺りに毒キノコしか残っていないということは、食用キノコは誰かが既に採った＝この辺りに人が来ているということ。近くに人里や他の採集者がいると分かり、助かる見込みがあると安堵した。",
+  "descriptors": [
+    {
+      "id": "D-S1",
+      "label": "辺りに毒キノコしかなかった"
+    },
+    {
+      "id": "D-S2",
+      "label": "男は安堵した"
+    },
+    {
+      "id": "D-1",
+      "label": "男はキノコ狩りをしていた"
+    },
+    {
+      "id": "D-2",
+      "label": "男は山で遭難していた"
+    },
+    {
+      "id": "D-3",
+      "label": "食用キノコは他の人が既に採っていた"
+    },
+    {
+      "id": "D-4",
+      "label": "近くに人里や他の採集者がいた"
+    },
+    {
+      "id": "D-5",
+      "label": "男は助かる見込みがあると判断した"
+    },
+    {
+      "id": "D-6",
+      "label": "男は助けを必要としていた",
+      "formation_conditions": [
+        [
+          "D-7"
+        ]
+      ]
+    },
+    {
+      "id": "D-7",
+      "label": "男は生命の危機にあった",
+      "formation_conditions": [
+        [
+          "D-8"
+        ]
+      ]
+    },
+    {
+      "id": "D-8",
+      "label": "男の安堵は自身の生存に関わるものだった"
+    },
+    {
+      "id": "D-9",
+      "label": "安堵の理由は毒キノコの毒性そのものではなかった",
+      "formation_conditions": [
+        [
+          "D-S1",
+          "D-S2"
+        ]
+      ]
+    },
+    {
+      "id": "D-10",
+      "label": "男は自力では脱出できない場所にいた",
+      "formation_conditions": [
+        [
+          "D-6"
+        ]
+      ]
+    },
+    {
+      "id": "D-11",
+      "label": "辺りの食用キノコが存在しない理由があった",
+      "formation_conditions": [
+        [
+          "D-1",
+          "D-S1"
+        ]
+      ]
+    }
+  ],
+  "pieces": [
+    {
+      "id": "P-SIT",
+      "label": "男の状況",
+      "members": [
+        "D-1",
+        "D-2"
+      ],
+      "depends_on": [],
+      "trigger": [
+        [
+          "D-6"
+        ]
+      ],
+      "is_key": true
+    },
+    {
+      "id": "P-INF",
+      "label": "キノコの推論",
+      "members": [
+        "D-3",
+        "D-4",
+        "D-5"
+      ],
+      "depends_on": [
+        "P-SIT"
+      ],
+      "trigger": [
+        [
+          "D-1"
+        ]
+      ],
+      "is_key": true
+    }
+  ],
+  "initial_confirmed": [
+    "D-S1",
+    "D-S2"
+  ],
+  "clear_conditions": [
+    [
+      "D-1",
+      "D-2",
+      "D-3",
+      "D-4",
+      "D-5"
+    ]
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "男の安堵は自身の生存に関わるものでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-9"
+        ]
+      ],
+      "reveals": [
+        "D-8"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "topic_category": "安堵の理由"
+    },
+    {
+      "id": "Q-2",
+      "text": "男は山で遭難していましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-10"
+        ]
+      ],
+      "reveals": [
+        "D-2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "男の状況"
+    },
+    {
+      "id": "Q-3",
+      "text": "男はキノコ狩りをしていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-S1"
+        ],
+        [
+          "D-2",
+          "D-S1"
+        ]
+      ],
+      "reveals": [
+        "D-1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "男の行動"
+    },
+    {
+      "id": "Q-4",
+      "text": "食用キノコは他の人が採っていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-11"
+        ]
+      ],
+      "reveals": [
+        "D-3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "キノコの推論"
+    },
+    {
+      "id": "Q-5",
+      "text": "近くに人里や他の採集者がいましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-3"
+        ]
+      ],
+      "reveals": [
+        "D-4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "周囲の状況"
+    },
+    {
+      "id": "Q-6",
+      "text": "男は助かる見込みがあると判断しましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-4",
+          "D-2"
+        ]
+      ],
+      "reveals": [
+        "D-5"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "D-2"
+      ],
+      "topic_category": "結果"
+    }
+  ]
+}
