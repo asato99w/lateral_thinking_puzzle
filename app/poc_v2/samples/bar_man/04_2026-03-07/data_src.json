@@ -1,0 +1,191 @@
+{
+  "title": "バーの男",
+  "S": "男がバーに入ってきて、バーテンダーに水を一杯頼んだ。するとバーテンダーは男に銃を向けた。男は「ありがとう」と言って帰っていった。",
+  "T": "男はしゃっくりが止まらず困っていた。水を飲めばしゃっくりが治ると思い、バーに入って水を頼んだ。バーテンダーは男のしゃっくりに気づき、驚かせて止めようと銃を向けた。驚いた男はしゃっくりが止まり、水が不要になったので「ありがとう」と言って帰った。",
+  "descriptors": [
+    {"id": "D-1", "label": "男はしゃっくりが止まらなかった"},
+    {"id": "D-2", "label": "男は水を飲めばしゃっくりが治ると考えていた"},
+    {"id": "D-3", "label": "バーテンダーは男のしゃっくりに気づいた"},
+    {"id": "D-4", "label": "バーテンダーは驚かせればしゃっくりが止まると考えた"},
+    {"id": "D-5", "label": "男は驚いた"},
+    {"id": "D-6", "label": "男のしゃっくりが止まった"},
+    {"id": "D-7", "label": "男には体の症状があった"},
+    {"id": "D-8", "label": "バーテンダーは男を助けようとしていた", "formation_conditions": [["D-S3", "D-S4"]]},
+    {"id": "D-S1", "label": "男がバーに入ってきた"},
+    {"id": "D-S2", "label": "男はバーテンダーに水を一杯頼んだ"},
+    {"id": "D-S3", "label": "バーテンダーは男に銃を向けた"},
+    {"id": "D-S4", "label": "男は「ありがとう」と言って帰った"}
+  ],
+  "_phase1": {
+    "t_descriptors": ["D-1", "D-2", "D-3", "D-4", "D-5", "D-6"]
+  },
+  "_phase2": {
+    "generated_descriptors": ["D-7"],
+    "terminal_descriptors": ["D-7"],
+    "clear_conditions_semantic": ["D-1", "D-2", "D-3", "D-4", "D-5", "D-6"]
+  },
+  "_phase3": {
+    "s_descriptors": ["D-S1", "D-S2", "D-S3", "D-S4"],
+    "generated_descriptors": ["D-8"],
+    "terminal_chains": {
+      "D-7": [
+        {
+          "input": ["D-S3", "D-S4"],
+          "tactic": "矛盾の指摘",
+          "output": "D-8"
+        },
+        {
+          "input": ["D-8", "D-S2"],
+          "tactic": "段階的絞り込み",
+          "output": "D-7"
+        }
+      ]
+    },
+    "piece_chains": {
+      "P-HIC": [
+        {
+          "input": ["D-7", "D-S2"],
+          "tactic": "段階的絞り込み",
+          "output": "D-1"
+        },
+        {
+          "input": ["D-1", "D-S2"],
+          "tactic": "因果の逆転",
+          "output": "D-2"
+        }
+      ],
+      "P-CUR": [
+        {
+          "input": ["D-1", "D-S3"],
+          "tactic": "因果の逆転",
+          "output": "D-3"
+        },
+        {
+          "input": ["D-3", "D-S3"],
+          "tactic": "動機の探索",
+          "output": "D-4"
+        },
+        {
+          "input": ["D-S3"],
+          "tactic": "観測事実の深掘り",
+          "output": "D-5"
+        },
+        {
+          "input": ["D-4", "D-5", "D-S4"],
+          "tactic": "因果の逆転",
+          "output": "D-6"
+        }
+      ]
+    }
+  },
+  "initial_confirmed": ["D-S1", "D-S2", "D-S3", "D-S4"],
+  "clear_conditions": [["D-1", "D-2", "D-3", "D-4", "D-5", "D-6"]],
+  "pieces": [
+    {
+      "id": "P-HIC",
+      "label": "しゃっくりと水の関係",
+      "members": ["D-1", "D-2"],
+      "depends_on": [],
+      "trigger": [["D-7"]],
+      "is_key": true
+    },
+    {
+      "id": "P-CUR",
+      "label": "バーテンダーの対処",
+      "members": ["D-3", "D-4", "D-5", "D-6"],
+      "depends_on": ["P-HIC"],
+      "trigger": [["D-1"]],
+      "is_key": true
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "バーテンダーが銃を向けたのは、男を助けるためでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-S3", "D-S4"]],
+      "reveals": ["D-8"],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "topic_category": "バーテンダーの行動",
+      "_chain_ref": "terminal/D-7/矛盾の指摘"
+    },
+    {
+      "id": "Q-2",
+      "text": "男は体の不調がありましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-8", "D-S2"]],
+      "reveals": ["D-7"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "男の状態",
+      "_chain_ref": "terminal/D-7/段階的絞り込み"
+    },
+    {
+      "id": "Q-3",
+      "text": "男はしゃっくりが止まらなかったのですか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-7", "D-S2"]],
+      "reveals": ["D-1"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "男の状態",
+      "_chain_ref": "P-HIC/段階的絞り込み"
+    },
+    {
+      "id": "Q-4",
+      "text": "男は水を飲めばしゃっくりが治ると思っていたのですか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1", "D-S2"]],
+      "reveals": ["D-2"],
+      "mechanism": "link",
+      "prerequisites": ["D-1"],
+      "topic_category": "男の状態",
+      "_chain_ref": "P-HIC/因果の逆転"
+    },
+    {
+      "id": "Q-5",
+      "text": "バーテンダーは男のしゃっくりに気づいていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1", "D-S3"]],
+      "reveals": ["D-3"],
+      "mechanism": "observation",
+      "prerequisites": ["D-1"],
+      "topic_category": "バーテンダーの行動",
+      "_chain_ref": "P-CUR/因果の逆転"
+    },
+    {
+      "id": "Q-6",
+      "text": "バーテンダーは男を驚かせてしゃっくりを止めようとしたのですか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-3", "D-S3"]],
+      "reveals": ["D-4"],
+      "mechanism": "link",
+      "prerequisites": ["D-3"],
+      "topic_category": "バーテンダーの行動",
+      "_chain_ref": "P-CUR/動機の探索"
+    },
+    {
+      "id": "Q-7",
+      "text": "男は銃を向けられて驚きましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-S3"]],
+      "reveals": ["D-5"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "男の反応",
+      "_chain_ref": "P-CUR/観測事実の深掘り"
+    },
+    {
+      "id": "Q-8",
+      "text": "男のしゃっくりは止まりましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1"]],
+      "reveals": ["D-6"],
+      "mechanism": "observation",
+      "prerequisites": ["D-1"],
+      "topic_category": "結果",
+      "_chain_ref": "P-CUR/因果の逆転(D-6)"
+    }
+  ]
+}
