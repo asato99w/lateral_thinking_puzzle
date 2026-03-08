@@ -1,0 +1,104 @@
+"""recall = fc 整合性チェック (v3)
+
+各質問の recall_conditions が reveals される記述素の formation_conditions と一致するかを検証する。
+data_src.json 専用。
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+
+def load_data(path: str) -> dict:
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _normalize_conditions(conditions: list[list[str]] | None) -> list[list[str]]:
+    """条件を正規化する（ソートして比較可能にする）"""
+    if conditions is None:
+        return []
+    return sorted([sorted(group) for group in conditions])
+
+
+def check_recall_equals_fc(data: dict) -> list[str]:
+    """各質問の recall_conditions が reveals される記述素の fc と一致するか"""
+    errors = []
+    descriptor_map = {d["id"]: d for d in data.get("descriptors", [])}
+
+    for q in data.get("questions", []):
+        qid = q["id"]
+        recall = q.get("recall_conditions", [])
+        reveals = q.get("reveals", [])
+
+        if not reveals:
+            continue
+
+        # reveals される全記述素の fc を集める
+        # 複数の記述素が reveals される場合、最初の（主要な）記述素の fc と比較
+        # v3 では recall = reveals される記述素の fc
+        for rev_id in reveals:
+            d = descriptor_map.get(rev_id)
+            if d is None:
+                continue
+            fc = d.get("formation_conditions")
+
+            # fc が None（基礎記述素）の場合、recall は空であるべき
+            expected = _normalize_conditions(fc)
+            actual = _normalize_conditions(recall)
+
+            if expected != actual:
+                fc_str = fc if fc else "[]"
+                recall_str = recall if recall else "[]"
+                errors.append(
+                    f"question '{qid}': recall_conditions と "
+                    f"reveals '{rev_id}' の formation_conditions が不一致\n"
+                    f"      recall: {recall_str}\n"
+                    f"      fc:     {fc_str}"
+                )
+            # 最初の reveals 記述素のみチェック（v3 では 1 質問 1 主記述素が基本）
+            break
+
+    return errors
+
+
+def run(path: str) -> tuple[bool, list[str]]:
+    data = load_data(path)
+
+    checks = [
+        ("recall = fc 整合性", check_recall_equals_fc),
+    ]
+
+    all_errors: list[str] = []
+    for label, fn in checks:
+        errors = fn(data)
+        if errors:
+            print(f"  FAIL: {label}")
+            for e in errors:
+                print(f"    - {e}")
+            all_errors.extend(errors)
+        else:
+            print(f"  PASS: {label}")
+
+    return len(all_errors) == 0, all_errors
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python check_recall_fc.py <data_src.json>", file=sys.stderr)
+        sys.exit(2)
+
+    path = sys.argv[1]
+    if not Path(path).exists():
+        print(f"Error: {path} が見つかりません", file=sys.stderr)
+        sys.exit(2)
+
+    print("[check_recall_fc]")
+    ok, _ = run(path)
+    sys.exit(0 if ok else 1)
+
+
+if __name__ == "__main__":
+    main()

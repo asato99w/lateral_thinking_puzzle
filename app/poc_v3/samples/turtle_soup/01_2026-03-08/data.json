@@ -1,0 +1,713 @@
+{
+  "title": "ウミガメのスープ",
+  "initial_confirmed": [
+    "D-S1",
+    "D-S2",
+    "D-S3",
+    "D-S4",
+    "D-S5"
+  ],
+  "clear_conditions": [
+    [
+      "D-7",
+      "D-9",
+      "D-10"
+    ]
+  ],
+  "descriptors": [
+    {
+      "id": "D-S1",
+      "label": "男がレストランに入った"
+    },
+    {
+      "id": "D-S2",
+      "label": "男は「ウミガメのスープ」を注文した"
+    },
+    {
+      "id": "D-S3",
+      "label": "男は一口飲んで店員に「これは本当にウミガメのスープか？」と尋ねた"
+    },
+    {
+      "id": "D-S4",
+      "label": "店員は「はい、間違いなくウミガメのスープです」と答えた"
+    },
+    {
+      "id": "D-S5",
+      "label": "男はその夜自殺した"
+    },
+    {
+      "id": "D-1",
+      "label": "男は船乗りだった",
+      "formation_conditions": [
+        [
+          "D-2"
+        ]
+      ]
+    },
+    {
+      "id": "D-2",
+      "label": "男はかつて仲間と船で遭難した",
+      "formation_conditions": [
+        [
+          "D-19"
+        ]
+      ]
+    },
+    {
+      "id": "D-3",
+      "label": "遭難中に食料が尽きた",
+      "formation_conditions": [
+        [
+          "D-2"
+        ]
+      ]
+    },
+    {
+      "id": "D-4",
+      "label": "遭難中に仲間の一人が死んだ",
+      "formation_conditions": [
+        [
+          "D-2",
+          "D-3"
+        ],
+        [
+          "D-2"
+        ]
+      ]
+    },
+    {
+      "id": "D-5",
+      "label": "残った仲間が死んだ仲間の肉でスープを作った",
+      "formation_conditions": [
+        [
+          "D-4",
+          "D-3"
+        ],
+        [
+          "D-7",
+          "D-3"
+        ]
+      ]
+    },
+    {
+      "id": "D-6",
+      "label": "仲間は男に「ウミガメのスープだ」と言ってそのスープを飲ませた",
+      "formation_conditions": [
+        [
+          "D-11",
+          "D-2"
+        ],
+        [
+          "D-11",
+          "D-7"
+        ]
+      ]
+    },
+    {
+      "id": "D-7",
+      "label": "実際にはそのスープは人肉で作られたものだった",
+      "formation_conditions": [
+        [
+          "D-15",
+          "D-4"
+        ],
+        [
+          "D-20",
+          "D-4"
+        ]
+      ]
+    },
+    {
+      "id": "D-8",
+      "label": "レストランで本物のウミガメのスープを飲んだ男は味が違うことに気づいた",
+      "formation_conditions": [
+        [
+          "D-14"
+        ]
+      ]
+    },
+    {
+      "id": "D-9",
+      "label": "男はあのとき飲まされたものの正体（人肉）を悟った",
+      "formation_conditions": [
+        [
+          "D-7",
+          "D-8"
+        ],
+        [
+          "D-7",
+          "D-6"
+        ]
+      ]
+    },
+    {
+      "id": "D-10",
+      "label": "男は絶望して自殺した",
+      "formation_conditions": [
+        [
+          "D-9"
+        ]
+      ]
+    },
+    {
+      "id": "D-11",
+      "label": "男は過去に「ウミガメのスープ」を飲んだ経験がある",
+      "formation_conditions": [
+        [
+          "D-16"
+        ]
+      ]
+    },
+    {
+      "id": "D-12",
+      "label": "男には過去に危機的な体験がある",
+      "formation_conditions": [
+        [
+          "D-17"
+        ]
+      ]
+    },
+    {
+      "id": "D-13",
+      "label": "男が過去に飲んだ「ウミガメのスープ」の味は本物と異なっていた",
+      "formation_conditions": [
+        [
+          "D-14"
+        ]
+      ]
+    },
+    {
+      "id": "D-14",
+      "label": "男がレストランで飲んだスープと過去に飲んだスープは味が違った",
+      "formation_conditions": [
+        [
+          "D-18",
+          "D-16"
+        ]
+      ]
+    },
+    {
+      "id": "D-15",
+      "label": "過去に飲まされたスープにはウミガメ以外の材料が使われていた",
+      "formation_conditions": [
+        [
+          "D-13",
+          "D-6"
+        ],
+        [
+          "D-8",
+          "D-6"
+        ]
+      ]
+    },
+    {
+      "id": "D-16",
+      "label": "男はスープの味に何らかの期待や記憶を持っていた",
+      "formation_conditions": [
+        [
+          "D-S2",
+          "D-S3"
+        ]
+      ]
+    },
+    {
+      "id": "D-17",
+      "label": "男の自殺はレストランでの出来事が引き金となった",
+      "formation_conditions": [
+        [
+          "D-S5",
+          "D-S3"
+        ],
+        [
+          "D-S5",
+          "D-S2"
+        ]
+      ]
+    },
+    {
+      "id": "D-18",
+      "label": "男が店員に確認したのは味に疑問を感じたからである",
+      "formation_conditions": [
+        [
+          "D-S3",
+          "D-S4"
+        ]
+      ]
+    },
+    {
+      "id": "D-19",
+      "label": "男が過去にスープを飲んだのは日常的な状況ではなかった",
+      "formation_conditions": [
+        [
+          "D-11",
+          "D-17"
+        ],
+        [
+          "D-11",
+          "D-S5"
+        ]
+      ]
+    },
+    {
+      "id": "D-20",
+      "label": "遭難時に飲まされたスープは「ウミガメのスープ」ではなかった",
+      "formation_conditions": [
+        [
+          "D-15",
+          "D-6"
+        ],
+        [
+          "D-13",
+          "D-6"
+        ]
+      ]
+    }
+  ],
+  "pieces": [
+    {
+      "id": "P-PAST",
+      "label": "遭難の体験",
+      "members": [
+        "D-1",
+        "D-2",
+        "D-3",
+        "D-4",
+        "D-5",
+        "D-6",
+        "D-11",
+        "D-12"
+      ],
+      "trigger": [
+        [
+          "D-11"
+        ],
+        [
+          "D-12"
+        ]
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "P-TASTE",
+      "label": "味の不一致",
+      "members": [
+        "D-8",
+        "D-13",
+        "D-14"
+      ],
+      "trigger": [
+        [
+          "D-14"
+        ]
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "P-TRUTH",
+      "label": "正体の発覚と絶望",
+      "members": [
+        "D-7",
+        "D-9",
+        "D-10",
+        "D-15",
+        "D-20"
+      ],
+      "trigger": [
+        [
+          "D-15",
+          "D-6"
+        ],
+        [
+          "D-15",
+          "D-13"
+        ]
+      ],
+      "depends_on": [
+        "P-PAST",
+        "P-TASTE"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "男は以前にもウミガメのスープを飲んだことがありますか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-11"
+      ],
+      "mechanism": "observation",
+      "recall_conditions": [
+        [
+          "D-16"
+        ]
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "Q-2",
+      "text": "男がスープの味を確認したのは、以前飲んだ味の記憶があったからですか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-16"
+      ],
+      "mechanism": "link",
+      "recall_conditions": [
+        [
+          "D-S2",
+          "D-S3"
+        ]
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "Q-3",
+      "text": "男の自殺はレストランでの出来事がきっかけですか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-17"
+      ],
+      "mechanism": "link",
+      "recall_conditions": [
+        [
+          "D-S5",
+          "D-S3"
+        ],
+        [
+          "D-S5",
+          "D-S2"
+        ]
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "Q-4",
+      "text": "男には過去に深刻な体験がありますか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-12"
+      ],
+      "mechanism": "observation",
+      "recall_conditions": [
+        [
+          "D-17"
+        ]
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "Q-5",
+      "text": "男が店員に確認したのは、味に疑問を感じたからですか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-18"
+      ],
+      "mechanism": "link",
+      "recall_conditions": [
+        [
+          "D-S3",
+          "D-S4"
+        ]
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "Q-6",
+      "text": "男がレストランで飲んだスープと過去に飲んだスープは味が違いましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-14"
+      ],
+      "mechanism": "observation",
+      "recall_conditions": [
+        [
+          "D-18",
+          "D-16"
+        ]
+      ],
+      "prerequisites": [
+        "D-11"
+      ]
+    },
+    {
+      "id": "Q-7",
+      "text": "男が過去にスープを飲んだのは普通の状況ではなかったですか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-19"
+      ],
+      "mechanism": "link",
+      "recall_conditions": [
+        [
+          "D-11",
+          "D-17"
+        ],
+        [
+          "D-11",
+          "D-S5"
+        ]
+      ],
+      "prerequisites": [
+        "D-11"
+      ]
+    },
+    {
+      "id": "Q-8",
+      "text": "男はかつて遭難したことがありますか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-2"
+      ],
+      "mechanism": "observation",
+      "recall_conditions": [
+        [
+          "D-19"
+        ]
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "Q-9",
+      "text": "男は船乗りですか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-1"
+      ],
+      "mechanism": "observation",
+      "recall_conditions": [
+        [
+          "D-2"
+        ]
+      ],
+      "prerequisites": [
+        "D-2"
+      ]
+    },
+    {
+      "id": "Q-10",
+      "text": "遭難中に食料が尽きましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-3"
+      ],
+      "mechanism": "observation",
+      "recall_conditions": [
+        [
+          "D-2"
+        ]
+      ],
+      "prerequisites": [
+        "D-2"
+      ]
+    },
+    {
+      "id": "Q-11",
+      "text": "遭難中に仲間が死にましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-4"
+      ],
+      "mechanism": "observation",
+      "recall_conditions": [
+        [
+          "D-2",
+          "D-3"
+        ],
+        [
+          "D-2"
+        ]
+      ],
+      "prerequisites": [
+        "D-2"
+      ]
+    },
+    {
+      "id": "Q-12",
+      "text": "死んだ仲間の肉でスープが作られましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-5"
+      ],
+      "mechanism": "link",
+      "recall_conditions": [
+        [
+          "D-4",
+          "D-3"
+        ],
+        [
+          "D-7",
+          "D-3"
+        ]
+      ],
+      "prerequisites": [
+        "D-4"
+      ]
+    },
+    {
+      "id": "Q-13",
+      "text": "男は遭難時に仲間から「ウミガメのスープだ」と言われてスープを飲まされましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-6"
+      ],
+      "mechanism": "observation",
+      "recall_conditions": [
+        [
+          "D-11",
+          "D-2"
+        ],
+        [
+          "D-11",
+          "D-7"
+        ]
+      ],
+      "prerequisites": [
+        "D-11",
+        "D-2"
+      ]
+    },
+    {
+      "id": "Q-14",
+      "text": "男が過去に飲んだ「ウミガメのスープ」は本物とは味が違っていましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-13"
+      ],
+      "mechanism": "link",
+      "recall_conditions": [
+        [
+          "D-14"
+        ]
+      ],
+      "prerequisites": [
+        "D-11"
+      ]
+    },
+    {
+      "id": "Q-15",
+      "text": "レストランで本物のウミガメのスープを飲んだことで、男は味の違いに気づきましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-8"
+      ],
+      "mechanism": "observation",
+      "recall_conditions": [
+        [
+          "D-14"
+        ]
+      ],
+      "prerequisites": [
+        "D-14"
+      ]
+    },
+    {
+      "id": "Q-16",
+      "text": "遭難時に飲まされたスープにはウミガメ以外の材料が使われていましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-15"
+      ],
+      "mechanism": "link",
+      "recall_conditions": [
+        [
+          "D-13",
+          "D-6"
+        ],
+        [
+          "D-8",
+          "D-6"
+        ]
+      ],
+      "prerequisites": [
+        "D-6"
+      ]
+    },
+    {
+      "id": "Q-17",
+      "text": "遭難時に飲まされたスープは実は「ウミガメのスープ」ではなかったのですか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-20"
+      ],
+      "mechanism": "anomaly",
+      "recall_conditions": [
+        [
+          "D-15",
+          "D-6"
+        ],
+        [
+          "D-13",
+          "D-6"
+        ]
+      ],
+      "prerequisites": [
+        "D-6",
+        "D-15"
+      ]
+    },
+    {
+      "id": "Q-18",
+      "text": "遭難時に飲まされたスープは人肉で作られていましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-7"
+      ],
+      "mechanism": "link",
+      "recall_conditions": [
+        [
+          "D-15",
+          "D-4"
+        ],
+        [
+          "D-20",
+          "D-4"
+        ]
+      ],
+      "prerequisites": [
+        "D-4"
+      ]
+    },
+    {
+      "id": "Q-19",
+      "text": "男は過去に飲まされたスープの正体を悟りましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-9"
+      ],
+      "mechanism": "link",
+      "recall_conditions": [
+        [
+          "D-7",
+          "D-8"
+        ],
+        [
+          "D-7",
+          "D-6"
+        ]
+      ],
+      "prerequisites": [
+        "D-7"
+      ]
+    },
+    {
+      "id": "Q-20",
+      "text": "男は正体を悟って絶望し、自殺しましたか？",
+      "answer": "Yes",
+      "reveals": [
+        "D-10"
+      ],
+      "mechanism": "link",
+      "recall_conditions": [
+        [
+          "D-9"
+        ]
+      ],
+      "prerequisites": [
+        "D-9"
+      ]
+    }
+  ],
+  "statement": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口飲んだ男は店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜだろう？",
+  "truth": "男は船乗りで、かつて仲間と船で遭難し、食料が尽きた。仲間の一人が死に、残った仲間は男に「ウミガメのスープだ」と言ってスープを飲ませた。実際にはそれは死んだ仲間の肉で作ったスープだった。レストランで本物のウミガメのスープを飲んだ男は、味が違うことに気づき、あのとき飲まされたものの正体を悟り、絶望して自殺した。",
+  "id": "ウミガメのスープ"
+}
