@@ -118,6 +118,18 @@ def check_formation_refs(data: dict) -> list[str]:
     return errors
 
 
+def check_entailment_refs(data: dict) -> list[str]:
+    errors = []
+    descriptor_ids = {d["id"] for d in data.get("descriptors", [])}
+    for d in data.get("descriptors", []):
+        did = d["id"]
+        for cond_group in d.get("entailment_conditions", []):
+            for ref in cond_group:
+                if ref not in descriptor_ids:
+                    errors.append(f"descriptor '{did}' の entailment_conditions 参照 '{ref}' が descriptors に存在しない")
+    return errors
+
+
 def check_rejection_refs(data: dict) -> list[str]:
     errors = []
     descriptor_ids = {d["id"] for d in data.get("descriptors", [])}
@@ -133,9 +145,9 @@ def check_rejection_refs(data: dict) -> list[str]:
 def check_question_refs(data: dict) -> list[str]:
     errors = []
     descriptor_ids = {d["id"] for d in data.get("descriptors", [])}
-    # formation_conditions を持つ記述素のID集合（導出記述素 = 仮説的なもの）
+    # formation_conditions を持つ命題のID集合（導出命題 = 仮説的なもの）
     derivable_ids = {d["id"] for d in data.get("descriptors", []) if "formation_conditions" in d}
-    # recall_conditions で使われるのは導出可能な記述素のみ（基礎記述素は reveals で直接確認される）
+    # recall_conditions で使われるのは導出可能な命題のみ（基礎命題は reveals で直接確認される）
     for q in data.get("questions", []):
         qid = q["id"]
         for cond_group in q.get("recall_conditions", []):
@@ -159,10 +171,10 @@ def check_mechanism_values(data: dict) -> list[str]:
 
 
 def check_prerequisites_grounded(data: dict) -> list[str]:
-    """前提条件の記述素が対話上で確立可能か検証する。
+    """前提条件の命題が対話上で確立可能か検証する。
 
     前提条件は質問文の言語的前提（presupposition）であり、
-    導出（formation_conditions）のみで得られた記述素では対話上の前提として成立しない。
+    導出（formation_conditions）のみで得られた命題では対話上の前提として成立しない。
     initial_confirmed またはいずれかの質問の reveals に含まれている必要がある。
     """
     errors = []
@@ -225,6 +237,7 @@ def run(path: str) -> tuple[bool, list[str]]:
         ("clear_conditions の妥当性", check_clear_conditions),
         ("pieces の参照整合", check_piece_refs),
         ("formation_conditions の参照整合", check_formation_refs),
+        ("entailment_conditions の参照整合", check_entailment_refs),
         ("rejection_conditions の参照整合", check_rejection_refs),
         ("questions の参照整合", check_question_refs),
         ("mechanism の値域", check_mechanism_values),

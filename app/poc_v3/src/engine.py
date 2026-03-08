@@ -1,4 +1,9 @@
-"""v2 POC: パズルエンジン - コアロジック"""
+"""v3 POC: パズルエンジン - コアロジック
+
+v3 の導出は 2 段階:
+1. 論理的導出（entailment_conditions）: confirmed → confirmed の不動点計算
+2. 仮説導出（formation_conditions）: confirmed → derived の 1 回パス
+"""
 
 from __future__ import annotations
 
@@ -7,9 +12,9 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from models import (
-    Descriptor,
     GameState,
     Piece,
+    Proposition,
     Question,
 )
 
@@ -22,9 +27,9 @@ class PuzzleData:
     title: str
     statement: str
     truth: str
-    descriptors: dict[str, Descriptor]
+    propositions: dict[str, Proposition]
     initial_confirmed: list[str]
-    clear_conditions: list[list[str]]  # OR of AND: クリア条件（記述素IDの族）
+    clear_conditions: list[list[str]]  # OR of AND: クリア条件（命題IDの族）
     pieces: dict[str, Piece]
     questions: dict[str, Question]
 
@@ -34,15 +39,16 @@ def load_puzzle(path: str | Path) -> PuzzleData:
     with open(path, encoding="utf-8") as f:
         raw = json.load(f)
 
-    descriptors = {}
+    propositions = {}
     for item in raw["descriptors"]:
-        d = Descriptor(
+        p = Proposition(
             id=item["id"],
             label=item["label"],
             formation_conditions=item.get("formation_conditions"),
+            entailment_conditions=item.get("entailment_conditions"),
             rejection_conditions=item.get("rejection_conditions"),
         )
-        descriptors[d.id] = d
+        propositions[p.id] = p
 
     pieces = {}
     for item in raw["pieces"]:
@@ -72,7 +78,7 @@ def load_puzzle(path: str | Path) -> PuzzleData:
         title=raw["title"],
         statement=raw["statement"],
         truth=raw["truth"],
-        descriptors=descriptors,
+        propositions=propositions,
         initial_confirmed=raw["initial_confirmed"],
         clear_conditions=raw.get("clear_conditions", []),
         pieces=pieces,
@@ -83,45 +89,65 @@ def load_puzzle(path: str | Path) -> PuzzleData:
 def init_game(puzzle: PuzzleData) -> GameState:
     """ゲーム初期化: initial_confirmed を confirmed に設定し、導出チェック"""
     state = GameState(confirmed=set(puzzle.initial_confirmed))
-    evaluate_derivations(state, puzzle)
+    evaluate_entailments(state, puzzle)
+    evaluate_hypotheses(state, puzzle)
     return state
 
 
-def evaluate_derivations(state: GameState, puzzle: PuzzleData) -> tuple[list[str], list[str]]:
-    """confirmed 集合から導出可能な記述素を不動点計算で求め、state.derived を更新する。
+def evaluate_entailments(state: GameState, puzzle: PuzzleData) -> list[str]:
+    """論理的導出: confirmed → confirmed の不動点計算。
 
-    state.confirmed は変更しない。導出結果は state.derived に格納される。
-    戻り値: (newly_derived, newly_rejected)
-    - newly_derived: 新たに導出された記述素のリスト
-    - newly_rejected: 今回棄却された（derived から除去された）記述素のリスト
+    entailment_conditions が confirmed で満たされる命題を confirmed に追加する。
+    論理的帰結であり連鎖は許容される。
+    戻り値: 新たに confirmed に追加された命題のリスト
     """
-    # Step 1: 棄却集合の計算（confirmed のみ参照、O(n)）
-    rejected = set()
-    for d in puzzle.descriptors.values():
-        if d.rejection_conditions is not None:
-            if any(all(c in state.confirmed for c in group) for group in d.rejection_conditions):
-                rejected.add(d.id)
-
-    # Step 2: 不動点計算（rejected をスキップ）
-    known = set(state.confirmed)
+    newly_confirmed = []
     changed = True
     while changed:
         changed = False
-        for d in puzzle.descriptors.values():
-            if d.formation_conditions is None:
+        for p in puzzle.propositions.values():
+            if p.entailment_conditions is None:
                 continue
-            if d.id in known or d.id in rejected:
+            if p.id in state.confirmed:
                 continue
-            for condition_set in d.formation_conditions:
-                if all(c in known for c in condition_set):
-                    known.add(d.id)
+            for cond_group in p.entailment_conditions:
+                if all(c in state.confirmed for c in cond_group):
+                    state.confirmed.add(p.id)
+                    newly_confirmed.append(p.id)
                     changed = True
                     break
-    # derived = known から confirmed を除いた部分
-    new_derived_set = known - state.confirmed
-    newly_derived = sorted(new_derived_set - state.derived)
-    newly_rejected = sorted((state.derived - new_derived_set) - state.confirmed)
-    state.derived = new_derived_set
+    return newly_confirmed
+
+
+def evaluate_hypotheses(state: GameState, puzzle: PuzzleData) -> tuple[list[str], list[str]]:
+    """仮説導出: confirmed → derived の 1 回パス。
+
+    formation_conditions が confirmed で満たされる命題を derived とする。
+    不動点計算は行わない（derived からの連鎖なし）。
+    戻り値: (newly_derived, newly_rejected)
+    """
+    # Step 1: 棄却集合の計算（confirmed のみ参照）
+    rejected = set()
+    for p in puzzle.propositions.values():
+        if p.rejection_conditions is not None:
+            if any(all(c in state.confirmed for c in group) for group in p.rejection_conditions):
+                rejected.add(p.id)
+
+    # Step 2: 1 回パス（confirmed のみ参照、連鎖なし）
+    new_derived = set()
+    for p in puzzle.propositions.values():
+        if p.formation_conditions is None:
+            continue
+        if p.id in state.confirmed or p.id in rejected:
+            continue
+        for cond_group in p.formation_conditions:
+            if all(c in state.confirmed for c in cond_group):
+                new_derived.add(p.id)
+                break
+
+    newly_derived = sorted(new_derived - state.derived)
+    newly_rejected = sorted((state.derived - new_derived) - state.confirmed)
+    state.derived = new_derived
     return newly_derived, newly_rejected
 
 
@@ -138,7 +164,7 @@ def available_questions(state: GameState, puzzle: PuzzleData) -> list[Question]:
     """利用可能な質問を返す: 前提条件・想起条件が満たされ、未回答のもの
 
     - 前提条件（prerequisites）: confirmed のみで判定。対話上で確立された事実。
-    - 想起条件（recall_conditions）: known（confirmed ∪ derived）で判定。仮説の導出。
+    - 想起条件（recall_conditions）: known（confirmed ∪ derived）で判定。
     """
     result = []
     for q in puzzle.questions.values():
@@ -155,7 +181,7 @@ def available_questions(state: GameState, puzzle: PuzzleData) -> list[Question]:
 class AnswerResult:
     """質問回答の結果"""
 
-    new_confirmed: list[str]
+    new_confirmed: list[str]  # reveals + 論理的導出
     new_derived: list[str]
     new_rejected: list[str]
     new_pieces: list[str]
@@ -171,16 +197,20 @@ def answer_question(
     new_confirmed: list[str] = []
     new_pieces: list[str] = []
 
-    # reveals の記述素を confirmed に追加
-    for descriptor_id in question.reveals:
-        if descriptor_id not in state.confirmed:
-            state.confirmed.add(descriptor_id)
-            new_confirmed.append(descriptor_id)
+    # 1. reveals の命題を confirmed に追加
+    for prop_id in question.reveals:
+        if prop_id not in state.confirmed:
+            state.confirmed.add(prop_id)
+            new_confirmed.append(prop_id)
 
-    # 導出の再評価
-    new_derived, new_rejected = evaluate_derivations(state, puzzle)
+    # 2. 論理的導出（confirmed → confirmed の不動点計算）
+    entailed = evaluate_entailments(state, puzzle)
+    new_confirmed.extend(entailed)
 
-    # ピースの構成記述素がすべて揃ったかチェック（confirmed ∪ derived で判定）
+    # 3. 仮説導出（confirmed → derived の 1 回パス）
+    new_derived, new_rejected = evaluate_hypotheses(state, puzzle)
+
+    # 4. ピースの構成命題がすべて揃ったかチェック（confirmed ∪ derived で判定）
     known = state.known
     for piece in puzzle.pieces.values():
         if piece.id in state.discovered_pieces:
@@ -208,8 +238,8 @@ def answer_question(
 
 
 def check_complete(state: GameState, puzzle: PuzzleData) -> bool:
-    """クリア判定: clear_conditions（記述素の族）のいずれかのグループが全て confirmed"""
+    """クリア判定: clear_conditions（命題の族）のいずれかのグループが全て confirmed"""
     return any(
-        all(descriptor_id in state.confirmed for descriptor_id in condition_set)
+        all(prop_id in state.confirmed for prop_id in condition_set)
         for condition_set in puzzle.clear_conditions
     )

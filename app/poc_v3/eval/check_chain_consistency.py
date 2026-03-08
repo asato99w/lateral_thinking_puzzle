@@ -4,6 +4,8 @@ _tactical_chains / _piece_chains と questions の整合性を検証する。
 data_src.json 専用（_ プレフィックスフィールドが必要）。
 """
 
+from __future__ import annotations
+
 import json
 import sys
 from pathlib import Path
@@ -60,14 +62,14 @@ def check_output_coverage(data: dict) -> list[str]:
             if uncovered:
                 errors.append(
                     f"_piece_chains '{chain_id}' step[{i}]: "
-                    f"output のうち質問群が reveals しない記述素がある: {sorted(uncovered)}"
+                    f"output のうち質問群が reveals しない命題がある: {sorted(uncovered)}"
                 )
 
     return errors
 
 
 def check_reveals_scope(data: dict) -> list[str]:
-    """質問が reveals する記述素がステップの output 範囲内か"""
+    """質問が reveals する命題がステップの output 範囲内か"""
     errors = []
     question_map = {q["id"]: q for q in data.get("questions", [])}
 
@@ -84,27 +86,55 @@ def check_reveals_scope(data: dict) -> list[str]:
                 if overflow:
                     errors.append(
                         f"_piece_chains '{chain_id}' step[{i}]: "
-                        f"質問 '{qid}' が output 外の記述素を reveals: {sorted(overflow)}"
+                        f"質問 '{qid}' が output 外の命題を reveals: {sorted(overflow)}"
                     )
 
     return errors
 
 
-def _derivable_from(available: set[str], derived_conditions: dict[str, list[list[str]]]) -> set[str]:
-    """available から不動点計算で導出可能な記述素を返す"""
-    derived = set(available)
+def _derivable_from(
+    available: set[str],
+    formation_conditions: dict[str, list[list[str]]],
+    entailment_conditions: dict[str, list[list[str]]],
+    rejection_conditions: dict[str, list[list[str]]] | None = None,
+) -> set[str]:
+    """available から v3 の 2 段階導出で到達可能な命題を返す。
+
+    1. 論理的導出（entailment）: confirmed → confirmed の不動点計算
+    2. 仮説導出（formation）: confirmed → derived の 1 回パス
+    """
+    # Step 1: 論理的導出（不動点計算）
+    confirmed = set(available)
     changed = True
     while changed:
         changed = False
-        for did, conditions in derived_conditions.items():
-            if did in derived:
+        for did, conditions in entailment_conditions.items():
+            if did in confirmed:
                 continue
             for cond_group in conditions:
-                if all(ref in derived for ref in cond_group):
-                    derived.add(did)
+                if all(ref in confirmed for ref in cond_group):
+                    confirmed.add(did)
                     changed = True
                     break
-    return derived - available
+
+    # Step 2: 棄却集合の計算
+    rejected = set()
+    if rejection_conditions:
+        for did, conditions in rejection_conditions.items():
+            if any(all(c in confirmed for c in group) for group in conditions):
+                rejected.add(did)
+
+    # Step 3: 仮説導出（1 回パス）
+    derived = set()
+    for did, conditions in formation_conditions.items():
+        if did in confirmed or did in rejected:
+            continue
+        for cond_group in conditions:
+            if all(ref in confirmed for ref in cond_group):
+                derived.add(did)
+                break
+
+    return (confirmed | derived) - available
 
 
 def check_recall_derivability(data: dict) -> list[str]:
@@ -112,11 +142,17 @@ def check_recall_derivability(data: dict) -> list[str]:
     errors = []
     question_map = {q["id"]: q for q in data.get("questions", [])}
 
-    # 導出記述素の formation_conditions
-    derived_conditions: dict[str, list[list[str]]] = {}
+    # 導出条件の収集
+    formation_conditions: dict[str, list[list[str]]] = {}
+    entailment_conditions: dict[str, list[list[str]]] = {}
+    rejection_conditions: dict[str, list[list[str]]] = {}
     for d in data.get("descriptors", []):
         if "formation_conditions" in d:
-            derived_conditions[d["id"]] = d["formation_conditions"]
+            formation_conditions[d["id"]] = d["formation_conditions"]
+        if "entailment_conditions" in d:
+            entailment_conditions[d["id"]] = d["entailment_conditions"]
+        if "rejection_conditions" in d:
+            rejection_conditions[d["id"]] = d["rejection_conditions"]
 
     for chain in data.get("_piece_chains", []):
         chain_id = chain.get("id", "?")
@@ -126,8 +162,8 @@ def check_recall_derivability(data: dict) -> list[str]:
             step_input = set(step.get("input", []))
             cumulative_available.update(step_input)
 
-            # cumulative_available から導出可能な記述素を計算
-            derivable = _derivable_from(cumulative_available, derived_conditions)
+            # cumulative_available から導出可能な命題を計算（v3 の 2 段階導出）
+            derivable = _derivable_from(cumulative_available, formation_conditions, entailment_conditions, rejection_conditions or None)
             reachable = cumulative_available | derivable
 
             for qid in step.get("questions", []):
@@ -150,7 +186,7 @@ def check_recall_derivability(data: dict) -> list[str]:
 
 
 def check_reveals_piece_membership(data: dict) -> list[str]:
-    """reveals する記述素のピース帰属が正しいか"""
+    """reveals する命題のピース帰属が正しいか"""
     errors = []
     question_map = {q["id"]: q for q in data.get("questions", [])}
 

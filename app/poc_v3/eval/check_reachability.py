@@ -1,6 +1,6 @@
 """到達可能性チェック
 
-initial_confirmed 以外の全記述素が question の reveals 経由で到達可能かを検証する。
+initial_confirmed 以外の全命題が question の reveals 経由で到達可能かを検証する。
 """
 
 from __future__ import annotations
@@ -16,17 +16,24 @@ def load_data(path: str) -> dict:
 
 
 def _is_base(d: dict) -> bool:
-    """基礎記述素かどうか（formation_conditions を持たない）"""
-    return "formation_conditions" not in d
+    """基礎命題かどうか（formation_conditions も entailment_conditions も持たない）"""
+    return "formation_conditions" not in d and "entailment_conditions" not in d
 
 
-def _is_derived(d: dict) -> bool:
-    """導出記述素かどうか（formation_conditions を持つ）"""
+def _has_formation(d: dict) -> bool:
+    """仮説導出可能かどうか（formation_conditions を持つ）"""
     return "formation_conditions" in d
 
 
+def _has_entailment(d: dict) -> bool:
+    """論理的導出可能かどうか（entailment_conditions を持つ）"""
+    return "entailment_conditions" in d
+
+
 def check_base_descriptor_reachability(data: dict) -> list[str]:
-    """initial_confirmed に含まれない全基礎記述素が、いずれかの question の reveals に含まれるか。"""
+    """initial_confirmed に含まれない全基礎命題が、いずれかの question の reveals に含まれるか。
+    基礎命題 = formation_conditions も entailment_conditions も持たない命題。
+    """
     errors = []
     initial = set(data.get("initial_confirmed", []))
     revealed: set[str] = set()
@@ -38,7 +45,7 @@ def check_base_descriptor_reachability(data: dict) -> list[str]:
             continue
         did = d["id"]
         if did not in initial and did not in revealed:
-            errors.append(f"基礎記述素 '{did}' ({d.get('label', '')}) が到達不能（initial_confirmed にも reveals にも含まれない）")
+            errors.append(f"基礎命題 '{did}' ({d.get('label', '')}) が到達不能（initial_confirmed にも reveals にも含まれない）")
     return errors
 
 
@@ -53,21 +60,22 @@ def check_piece_member_reachability(data: dict) -> list[str]:
     for q in data.get("questions", []):
         revealed.update(q.get("reveals", []))
 
-    # formation_conditions による導出記述素も到達可能とみなす
-    derived_descriptors = {d["id"]: d.get("formation_conditions", []) for d in data.get("descriptors", []) if _is_derived(d)}
+    # 論理的導出 + 仮説導出で到達可能な命題を求める
+    formation_conds = {d["id"]: d["formation_conditions"] for d in data.get("descriptors", []) if _has_formation(d)}
+    entailment_conds = {d["id"]: d["entailment_conditions"] for d in data.get("descriptors", []) if _has_entailment(d)}
     rejection_conds: dict[str, list[list[str]]] = {}
     for d in data.get("descriptors", []):
         rc = d.get("rejection_conditions")
         if rc is not None:
             rejection_conds[d["id"]] = rc
-    derivable = _derivable_descriptors(initial | revealed, derived_descriptors, rejection_conds or None)
+    derivable = _derivable_descriptors(initial | revealed, formation_conds, entailment_conds, rejection_conds or None)
     reachable = initial | revealed | derivable
 
     for piece in data.get("pieces", []):
         pid = piece["id"]
         for mref in piece.get("members", []):
             if mref not in reachable:
-                errors.append(f"piece '{pid}' の構成記述素 '{mref}' が到達不能")
+                errors.append(f"piece '{pid}' の構成命題 '{mref}' が到達不能")
     return errors
 
 
@@ -85,54 +93,58 @@ def _transitive_deps(pid: str, piece_deps: dict[str, set[str]]) -> set[str]:
 
 def _derivable_descriptors(
     allowed_confirmed: set[str],
-    descriptors: dict[str, list[list[str]]],
+    formation_conditions: dict[str, list[list[str]]],
+    entailment_conditions: dict[str, list[list[str]]],
     rejection_conditions: dict[str, list[list[str]]] | None = None,
 ) -> set[str]:
-    """allowed_confirmed から導出可能な全記述素を不動点計算で求める。
+    """allowed_confirmed から到達可能な全命題を求める。
 
-    導出ロジック:
-    1. 棄却集合を計算（rejection_conditions が confirmed で満たされるもの）
-    2. 導出済み集合を allowed_confirmed で初期化
-    3. 記述素が導出済み集合内と一致 → 導出（棄却済みを除く）
-    4. 形成条件のいずれかのグループが全て導出済み → 導出（棄却済みを除く）
-    5. 変化がなくなるまで繰り返す
+    v3 の 2 段階導出:
+    1. 論理的導出（entailment）: confirmed → confirmed の不動点計算
+    2. 棄却集合の計算（confirmed で判定）
+    3. 仮説導出（formation）: confirmed → derived の 1 回パス
     """
-    # 棄却集合の計算
-    rejected = set()
-    if rejection_conditions:
-        for did, conditions in rejection_conditions.items():
-            if any(all(c in allowed_confirmed for c in group) for group in conditions):
-                rejected.add(did)
-
-    derived = set(allowed_confirmed)
+    # Step 1: 論理的導出（不動点計算）
+    confirmed = set(allowed_confirmed)
     changed = True
     while changed:
         changed = False
-        for did, conditions in descriptors.items():
-            if did in derived or did in rejected:
+        for did, conditions in entailment_conditions.items():
+            if did in confirmed:
                 continue
-            # 記述素が confirmed と一致する場合
-            if did in allowed_confirmed:
-                derived.add(did)
-                changed = True
-                continue
-            # 形成条件が全て導出済みの場合
             for cond_group in conditions:
-                if all(ref in derived for ref in cond_group):
-                    derived.add(did)
+                if all(ref in confirmed for ref in cond_group):
+                    confirmed.add(did)
                     changed = True
                     break
-    # 導出済み集合のうち導出記述素IDに該当するものを返す
-    return {did for did in derived if did in descriptors}
+
+    # Step 2: 棄却集合の計算（confirmed で判定）
+    rejected = set()
+    if rejection_conditions:
+        for did, conditions in rejection_conditions.items():
+            if any(all(c in confirmed for c in group) for group in conditions):
+                rejected.add(did)
+
+    # Step 3: 仮説導出（1 回パス、confirmed のみ参照）
+    derived = set()
+    for did, conditions in formation_conditions.items():
+        if did in confirmed or did in rejected:
+            continue
+        for cond_group in conditions:
+            if all(ref in confirmed for ref in cond_group):
+                derived.add(did)
+                break
+
+    return (confirmed | derived) - allowed_confirmed
 
 
 def check_recall_scope(data: dict) -> list[str]:
     """各ピースの想起スコープの検証。
 
-    recall_conditions は記述素IDで構成される。
-    各ピースのスコープ内の記述素集合から導出可能な記述素のみが許可される。
-    独立ピース: S の記述素 + 自身の記述素から導出可能
-    依存ピース: 上記 + 依存先ピース（推移的）の記述素から導出可能
+    recall_conditions は命題IDで構成される。
+    各ピースのスコープ内の命題集合から導出可能な命題のみが許可される。
+    独立ピース: S の命題 + 自身の命題から導出可能
+    依存ピース: 上記 + 依存先ピース（推移的）の命題から導出可能
     """
     errors = []
     initial = set(data.get("initial_confirmed", []))
@@ -144,7 +156,7 @@ def check_recall_scope(data: dict) -> list[str]:
             descriptor_to_piece[mid] = piece["id"]
 
     piece_deps = {p["id"]: set(p.get("depends_on", [])) for p in data.get("pieces", [])}
-    # members + trigger の全記述素をピースの記述素とする
+    # members + trigger の全命題をピースの命題とする
     piece_members: dict[str, set[str]] = {}
     for p in data.get("pieces", []):
         ids = set(p.get("members", []))
@@ -158,8 +170,9 @@ def check_recall_scope(data: dict) -> list[str]:
         for did in q.get("reveals", []):
             reveals_map.setdefault(did, []).append(q)
 
-    # 導出記述素: formation_conditions を持つもの
-    derived_descriptors = {d["id"]: d.get("formation_conditions", []) for d in data.get("descriptors", []) if _is_derived(d)}
+    # 導出条件の収集
+    formation_conds = {d["id"]: d["formation_conditions"] for d in data.get("descriptors", []) if _has_formation(d)}
+    entailment_conds = {d["id"]: d["entailment_conditions"] for d in data.get("descriptors", []) if _has_entailment(d)}
 
     # 棄却条件: rejection_conditions を持つもの
     rejection_conds: dict[str, list[list[str]]] = {}
@@ -180,26 +193,37 @@ def check_recall_scope(data: dict) -> list[str]:
         for dep_pid in deps:
             allowed_confirmed.update(piece_members.get(dep_pid, set()))
 
-        # allowed = base descriptors in scope + derived descriptors from scope
-        derivable = _derivable_descriptors(allowed_confirmed, derived_descriptors, rejection_conds or None)
+        # allowed = confirmed + entailed + derived（v3 の 2 段階導出）
+        derivable = _derivable_descriptors(allowed_confirmed, formation_conds, entailment_conds, rejection_conds or None)
         allowed = allowed_confirmed | derivable
 
         # check each question that reveals this piece's members
+        # recall は OR of AND なので、少なくとも1つのグループが完全にスコープ内であれば OK
         for mid in piece.get("members", []):
             for q in reveals_map.get(mid, []):
                 qid = q["id"]
-                for i, cond_group in enumerate(q.get("recall_conditions", [])):
-                    for ref in cond_group:
-                        if ref not in allowed:
-                            errors.append(
-                                f"{piece_type}ピース '{pid}': question '{qid}' の "
-                                f"recall_conditions[{i}] の記述素 '{ref}' がスコープ外"
-                            )
+                recall = q.get("recall_conditions", [])
+                if not recall:
+                    continue
+                has_valid_group = any(
+                    all(ref in allowed for ref in cond_group)
+                    for cond_group in recall
+                )
+                if not has_valid_group:
+                    out_of_scope = []
+                    for i, cond_group in enumerate(recall):
+                        for ref in cond_group:
+                            if ref not in allowed:
+                                out_of_scope.append(f"[{i}]:'{ref}'")
+                    errors.append(
+                        f"{piece_type}ピース '{pid}': question '{qid}' の "
+                        f"recall_conditions にスコープ内のグループがない（スコープ外: {', '.join(out_of_scope)}）"
+                    )
     return errors
 
 
 def check_orphan_descriptors(data: dict) -> list[str]:
-    """孤立基礎記述素の検出。"""
+    """孤立基礎命題の検出。"""
     warnings = []
     initial = set(data.get("initial_confirmed", []))
     revealed: set[str] = set()
@@ -211,17 +235,17 @@ def check_orphan_descriptors(data: dict) -> list[str]:
             continue
         did = d["id"]
         if did not in initial and did not in revealed:
-            warnings.append(f"孤立記述素: '{did}' ({d.get('label', '')})")
+            warnings.append(f"孤立命題: '{did}' ({d.get('label', '')})")
     return warnings
 
 
 def run(path: str) -> tuple[bool, list[str]]:
     data = load_data(path)
     checks = [
-        ("基礎記述素の到達可能性", check_base_descriptor_reachability),
-        ("ピース構成記述素の到達可能性", check_piece_member_reachability),
+        ("基礎命題の到達可能性", check_base_descriptor_reachability),
+        ("ピース構成命題の到達可能性", check_piece_member_reachability),
         ("想起スコープの整合性", check_recall_scope),
-        ("孤立記述素の検出", check_orphan_descriptors),
+        ("孤立命題の検出", check_orphan_descriptors),
     ]
 
     all_errors: list[str] = []

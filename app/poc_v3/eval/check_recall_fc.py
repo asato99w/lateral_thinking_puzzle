@@ -1,6 +1,6 @@
 """recall = fc 整合性チェック (v3)
 
-各質問の recall_conditions が reveals される記述素の formation_conditions と一致するかを検証する。
+各質問の recall_conditions が reveals される命題の formation_conditions と一致するかを検証する。
 data_src.json 専用。
 """
 
@@ -24,7 +24,7 @@ def _normalize_conditions(conditions: list[list[str]] | None) -> list[list[str]]
 
 
 def check_recall_equals_fc(data: dict) -> list[str]:
-    """各質問の recall_conditions が reveals される記述素の fc と一致するか"""
+    """各質問の recall_conditions が reveals される命題の fc と一致するか"""
     errors = []
     descriptor_map = {d["id"]: d for d in data.get("descriptors", [])}
 
@@ -36,16 +36,16 @@ def check_recall_equals_fc(data: dict) -> list[str]:
         if not reveals:
             continue
 
-        # reveals される全記述素の fc を集める
-        # 複数の記述素が reveals される場合、最初の（主要な）記述素の fc と比較
-        # v3 では recall = reveals される記述素の fc
+        # reveals される全命題の fc を集める
+        # 複数の命題が reveals される場合、最初の（主要な）命題の fc と比較
+        # v3 では recall = reveals される命題の fc
         for rev_id in reveals:
             d = descriptor_map.get(rev_id)
             if d is None:
                 continue
             fc = d.get("formation_conditions")
 
-            # fc が None（基礎記述素）の場合、recall は空であるべき
+            # fc が None（基礎命題）の場合、recall は空であるべき
             expected = _normalize_conditions(fc)
             actual = _normalize_conditions(recall)
 
@@ -58,7 +58,7 @@ def check_recall_equals_fc(data: dict) -> list[str]:
                     f"      recall: {recall_str}\n"
                     f"      fc:     {fc_str}"
                 )
-            # 最初の reveals 記述素のみチェック（v3 では 1 質問 1 主記述素が基本）
+            # 最初の reveals 命題のみチェック（v3 では 1 質問 1 主命題が基本）
             break
 
     return errors
