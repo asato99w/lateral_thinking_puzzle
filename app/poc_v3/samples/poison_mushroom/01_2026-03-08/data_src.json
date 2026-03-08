@@ -1,0 +1,172 @@
+{
+  "title": "毒キノコ",
+  "S": "男は、辺りに毒キノコしかないのを見て安堵した。なぜだろうか。",
+  "T": "男はキノコ狩りの最中に山で遭難していた。辺りに毒キノコしか残っていないということは、食用キノコは誰かが既に採った＝この辺りに人が来ているということ。近くに人里や他の採集者がいると分かり、助かる見込みがあると安堵した。",
+  "descriptors": [
+    {"id": "D-S1", "label": "男は辺りに毒キノコしかないのを見た", "_source": "S"},
+    {"id": "D-S2", "label": "男は安堵した", "_source": "S"},
+    {"id": "D-1", "label": "男はキノコ狩りの最中に山で遭難していた", "_source": "T"},
+    {"id": "D-2", "label": "辺りに毒キノコしか残っていなかった", "_source": "T", "formation_conditions": [["D-S1"]]},
+    {"id": "D-3", "label": "食用キノコは誰かが既に採っていた", "_source": "T", "formation_conditions": [["D-2", "D-8"], ["D-S1", "D-8"]]},
+    {"id": "D-4", "label": "この辺りに人が来ている", "_source": "T", "entailment_conditions": [["D-3"]]},
+    {"id": "D-5", "label": "近くに人里や他の採集者がいると分かった", "_source": "T", "entailment_conditions": [["D-4"]]},
+    {"id": "D-6", "label": "助かる見込みがあると分かった", "_source": "T", "entailment_conditions": [["D-5", "D-1"]]},
+    {"id": "D-7", "label": "男は安堵した", "_source": "T", "entailment_conditions": [["D-6"]]},
+    {"id": "D-8", "label": "この山には通常、食用キノコも生えている", "_source": "T-derived", "formation_conditions": [["D-1"], ["D-11"]]},
+    {"id": "D-9", "label": "男は山にいた", "_source": "phase2", "formation_conditions": [["D-13"], ["D-10"]]},
+    {"id": "D-10", "label": "男は困難な状況にあった", "_source": "phase2", "formation_conditions": [["D-12"], ["D-S1", "D-S2"]]},
+    {"id": "D-11", "label": "毒キノコだけが残っていることには理由がある", "_source": "phase2", "formation_conditions": [["D-S1", "D-1"], ["D-2", "D-1"]]},
+    {"id": "D-12", "label": "毒キノコを見て安堵するのは通常の反応ではない", "_source": "phase3", "formation_conditions": [["D-S1", "D-S2"]]},
+    {"id": "D-13", "label": "男は自然の中で危険な状況にあった", "_source": "phase3", "formation_conditions": [["D-10"], ["D-12"]]}
+  ],
+  "initial_confirmed": ["D-S1", "D-S2"],
+  "clear_conditions": [["D-3", "D-4", "D-5", "D-6", "D-7"]],
+  "pieces": [
+    {
+      "id": "P-LOST",
+      "label": "遭難の状況",
+      "members": ["D-1", "D-9", "D-10", "D-13"],
+      "trigger": [["D-10"]],
+      "depends_on": []
+    },
+    {
+      "id": "P-REASON",
+      "label": "毒キノコからの推論と安堵",
+      "members": ["D-2", "D-3", "D-4", "D-5", "D-6", "D-7", "D-8", "D-11"],
+      "trigger": [["D-1", "D-S1"], ["D-1", "D-2"]],
+      "depends_on": ["P-LOST"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "毒キノコを見て安堵するのは普通のことですか？",
+      "answer": "No",
+      "recall_conditions": [["D-S1", "D-S2"]],
+      "reveals": ["D-12"],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-LOST-trigger/0"
+    },
+    {
+      "id": "Q-2",
+      "text": "男は何か困っている状況にありましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-12"], ["D-S1", "D-S2"]],
+      "reveals": ["D-10"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-LOST-trigger/1"
+    },
+    {
+      "id": "Q-3",
+      "text": "男は自然の中で危険な状況にありましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-10"], ["D-12"]],
+      "reveals": ["D-13"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-LOST-internal/0"
+    },
+    {
+      "id": "Q-4",
+      "text": "男は山にいましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-13"], ["D-10"]],
+      "reveals": ["D-9"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-LOST-internal/1"
+    },
+    {
+      "id": "Q-5",
+      "text": "男はキノコ狩りの最中に遭難していましたか？",
+      "answer": "Yes",
+      "recall_conditions": [],
+      "reveals": ["D-1"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-LOST-internal/2"
+    },
+    {
+      "id": "Q-6",
+      "text": "辺りには毒キノコだけが残っていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-S1"]],
+      "reveals": ["D-2"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-REASON-internal/0"
+    },
+    {
+      "id": "Q-7",
+      "text": "毒キノコだけが残っていることには特別な意味がありましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-S1", "D-1"], ["D-2", "D-1"]],
+      "reveals": ["D-11"],
+      "mechanism": "anomaly",
+      "prerequisites": ["D-1"],
+      "_chain_ref": "chain-P-REASON-internal/1"
+    },
+    {
+      "id": "Q-8",
+      "text": "その山には通常、食用キノコも生えていますか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1"], ["D-11"]],
+      "reveals": ["D-8"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-REASON-internal/2"
+    },
+    {
+      "id": "Q-9",
+      "text": "食用キノコは誰かが既に採っていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-2", "D-8"], ["D-S1", "D-8"]],
+      "reveals": ["D-3"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-REASON-internal/3"
+    }
+  ],
+  "_phase2": {
+    "generated_descriptors": ["D-9", "D-10", "D-11"],
+    "key_pieces": ["P-REASON"]
+  },
+  "_phase3": {
+    "generated_descriptors": ["D-12", "D-13"],
+    "s_descriptors": ["D-S1", "D-S2"]
+  },
+  "_piece_chains": [
+    {
+      "id": "chain-P-LOST-trigger",
+      "piece_id": "P-LOST",
+      "type": "trigger",
+      "steps": [
+        {"input": ["D-S1", "D-S2"], "tactic": "矛盾の指摘", "output": ["D-12"], "questions": ["Q-1"]},
+        {"input": ["D-12"], "tactic": "因果の逆転", "output": ["D-10"], "questions": ["Q-2"]}
+      ]
+    },
+    {
+      "id": "chain-P-LOST-internal",
+      "piece_id": "P-LOST",
+      "type": "internal",
+      "steps": [
+        {"input": ["D-10"], "tactic": "段階的絞り込み", "output": ["D-13"], "questions": ["Q-3"]},
+        {"input": ["D-13"], "tactic": "段階的絞り込み", "output": ["D-9"], "questions": ["Q-4"]},
+        {"input": ["D-9", "D-S1"], "tactic": "観測事実の深掘り", "output": ["D-1"], "questions": ["Q-5"]}
+      ]
+    },
+    {
+      "id": "chain-P-REASON-internal",
+      "piece_id": "P-REASON",
+      "type": "internal",
+      "steps": [
+        {"input": ["D-S1"], "tactic": "直接同定", "output": ["D-2"], "questions": ["Q-6"]},
+        {"input": ["D-S1", "D-1"], "tactic": "矛盾の指摘", "output": ["D-11"], "questions": ["Q-7"]},
+        {"input": ["D-11"], "tactic": "因果の逆転", "output": ["D-8"], "questions": ["Q-8"]},
+        {"input": ["D-8", "D-2"], "tactic": "因果の逆転", "output": ["D-3"], "questions": ["Q-9"]}
+      ]
+    }
+  ]
+}
