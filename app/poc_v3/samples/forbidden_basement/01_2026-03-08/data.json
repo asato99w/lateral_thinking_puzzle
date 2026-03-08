@@ -1,0 +1,377 @@
+{
+  "title": "禁じられた地下室",
+  "descriptors": [
+    {
+      "id": "D-S1",
+      "label": "女性は絶対に開けてはいけないと言われていた地下室のドアを開けた"
+    },
+    {
+      "id": "D-S2",
+      "label": "女性は中に入って見たものに驚いた"
+    },
+    {
+      "id": "D-S3",
+      "label": "女性はすぐに警察に駆け込んだ"
+    },
+    {
+      "id": "D-S4",
+      "label": "地下室の中には何も異常なものはなかった"
+    },
+    {
+      "id": "D-1",
+      "label": "女性は地下室に監禁されていた"
+    },
+    {
+      "id": "D-2",
+      "label": "「開けてはいけないドア」とは監禁部屋から外に出るドアのことだった",
+      "formation_conditions": [
+        [
+          "D-3"
+        ],
+        [
+          "D-11",
+          "D-S1"
+        ]
+      ]
+    },
+    {
+      "id": "D-3",
+      "label": "ドアを開けたら普通の外の世界が見えた",
+      "formation_conditions": [
+        [
+          "D-11"
+        ],
+        [
+          "D-8"
+        ]
+      ]
+    },
+    {
+      "id": "D-4",
+      "label": "女性は自分が監禁されていたことに気づいた",
+      "entailment_conditions": [
+        [
+          "D-3",
+          "D-6"
+        ]
+      ]
+    },
+    {
+      "id": "D-5",
+      "label": "女性は自分の監禁を通報するために警察に行った",
+      "entailment_conditions": [
+        [
+          "D-4"
+        ]
+      ]
+    },
+    {
+      "id": "D-6",
+      "label": "女性は自分が監禁されていることを知らなかった",
+      "formation_conditions": [
+        [
+          "D-7",
+          "D-1"
+        ],
+        [
+          "D-1"
+        ]
+      ]
+    },
+    {
+      "id": "D-7",
+      "label": "女性は地下室の外の世界を知らなかった",
+      "formation_conditions": [
+        [
+          "D-8"
+        ],
+        [
+          "D-11"
+        ]
+      ]
+    },
+    {
+      "id": "D-8",
+      "label": "ドアの向こうには女性が知らない世界があった",
+      "formation_conditions": [
+        [
+          "D-10",
+          "D-S2"
+        ],
+        [
+          "D-S1",
+          "D-S4",
+          "D-S2"
+        ]
+      ]
+    },
+    {
+      "id": "D-9",
+      "label": "女性は自分の置かれた状況が異常だと悟った",
+      "formation_conditions": [
+        [
+          "D-3",
+          "D-7"
+        ],
+        [
+          "D-7",
+          "D-S2"
+        ]
+      ]
+    },
+    {
+      "id": "D-10",
+      "label": "ドアの向こうの状況はSの表面的な読みとは異なる",
+      "formation_conditions": [
+        [
+          "D-S1",
+          "D-S4"
+        ],
+        [
+          "D-S2",
+          "D-S4"
+        ]
+      ]
+    },
+    {
+      "id": "D-11",
+      "label": "女性はドアを開けるまで外の世界を見たことがなかった",
+      "formation_conditions": [
+        [
+          "D-7"
+        ],
+        [
+          "D-8"
+        ]
+      ]
+    }
+  ],
+  "initial_confirmed": [
+    "D-S1",
+    "D-S2",
+    "D-S3",
+    "D-S4"
+  ],
+  "clear_conditions": [
+    [
+      "D-1",
+      "D-4",
+      "D-5",
+      "D-6"
+    ]
+  ],
+  "pieces": [
+    {
+      "id": "P-DOOR",
+      "label": "ドアと外の世界",
+      "members": [
+        "D-2",
+        "D-3",
+        "D-7",
+        "D-8",
+        "D-11"
+      ],
+      "trigger": [
+        [
+          "D-8"
+        ]
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "P-CAPTIVE",
+      "label": "監禁の真相と通報",
+      "members": [
+        "D-1",
+        "D-4",
+        "D-5",
+        "D-6",
+        "D-9"
+      ],
+      "trigger": [
+        [
+          "D-7",
+          "D-3"
+        ],
+        [
+          "D-7",
+          "D-2"
+        ]
+      ],
+      "depends_on": [
+        "P-DOOR"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "地下室の中に本当に何も異常なものはありませんでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-S1",
+          "D-S4"
+        ],
+        [
+          "D-S2",
+          "D-S4"
+        ]
+      ],
+      "reveals": [
+        "D-10"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-2",
+      "text": "女性はドアの向こうに自分の知らない世界を見ましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-10",
+          "D-S2"
+        ],
+        [
+          "D-S1",
+          "D-S4",
+          "D-S2"
+        ]
+      ],
+      "reveals": [
+        "D-8"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-3",
+      "text": "女性は地下室の外の世界を知りませんでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-8"
+        ],
+        [
+          "D-11"
+        ]
+      ],
+      "reveals": [
+        "D-7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-4",
+      "text": "女性はドアを開けるまで外の世界を見たことがありませんでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-7"
+        ],
+        [
+          "D-8"
+        ]
+      ],
+      "reveals": [
+        "D-11"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-5",
+      "text": "ドアを開けたら普通の外の世界が見えましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-11"
+        ],
+        [
+          "D-8"
+        ]
+      ],
+      "reveals": [
+        "D-3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-6",
+      "text": "そのドアは地下室から外に出るためのドアでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-3"
+        ],
+        [
+          "D-11",
+          "D-S1"
+        ]
+      ],
+      "reveals": [
+        "D-2"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-7",
+      "text": "女性は自分の置かれた状況が異常だと悟りましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-3",
+          "D-7"
+        ],
+        [
+          "D-7",
+          "D-S2"
+        ]
+      ],
+      "reveals": [
+        "D-9"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-8",
+      "text": "女性は地下室に監禁されていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [],
+      "reveals": [
+        "D-1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-9",
+      "text": "女性は自分が監禁されていることを知りませんでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-7",
+          "D-1"
+        ],
+        [
+          "D-1"
+        ]
+      ],
+      "reveals": [
+        "D-6"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "D-1"
+      ]
+    }
+  ],
+  "statement": "絶対に開けてはいけないと言われていた地下室のドアを開けた女性。中に入って見たものに驚き、すぐに警察に駆け込んだ。しかし地下室の中には何も異常なものはなかった。",
+  "truth": "女性は地下室に監禁されていた。「開けてはいけないドア」とは監禁部屋から外に出るドアのこと。ドアを開けたら普通の外の世界が見えた。「何も異常なものはなかった」のは外の世界が普通だから。彼女は自分の監禁を通報するために警察に行った。",
+  "id": "禁じられた地下室"
+}
