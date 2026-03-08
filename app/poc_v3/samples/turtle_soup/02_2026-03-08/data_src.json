@@ -1,0 +1,284 @@
+{
+  "title": "ウミガメのスープ",
+  "S": "ある男がレストランで「ウミガメのスープ」を注文した。スープを一口飲んだ男は、それ以上スープを飲むことなく店を出た。そして男は自殺した。なぜか？",
+  "T": "男は船乗りで、かつて仲間と船で遭難し、食料が尽きた。仲間の一人が死に、残った仲間は男に「ウミガメのスープだ」と言ってスープを飲ませた。実際にはそれは死んだ仲間の肉で作ったスープだった。レストランで本物のウミガメのスープを飲んだ男は、味が違うことに気づき、あのとき飲まされたものの正体を悟り、絶望して自殺した。",
+  "descriptors": [
+    {"id": "D-S1", "label": "男がレストランでウミガメのスープを注文した", "_source": "S"},
+    {"id": "D-S2", "label": "男はスープを一口飲んだ", "_source": "S"},
+    {"id": "D-S3", "label": "男はそれ以上スープを飲まずに店を出た", "_source": "S"},
+    {"id": "D-S4", "label": "男は自殺した", "_source": "S"},
+    {"id": "D-1", "label": "男は船乗りだった", "_source": "T"},
+    {"id": "D-2", "label": "男はかつて仲間と船で遭難した", "_source": "T", "formation_conditions": [["D-1"], ["D-14"]]},
+    {"id": "D-3", "label": "遭難中に食料が尽きた", "_source": "T", "formation_conditions": [["D-2"]]},
+    {"id": "D-4", "label": "遭難中に仲間の一人が死んだ", "_source": "T", "formation_conditions": [["D-2", "D-3"], ["D-2"]]},
+    {"id": "D-5", "label": "残った仲間が死んだ仲間の肉でスープを作った", "_source": "T", "formation_conditions": [["D-4", "D-3", "D-17"], ["D-22"]]},
+    {"id": "D-6", "label": "仲間は男に「ウミガメのスープだ」と言ってそのスープを飲ませた", "_source": "T", "formation_conditions": [["D-16"], ["D-3", "D-4"]]},
+    {"id": "D-7", "label": "そのスープは実際には人肉で作られたものだった", "_source": "T", "entailment_conditions": [["D-5"]]},
+    {"id": "D-8", "label": "レストランで飲んだスープの味が過去のスープと違うことに気づいた", "_source": "T", "formation_conditions": [["D-16", "D-S2"], ["D-6", "D-S1"]]},
+    {"id": "D-9", "label": "男は過去に飲まされたスープの正体（人肉）を悟った", "_source": "T", "entailment_conditions": [["D-8", "D-7"]]},
+    {"id": "D-10", "label": "男は絶望して自殺した", "_source": "T", "entailment_conditions": [["D-9"]]},
+    {"id": "D-11", "label": "男はレストラン以前に本物のウミガメのスープを飲んだことがなかった", "_source": "T-derived", "formation_conditions": [["D-8", "D-6"]]},
+    {"id": "D-12", "label": "男は過去に飲まされたスープをウミガメのスープだと信じていた", "_source": "T-derived", "formation_conditions": [["D-6"]]},
+    {"id": "D-13", "label": "男の「ウミガメのスープの味」の記憶は実際には人肉スープの味だった", "_source": "T-derived", "entailment_conditions": [["D-11", "D-12", "D-7"]]},
+    {"id": "D-14", "label": "男は過去に深刻な状況でスープを口にしたことがある", "_source": "phase2", "formation_conditions": [["D-15"], ["D-2"], ["D-1", "D-S4"]]},
+    {"id": "D-15", "label": "男にはスープに関連する過去の特別な経験がある", "_source": "phase2", "formation_conditions": [["D-18"], ["D-S2", "D-S3", "D-S4"]]},
+    {"id": "D-16", "label": "男は遭難中にスープを飲んだ経験がある", "_source": "phase2", "formation_conditions": [["D-3"], ["D-15", "D-2"]]},
+    {"id": "D-17", "label": "遭難中に男が飲んだスープの実際の材料はウミガメではなかった", "_source": "phase2", "formation_conditions": [["D-8", "D-11"], ["D-8", "D-6"]]},
+    {"id": "D-18", "label": "スープの味が男に何かを想起させた", "_source": "phase3", "formation_conditions": [["D-S2", "D-S3"], ["D-S2", "D-S4"]]},
+    {"id": "D-20", "label": "男の過去の体験は海や船に関連している", "_source": "phase3", "formation_conditions": [["D-1"], ["D-2"]]},
+    {"id": "D-21", "label": "食料不足にもかかわらず何らかの食事が提供された", "_source": "phase3", "formation_conditions": [["D-3"]]},
+    {"id": "D-22", "label": "食料不足で死んだ仲間の体が食料として利用された可能性がある", "_source": "phase3", "formation_conditions": [["D-4", "D-17"], ["D-4", "D-3", "D-11"]]}
+  ],
+  "initial_confirmed": ["D-S1", "D-S2", "D-S3", "D-S4"],
+  "clear_conditions": [["D-5", "D-7", "D-9", "D-10", "D-13"]],
+  "pieces": [
+    {
+      "id": "P-PAST",
+      "label": "過去の遭難経験",
+      "members": ["D-1", "D-2", "D-3", "D-4", "D-14", "D-20"],
+      "trigger": [["D-15"]],
+      "depends_on": []
+    },
+    {
+      "id": "P-SOUP",
+      "label": "スープの欺瞞と信念",
+      "members": ["D-6", "D-8", "D-11", "D-12", "D-16", "D-21"],
+      "trigger": [["D-3", "D-4"], ["D-15", "D-2"]],
+      "depends_on": ["P-PAST"]
+    },
+    {
+      "id": "P-TRUTH",
+      "label": "真相と結末",
+      "members": ["D-5", "D-7", "D-9", "D-10", "D-13", "D-17", "D-22"],
+      "trigger": [["D-4", "D-8"], ["D-3", "D-6", "D-11"]],
+      "depends_on": ["P-PAST", "P-SOUP"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "スープの味が男に何かを思い出させましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-S2", "D-S3"], ["D-S2", "D-S4"]],
+      "reveals": ["D-18"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-PAST-trigger/0"
+    },
+    {
+      "id": "Q-2",
+      "text": "男にはスープに関する特別な過去の経験がありますか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-18"], ["D-S2", "D-S3", "D-S4"]],
+      "reveals": ["D-15"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-PAST-trigger/1"
+    },
+    {
+      "id": "Q-3",
+      "text": "男は過去に深刻な状況を経験しましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-15"], ["D-2"], ["D-1", "D-S4"]],
+      "reveals": ["D-14"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-PAST-internal/0"
+    },
+    {
+      "id": "Q-4",
+      "text": "男の過去の経験は海に関係がありますか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1"], ["D-2"]],
+      "reveals": ["D-20"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-PAST-internal/1"
+    },
+    {
+      "id": "Q-5",
+      "text": "男は船乗りですか？",
+      "answer": "Yes",
+      "recall_conditions": [],
+      "reveals": ["D-1"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-PAST-internal/2"
+    },
+    {
+      "id": "Q-6",
+      "text": "男はかつて遭難したことがありますか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1"], ["D-14"]],
+      "reveals": ["D-2"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-PAST-internal/3"
+    },
+    {
+      "id": "Q-7",
+      "text": "遭難中に食料が不足しましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-2"]],
+      "reveals": ["D-3"],
+      "mechanism": "observation",
+      "prerequisites": ["D-2"],
+      "_chain_ref": "chain-P-PAST-internal/4"
+    },
+    {
+      "id": "Q-8",
+      "text": "遭難中に仲間が亡くなりましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-2", "D-3"], ["D-2"]],
+      "reveals": ["D-4"],
+      "mechanism": "observation",
+      "prerequisites": ["D-2"],
+      "_chain_ref": "chain-P-PAST-internal/5"
+    },
+    {
+      "id": "Q-9",
+      "text": "食料不足の状況でも何らかの食事は提供されましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-3"]],
+      "reveals": ["D-21"],
+      "mechanism": "anomaly",
+      "prerequisites": ["D-3"],
+      "_chain_ref": "chain-P-SOUP-internal/0"
+    },
+    {
+      "id": "Q-10",
+      "text": "遭難中に男はスープを飲みましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-3"], ["D-15", "D-2"]],
+      "reveals": ["D-16"],
+      "mechanism": "observation",
+      "prerequisites": ["D-2"],
+      "_chain_ref": "chain-P-SOUP-internal/1"
+    },
+    {
+      "id": "Q-11",
+      "text": "遭難中に仲間から「ウミガメのスープだ」と言われてスープを飲まされましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-16"], ["D-3", "D-4"]],
+      "reveals": ["D-6"],
+      "mechanism": "observation",
+      "prerequisites": ["D-2"],
+      "_chain_ref": "chain-P-SOUP-internal/2"
+    },
+    {
+      "id": "Q-12",
+      "text": "男はそのスープがウミガメのスープだと信じていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-6"]],
+      "reveals": ["D-12"],
+      "mechanism": "observation",
+      "prerequisites": ["D-6"],
+      "_chain_ref": "chain-P-SOUP-internal/3"
+    },
+    {
+      "id": "Q-13",
+      "text": "レストランのスープは男が以前飲んだスープと味が違いましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-16", "D-S2"], ["D-6", "D-S1"]],
+      "reveals": ["D-8"],
+      "mechanism": "anomaly",
+      "prerequisites": ["D-16"],
+      "_chain_ref": "chain-P-SOUP-internal/4"
+    },
+    {
+      "id": "Q-14",
+      "text": "男はレストランに来る前に本物のウミガメのスープを飲んだことがありましたか？",
+      "answer": "No",
+      "recall_conditions": [["D-8", "D-6"]],
+      "reveals": ["D-11"],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-SOUP-internal/5"
+    },
+    {
+      "id": "Q-15",
+      "text": "遭難中に男が飲んだスープは実際にはウミガメで作られたものではなかったのですか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-8", "D-11"], ["D-8", "D-6"]],
+      "reveals": ["D-17"],
+      "mechanism": "anomaly",
+      "prerequisites": ["D-16"],
+      "_chain_ref": "chain-P-TRUTH-internal/0"
+    },
+    {
+      "id": "Q-16",
+      "text": "遭難中に死んだ仲間の遺体が食料に使われましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-4", "D-17"], ["D-4", "D-3", "D-11"]],
+      "reveals": ["D-22"],
+      "mechanism": "link",
+      "prerequisites": ["D-4"],
+      "_chain_ref": "chain-P-TRUTH-internal/1"
+    },
+    {
+      "id": "Q-17",
+      "text": "死んだ仲間の肉でスープが作られましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-4", "D-3", "D-17"], ["D-22"]],
+      "reveals": ["D-5"],
+      "mechanism": "link",
+      "prerequisites": ["D-4"],
+      "_chain_ref": "chain-P-TRUTH-internal/2"
+    }
+  ],
+  "_phase2": {
+    "generated_descriptors": ["D-14", "D-15", "D-16", "D-17"],
+    "key_pieces": ["P-TRUTH"]
+  },
+  "_phase3": {
+    "generated_descriptors": ["D-18", "D-20", "D-21", "D-22"],
+    "s_descriptors": ["D-S1", "D-S2", "D-S3", "D-S4"]
+  },
+  "_piece_chains": [
+    {
+      "id": "chain-P-PAST-trigger",
+      "piece_id": "P-PAST",
+      "type": "trigger",
+      "steps": [
+        {"input": ["D-S2", "D-S3"], "tactic": "因果の逆転", "output": ["D-18"], "questions": ["Q-1"]},
+        {"input": ["D-18"], "tactic": "時間軸の拡張", "output": ["D-15"], "questions": ["Q-2"]}
+      ]
+    },
+    {
+      "id": "chain-P-PAST-internal",
+      "piece_id": "P-PAST",
+      "type": "internal",
+      "steps": [
+        {"input": ["D-15"], "tactic": "段階的絞り込み", "output": ["D-14"], "questions": ["Q-3"]},
+        {"input": ["D-14"], "tactic": "段階的絞り込み", "output": ["D-20"], "questions": ["Q-4"]},
+        {"input": ["D-20"], "tactic": "人物像の探索", "output": ["D-1"], "questions": ["Q-5"]},
+        {"input": ["D-20"], "tactic": "段階的絞り込み", "output": ["D-2"], "questions": ["Q-6"]},
+        {"input": ["D-2"], "tactic": "観測事実の深掘り", "output": ["D-3"], "questions": ["Q-7"]},
+        {"input": ["D-2", "D-3"], "tactic": "因果の逆転", "output": ["D-4"], "questions": ["Q-8"]}
+      ]
+    },
+    {
+      "id": "chain-P-SOUP-internal",
+      "piece_id": "P-SOUP",
+      "type": "internal",
+      "steps": [
+        {"input": ["D-3"], "tactic": "因果の逆転", "output": ["D-21"], "questions": ["Q-9"]},
+        {"input": ["D-21"], "tactic": "段階的絞り込み", "output": ["D-16"], "questions": ["Q-10"]},
+        {"input": ["D-16"], "tactic": "観測事実の深掘り", "output": ["D-6"], "questions": ["Q-11"]},
+        {"input": ["D-6"], "tactic": "観測事実の深掘り", "output": ["D-12"], "questions": ["Q-12"]},
+        {"input": ["D-16", "D-S2"], "tactic": "矛盾の指摘", "output": ["D-8"], "questions": ["Q-13"]},
+        {"input": ["D-8", "D-6"], "tactic": "ラベルと実体の乖離", "output": ["D-11"], "questions": ["Q-14"]}
+      ]
+    },
+    {
+      "id": "chain-P-TRUTH-internal",
+      "piece_id": "P-TRUTH",
+      "type": "internal",
+      "steps": [
+        {"input": ["D-8", "D-11"], "tactic": "ラベルと実体の乖離", "output": ["D-17"], "questions": ["Q-15"]},
+        {"input": ["D-4", "D-17"], "tactic": "因果の逆転", "output": ["D-22"], "questions": ["Q-16"]},
+        {"input": ["D-22"], "tactic": "段階的絞り込み", "output": ["D-5"], "questions": ["Q-17"]}
+      ]
+    }
+  ]
+}

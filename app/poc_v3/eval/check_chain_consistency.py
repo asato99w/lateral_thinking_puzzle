@@ -138,9 +138,15 @@ def _derivable_from(
 
 
 def check_recall_derivability(data: dict) -> list[str]:
-    """recall_conditions が対応ステップの input から導出可能か"""
+    """recall_conditions が対応ステップの input から導出可能か。
+
+    recall_conditions は OR-of-AND なので、少なくとも1つのグループが
+    完全にステップの累積入力から導出可能であれば OK。
+    cumulative_available のベースラインには initial_confirmed を含める。
+    """
     errors = []
     question_map = {q["id"]: q for q in data.get("questions", [])}
+    initial = set(data.get("initial_confirmed", []))
 
     # 導出条件の収集
     formation_conditions: dict[str, list[list[str]]] = {}
@@ -156,8 +162,8 @@ def check_recall_derivability(data: dict) -> list[str]:
 
     for chain in data.get("_piece_chains", []):
         chain_id = chain.get("id", "?")
-        # 累積 input: 前のステップの output も利用可能
-        cumulative_available: set[str] = set()
+        # 累積 input: initial_confirmed + 前のステップの output も利用可能
+        cumulative_available: set[str] = set(initial)
         for i, step in enumerate(chain.get("steps", [])):
             step_input = set(step.get("input", []))
             cumulative_available.update(step_input)
@@ -170,14 +176,25 @@ def check_recall_derivability(data: dict) -> list[str]:
                 q = question_map.get(qid)
                 if q is None:
                     continue
-                for j, cond_group in enumerate(q.get("recall_conditions", [])):
-                    for ref in cond_group:
-                        if ref not in reachable:
-                            errors.append(
-                                f"_piece_chains '{chain_id}' step[{i}]: "
-                                f"質問 '{qid}' の recall_conditions[{j}] の '{ref}' が "
-                                f"ステップ input から導出不可能"
-                            )
+                recall = q.get("recall_conditions", [])
+                if not recall:
+                    continue
+                # OR-of-AND: 少なくとも1つのグループが全て reachable なら OK
+                has_valid_group = any(
+                    all(ref in reachable for ref in cond_group)
+                    for cond_group in recall
+                )
+                if not has_valid_group:
+                    out_of_scope = []
+                    for j, cond_group in enumerate(recall):
+                        unreachable = [ref for ref in cond_group if ref not in reachable]
+                        if unreachable:
+                            out_of_scope.append(f"[{j}]: {unreachable}")
+                    errors.append(
+                        f"_piece_chains '{chain_id}' step[{i}]: "
+                        f"質問 '{qid}' の recall_conditions にステップ input から "
+                        f"導出可能なグループがない（{', '.join(out_of_scope)}）"
+                    )
 
             # output を次のステップで利用可能に
             cumulative_available.update(step.get("output", []))
