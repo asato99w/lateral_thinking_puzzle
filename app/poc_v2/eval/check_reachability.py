@@ -16,13 +16,13 @@ def load_data(path: str) -> dict:
 
 
 def _is_base(d: dict) -> bool:
-    """基礎記述素かどうか（formation_conditions を持たない）"""
-    return "formation_conditions" not in d
+    """基礎記述素かどうか（formation_conditions も entailment_conditions も持たない）"""
+    return "formation_conditions" not in d and "entailment_conditions" not in d
 
 
 def _is_derived(d: dict) -> bool:
-    """導出記述素かどうか（formation_conditions を持つ）"""
-    return "formation_conditions" in d
+    """導出記述素かどうか（formation_conditions または entailment_conditions を持つ）"""
+    return "formation_conditions" in d or "entailment_conditions" in d
 
 
 def check_base_descriptor_reachability(data: dict) -> list[str]:
@@ -53,8 +53,13 @@ def check_piece_member_reachability(data: dict) -> list[str]:
     for q in data.get("questions", []):
         revealed.update(q.get("reveals", []))
 
-    # formation_conditions による導出記述素も到達可能とみなす
-    derived_descriptors = {d["id"]: d.get("formation_conditions", []) for d in data.get("descriptors", []) if _is_derived(d)}
+    # formation_conditions / entailment_conditions による導出記述素も到達可能とみなす
+    derived_descriptors: dict[str, list[list[str]]] = {}
+    for d in data.get("descriptors", []):
+        if not _is_derived(d):
+            continue
+        conds = d.get("formation_conditions", []) + d.get("entailment_conditions", [])
+        derived_descriptors[d["id"]] = conds
     rejection_conds: dict[str, list[list[str]]] = {}
     for d in data.get("descriptors", []):
         rc = d.get("rejection_conditions")
@@ -158,8 +163,13 @@ def check_recall_scope(data: dict) -> list[str]:
         for did in q.get("reveals", []):
             reveals_map.setdefault(did, []).append(q)
 
-    # 導出記述素: formation_conditions を持つもの
-    derived_descriptors = {d["id"]: d.get("formation_conditions", []) for d in data.get("descriptors", []) if _is_derived(d)}
+    # 導出記述素: formation_conditions または entailment_conditions を持つもの
+    derived_descriptors: dict[str, list[list[str]]] = {}
+    for d in data.get("descriptors", []):
+        if not _is_derived(d):
+            continue
+        conds = d.get("formation_conditions", []) + d.get("entailment_conditions", [])
+        derived_descriptors[d["id"]] = conds
 
     # 棄却条件: rejection_conditions を持つもの
     rejection_conds: dict[str, list[list[str]]] = {}

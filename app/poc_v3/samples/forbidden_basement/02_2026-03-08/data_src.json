@@ -1,0 +1,164 @@
+{
+  "title": "禁じられた地下室",
+  "S": "絶対に開けてはいけないと言われていた地下室のドアを開けた女性。中に入って見たものに驚き、すぐに警察に駆け込んだ。しかし地下室の中には何も異常なものはなかった。",
+  "T": "女性は地下室に監禁されていた。「開けてはいけないドア」とは監禁部屋から外に出るドアのこと。ドアを開けたら普通の外の世界が見えた。「何も異常なものはなかった」のは外の世界が普通だから。彼女は自分の監禁を通報するために警察に行った。",
+  "descriptors": [
+    {"id": "D-S1", "label": "女性は絶対に開けてはいけないと言われていた地下室のドアを開けた", "_source": "S"},
+    {"id": "D-S2", "label": "女性は中に入って見たものに驚いた", "_source": "S"},
+    {"id": "D-S3", "label": "女性はすぐに警察に駆け込んだ", "_source": "S"},
+    {"id": "D-S4", "label": "地下室の中には何も異常なものはなかった", "_source": "S"},
+    {"id": "D-1", "label": "女性は地下室に監禁されていた", "_source": "T", "formation_conditions": [["D-2"], ["D-9"]]},
+    {"id": "D-2", "label": "「開けてはいけないドア」とは監禁部屋から外に出るドアのことだった", "_source": "T", "formation_conditions": [["D-3"], ["D-3", "D-S1"]]},
+    {"id": "D-3", "label": "ドアを開けたら普通の外の世界が見えた", "_source": "T", "formation_conditions": [["D-8"]]},
+    {"id": "D-4", "label": "女性は自分が監禁されていたことに気づいた", "_source": "T", "entailment_conditions": [["D-3", "D-6"]]},
+    {"id": "D-5", "label": "女性は自分の監禁を通報するために警察に行った", "_source": "T", "entailment_conditions": [["D-4"]]},
+    {"id": "D-6", "label": "女性は自分が監禁されていることを知らなかった", "_source": "T-derived", "formation_conditions": [["D-1"], ["D-7", "D-1"]]},
+    {"id": "D-7", "label": "女性は地下室の外の世界を知らなかった", "_source": "T-derived", "formation_conditions": [["D-8"]]},
+    {"id": "D-8", "label": "ドアの向こうには女性が知らない世界があった", "_source": "phase2", "formation_conditions": [["D-10", "D-S2"], ["D-S1", "D-S4", "D-S2"]]},
+    {"id": "D-9", "label": "女性は自分の置かれた状況が異常だと悟った", "_source": "phase2", "formation_conditions": [["D-3", "D-7"], ["D-7", "D-S2"]]},
+    {"id": "D-10", "label": "ドアの向こうの状況はSの表面的な読みとは異なる", "_source": "phase3", "formation_conditions": [["D-S1", "D-S4"], ["D-S2", "D-S4"]]}
+  ],
+  "initial_confirmed": ["D-S1", "D-S2", "D-S3", "D-S4"],
+  "clear_conditions": [["D-1", "D-4", "D-5", "D-6"]],
+  "pieces": [
+    {
+      "id": "P-TRUTH",
+      "label": "監禁の真相",
+      "members": ["D-1", "D-2", "D-3", "D-4", "D-5", "D-6", "D-7", "D-8", "D-9"],
+      "trigger": [["D-10"]],
+      "depends_on": []
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "地下室の中に本当に何も異常なものはありませんでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-S1", "D-S4"], ["D-S2", "D-S4"]],
+      "reveals": ["D-10"],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-TRUTH-trigger/0"
+    },
+    {
+      "id": "Q-2",
+      "text": "女性はドアの向こうに自分の知らない世界を見ましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-10", "D-S2"], ["D-S1", "D-S4", "D-S2"]],
+      "reveals": ["D-8"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-TRUTH-trigger/1"
+    },
+    {
+      "id": "Q-3",
+      "text": "ドアを開けたら普通の外の世界が見えましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-8"]],
+      "reveals": ["D-3"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-TRUTH-pathA/0"
+    },
+    {
+      "id": "Q-4",
+      "text": "女性は地下室の外の世界を知りませんでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-8"]],
+      "reveals": ["D-7"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-TRUTH-pathB/0"
+    },
+    {
+      "id": "Q-5",
+      "text": "そのドアは地下室から外に出るためのドアでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-3"], ["D-3", "D-S1"]],
+      "reveals": ["D-2"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-TRUTH-pathA/1"
+    },
+    {
+      "id": "Q-6",
+      "text": "女性は自分の置かれた状況が異常だと悟りましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-3", "D-7"], ["D-7", "D-S2"]],
+      "reveals": ["D-9"],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-TRUTH-pathB/1"
+    },
+    {
+      "id": "Q-7",
+      "text": "女性は地下室に監禁されていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-2"], ["D-9"]],
+      "reveals": ["D-1"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-TRUTH-convergence/0"
+    },
+    {
+      "id": "Q-8",
+      "text": "女性は自分が監禁されていることを知りませんでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1"], ["D-7", "D-1"]],
+      "reveals": ["D-6"],
+      "mechanism": "link",
+      "prerequisites": ["D-1"],
+      "_chain_ref": "chain-P-TRUTH-convergence/1"
+    }
+  ],
+  "_phase1": {
+    "direct_propositions": ["D-1", "D-2", "D-3", "D-4", "D-5"],
+    "derived_propositions": ["D-6", "D-7"]
+  },
+  "_phase2": {
+    "generated_descriptors": ["D-8", "D-9"],
+    "key_pieces": ["P-TRUTH"]
+  },
+  "_phase3": {
+    "generated_descriptors": ["D-10"],
+    "s_descriptors": ["D-S1", "D-S2", "D-S3", "D-S4"]
+  },
+  "_piece_chains": [
+    {
+      "id": "chain-P-TRUTH-trigger",
+      "piece_id": "P-TRUTH",
+      "type": "trigger",
+      "steps": [
+        {"input": ["D-S1", "D-S4"], "tactic": "矛盾の指摘", "output": ["D-10"], "questions": ["Q-1"]},
+        {"input": ["D-10", "D-S2"], "tactic": "因果の逆転", "output": ["D-8"], "questions": ["Q-2"]}
+      ]
+    },
+    {
+      "id": "chain-P-TRUTH-pathA",
+      "piece_id": "P-TRUTH",
+      "type": "internal",
+      "steps": [
+        {"input": ["D-8"], "tactic": "観測事実の深掘り", "output": ["D-3"], "questions": ["Q-3"]},
+        {"input": ["D-3"], "tactic": "因果の逆転", "output": ["D-2"], "questions": ["Q-5"]}
+      ]
+    },
+    {
+      "id": "chain-P-TRUTH-pathB",
+      "piece_id": "P-TRUTH",
+      "type": "internal",
+      "steps": [
+        {"input": ["D-8"], "tactic": "観測事実の深掘り", "output": ["D-7"], "questions": ["Q-4"]},
+        {"input": ["D-7", "D-S2"], "tactic": "矛盾の指摘", "output": ["D-9"], "questions": ["Q-6"]}
+      ]
+    },
+    {
+      "id": "chain-P-TRUTH-convergence",
+      "piece_id": "P-TRUTH",
+      "type": "internal",
+      "steps": [
+        {"input": ["D-2"], "tactic": "因果の逆転", "output": ["D-1"], "questions": ["Q-7"]},
+        {"input": ["D-1"], "tactic": "因果の逆転", "output": ["D-6"], "questions": ["Q-8"]}
+      ]
+    }
+  ]
+}

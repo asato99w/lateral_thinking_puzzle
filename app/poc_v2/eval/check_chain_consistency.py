@@ -108,20 +108,25 @@ def _derivable_from(available: set[str], derived_conditions: dict[str, list[list
 
 
 def check_recall_derivability(data: dict) -> list[str]:
-    """recall_conditions が対応ステップの input から導出可能か"""
+    """recall_conditions が対応ステップの input から導出可能か（OR-of-AND 意味論）
+
+    少なくとも1つの recall グループが全要素 reachable であれば OK。
+    """
     errors = []
     question_map = {q["id"]: q for q in data.get("questions", [])}
+    initial = set(data.get("initial_confirmed", []))
 
-    # 導出記述素の formation_conditions
+    # 導出記述素の formation_conditions + entailment_conditions
     derived_conditions: dict[str, list[list[str]]] = {}
     for d in data.get("descriptors", []):
-        if "formation_conditions" in d:
-            derived_conditions[d["id"]] = d["formation_conditions"]
+        conds = d.get("formation_conditions", []) + d.get("entailment_conditions", [])
+        if conds:
+            derived_conditions[d["id"]] = conds
 
     for chain in data.get("_piece_chains", []):
         chain_id = chain.get("id", "?")
-        # 累積 input: 前のステップの output も利用可能
-        cumulative_available: set[str] = set()
+        # 累積 input: initial_confirmed + 前のステップの output も利用可能
+        cumulative_available: set[str] = set(initial)
         for i, step in enumerate(chain.get("steps", [])):
             step_input = set(step.get("input", []))
             cumulative_available.update(step_input)
@@ -134,14 +139,20 @@ def check_recall_derivability(data: dict) -> list[str]:
                 q = question_map.get(qid)
                 if q is None:
                     continue
-                for j, cond_group in enumerate(q.get("recall_conditions", [])):
-                    for ref in cond_group:
-                        if ref not in reachable:
-                            errors.append(
-                                f"_piece_chains '{chain_id}' step[{i}]: "
-                                f"質問 '{qid}' の recall_conditions[{j}] の '{ref}' が "
-                                f"ステップ input から導出不可能"
-                            )
+                recall = q.get("recall_conditions", [])
+                if not recall:
+                    continue
+                # OR-of-AND: 少なくとも1つのグループが全要素 reachable
+                has_valid_group = any(
+                    all(ref in reachable for ref in cond_group)
+                    for cond_group in recall
+                )
+                if not has_valid_group:
+                    errors.append(
+                        f"_piece_chains '{chain_id}' step[{i}]: "
+                        f"質問 '{qid}' の recall_conditions のいずれのグループも "
+                        f"ステップ累積 input から充足不可能"
+                    )
 
             # output を次のステップで利用可能に
             cumulative_available.update(step.get("output", []))
