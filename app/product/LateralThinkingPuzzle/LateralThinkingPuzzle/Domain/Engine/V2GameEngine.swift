@@ -1,15 +1,22 @@
 // MARK: - V2 Domain Models
 
+enum DerivationMode: Sendable {
+    case v2  // formation_conditions で不動点計算 → derived
+    case v3  // entailment_conditions → confirmed (不動点) + formation_conditions → derived (1回パス)
+}
+
 struct V2Descriptor: Equatable, Sendable {
     let id: String
     let label: String
     let formationConditions: [[String]]?  // nil = 基礎記述素
+    let entailmentConditions: [[String]]?  // v3: 論理的導出（confirmed → confirmed）
     let rejectionConditions: [[String]]?  // confirmed により棄却される条件
 
-    init(id: String, label: String, formationConditions: [[String]]?, rejectionConditions: [[String]]? = nil) {
+    init(id: String, label: String, formationConditions: [[String]]?, entailmentConditions: [[String]]? = nil, rejectionConditions: [[String]]? = nil) {
         self.id = id
         self.label = label
         self.formationConditions = formationConditions
+        self.entailmentConditions = entailmentConditions
         self.rejectionConditions = rejectionConditions
     }
 }
@@ -44,6 +51,25 @@ struct V2PuzzleData: Sendable {
     let pieces: [String: V2Piece]
     let questions: [String: V2Question]
     let topicCategories: [TopicCategory]
+    let derivationMode: DerivationMode
+
+    init(id: String, title: String, statement: String, truth: String,
+         descriptors: [String: V2Descriptor], initialConfirmed: [String],
+         clearConditions: [[String]], pieces: [String: V2Piece],
+         questions: [String: V2Question], topicCategories: [TopicCategory],
+         derivationMode: DerivationMode = .v2) {
+        self.id = id
+        self.title = title
+        self.statement = statement
+        self.truth = truth
+        self.descriptors = descriptors
+        self.initialConfirmed = initialConfirmed
+        self.clearConditions = clearConditions
+        self.pieces = pieces
+        self.questions = questions
+        self.topicCategories = topicCategories
+        self.derivationMode = derivationMode
+    }
 }
 
 struct V2GameState: Equatable, Sendable {
@@ -83,7 +109,13 @@ enum V2GameEngine {
             discoveredPieces: [],
             answered: []
         )
-        _ = evaluateDerivations(state: &state, puzzle: puzzle)
+        switch puzzle.derivationMode {
+        case .v2:
+            _ = evaluateDerivations(state: &state, puzzle: puzzle)
+        case .v3:
+            _ = evaluateEntailments(state: &state, puzzle: puzzle)
+            _ = evaluateHypotheses(state: &state, puzzle: puzzle)
+        }
         return state
     }
 
@@ -151,8 +183,21 @@ enum V2GameEngine {
             }
         }
 
-        // 導出の再評価
-        let (newDerived, newRejected) = evaluateDerivations(state: &state, puzzle: puzzle)
+        // 導出の再評価（derivationMode で分岐）
+        let newDerived: [String]
+        let newRejected: [String]
+        switch puzzle.derivationMode {
+        case .v2:
+            let result = evaluateDerivations(state: &state, puzzle: puzzle)
+            newDerived = result.newlyDerived
+            newRejected = result.newlyRejected
+        case .v3:
+            let entailed = evaluateEntailments(state: &state, puzzle: puzzle)
+            newConfirmed.append(contentsOf: entailed)
+            let result = evaluateHypotheses(state: &state, puzzle: puzzle)
+            newDerived = result.newlyDerived
+            newRejected = result.newlyRejected
+        }
 
         // ピースの構成記述素がすべて揃ったかチェック（confirmed ∪ derived で判定）
         let knownSet = state.known
@@ -179,6 +224,66 @@ enum V2GameEngine {
         puzzle.clearConditions.contains { conditionSet in
             conditionSet.allSatisfy { state.confirmed.contains($0) }
         }
+    }
+
+    // MARK: - v3 Derivation
+
+    /// v3 論理的導出: entailment_conditions → confirmed の不動点計算。
+    /// 論理的帰結であり連鎖を許容する。confirmed に直接追加される。
+    /// 戻り値: 新たに confirmed に追加された命題のリスト
+    @discardableResult
+    static func evaluateEntailments(state: inout V2GameState, puzzle: V2PuzzleData) -> [String] {
+        var newlyConfirmed: [String] = []
+        var changed = true
+        while changed {
+            changed = false
+            for d in puzzle.descriptors.values {
+                guard let conditions = d.entailmentConditions else { continue }
+                if state.confirmed.contains(d.id) { continue }
+                for conditionSet in conditions {
+                    if conditionSet.allSatisfy({ state.confirmed.contains($0) }) {
+                        state.confirmed.insert(d.id)
+                        newlyConfirmed.append(d.id)
+                        changed = true
+                        break
+                    }
+                }
+            }
+        }
+        return newlyConfirmed
+    }
+
+    /// v3 仮説導出: formation_conditions → derived の1回パス（連鎖なし）。
+    /// confirmed のみ参照し、derived 同士の連鎖は行わない。
+    /// 戻り値: (newlyDerived, newlyRejected)
+    @discardableResult
+    static func evaluateHypotheses(state: inout V2GameState, puzzle: V2PuzzleData) -> (newlyDerived: [String], newlyRejected: [String]) {
+        // Step 1: 棄却集合の計算（confirmed のみ参照）
+        var rejected = Set<String>()
+        for d in puzzle.descriptors.values {
+            guard let rejConds = d.rejectionConditions else { continue }
+            if rejConds.contains(where: { group in group.allSatisfy { state.confirmed.contains($0) } }) {
+                rejected.insert(d.id)
+            }
+        }
+
+        // Step 2: 1回パス（confirmed のみ参照、連鎖なし）
+        var newDerivedSet = Set<String>()
+        for d in puzzle.descriptors.values {
+            guard let conditions = d.formationConditions else { continue }
+            if state.confirmed.contains(d.id) || rejected.contains(d.id) { continue }
+            for conditionSet in conditions {
+                if conditionSet.allSatisfy({ state.confirmed.contains($0) }) {
+                    newDerivedSet.insert(d.id)
+                    break
+                }
+            }
+        }
+
+        let newlyDerived = newDerivedSet.subtracting(state.derived).sorted()
+        let newlyRejected = state.derived.subtracting(newDerivedSet).subtracting(state.confirmed).sorted()
+        state.derived = newDerivedSet
+        return (newlyDerived: newlyDerived, newlyRejected: newlyRejected)
     }
 
     // MARK: - Private

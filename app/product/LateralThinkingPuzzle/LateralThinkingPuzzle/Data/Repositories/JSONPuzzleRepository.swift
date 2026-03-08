@@ -15,7 +15,10 @@ struct JSONPuzzleRepository: PuzzleRepository {
         switch engineVersion {
         case "v2":
             let dto = try JSONDecoder().decode(V2PuzzleDataDTO.self, from: data)
-            return V2GameSession(puzzle: dto.toDomain())
+            return V2GameSession(puzzle: dto.toDomain(derivationMode: .v2))
+        case "v3":
+            let dto = try JSONDecoder().decode(V2PuzzleDataDTO.self, from: data)
+            return V2GameSession(puzzle: dto.toDomain(derivationMode: .v3))
         default:
             let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
             return V1GameSession(puzzle: try dto.toDomain())
