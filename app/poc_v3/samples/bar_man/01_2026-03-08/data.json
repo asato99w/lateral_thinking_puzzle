@@ -1,0 +1,442 @@
+{
+  "title": "バーの男",
+  "descriptors": [
+    {
+      "id": "D-S1",
+      "label": "男がバーに入ってきた"
+    },
+    {
+      "id": "D-S2",
+      "label": "男はバーテンダーに水を一杯頼んだ"
+    },
+    {
+      "id": "D-S3",
+      "label": "バーテンダーは男に銃を向けた"
+    },
+    {
+      "id": "D-S4",
+      "label": "男は「ありがとう」と言って帰っていった"
+    },
+    {
+      "id": "D-1",
+      "label": "男はしゃっくりが止まらなかった"
+    },
+    {
+      "id": "D-2",
+      "label": "男は水を飲めばしゃっくりが治ると考えていた",
+      "formation_conditions": [
+        [
+          "D-13"
+        ],
+        [
+          "D-10"
+        ]
+      ]
+    },
+    {
+      "id": "D-3",
+      "label": "バーテンダーは男のしゃっくりに気づいた",
+      "formation_conditions": [
+        [
+          "D-1",
+          "D-11"
+        ],
+        [
+          "D-1"
+        ]
+      ]
+    },
+    {
+      "id": "D-4",
+      "label": "バーテンダーは驚かせればしゃっくりが止まると考えた",
+      "formation_conditions": [
+        [
+          "D-3"
+        ],
+        [
+          "D-11",
+          "D-1"
+        ]
+      ]
+    },
+    {
+      "id": "D-5",
+      "label": "バーテンダーは男に銃を向けて驚かせた",
+      "formation_conditions": [
+        [
+          "D-4"
+        ],
+        [
+          "D-S3",
+          "D-4"
+        ]
+      ]
+    },
+    {
+      "id": "D-6",
+      "label": "男は驚いた",
+      "entailment_conditions": [
+        [
+          "D-5"
+        ]
+      ]
+    },
+    {
+      "id": "D-7",
+      "label": "男のしゃっくりが止まった",
+      "entailment_conditions": [
+        [
+          "D-6"
+        ]
+      ]
+    },
+    {
+      "id": "D-8",
+      "label": "男は感謝した",
+      "entailment_conditions": [
+        [
+          "D-9"
+        ]
+      ]
+    },
+    {
+      "id": "D-9",
+      "label": "男はバーテンダーが自分のしゃっくりを止めるために銃を向けたと理解した",
+      "formation_conditions": [
+        [
+          "D-7",
+          "D-5"
+        ],
+        [
+          "D-7",
+          "D-1"
+        ]
+      ]
+    },
+    {
+      "id": "D-10",
+      "label": "男には水を頼んだ本当の理由がある",
+      "formation_conditions": [
+        [
+          "D-12"
+        ],
+        [
+          "D-S2",
+          "D-S4"
+        ]
+      ]
+    },
+    {
+      "id": "D-11",
+      "label": "バーテンダーの行為には男を助ける意図があった",
+      "formation_conditions": [
+        [
+          "D-14"
+        ],
+        [
+          "D-S3",
+          "D-S4"
+        ]
+      ]
+    },
+    {
+      "id": "D-12",
+      "label": "男が水を頼んだのは喉が渇いていたからではない",
+      "formation_conditions": [
+        [
+          "D-S2",
+          "D-S4"
+        ]
+      ]
+    },
+    {
+      "id": "D-13",
+      "label": "男は身体的な問題を抱えていた",
+      "formation_conditions": [
+        [
+          "D-10"
+        ],
+        [
+          "D-12"
+        ]
+      ]
+    },
+    {
+      "id": "D-14",
+      "label": "バーテンダーが銃を向けたことは男にとって有害ではなかった",
+      "formation_conditions": [
+        [
+          "D-S3",
+          "D-S4"
+        ]
+      ]
+    }
+  ],
+  "initial_confirmed": [
+    "D-S1",
+    "D-S2",
+    "D-S3",
+    "D-S4"
+  ],
+  "clear_conditions": [
+    [
+      "D-3",
+      "D-4",
+      "D-5",
+      "D-7",
+      "D-8",
+      "D-9"
+    ]
+  ],
+  "pieces": [
+    {
+      "id": "P-HICCUP",
+      "label": "しゃっくりと水の真意",
+      "members": [
+        "D-1",
+        "D-2",
+        "D-10",
+        "D-13"
+      ],
+      "trigger": [
+        [
+          "D-10"
+        ]
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "P-GUN",
+      "label": "銃の真意と解決",
+      "members": [
+        "D-3",
+        "D-4",
+        "D-5",
+        "D-6",
+        "D-7",
+        "D-8",
+        "D-9",
+        "D-11",
+        "D-14"
+      ],
+      "trigger": [
+        [
+          "D-1",
+          "D-3"
+        ],
+        [
+          "D-1",
+          "D-S3"
+        ]
+      ],
+      "depends_on": [
+        "P-HICCUP"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "男が水を頼んだのは喉が渇いていたからですか？",
+      "answer": "No",
+      "recall_conditions": [
+        [
+          "D-S2",
+          "D-S4"
+        ]
+      ],
+      "reveals": [
+        "D-12"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-2",
+      "text": "男には水を頼んだ別の理由がありますか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-12"
+        ],
+        [
+          "D-S2",
+          "D-S4"
+        ]
+      ],
+      "reveals": [
+        "D-10"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-3",
+      "text": "男は何か身体的な問題を抱えていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-10"
+        ],
+        [
+          "D-12"
+        ]
+      ],
+      "reveals": [
+        "D-13"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-4",
+      "text": "男は水を飲めばその問題が解決すると思っていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-13"
+        ],
+        [
+          "D-10"
+        ]
+      ],
+      "reveals": [
+        "D-2"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-5",
+      "text": "男はしゃっくりが止まらなかったのですか？",
+      "answer": "Yes",
+      "recall_conditions": [],
+      "reveals": [
+        "D-1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-6",
+      "text": "バーテンダーが銃を向けたことは男にとって結果的に良いことでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-S3",
+          "D-S4"
+        ]
+      ],
+      "reveals": [
+        "D-14"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-7",
+      "text": "バーテンダーは男を助けようとしていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-14"
+        ],
+        [
+          "D-S3",
+          "D-S4"
+        ]
+      ],
+      "reveals": [
+        "D-11"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-8",
+      "text": "バーテンダーは男のしゃっくりに気づいていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-1",
+          "D-11"
+        ],
+        [
+          "D-1"
+        ]
+      ],
+      "reveals": [
+        "D-3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "D-1"
+      ]
+    },
+    {
+      "id": "Q-9",
+      "text": "バーテンダーは驚かせればしゃっくりが止まると考えましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-3"
+        ],
+        [
+          "D-11",
+          "D-1"
+        ]
+      ],
+      "reveals": [
+        "D-4"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "D-3"
+      ]
+    },
+    {
+      "id": "Q-10",
+      "text": "バーテンダーは男を驚かせるために銃を向けましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-4"
+        ],
+        [
+          "D-S3",
+          "D-4"
+        ]
+      ],
+      "reveals": [
+        "D-5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q-11",
+      "text": "男はバーテンダーがしゃっくりを止めるために銃を向けたと理解しましたか？",
+      "answer": "Yes",
+      "recall_conditions": [
+        [
+          "D-7",
+          "D-5"
+        ],
+        [
+          "D-7",
+          "D-1"
+        ]
+      ],
+      "reveals": [
+        "D-9"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "D-5"
+      ]
+    }
+  ],
+  "statement": "男がバーに入ってきて、バーテンダーに水を一杯頼んだ。するとバーテンダーは男に銃を向けた。男は「ありがとう」と言って帰っていった。",
+  "truth": "男はしゃっくりが止まらなかった。男は水を飲めばしゃっくりが治ると考えていた。バーテンダーは男のしゃっくりに気づいた。バーテンダーは驚かせればしゃっくりが止まると考えた。バーテンダーは男に銃を向けて驚かせた。男は驚いた。男のしゃっくりが止まった。男は感謝した。",
+  "id": "バーの男"
+}

@@ -1,0 +1,197 @@
+{
+  "title": "バーの男",
+  "S": "男がバーに入ってきて、バーテンダーに水を一杯頼んだ。するとバーテンダーは男に銃を向けた。男は「ありがとう」と言って帰っていった。",
+  "T": "男はしゃっくりが止まらなかった。男は水を飲めばしゃっくりが治ると考えていた。バーテンダーは男のしゃっくりに気づいた。バーテンダーは驚かせればしゃっくりが止まると考えた。バーテンダーは男に銃を向けて驚かせた。男は驚いた。男のしゃっくりが止まった。男は感謝した。",
+  "descriptors": [
+    {"id": "D-S1", "label": "男がバーに入ってきた", "_source": "S"},
+    {"id": "D-S2", "label": "男はバーテンダーに水を一杯頼んだ", "_source": "S"},
+    {"id": "D-S3", "label": "バーテンダーは男に銃を向けた", "_source": "S"},
+    {"id": "D-S4", "label": "男は「ありがとう」と言って帰っていった", "_source": "S"},
+    {"id": "D-1", "label": "男はしゃっくりが止まらなかった", "_source": "T"},
+    {"id": "D-2", "label": "男は水を飲めばしゃっくりが治ると考えていた", "_source": "T", "formation_conditions": [["D-13"], ["D-10"]]},
+    {"id": "D-3", "label": "バーテンダーは男のしゃっくりに気づいた", "_source": "T", "formation_conditions": [["D-1", "D-11"], ["D-1"]]},
+    {"id": "D-4", "label": "バーテンダーは驚かせればしゃっくりが止まると考えた", "_source": "T", "formation_conditions": [["D-3"], ["D-11", "D-1"]]},
+    {"id": "D-5", "label": "バーテンダーは男に銃を向けて驚かせた", "_source": "T", "formation_conditions": [["D-4"], ["D-S3", "D-4"]]},
+    {"id": "D-6", "label": "男は驚いた", "_source": "T", "entailment_conditions": [["D-5"]]},
+    {"id": "D-7", "label": "男のしゃっくりが止まった", "_source": "T", "entailment_conditions": [["D-6"]]},
+    {"id": "D-8", "label": "男は感謝した", "_source": "T", "entailment_conditions": [["D-9"]]},
+    {"id": "D-9", "label": "男はバーテンダーが自分のしゃっくりを止めるために銃を向けたと理解した", "_source": "T-derived", "formation_conditions": [["D-7", "D-5"], ["D-7", "D-1"]]},
+    {"id": "D-10", "label": "男には水を頼んだ本当の理由がある", "_source": "phase2", "formation_conditions": [["D-12"], ["D-S2", "D-S4"]]},
+    {"id": "D-11", "label": "バーテンダーの行為には男を助ける意図があった", "_source": "phase2", "formation_conditions": [["D-14"], ["D-S3", "D-S4"]]},
+    {"id": "D-12", "label": "男が水を頼んだのは喉が渇いていたからではない", "_source": "phase3", "formation_conditions": [["D-S2", "D-S4"]]},
+    {"id": "D-13", "label": "男は身体的な問題を抱えていた", "_source": "phase3", "formation_conditions": [["D-10"], ["D-12"]]},
+    {"id": "D-14", "label": "バーテンダーが銃を向けたことは男にとって有害ではなかった", "_source": "phase3", "formation_conditions": [["D-S3", "D-S4"]]}
+  ],
+  "initial_confirmed": ["D-S1", "D-S2", "D-S3", "D-S4"],
+  "clear_conditions": [["D-3", "D-4", "D-5", "D-7", "D-8", "D-9"]],
+  "pieces": [
+    {
+      "id": "P-HICCUP",
+      "label": "しゃっくりと水の真意",
+      "members": ["D-1", "D-2", "D-10", "D-13"],
+      "trigger": [["D-10"]],
+      "depends_on": []
+    },
+    {
+      "id": "P-GUN",
+      "label": "銃の真意と解決",
+      "members": ["D-3", "D-4", "D-5", "D-6", "D-7", "D-8", "D-9", "D-11", "D-14"],
+      "trigger": [["D-1", "D-3"], ["D-1", "D-S3"]],
+      "depends_on": ["P-HICCUP"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-1",
+      "text": "男が水を頼んだのは喉が渇いていたからですか？",
+      "answer": "No",
+      "recall_conditions": [["D-S2", "D-S4"]],
+      "reveals": ["D-12"],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-HICCUP-trigger/0"
+    },
+    {
+      "id": "Q-2",
+      "text": "男には水を頼んだ別の理由がありますか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-12"], ["D-S2", "D-S4"]],
+      "reveals": ["D-10"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-HICCUP-trigger/1"
+    },
+    {
+      "id": "Q-3",
+      "text": "男は何か身体的な問題を抱えていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-10"], ["D-12"]],
+      "reveals": ["D-13"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-HICCUP-internal/0"
+    },
+    {
+      "id": "Q-4",
+      "text": "男は水を飲めばその問題が解決すると思っていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-13"], ["D-10"]],
+      "reveals": ["D-2"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-HICCUP-internal/1"
+    },
+    {
+      "id": "Q-5",
+      "text": "男はしゃっくりが止まらなかったのですか？",
+      "answer": "Yes",
+      "recall_conditions": [],
+      "reveals": ["D-1"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-HICCUP-internal/2"
+    },
+    {
+      "id": "Q-6",
+      "text": "バーテンダーが銃を向けたことは男にとって結果的に良いことでしたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-S3", "D-S4"]],
+      "reveals": ["D-14"],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-GUN-internal/0"
+    },
+    {
+      "id": "Q-7",
+      "text": "バーテンダーは男を助けようとしていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-14"], ["D-S3", "D-S4"]],
+      "reveals": ["D-11"],
+      "mechanism": "link",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-GUN-internal/1"
+    },
+    {
+      "id": "Q-8",
+      "text": "バーテンダーは男のしゃっくりに気づいていましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-1", "D-11"], ["D-1"]],
+      "reveals": ["D-3"],
+      "mechanism": "observation",
+      "prerequisites": ["D-1"],
+      "_chain_ref": "chain-P-GUN-internal/2"
+    },
+    {
+      "id": "Q-9",
+      "text": "バーテンダーは驚かせればしゃっくりが止まると考えましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-3"], ["D-11", "D-1"]],
+      "reveals": ["D-4"],
+      "mechanism": "link",
+      "prerequisites": ["D-3"],
+      "_chain_ref": "chain-P-GUN-internal/3"
+    },
+    {
+      "id": "Q-10",
+      "text": "バーテンダーは男を驚かせるために銃を向けましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-4"], ["D-S3", "D-4"]],
+      "reveals": ["D-5"],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "_chain_ref": "chain-P-GUN-internal/4"
+    },
+    {
+      "id": "Q-11",
+      "text": "男はバーテンダーがしゃっくりを止めるために銃を向けたと理解しましたか？",
+      "answer": "Yes",
+      "recall_conditions": [["D-7", "D-5"], ["D-7", "D-1"]],
+      "reveals": ["D-9"],
+      "mechanism": "link",
+      "prerequisites": ["D-5"],
+      "_chain_ref": "chain-P-GUN-internal/5"
+    }
+  ],
+  "_phase2": {
+    "generated_descriptors": ["D-10", "D-11"],
+    "key_pieces": ["P-GUN"]
+  },
+  "_phase3": {
+    "generated_descriptors": ["D-12", "D-13", "D-14"],
+    "s_descriptors": ["D-S1", "D-S2", "D-S3", "D-S4"]
+  },
+  "_piece_chains": [
+    {
+      "id": "chain-P-HICCUP-trigger",
+      "piece_id": "P-HICCUP",
+      "type": "trigger",
+      "steps": [
+        {"input": ["D-S2", "D-S4"], "tactic": "動機の探索", "output": ["D-12"], "questions": ["Q-1"]},
+        {"input": ["D-12"], "tactic": "段階的絞り込み", "output": ["D-10"], "questions": ["Q-2"]}
+      ]
+    },
+    {
+      "id": "chain-P-HICCUP-internal",
+      "piece_id": "P-HICCUP",
+      "type": "internal",
+      "steps": [
+        {"input": ["D-10"], "tactic": "段階的絞り込み", "output": ["D-13"], "questions": ["Q-3"]},
+        {"input": ["D-13"], "tactic": "段階的絞り込み", "output": ["D-2"], "questions": ["Q-4"]},
+        {"input": ["D-2"], "tactic": "因果の逆転", "output": ["D-1"], "questions": ["Q-5"]}
+      ]
+    },
+    {
+      "id": "chain-P-GUN-internal",
+      "piece_id": "P-GUN",
+      "type": "internal",
+      "steps": [
+        {"input": ["D-S3", "D-S4"], "tactic": "矛盾の指摘", "output": ["D-14"], "questions": ["Q-6"]},
+        {"input": ["D-14"], "tactic": "段階的絞り込み", "output": ["D-11"], "questions": ["Q-7"]},
+        {"input": ["D-1", "D-11"], "tactic": "因果の逆転", "output": ["D-3"], "questions": ["Q-8"]},
+        {"input": ["D-3"], "tactic": "動機の探索", "output": ["D-4"], "questions": ["Q-9"]},
+        {"input": ["D-4"], "tactic": "手段の探索", "output": ["D-5"], "questions": ["Q-10"]},
+        {"input": ["D-7", "D-5"], "tactic": "因果の逆転", "output": ["D-9"], "questions": ["Q-11"]}
+      ]
+    }
+  ]
+}
