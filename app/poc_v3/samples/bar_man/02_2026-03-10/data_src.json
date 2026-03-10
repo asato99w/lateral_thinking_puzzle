@@ -1,0 +1,116 @@
+{
+  "title": "バーの男",
+  "S": "ある男がバーに入り、バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた。男は「ありがとう」と言って帰った。なぜだろう？",
+  "T": "男はしゃっくりが止まらなくて困っていた。水を飲めば治ると思いバーに立ち寄ったが、バーテンダーはしゃっくりに気づき、驚かせて止めてやろうと銃を向けた。しゃっくりが止まった男は水が不要になり、「ありがとう」と言って帰った。",
+
+  "propositions": [
+    {"id": "S-1", "label": "ある男がいた", "_source": "S", "truth_value": true},
+    {"id": "S-2", "label": "男はバーに入った", "_source": "S", "truth_value": true},
+    {"id": "S-3", "label": "バーテンダーがいた", "_source": "S", "truth_value": true},
+    {"id": "S-4", "label": "男はバーテンダーに「水をください」と頼んだ", "_source": "S", "truth_value": true},
+    {"id": "S-5", "label": "バーテンダーは男に銃を向けた", "_source": "S", "truth_value": true},
+    {"id": "S-6", "label": "男は「ありがとう」と言った", "_source": "S", "truth_value": true},
+    {"id": "S-7", "label": "男は帰った", "_source": "S", "truth_value": true},
+
+    {"id": "I-1", "label": "男が水を求めた理由がある", "_source": "explore", "truth_value": true, "entailment_conditions": [["S-4"]]},
+    {"id": "I-2", "label": "バーテンダーには銃を向けた理由がある", "_source": "explore", "truth_value": true, "entailment_conditions": [["S-5"]]},
+    {"id": "I-3", "label": "男にとって良い結果が生じた", "_source": "explore", "truth_value": true, "entailment_conditions": [["S-6"]]},
+    {"id": "I-4", "label": "男の目的が達成された", "_source": "explore", "truth_value": true, "entailment_conditions": [["S-7"]]},
+
+    {"id": "D-L1", "label": "男に身体的な不調があった", "_source": "leaf", "_h_source": "H1", "truth_value": true, "formation_conditions": [["I-1"]]},
+    {"id": "D-L2", "label": "男は自分の困りごとへの対処法を持っていた", "_source": "leaf", "_h_source": "H1", "truth_value": true, "formation_conditions": [["D-L1"]]},
+    {"id": "D-L3", "label": "男の表面的な行動と真の目的が異なっていた", "_source": "leaf", "_h_source": "H1", "truth_value": true, "formation_conditions": [["I-4", "S-4"]]},
+    {"id": "D-L4", "label": "バーテンダーは男の真の状態を認識していた", "_source": "leaf", "_h_source": "H2", "truth_value": true, "formation_conditions": [["I-2", "D-L1"]]},
+    {"id": "D-L5", "label": "バーテンダーは善意で行動した", "_source": "leaf", "_h_source": "H2", "truth_value": true, "formation_conditions": [["D-L4"]]},
+    {"id": "D-L6", "label": "バーテンダーの行動は見かけと意図が異なっていた", "_source": "leaf", "_h_source": "H2", "truth_value": true, "formation_conditions": [["D-L5"]]},
+    {"id": "D-L7", "label": "男は心理的衝撃を受けた", "_source": "leaf", "_h_source": "H3", "truth_value": true, "formation_conditions": [["S-5"]]},
+    {"id": "D-L8", "label": "当初の手段とは別の方法で目的が達成された", "_source": "leaf", "_h_source": "H3", "truth_value": true, "formation_conditions": [["I-4"]]},
+    {"id": "D-L9", "label": "間接的な作用で男の問題が解消された", "_source": "leaf", "_h_source": "H3", "truth_value": true, "formation_conditions": [["I-3"]]},
+
+    {"id": "I-5", "label": "男の症状は繰り返し生じる反射的なものだった", "_source": "derive", "truth_value": true, "formation_conditions": [["D-L1"]]},
+    {"id": "I-6", "label": "男はしゃっくりが出ていた", "_source": "derive", "truth_value": true, "formation_conditions": [["I-5"]]},
+    {"id": "I-7", "label": "驚きによってしゃっくりが止まった", "_source": "derive", "truth_value": true, "formation_conditions": [["I-6", "D-L7"]]},
+    {"id": "I-8", "label": "水を飲むことはしゃっくりの対処法だった", "_source": "derive", "truth_value": true, "formation_conditions": [["I-6", "D-L2"]]},
+
+    {"id": "D-1", "label": "男はしゃっくりが止まらなかった", "_source": "T", "truth_value": true, "entailment_conditions": [["I-6"]]},
+    {"id": "D-2", "label": "男は水を飲めばしゃっくりが治ると考えた", "_source": "T", "truth_value": true, "entailment_conditions": [["I-8"]]},
+    {"id": "D-3", "label": "男はしゃっくりを止めるためにバーに立ち寄った", "_source": "T", "truth_value": true, "entailment_conditions": [["D-1", "D-2"]]},
+    {"id": "D-4", "label": "バーテンダーは男のしゃっくりに気づいた", "_source": "T", "truth_value": true, "entailment_conditions": [["D-L4", "D-1"]]},
+    {"id": "D-5", "label": "バーテンダーは男を驚かせてしゃっくりを止めようとした", "_source": "T", "truth_value": true, "entailment_conditions": [["D-4"]]},
+    {"id": "D-6", "label": "バーテンダーは驚かせる手段として銃を向けた", "_source": "T", "truth_value": true, "entailment_conditions": [["D-5"]]},
+    {"id": "D-7", "label": "男は銃を向けられて驚いた", "_source": "T", "truth_value": true, "entailment_conditions": [["D-6"]]},
+    {"id": "D-8", "label": "しゃっくりが止まった", "_source": "T", "truth_value": true, "entailment_conditions": [["I-7"]]},
+    {"id": "D-9", "label": "男は水が不要になった", "_source": "T", "truth_value": true, "entailment_conditions": [["D-8"]]},
+    {"id": "D-10", "label": "男はしゃっくりを止めてくれたことに感謝した", "_source": "T", "truth_value": true, "entailment_conditions": [["D-8", "D-5"]]}
+  ],
+
+  "initial_confirmed": ["S-1", "S-2", "S-3", "S-4", "S-5", "S-6", "S-7"],
+
+  "leaves": ["D-L1", "D-L2", "D-L3", "D-L4", "D-L5", "D-L6", "D-L7", "D-L8", "D-L9"],
+
+  "patterns": [
+    {
+      "id": "P-T",
+      "leaf_values": {"D-L1": true, "D-L2": true, "D-L3": true, "D-L4": true, "D-L5": true, "D-L6": true, "D-L7": true, "D-L8": true, "D-L9": true},
+      "model_ids": ["T", "M1", "M2"],
+      "distance_from_t": 0
+    },
+    {
+      "id": "P-A",
+      "leaf_values": {"D-L1": false, "D-L2": true, "D-L3": true, "D-L4": true, "D-L5": true, "D-L6": true, "D-L7": true, "D-L8": true, "D-L9": true},
+      "model_ids": ["M3"],
+      "distance_from_t": 1
+    },
+    {
+      "id": "P-B",
+      "leaf_values": {"D-L1": false, "D-L2": false, "D-L3": true, "D-L4": true, "D-L5": true, "D-L6": true, "D-L7": true, "D-L8": true, "D-L9": true},
+      "model_ids": ["M4"],
+      "distance_from_t": 2
+    },
+    {
+      "id": "P-C",
+      "leaf_values": {"D-L1": false, "D-L2": false, "D-L3": true, "D-L4": true, "D-L5": false, "D-L6": true, "D-L7": false, "D-L8": true, "D-L9": false},
+      "model_ids": ["M5"],
+      "distance_from_t": 5
+    },
+    {
+      "id": "P-D",
+      "leaf_values": {"D-L1": false, "D-L2": false, "D-L3": true, "D-L4": true, "D-L5": true, "D-L6": true, "D-L7": true, "D-L8": true, "D-L9": false},
+      "model_ids": ["M6"],
+      "distance_from_t": 3
+    }
+  ],
+
+  "models": [
+    {"id": "T", "label": "しゃっくりモデル", "pattern_id": "P-T", "is_truth": true},
+    {"id": "M1", "label": "喉詰まりモデル", "pattern_id": "P-T", "rejection_conditions": [["I-5"], ["I-6"]]},
+    {"id": "M2", "label": "酔い覚ましモデル", "pattern_id": "P-T", "rejection_conditions": [["I-5"], ["I-6"]]},
+    {"id": "M3", "label": "パニック発作モデル", "pattern_id": "P-A"},
+    {"id": "M4", "label": "自殺防止モデル", "pattern_id": "P-B"},
+    {"id": "M5", "label": "暗号モデル", "pattern_id": "P-C"},
+    {"id": "M6", "label": "度胸試しモデル", "pattern_id": "P-D"}
+  ],
+
+  "clear_conditions": [],
+  "questions": [],
+
+  "_phase1": {
+    "tensions": ["α: 水→銃", "β: 銃→感謝", "γ: 水不要→帰宅"],
+    "h_elements": ["H1", "H2", "H3"],
+    "t_propositions": ["D-1", "D-2", "D-3", "D-4", "D-5", "D-6", "D-7", "D-8", "D-9", "D-10"]
+  },
+  "_phase4": {
+    "leaf_rejection": {
+      "D-L1": ["M3", "M4", "M5", "M6"],
+      "D-L2": ["M4", "M5", "M6"],
+      "D-L5": ["M5"],
+      "D-L7": ["M5"],
+      "D-L9": ["M5", "M6"]
+    },
+    "note": "M1, M2 は葉レベルで棄却不可能。Phase 7 で中間命題による棄却条件を定義"
+  },
+  "_phase6": {
+    "exploration_intermediates": ["I-1", "I-2", "I-3", "I-4"],
+    "derivation_intermediates": ["I-5", "I-6", "I-7", "I-8"]
+  }
+}
