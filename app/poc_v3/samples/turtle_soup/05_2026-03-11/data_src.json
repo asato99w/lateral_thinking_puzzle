@@ -1,0 +1,197 @@
+{
+  "title": "ウミガメのスープ",
+  "S": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口飲んだ男は店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜだろう？",
+  "T": "男は船乗りで、かつて仲間と船で遭難し、食料が尽きた。仲間の一人が死に、残った仲間は男に「ウミガメのスープだ」と言ってスープを飲ませた。実際にはそれは死んだ仲間の肉で作ったスープだった。レストランで本物のウミガメのスープを飲んだ男は、味が違うことに気づき、あのとき飲まされたものの正体を悟り、絶望して自殺した。",
+  "_phase1": {
+    "tensions": [
+      {"id": "α", "label": "男がスープの真偽を店員に確認した（注文した料理の真偽を疑う不自然さ）"},
+      {"id": "β", "label": "「本物のウミガメのスープです」という回答の後に自殺した（肯定回答と自殺の因果断絶）"},
+      {"id": "γ", "label": "一口飲んでから確認した（味の認識が確認行為のトリガー）"}
+    ],
+    "models": [
+      {"id": "T", "label": "遭難時の人肉スープ", "summary": "遭難時に人肉を「ウミガメのスープ」と偽られて飲んだ。本物の味との違いで真実を悟り自殺。", "tension_subset": ["α", "β", "γ"]},
+      {"id": "M1", "label": "遭難時の別動物のスープ", "summary": "遭難時に別の動物の肉を「ウミガメのスープ」と偽られて飲んだ。本物の味との違いで気づき罪悪感で自殺。", "tension_subset": ["α", "β", "γ"]},
+      {"id": "M2", "label": "亡き家族の偽スープ", "summary": "亡き母が安い肉を「ウミガメのスープ」と偽って食べさせていた。本物の味との違いで母の嘘と苦労を悟り自殺。", "tension_subset": ["α", "β", "γ"]},
+      {"id": "M3", "label": "捕虜時の偽スープ", "summary": "戦争中に捕虜として看守が人肉を「ウミガメのスープ」と偽って食べさせた。本物の味で真実を悟り自殺。", "tension_subset": ["α", "β", "γ"]},
+      {"id": "M4", "label": "遭難時の正体不明のスープ", "summary": "島で遭難し自分で捕まえた動物をウミガメと誤認してスープにした。本物の味と違い正体不明の恐怖で自殺。", "tension_subset": ["α", "β", "γ"]},
+      {"id": "M5", "label": "料理人の詐欺", "summary": "料理人が長年別の食材を「ウミガメのスープ」として提供していた。本物を飲み詐欺の罪悪感で自殺。", "tension_subset": ["α", "β", "γ"]},
+      {"id": "M6", "label": "宗教的禁忌", "summary": "ウミガメを神聖視する信仰の出身。本物と知り禁忌を犯した罪悪感で自殺。", "tension_subset": ["α", "β"]},
+      {"id": "M7", "label": "味覚喪失と病気の末期", "summary": "重病で味覚に異常。本物なのに味がしないことから病気の末期を確信し自殺。", "tension_subset": ["α", "β", "γ"]},
+      {"id": "M8", "label": "幼少期の虐待トラウマ", "summary": "幼少期に虐待者が「ウミガメのスープ」と偽って飲ませた。本物の味との違いで正体を悟りトラウマで自殺。", "tension_subset": ["α", "β", "γ"]},
+      {"id": "M9", "label": "保護活動家の絶望", "summary": "ウミガメ保護活動家が証拠のため来店。本物と確認し活動の無力さに絶望して自殺。", "tension_subset": ["α", "β"]},
+      {"id": "M10", "label": "調査員の別件自殺", "summary": "食品偽装調査員が調査で確認。本物だった。別件で自殺。", "tension_subset": ["α"]},
+      {"id": "M11", "label": "計画的自殺の最後の晩餐", "summary": "自殺を決意済み。最後の食事として注文・確認し予定通り自殺。", "tension_subset": ["α", "β", "γ"]},
+      {"id": "M12", "label": "飢饉の村の人肉スープ", "summary": "飢饉の村で「ウミガメのスープ」として人肉を食べた。本物の味との違いで噂を確信し自殺。", "tension_subset": ["α", "β", "γ"]}
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "T": ["男は船乗りだった", "男はかつて仲間と船で遭難した", "遭難中に食料が尽きた", "仲間の一人が死んだ", "残った仲間が死んだ仲間の肉でスープを作った", "仲間は「ウミガメのスープだ」と偽って飲ませた", "男は当時信じた", "本物の味が過去と違った", "過去のスープが偽物と悟った", "人肉だったと悟り絶望して自殺"],
+      "M1": ["男は遭難経験がある", "仲間が別の動物の肉でスープを作った", "「ウミガメのスープだ」と偽って飲ませた", "本物の味と違いに気づいた", "別の動物だったと悟り罪悪感で自殺"],
+      "M2": ["亡き母が安い肉を「ウミガメのスープ」と偽った", "本物の味と違いに気づいた", "母の嘘と苦労を悟った", "後悔で自殺"],
+      "M3": ["男は戦争中に捕虜だった", "看守が捕虜の肉を「ウミガメのスープ」と偽った", "本物の味と違いに気づいた", "人肉を食べさせられたと悟り自殺"],
+      "M4": ["男は島で遭難した", "自分で捕まえた動物をウミガメと誤認", "本物の味と違いに気づいた", "正体不明の恐怖で自殺"],
+      "M5": ["男は料理人", "別の食材を「ウミガメのスープ」として客に提供", "本物を飲み自分の料理と違うと気づいた", "詐欺の罪悪感で自殺"],
+      "M6": ["ウミガメを神聖視する信仰の出身", "禁忌と知りつつ注文", "本物と分かり罪悪感で自殺"],
+      "M7": ["男は重病", "味が全くしなかった", "本物なのに味がしない→病気末期と確信", "絶望で自殺"],
+      "M8": ["幼少期に虐待者が偽って飲ませた", "本物の味と違いに気づいた", "正体を悟りトラウマで自殺"],
+      "M9": ["ウミガメ保護活動家", "証拠のため来店", "本物と確認し活動の絶望で自殺"],
+      "M10": ["食品偽装調査員", "調査で確認", "別件で自殺"],
+      "M11": ["自殺を決意済み", "最後の食事として注文", "確認して満足", "予定通り自殺"],
+      "M12": ["飢饉の村で「ウミガメのスープ」として食べた", "人肉の噂があった", "本物の味と違いで噂を確信", "自殺"]
+    },
+    "division_propositions": [
+      {"id": "P1", "label": "男は過去に「ウミガメのスープ」だと信じて実際はウミガメではないものを飲んだ経験がある", "truth_value_in_T": true, "true_models": ["T", "M1", "M2", "M3", "M4", "M8", "M12"], "false_models": ["M5", "M6", "M7", "M9", "M10", "M11"]},
+      {"id": "P2", "label": "その過去の体験は海での遭難に起因する", "truth_value_in_T": true, "true_models": ["T", "M1", "M4"], "false_models": ["M2", "M3", "M8", "M12"]},
+      {"id": "P3", "label": "偽りのスープは他者が意図的に「ウミガメのスープだ」と嘘をついて飲ませたものだった", "truth_value_in_T": true, "true_models": ["T", "M1"], "false_models": ["M4"]},
+      {"id": "P4", "label": "偽りのスープの原材料は人間の肉だった", "truth_value_in_T": true, "true_models": ["T"], "false_models": ["M1"]}
+    ],
+    "division_hierarchy": [
+      {
+        "proposition_id": "P1",
+        "true_set": ["T", "M1", "M2", "M3", "M4", "M8", "M12"],
+        "false_set": ["M5", "M6", "M7", "M9", "M10", "M11"],
+        "children": [
+          {
+            "proposition_id": "P2",
+            "true_set": ["T", "M1", "M4"],
+            "false_set": ["M2", "M3", "M8", "M12"],
+            "children": [
+              {
+                "proposition_id": "P3",
+                "true_set": ["T", "M1"],
+                "false_set": ["M4"],
+                "children": [
+                  {
+                    "proposition_id": "P4",
+                    "true_set": ["T"],
+                    "false_set": ["M1"],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "_phase3": {
+    "rejection_map": [
+      {"model_id": "M1", "false_propositions": ["P4"], "min_rejection": ["P4"]},
+      {"model_id": "M2", "false_propositions": ["P2"], "min_rejection": ["P2"]},
+      {"model_id": "M3", "false_propositions": ["P2"], "min_rejection": ["P2"]},
+      {"model_id": "M4", "false_propositions": ["P3"], "min_rejection": ["P3"]},
+      {"model_id": "M5", "false_propositions": ["P1"], "min_rejection": ["P1"]},
+      {"model_id": "M6", "false_propositions": ["P1"], "min_rejection": ["P1"]},
+      {"model_id": "M7", "false_propositions": ["P1"], "min_rejection": ["P1"]},
+      {"model_id": "M8", "false_propositions": ["P2"], "min_rejection": ["P2"]},
+      {"model_id": "M9", "false_propositions": ["P1"], "min_rejection": ["P1"]},
+      {"model_id": "M10", "false_propositions": ["P1"], "min_rejection": ["P1"]},
+      {"model_id": "M11", "false_propositions": ["P1"], "min_rejection": ["P1"]},
+      {"model_id": "M12", "false_propositions": ["P2"], "min_rejection": ["P2"]}
+    ],
+    "rejection_power": [
+      {"proposition_id": "P1", "rejects": ["M5", "M6", "M7", "M9", "M10", "M11"], "count": 6},
+      {"proposition_id": "P2", "rejects": ["M2", "M3", "M8", "M12"], "count": 4},
+      {"proposition_id": "P3", "rejects": ["M4"], "count": 1},
+      {"proposition_id": "P4", "rejects": ["M1"], "count": 1}
+    ],
+    "unrejectable_models": {
+      "models": [],
+      "reason": "全競合モデルが P1-P4 のいずれかの確認により棄却可能"
+    },
+    "rejection_progression": [
+      {"step": 1, "confirmed_proposition": "P1", "rejected": ["M5", "M6", "M7", "M9", "M10", "M11"], "remaining": ["T", "M1", "M2", "M3", "M4", "M8", "M12"]},
+      {"step": 2, "confirmed_proposition": "P2", "rejected": ["M2", "M3", "M8", "M12"], "remaining": ["T", "M1", "M4"]},
+      {"step": 3, "confirmed_proposition": "P3", "rejected": ["M4"], "remaining": ["T", "M1"]},
+      {"step": 4, "confirmed_proposition": "P4", "rejected": ["M1"], "remaining": ["T"]}
+    ]
+  },
+  "_phase4": {
+    "s_propositions": [
+      {"id": "S1", "label": "ある男がいた", "type": "atomic"},
+      {"id": "S2", "label": "男はレストランに入った", "type": "atomic"},
+      {"id": "S3", "label": "男は「ウミガメのスープ」を注文した", "type": "atomic"},
+      {"id": "S4", "label": "男はスープを一口飲んだ", "type": "atomic"},
+      {"id": "S5", "label": "男は店員に「これは本当にウミガメのスープか？」と尋ねた", "type": "atomic"},
+      {"id": "S6", "label": "店員は「はい、間違いなくウミガメのスープです」と答えた", "type": "atomic"},
+      {"id": "S7", "label": "男はその夜自殺した", "type": "atomic"},
+      {"id": "S8", "label": "レストランがあった", "type": "derived", "derived_from": ["S2"]},
+      {"id": "S9", "label": "店員がいた", "type": "derived", "derived_from": ["S5", "S6"]},
+      {"id": "S10", "label": "男はスープの真偽を疑った", "type": "derived", "derived_from": ["S5"]},
+      {"id": "S11", "label": "男は飲んでから確認した", "type": "derived", "derived_from": ["S4", "S5"]},
+      {"id": "S12", "label": "スープは本物のウミガメのスープだった", "type": "derived", "derived_from": ["S6"]}
+    ],
+    "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12"],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_upper",
+        "source": ["S5", "S10", "S11", "S12"],
+        "target": "P1",
+        "via": "I1",
+        "tactic": "動機の探索 → 時間軸の拡張 → ラベルと実体の乖離",
+        "description": "{S5,S10,S11} →[動機の探索]→ なぜ疑った？ →[時間軸の拡張]→ I1: 以前にも飲んだ → {I1,S12} →[ラベルと実体の乖離]→ P1: 過去のは偽物だった"
+      },
+      {
+        "id": "C2",
+        "type": "upper_to_lower",
+        "source": ["P1"],
+        "target": "P2",
+        "tactic": "人物像の探索 → 段階的絞り込み",
+        "description": "{P1} →[人物像の探索]→ どんな状況で？ →[段階的絞り込み]→ P2: 遭難",
+        "fc_source": "P1 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C3",
+        "type": "upper_to_lower",
+        "source": ["P2"],
+        "target": "P3",
+        "tactic": "登場人物の探索 → 段階的絞り込み",
+        "description": "{P2} →[登場人物の探索]→ 誰が関与？ →[段階的絞り込み]→ P3: 他者の欺瞞",
+        "fc_source": "P2 は連鎖 C2 の reveals"
+      },
+      {
+        "id": "C4",
+        "type": "upper_to_lower",
+        "source": ["P3"],
+        "target": "P4",
+        "tactic": "段階的絞り込み",
+        "description": "{P3} →[段階的絞り込み]→ 中身は何か？ → P4: 人肉",
+        "fc_source": "P3 は連鎖 C3 の reveals"
+      }
+    ]
+  },
+  "_phase5": {
+    "rejection_progression": [
+      {"trigger": "Q1c answered", "confirmed": "P1", "rejected": ["M5", "M6", "M7", "M9", "M10", "M11"], "remaining": ["T", "M1", "M2", "M3", "M4", "M8", "M12"]},
+      {"trigger": "Q2b answered", "confirmed": "P2", "rejected": ["M2", "M3", "M8", "M12"], "remaining": ["T", "M1", "M4"]},
+      {"trigger": "Q3a answered", "confirmed": "P3", "rejected": ["M4"], "remaining": ["T", "M1"]},
+      {"trigger": "Q4b answered", "confirmed": "P4", "rejected": ["M1"], "remaining": ["T"]}
+    ],
+    "exploration_paths": [
+      {"name": "パス A: 排除→確認交互", "sequence": "Q1a(いいえ) → Q1b(はい:I1) → Q1c(いいえ:P1) → Q2a(いいえ) → Q2b(はい:P2) → Q3a(はい:P3) → Q4a(いいえ) → Q4b(はい:P4) → T"},
+      {"name": "パス B: 確認のみ最短", "sequence": "Q1b(はい:I1) → Q1c(いいえ:P1) → Q2b(はい:P2) → Q3a(はい:P3) → Q4b(はい:P4) → T"},
+      {"name": "パス C: derived経由最短", "sequence": "Q1c(いいえ:P1,I1 derived) → Q2b(はい:P2) → Q3a(はい:P3) → Q4b(はい:P4) → T"}
+    ]
+  },
+  "propositions": [
+    {"id": "I1", "label": "男は以前にも「ウミガメのスープ」を飲んだことがある（と信じている）", "truth_value": true, "formation_conditions": [["S5", "S10", "S11"]]},
+    {"id": "P1", "label": "男は過去に「ウミガメのスープ」だと信じて実際はウミガメではないものを飲んだ経験がある", "truth_value": true, "formation_conditions": [["I1", "S12"]]},
+    {"id": "P2", "label": "その過去の体験は海での遭難に起因する", "truth_value": true, "formation_conditions": [["P1"]]},
+    {"id": "P3", "label": "偽りのスープは他者が意図的に「ウミガメのスープだ」と嘘をついて飲ませたものだった", "truth_value": true, "formation_conditions": [["P2"]]},
+    {"id": "P4", "label": "偽りのスープの原材料は人間の肉だった", "truth_value": true, "formation_conditions": [["P3"]]}
+  ],
+  "questions": [
+    {"id": "Q1a", "text": "男がスープの真偽を確認したのは、味が不味いと感じたからですか？", "answer": "いいえ", "recall_conditions": [["S5", "S10", "S11"]], "reveals": [], "chain_id": "C1"},
+    {"id": "Q1b", "text": "男は過去に「ウミガメのスープ」を飲んだことがあると認識していますか？", "answer": "はい", "recall_conditions": [["S5", "S10", "S11"]], "reveals": ["I1"], "chain_id": "C1"},
+    {"id": "Q1c", "text": "男が過去に飲んだ「ウミガメのスープ」は、本物のウミガメのスープでしたか？", "answer": "いいえ", "recall_conditions": [["I1", "S12"]], "reveals": ["P1"], "chain_id": "C1"},
+    {"id": "Q2a", "text": "偽のスープを飲んだのは日常生活の中での出来事ですか？", "answer": "いいえ", "recall_conditions": [["P1"]], "reveals": [], "chain_id": "C2"},
+    {"id": "Q2b", "text": "男は海で遭難したことがありますか？", "answer": "はい", "recall_conditions": [["P1"]], "reveals": ["P2"], "chain_id": "C2"},
+    {"id": "Q3a", "text": "遭難時に誰かが男に「ウミガメのスープだ」と嘘をついて飲ませましたか？", "answer": "はい", "recall_conditions": [["P2"]], "reveals": ["P3"], "chain_id": "C3"},
+    {"id": "Q4a", "text": "実際のスープの材料は動物の肉でしたか？", "answer": "いいえ", "recall_conditions": [["P3"]], "reveals": [], "chain_id": "C4"},
+    {"id": "Q4b", "text": "実際のスープの材料は人間の肉でしたか？", "answer": "はい", "recall_conditions": [["P3"]], "reveals": ["P4"], "chain_id": "C4"}
+  ],
+  "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12"]
+}

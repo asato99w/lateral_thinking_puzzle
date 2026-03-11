@@ -26,7 +26,8 @@ def _normalize_conditions(conditions: list[list[str]] | None) -> list[list[str]]
 def check_recall_equals_fc(data: dict) -> list[str]:
     """各質問の recall_conditions が reveals される命題の fc と一致するか"""
     errors = []
-    descriptor_map = {d["id"]: d for d in data.get("descriptors", [])}
+    descriptors = data.get("propositions", data.get("descriptors", []))
+    descriptor_map = {d["id"]: d for d in descriptors}
 
     for q in data.get("questions", []):
         qid = q["id"]
