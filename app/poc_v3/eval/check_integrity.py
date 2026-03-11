@@ -184,6 +184,14 @@ def check_rejection_refs(data: dict) -> list[str]:
     return errors
 
 
+def _get_reveals(q: dict) -> list[str]:
+    """reveals を文字列・リスト両対応でリストとして返す"""
+    r = q.get("reveals", [])
+    if isinstance(r, str):
+        return [r] if r else []
+    return r
+
+
 def check_question_refs(data: dict) -> list[str]:
     errors = []
     descriptors = _get_descriptors(data)
@@ -196,7 +204,7 @@ def check_question_refs(data: dict) -> list[str]:
             for ref in cond_group:
                 if ref not in all_valid_ids:
                     errors.append(f"question '{qid}' の recall_conditions 参照 '{ref}' が存在しない")
-        for ref in q.get("reveals", []):
+        for ref in _get_reveals(q):
             if ref not in all_valid_ids:
                 errors.append(f"question '{qid}' の reveals 参照 '{ref}' が存在しない")
     return errors
@@ -220,7 +228,7 @@ def check_prerequisites_grounded(data: dict) -> list[str]:
     initial = set(data.get("initial_confirmed", []))
     all_reveals = set()
     for q in data.get("questions", []):
-        for ref in q.get("reveals", []):
+        for ref in _get_reveals(q):
             all_reveals.add(ref)
 
     grounded = initial | all_reveals

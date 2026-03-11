@@ -2,6 +2,18 @@
   "title": "ウミガメのスープ",
   "propositions": [
     {
+      "id": "N1a",
+      "label": "男がスープの真偽を確認した理由は味の不味さではない",
+      "truth_value": true,
+      "formation_conditions": [
+        [
+          "S5",
+          "S10",
+          "S11"
+        ]
+      ]
+    },
+    {
       "id": "I1",
       "label": "男は以前にも「ウミガメのスープ」を飲んだことがある（と信じている）",
       "truth_value": true,
@@ -9,7 +21,8 @@
         [
           "S5",
           "S10",
-          "S11"
+          "S11",
+          "N1a"
         ]
       ]
     },
@@ -25,12 +38,54 @@
       ]
     },
     {
+      "id": "N2a",
+      "label": "偽のスープを飲んだのは日常的な出来事ではなかった",
+      "truth_value": true,
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ]
+    },
+    {
+      "id": "N2b",
+      "label": "偽のスープを飲んだのは極限状態での出来事だった",
+      "truth_value": true,
+      "formation_conditions": [
+        [
+          "P1",
+          "N2a"
+        ]
+      ]
+    },
+    {
       "id": "P2",
       "label": "その過去の体験は海での遭難に起因する",
       "truth_value": true,
       "formation_conditions": [
         [
-          "P1"
+          "N2b",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "N3a",
+      "label": "遭難時に仲間がいた",
+      "truth_value": true,
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ]
+    },
+    {
+      "id": "N3b",
+      "label": "遭難中に仲間の一人が死んだ",
+      "truth_value": true,
+      "formation_conditions": [
+        [
+          "N3a"
         ]
       ]
     },
@@ -40,7 +95,18 @@
       "truth_value": true,
       "formation_conditions": [
         [
-          "P2"
+          "N3a",
+          "P1"
+        ]
+      ]
+    },
+    {
+      "id": "N4a",
+      "label": "偽りのスープの材料は一般的な食用動物の肉ではなかった",
+      "truth_value": true,
+      "formation_conditions": [
+        [
+          "P3"
         ]
       ]
     },
@@ -50,7 +116,8 @@
       "truth_value": true,
       "formation_conditions": [
         [
-          "P3"
+          "N4a",
+          "N3b"
         ]
       ]
     }
@@ -60,112 +127,108 @@
       "id": "Q1a",
       "text": "男がスープの真偽を確認したのは、味が不味いと感じたからですか？",
       "answer": "いいえ",
-      "recall_conditions": [
-        [
-          "S5",
-          "S10",
-          "S11"
-        ]
+      "prerequisites": [
+        "S5",
+        "S10"
       ],
-      "reveals": [],
+      "reveals": "N1a",
       "chain_id": "C1"
     },
     {
       "id": "Q1b",
       "text": "男は過去に「ウミガメのスープ」を飲んだことがあると認識していますか？",
       "answer": "はい",
-      "recall_conditions": [
-        [
-          "S5",
-          "S10",
-          "S11"
-        ]
-      ],
-      "reveals": [
-        "I1"
-      ],
+      "prerequisites": [],
+      "reveals": "I1",
       "chain_id": "C1"
     },
     {
       "id": "Q1c",
       "text": "男が過去に飲んだ「ウミガメのスープ」は、本物のウミガメのスープでしたか？",
       "answer": "いいえ",
-      "recall_conditions": [
-        [
-          "I1",
-          "S12"
-        ]
+      "prerequisites": [
+        "I1"
       ],
-      "reveals": [
-        "P1"
-      ],
+      "reveals": "P1",
       "chain_id": "C1"
     },
     {
       "id": "Q2a",
       "text": "偽のスープを飲んだのは日常生活の中での出来事ですか？",
       "answer": "いいえ",
-      "recall_conditions": [
-        [
-          "P1"
-        ]
+      "prerequisites": [
+        "P1"
       ],
-      "reveals": [],
+      "reveals": "N2a",
       "chain_id": "C2"
     },
     {
       "id": "Q2b",
+      "text": "事故や災害など、極限状態での出来事ですか？",
+      "answer": "はい",
+      "prerequisites": [
+        "P1"
+      ],
+      "reveals": "N2b",
+      "chain_id": "C2"
+    },
+    {
+      "id": "Q2c",
       "text": "男は海で遭難したことがありますか？",
       "answer": "はい",
-      "recall_conditions": [
-        [
-          "P1"
-        ]
-      ],
-      "reveals": [
-        "P2"
-      ],
+      "prerequisites": [],
+      "reveals": "P2",
       "chain_id": "C2"
     },
     {
       "id": "Q3a",
-      "text": "遭難時に誰かが男に「ウミガメのスープだ」と嘘をついて飲ませましたか？",
+      "text": "遭難時に仲間がいましたか？",
       "answer": "はい",
-      "recall_conditions": [
-        [
-          "P2"
-        ]
+      "prerequisites": [
+        "P2"
       ],
-      "reveals": [
-        "P3"
+      "reveals": "N3a",
+      "chain_id": "C3"
+    },
+    {
+      "id": "Q3b",
+      "text": "遭難中に亡くなった仲間はいましたか？",
+      "answer": "はい",
+      "prerequisites": [
+        "N3a"
       ],
+      "reveals": "N3b",
+      "chain_id": "C3"
+    },
+    {
+      "id": "Q3c",
+      "text": "仲間が男に「ウミガメのスープだ」と嘘をついて飲ませましたか？",
+      "answer": "はい",
+      "prerequisites": [
+        "P1"
+      ],
+      "reveals": "P3",
       "chain_id": "C3"
     },
     {
       "id": "Q4a",
-      "text": "実際のスープの材料は動物の肉でしたか？",
+      "text": "実際のスープの材料は一般的な食用動物の肉でしたか？",
       "answer": "いいえ",
-      "recall_conditions": [
-        [
-          "P3"
-        ]
+      "prerequisites": [
+        "P3"
       ],
-      "reveals": [],
-      "chain_id": "C4"
+      "reveals": "N4a",
+      "chain_id": "C3"
     },
     {
       "id": "Q4b",
       "text": "実際のスープの材料は人間の肉でしたか？",
       "answer": "はい",
-      "recall_conditions": [
-        [
-          "P3"
-        ]
+      "prerequisites": [
+        "P3"
       ],
-      "reveals": [
-        "P4"
-      ],
-      "chain_id": "C4"
+      "reveals": "P4",
+      "chain_id": "C3"
     }
   ],
   "initial_confirmed": [

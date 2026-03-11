@@ -16,6 +16,14 @@ def load_data(path: str) -> dict:
         return json.load(f)
 
 
+def _get_reveals(q: dict) -> list[str]:
+    """reveals を文字列・リスト両対応でリストとして返す"""
+    r = q.get("reveals", [])
+    if isinstance(r, str):
+        return [r] if r else []
+    return r
+
+
 def check_chain_question_coverage(data: dict) -> list[str]:
     """全連鎖ステップに対応する質問が存在するか"""
     errors = []
@@ -57,7 +65,7 @@ def check_output_coverage(data: dict) -> list[str]:
                 q = question_map.get(qid)
                 if q is None:
                     continue
-                collective_reveals.update(q.get("reveals", []))
+                collective_reveals.update(_get_reveals(q))
             uncovered = outputs - collective_reveals
             if uncovered:
                 errors.append(
@@ -81,7 +89,7 @@ def check_reveals_scope(data: dict) -> list[str]:
                 q = question_map.get(qid)
                 if q is None:
                     continue
-                reveals = set(q.get("reveals", []))
+                reveals = set(_get_reveals(q))
                 overflow = reveals - outputs
                 if overflow:
                     errors.append(
@@ -224,7 +232,7 @@ def check_reveals_piece_membership(data: dict) -> list[str]:
                 q = question_map.get(qid)
                 if q is None:
                     continue
-                for rev_id in q.get("reveals", []):
+                for rev_id in _get_reveals(q):
                     actual_piece = descriptor_to_piece.get(rev_id)
                     if actual_piece is not None and actual_piece != expected_piece:
                         errors.append(

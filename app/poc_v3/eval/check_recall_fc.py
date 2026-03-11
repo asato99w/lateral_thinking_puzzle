@@ -16,6 +16,14 @@ def load_data(path: str) -> dict:
         return json.load(f)
 
 
+def _get_reveals(q: dict) -> list[str]:
+    """reveals を文字列・リスト両対応でリストとして返す"""
+    r = q.get("reveals", [])
+    if isinstance(r, str):
+        return [r] if r else []
+    return r
+
+
 def _normalize_conditions(conditions: list[list[str]] | None) -> list[list[str]]:
     """条件を正規化する（ソートして比較可能にする）"""
     if conditions is None:
@@ -32,14 +40,16 @@ def check_recall_equals_fc(data: dict) -> list[str]:
     for q in data.get("questions", []):
         qid = q["id"]
         recall = q.get("recall_conditions", [])
-        reveals = q.get("reveals", [])
+        reveals = _get_reveals(q)
 
         if not reveals:
             continue
 
-        # reveals される全命題の fc を集める
-        # 複数の命題が reveals される場合、最初の（主要な）命題の fc と比較
-        # v3 では recall = reveals される命題の fc
+        # recall_conditions が存在しない場合（rc 廃止後の形式）はスキップ
+        if not recall:
+            continue
+
+        # reveals される命題の fc と比較
         for rev_id in reveals:
             d = descriptor_map.get(rev_id)
             if d is None:

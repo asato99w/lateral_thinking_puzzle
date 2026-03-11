@@ -24,6 +24,14 @@ def _get_descriptors(data: dict) -> list[dict]:
     return data.get("propositions", data.get("descriptors", []))
 
 
+def _get_reveals(q: dict) -> list[str]:
+    """reveals を文字列・リスト両対応でリストとして返す"""
+    r = q.get("reveals", [])
+    if isinstance(r, str):
+        return [r] if r else []
+    return r
+
+
 def _is_base(d: dict) -> bool:
     """基礎命題かどうか（formation_conditions も entailment_conditions も持たない）"""
     return "formation_conditions" not in d and "entailment_conditions" not in d
@@ -43,7 +51,7 @@ def check_base_descriptor_reachability(data: dict) -> list[str]:
     initial = set(data.get("initial_confirmed", []))
     revealed: set[str] = set()
     for q in data.get("questions", []):
-        revealed.update(q.get("reveals", []))
+        revealed.update(_get_reveals(q))
 
     for d in _get_descriptors(data):
         if not _is_base(d):
@@ -101,7 +109,7 @@ def check_proposition_reachability(data: dict) -> list[str]:
     initial = set(data.get("initial_confirmed", []))
     revealed: set[str] = set()
     for q in data.get("questions", []):
-        revealed.update(q.get("reveals", []))
+        revealed.update(_get_reveals(q))
 
     descriptors = _get_descriptors(data)
     formation_conds = {d["id"]: d["formation_conditions"] for d in descriptors if _has_formation(d)}
@@ -130,7 +138,7 @@ def check_piece_member_reachability(data: dict) -> list[str]:
     initial = set(data.get("initial_confirmed", []))
     revealed: set[str] = set()
     for q in data.get("questions", []):
-        revealed.update(q.get("reveals", []))
+        revealed.update(_get_reveals(q))
 
     descriptors = _get_descriptors(data)
     formation_conds = {d["id"]: d["formation_conditions"] for d in descriptors if _has_formation(d)}
@@ -185,7 +193,7 @@ def check_recall_scope(data: dict) -> list[str]:
 
     reveals_map: dict[str, list[dict]] = {}
     for q in data.get("questions", []):
-        for did in q.get("reveals", []):
+        for did in _get_reveals(q):
             reveals_map.setdefault(did, []).append(q)
 
     descriptors = _get_descriptors(data)
@@ -238,7 +246,7 @@ def check_orphan_descriptors(data: dict) -> list[str]:
     initial = set(data.get("initial_confirmed", []))
     revealed: set[str] = set()
     for q in data.get("questions", []):
-        revealed.update(q.get("reveals", []))
+        revealed.update(_get_reveals(q))
 
     for d in _get_descriptors(data):
         if not _is_base(d):
@@ -265,7 +273,7 @@ def check_recall_reachability_v3(data: dict) -> list[str]:
     # 全 reveals を集めた confirmed で最大到達可能集合を求める
     all_reveals: set[str] = set()
     for q in data.get("questions", []):
-        all_reveals.update(q.get("reveals", []))
+        all_reveals.update(_get_reveals(q))
 
     max_confirmed = initial | all_reveals
     derivable = _derivable_descriptors(max_confirmed, formation_conds, entailment_conds, rejection_conds or None)
