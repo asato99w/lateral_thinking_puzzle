@@ -77,6 +77,63 @@
     ]
   },
   "_phase3": {
+    "s_propositions": [
+      {"id": "S1", "label": "ある男がいた", "type": "atomic"},
+      {"id": "S2", "label": "男はレストランに入った", "type": "atomic"},
+      {"id": "S3", "label": "男は「ウミガメのスープ」を注文した", "type": "atomic"},
+      {"id": "S4", "label": "男はスープを一口飲んだ", "type": "atomic"},
+      {"id": "S5", "label": "男は店員に「これは本当にウミガメのスープか？」と尋ねた", "type": "atomic"},
+      {"id": "S6", "label": "店員は「はい、間違いなくウミガメのスープです」と答えた", "type": "atomic"},
+      {"id": "S7", "label": "男はその夜自殺した", "type": "atomic"},
+      {"id": "S8", "label": "レストランがあった", "type": "derived", "derived_from": ["S2"]},
+      {"id": "S9", "label": "店員がいた", "type": "derived", "derived_from": ["S5", "S6"]},
+      {"id": "S10", "label": "男はスープの真偽を疑った", "type": "derived", "derived_from": ["S5"]},
+      {"id": "S11", "label": "男は飲んでから確認した", "type": "derived", "derived_from": ["S4", "S5"]},
+      {"id": "S12", "label": "スープは本物のウミガメのスープだった", "type": "derived", "derived_from": ["S6"]}
+    ],
+    "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12"],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_upper",
+        "source": ["S5", "S10", "S11", "S12"],
+        "target": "P1",
+        "tactic": "動機の探索 > 段階的絞り込み → ラベルと実体の乖離",
+        "description": "{S5,S10,S11} →[動機の探索 > 段階的絞り込み]→ N1a: 味の不味さが理由ではない → I1: 以前にも飲んだ → {I1,S12} →[ラベルと実体の乖離]→ P1: 過去のは偽物だった"
+      },
+      {
+        "id": "C2",
+        "type": "upper_to_lower",
+        "source": ["P1"],
+        "target": "P2",
+        "tactic": "人物像の探索 > 段階的絞り込み",
+        "description": "{P1} →[人物像の探索 > 段階的絞り込み]→ N2a: 日常的な出来事ではない → N2b: 極限状態での出来事 → P2: 遭難",
+        "fc_source": "P1 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C3",
+        "type": "upper_to_lower",
+        "source": ["P2"],
+        "target": "P4",
+        "tactic": "登場人物の探索 > 段階的絞り込み（分岐あり）",
+        "description": "{P2} → N3a(仲間がいた) → N3b(仲間が死んだ) → P3(仲間の欺瞞) → N4a(食用動物でない) → P4(人肉)。N3b は P3 への流れと P4 の fc に分岐合流する",
+        "fc_source": "P2 は連鎖 C2 の reveals"
+      }
+    ]
+  },
+  "_phase4": {
+    "chain_mapping": {
+      "C1": ["Q1a", "Q1b", "Q1c"],
+      "C2": ["Q2a", "Q2b", "Q2c"],
+      "C3": ["Q3a", "Q3b", "Q3c", "Q4a", "Q4b"]
+    },
+    "exploration_paths": [
+      {"name": "パス A: 味の動機から入る", "sequence": "Q1a(いいえ:N1a) → Q1b(はい:I1) → Q1c(いいえ:P1) → Q2a(いいえ:N2a) → Q2b(はい:N2b) → Q2c(はい:P2) → Q3a(はい:N3a) → Q3b(はい:N3b) → Q3c(はい:P3) → Q4a(いいえ:N4a) → Q4b(はい:P4) → T"},
+      {"name": "パス B: 過去の体験から入る", "sequence": "Q1b(はい:I1) → Q1c(いいえ:P1) → Q2a(いいえ:N2a) → Q2c(はい:P2) → Q3a(はい:N3a) → Q3c(はい:P3) → Q4b(はい:P4) → T"},
+      {"name": "パス C: 遭難から直接入る", "sequence": "Q2c(はい:P2) → Q3a(はい:N3a) → Q3b(はい:N3b) → Q1b(はい:I1) → Q1c(いいえ:P1) → Q3c(はい:P3) → Q4a(いいえ:N4a) → Q4b(はい:P4) → T"}
+    ]
+  },
+  "_phase5": {
     "rejection_map": [
       {"model_id": "M1", "false_propositions": ["P4"], "min_rejection": ["P4"]},
       {"model_id": "M2", "false_propositions": ["P2"], "min_rejection": ["P2"]},
@@ -106,91 +163,151 @@
       {"step": 2, "confirmed_proposition": "P2", "rejected": ["M2", "M3", "M8", "M12"], "remaining": ["T", "M1", "M4"]},
       {"step": 3, "confirmed_proposition": "P3", "rejected": ["M4"], "remaining": ["T", "M1"]},
       {"step": 4, "confirmed_proposition": "P4", "rejected": ["M1"], "remaining": ["T"]}
-    ]
-  },
-  "_phase4": {
-    "s_propositions": [
-      {"id": "S1", "label": "ある男がいた", "type": "atomic"},
-      {"id": "S2", "label": "男はレストランに入った", "type": "atomic"},
-      {"id": "S3", "label": "男は「ウミガメのスープ」を注文した", "type": "atomic"},
-      {"id": "S4", "label": "男はスープを一口飲んだ", "type": "atomic"},
-      {"id": "S5", "label": "男は店員に「これは本当にウミガメのスープか？」と尋ねた", "type": "atomic"},
-      {"id": "S6", "label": "店員は「はい、間違いなくウミガメのスープです」と答えた", "type": "atomic"},
-      {"id": "S7", "label": "男はその夜自殺した", "type": "atomic"},
-      {"id": "S8", "label": "レストランがあった", "type": "derived", "derived_from": ["S2"]},
-      {"id": "S9", "label": "店員がいた", "type": "derived", "derived_from": ["S5", "S6"]},
-      {"id": "S10", "label": "男はスープの真偽を疑った", "type": "derived", "derived_from": ["S5"]},
-      {"id": "S11", "label": "男は飲んでから確認した", "type": "derived", "derived_from": ["S4", "S5"]},
-      {"id": "S12", "label": "スープは本物のウミガメのスープだった", "type": "derived", "derived_from": ["S6"]}
     ],
-    "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12"],
-    "tactical_chains": [
+    "false_side_analysis": [
       {
-        "id": "C1",
-        "type": "S_to_upper",
-        "source": ["S5", "S10", "S11", "S12"],
-        "target": "P1",
-        "via": "N1a, I1",
-        "tactic": "動機の探索 > 段階的絞り込み → ラベルと実体の乖離",
-        "description": "{S5,S10,S11} →[動機の探索 > 段階的絞り込み]→ N1a: 味の不味さが理由ではない → I1: 以前にも飲んだ → {I1,S12} →[ラベルと実体の乖離]→ P1: 過去のは偽物だった"
+        "division_point": "P1",
+        "false_set": ["M5", "M6", "M7", "M9", "M10", "M11"],
+        "characteristics": "過去の偽スープ体験がない。現在のレストラン訪問自体に自殺の原因がある（職業的理由、宗教的禁忌、体調悪化、計画的自殺等）",
+        "internal_structure": "職業・活動関連(M5,M9,M10) vs 個人的事情(M6,M7,M11)"
       },
       {
-        "id": "C2",
-        "type": "upper_to_lower",
-        "source": ["P1"],
-        "target": "P2",
-        "tactic": "人物像の探索 > 段階的絞り込み",
-        "description": "{P1} →[人物像の探索 > 段階的絞り込み]→ N2a: 日常的な出来事ではない → N2b: 極限状態での出来事 → P2: 遭難",
-        "fc_source": "P1 は連鎖 C1 の reveals"
+        "division_point": "P2",
+        "false_set": ["M2", "M3", "M8", "M12"],
+        "characteristics": "過去の偽スープ体験はあるが海難ではない。家庭内(M2,M8)、戦争(M3)、飢饉(M12)が起源",
+        "internal_structure": "家庭・個人的事情(M2,M8) vs 社会的危機(M3,M12)"
       },
       {
-        "id": "C3",
-        "type": "upper_to_lower",
-        "source": ["P2"],
-        "target": "P4",
-        "tactic": "登場人物の探索 > 段階的絞り込み（分岐あり）",
-        "description": "{P2} → N3a(仲間がいた) → N3b(仲間が死んだ) → P3(仲間の欺瞞) → N4a(食用動物でない) → P4(人肉)。N3b は P3 への流れと P4 の fc に分岐合流する",
-        "fc_source": "P2 は連鎖 C2 の reveals"
+        "division_point": "P3",
+        "false_set": ["M4"],
+        "characteristics": "海難だが他者の意図的欺瞞ではなく自己の誤認。スープの偽りは第三者の嘘ではなく本人の勘違い",
+        "internal_structure": "単一モデル"
+      },
+      {
+        "division_point": "P4",
+        "false_set": ["M1"],
+        "characteristics": "他者の欺瞞はあるが人肉ではなく別の動物の肉。T と構造的に最も近いモデル",
+        "internal_structure": "単一モデル"
       }
     ]
   },
-  "_phase5": {
-    "rejection_progression": [
-      {"trigger": "Q1c answered", "confirmed": "P1", "rejected": ["M5", "M6", "M7", "M9", "M10", "M11"], "remaining": ["T", "M1", "M2", "M3", "M4", "M8", "M12"]},
-      {"trigger": "Q2c answered", "confirmed": "P2", "rejected": ["M2", "M3", "M8", "M12"], "remaining": ["T", "M1", "M4"]},
-      {"trigger": "Q3b answered", "confirmed": "P3", "rejected": ["M4"], "remaining": ["T", "M1"]},
-      {"trigger": "Q4b answered", "confirmed": "P4", "rejected": ["M1"], "remaining": ["T"]}
+  "_phase6": {
+    "false_side_chains": [
+      {
+        "id": "FC1",
+        "division_point": "P1",
+        "direction": "false",
+        "source": ["S10", "N1a"],
+        "target": "NF1a",
+        "tactic": "人物像の探索",
+        "description": "{S10, N1a} →[人物像の探索]→ NF1a: 食品の専門知識仮説の否定",
+        "fc_source": "S10 は initial_confirmed、N1a は Q1a の reveals"
+      },
+      {
+        "id": "FC2",
+        "division_point": "P2",
+        "direction": "false",
+        "source": ["N2b"],
+        "target": "NF2a",
+        "tactic": "段階的絞り込み",
+        "description": "{N2b} →[段階的絞り込み]→ NF2a: 陸上の危機的状況",
+        "fc_source": "N2b は Q2b の reveals"
+      },
+      {
+        "id": "FC3",
+        "division_point": "P3",
+        "direction": "false",
+        "source": ["P2"],
+        "target": "NF3a",
+        "tactic": "段階的絞り込み",
+        "description": "{P2} →[段階的絞り込み]→ NF3a: 自己の食材誤認",
+        "fc_source": "P2 は Q2c の reveals"
+      },
+      {
+        "id": "FC4",
+        "division_point": "P4",
+        "direction": "false",
+        "source": ["P3", "N4a"],
+        "target": "NF4a",
+        "tactic": "段階的絞り込み",
+        "description": "{P3, N4a} →[段階的絞り込み]→ NF4a: 別の動物の肉",
+        "fc_source": "P3 は Q3c の reveals、N4a は Q4a の reveals"
+      }
+    ]
+  },
+  "_phase7": {
+    "internal_branches": [
+      {
+        "source_question": "Q1b",
+        "branch_answer": "いいえ",
+        "leads_to": ["QF1a"],
+        "description": "I1 否定時に、食品専門知識の仮説を探索"
+      },
+      {
+        "source_question": "Q2c",
+        "branch_answer": "いいえ",
+        "leads_to": ["QF2a"],
+        "description": "P2 否定時に、陸上危機の仮説を探索"
+      },
+      {
+        "source_question": "Q3a",
+        "branch_answer": "いいえ",
+        "leads_to": ["QF3a"],
+        "description": "N3a 否定時に、自己誤認の仮説を探索"
+      },
+      {
+        "source_question": "Q4b",
+        "branch_answer": "いいえ",
+        "leads_to": ["QF4a"],
+        "description": "P4 否定時に、動物肉の仮説を探索"
+      }
     ],
-    "exploration_paths": [
-      {"name": "パス A: 全質問順序", "sequence": "Q1a(いいえ:N1a) → Q1b(はい:I1) → Q1c(いいえ:P1) → Q2a(いいえ:N2a) → Q2b(はい:N2b) → Q2c(はい:P2) → Q3a(はい:N3a) → Q3b(はい:N3b) → Q3c(はい:P3) → Q4a(いいえ:N4a) → Q4b(はい:P4) → T"},
-      {"name": "パス B: 排除を一部省略", "sequence": "Q1a(いいえ:N1a) → Q1b(はい:I1) → Q1c(いいえ:P1) → Q2a(いいえ:N2a) → Q2b(はい:N2b) → Q2c(はい:P2) → Q3a(はい:N3a) → Q3b(はい:N3b) → Q3c(はい:P3) → Q4b(はい:P4) → T"}
+    "convergence_points": [
+      {
+        "proposition_id": "P3",
+        "new_fc_group": ["NF3a", "N3a"],
+        "source": "偽側 QF3a の reveals (NF3a) + 既存 N3a からの合流"
+      },
+      {
+        "proposition_id": "P4",
+        "new_fc_group": ["NF4a", "N3b"],
+        "source": "偽側 QF4a の reveals (NF4a) + 既存 N3b からの合流"
+      }
     ]
   },
   "propositions": [
-    {"id": "N1a", "label": "男がスープの真偽を確認した理由は味の不味さではない", "truth_value": true, "formation_conditions": [["S5", "S10", "S11"]]},
-    {"id": "I1", "label": "男は以前にも「ウミガメのスープ」を飲んだことがある（と信じている）", "truth_value": true, "formation_conditions": [["S5", "S10", "S11", "N1a"]]},
-    {"id": "P1", "label": "男は過去に「ウミガメのスープ」だと信じて実際はウミガメではないものを飲んだ経験がある", "truth_value": true, "formation_conditions": [["I1", "S12"]]},
-    {"id": "N2a", "label": "偽のスープを飲んだのは日常的な出来事ではなかった", "truth_value": true, "formation_conditions": [["P1"]]},
-    {"id": "N2b", "label": "偽のスープを飲んだのは極限状態での出来事だった", "truth_value": true, "formation_conditions": [["P1", "N2a"]]},
-    {"id": "P2", "label": "その過去の体験は海での遭難に起因する", "truth_value": true, "formation_conditions": [["N2b", "S3"]]},
-    {"id": "N3a", "label": "遭難時に仲間がいた", "truth_value": true, "formation_conditions": [["P2"]]},
-    {"id": "N3b", "label": "遭難中に仲間の一人が死んだ", "truth_value": true, "formation_conditions": [["N3a"]]},
-    {"id": "P3", "label": "偽りのスープは他者が意図的に「ウミガメのスープだ」と嘘をついて飲ませたものだった", "truth_value": true, "formation_conditions": [["N3a", "P1"]]},
-    {"id": "N4a", "label": "偽りのスープの材料は一般的な食用動物の肉ではなかった", "truth_value": true, "formation_conditions": [["P3"]]},
-    {"id": "P4", "label": "偽りのスープの原材料は人間の肉だった", "truth_value": true, "formation_conditions": [["N4a", "N3b"]]}
+    {"id": "N1a", "label": "男がスープの真偽を確認した理由は味の不味さではない", "_truth_value": true, "formation_conditions": [["S5", "S10", "S11"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "I1", "label": "男は以前にも「ウミガメのスープ」を飲んだことがある（と信じている）", "_truth_value": true, "formation_conditions": [["S5", "S10", "S11", "N1a"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "P1", "label": "男は過去に「ウミガメのスープ」だと信じて実際はウミガメではないものを飲んだ経験がある", "_truth_value": true, "formation_conditions": [["I1", "S12"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "N2a", "label": "偽のスープを飲んだのは日常的な出来事ではなかった", "_truth_value": true, "formation_conditions": [["P1"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "N2b", "label": "偽のスープを飲んだのは極限状態での出来事だった", "_truth_value": true, "formation_conditions": [["P1", "N2a"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "P2", "label": "その過去の体験は海での遭難に起因する", "_truth_value": true, "formation_conditions": [["N2b", "S3"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "N3a", "label": "遭難時に仲間がいた", "_truth_value": true, "formation_conditions": [["P2"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "N3b", "label": "遭難中に仲間の一人が死んだ", "_truth_value": true, "formation_conditions": [["N3a"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "P3", "label": "偽りのスープは他者が意図的に「ウミガメのスープだ」と嘘をついて飲ませたものだった", "_truth_value": true, "formation_conditions": [["N3a", "P1"], ["NF3a", "N3a"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "N4a", "label": "偽りのスープの材料は一般的な食用動物の肉ではなかった", "_truth_value": true, "formation_conditions": [["P3"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "P4", "label": "偽りのスープの原材料は人間の肉だった", "_truth_value": true, "formation_conditions": [["N4a", "N3b"], ["NF4a", "N3b"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "NF1a", "label": "男は食品に関する専門的な知識を持つ立場にはなかった", "_truth_value": true, "formation_conditions": [["S10", "N1a"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "NF2a", "label": "偽のスープ体験は陸上の危機（戦争・飢饉・虐待等）に起因するものではなかった", "_truth_value": true, "formation_conditions": [["N2b"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "NF3a", "label": "偽りのスープは男自身の食材の誤認によるものではなかった", "_truth_value": true, "formation_conditions": [["P2"]], "entailment_conditions": [], "rejection_conditions": []},
+    {"id": "NF4a", "label": "偽りのスープの材料は人間以外の動物の肉ではなかった", "_truth_value": true, "formation_conditions": [["P3", "N4a"]], "entailment_conditions": [], "rejection_conditions": []}
   ],
   "questions": [
-    {"id": "Q1a", "text": "男がスープの真偽を確認したのは、味が不味いと感じたからですか？", "answer": "いいえ", "prerequisites": ["S5", "S10"], "reveals": "N1a", "chain_id": "C1"},
-    {"id": "Q1b", "text": "男は過去に「ウミガメのスープ」を飲んだことがあると認識していますか？", "answer": "はい", "prerequisites": [], "reveals": "I1", "chain_id": "C1"},
-    {"id": "Q1c", "text": "男が過去に飲んだ「ウミガメのスープ」は、本物のウミガメのスープでしたか？", "answer": "いいえ", "prerequisites": ["I1"], "reveals": "P1", "chain_id": "C1"},
-    {"id": "Q2a", "text": "偽のスープを飲んだのは日常生活の中での出来事ですか？", "answer": "いいえ", "prerequisites": ["P1"], "reveals": "N2a", "chain_id": "C2"},
-    {"id": "Q2b", "text": "事故や災害など、極限状態での出来事ですか？", "answer": "はい", "prerequisites": ["P1"], "reveals": "N2b", "chain_id": "C2"},
-    {"id": "Q2c", "text": "男は海で遭難したことがありますか？", "answer": "はい", "prerequisites": [], "reveals": "P2", "chain_id": "C2"},
-    {"id": "Q3a", "text": "遭難時に仲間がいましたか？", "answer": "はい", "prerequisites": ["P2"], "reveals": "N3a", "chain_id": "C3"},
-    {"id": "Q3b", "text": "遭難中に亡くなった仲間はいましたか？", "answer": "はい", "prerequisites": ["N3a"], "reveals": "N3b", "chain_id": "C3"},
-    {"id": "Q3c", "text": "仲間が男に「ウミガメのスープだ」と嘘をついて飲ませましたか？", "answer": "はい", "prerequisites": ["P1"], "reveals": "P3", "chain_id": "C3"},
-    {"id": "Q4a", "text": "実際のスープの材料は一般的な食用動物の肉でしたか？", "answer": "いいえ", "prerequisites": ["P3"], "reveals": "N4a", "chain_id": "C3"},
-    {"id": "Q4b", "text": "実際のスープの材料は人間の肉でしたか？", "answer": "はい", "prerequisites": ["P3"], "reveals": "P4", "chain_id": "C3"}
+    {"id": "Q1a", "text": "男がスープの真偽を確認したのは、味が不味いと感じたからですか？", "answer": "いいえ", "recall_conditions": [["S5", "S10", "S11"]], "reveals": ["N1a"], "mechanism": "observation", "prerequisites": ["S5", "S10"]},
+    {"id": "Q1b", "text": "男は過去に「ウミガメのスープ」を飲んだことがあると認識していますか？", "answer": "はい", "recall_conditions": [["S5", "S10", "S11", "N1a"]], "reveals": ["I1"], "mechanism": "link", "prerequisites": []},
+    {"id": "Q1c", "text": "男が過去に飲んだ「ウミガメのスープ」は、本物のウミガメのスープでしたか？", "answer": "いいえ", "recall_conditions": [["I1", "S12"]], "reveals": ["P1"], "mechanism": "anomaly", "prerequisites": ["I1"]},
+    {"id": "Q2a", "text": "偽のスープを飲んだのは日常生活の中での出来事ですか？", "answer": "いいえ", "recall_conditions": [["P1"]], "reveals": ["N2a"], "mechanism": "observation", "prerequisites": ["P1"]},
+    {"id": "Q2b", "text": "事故や災害など、極限状態での出来事ですか？", "answer": "はい", "recall_conditions": [["P1", "N2a"]], "reveals": ["N2b"], "mechanism": "link", "prerequisites": ["P1"]},
+    {"id": "Q2c", "text": "男は海で遭難したことがありますか？", "answer": "はい", "recall_conditions": [["N2b", "S3"]], "reveals": ["P2"], "mechanism": "observation", "prerequisites": []},
+    {"id": "Q3a", "text": "遭難時に仲間がいましたか？", "answer": "はい", "recall_conditions": [["P2"]], "reveals": ["N3a"], "mechanism": "observation", "prerequisites": ["P2"]},
+    {"id": "Q3b", "text": "遭難中に亡くなった仲間はいましたか？", "answer": "はい", "recall_conditions": [["N3a"]], "reveals": ["N3b"], "mechanism": "observation", "prerequisites": ["N3a"]},
+    {"id": "Q3c", "text": "仲間が男に「ウミガメのスープだ」と嘘をついて飲ませましたか？", "answer": "はい", "recall_conditions": [["N3a", "P1"], ["NF3a", "N3a"]], "reveals": ["P3"], "mechanism": "link", "prerequisites": ["P1"]},
+    {"id": "Q4a", "text": "実際のスープの材料は一般的な食用動物の肉でしたか？", "answer": "いいえ", "recall_conditions": [["P3"]], "reveals": ["N4a"], "mechanism": "observation", "prerequisites": ["P3"]},
+    {"id": "Q4b", "text": "実際のスープの材料は人間の肉でしたか？", "answer": "はい", "recall_conditions": [["N4a", "N3b"], ["NF4a", "N3b"]], "reveals": ["P4"], "mechanism": "link", "prerequisites": ["P3"]},
+    {"id": "QF1a", "text": "男は食品に関する専門的な知識を持つ職業の人ですか？", "answer": "いいえ", "recall_conditions": [["S10", "N1a"]], "reveals": ["NF1a"], "mechanism": "observation", "prerequisites": []},
+    {"id": "QF2a", "text": "偽のスープを飲まされたのは、戦争や飢饉など陸上の危機的状況でしたか？", "answer": "いいえ", "recall_conditions": [["N2b"]], "reveals": ["NF2a"], "mechanism": "observation", "prerequisites": ["P1"]},
+    {"id": "QF3a", "text": "遭難中に男自身が捕まえた動物を食材と誤認しましたか？", "answer": "いいえ", "recall_conditions": [["P2"]], "reveals": ["NF3a"], "mechanism": "observation", "prerequisites": ["P2"]},
+    {"id": "QF4a", "text": "偽りのスープの材料は、人間以外の動物の肉でしたか？", "answer": "いいえ", "recall_conditions": [["P3", "N4a"]], "reveals": ["NF4a"], "mechanism": "observation", "prerequisites": ["P3"]}
   ],
   "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12"]
 }
