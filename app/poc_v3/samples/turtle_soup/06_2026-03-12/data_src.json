@@ -695,6 +695,18 @@
       ],
       "entailment_conditions": null,
       "rejection_conditions": null
+    },
+    {
+      "id": "NF5a",
+      "label": "遭難中、男たちは海上（船上または漂流中）にいた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     }
   ],
   "questions": [
@@ -883,6 +895,23 @@
       "prerequisites": [
         "N5a"
       ]
+    },
+    {
+      "id": "QF5a",
+      "text": "遭難中、男たちは陸地ではなく海の上にいましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "reveals": [
+        "NF5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P3"
+      ]
     }
   ],
   "_phase4": {
@@ -924,5 +953,397 @@
         "sequence": "Q1a(いいえ:N1a) → Q2a(はい:N2b) → Q2b(はい:N2c) → Q3(はい:P1) → Q4a(はい:N3b) → Q4b(はい:N3c) → Q4c(はい:P2) → Q5(はい:P3) → Q6a(はい:N5a) → Q6b(はい:P4)"
       }
     ]
+  },
+  "_phase5": {
+    "chain_branches": [
+      {
+        "chain_id": "C1",
+        "chain_path": "S → N1a → N1b → P1",
+        "branches": [
+          {
+            "at_step": "N1a",
+            "tactic": "動機の探索",
+            "true_side_label": "スープの正体確認は味への不満によるものではない",
+            "parallels": [
+              {
+                "label": "宗教的・文化的禁忌の確認のために正体を尋ねた",
+                "models": [
+                  "M10"
+                ]
+              },
+              {
+                "label": "約束や誓いの履行としての確認",
+                "models": [
+                  "M11"
+                ]
+              },
+              {
+                "label": "罪悪感・疑念からの確認",
+                "models": [
+                  "M12"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "N1b",
+            "tactic": "観測事実の深掘り",
+            "true_side_label": "男はスープの味を何かと比較していた",
+            "parallels": [
+              {
+                "label": "味ではなく見た目や匂いで判断した",
+                "models": []
+              },
+              {
+                "label": "味の照合ではなく感情的な反応（嫌悪・恐怖）で残した",
+                "models": [
+                  "M11"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P1",
+            "tactic": "時間軸の拡張",
+            "true_side_label": "男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある",
+            "parallels": [
+              {
+                "label": "知識・伝聞に基づく比較（自分では飲んでいない）",
+                "models": [
+                  "M10"
+                ]
+              },
+              {
+                "label": "他者の体験の伝聞に基づく比較",
+                "models": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C2",
+        "chain_path": "S → N2b → N2c → P1",
+        "branches": [
+          {
+            "at_step": "N2b",
+            "tactic": "因果の逆転",
+            "true_side_label": "本物のウミガメのスープだと確認されたことが自殺の契機となった",
+            "parallels": [
+              {
+                "label": "確認行為自体は無関係で、別の出来事が自殺の原因",
+                "models": [
+                  "M8",
+                  "M9"
+                ]
+              },
+              {
+                "label": "確認は自殺を思い止まるための行為だったが失敗した",
+                "models": []
+              }
+            ]
+          },
+          {
+            "at_step": "N2c",
+            "tactic": "矛盾の指摘",
+            "true_side_label": "男にとって本物のウミガメのスープであることが致命的な意味を持っていた",
+            "parallels": [
+              {
+                "label": "致命的ではなく象徴的・感情的な意味",
+                "models": [
+                  "M11"
+                ]
+              },
+              {
+                "label": "致命的な意味は個人的な秘密の露見に関わる",
+                "models": [
+                  "M12"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P1",
+            "tactic": "時間軸の拡張",
+            "true_side_label": "男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある",
+            "parallels": [
+              {
+                "label": "知識・伝聞に基づく比較（自分では飲んでいない）",
+                "models": [
+                  "M10"
+                ]
+              },
+              {
+                "label": "他者の体験の伝聞に基づく比較",
+                "models": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C3",
+        "chain_path": "P1 → N3b → N3c → P2",
+        "branches": [
+          {
+            "at_step": "N3b",
+            "tactic": "段階的絞り込み",
+            "true_side_label": "過去のスープ体験は日常生活での出来事ではなかった",
+            "parallels": [
+              {
+                "label": "職業上の経験として飲んだ（料理人・調査員等）",
+                "models": [
+                  "M5",
+                  "M9"
+                ]
+              },
+              {
+                "label": "家庭で配偶者に提供されて飲んだ",
+                "models": [
+                  "M8"
+                ]
+              },
+              {
+                "label": "入院・療養中に出された食事",
+                "models": [
+                  "M7"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "N3c",
+            "tactic": "段階的絞り込み",
+            "true_side_label": "過去のスープ体験は命に関わるような極限状況でのことだった",
+            "parallels": [
+              {
+                "label": "非日常的だが命には関わらない特別な状況（儀式・旅行等）",
+                "models": [
+                  "M10"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P2",
+            "tactic": "段階的絞り込み",
+            "true_side_label": "過去のスープ体験は食料の危機的状況に起因する",
+            "parallels": [
+              {
+                "label": "食料以外の生命の危機（暴力・拘束・紛争等）に起因する",
+                "models": [
+                  "M3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C4",
+        "chain_path": "{P2, S3} → P3",
+        "branches": [
+          {
+            "at_step": "P3",
+            "tactic": "段階的絞り込み",
+            "true_side_label": "過去の体験は海での遭難に起因する",
+            "parallels": [
+              {
+                "label": "陸上での食料危機（貧困・飢饉等）",
+                "models": [
+                  "M2",
+                  "M6"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C5",
+        "chain_path": "{P3} → N5a → P4",
+        "branches": [
+          {
+            "at_step": "P3_entry",
+            "tactic": "(起点の具体化)",
+            "true_side_label": "海上（船上・漂流中）で遭難していた",
+            "parallels": [
+              {
+                "label": "海経由だが陸地（島）に漂着していた",
+                "models": [
+                  "M4"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "N5a",
+            "tactic": "登場人物の探索",
+            "true_side_label": "遭難時に男以外の人物がいた",
+            "parallels": [],
+            "note": "存在の有無を問う粒度であり、有意な並列が本質的に限定される。人物の役割に関する並列は次のP4ステップで展開"
+          },
+          {
+            "at_step": "P4",
+            "tactic": "段階的絞り込み",
+            "true_side_label": "他者が男に対して意図的に偽って飲ませた",
+            "parallels": [
+              {
+                "label": "男自身が自己欺瞞した（他者は偽っていない）",
+                "models": [
+                  "M1"
+                ]
+              },
+              {
+                "label": "男が他者を欺いた（加害者側）",
+                "models": [
+                  "M12"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "all_models": [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7",
+        "M8",
+        "M9",
+        "M10",
+        "M11",
+        "M12"
+      ],
+      "model_coverage": {
+        "M1": [
+          {
+            "chain": "C5",
+            "step": "P4"
+          }
+        ],
+        "M2": [
+          {
+            "chain": "C4",
+            "step": "P3"
+          }
+        ],
+        "M3": [
+          {
+            "chain": "C3",
+            "step": "P2"
+          }
+        ],
+        "M4": [
+          {
+            "chain": "C5",
+            "step": "P3_entry"
+          }
+        ],
+        "M5": [
+          {
+            "chain": "C3",
+            "step": "N3b"
+          }
+        ],
+        "M6": [
+          {
+            "chain": "C4",
+            "step": "P3"
+          }
+        ],
+        "M7": [
+          {
+            "chain": "C3",
+            "step": "N3b"
+          }
+        ],
+        "M8": [
+          {
+            "chain": "C2",
+            "step": "N2b"
+          },
+          {
+            "chain": "C3",
+            "step": "N3b"
+          }
+        ],
+        "M9": [
+          {
+            "chain": "C2",
+            "step": "N2b"
+          },
+          {
+            "chain": "C3",
+            "step": "N3b"
+          }
+        ],
+        "M10": [
+          {
+            "chain": "C1",
+            "step": "N1a"
+          },
+          {
+            "chain": "C1",
+            "step": "P1"
+          },
+          {
+            "chain": "C3",
+            "step": "N3c"
+          }
+        ],
+        "M11": [
+          {
+            "chain": "C1",
+            "step": "N1a"
+          },
+          {
+            "chain": "C1",
+            "step": "N1b"
+          },
+          {
+            "chain": "C2",
+            "step": "N2c"
+          }
+        ],
+        "M12": [
+          {
+            "chain": "C1",
+            "step": "N1a"
+          },
+          {
+            "chain": "C2",
+            "step": "N2c"
+          },
+          {
+            "chain": "C5",
+            "step": "P4"
+          }
+        ]
+      },
+      "uncovered": [],
+      "uncovered_notes": ""
+    },
+    "generated": {
+      "propositions": [
+        {
+          "id": "NF5a",
+          "source_chain": "C5",
+          "source_step": "P3_entry",
+          "parallel_index": 0
+        }
+      ],
+      "questions": [
+        {
+          "id": "QF5a",
+          "reveals_proposition": "NF5a"
+        }
+      ]
+    }
   }
 }
