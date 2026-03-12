@@ -153,6 +153,42 @@
       ],
       "entailment_conditions": null,
       "rejection_conditions": null
+    },
+    {
+      "id": "NT9",
+      "label": "レストランのスープは以前飲んだものと味が異なっていた",
+      "formation_conditions": [
+        [
+          "P1",
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NU3",
+      "label": "遭難中に仲間の一人が死んだ",
+      "formation_conditions": [
+        [
+          "P2",
+          "P4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NU4",
+      "label": "飲まされたスープは死んだ仲間の肉で作られていた",
+      "formation_conditions": [
+        [
+          "NU3",
+          "P4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     }
   ],
   "questions": [
@@ -291,7 +327,45 @@
       "prerequisites": [
         "P3"
       ]
+    },
+    {
+      "id": "QT9",
+      "text": "レストランで飲んだスープは、以前飲んだものと味が違いましたか？",
+      "answer": "はい",
+      "reveals": [
+        "NT9"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QU3",
+      "text": "遭難中に仲間の一人が死にましたか？",
+      "answer": "はい",
+      "reveals": [
+        "NU3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QU4",
+      "text": "飲まされたスープは、死んだ仲間の肉で作られていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "NU4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "NU3"
+      ]
     }
+  ],
+  "clear_conditions": [
+    [
+      "T3",
+      "T4"
+    ]
   ],
   "statement": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口飲んだ男は店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜだろう？",
   "truth": "男は船乗りで、かつて仲間と船で遭難し、食料が尽きた。仲間の一人が死に、残った仲間は男に「ウミガメのスープだ」と言ってスープを飲ませた。実際にはそれは死んだ仲間の肉で作ったスープだった。レストランで本物のウミガメのスープを飲んだ男は、味が違うことに気づき、あのとき飲まされたものの正体を悟り、絶望して自殺した。",

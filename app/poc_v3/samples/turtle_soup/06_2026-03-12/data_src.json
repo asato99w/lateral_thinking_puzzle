@@ -707,6 +707,45 @@
       ],
       "entailment_conditions": null,
       "rejection_conditions": null
+    },
+    {
+      "id": "NT9",
+      "label": "レストランのスープは以前飲んだものと味が異なっていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P1",
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NU3",
+      "label": "遭難中に仲間の一人が死んだ",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P2",
+          "P4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NU4",
+      "label": "飲まされたスープは死んだ仲間の肉で作られていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "NU3",
+          "P4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     }
   ],
   "questions": [
@@ -845,6 +884,38 @@
       "prerequisites": [
         "P3"
       ]
+    },
+    {
+      "id": "QT9",
+      "text": "レストランで飲んだスープは、以前飲んだものと味が違いましたか？",
+      "answer": "はい",
+      "reveals": [
+        "NT9"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QU3",
+      "text": "遭難中に仲間の一人が死にましたか？",
+      "answer": "はい",
+      "reveals": [
+        "NU3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QU4",
+      "text": "飲まされたスープは、死んだ仲間の肉で作られていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "NU4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "NU3"
+      ]
     }
   ],
   "_phase4": {
@@ -888,6 +959,36 @@
     ]
   },
   "_phase5": {
+    "t_facts": [
+      {"id": "T1", "label": "男は船乗りだった", "deducible": false, "entailment_conditions": null},
+      {"id": "T2", "label": "男は仲間と船で遭難し、食料が尽きた", "deducible": false, "entailment_conditions": null},
+      {"id": "T3", "label": "仲間の一人が死んだ", "deducible": false, "entailment_conditions": null},
+      {"id": "T4", "label": "残った仲間が死んだ仲間の肉でスープを作った", "deducible": false, "entailment_conditions": null},
+      {"id": "T5", "label": "仲間は男に「ウミガメのスープだ」と偽って飲ませた", "deducible": true, "entailment_conditions": [["P4", "P1"]]},
+      {"id": "T6", "label": "男はウミガメのスープだと信じて飲んだ", "deducible": true, "entailment_conditions": [["P1"]]},
+      {"id": "T7", "label": "男は助けられた", "deducible": true, "entailment_conditions": [["P3", "S2"]]},
+      {"id": "T8", "label": "レストランで本物のウミガメのスープを注文した", "deducible": true, "entailment_conditions": [["S3", "S10"]]},
+      {"id": "T9", "label": "一口飲んで味が違うことに気づいた", "deducible": false, "entailment_conditions": null},
+      {"id": "T10", "label": "以前飲まされたものは本物のウミガメのスープではなかったと悟った", "deducible": true, "entailment_conditions": [["P4"]]},
+      {"id": "T11", "label": "飲まされたものが人肉だったと理解した", "deducible": false, "entailment_conditions": null},
+      {"id": "T12", "label": "絶望して自殺した", "deducible": false, "entailment_conditions": null}
+    ],
+    "c_final": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12", "P1", "P2", "P3", "P4"],
+    "chain_extensions": [
+      {"t_fact_id": "T9", "source_chain": "C1", "propositions": ["NT9"], "questions": ["QT9"]}
+    ],
+    "unique_elements": ["T1", "T3", "T4", "T11"]
+  },
+  "_phase6": {
+    "clear_conditions": [["T3", "T4"]],
+    "required_unique_elements": ["T3", "T4"],
+    "chain_designs": [
+      {"target": "T3", "source": "C_final", "propositions": ["NU3"], "questions": ["QU3"]},
+      {"target": "T4", "source": "C_final", "propositions": ["NU4"], "questions": ["QU4"]}
+    ]
+  },
+  "clear_conditions": [["T3", "T4"]],
+  "_phase9": {
     "chain_branches": [
       {
         "chain_id": "C1",
