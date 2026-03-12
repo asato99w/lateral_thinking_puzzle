@@ -1,0 +1,366 @@
+{
+  "title": "ウミガメのスープ",
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11",
+    "S12"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある",
+      "formation_conditions": [
+        [
+          "N1b"
+        ],
+        [
+          "N2c"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "過去のスープ体験は食料の危機的状況に起因する",
+      "formation_conditions": [
+        [
+          "N3c"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "過去の体験は海での遭難に起因する",
+      "formation_conditions": [
+        [
+          "P2",
+          "S3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "他者が男に対して意図的に偽って飲ませた",
+      "formation_conditions": [
+        [
+          "N5a",
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "スープの正体確認は味への不満によるものではない",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1b",
+      "label": "男はスープの味を何かと比較していた",
+      "formation_conditions": [
+        [
+          "N1a",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N2b",
+      "label": "本物のウミガメのスープだと確認されたことが自殺の契機となった",
+      "formation_conditions": [
+        [
+          "S7",
+          "S6"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N2c",
+      "label": "男にとって本物のウミガメのスープであることが致命的な意味を持っていた",
+      "formation_conditions": [
+        [
+          "N2b"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3b",
+      "label": "過去のスープ体験は日常生活での出来事ではなかった",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3c",
+      "label": "過去のスープ体験は命に関わるような極限状況でのことだった",
+      "formation_conditions": [
+        [
+          "N3b"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N5a",
+      "label": "遭難時に男以外の人物がいた",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5a",
+      "label": "遭難中、男たちは海上（船上または漂流中）にいた",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "男が店員にスープの正体を尋ねたのは、味に不満があったからですか？",
+      "answer": "いいえ",
+      "recall_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q1b",
+      "text": "男はスープの味を、以前飲んだことのある何かと比較していましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "N1a",
+          "S4"
+        ]
+      ],
+      "reveals": [
+        "N1b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q2a",
+      "text": "男が自殺した直接のきっかけは、スープが本物のウミガメのスープだと確認されたことですか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "S7",
+          "S6"
+        ]
+      ],
+      "reveals": [
+        "N2b"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q2b",
+      "text": "本物のウミガメのスープであることが、男にとって致命的な意味を持っていましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "N2b"
+        ]
+      ],
+      "reveals": [
+        "N2c"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "N2b"
+      ]
+    },
+    {
+      "id": "Q3",
+      "text": "男は以前にも「ウミガメのスープ」だと思ってスープを飲んだことがありますか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "N1b"
+        ],
+        [
+          "N2c"
+        ]
+      ],
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q4a",
+      "text": "その体験は、日常生活での出来事ではなく、特別な状況でのことでしたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "reveals": [
+        "N3b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ]
+    },
+    {
+      "id": "Q4b",
+      "text": "その特別な状況は、命に関わるような極限的なものでしたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "N3b"
+        ]
+      ],
+      "reveals": [
+        "N3c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N3b"
+      ]
+    },
+    {
+      "id": "Q4c",
+      "text": "その状況は、食料に困るような危機的なものでしたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "N3c"
+        ]
+      ],
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N3c"
+      ]
+    },
+    {
+      "id": "Q5",
+      "text": "その食料の危機は、海での遭難によるものですか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P2",
+          "S3"
+        ]
+      ],
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P2"
+      ]
+    },
+    {
+      "id": "Q6a",
+      "text": "遭難時に男以外の人物がいましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "reveals": [
+        "N5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P3"
+      ]
+    },
+    {
+      "id": "Q6b",
+      "text": "その人物が男に偽りの「ウミガメのスープ」を飲ませましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "N5a",
+          "P1"
+        ]
+      ],
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N5a"
+      ]
+    },
+    {
+      "id": "QF5a",
+      "text": "遭難中、男たちは陸地ではなく海の上にいましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "reveals": [
+        "NF5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P3"
+      ]
+    }
+  ],
+  "statement": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口飲んだ男は店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜだろう？",
+  "truth": "男は船乗りで、かつて仲間と船で遭難し、食料が尽きた。仲間の一人が死に、残った仲間は男に「ウミガメのスープだ」と言ってスープを飲ませた。実際にはそれは死んだ仲間の肉で作ったスープだった。レストランで本物のウミガメのスープを飲んだ男は、味が違うことに気づき、あのとき飲まされたものの正体を悟り、絶望して自殺した。",
+  "id": "ウミガメのスープ"
+}
