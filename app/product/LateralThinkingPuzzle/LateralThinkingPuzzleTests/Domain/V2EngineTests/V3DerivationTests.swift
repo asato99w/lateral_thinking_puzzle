@@ -206,7 +206,7 @@ struct V3DerivationTests {
             clearConditions: [],
             pieces: [:],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["f1"]], reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: [],
             derivationMode: .v3

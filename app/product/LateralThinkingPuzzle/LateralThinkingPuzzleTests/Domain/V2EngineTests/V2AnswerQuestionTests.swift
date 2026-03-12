@@ -15,7 +15,7 @@ struct V2AnswerQuestionTests {
             clearConditions: [],
             pieces: [:],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )
@@ -37,7 +37,7 @@ struct V2AnswerQuestionTests {
             clearConditions: [],
             pieces: [:],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h1"]], reveals: [], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", reveals: [], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )
@@ -61,7 +61,7 @@ struct V2AnswerQuestionTests {
                 "p1": V2Piece(id: "p1", label: "Piece", members: ["f1", "f2"], dependsOn: []),
             ],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )
@@ -87,7 +87,7 @@ struct V2AnswerQuestionTests {
                 "p1": V2Piece(id: "p1", label: "Piece", members: ["f1"], dependsOn: ["p_dep"]),
             ],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h1"]], reveals: [], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", reveals: [], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )
@@ -115,7 +115,7 @@ struct V2AnswerQuestionTests {
                 "p1": V2Piece(id: "p1", label: "Piece", members: ["f1", "h2"], dependsOn: []),
             ],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )
@@ -141,7 +141,7 @@ struct V2AnswerQuestionTests {
             clearConditions: [],
             pieces: [:],
             questions: [
-                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", recallConditions: [["h1"]], reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
+                "q1": V2Question(id: "q1", text: "Q?", answer: "Yes", reveals: ["f2"], mechanism: "observation", prerequisites: [], correctAnswer: .yes, topicCategory: ""),
             ],
             topicCategories: []
         )

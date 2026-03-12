@@ -32,7 +32,6 @@ struct V2Question: Equatable, Sendable {
     let id: String
     let text: String
     let answer: String
-    let recallConditions: [[String]]
     let reveals: [String]
     let mechanism: String
     let prerequisites: [String]
@@ -166,8 +165,9 @@ enum V2GameEngine {
             if !q.prerequisites.isEmpty && !q.prerequisites.allSatisfy({ state.confirmed.contains($0) }) {
                 return false
             }
-            // recall_conditions: known (confirmed ∪ derived) で判定
-            return checkConditions(q.recallConditions, state: state)
+            // 想起条件: reveals[0] の formationConditions を known (confirmed ∪ derived) で判定
+            guard let rc = deriveRecallConditions(question: q, puzzle: puzzle) else { return true }
+            return checkConditions(rc, state: state)
         }
     }
 
@@ -287,6 +287,14 @@ enum V2GameEngine {
     }
 
     // MARK: - Private
+
+    /// reveals[0] の formationConditions を想起条件として返す。
+    /// reveals が空または対象記述素が見つからない場合は nil（常に利用可能）。
+    private static func deriveRecallConditions(question: V2Question, puzzle: V2PuzzleData) -> [[String]]? {
+        guard let firstReveal = question.reveals.first,
+              let descriptor = puzzle.descriptors[firstReveal] else { return nil }
+        return descriptor.formationConditions
+    }
 
     private static func checkConditions(_ conditions: [[String]], state: V2GameState) -> Bool {
         let knownSet = state.known

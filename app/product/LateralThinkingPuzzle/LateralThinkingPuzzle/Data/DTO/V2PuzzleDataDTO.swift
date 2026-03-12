@@ -31,7 +31,6 @@ struct V2QuestionDTO: Codable {
     let id: String
     let text: String
     let answer: String
-    let recallConditions: [[String]]
     let reveals: [String]
     let mechanism: String
     let prerequisites: [String]?
@@ -40,7 +39,6 @@ struct V2QuestionDTO: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id, text, answer
-        case recallConditions = "recall_conditions"
         case reveals, mechanism, prerequisites
         case correctAnswer = "correct_answer"
         case topicCategory = "topic_category"
@@ -67,6 +65,32 @@ struct V2PuzzleDataDTO: Codable {
         case topicCategories = "topic_categories"
     }
 
+    // v3 JSON では "propositions" キー
+    private enum PropositionsKey: String, CodingKey {
+        case propositions
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        statement = try container.decode(String.self, forKey: .statement)
+        truth = try container.decode(String.self, forKey: .truth)
+        initialConfirmed = try container.decode([String].self, forKey: .initialConfirmed)
+        clearConditions = try container.decodeIfPresent([[String]].self, forKey: .clearConditions) ?? []
+        pieces = try container.decodeIfPresent([V2PieceDTO].self, forKey: .pieces) ?? []
+        questions = try container.decode([V2QuestionDTO].self, forKey: .questions)
+        topicCategories = try container.decodeIfPresent([TopicCategoryDTO].self, forKey: .topicCategories)
+
+        // "descriptors" または "propositions" キーから読み込む
+        if let descs = try container.decodeIfPresent([V2DescriptorDTO].self, forKey: .descriptors) {
+            descriptors = descs
+        } else {
+            let container2 = try decoder.container(keyedBy: PropositionsKey.self)
+            descriptors = try container2.decode([V2DescriptorDTO].self, forKey: .propositions)
+        }
+    }
+
     func toDomain(derivationMode: DerivationMode = .v2) -> V2PuzzleData {
         let descriptorsMap = Dictionary(uniqueKeysWithValues: descriptors.map {
             ($0.id, V2Descriptor(id: $0.id, label: $0.label, formationConditions: $0.formationConditions, entailmentConditions: $0.entailmentConditions, rejectionConditions: $0.rejectionConditions))
@@ -90,7 +114,6 @@ struct V2PuzzleDataDTO: Codable {
                 id: q.id,
                 text: q.text,
                 answer: q.answer,
-                recallConditions: q.recallConditions,
                 reveals: q.reveals,
                 mechanism: q.mechanism,
                 prerequisites: q.prerequisites ?? [],
