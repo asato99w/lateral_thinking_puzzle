@@ -40,11 +40,9 @@ T の具体的事実（model_propositions.T で列挙済み）が、ゲームの
 
 全分割命題（最終の分割命題を P_last とする）が confirmed になった時点で、確実に confirmed な命題をリストアップする。
 
-- initial_confirmed（S命題群）
-- 全分割命題（P1〜P_last）
-- 全中間命題（N*）のうち、P_last 到達の全パスで必ず confirmed になるもの
+C_final = initial_confirmed（S命題群）∪ 全分割命題（P1〜P_last）
 
-この集合を C_final とする。
+中間命題（N*）はパスによって confirmed か derived かが異なりうるため、C_final には含めない（控えめな近似）。これにより演繹の判定が漏れる方向に偏るが、漏れたT事実は Step 4（連鎖延長）または Step 6（ユニーク要素）で拾えるため安全である。
 
 ### Step 3: 導出済みT事実の判定
 
