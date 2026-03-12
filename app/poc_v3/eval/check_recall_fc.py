@@ -2,6 +2,8 @@
 
 各質問の recall_conditions が reveals される命題の formation_conditions と一致するかを検証する。
 data_src.json 専用。
+
+recall_conditions が質問に存在しない場合（rc 廃止後の形式）はチェックをスキップする。
 """
 
 from __future__ import annotations
@@ -32,12 +34,21 @@ def _normalize_conditions(conditions: list[list[str]] | None) -> list[list[str]]
 
 
 def check_recall_equals_fc(data: dict) -> list[str]:
-    """各質問の recall_conditions が reveals される命題の fc と一致するか"""
+    """各質問の recall_conditions が reveals される命題の fc と一致するか。
+
+    recall_conditions が質問に存在しない場合（rc 廃止後）は全スキップ。
+    """
     errors = []
     descriptors = data.get("propositions", data.get("descriptors", []))
     descriptor_map = {d["id"]: d for d in descriptors}
 
-    for q in data.get("questions", []):
+    # rc 廃止後: いずれかの質問に recall_conditions がなければスキップ
+    questions = data.get("questions", [])
+    has_rc = any("recall_conditions" in q for q in questions)
+    if not has_rc:
+        return errors
+
+    for q in questions:
         qid = q["id"]
         recall = q.get("recall_conditions", [])
         reveals = _get_reveals(q)
@@ -45,7 +56,6 @@ def check_recall_equals_fc(data: dict) -> list[str]:
         if not reveals:
             continue
 
-        # recall_conditions が存在しない場合（rc 廃止後の形式）はスキップ
         if not recall:
             continue
 

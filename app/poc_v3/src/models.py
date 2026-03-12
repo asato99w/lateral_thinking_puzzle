@@ -26,12 +26,11 @@ class Piece:
 
 @dataclass
 class Question:
-    """質問。想起条件は命題の族（OR of AND）"""
+    """質問。想起条件は reveals される命題の formation_conditions から導出される"""
 
     id: str
     text: str
     answer: str
-    recall_conditions: list[list[str]]  # OR of AND: 想起条件（reveals される命題の導出条件）
     reveals: list[str]  # 回答で明らかになる命題 ID 群
     mechanism: str  # ラベル: "observation" | "link" | "anomaly"
     prerequisites: list[str] = field(default_factory=list)  # 質問文の言語的前提（confirmed のみで判定）

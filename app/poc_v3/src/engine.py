@@ -66,7 +66,6 @@ def load_puzzle(path: str | Path) -> PuzzleData:
             id=item["id"],
             text=item["text"],
             answer=item["answer"],
-            recall_conditions=item["recall_conditions"],
             reveals=item["reveals"],
             mechanism=item["mechanism"],
             prerequisites=item.get("prerequisites", []),
@@ -160,11 +159,25 @@ def _check_conditions(conditions: list[list[str]], state: GameState) -> bool:
     )
 
 
+def _derive_recall_conditions(q: Question, puzzle: PuzzleData) -> list[list[str]] | None:
+    """reveals される命題の formation_conditions を想起条件として返す。
+
+    recall_conditions は常に reveals[0] の formation_conditions と一致するため、
+    質問に冗長なフィールドを持たせず、命題側から導出する。
+    """
+    if not q.reveals:
+        return None
+    prop = puzzle.propositions.get(q.reveals[0])
+    if prop is None:
+        return None
+    return prop.formation_conditions
+
+
 def available_questions(state: GameState, puzzle: PuzzleData) -> list[Question]:
     """利用可能な質問を返す: 前提条件・想起条件が満たされ、未回答のもの
 
     - 前提条件（prerequisites）: confirmed のみで判定。対話上で確立された事実。
-    - 想起条件（recall_conditions）: known（confirmed ∪ derived）で判定。
+    - 想起条件: reveals される命題の formation_conditions を known（confirmed ∪ derived）で判定。
     """
     result = []
     for q in puzzle.questions.values():
@@ -172,7 +185,8 @@ def available_questions(state: GameState, puzzle: PuzzleData) -> list[Question]:
             continue
         if q.prerequisites and not all(p in state.confirmed for p in q.prerequisites):
             continue
-        if _check_conditions(q.recall_conditions, state):
+        rc = _derive_recall_conditions(q, puzzle)
+        if rc is None or _check_conditions(rc, state):
             result.append(q)
     return result
 

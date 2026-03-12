@@ -146,21 +146,28 @@ def _derivable_from(
 
 
 def check_recall_derivability(data: dict) -> list[str]:
-    """recall_conditions が対応ステップの input から導出可能か。
+    """想起条件（reveals 先の fc）が対応ステップの input から導出可能か。
 
-    recall_conditions は OR-of-AND なので、少なくとも1つのグループが
+    想起条件は OR-of-AND なので、少なくとも1つのグループが
     完全にステップの累積入力から導出可能であれば OK。
     cumulative_available のベースラインには initial_confirmed を含める。
+
+    recall_conditions が質問に存在する場合（v2 互換）はそちらを使用し、
+    存在しない場合は reveals 先の formation_conditions を使用する。
     """
     errors = []
     question_map = {q["id"]: q for q in data.get("questions", [])}
     initial = set(data.get("initial_confirmed", []))
 
+    # 命題マップの構築（v2: descriptors, v3: propositions）
+    descriptors = data.get("propositions", data.get("descriptors", []))
+    descriptor_map = {d["id"]: d for d in descriptors}
+
     # 導出条件の収集
     formation_conditions: dict[str, list[list[str]]] = {}
     entailment_conditions: dict[str, list[list[str]]] = {}
     rejection_conditions: dict[str, list[list[str]]] = {}
-    for d in data.get("descriptors", []):
+    for d in descriptors:
         if "formation_conditions" in d:
             formation_conditions[d["id"]] = d["formation_conditions"]
         if "entailment_conditions" in d:
@@ -184,7 +191,14 @@ def check_recall_derivability(data: dict) -> list[str]:
                 q = question_map.get(qid)
                 if q is None:
                     continue
-                recall = q.get("recall_conditions", [])
+                # recall_conditions があればそれを使用、なければ reveals 先の fc
+                recall = q.get("recall_conditions")
+                if recall is None:
+                    reveals = _get_reveals(q)
+                    if reveals:
+                        d = descriptor_map.get(reveals[0])
+                        if d is not None:
+                            recall = d.get("formation_conditions")
                 if not recall:
                     continue
                 # OR-of-AND: 少なくとも1つのグループが全て reachable なら OK
@@ -200,7 +214,7 @@ def check_recall_derivability(data: dict) -> list[str]:
                             out_of_scope.append(f"[{j}]: {unreachable}")
                     errors.append(
                         f"_piece_chains '{chain_id}' step[{i}]: "
-                        f"質問 '{qid}' の recall_conditions にステップ input から "
+                        f"質問 '{qid}' の想起条件にステップ input から "
                         f"導出可能なグループがない（{', '.join(out_of_scope)}）"
                     )
 

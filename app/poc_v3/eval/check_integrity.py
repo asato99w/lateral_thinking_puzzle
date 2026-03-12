@@ -200,6 +200,7 @@ def check_question_refs(data: dict) -> list[str]:
     all_valid_ids = descriptor_ids | set(data.get("initial_confirmed", []))
     for q in data.get("questions", []):
         qid = q["id"]
+        # v2 互換: recall_conditions が存在する場合のみチェック
         for cond_group in q.get("recall_conditions", []):
             for ref in cond_group:
                 if ref not in all_valid_ids:
