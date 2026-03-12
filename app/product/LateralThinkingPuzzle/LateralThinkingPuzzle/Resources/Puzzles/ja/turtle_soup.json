@@ -1,894 +1,299 @@
 {
-  "id": "turtle_soup",
   "title": "ウミガメのスープ",
-  "statement": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口食べた男は店員を呼び、「これは本当にウミガメのスープですか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男は会計を済ませ、帰宅後、自殺した。",
-  "truth": "男はかつて乗っていた船が遭難し、仲間と無人島に漂着した。食糧が尽き、仲間が一人死んだ。残った者たちはその肉でスープを作り、男には「ウミガメのスープだ」と偽って食べさせた。レストランで本物のウミガメのスープを飲んだ男は味が記憶と全く違うことに気づき、あの時のスープが仲間の人肉だったと悟り、絶望して自殺した。",
-  "descriptors": [
-    {
-      "id": "D-1",
-      "label": "男がレストランに入った"
-    },
-    {
-      "id": "D-2",
-      "label": "ウミガメのスープを注文した"
-    },
-    {
-      "id": "D-3",
-      "label": "一口食べて店員に「本当にウミガメのスープか」と尋ねた"
-    },
-    {
-      "id": "D-4",
-      "label": "店員は「間違いなくウミガメのスープです」と答えた"
-    },
-    {
-      "id": "D-5",
-      "label": "男は帰宅後、自殺した"
-    },
-    {
-      "id": "D-6",
-      "label": "男はかつて船が遭難した"
-    },
-    {
-      "id": "D-7",
-      "label": "漂着した",
-      "formation_conditions": [
-        [
-          "D-6"
-        ]
-      ]
-    },
-    {
-      "id": "D-8",
-      "label": "食糧が尽きた"
-    },
-    {
-      "id": "D-9",
-      "label": "仲間が一人死んだ"
-    },
-    {
-      "id": "D-10",
-      "label": "残った者たちがその肉でスープを作った"
-    },
-    {
-      "id": "D-11",
-      "label": "男には「ウミガメのスープだ」と偽って食べさせた"
-    },
-    {
-      "id": "D-12",
-      "label": "本物のウミガメのスープと味が全く違った"
-    },
-    {
-      "id": "D-13",
-      "label": "あの時のスープが仲間の人肉だったと悟った"
-    },
-    {
-      "id": "D-14",
-      "label": "絶望して自殺した"
-    },
-    {
-      "id": "D-15",
-      "label": "過去に船に乗っていた"
-    },
-    {
-      "id": "D-16",
-      "label": "過去に危機的な体験があった"
-    },
-    {
-      "id": "D-17",
-      "label": "仲間がいた"
-    },
-    {
-      "id": "D-18",
-      "label": "男は過去にスープを飲まされたことがある"
-    },
-    {
-      "id": "D-19",
-      "label": "そのスープは偽りの名前だった"
-    },
-    {
-      "id": "D-20",
-      "label": "偽装に悪意はなかった"
-    },
-    {
-      "id": "D-21",
-      "label": "男は過去に欺かれた"
-    },
-    {
-      "id": "D-22",
-      "label": "男は過去にもスープを飲んだことがある",
-      "formation_conditions": [
-        [
-          "D-3"
-        ]
-      ]
-    },
-    {
-      "id": "D-C1",
-      "label": "スープの味が男の期待と違った",
-      "formation_conditions": [
-        [
-          "D-2",
-          "D-3"
-        ]
-      ],
-      "rejection_conditions": [
-        [
-          "D-N1"
-        ]
-      ]
-    },
-    {
-      "id": "D-C2",
-      "label": "男は味への不満から店員に確認した",
-      "formation_conditions": [
-        [
-          "D-C1"
-        ]
-      ]
-    },
-    {
-      "id": "D-C3",
-      "label": "スープの見た目が通常のウミガメのスープと異なっていた",
-      "formation_conditions": [
-        [
-          "D-2",
-          "D-3"
-        ]
-      ],
-      "rejection_conditions": [
-        [
-          "D-N1"
-        ]
-      ]
-    },
-    {
-      "id": "D-C4",
-      "label": "男は見た目の違いから店員に確認した",
-      "formation_conditions": [
-        [
-          "D-C3"
-        ]
-      ]
-    },
-    {
-      "id": "D-C5",
-      "label": "男にはウミガメに対するアレルギーがあった",
-      "formation_conditions": [
-        [
-          "D-3"
-        ]
-      ]
-    },
-    {
-      "id": "D-C6",
-      "label": "男はアレルギーの確認のために尋ねた",
-      "formation_conditions": [
-        [
-          "D-C5"
-        ]
-      ]
-    },
-    {
-      "id": "D-C7",
-      "label": "レストランで男にとって衝撃的な出来事が起きた",
-      "formation_conditions": [
-        [
-          "D-1",
-          "D-5"
-        ]
-      ]
-    },
-    {
-      "id": "D-C8",
-      "label": "レストランでの出来事が自殺の直接の原因だった",
-      "formation_conditions": [
-        [
-          "D-C7"
-        ]
-      ]
-    },
-    {
-      "id": "D-C9",
-      "label": "男はもともと精神的に不安定だった",
-      "formation_conditions": [
-        [
-          "D-5"
-        ]
-      ],
-      "rejection_conditions": [
-        [
-          "D-N3"
-        ]
-      ]
-    },
-    {
-      "id": "D-C10",
-      "label": "スープの出来事は自殺のきっかけに過ぎなかった",
-      "formation_conditions": [
-        [
-          "D-C9"
-        ]
-      ]
-    },
-    {
-      "id": "D-C11",
-      "label": "男はレストラン以外に深刻な問題を抱えていた",
-      "formation_conditions": [
-        [
-          "D-5"
-        ]
-      ]
-    },
-    {
-      "id": "D-C12",
-      "label": "自殺の原因はレストランの出来事とは別にあった",
-      "formation_conditions": [
-        [
-          "D-C11"
-        ]
-      ]
-    },
-    {
-      "id": "D-C13",
-      "label": "漂着後まもなく救助された",
-      "formation_conditions": [
-        [
-          "D-7"
-        ]
-      ],
-      "rejection_conditions": [
-        [
-          "D-N5"
-        ]
-      ]
-    },
-    {
-      "id": "D-C14",
-      "label": "遭難で深刻な飢餓状態にはならなかった",
-      "formation_conditions": [
-        [
-          "D-C13"
-        ]
-      ]
-    },
-    {
-      "id": "D-C15",
-      "label": "漂着中に仲間との間に深刻なトラブルがあった",
-      "formation_conditions": [
-        [
-          "D-7",
-          "D-17"
-        ]
-      ]
-    },
-    {
-      "id": "D-C16",
-      "label": "人間関係のトラブルが男のトラウマになった",
-      "formation_conditions": [
-        [
-          "D-C15"
-        ]
-      ]
-    },
-    {
-      "id": "D-C17",
-      "label": "遭難中に事故が起きた",
-      "formation_conditions": [
-        [
-          "D-6",
-          "D-7"
-        ]
-      ]
-    },
-    {
-      "id": "D-C18",
-      "label": "男は遭難中の事故の記憶にトラウマを持っていた",
-      "formation_conditions": [
-        [
-          "D-C17"
-        ]
-      ]
-    },
-    {
-      "id": "D-C19",
-      "label": "レストランのスープは本物のウミガメのスープではなかった",
-      "formation_conditions": [
-        [
-          "D-3",
-          "D-4"
-        ]
-      ],
-      "rejection_conditions": [
-        [
-          "D-N2"
-        ]
-      ]
-    },
-    {
-      "id": "D-C20",
-      "label": "店員は嘘をついた",
-      "formation_conditions": [
-        [
-          "D-C19"
-        ]
-      ]
-    },
-    {
-      "id": "D-C21",
-      "label": "確認行為は単なる好奇心だった",
-      "formation_conditions": [
-        [
-          "D-3"
-        ]
-      ]
-    },
-    {
-      "id": "D-C22",
-      "label": "スープの確認と自殺に因果関係はなかった",
-      "formation_conditions": [
-        [
-          "D-C21"
-        ]
-      ]
-    },
-    {
-      "id": "D-C23",
-      "label": "男は以前に別の店で偽物のウミガメのスープを出された",
-      "formation_conditions": [
-        [
-          "D-3"
-        ]
-      ]
-    },
-    {
-      "id": "D-C24",
-      "label": "過去の経験から今回も偽物を疑って確認した",
-      "formation_conditions": [
-        [
-          "D-C23"
-        ]
-      ]
-    },
-    {
-      "id": "D-C25",
-      "label": "ウミガメは絶滅危惧種だった",
-      "formation_conditions": [
-        [
-          "D-2",
-          "D-4"
-        ]
-      ],
-      "rejection_conditions": [
-        [
-          "D-N4"
-        ]
-      ]
-    },
-    {
-      "id": "D-C26",
-      "label": "男は絶滅危惧種を食べたことに強い罪悪感を感じた",
-      "formation_conditions": [
-        [
-          "D-C25"
-        ]
-      ]
-    },
-    {
-      "id": "D-C27",
-      "label": "罪悪感から自殺した",
-      "formation_conditions": [
-        [
-          "D-C26"
-        ]
-      ]
-    },
-    {
-      "id": "D-C28",
-      "label": "男の信仰ではウミガメを食べることは禁忌だった",
-      "formation_conditions": [
-        [
-          "D-2"
-        ]
-      ]
-    },
-    {
-      "id": "D-C29",
-      "label": "本物のウミガメと確認し禁忌を犯したと悟った",
-      "formation_conditions": [
-        [
-          "D-C28",
-          "D-4"
-        ]
-      ]
-    },
-    {
-      "id": "D-C30",
-      "label": "宗教的罪悪感から自殺した",
-      "formation_conditions": [
-        [
-          "D-C29"
-        ]
-      ]
-    },
-    {
-      "id": "D-C31",
-      "label": "男はウミガメのスープを食べないと誰かに約束していた",
-      "formation_conditions": [
-        [
-          "D-2"
-        ]
-      ]
-    },
-    {
-      "id": "D-C32",
-      "label": "約束を破ったことへの罪悪感から自殺した",
-      "formation_conditions": [
-        [
-          "D-C31",
-          "D-4"
-        ]
-      ]
-    },
-    {
-      "id": "D-N1",
-      "label": "スープの品質に問題はなかった"
-    },
-    {
-      "id": "D-N2",
-      "label": "店員は嘘をついていない"
-    },
-    {
-      "id": "D-N3",
-      "label": "男はもともと精神的に問題はなかった"
-    },
-    {
-      "id": "D-N4",
-      "label": "ウミガメの種としての希少性は関係ない"
-    },
-    {
-      "id": "D-N5",
-      "label": "漂着後すぐには救助されなかった"
-    }
-  ],
   "initial_confirmed": [
-    "D-1",
-    "D-2",
-    "D-3",
-    "D-4",
-    "D-5"
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11",
+    "S12"
   ],
-  "pieces": [
+  "propositions": [
     {
-      "id": "P-shipwreck",
-      "label": "遭難",
-      "members": [
-        "D-6",
-        "D-7",
-        "D-8",
-        "D-9"
-      ],
-      "trigger": [
+      "id": "P1",
+      "label": "男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある",
+      "formation_conditions": [
         [
-          "D-15"
+          "N1b"
         ],
         [
-          "D-16"
-        ],
-        [
-          "D-17"
+          "N2c"
         ]
       ],
-      "depends_on": []
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
-      "id": "P-deception",
-      "label": "偽装",
-      "members": [
-        "D-18",
-        "D-19",
-        "D-20"
-      ],
-      "trigger": [
+      "id": "P2",
+      "label": "過去のスープ体験は食料の危機的状況に起因する",
+      "formation_conditions": [
         [
-          "D-21"
-        ],
-        [
-          "D-22"
+          "N3c"
         ]
       ],
-      "depends_on": []
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
-      "id": "P-realization",
-      "label": "発覚と結末",
-      "members": [
-        "D-10",
-        "D-11",
-        "D-12",
-        "D-13",
-        "D-14"
-      ],
-      "trigger": [
+      "id": "P3",
+      "label": "過去の体験は海での遭難に起因する",
+      "formation_conditions": [
         [
-          "D-6",
-          "D-8",
-          "D-9",
-          "D-18",
-          "D-19"
-        ],
-        [
-          "D-7",
-          "D-9",
-          "D-18",
-          "D-19",
-          "D-20"
+          "P2",
+          "S3"
         ]
       ],
-      "depends_on": [
-        "P-shipwreck",
-        "P-deception"
-      ]
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "他者が男に対して意図的に偽って飲ませた",
+      "formation_conditions": [
+        [
+          "N5a",
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "スープの正体確認は味への不満によるものではない",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1b",
+      "label": "男はスープの味を何かと比較していた",
+      "formation_conditions": [
+        [
+          "N1a",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N2b",
+      "label": "本物のウミガメのスープだと確認されたことが自殺の契機となった",
+      "formation_conditions": [
+        [
+          "S7",
+          "S6"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N2c",
+      "label": "男にとって本物のウミガメのスープであることが致命的な意味を持っていた",
+      "formation_conditions": [
+        [
+          "N2b"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3b",
+      "label": "過去のスープ体験は日常生活での出来事ではなかった",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3c",
+      "label": "過去のスープ体験は命に関わるような極限状況でのことだった",
+      "formation_conditions": [
+        [
+          "N3b"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N5a",
+      "label": "遭難時に男以外の人物がいた",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5a",
+      "label": "遭難中、男たちは海上（船上または漂流中）にいた",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     }
-  ],
-  "clear_conditions": [
-    [
-      "D-13",
-      "D-14"
-    ]
   ],
   "questions": [
     {
-      "id": "Q-1",
-      "text": "男は過去に船に乗ったことがありますか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-16"
-        ]
-      ],
+      "id": "Q1a",
+      "text": "男が店員にスープの正体を尋ねたのは、味に不満があったからですか？",
+      "answer": "いいえ",
       "reveals": [
-        "D-15"
+        "N1a"
       ],
       "mechanism": "observation",
-      "topic_category": "状況の確認"
+      "prerequisites": []
     },
     {
-      "id": "Q-2",
-      "text": "男は過去に危機的な体験をしましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-18",
-          "D-5"
-        ]
-      ],
+      "id": "Q1b",
+      "text": "男はスープの味を、以前飲んだことのある何かと比較していましたか？",
+      "answer": "はい",
       "reveals": [
-        "D-16"
+        "N1b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q2a",
+      "text": "男が自殺した直接のきっかけは、スープが本物のウミガメのスープだと確認されたことですか？",
+      "answer": "はい",
+      "reveals": [
+        "N2b"
       ],
       "mechanism": "link",
-      "topic_category": "原因と動機"
+      "prerequisites": []
     },
     {
-      "id": "Q-3",
-      "text": "男には仲間がいましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-15"
-        ]
-      ],
+      "id": "Q2b",
+      "text": "本物のウミガメのスープであることが、男にとって致命的な意味を持っていましたか？",
+      "answer": "はい",
       "reveals": [
-        "D-17"
-      ],
-      "mechanism": "observation",
-      "topic_category": "人物と背景"
-    },
-    {
-      "id": "Q-4",
-      "text": "男は過去に誰かに欺かれたことがありますか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-18"
-        ]
-      ],
-      "reveals": [
-        "D-21"
+        "N2c"
       ],
       "mechanism": "link",
-      "topic_category": "原因と動機"
+      "prerequisites": [
+        "N2b"
+      ]
     },
     {
-      "id": "Q-5",
-      "text": "男は以前にもスープを飲まされたことがありますか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-22"
-        ],
-        [
-          "D-2",
-          "D-3"
-        ]
-      ],
+      "id": "Q3",
+      "text": "男は以前にも「ウミガメのスープ」だと思ってスープを飲んだことがありますか？",
+      "answer": "はい",
       "reveals": [
-        "D-18"
+        "P1"
       ],
       "mechanism": "observation",
-      "topic_category": "状況の確認"
+      "prerequisites": []
     },
     {
-      "id": "Q-6",
-      "text": "男が乗っていた船は遭難しましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-15"
-        ]
-      ],
+      "id": "Q4a",
+      "text": "その体験は、日常生活での出来事ではなく、特別な状況でのことでしたか？",
+      "answer": "はい",
       "reveals": [
-        "D-6"
+        "N3b"
       ],
       "mechanism": "observation",
-      "topic_category": "人物と背景"
+      "prerequisites": [
+        "P1"
+      ]
     },
     {
-      "id": "Q-7",
-      "text": "遭難して漂着しましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-6"
-        ]
-      ],
+      "id": "Q4b",
+      "text": "その特別な状況は、命に関わるような極限的なものでしたか？",
+      "answer": "はい",
       "reveals": [
-        "D-7"
+        "N3c"
       ],
       "mechanism": "observation",
-      "topic_category": "状況の確認"
+      "prerequisites": [
+        "N3b"
+      ]
     },
     {
-      "id": "Q-8",
-      "text": "漂着先で食糧が尽きましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-7"
-        ]
-      ],
+      "id": "Q4c",
+      "text": "その状況は、食料に困るような危機的なものでしたか？",
+      "answer": "はい",
       "reveals": [
-        "D-8"
+        "P2"
       ],
       "mechanism": "observation",
-      "topic_category": "状況の確認"
+      "prerequisites": [
+        "N3c"
+      ]
     },
     {
-      "id": "Q-9",
-      "text": "仲間の一人が亡くなりましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-8",
-          "D-17"
-        ]
-      ],
+      "id": "Q5",
+      "text": "その食料の危機は、海での遭難によるものですか？",
+      "answer": "はい",
       "reveals": [
-        "D-9"
-      ],
-      "mechanism": "link",
-      "topic_category": "原因と動機"
-    },
-    {
-      "id": "Q-10",
-      "text": "飲まされたスープの名前は偽りでしたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-18",
-          "D-21"
-        ]
-      ],
-      "reveals": [
-        "D-19"
-      ],
-      "mechanism": "anomaly",
-      "topic_category": "前提の確認"
-    },
-    {
-      "id": "Q-11",
-      "text": "スープの名前を偽ったのは悪意からですか？",
-      "answer": "No",
-      "recall_conditions": [
-        [
-          "D-19"
-        ]
-      ],
-      "reveals": [
-        "D-20"
+        "P3"
       ],
       "mechanism": "observation",
-      "topic_category": "原因と動機"
+      "prerequisites": [
+        "P2"
+      ]
     },
     {
-      "id": "Q-12",
-      "text": "亡くなった仲間の肉でスープを作りましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-8",
-          "D-9",
-          "D-18",
-          "D-19"
-        ]
-      ],
+      "id": "Q6a",
+      "text": "遭難時に男以外の人物がいましたか？",
+      "answer": "はい",
       "reveals": [
-        "D-10"
+        "N5a"
       ],
-      "mechanism": "link",
-      "topic_category": "原因と動機"
+      "mechanism": "observation",
+      "prerequisites": [
+        "P3"
+      ]
     },
     {
-      "id": "Q-13",
-      "text": "そのスープを「ウミガメのスープ」と偽って男に食べさせましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-10",
-          "D-19"
-        ]
-      ],
+      "id": "Q6b",
+      "text": "その人物が男に偽りの「ウミガメのスープ」を飲ませましたか？",
+      "answer": "はい",
       "reveals": [
-        "D-11"
+        "P4"
       ],
-      "mechanism": "anomaly",
-      "topic_category": "前提の確認"
+      "mechanism": "observation",
+      "prerequisites": [
+        "N5a"
+      ]
     },
     {
-      "id": "Q-14",
-      "text": "レストランのスープと過去に飲んだスープは味が違いましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-10",
-          "D-2",
-          "D-22"
-        ]
-      ],
+      "id": "QF5a",
+      "text": "遭難中、男たちは陸地ではなく海の上にいましたか？",
+      "answer": "はい",
       "reveals": [
-        "D-12"
+        "NF5a"
       ],
-      "mechanism": "anomaly",
-      "topic_category": "前提の確認"
-    },
-    {
-      "id": "Q-15",
-      "text": "男はあの時のスープが仲間の人肉だったと悟りましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-10",
-          "D-12"
-        ]
-      ],
-      "reveals": [
-        "D-13"
-      ],
-      "mechanism": "link",
-      "topic_category": "原因と動機"
-    },
-    {
-      "id": "Q-16",
-      "text": "男は真実を知って絶望し、自殺しましたか？",
-      "answer": "Yes",
-      "recall_conditions": [
-        [
-          "D-13"
-        ]
-      ],
-      "reveals": [
-        "D-14"
-      ],
-      "mechanism": "link",
-      "topic_category": "原因と動機"
-    },
-    {
-      "id": "Q-17",
-      "text": "スープの品質に問題がありましたか？",
-      "answer": "No",
-      "recall_conditions": [
-        [
-          "D-3"
-        ],
-        [
-          "D-2",
-          "D-5"
-        ]
-      ],
-      "reveals": [
-        "D-N1"
-      ],
-      "mechanism": "rejection",
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q-18",
-      "text": "店員は嘘をつきましたか？",
-      "answer": "No",
-      "recall_conditions": [
-        [
-          "D-3",
-          "D-4"
-        ]
-      ],
-      "reveals": [
-        "D-N2"
-      ],
-      "mechanism": "rejection",
-      "topic_category": "前提の確認"
-    },
-    {
-      "id": "Q-19",
-      "text": "男はもともと精神的に問題がありましたか？",
-      "answer": "No",
-      "recall_conditions": [
-        [
-          "D-5"
-        ]
-      ],
-      "reveals": [
-        "D-N3"
-      ],
-      "mechanism": "rejection",
-      "topic_category": "人物と背景"
-    },
-    {
-      "id": "Q-20",
-      "text": "ウミガメが絶滅危惧種であることは重要ですか？",
-      "answer": "No",
-      "recall_conditions": [
-        [
-          "D-2",
-          "D-4"
-        ]
-      ],
-      "reveals": [
-        "D-N4"
-      ],
-      "mechanism": "rejection",
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q-21",
-      "text": "漂着先ですぐに救助されましたか？",
-      "answer": "No",
-      "recall_conditions": [
-        [
-          "D-7"
-        ]
-      ],
-      "reveals": [
-        "D-N5"
-      ],
-      "mechanism": "rejection",
-      "topic_category": "状況の確認"
+      "mechanism": "observation",
+      "prerequisites": [
+        "P3"
+      ]
     }
   ],
-  "topic_categories": [
-    {
-      "id": "状況の確認",
-      "name": "状況の確認"
-    },
-    {
-      "id": "原因と動機",
-      "name": "原因と動機"
-    },
-    {
-      "id": "人物と背景",
-      "name": "人物と背景"
-    },
-    {
-      "id": "前提の確認",
-      "name": "前提の確認"
-    }
-  ]
+  "statement": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口飲んだ男は店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜだろう？",
+  "truth": "男は船乗りで、かつて仲間と船で遭難し、食料が尽きた。仲間の一人が死に、残った仲間は男に「ウミガメのスープだ」と言ってスープを飲ませた。実際にはそれは死んだ仲間の肉で作ったスープだった。レストランで本物のウミガメのスープを飲んだ男は、味が違うことに気づき、あのとき飲まされたものの正体を悟り、絶望して自殺した。",
+  "id": "turtle_soup"
 }
