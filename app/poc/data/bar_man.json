@@ -1,1404 +1,568 @@
 {
   "title": "バーの男",
-  "statement": "ある男がバーに入り、バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた。男は「ありがとう」と言って帰った。なぜだろう？",
-  "init_paradigm": "P1",
-  "ps_values": [
-    [
-      "Ps-1",
-      1
-    ],
-    [
-      "Ps-2",
-      1
-    ],
-    [
-      "Ps-3",
-      1
-    ],
-    [
-      "Ps-4",
-      1
-    ],
-    [
-      "Ps-5",
-      1
-    ]
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11",
+    "S12",
+    "S13"
   ],
-  "all_descriptor_ids": [
-    "Ps-1",
-    "Ps-2",
-    "Ps-3",
-    "Ps-4",
-    "Ps-5",
-    "Fs-01",
-    "Fs-02",
-    "Fs-03",
-    "Fs-04",
-    "Fs-05",
-    "Fs-06",
-    "Fs-07",
-    "Fs-08",
-    "Fs-09",
-    "Fs-10",
-    "Ft-01",
-    "Ft-02",
-    "Ft-03",
-    "Ft-04",
-    "Ft-05",
-    "Ft-06",
-    "Pt-1",
-    "Pt-2",
-    "Pt-3",
-    "Pt-4",
-    "Pt-5",
-    "Pt-6",
-    "Pt-7",
-    "Pt-8",
-    "D-01"
-  ],
-  "paradigms": [
+  "propositions": [
     {
-      "id": "P1",
-      "name": "日常的なやりとり",
-      "p_pred": [
+      "id": "N1a",
+      "label": "男が水を求めたのは単なる喉の渇きからではない",
+      "formation_conditions": [
         [
-          "Ps-1",
-          1
-        ],
-        [
-          "Ps-2",
-          1
-        ],
-        [
-          "Ps-3",
-          1
-        ],
-        [
-          "Ps-4",
-          1
-        ],
-        [
-          "Ps-5",
-          1
-        ],
-        [
-          "Fs-01",
-          1
-        ],
-        [
-          "Fs-02",
-          1
-        ],
-        [
-          "Fs-03",
-          1
-        ],
-        [
-          "Fs-04",
-          1
-        ],
-        [
-          "Fs-09",
-          1
-        ],
-        [
-          "Fs-05",
-          0
-        ],
-        [
-          "Fs-06",
-          0
-        ],
-        [
-          "Fs-07",
-          0
-        ],
-        [
-          "Fs-08",
-          0
-        ],
-        [
-          "Fs-10",
-          0
-        ],
-        [
-          "Ft-03",
-          0
-        ],
-        [
-          "Ft-05",
-          0
+          "S13"
         ]
       ],
-      "relations": [
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N2a",
+      "label": "銃を向けられたことが男にとって害ではなく恩恵だった",
+      "formation_conditions": [
         [
-          "Ps-1",
-          "Fs-01",
-          0.9
-        ],
-        [
-          "Ps-1",
-          "Fs-02",
-          0.9
-        ],
-        [
-          "Ps-2",
-          "Fs-03",
-          0.9
-        ],
-        [
-          "Ps-2",
-          "Fs-04",
-          0.9
-        ],
-        [
-          "Ps-4",
-          "Fs-09",
-          0.9
-        ],
-        [
-          "Fs-02",
-          "Fs-05",
-          0.8
-        ],
-        [
-          "Fs-02",
-          "Fs-07",
-          0.8
-        ],
-        [
-          "Fs-05",
-          "Fs-06",
-          0.8
-        ],
-        [
-          "Fs-05",
-          "Fs-08",
-          0.8
-        ],
-        [
-          "Fs-05",
-          "Ft-03",
-          0.8
-        ],
-        [
-          "Fs-05",
-          "Ft-05",
-          0.8
-        ],
-        [
-          "Fs-07",
-          "Fs-10",
-          0.8
+          "S5",
+          "S6"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P1",
+      "label": "男は何らかの困りごとを抱えていた",
+      "formation_conditions": [
+        [
+          "N1a"
+        ],
+        [
+          "N2a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P2",
-      "name": "バーテンダーの善意",
-      "p_pred": [
+      "label": "水は男の困りごとへの対処法だった",
+      "formation_conditions": [
         [
-          "Ps-1",
-          1
-        ],
-        [
-          "Ps-2",
-          1
-        ],
-        [
-          "Ps-3",
-          1
-        ],
-        [
-          "Ps-4",
-          1
-        ],
-        [
-          "Ps-5",
-          1
-        ],
-        [
-          "Fs-01",
-          1
-        ],
-        [
-          "Fs-02",
-          1
-        ],
-        [
-          "Fs-03",
-          1
-        ],
-        [
-          "Fs-04",
-          1
-        ],
-        [
-          "Fs-09",
-          1
-        ],
-        [
-          "Fs-05",
-          1
-        ],
-        [
-          "Fs-06",
-          1
-        ],
-        [
-          "Fs-08",
-          1
-        ],
-        [
-          "Ft-03",
-          1
-        ],
-        [
-          "Ft-05",
-          1
-        ],
-        [
-          "Ft-06",
-          1
-        ],
-        [
-          "Fs-07",
-          0
-        ],
-        [
-          "Fs-10",
-          0
-        ],
-        [
-          "Ft-01",
-          0
-        ],
-        [
-          "Ft-02",
-          0
+          "P1",
+          "S13"
         ]
       ],
-      "relations": [
-        [
-          "Fs-07",
-          "Ft-01",
-          0.8
-        ],
-        [
-          "Fs-10",
-          "Ft-01",
-          0.8
-        ],
-        [
-          "Ft-01",
-          "Ft-02",
-          0.8
-        ]
-      ]
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P3",
-      "name": "男の隠れた問題",
-      "p_pred": [
+      "label": "男の困りごとは身体的な症状だった",
+      "formation_conditions": [
         [
-          "Ps-1",
-          1
-        ],
-        [
-          "Ps-2",
-          1
-        ],
-        [
-          "Ps-3",
-          1
-        ],
-        [
-          "Ps-4",
-          1
-        ],
-        [
-          "Ps-5",
-          1
-        ],
-        [
-          "Fs-01",
-          1
-        ],
-        [
-          "Fs-02",
-          1
-        ],
-        [
-          "Fs-03",
-          1
-        ],
-        [
-          "Fs-04",
-          1
-        ],
-        [
-          "Fs-09",
-          1
-        ],
-        [
-          "Fs-05",
-          1
-        ],
-        [
-          "Fs-06",
-          1
-        ],
-        [
-          "Fs-07",
-          1
-        ],
-        [
-          "Fs-08",
-          1
-        ],
-        [
-          "Fs-10",
-          1
-        ],
-        [
-          "Ft-01",
-          1
-        ],
-        [
-          "Ft-02",
-          1
-        ],
-        [
-          "Ft-03",
-          1
-        ],
-        [
-          "Ft-05",
-          1
-        ],
-        [
-          "Ft-06",
-          1
-        ],
-        [
-          "Pt-1",
-          1
-        ],
-        [
-          "Pt-2",
-          1
-        ],
-        [
-          "Pt-3",
-          1
-        ],
-        [
-          "Pt-6",
-          1
-        ],
-        [
-          "Pt-7",
-          1
-        ],
-        [
-          "Pt-8",
-          1
-        ],
-        [
-          "D-01",
-          1
-        ],
-        [
-          "Pt-4",
-          0
-        ],
-        [
-          "Pt-5",
-          0
-        ],
-        [
-          "Ft-04",
-          0
+          "P2"
         ]
       ],
-      "relations": [
-        [
-          "Ft-01",
-          "Pt-1",
-          0.8
-        ],
-        [
-          "Pt-1",
-          "Pt-2",
-          0.8
-        ],
-        [
-          "Pt-1",
-          "Pt-3",
-          0.8
-        ],
-        [
-          "Pt-3",
-          "Ft-06",
-          0.8
-        ],
-        [
-          "Pt-4",
-          "Pt-5",
-          0.8
-        ],
-        [
-          "Pt-5",
-          "Pt-6",
-          0.8
-        ],
-        [
-          "Pt-6",
-          "Pt-7",
-          0.8
-        ],
-        [
-          "Pt-6",
-          "Pt-8",
-          0.8
-        ],
-        [
-          "Pt-8",
-          "D-01",
-          0.8
-        ]
-      ]
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
-      "id": "T",
-      "name": "しゃっくりと驚かし",
-      "p_pred": [
+      "id": "P4",
+      "label": "男の症状は不随意的な反復反応だった",
+      "formation_conditions": [
         [
-          "Ps-1",
-          1
-        ],
-        [
-          "Ps-2",
-          1
-        ],
-        [
-          "Ps-3",
-          1
-        ],
-        [
-          "Ps-4",
-          1
-        ],
-        [
-          "Ps-5",
-          1
-        ],
-        [
-          "Fs-01",
-          1
-        ],
-        [
-          "Fs-02",
-          1
-        ],
-        [
-          "Fs-03",
-          1
-        ],
-        [
-          "Fs-04",
-          1
-        ],
-        [
-          "Fs-05",
-          1
-        ],
-        [
-          "Fs-06",
-          1
-        ],
-        [
-          "Fs-07",
-          1
-        ],
-        [
-          "Fs-08",
-          1
-        ],
-        [
-          "Fs-09",
-          1
-        ],
-        [
-          "Fs-10",
-          1
-        ],
-        [
-          "Ft-01",
-          1
-        ],
-        [
-          "Ft-02",
-          1
-        ],
-        [
-          "Ft-03",
-          1
-        ],
-        [
-          "Ft-04",
-          1
-        ],
-        [
-          "Ft-05",
-          1
-        ],
-        [
-          "Ft-06",
-          1
-        ],
-        [
-          "Pt-1",
-          1
-        ],
-        [
-          "Pt-2",
-          1
-        ],
-        [
-          "Pt-3",
-          1
-        ],
-        [
-          "Pt-4",
-          1
-        ],
-        [
-          "Pt-5",
-          1
-        ],
-        [
-          "Pt-6",
-          1
-        ],
-        [
-          "Pt-7",
-          1
-        ],
-        [
-          "Pt-8",
-          1
-        ],
-        [
-          "D-01",
-          1
+          "P3"
         ]
       ],
-      "relations": [
-        [
-          "Pt-6",
-          "Pt-7",
-          0.8
-        ],
-        [
-          "Pt-6",
-          "Pt-8",
-          0.8
-        ],
-        [
-          "Pt-8",
-          "D-01",
-          0.8
-        ]
-      ]
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
-      "id": "S1",
-      "name": "バーテンダーの敵意",
-      "p_pred": [
+      "id": "NT1",
+      "label": "バーテンダーは男を驚かせることで症状を止めようとした",
+      "formation_conditions": [
         [
-          "Ps-1",
-          1
-        ],
-        [
-          "Ps-2",
-          1
-        ],
-        [
-          "Ps-3",
-          1
-        ],
-        [
-          "Ps-4",
-          1
-        ],
-        [
-          "Ps-5",
-          1
-        ],
-        [
-          "Fs-01",
-          1
-        ],
-        [
-          "Fs-02",
-          1
-        ],
-        [
-          "Fs-03",
-          1
-        ],
-        [
-          "Fs-04",
-          1
-        ],
-        [
-          "Fs-09",
-          1
-        ],
-        [
-          "Fs-05",
-          0
-        ],
-        [
-          "Fs-06",
-          0
-        ],
-        [
-          "Fs-07",
-          0
-        ],
-        [
-          "Fs-08",
-          0
-        ],
-        [
-          "Fs-10",
-          0
-        ],
-        [
-          "Ft-03",
-          0
-        ],
-        [
-          "Ft-05",
-          0
+          "P4",
+          "N2a"
         ]
       ],
-      "relations": [
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NU1",
+      "label": "男はしゃっくりが止まらなくて困っていた",
+      "formation_conditions": [
         [
-          "Ps-1",
-          "Fs-01",
-          0.9
-        ],
-        [
-          "Ps-1",
-          "Fs-02",
-          0.9
-        ],
-        [
-          "Ps-2",
-          "Fs-03",
-          0.9
-        ],
-        [
-          "Ps-2",
-          "Fs-04",
-          0.9
-        ],
-        [
-          "Ps-4",
-          "Fs-09",
-          0.9
-        ],
-        [
-          "Fs-02",
-          "Fs-05",
-          0.8
-        ],
-        [
-          "Fs-02",
-          "Fs-07",
-          0.8
-        ],
-        [
-          "Fs-05",
-          "Fs-06",
-          0.8
-        ],
-        [
-          "Fs-05",
-          "Fs-08",
-          0.8
-        ],
-        [
-          "Fs-05",
-          "Ft-03",
-          0.8
-        ],
-        [
-          "Fs-05",
-          "Ft-05",
-          0.8
-        ],
-        [
-          "Fs-07",
-          "Fs-10",
-          0.8
+          "P4",
+          "NT1"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "「水」は文字通りの水を意味していた",
+      "formation_conditions": [
+        [
+          "S13"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1b",
+      "label": "この状況は実際に起きた出来事だった",
+      "formation_conditions": [
+        [
+          "S4",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1c",
+      "label": "男は賭けをしていなかった",
+      "formation_conditions": [
+        [
+          "S4",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "「ありがとう」は心からの感謝だった",
+      "formation_conditions": [
+        [
+          "S5",
+          "S6"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2b",
+      "label": "銃を向けたのは冗談ではなかった",
+      "formation_conditions": [
+        [
+          "S5",
+          "S6"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3a",
+      "label": "男は意識がはっきりしていた",
+      "formation_conditions": [
+        [
+          "P1",
+          "S13"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3b",
+      "label": "男は自殺するつもりはなかった",
+      "formation_conditions": [
+        [
+          "P1",
+          "S13"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4a",
+      "label": "男の困りごとはパニック発作ではなかった",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5a",
+      "label": "男は喉に異物が詰まっていたのではなかった",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5b",
+      "label": "男は酔っていなかった",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6a",
+      "label": "男の症状は咳ではなかった",
+      "formation_conditions": [
+        [
+          "P4",
+          "NT1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     }
   ],
   "questions": [
     {
-      "id": "q01",
-      "text": "男は飲み物を求めてバーに来ましたか？",
-      "ans_yes": [
+      "id": "Q1a",
+      "text": "男が水を求めたのは喉が渇いたからですか？",
+      "answer": "いいえ",
+      "recall_conditions": [
         [
-          "Fs-01",
-          1
+          "S13"
         ]
       ],
-      "ans_no": [
-        [
-          "Fs-01",
-          0
-        ]
+      "reveals": [
+        "N1a"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "purpose"
+      "mechanism": "observation",
+      "prerequisites": []
     },
     {
-      "id": "q02",
-      "text": "男にはバーに来た理由がありますか？",
-      "ans_yes": [
+      "id": "Q1b",
+      "text": "男は何かに困っていましたか？",
+      "answer": "はい",
+      "recall_conditions": [
         [
-          "Fs-02",
-          1
-        ]
-      ],
-      "ans_no": [
-        [
-          "Fs-02",
-          0
-        ]
-      ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "purpose"
-    },
-    {
-      "id": "q03",
-      "text": "男は飲酒目的ではなかったですか？",
-      "ans_yes": [
-        [
-          "Fs-03",
-          1
-        ]
-      ],
-      "ans_no": [
-        [
-          "Fs-03",
-          0
-        ]
-      ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "purpose"
-    },
-    {
-      "id": "q04",
-      "text": "水の注文には理由がありましたか？",
-      "ans_yes": [
-        [
-          "Fs-04",
-          1
-        ]
-      ],
-      "ans_no": [
-        [
-          "Fs-04",
-          0
-        ]
-      ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "events"
-    },
-    {
-      "id": "q05",
-      "text": "男の目的は達成されましたか？",
-      "ans_yes": [
-        [
-          "Fs-09",
-          1
-        ]
-      ],
-      "ans_no": [
-        [
-          "Fs-09",
-          0
-        ]
-      ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "resolution"
-    },
-    {
-      "id": "q06",
-      "text": "バーテンダーは男を助けようとしましたか？",
-      "ans_yes": [
-        [
-          "Fs-05",
-          1
+          "N1a"
         ],
         [
-          "Fs-04",
-          1
+          "N2a"
         ]
       ],
-      "ans_no": [
-        [
-          "Fs-05",
-          0
-        ]
+      "reveals": [
+        "P1"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [
-        "Fs-02"
-      ],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "events"
+      "mechanism": "observation",
+      "prerequisites": []
     },
     {
-      "id": "q07",
-      "text": "男の体に何か異常がありましたか？",
-      "ans_yes": [
+      "id": "Q2a",
+      "text": "銃を向けられたことは男にとって良いことでしたか？",
+      "answer": "はい",
+      "recall_conditions": [
         [
-          "Fs-07",
-          1
-        ],
-        [
-          "Fs-02",
-          1
+          "S5",
+          "S6"
         ]
       ],
-      "ans_no": [
-        [
-          "Fs-07",
-          0
-        ]
+      "reveals": [
+        "N2a"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [
-        "Fs-02"
-      ],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "events"
+      "mechanism": "anomaly",
+      "prerequisites": []
     },
     {
-      "id": "q08",
-      "text": "銃は脅しではなかったですか？",
-      "ans_yes": [
+      "id": "Q3a",
+      "text": "水は男の困りごとの対処法でしたか？",
+      "answer": "はい",
+      "recall_conditions": [
         [
-          "Fs-06",
-          1
+          "P1",
+          "S13"
         ]
       ],
-      "ans_no": [
-        [
-          "Fs-06",
-          0
-        ]
+      "reveals": [
+        "P2"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
+      "mechanism": "link",
       "prerequisites": [
-        "Fs-05"
-      ],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "events"
+        "P1"
+      ]
     },
     {
-      "id": "q09",
-      "text": "バーテンダーの行動は男に有益でしたか？",
-      "ans_yes": [
+      "id": "Q4a",
+      "text": "男の困りごとは身体的な症状でしたか？",
+      "answer": "はい",
+      "recall_conditions": [
         [
-          "Fs-08",
-          1
+          "P2"
         ]
       ],
-      "ans_no": [
-        [
-          "Fs-08",
-          0
-        ]
+      "reveals": [
+        "P3"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
+      "mechanism": "observation",
       "prerequisites": [
-        "Fs-05"
-      ],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "events"
+        "P1"
+      ]
     },
     {
-      "id": "q10",
-      "text": "男には表面化していない問題がありましたか？",
-      "ans_yes": [
+      "id": "Q5a",
+      "text": "男の症状は繰り返し起きるものでしたか？",
+      "answer": "はい",
+      "recall_conditions": [
         [
-          "Fs-10",
-          1
+          "P3"
         ]
       ],
-      "ans_no": [
-        [
-          "Fs-10",
-          0
-        ]
+      "reveals": [
+        "P4"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
+      "mechanism": "observation",
       "prerequisites": [
-        "Fs-07"
-      ],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "purpose"
+        "P3"
+      ]
     },
     {
-      "id": "q11",
-      "text": "バーテンダーの行動には合理的な意図がありましたか？",
-      "ans_yes": [
+      "id": "QT1",
+      "text": "バーテンダーは男を驚かせることで症状を止めようとしましたか？",
+      "answer": "はい",
+      "recall_conditions": [
         [
-          "Ft-03",
-          1
+          "P4",
+          "N2a"
         ]
       ],
-      "ans_no": [
-        [
-          "Ft-03",
-          0
-        ]
+      "reveals": [
+        "NT1"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
+      "mechanism": "link",
       "prerequisites": [
-        "Fs-05"
-      ],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "events"
+        "P3"
+      ]
     },
     {
-      "id": "q12",
-      "text": "銃を向けた行為と感謝は因果的に関係していますか？",
-      "ans_yes": [
+      "id": "QU1",
+      "text": "男の症状はしゃっくりでしたか？",
+      "answer": "はい",
+      "recall_conditions": [
         [
-          "Ft-05",
-          1
+          "P4",
+          "NT1"
         ]
       ],
-      "ans_no": [
-        [
-          "Ft-05",
-          0
-        ]
+      "reveals": [
+        "NU1"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
+      "mechanism": "observation",
       "prerequisites": [
-        "Fs-05"
-      ],
-      "paradigms": [
-        "P1",
-        "P2",
-        "P3",
-        "T",
-        "S1"
-      ],
-      "topic_category": "resolution"
+        "P4"
+      ]
     },
     {
-      "id": "q13",
-      "text": "男のバー訪問は身体症状への対処でしたか？",
-      "ans_yes": [
+      "id": "QF1a",
+      "text": "「水」は何かの隠語・合図でしたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
         [
-          "Ft-01",
-          1
+          "S13"
         ]
       ],
-      "ans_no": [
-        [
-          "Ft-01",
-          0
-        ]
+      "reveals": [
+        "NF1a"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [
-        "Fs-07",
-        "Fs-10"
-      ],
-      "paradigms": [
-        "P2",
-        "P3",
-        "T"
-      ],
-      "topic_category": "purpose"
+      "mechanism": "rejection",
+      "prerequisites": []
     },
     {
-      "id": "q14",
-      "text": "水は症状の治療法として選ばれましたか？",
-      "ans_yes": [
+      "id": "QF1b",
+      "text": "これは映画や劇の撮影の一場面でしたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
         [
-          "Ft-02",
-          1
+          "S4",
+          "S5"
         ]
       ],
-      "ans_no": [
-        [
-          "Ft-02",
-          0
-        ]
+      "reveals": [
+        "NF1b"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [
-        "Ft-01"
-      ],
-      "paradigms": [
-        "P2",
-        "P3",
-        "T"
-      ],
-      "topic_category": "resolution"
+      "mechanism": "rejection",
+      "prerequisites": []
     },
     {
-      "id": "q15",
-      "text": "男はしゃっくりが止まらなかったですか？",
-      "ans_yes": [
+      "id": "QF1c",
+      "text": "男は誰かと賭けをしていましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
         [
-          "Pt-1",
-          1
+          "S4",
+          "S5"
         ]
       ],
-      "ans_no": [
-        [
-          "Pt-1",
-          0
-        ]
+      "reveals": [
+        "NF1c"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [
-        "Ft-01"
-      ],
-      "paradigms": [
-        "P3",
-        "T"
-      ],
-      "topic_category": "purpose"
+      "mechanism": "rejection",
+      "prerequisites": []
     },
     {
-      "id": "q16",
-      "text": "水でしゃっくりを治そうとしましたか？",
-      "ans_yes": [
+      "id": "QF2a",
+      "text": "「ありがとう」は皮肉で言いましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
         [
-          "Pt-2",
-          1
+          "S5",
+          "S6"
         ]
       ],
-      "ans_no": [
-        [
-          "Pt-2",
-          0
-        ]
+      "reveals": [
+        "NF2a"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [
-        "Pt-1"
-      ],
-      "paradigms": [
-        "P3",
-        "T"
-      ],
-      "topic_category": "purpose"
+      "mechanism": "rejection",
+      "prerequisites": []
     },
     {
-      "id": "q17",
-      "text": "バーテンダーはしゃっくりに気づきましたか？",
-      "ans_yes": [
+      "id": "QF2b",
+      "text": "銃を向けたのは冗談でしたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
         [
-          "Pt-3",
-          1
+          "S5",
+          "S6"
         ]
       ],
-      "ans_no": [
-        [
-          "Pt-3",
-          0
-        ]
+      "reveals": [
+        "NF2b"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [
-        "Pt-1"
-      ],
-      "paradigms": [
-        "P3",
-        "T"
-      ],
-      "topic_category": "events"
+      "mechanism": "rejection",
+      "prerequisites": []
     },
     {
-      "id": "q18",
-      "text": "バーテンダーは驚かせてしゃっくりを止めようとしましたか？",
-      "ans_yes": [
+      "id": "QF3a",
+      "text": "男は意識がもうろうとした状態でしたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
         [
-          "Ft-06",
-          1
-        ],
-        [
-          "Pt-4",
-          1
+          "P1",
+          "S13"
         ]
       ],
-      "ans_no": [
-        [
-          "Pt-4",
-          0
-        ]
+      "reveals": [
+        "NF3a"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [
-        "Pt-3"
-      ],
-      "paradigms": [
-        "P3",
-        "T"
-      ],
-      "topic_category": "resolution"
+      "mechanism": "rejection",
+      "prerequisites": []
     },
     {
-      "id": "q19",
-      "text": "銃を向けたのは驚かせる手段でしたか？",
-      "ans_yes": [
+      "id": "QF3b",
+      "text": "男は自殺しようとしていましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
         [
-          "Pt-5",
-          1
+          "P1",
+          "S13"
         ]
       ],
-      "ans_no": [
-        [
-          "Pt-5",
-          0
-        ]
+      "reveals": [
+        "NF3b"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [
-        "Pt-4"
-      ],
-      "paradigms": [
-        "P3",
-        "T"
-      ],
-      "topic_category": "resolution"
+      "mechanism": "rejection",
+      "prerequisites": []
     },
     {
-      "id": "q20",
-      "text": "驚いた結果しゃっくりが止まり水が不要になりましたか？",
-      "ans_yes": [
+      "id": "QF4a",
+      "text": "男はパニック発作を起こしていましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
         [
-          "Pt-6",
-          1
-        ],
-        [
-          "Pt-7",
-          1
-        ],
-        [
-          "Ft-04",
-          1
+          "P2"
         ]
       ],
-      "ans_no": [
-        [
-          "Pt-6",
-          0
-        ]
+      "reveals": [
+        "NF4a"
       ],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": false,
-      "prerequisites": [
-        "Pt-4"
-      ],
-      "paradigms": [
-        "P3",
-        "T"
-      ],
-      "topic_category": "resolution"
+      "mechanism": "rejection",
+      "prerequisites": []
     },
     {
-      "id": "q21",
-      "text": "男はしゃっくりが止まらず水を飲めば治ると思いバーに来たが、バーテンダーがしゃっくりに気づき驚かせて止めようと銃を向け、しゃっくりが止まり水が不要になり感謝して帰ったのですか？",
-      "ans_yes": [
+      "id": "QF5a",
+      "text": "男は喉に何かが詰まっていましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
         [
-          "Pt-8",
-          1
-        ],
-        [
-          "D-01",
-          1
+          "P3"
         ]
       ],
-      "ans_no": [],
-      "ans_irrelevant": [],
-      "correct_answer": "yes",
-      "is_clear": true,
+      "reveals": [
+        "NF5a"
+      ],
+      "mechanism": "rejection",
       "prerequisites": [
-        "Pt-6"
+        "P1"
+      ]
+    },
+    {
+      "id": "QF5b",
+      "text": "男は酔っていましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
+        [
+          "P3"
+        ]
       ],
-      "paradigms": [
-        "T"
+      "reveals": [
+        "NF5b"
       ],
-      "topic_category": "resolution"
+      "mechanism": "rejection",
+      "prerequisites": [
+        "P1"
+      ]
+    },
+    {
+      "id": "QF6a",
+      "text": "男は咳が止まりませんでしたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
+        [
+          "P4",
+          "NT1"
+        ]
+      ],
+      "reveals": [
+        "NF6a"
+      ],
+      "mechanism": "rejection",
+      "prerequisites": [
+        "P4"
+      ]
     }
   ],
-  "topic_categories": [
-    {
-      "id": "I",
-      "name": "日常の理解"
-    },
-    {
-      "id": "II",
-      "name": "善意と隠れた問題"
-    },
-    {
-      "id": "III",
-      "name": "真相"
-    }
+  "clear_conditions": [
+    [
+      "NU1"
+    ]
   ],
-  "init_question_ids": [
-    "q01",
-    "q02",
-    "q03",
-    "q04",
-    "q05"
-  ],
-  "truth_paradigm": "T",
-  "question_categories": [
-    {
-      "id": "purpose",
-      "name": "男の目的"
-    },
-    {
-      "id": "events",
-      "name": "バーの出来事"
-    },
-    {
-      "id": "resolution",
-      "name": "結末"
-    }
-  ]
+  "statement": "ある男がバーに入り、バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた。男は「ありがとう」と言って帰った。なぜだろう？",
+  "truth": "男はしゃっくりが止まらなくて困っていた。水を飲めば治ると思いバーに立ち寄ったが、バーテンダーはしゃっくりに気づき、驚かせて止めてやろうと銃を向けた。しゃっくりが止まった男は水が不要になり、「ありがとう」と言って帰った。",
+  "id": "バーの男"
 }

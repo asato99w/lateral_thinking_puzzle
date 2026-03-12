@@ -17,49 +17,47 @@ struct PuzzleDataDTOTests {
         throw PuzzleRepositoryError.puzzleNotFound(id: name)
     }
 
+    // bar_man is now v3 engine format — tested via V2PuzzleDataDTO
     @Test func test_decodeBarManJSON_succeeds() throws {
         let data = try loadPuzzleJSON(name: "bar_man")
-        let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
+        let dto = try JSONDecoder().decode(V2PuzzleDataDTO.self, from: data)
 
         #expect(dto.title == "バーの男")
-        #expect(dto.initParadigm == "P1")
-        #expect(dto.paradigms.count == 5)
-        #expect(dto.questions.count == 21)
+        #expect(dto.descriptors.count == 19)
+        #expect(dto.questions.count == 19)
     }
 
     @Test func test_decodeDesertManJSON_succeeds() throws {
         let data = try loadPuzzleJSON(name: "desert_man")
-        let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
+        let dto = try JSONDecoder().decode(V2PuzzleDataDTO.self, from: data)
 
         #expect(dto.title == "砂漠の男")
-        #expect(dto.initParadigm == "P1")
-        #expect(dto.paradigms.count == 6)
-        #expect(dto.questions.count == 26)
+        #expect(dto.descriptors.count == 12)
+        #expect(dto.questions.count == 12)
     }
 
     @Test func test_barManToDomain_succeeds() throws {
         let data = try loadPuzzleJSON(name: "bar_man")
-        let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
-        let puzzle = try dto.toDomain()
+        let dto = try JSONDecoder().decode(V2PuzzleDataDTO.self, from: data)
+        let puzzle = dto.toDomain(derivationMode: .v3)
 
         #expect(puzzle.title == "バーの男")
-        #expect(puzzle.paradigms.count == 5)
-        #expect(puzzle.questions.count == 21)
+        #expect(puzzle.descriptors.count == 19)
+        #expect(puzzle.questions.count == 19)
     }
 
     @Test func test_desertManToDomain_succeeds() throws {
         let data = try loadPuzzleJSON(name: "desert_man")
-        let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
-        let puzzle = try dto.toDomain()
+        let dto = try JSONDecoder().decode(V2PuzzleDataDTO.self, from: data)
+        let puzzle = dto.toDomain(derivationMode: .v3)
 
         #expect(puzzle.title == "砂漠の男")
-        #expect(puzzle.paradigms.count == 6)
-        #expect(puzzle.questions.count == 26)
+        #expect(puzzle.descriptors.count == 12)
+        #expect(puzzle.questions.count == 12)
     }
 
-    @Test func test_allBundledPuzzles_toDomain_succeeds() throws {
-        // turtle_soup is now v2 engine format; tested separately via V2 engine tests
-        let names = ["bar_man", "desert_man", "poisonous_mushroom", "underground"]
+    @Test func test_allBundledPuzzles_v1_toDomain_succeeds() throws {
+        let names = ["underground"]
         for name in names {
             let data = try loadPuzzleJSON(name: name)
             let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
@@ -70,26 +68,43 @@ struct PuzzleDataDTOTests {
         }
     }
 
-    @Test func test_allBundledPuzzles_fullGameFlow() throws {
-        // turtle_soup is now v2 engine format; tested separately via V2 engine tests
-        let names = ["bar_man", "desert_man", "poisonous_mushroom", "underground"]
+    @Test func test_allBundledPuzzles_v2v3_toDomain_succeeds() throws {
+        let v2Names = ["poisonous_mushroom"]
+        for name in v2Names {
+            let data = try loadPuzzleJSON(name: name)
+            let dto = try JSONDecoder().decode(V2PuzzleDataDTO.self, from: data)
+            let puzzle = dto.toDomain(derivationMode: .v2)
+            #expect(!puzzle.title.isEmpty, "Puzzle \(name) has empty title")
+            #expect(!puzzle.descriptors.isEmpty, "Puzzle \(name) has no descriptors")
+            #expect(!puzzle.questions.isEmpty, "Puzzle \(name) has no questions")
+        }
+        let v3Names = ["bar_man", "desert_man"]
+        for name in v3Names {
+            let data = try loadPuzzleJSON(name: name)
+            let dto = try JSONDecoder().decode(V2PuzzleDataDTO.self, from: data)
+            let puzzle = dto.toDomain(derivationMode: .v3)
+            #expect(!puzzle.title.isEmpty, "Puzzle \(name) has empty title")
+            #expect(!puzzle.descriptors.isEmpty, "Puzzle \(name) has no descriptors")
+            #expect(!puzzle.questions.isEmpty, "Puzzle \(name) has no questions")
+        }
+    }
+
+    @Test func test_allBundledPuzzles_v1_fullGameFlow() throws {
+        let names = ["underground"]
         for name in names {
             let data = try loadPuzzleJSON(name: name)
             let dto = try JSONDecoder().decode(PuzzleDataDTO.self, from: data)
             let puzzle = try dto.toDomain()
 
-            // Simulate StartGameUseCase
             let startGame = StartGameUseCase()
             let result = startGame.execute(puzzle: puzzle)
 
             #expect(!result.state.pCurrent.isEmpty, "Puzzle \(name): pCurrent should be set")
 
-            // Simulate answering each open question
             let answerUseCase = AnswerQuestionUseCase()
             var state = result.state
             var openQs = result.openQuestions
 
-            // Answer up to 5 questions to verify no crash
             var answeredCount = 0
             while answeredCount < 5 && !openQs.isEmpty {
                 let q = openQs[0]
@@ -102,6 +117,32 @@ struct PuzzleDataDTOTests {
                 state = ansResult.state
                 openQs = ansResult.openQuestions
                 answeredCount += 1
+            }
+        }
+    }
+
+    @Test func test_allBundledPuzzles_v2v3_fullGameFlow() throws {
+        let puzzles: [(String, DerivationMode)] = [
+            ("poisonous_mushroom", .v2),
+            ("bar_man", .v3),
+            ("desert_man", .v3),
+        ]
+        for (name, mode) in puzzles {
+            let data = try loadPuzzleJSON(name: name)
+            let dto = try JSONDecoder().decode(V2PuzzleDataDTO.self, from: data)
+            let puzzle = dto.toDomain(derivationMode: mode)
+
+            var session = V2GameSession(puzzle: puzzle)
+            let startResult = session.start()
+            #expect(!startResult.openQuestions.isEmpty, "Puzzle \(name): should have open questions")
+
+            var currentSession = session
+            for _ in 0..<5 {
+                var s = currentSession
+                let available = s.start().openQuestions
+                if available.isEmpty { break }
+                _ = s.selectQuestion(available.first!)
+                currentSession = s
             }
         }
     }

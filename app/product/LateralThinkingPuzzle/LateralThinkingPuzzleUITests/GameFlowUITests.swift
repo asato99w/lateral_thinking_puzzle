@@ -35,7 +35,7 @@ final class GameFlowUITests: XCTestCase {
         add(attach)
     }
 
-    func test_barMan_showsCategoryTabs() throws {
+    func test_barMan_loadsGameScreen() throws {
         // 1. Enter バーの男 game
         let barMan = app.staticTexts["バーの男"]
         XCTAssertTrue(barMan.waitForExistence(timeout: 5), "バーの男 should appear in puzzle list")
@@ -46,17 +46,17 @@ final class GameFlowUITests: XCTestCase {
         let statementHeader = app.staticTexts["出題"]
         XCTAssertTrue(statementHeader.waitForExistence(timeout: 5), "Statement header should appear")
 
-        // 3. Verify "すべて" tab exists (bar_man now has topic_categories)
+        // 3. bar_man v3 has no topic_categories, so category tabs should not appear
         let allTab = app.buttons.containing(NSPredicate(format: "label CONTAINS %@", "すべて")).firstMatch
-        XCTAssertTrue(allTab.waitForExistence(timeout: 3), "'すべて' category tab should appear for bar_man")
+        XCTAssertFalse(allTab.waitForExistence(timeout: 2), "'すべて' category tab should not appear for v3 bar_man (no topic_categories)")
 
-        // 4. Verify a real category tab
-        let catI = app.buttons.containing(NSPredicate(format: "label CONTAINS %@", "日常の理解")).firstMatch
-        XCTAssertTrue(catI.exists, "Category '日常の理解' tab should appear")
+        // 4. Verify questions are displayed
+        let questionsHeader = app.staticTexts["質問を選んでください"]
+        XCTAssertTrue(questionsHeader.waitForExistence(timeout: 3), "Questions section should appear")
 
         let screenshot = app.screenshot()
         let attach = XCTAttachment(screenshot: screenshot)
-        attach.name = "BarMan_CategoryTabs"
+        attach.name = "BarMan_v3_GameScreen"
         attach.lifetime = .keepAlways
         add(attach)
     }
