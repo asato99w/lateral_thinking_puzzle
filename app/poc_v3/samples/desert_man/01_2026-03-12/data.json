@@ -1,0 +1,379 @@
+{
+  "title": "砂漠の男",
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "男が砂漠にいるのは予期せぬ事態の結果だった",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4",
+          "N1a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "男は乗り物のトラブルにより砂漠に取り残された",
+      "formation_conditions": [
+        [
+          "P1",
+          "S2",
+          "N3a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "マッチは火をつけるための道具として使われたのではない",
+      "formation_conditions": [
+        [
+          "S5",
+          "S6",
+          "S7"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "男は空中から砂漠に到達した",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "男には仲間がいて共に危機的状況にあった",
+      "formation_conditions": [
+        [
+          "P4",
+          "N5a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "マッチはくじ引きの道具として使われた",
+      "formation_conditions": [
+        [
+          "P5",
+          "P3",
+          "S5",
+          "N6a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P7",
+      "label": "裸になったのは乗り物を軽くするためだった",
+      "formation_conditions": [
+        [
+          "P5",
+          "S3",
+          "P2",
+          "N7a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N5a",
+      "label": "乗り物には男以外にも人が乗っていた",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "男は日常的な活動として砂漠にいたのではない",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3a",
+      "label": "男は乗り物に乗っていた",
+      "formation_conditions": [
+        [
+          "P1",
+          "S2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N6a",
+      "label": "マッチ棒は仲間との意思決定に使われた",
+      "formation_conditions": [
+        [
+          "P5",
+          "P3",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N7a",
+      "label": "裸になったのは乗り物に関連する理由だった",
+      "formation_conditions": [
+        [
+          "P5",
+          "S3",
+          "P2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "男は日常的な活動として砂漠にいましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4"
+        ]
+      ],
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": []
+    },
+    {
+      "id": "Q1b",
+      "text": "男が砂漠にいるのは予期せぬ出来事の結果ですか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4",
+          "N1a"
+        ]
+      ],
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q2a",
+      "text": "マッチ棒は火をつけるために使われましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
+        [
+          "S5",
+          "S6",
+          "S7"
+        ]
+      ],
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q3a",
+      "text": "男は乗り物に乗っていましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P1",
+          "S2"
+        ]
+      ],
+      "reveals": [
+        "N3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q3b",
+      "text": "乗り物のトラブルにより砂漠に取り残されましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P1",
+          "S2",
+          "N3a"
+        ]
+      ],
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N3a"
+      ]
+    },
+    {
+      "id": "Q4a",
+      "text": "その乗り物は空を飛んでいましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q5a",
+      "text": "乗り物には男以外にも人が乗っていましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "reveals": [
+        "N5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q5b",
+      "text": "乗り合わせた人たちは共に危機的な状況にありましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P4",
+          "N5a"
+        ]
+      ],
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N5a"
+      ]
+    },
+    {
+      "id": "Q6a",
+      "text": "マッチ棒は仲間との間で何かを決めるために使われましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P5",
+          "P3",
+          "S5"
+        ]
+      ],
+      "reveals": [
+        "N6a"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q6b",
+      "text": "マッチ棒はくじ引きに使われましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P5",
+          "P3",
+          "S5",
+          "N6a"
+        ]
+      ],
+      "reveals": [
+        "P6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q7a",
+      "text": "裸になったのは乗り物に関連する理由ですか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P5",
+          "S3",
+          "P2"
+        ]
+      ],
+      "reveals": [
+        "N7a"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q7b",
+      "text": "乗り物を軽くするために裸になりましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P5",
+          "S3",
+          "P2",
+          "N7a"
+        ]
+      ],
+      "reveals": [
+        "P7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    }
+  ],
+  "statement": "砂漠の真ん中で裸の男が死んでいた。手には折れたマッチ棒を握りしめている。",
+  "truth": "男は数人で熱気球に乗っていたが、高度が下がり始めた。荷物を全て捨て、服も脱いで軽量化したが足りず、くじ引き（マッチの長さ）で一人が飛び降りることになった。短いマッチを引いた男が飛び降りて死亡した。",
+  "id": "砂漠の男"
+}

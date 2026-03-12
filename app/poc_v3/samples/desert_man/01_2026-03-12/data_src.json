@@ -1,0 +1,788 @@
+{
+  "title": "砂漠の男",
+  "S": "砂漠の真ん中で裸の男が死んでいた。手には折れたマッチ棒を握りしめている。",
+  "T": "男は数人で熱気球に乗っていたが、高度が下がり始めた。荷物を全て捨て、服も脱いで軽量化したが足りず、くじ引き（マッチの長さ）で一人が飛び降りることになった。短いマッチを引いた男が飛び降りて死亡した。",
+  "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"],
+  "_phase1": {
+    "tensions": [
+      {"id": "α", "label": "砂漠の真ん中にいること — 到達手段・経緯が不明"},
+      {"id": "β", "label": "裸であること — 砂漠で裸は生存に不合理"},
+      {"id": "γ", "label": "折れたマッチ棒を握りしめていること — 用途・折れた理由・握りしめる理由が不明"}
+    ],
+    "models": [
+      {
+        "id": "T",
+        "label": "熱気球からの転落",
+        "summary": "熱気球の高度低下で軽量化のため荷物と服を捨て、マッチのくじ引きで短い方を引いた男が飛び降りて死亡した。",
+        "tension_subset": ["α", "β", "γ"]
+      },
+      {
+        "id": "M1",
+        "label": "飛行機の不時着",
+        "summary": "小型飛行機が砂漠に墜落。衝撃と火災で衣服を失い、救難信号のためマッチで火を起こそうとしたが折れた。",
+        "tension_subset": ["α", "β", "γ"]
+      },
+      {
+        "id": "M2",
+        "label": "集団遭難とくじ引き",
+        "summary": "数人で砂漠横断中に車が故障し遭難。残りの水を巡りマッチのくじ引き。暑さで服を脱ぎ、短いマッチを引いた男が水を譲って脱水死。",
+        "tension_subset": ["α", "β", "γ"]
+      },
+      {
+        "id": "M3",
+        "label": "強盗被害",
+        "summary": "砂漠で強盗に襲われ身ぐるみ剥がされ放置。残されたマッチで火を起こし救助を求めようとしたが折れた。",
+        "tension_subset": ["α", "β", "γ"]
+      },
+      {
+        "id": "M4",
+        "label": "サバイバル挑戦",
+        "summary": "裸で砂漠を渡るサバイバル企画に参加。唯一許された道具がマッチ1本だったが折れ、火を起こせず死亡。",
+        "tension_subset": ["α", "β", "γ"]
+      },
+      {
+        "id": "M5",
+        "label": "砂漠での自殺",
+        "summary": "砂漠で死ぬことを選び、持ち物を捨て服も脱いだ。マッチで遺書を燃やし、最後の折れたマッチだけが手に残った。",
+        "tension_subset": ["α", "β", "γ"]
+      },
+      {
+        "id": "M6",
+        "label": "宗教的苦行",
+        "summary": "砂漠で裸の苦行に挑む修行者。聖火をつけるためのマッチが折れ、儀式を完遂できず脱水死。",
+        "tension_subset": ["α", "β", "γ"]
+      },
+      {
+        "id": "M7",
+        "label": "処刑・制裁",
+        "summary": "犯罪組織に裸で砂漠に放置された。マッチ1本だけ与えられたが意図的に折られていた。",
+        "tension_subset": ["α", "β", "γ"]
+      },
+      {
+        "id": "M8",
+        "label": "車の故障と信号",
+        "summary": "砂漠で車が故障。暑さで服を脱ぎ、マッチでガソリンに火をつけ煙の信号を送ろうとしたが折れた。",
+        "tension_subset": ["α", "β", "γ"]
+      },
+      {
+        "id": "M9",
+        "label": "映画撮影事故",
+        "summary": "砂漠ロケで裸のシーンを撮影中に事故死。マッチは小道具として握っていた。",
+        "tension_subset": ["α", "β", "γ"]
+      },
+      {
+        "id": "M10",
+        "label": "脱水による錯乱",
+        "summary": "砂漠で迷い脱水。精神錯乱で服を脱いだ。マッチは偶然の所持品。",
+        "tension_subset": ["α", "β"]
+      },
+      {
+        "id": "M11",
+        "label": "パラシュート事故",
+        "summary": "上空から降下し砂漠に着地。降下中に服が引き裂かれた。マッチは携行品。",
+        "tension_subset": ["α", "β"]
+      },
+      {
+        "id": "M12",
+        "label": "砂漠施設の火災",
+        "summary": "砂漠の施設で火災が発生。衣服が燃えて裸に。マッチが出火原因で握ったまま逃げ力尽きた。",
+        "tension_subset": ["β", "γ"]
+      }
+    ],
+    "structural_overlaps": [
+      "T, M2: 複数人＋マッチによるくじ引きの共通構造",
+      "T, M1, M11: 上空からの落下で砂漠に到達",
+      "M1, M3, M4, M8: マッチを火起こし道具として使用する構造",
+      "M3, M7: 犯罪被害による裸"
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "T": [
+        "男は数人で熱気球に乗っていた",
+        "熱気球の高度が下がり始めた",
+        "軽量化のため荷物を全て捨てた",
+        "荷物を捨てても不十分で服も脱いだ",
+        "軽量化でも高度が回復しなかった",
+        "くじ引きで一人が飛び降りることになった",
+        "くじ引きはマッチの長さの比較で行った",
+        "男は短いマッチを引いた",
+        "男は熱気球から飛び降りた",
+        "男は落下により死亡した"
+      ],
+      "M1": [
+        "男は小型飛行機に乗っていた",
+        "飛行機が砂漠に墜落した",
+        "墜落時の衝撃と火災で衣服が失われた",
+        "男は生き残ったが負傷した",
+        "救難信号のためマッチで火を起こそうとした",
+        "マッチが折れて火を起こせなかった",
+        "救助を待つうちに死亡した"
+      ],
+      "M2": [
+        "男は数人で砂漠を車で横断していた",
+        "車が故障し遭難した",
+        "残りの水が少なくなった",
+        "暑さで服を脱いだ",
+        "残りの水を誰が得るかマッチのくじ引きで決めた",
+        "男は短いマッチを引いた",
+        "男は水を譲り脱水で死亡した"
+      ],
+      "M3": [
+        "男は砂漠を旅行中だった",
+        "強盗に襲われた",
+        "身ぐるみ剥がされ裸にされた",
+        "砂漠に放置された",
+        "残されたマッチで火を起こそうとした",
+        "マッチが折れて火を起こせなかった",
+        "救助が来ず死亡した"
+      ],
+      "M4": [
+        "男はサバイバル企画に参加した",
+        "裸で砂漠を渡るルールだった",
+        "唯一許された道具がマッチ1本だった",
+        "火を起こそうとしたがマッチが折れた",
+        "火を起こせず脱水で死亡した"
+      ],
+      "M5": [
+        "男は自殺を決意した",
+        "砂漠で死ぬことを選んだ",
+        "持ち物を全て捨て服も脱いだ",
+        "マッチで遺書を燃やした",
+        "折れたマッチだけが手に残った",
+        "脱水で死亡した"
+      ],
+      "M6": [
+        "男は宗教的修行者だった",
+        "砂漠での裸の苦行に挑んだ",
+        "聖火をつけるためにマッチを持参した",
+        "マッチが折れて聖火をつけられなかった",
+        "脱水で死亡した"
+      ],
+      "M7": [
+        "男は犯罪組織に関わっていた",
+        "裏切り者として制裁を受けた",
+        "裸にされ砂漠に放置された",
+        "マッチ1本だけ与えられたが意図的に折られていた",
+        "救助の手段なく死亡した"
+      ],
+      "M8": [
+        "男は砂漠を車で走行中だった",
+        "車が故障した",
+        "暑さで服を脱いだ",
+        "マッチでガソリンに火をつけて煙の信号を送ろうとした",
+        "マッチが折れて火をつけられなかった",
+        "救助が来ず死亡した"
+      ],
+      "M9": [
+        "男は映画の撮影に参加していた",
+        "砂漠ロケで裸のシーンを撮影していた",
+        "マッチは小道具として握っていた",
+        "撮影中に事故が発生した",
+        "事故により死亡した"
+      ],
+      "M10": [
+        "男は砂漠を歩いていた",
+        "脱水症状に陥った",
+        "精神錯乱状態で服を脱いだ",
+        "マッチは元々の所持品だった",
+        "脱水により死亡した"
+      ],
+      "M11": [
+        "男はパラシュートで降下した",
+        "降下中に服が引き裂かれた",
+        "砂漠に着地した",
+        "マッチは携行品だった",
+        "着地の衝撃で死亡した"
+      ],
+      "M12": [
+        "男は砂漠の施設にいた",
+        "火災が発生した",
+        "衣服が燃えて裸になった",
+        "マッチが出火原因だった",
+        "マッチを握ったまま施設から逃げた",
+        "力尽きて死亡した"
+      ]
+    },
+    "division_propositions": [
+      {
+        "id": "P1",
+        "label": "男が砂漠にいるのは予期せぬ事態の結果だった",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M1", "M2", "M3", "M7", "M8", "M10", "M11", "M12"],
+        "false_models": ["M4", "M5", "M6", "M9"]
+      },
+      {
+        "id": "P2",
+        "label": "男は乗り物のトラブルにより砂漠に取り残された",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M1", "M2", "M8", "M11"],
+        "false_models": ["M3", "M4", "M5", "M6", "M7", "M9", "M10", "M12"]
+      },
+      {
+        "id": "P3",
+        "label": "マッチは火をつけるための道具として使われたのではない",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M2", "M7", "M9", "M10", "M11"],
+        "false_models": ["M1", "M3", "M4", "M5", "M6", "M8", "M12"]
+      },
+      {
+        "id": "P4",
+        "label": "男は空中から砂漠に到達した",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M1", "M11"],
+        "false_models": ["M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M12"]
+      },
+      {
+        "id": "P5",
+        "label": "男には仲間がいて共に危機的状況にあった",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M2"],
+        "false_models": ["M1", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12"]
+      },
+      {
+        "id": "P6",
+        "label": "マッチはくじ引きの道具として使われた",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M2"],
+        "false_models": ["M1", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12"]
+      },
+      {
+        "id": "P7",
+        "label": "裸になったのは乗り物を軽くするためだった",
+        "truth_value_in_T": true,
+        "true_models": ["T"],
+        "false_models": ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12"]
+      }
+    ],
+    "division_hierarchy": [
+      {
+        "proposition_id": "P1",
+        "true_set": ["T", "M1", "M2", "M3", "M7", "M8", "M10", "M11", "M12"],
+        "false_set": ["M4", "M5", "M6", "M9"],
+        "children": [
+          {
+            "proposition_id": "P2",
+            "true_set": ["T", "M1", "M2", "M8", "M11"],
+            "false_set": ["M3", "M7", "M10", "M12"],
+            "children": [
+              {
+                "proposition_id": "P4",
+                "true_set": ["T", "M1", "M11"],
+                "false_set": ["M2", "M8"],
+                "children": [
+                  {
+                    "proposition_id": "P5",
+                    "true_set": ["T"],
+                    "false_set": ["M1", "M11"],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "_phase3": {
+    "s_propositions": [
+      {"id": "S1", "label": "男がいた", "type": "atomic"},
+      {"id": "S2", "label": "男は砂漠の真ん中にいた", "type": "atomic"},
+      {"id": "S3", "label": "男は裸だった", "type": "atomic"},
+      {"id": "S4", "label": "男は死んでいた", "type": "atomic"},
+      {"id": "S5", "label": "男の手にマッチ棒があった", "type": "atomic"},
+      {"id": "S6", "label": "マッチ棒は折れていた", "type": "atomic"},
+      {"id": "S7", "label": "男はマッチ棒を握りしめていた", "type": "atomic"},
+      {"id": "S8", "label": "砂漠が存在した", "type": "derived", "derived_from": ["S2"]},
+      {"id": "S9", "label": "マッチ棒が存在した", "type": "derived", "derived_from": ["S5"]}
+    ],
+    "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_upper",
+        "source": ["S2", "S3", "S4"],
+        "target": "P1",
+        "tactic": "常識的仮説の排除 → 段階的絞り込み",
+        "description": "{S2, S3, S4} →[常識的仮説の排除]→ 砂漠の真ん中で裸で死ぬのは通常の状況ではない →[段階的絞り込み]→ P1(予期せぬ事態の結果だった)"
+      },
+      {
+        "id": "C2",
+        "type": "S_to_upper",
+        "source": ["S5", "S6", "S7"],
+        "target": "P3",
+        "tactic": "常識的仮説の排除",
+        "description": "{S5, S6, S7} →[常識的仮説の排除]→ マッチ棒は通常火を付ける道具だが、折れたまま握りしめている → P3(火を付ける目的ではなかった)"
+      },
+      {
+        "id": "C3",
+        "type": "upper_to_lower",
+        "source": ["P1", "S2"],
+        "target": "P2",
+        "tactic": "手段の探索 → 段階的絞り込み",
+        "description": "{P1, S2} →[手段の探索]→ 予期せぬ事態で砂漠の真ん中に至った手段は何か →[段階的絞り込み]→ P2(乗り物のトラブルで取り残された)",
+        "fc_source": "P1 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C4",
+        "type": "upper_to_lower",
+        "source": ["P2"],
+        "target": "P4",
+        "tactic": "段階的絞り込み",
+        "description": "{P2} →[段階的絞り込み]→ 乗り物の種類は地上か空中か → P4(空中から砂漠に到達した)",
+        "fc_source": "P2 は連鎖 C3 の reveals"
+      },
+      {
+        "id": "C5",
+        "type": "upper_to_lower",
+        "source": ["P4"],
+        "target": "P5",
+        "tactic": "登場人物の探索 → 段階的絞り込み",
+        "description": "{P4} →[登場人物の探索]→ 空中の乗り物に他の人もいたか →[段階的絞り込み]→ 共に危機的状況にあったか → P5(仲間がいて共に危機的状況にあった)",
+        "fc_source": "P4 は連鎖 C4 の reveals"
+      },
+      {
+        "id": "C6",
+        "type": "upper_to_lower",
+        "source": ["P5", "P3", "S5"],
+        "target": "P6",
+        "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "{P5, P3, S5} →[動機の探索]→ 仲間がいて火付け目的でないなら、マッチは仲間との間で何に使われたか →[段階的絞り込み]→ P6(くじ引きの道具として使われた)",
+        "fc_source": "P5 は連鎖 C5 の reveals, P3 は連鎖 C2 の reveals"
+      },
+      {
+        "id": "C7",
+        "type": "upper_to_lower",
+        "source": ["P5", "S3", "P2"],
+        "target": "P7",
+        "tactic": "因果の逆転 → 段階的絞り込み",
+        "description": "{P5, S3, P2} →[因果の逆転]→ 仲間と共に乗り物のトラブルで危機にある中、裸になった理由は何か →[段階的絞り込み]→ P7(乗り物を軽くするためだった)",
+        "fc_source": "P5 は連鎖 C5 の reveals, P2 は連鎖 C3 の reveals"
+      }
+    ]
+  },
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "男が砂漠にいるのは予期せぬ事態の結果だった",
+      "_truth_value": true,
+      "formation_conditions": [["S2", "S3", "S4", "N1a"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "男は乗り物のトラブルにより砂漠に取り残された",
+      "_truth_value": true,
+      "formation_conditions": [["P1", "S2", "N3a"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "マッチは火をつけるための道具として使われたのではない",
+      "_truth_value": true,
+      "formation_conditions": [["S5", "S6", "S7"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "男は空中から砂漠に到達した",
+      "_truth_value": true,
+      "formation_conditions": [["P2"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "男には仲間がいて共に危機的状況にあった",
+      "_truth_value": true,
+      "formation_conditions": [["P4", "N5a"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "マッチはくじ引きの道具として使われた",
+      "_truth_value": true,
+      "formation_conditions": [["P5", "P3", "S5", "N6a"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P7",
+      "label": "裸になったのは乗り物を軽くするためだった",
+      "_truth_value": true,
+      "formation_conditions": [["P5", "S3", "P2", "N7a"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N5a",
+      "label": "乗り物には男以外にも人が乗っていた",
+      "_truth_value": true,
+      "formation_conditions": [["P4"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "男は日常的な活動として砂漠にいたのではない",
+      "_truth_value": true,
+      "formation_conditions": [["S2", "S3", "S4"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3a",
+      "label": "男は乗り物に乗っていた",
+      "_truth_value": true,
+      "formation_conditions": [["P1", "S2"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N6a",
+      "label": "マッチ棒は仲間との意思決定に使われた",
+      "_truth_value": true,
+      "formation_conditions": [["P5", "P3", "S5"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N7a",
+      "label": "裸になったのは乗り物に関連する理由だった",
+      "_truth_value": true,
+      "formation_conditions": [["P5", "S3", "P2"]],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "男は日常的な活動として砂漠にいましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [["S2", "S3", "S4"]],
+      "reveals": ["N1a"],
+      "mechanism": "anomaly",
+      "prerequisites": []
+    },
+    {
+      "id": "Q1b",
+      "text": "男が砂漠にいるのは予期せぬ出来事の結果ですか？",
+      "answer": "はい",
+      "recall_conditions": [["S2", "S3", "S4", "N1a"]],
+      "reveals": ["P1"],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q2a",
+      "text": "マッチ棒は火をつけるために使われましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [["S5", "S6", "S7"]],
+      "reveals": ["P3"],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q3a",
+      "text": "男は乗り物に乗っていましたか？",
+      "answer": "はい",
+      "recall_conditions": [["P1", "S2"]],
+      "reveals": ["N3a"],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q3b",
+      "text": "乗り物のトラブルにより砂漠に取り残されましたか？",
+      "answer": "はい",
+      "recall_conditions": [["P1", "S2", "N3a"]],
+      "reveals": ["P2"],
+      "mechanism": "observation",
+      "prerequisites": ["N3a"]
+    },
+    {
+      "id": "Q4a",
+      "text": "その乗り物は空を飛んでいましたか？",
+      "answer": "はい",
+      "recall_conditions": [["P2"]],
+      "reveals": ["P4"],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q5a",
+      "text": "乗り物には男以外にも人が乗っていましたか？",
+      "answer": "はい",
+      "recall_conditions": [["P4"]],
+      "reveals": ["N5a"],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q5b",
+      "text": "乗り合わせた人たちは共に危機的な状況にありましたか？",
+      "answer": "はい",
+      "recall_conditions": [["P4", "N5a"]],
+      "reveals": ["P5"],
+      "mechanism": "observation",
+      "prerequisites": ["N5a"]
+    },
+    {
+      "id": "Q6a",
+      "text": "マッチ棒は仲間との間で何かを決めるために使われましたか？",
+      "answer": "はい",
+      "recall_conditions": [["P5", "P3", "S5"]],
+      "reveals": ["N6a"],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q6b",
+      "text": "マッチ棒はくじ引きに使われましたか？",
+      "answer": "はい",
+      "recall_conditions": [["P5", "P3", "S5", "N6a"]],
+      "reveals": ["P6"],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q7a",
+      "text": "裸になったのは乗り物に関連する理由ですか？",
+      "answer": "はい",
+      "recall_conditions": [["P5", "S3", "P2"]],
+      "reveals": ["N7a"],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "Q7b",
+      "text": "乗り物を軽くするために裸になりましたか？",
+      "answer": "はい",
+      "recall_conditions": [["P5", "S3", "P2", "N7a"]],
+      "reveals": ["P7"],
+      "mechanism": "observation",
+      "prerequisites": []
+    }
+  ],
+  "_phase4": {
+    "chain_mapping": {
+      "C1": ["Q1a", "Q1b"],
+      "C2": ["Q2a"],
+      "C3": ["Q3a", "Q3b"],
+      "C4": ["Q4a"],
+      "C5": ["Q5a", "Q5b"],
+      "C6": ["Q6a", "Q6b"],
+      "C7": ["Q7a", "Q7b"]
+    },
+    "exploration_paths": [
+      {
+        "name": "パス A: 砂漠到達の経緯から入る",
+        "sequence": "Q1b(はい:P1) → Q3a(はい:N3a) → Q3b(はい:P2) → Q4a(はい:P4) → Q5a(はい:N5a) → Q5b(はい:P5) → Q2a(いいえ:P3) → Q6b(はい:P6) → Q7b(はい:P7)"
+      },
+      {
+        "name": "パス B: マッチの用途から入る",
+        "sequence": "Q2a(いいえ:P3) → Q1b(はい:P1) → Q3a(はい:N3a) → Q3b(はい:P2) → Q4a(はい:P4) → Q5a(はい:N5a) → Q5b(はい:P5) → Q6b(はい:P6) → Q7b(はい:P7)"
+      },
+      {
+        "name": "パス C: 排除から丁寧に入る",
+        "sequence": "Q1a(いいえ:N1a) → Q1b(はい:P1) → Q3a(はい:N3a) → Q3b(はい:P2) → Q4a(はい:P4) → Q2a(いいえ:P3) → Q5a(はい:N5a) → Q5b(はい:P5) → Q6b(はい:P6) → Q7b(はい:P7)"
+      }
+    ]
+  },
+  "_phase5": {
+    "chain_branches": [
+      {
+        "chain_id": "C1",
+        "chain_path": "S → N1a → P1",
+        "branches": [
+          {
+            "at_step": "N1a",
+            "true_side_label": "男は日常的な活動として砂漠にいたのではない",
+            "parallels": [
+              {
+                "label": "日常的な活動として砂漠にいた",
+                "models": []
+              }
+            ]
+          },
+          {
+            "at_step": "P1",
+            "true_side_label": "男が砂漠にいるのは予期せぬ事態の結果だった",
+            "parallels": [
+              {
+                "label": "意図的/計画的に砂漠に来た",
+                "models": ["M4", "M5", "M6", "M9"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C2",
+        "chain_path": "S → P3",
+        "branches": [
+          {
+            "at_step": "P3",
+            "true_side_label": "マッチは火をつけるための道具として使われたのではない",
+            "parallels": [
+              {
+                "label": "マッチは火をつけるための道具として使われた",
+                "models": ["M1", "M3", "M4", "M5", "M6", "M8", "M12"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C3",
+        "chain_path": "P1 → N3a → P2",
+        "branches": [
+          {
+            "at_step": "N3a",
+            "true_side_label": "男は乗り物に乗っていた",
+            "parallels": [
+              {
+                "label": "乗り物に乗っていなかった",
+                "models": ["M3", "M7", "M10", "M12"]
+              }
+            ]
+          },
+          {
+            "at_step": "P2",
+            "true_side_label": "男は乗り物のトラブルにより砂漠に取り残された",
+            "parallels": [
+              {
+                "label": "乗り物はあったがトラブル以外の理由で砂漠にいる",
+                "models": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C4",
+        "chain_path": "P2 → P4",
+        "branches": [
+          {
+            "at_step": "P4",
+            "true_side_label": "男は空中から砂漠に到達した",
+            "parallels": [
+              {
+                "label": "地上の乗り物で砂漠に到達した",
+                "models": ["M2", "M8"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C5",
+        "chain_path": "P4 → N5a → P5",
+        "branches": [
+          {
+            "at_step": "N5a",
+            "true_side_label": "乗り物には男以外にも人が乗っていた",
+            "parallels": [
+              {
+                "label": "一人で乗っていた",
+                "models": ["M1", "M11"]
+              }
+            ]
+          },
+          {
+            "at_step": "P5",
+            "true_side_label": "男には仲間がいて共に危機的状況にあった",
+            "parallels": [
+              {
+                "label": "他の人はいたが共に危機的状況ではなかった",
+                "models": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C6",
+        "chain_path": "P5+P3+S5 → N6a → P6",
+        "branches": [
+          {
+            "at_step": "N6a",
+            "true_side_label": "マッチ棒は仲間との意思決定に使われた",
+            "parallels": [
+              {
+                "label": "仲間との意思決定以外の目的で使われた",
+                "models": []
+              }
+            ]
+          },
+          {
+            "at_step": "P6",
+            "true_side_label": "マッチはくじ引きの道具として使われた",
+            "parallels": [
+              {
+                "label": "くじ引き以外の意思決定方法で使われた",
+                "models": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C7",
+        "chain_path": "P5+S3+P2 → N7a → P7",
+        "branches": [
+          {
+            "at_step": "N7a",
+            "true_side_label": "裸になったのは乗り物に関連する理由だった",
+            "parallels": [
+              {
+                "label": "裸になったのは乗り物とは無関係の理由だった",
+                "models": ["M2"]
+              }
+            ]
+          },
+          {
+            "at_step": "P7",
+            "true_side_label": "裸になったのは乗り物を軽くするためだった",
+            "parallels": [
+              {
+                "label": "乗り物関連だが軽量化以外の理由で裸になった",
+                "models": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "all_models": ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12"],
+      "model_coverage": {
+        "M1": [{"chain": "C2", "step": "P3"}, {"chain": "C5", "step": "N5a"}],
+        "M2": [{"chain": "C4", "step": "P4"}, {"chain": "C7", "step": "N7a"}],
+        "M3": [{"chain": "C2", "step": "P3"}, {"chain": "C3", "step": "N3a"}],
+        "M4": [{"chain": "C1", "step": "P1"}, {"chain": "C2", "step": "P3"}],
+        "M5": [{"chain": "C1", "step": "P1"}, {"chain": "C2", "step": "P3"}],
+        "M6": [{"chain": "C1", "step": "P1"}, {"chain": "C2", "step": "P3"}],
+        "M7": [{"chain": "C3", "step": "N3a"}],
+        "M8": [{"chain": "C2", "step": "P3"}, {"chain": "C4", "step": "P4"}],
+        "M9": [{"chain": "C1", "step": "P1"}],
+        "M10": [{"chain": "C3", "step": "N3a"}],
+        "M11": [{"chain": "C5", "step": "N5a"}],
+        "M12": [{"chain": "C2", "step": "P3"}, {"chain": "C3", "step": "N3a"}]
+      },
+      "uncovered": [],
+      "uncovered_notes": "全12競合モデルがカバー済み。各並列命題は既存の真側質問の反対回答により暗黙にカバーされる。"
+    },
+    "generated": {
+      "propositions": [],
+      "questions": [],
+      "notes": "全並列命題が既存の真側質問（Q1b,Q2a,Q3a,Q4a,Q5a,Q7a）の反対回答により既にカバーされている。分割命題のtrue/false_modelsにより、真側命題の確認がそのまま偽側モデルの棄却となる。新規NF*/QF*の生成は不要。"
+    }
+  }
+}
