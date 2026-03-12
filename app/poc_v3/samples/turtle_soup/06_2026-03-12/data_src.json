@@ -528,19 +528,20 @@
         ],
         "target": "P2",
         "tactic": "段階的絞り込み",
-        "description": "{P1} →[段階的絞り込み]→ N3b →{N3b}→[段階的絞り込み]→ P2",
+        "description": "{P1} →[段階的絞り込み]→ N3b →[段階的絞り込み]→ N3c →[段階的絞り込み]→ P2",
         "fc_source": "P1 は C1 または C2 の reveals"
       },
       {
         "id": "C4",
         "type": "upper_to_lower",
         "source": [
-          "P2"
+          "P2",
+          "S3"
         ],
         "target": "P3",
         "tactic": "段階的絞り込み",
-        "description": "{P2} →[段階的絞り込み]→ P3",
-        "fc_source": "P2 は C3 の reveals"
+        "description": "{P2, S3} →[段階的絞り込み]→ P3",
+        "fc_source": "P2 は C3 の reveals、S3 は initial_confirmed"
       },
       {
         "id": "C5",
@@ -550,7 +551,7 @@
         ],
         "target": "P4",
         "tactic": "登場人物の探索 → 段階的絞り込み",
-        "description": "{P3} →[登場人物の探索]→ N5a →{N5a}→[段階的絞り込み]→ P4",
+        "description": "{P3} →[登場人物の探索]→ N5a →{N5a, P1}→[段階的絞り込み]→ P4",
         "fc_source": "P3 は C4 の reveals"
       }
     ]
@@ -577,8 +578,7 @@
       "_truth_value": true,
       "formation_conditions": [
         [
-          "N3b",
-          "P1"
+          "N3c"
         ]
       ],
       "entailment_conditions": null,
@@ -673,8 +673,32 @@
       "rejection_conditions": null
     },
     {
+      "id": "N3c",
+      "label": "過去のスープ体験は命に関わるような極限状況でのことだった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N3b"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
       "id": "N5a",
       "label": "遭難時に男以外の人物がいた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5a",
+      "label": "遭難中、男たちは海上（船上または漂流中）にいた",
       "_truth_value": true,
       "formation_conditions": [
         [
@@ -787,12 +811,28 @@
     },
     {
       "id": "Q4b",
+      "text": "その特別な状況は、命に関わるような極限的なものでしたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "N3b"
+        ]
+      ],
+      "reveals": [
+        "N3c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N3b"
+      ]
+    },
+    {
+      "id": "Q4c",
       "text": "その状況は、食料に困るような危機的なものでしたか？",
       "answer": "はい",
       "recall_conditions": [
         [
-          "N3b",
-          "P1"
+          "N3c"
         ]
       ],
       "reveals": [
@@ -800,7 +840,7 @@
       ],
       "mechanism": "observation",
       "prerequisites": [
-        "N3b"
+        "N3c"
       ]
     },
     {
@@ -809,7 +849,8 @@
       "answer": "はい",
       "recall_conditions": [
         [
-          "P2"
+          "P2",
+          "S3"
         ]
       ],
       "reveals": [
@@ -843,7 +884,8 @@
       "answer": "はい",
       "recall_conditions": [
         [
-          "N5a"
+          "N5a",
+          "P1"
         ]
       ],
       "reveals": [
@@ -852,6 +894,23 @@
       "mechanism": "observation",
       "prerequisites": [
         "N5a"
+      ]
+    },
+    {
+      "id": "QF5a",
+      "text": "遭難中、男たちは陸地ではなく海の上にいましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "reveals": [
+        "NF5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P3"
       ]
     }
   ],
@@ -869,7 +928,8 @@
       ],
       "C3": [
         "Q4a",
-        "Q4b"
+        "Q4b",
+        "Q4c"
       ],
       "C4": [
         "Q5"
@@ -882,16 +942,168 @@
     "exploration_paths": [
       {
         "name": "パス A: 味の確認行動から入る",
-        "sequence": "Q1a(いいえ:N1a) → Q1b(はい:N1b) → Q3(はい:P1) → Q4a(はい:N3b) → Q4b(はい:P2) → Q5(はい:P3) → Q6a(はい:N5a) → Q6b(はい:P4)"
+        "sequence": "Q1a(いいえ:N1a) → Q1b(はい:N1b) → Q3(はい:P1) → Q4a(はい:N3b) → Q4b(はい:N3c) → Q4c(はい:P2) → Q5(はい:P3) → Q6a(はい:N5a) → Q6b(はい:P4)"
       },
       {
         "name": "パス B: 自殺の因果から入る",
-        "sequence": "Q2a(はい:N2b) → Q2b(はい:N2c) → Q3(はい:P1) → Q4a(はい:N3b) → Q4b(はい:P2) → Q5(はい:P3) → Q6a(はい:N5a) → Q6b(はい:P4)"
+        "sequence": "Q2a(はい:N2b) → Q2b(はい:N2c) → Q3(はい:P1) → Q4a(はい:N3b) → Q4b(はい:N3c) → Q4c(はい:P2) → Q5(はい:P3) → Q6a(はい:N5a) → Q6b(はい:P4)"
       },
       {
         "name": "パス C: 混合ルート",
-        "sequence": "Q1a(いいえ:N1a) → Q2a(はい:N2b) → Q2b(はい:N2c) → Q3(はい:P1) → Q4a(はい:N3b) → Q4b(はい:P2) → Q5(はい:P3) → Q6a(はい:N5a) → Q6b(はい:P4)"
+        "sequence": "Q1a(いいえ:N1a) → Q2a(はい:N2b) → Q2b(はい:N2c) → Q3(はい:P1) → Q4a(はい:N3b) → Q4b(はい:N3c) → Q4c(はい:P2) → Q5(はい:P3) → Q6a(はい:N5a) → Q6b(はい:P4)"
       }
     ]
+  },
+  "_phase5": {
+    "chain_branches": [
+      {
+        "chain_id": "C1",
+        "chain_path": "S → N1a → N1b → P1",
+        "branches": [
+          {
+            "at_step": "N1a",
+            "true_side_label": "スープの正体確認は味への不満によるものではない",
+            "parallels": [
+              {"label": "味への不満が理由で正体を確認した", "models": []}
+            ]
+          },
+          {
+            "at_step": "N1b",
+            "true_side_label": "男はスープの味を何かと比較していた",
+            "parallels": [
+              {"label": "味の比較ではなく別の目的で確認していた", "models": ["M11"]}
+            ]
+          },
+          {
+            "at_step": "P1",
+            "true_side_label": "男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある",
+            "parallels": [
+              {"label": "以前の体験は「ウミガメのスープ」として飲んだものではなかった", "models": ["M10", "M12"]}
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C2",
+        "chain_path": "S → N2b → N2c → P1",
+        "branches": [
+          {
+            "at_step": "N2b",
+            "true_side_label": "本物のウミガメのスープだと確認されたことが自殺の契機となった",
+            "parallels": [
+              {"label": "自殺の契機はスープの確認以外の出来事", "models": []}
+            ]
+          },
+          {
+            "at_step": "N2c",
+            "true_side_label": "男にとって本物のウミガメのスープであることが致命的な意味を持っていた",
+            "parallels": [
+              {"label": "本物であることの意味は致命的ではなく感情的なもの", "models": ["M11"]}
+            ]
+          },
+          {
+            "at_step": "P1",
+            "true_side_label": "男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある",
+            "parallels": [
+              {"label": "以前の体験は「ウミガメのスープ」として飲んだものではなかった", "models": ["M10", "M12"]}
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C3",
+        "chain_path": "P1 → N3b → N3c → P2",
+        "branches": [
+          {
+            "at_step": "N3b",
+            "true_side_label": "過去のスープ体験は日常生活での出来事ではなかった",
+            "parallels": [
+              {"label": "過去のスープ体験は日常生活や職業上の出来事だった", "models": ["M5", "M7", "M8", "M9"]}
+            ]
+          },
+          {
+            "at_step": "N3c",
+            "true_side_label": "過去のスープ体験は命に関わるような極限状況でのことだった",
+            "parallels": [
+              {"label": "非日常的だが命に直接関わるほどの極限ではなかった", "models": []}
+            ]
+          },
+          {
+            "at_step": "P2",
+            "true_side_label": "過去のスープ体験は食料の危機的状況に起因する",
+            "parallels": [
+              {"label": "極限状況は食料以外の問題（拘束・暴力等）に起因する", "models": ["M3"]}
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C4",
+        "chain_path": "{P2, S3} → P3",
+        "branches": [
+          {
+            "at_step": "P3",
+            "true_side_label": "過去の体験は海での遭難に起因する",
+            "parallels": [
+              {"label": "食料危機は陸上での出来事（貧困・飢饉等）", "models": ["M2", "M6"]}
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C5",
+        "chain_path": "{P3} → N5a → P4",
+        "branches": [
+          {
+            "at_step": "P3",
+            "true_side_label": "男たちは海上（船上・漂流中）で遭難していた",
+            "parallels": [
+              {"label": "海経由だが陸地（無人島など）に漂着していた", "models": ["M4"]}
+            ]
+          },
+          {
+            "at_step": "N5a",
+            "true_side_label": "遭難時に男以外の人物がいた",
+            "parallels": [
+              {"label": "男は一人で遭難していた", "models": []}
+            ]
+          },
+          {
+            "at_step": "P4",
+            "true_side_label": "他者が男に対して意図的に偽って飲ませた",
+            "parallels": [
+              {"label": "偽りは他者によるものではなく男自身の自己欺瞞", "models": ["M1"]}
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "all_models": ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12"],
+      "model_coverage": {
+        "M1": [{"chain": "C5", "step": "P4"}],
+        "M2": [{"chain": "C4", "step": "P3"}],
+        "M3": [{"chain": "C3", "step": "P2"}],
+        "M4": [{"chain": "C5", "step": "P3"}],
+        "M5": [{"chain": "C3", "step": "N3b"}],
+        "M6": [{"chain": "C4", "step": "P3"}],
+        "M7": [{"chain": "C3", "step": "N3b"}],
+        "M8": [{"chain": "C3", "step": "N3b"}],
+        "M9": [{"chain": "C3", "step": "N3b"}],
+        "M10": [{"chain": "C1", "step": "P1"}],
+        "M11": [{"chain": "C1", "step": "N1b"}],
+        "M12": [{"chain": "C1", "step": "P1"}]
+      },
+      "uncovered": [],
+      "uncovered_notes": "M4は最近接競合モデル（全分割命題でTと同一真偽値）。C5/P3起点の海上vs島の分岐で部分的に区別。"
+    },
+    "generated": {
+      "propositions": [
+        {"id": "NF5a", "source_chain": "C5", "source_step": "P3", "parallel_index": 0}
+      ],
+      "questions": [
+        {"id": "QF5a", "reveals_proposition": "NF5a"}
+      ]
+    }
   }
 }
