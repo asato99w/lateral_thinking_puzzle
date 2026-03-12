@@ -1,151 +1,379 @@
 {
-  "id": "desert_man",
   "title": "砂漠の男",
-  "statement": "砂漠の真ん中で裸の男が死んでいた。手にはマッチ棒を握りしめている。",
-  "truth": "男は数人で熱気球に乗っていたが、高度が下がり始めた。荷物を全て捨て、服も脱いで軽量化したが足りず、くじ引き（マッチの長さ）で一人が飛び降りることになった。短いマッチを引いた男が飛び降りて死亡した。",
-  "initial_confirmed": ["D-1", "D-2", "D-3", "D-4"],
-  "clear_conditions": [["D-12", "D-14"]],
-  "descriptors": [
-    {"id": "D-1", "label": "砂漠の真ん中で発見された"},
-    {"id": "D-2", "label": "男が死んでいた"},
-    {"id": "D-3", "label": "男は裸だった"},
-    {"id": "D-4", "label": "手にマッチ棒を握りしめていた"},
-    {"id": "D-5", "label": "男は熱気球に乗っていた"},
-    {"id": "D-6", "label": "熱気球には他にも数人が乗っていた"},
-    {"id": "D-7", "label": "熱気球の高度が下がり始めた"},
-    {"id": "D-8", "label": "荷物を全て捨てて軽量化した"},
-    {"id": "D-9", "label": "服も脱いで軽量化した"},
-    {"id": "D-10", "label": "軽量化が足りなかった"},
-    {"id": "D-11", "label": "一人が飛び降りることになった"},
-    {"id": "D-12", "label": "マッチの長さでくじ引きをした"},
-    {"id": "D-13", "label": "男は短いマッチを引いた"},
-    {"id": "D-14", "label": "男は熱気球から飛び降りて死亡した"},
-    {"id": "D-15", "label": "男は地上からこの場所に来たのではない"},
-    {"id": "D-16", "label": "裸になったのには理由があった"},
-    {"id": "D-17", "label": "男は空からこの場所に来た", "formation_conditions": [["D-1", "D-15"]]}
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9"
   ],
-  "pieces": [
+  "propositions": [
     {
-      "id": "P-balloon",
-      "label": "熱気球と軽量化",
-      "type": "support",
-      "members": ["D-5", "D-6", "D-7", "D-8", "D-9", "D-10", "D-15", "D-16", "D-17"],
-      "triggers": [["D-15"], ["D-16"]],
-      "depends_on": []
+      "id": "P1",
+      "label": "男が砂漠にいるのは予期せぬ事態の結果だった",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4",
+          "N1a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
-      "id": "P-lottery",
-      "label": "くじ引きと結末",
-      "type": "key",
-      "members": ["D-11", "D-12", "D-13", "D-14"],
-      "triggers": [["D-10"]],
-      "depends_on": ["P-balloon"]
+      "id": "P2",
+      "label": "男は乗り物のトラブルにより砂漠に取り残された",
+      "formation_conditions": [
+        [
+          "P1",
+          "S2",
+          "N3a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "マッチは火をつけるための道具として使われたのではない",
+      "formation_conditions": [
+        [
+          "S5",
+          "S6",
+          "S7"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "男は空中から砂漠に到達した",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "男には仲間がいて共に危機的状況にあった",
+      "formation_conditions": [
+        [
+          "P4",
+          "N5a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "マッチはくじ引きの道具として使われた",
+      "formation_conditions": [
+        [
+          "P5",
+          "P3",
+          "S5",
+          "N6a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P7",
+      "label": "裸になったのは乗り物を軽くするためだった",
+      "formation_conditions": [
+        [
+          "P5",
+          "S3",
+          "P2",
+          "N7a"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N5a",
+      "label": "乗り物には男以外にも人が乗っていた",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "男は日常的な活動として砂漠にいたのではない",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3a",
+      "label": "男は乗り物に乗っていた",
+      "formation_conditions": [
+        [
+          "P1",
+          "S2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N6a",
+      "label": "マッチ棒は仲間との意思決定に使われた",
+      "formation_conditions": [
+        [
+          "P5",
+          "P3",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N7a",
+      "label": "裸になったのは乗り物に関連する理由だった",
+      "formation_conditions": [
+        [
+          "P5",
+          "S3",
+          "P2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     }
   ],
   "questions": [
     {
-      "id": "Q-1",
-      "text": "男は地上からこの場所に来ましたか？",
-      "answer": "No",
-      "recall_conditions": [["D-1"]],
-      "reveals": ["D-15"],
-      "mechanism": "observation"
+      "id": "Q1a",
+      "text": "男は日常的な活動として砂漠にいましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4"
+        ]
+      ],
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": []
     },
     {
-      "id": "Q-2",
-      "text": "男が裸でいたことには特別な理由がありますか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-3"]],
-      "reveals": ["D-16"],
-      "mechanism": "observation"
+      "id": "Q1b",
+      "text": "男が砂漠にいるのは予期せぬ出来事の結果ですか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4",
+          "N1a"
+        ]
+      ],
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
     },
     {
-      "id": "Q-3",
-      "text": "男は熱気球に乗っていましたか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-17"], ["D-7"]],
-      "reveals": ["D-5"],
-      "mechanism": "observation"
+      "id": "Q2a",
+      "text": "マッチ棒は火をつけるために使われましたか？",
+      "answer": "いいえ",
+      "recall_conditions": [
+        [
+          "S5",
+          "S6",
+          "S7"
+        ]
+      ],
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
     },
     {
-      "id": "Q-4",
-      "text": "熱気球には男以外にも数人が乗っていましたか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-5"]],
-      "reveals": ["D-6"],
-      "mechanism": "observation"
+      "id": "Q3a",
+      "text": "男は乗り物に乗っていましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P1",
+          "S2"
+        ]
+      ],
+      "reveals": [
+        "N3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
     },
     {
-      "id": "Q-5",
-      "text": "熱気球の高度が下がり始めましたか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-5"]],
-      "reveals": ["D-7"],
-      "mechanism": "observation"
+      "id": "Q3b",
+      "text": "乗り物のトラブルにより砂漠に取り残されましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P1",
+          "S2",
+          "N3a"
+        ]
+      ],
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N3a"
+      ]
     },
     {
-      "id": "Q-6",
-      "text": "軽量化のために荷物を全て捨てましたか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-7"], ["D-9"]],
-      "reveals": ["D-8"],
-      "mechanism": "link"
+      "id": "Q4a",
+      "text": "その乗り物は空を飛んでいましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
     },
     {
-      "id": "Q-7",
-      "text": "軽量化のために服も脱ぎましたか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-8"], ["D-16"]],
-      "reveals": ["D-9"],
-      "mechanism": "link"
+      "id": "Q5a",
+      "text": "乗り物には男以外にも人が乗っていましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "reveals": [
+        "N5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
     },
     {
-      "id": "Q-8",
-      "text": "軽量化は十分でしたか？",
-      "answer": "No",
-      "recall_conditions": [["D-8"]],
-      "reveals": ["D-10"],
-      "mechanism": "observation"
+      "id": "Q5b",
+      "text": "乗り合わせた人たちは共に危機的な状況にありましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P4",
+          "N5a"
+        ]
+      ],
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N5a"
+      ]
     },
     {
-      "id": "Q-9",
-      "text": "一人が飛び降りることになりましたか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-10"]],
-      "reveals": ["D-11"],
-      "mechanism": "link"
+      "id": "Q6a",
+      "text": "マッチ棒は仲間との間で何かを決めるために使われましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P5",
+          "P3",
+          "S5"
+        ]
+      ],
+      "reveals": [
+        "N6a"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
     },
     {
-      "id": "Q-10",
-      "text": "マッチの長さでくじ引きをしましたか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-11"]],
-      "reveals": ["D-12"],
-      "mechanism": "observation"
+      "id": "Q6b",
+      "text": "マッチ棒はくじ引きに使われましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P5",
+          "P3",
+          "S5",
+          "N6a"
+        ]
+      ],
+      "reveals": [
+        "P6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
     },
     {
-      "id": "Q-11",
-      "text": "男は短いマッチを引きましたか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-12"]],
-      "reveals": ["D-13"],
-      "mechanism": "observation"
+      "id": "Q7a",
+      "text": "裸になったのは乗り物に関連する理由ですか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P5",
+          "S3",
+          "P2"
+        ]
+      ],
+      "reveals": [
+        "N7a"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
     },
     {
-      "id": "Q-12",
-      "text": "男は熱気球から飛び降りて死亡しましたか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-13", "D-5"]],
-      "reveals": ["D-14"],
-      "mechanism": "link"
-    },
-    {
-      "id": "Q-13",
-      "text": "男は空から来ましたか？",
-      "answer": "Yes",
-      "recall_conditions": [["D-8"]],
-      "reveals": ["D-17"],
-      "mechanism": "link"
+      "id": "Q7b",
+      "text": "乗り物を軽くするために裸になりましたか？",
+      "answer": "はい",
+      "recall_conditions": [
+        [
+          "P5",
+          "S3",
+          "P2",
+          "N7a"
+        ]
+      ],
+      "reveals": [
+        "P7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
     }
-  ]
+  ],
+  "statement": "砂漠の真ん中で裸の男が死んでいた。手には折れたマッチ棒を握りしめている。",
+  "truth": "男は数人で熱気球に乗っていたが、高度が下がり始めた。荷物を全て捨て、服も脱いで軽量化したが足りず、くじ引き（マッチの長さ）で一人が飛び降りることになった。短いマッチを引いた男が飛び降りて死亡した。",
+  "id": "desert_man"
 }
