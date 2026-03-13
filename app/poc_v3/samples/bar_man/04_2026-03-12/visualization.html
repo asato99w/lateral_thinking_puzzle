@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>バーの男 data_src</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: #fafafa; color: #333; padding: 20px; }
+  h1 { font-size: 1.6em; margin-bottom: 10px; }
+  h2 { font-size: 1.2em; margin: 20px 0 10px; padding: 8px 12px;
+       background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 2px; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+  .stat { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px;
+           padding: 10px 16px; min-width: 120px; }
+  .stat .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+  .stat .label { font-size: 0.85em; color: #666; }
+  .tabs { display: flex; gap: 4px; margin: 16px 0 0; border-bottom: 2px solid #e0e0e0; }
+  .tab { padding: 8px 16px; cursor: pointer; background: #f5f5f5;
+          border: 1px solid #e0e0e0; border-bottom: none; border-radius: 6px 6px 0 0;
+          font-size: 0.9em; user-select: none; }
+  .tab.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px;
+                 font-weight: bold; color: #1565c0; }
+  .tab-content { background: #fff; border: 1px solid #e0e0e0;
+                  border-top: none; padding: 16px; overflow-x: auto; }
+  .tab-content.hidden { display: none; }
+  .mermaid { text-align: center; }
+  ul.checks { list-style: none; padding: 8px 0; }
+  ul.checks li { padding: 4px 8px; font-size: 0.9em; }
+  li.issue { color: #e65100; }
+  li.ok { color: #2e7d32; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0; font-size: 0.8em; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-swatch { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #999; }
+  .note { font-size: 0.85em; color: #666; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h1>バーの男 — data_src.json</h1>
+
+<div class="stats">
+  <div class="stat"><div class="num">3</div><div class="label">tension</div></div>
+  <div class="stat"><div class="num">13</div><div class="label">model</div></div>
+  <div class="stat"><div class="num">13</div><div class="label">S prop</div></div>
+  <div class="stat"><div class="num">19</div><div class="label">proposition</div></div>
+  <div class="stat"><div class="num">19</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">5</div><div class="label">chain</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#e3f2fd"></div> S</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fff3e0"></div> N</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#e8f5e9"></div> P</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fce4ec"></div> NT</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f3e5f5"></div> NU</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f5f5f5"></div> NF</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="derivation">derivation</div>
+  <div class="tab" data-tab="questions">Q -&gt; prop</div>
+  <div class="tab" data-tab="division">model split</div>
+  <div class="tab" data-tab="chains">chain</div>
+  <div class="tab" data-tab="branches">branch / NF</div>
+  <div class="tab" data-tab="paths">path</div>
+  <div class="tab" data-tab="integrity">integrity</div>
+</div>
+
+<div id="derivation" class="tab-content">
+<h2>formation_conditions</h2>
+<p class="note">
+  S -&gt; N -&gt; P -&gt; NT -&gt; NU. Solid = fc, dotted = S derived_from.
+  Junction = AND. Multiple arrows to same node = OR.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef sNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  S1["S1: ある男がいた"]:::sNode
+  S2["S2: 男がバーに入った"]:::sNode
+  S3["S3: バーテンダーがいた"]:::sNode
+  S4["S4: 男はバーテンダーに「水をください」と頼んだ"]:::sNode
+  S5["S5: バーテンダーは男に銃を向けた"]:::sNode
+  S6["S6: 男は「ありがとう」と言った"]:::sNode
+  S7["S7: 男は帰った"]:::sNode
+  S8["S8: バーがあった"]:::sNode
+  S9["S9: 男はバーの外から来た"]:::sNode
+  S10["S10: バーテンダーは銃を持っていた"]:::sNode
+  S11["S11: 水の注文は銃を向けるより先だった"]:::sNode
+  S12["S12: 銃を向けたのは「ありがとう」より先だった"]:::sNode
+  S13["S13: 男は水を求めた"]:::sNode
+  N1a["N1a: 男が水を求めたのは単なる喉の渇きからではない"]:::nNode
+  N2a["N2a: 銃を向けられたことが男にとって害ではなく恩恵だった"]:::nNode
+  P1["P1: 男は何らかの困りごとを抱えていた"]:::pNode
+  P2["P2: 水は男の困りごとへの対処法だった"]:::pNode
+  P3["P3: 男の困りごとは身体的な症状だった"]:::pNode
+  P4["P4: 男の症状は不随意的な反復反応だった"]:::pNode
+  NT1["NT1: バーテンダーは男を驚かせることで症状を止めようとした"]:::tNode
+  NU1["NU1: 男はしゃっくりが止まらなくて困っていた"]:::uNode
+  S2 -.-> S8
+  S2 -.-> S9
+  S5 -.-> S10
+  S4 -.-> S11
+  S5 -.-> S11
+  S5 -.-> S12
+  S6 -.-> S12
+  S4 -.-> S13
+  S13 --> N1a
+  j_N2a_S5_S6(( ))
+  S5 --> j_N2a_S5_S6
+  S6 --> j_N2a_S5_S6
+  j_N2a_S5_S6 --> N2a
+  N1a --> P1
+  N2a --> P1
+  j_P2_P1_S13(( ))
+  P1 --> j_P2_P1_S13
+  S13 --> j_P2_P1_S13
+  j_P2_P1_S13 --> P2
+  P2 --> P3
+  P3 --> P4
+  j_NT1_P4_N2a(( ))
+  P4 --> j_NT1_P4_N2a
+  N2a --> j_NT1_P4_N2a
+  j_NT1_P4_N2a --> NT1
+  j_NU1_P4_NT1(( ))
+  P4 --> j_NU1_P4_NT1
+  NT1 --> j_NU1_P4_NT1
+  j_NU1_P4_NT1 --> NU1
+</pre>
+</div>
+
+<div id="questions" class="tab-content">
+<h2>Q -&gt; proposition (reveals)</h2>
+<p class="note">O = yes, X = no</p>
+<pre class="mermaid">
+graph LR
+  classDef qNode fill:#e8eaf6,stroke:#283593,color:#1a237e
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  Q1a["Q1a X<br/>男が水を求めたのは喉が渇いたからですか？"]:::qNode
+  N1a_q["N1a: 男が水を求めたのは単なる喉の渇きからではない"]:::nNode
+  Q1b["Q1b O<br/>男は何かに困っていましたか？"]:::qNode
+  P1_q["P1: 男は何らかの困りごとを抱えていた"]:::pNode
+  Q2a["Q2a O<br/>銃を向けられたことは男にとって良いことでしたか？"]:::qNode
+  N2a_q["N2a: 銃を向けられたことが男にとって害ではなく恩恵だった"]:::nNode
+  Q3a["Q3a O<br/>水は男の困りごとの対処法でしたか？"]:::qNode
+  P2_q["P2: 水は男の困りごとへの対処法だった"]:::pNode
+  Q4a["Q4a O<br/>男の困りごとは身体的な症状でしたか？"]:::qNode
+  P3_q["P3: 男の困りごとは身体的な症状だった"]:::pNode
+  Q5a["Q5a O<br/>男の症状は繰り返し起きるものでしたか？"]:::qNode
+  P4_q["P4: 男の症状は不随意的な反復反応だった"]:::pNode
+  QF1a["QF1a X<br/>「水」は何かの隠語・合図でしたか？"]:::qNode
+  NF1a_q["NF1a: 「水」は文字通りの水を意味していた"]:::fNode
+  QF1b["QF1b X<br/>これは映画や劇の撮影の一場面でしたか？"]:::qNode
+  NF1b_q["NF1b: この状況は実際に起きた出来事だった"]:::fNode
+  QF1c["QF1c X<br/>男は誰かと賭けをしていましたか？"]:::qNode
+  NF1c_q["NF1c: 男は賭けをしていなかった"]:::fNode
+  QF2a["QF2a X<br/>「ありがとう」は皮肉で言いましたか？"]:::qNode
+  NF2a_q["NF2a: 「ありがとう」は心からの感謝だった"]:::fNode
+  QF2b["QF2b X<br/>銃を向けたのは冗談でしたか？"]:::qNode
+  NF2b_q["NF2b: 銃を向けたのは冗談ではなかった"]:::fNode
+  QF3a["QF3a X<br/>男は意識がもうろうとした状態でしたか？"]:::qNode
+  NF3a_q["NF3a: 男は意識がはっきりしていた"]:::fNode
+  QF3b["QF3b X<br/>男は自殺しようとしていましたか？"]:::qNode
+  NF3b_q["NF3b: 男は自殺するつもりはなかった"]:::fNode
+  QF4a["QF4a X<br/>男はパニック発作を起こしていましたか？"]:::qNode
+  NF4a_q["NF4a: 男の困りごとはパニック発作ではなかった"]:::fNode
+  QF5a["QF5a X<br/>男は喉に何かが詰まっていましたか？"]:::qNode
+  NF5a_q["NF5a: 男は喉に異物が詰まっていたのではなかった"]:::fNode
+  QF5b["QF5b X<br/>男は酔っていましたか？"]:::qNode
+  NF5b_q["NF5b: 男は酔っていなかった"]:::fNode
+  QF6a["QF6a X<br/>男は咳が止まりませんでしたか？"]:::qNode
+  NF6a_q["NF6a: 男の症状は咳ではなかった"]:::fNode
+  QT1["QT1 O<br/>バーテンダーは男を驚かせることで症状を止めようとしましたか？"]:::qNode
+  NT1_q["NT1: バーテンダーは男を驚かせることで症状を止めようとした"]:::tNode
+  QU1["QU1 O<br/>男の症状はしゃっくりでしたか？"]:::qNode
+  NU1_q["NU1: 男はしゃっくりが止まらなくて困っていた"]:::uNode
+  Q1a -->|reveals| N1a_q
+  Q1b -->|reveals| P1_q
+  Q2a -->|reveals| N2a_q
+  Q3a -->|reveals| P2_q
+  Q4a -->|reveals| P3_q
+  Q5a -->|reveals| P4_q
+  QF1a -->|reveals| NF1a_q
+  QF1b -->|reveals| NF1b_q
+  QF1c -->|reveals| NF1c_q
+  QF2a -->|reveals| NF2a_q
+  QF2b -->|reveals| NF2b_q
+  QF3a -->|reveals| NF3a_q
+  QF3b -->|reveals| NF3b_q
+  QF4a -->|reveals| NF4a_q
+  QF5a -->|reveals| NF5a_q
+  QF5b -->|reveals| NF5b_q
+  QF6a -->|reveals| NF6a_q
+  QT1 -->|reveals| NT1_q
+  QU1 -->|reveals| NU1_q
+</pre>
+</div>
+
+<div id="division" class="tab-content">
+<h2>model division hierarchy</h2>
+<pre class="mermaid">
+graph TD
+  classDef trueSet fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseSet fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef propNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  ALL["T, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12"]
+  P1_div["P1: 男は何らかの困りごとを抱えていた"]:::propNode
+  P1_true["T: T, M1, M2, M3, M4, M5, M6"]:::trueSet
+  P1_false["F: M7, M8, M9, M10, M11, M12"]:::falseSet
+  ALL --> P1_div
+  P1_div -->|TRUE| P1_true
+  P1_div -->|FALSE| P1_false
+  P2_div["P2: 水は男の困りごとへの対処法だった"]:::propNode
+  P2_true["T: T, M1, M2, M3, M4"]:::trueSet
+  P2_false["F: M5, M6"]:::falseSet
+  P1_true --> P2_div
+  P2_div -->|TRUE| P2_true
+  P2_div -->|FALSE| P2_false
+  P3_div["P3: 男の困りごとは身体的な症状だった"]:::propNode
+  P3_true["T: T, M1, M2, M3"]:::trueSet
+  P3_false["F: M4"]:::falseSet
+  P2_true --> P3_div
+  P3_div -->|TRUE| P3_true
+  P3_div -->|FALSE| P3_false
+  P4_div["P4: 男の症状は不随意的な反復反応だった"]:::propNode
+  P4_true["T: T, M2"]:::trueSet
+  P4_false["F: M1, M3"]:::falseSet
+  P3_true --> P4_div
+  P4_div -->|TRUE| P4_true
+  P4_div -->|FALSE| P4_false
+</pre>
+</div>
+
+<div id="chains" class="tab-content">
+<h2>tactical chains</h2>
+<p class="note">C1-C5 + extensions. Parsed from _phase3 description.</p>
+<pre class="mermaid">
+graph TD
+  classDef srcNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef midNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef tgtNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef extNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uniNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  subgraph C1["C1: 常識的仮説の排除 → 動機の探索"]
+    direction LR
+    C1_S13["S13: 水を求めた"]:::srcNode
+    C1_N1a["N1a: 喉の渇きではない"]:::midNode
+    C1_S13 -->|"動機の探索"| C1_N1a
+    C1_P1["P1: 困りごと"]:::tgtNode
+    C1_N1a --> C1_P1
+  end
+  subgraph C2["C2: 矛盾の指摘 → 因果の逆転"]
+    direction LR
+    C2_S5_S6["S5_S6: {S5,S6}: 銃+ありがとう"]:::srcNode
+    C2_N2a["N2a: 銃は恩恵"]:::midNode
+    C2_S5_S6 -->|"因果の逆転"| C2_N2a
+    C2_P1["P1: 困りごと"]:::tgtNode
+    C2_N2a --> C2_P1
+  end
+  subgraph C3["C3: 観測事実の深掘り"]
+    direction LR
+    C3_P1_S13["P1_S13: {P1,S13}: 困りごと+水を求めた"]:::srcNode
+    C3_P2["P2: 水は対処法"]:::tgtNode
+    C3_P1_S13 --> C3_P2
+  end
+  subgraph C4["C4: 段階的絞り込み"]
+    direction LR
+    C4_P2["P2: 水が対処法"]:::srcNode
+    C4_P3["P3: 身体的症状"]:::tgtNode
+    C4_P2 --> C4_P3
+  end
+  subgraph C5["C5: 段階的絞り込み"]
+    direction LR
+    C5_P3["P3: 身体的症状"]:::srcNode
+    C5_P4["P4: 反復反応"]:::tgtNode
+    C5_P3 --> C5_P4
+  end
+  NT1_ext["NT1: T5の抽象形をC5から延長。T4,T6,T7も抽象的にカバー"]:::extNode
+  C5 --> NT1_ext
+  NU1_uni["NU1: P4(反復反応)+NT1(驚かせて止めた)→しゃっくり"]:::uniNode
+  NT1_ext --> NU1_uni
+</pre>
+</div>
+
+<div id="branches" class="tab-content">
+<h2>chain branches / rejection (_phase9)</h2>
+<p class="note">T = true side, F = false side (parallel). Dotted = generated NF proposition.</p>
+<pre class="mermaid">
+graph TD
+  classDef trueNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseNode fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef nfNode fill:#f5f5f5,stroke:#757575,color:#424242
+  subgraph C1_branch["C1: S13 → N1a → P1"]
+    C1_N1a_t["T N1a: 喉の渇きからではない"]:::trueNode
+    C1_P1_t["T P1: 困りごとを抱えていた"]:::trueNode
+    C1_P1_f0["F 「水」は取引の隠語だった<br/>(M7)"]:::falseNode
+    C1_P1_t --- C1_P1_f0
+    NF1a_nf["NF1a"]:::nfNode
+    C1_P1_f0 -.-> NF1a_nf
+    C1_P1_f1["F 台本通りの演技だった<br/>(M8)"]:::falseNode
+    C1_P1_t --- C1_P1_f1
+    NF1b_nf["NF1b"]:::nfNode
+    C1_P1_f1 -.-> NF1b_nf
+    C1_P1_f2["F 賭けの口実だった<br/>(M9)"]:::falseNode
+    C1_P1_t --- C1_P1_f2
+    NF1c_nf["NF1c"]:::nfNode
+    C1_P1_f2 -.-> NF1c_nf
+  end
+  subgraph C2_branch["C2: {S5,S6} → N2a → P1"]
+    C2_N2a_t["T N2a: 銃は恩恵だった"]:::trueNode
+    C2_N2a_f0["F 「ありがとう」は皮肉だった<br/>(M10, M11)"]:::falseNode
+    C2_N2a_t --- C2_N2a_f0
+    NF2a_nf["NF2a"]:::nfNode
+    C2_N2a_f0 -.-> NF2a_nf
+    C2_N2a_f1["F 銃はお決まりの冗談だった<br/>(M12)"]:::falseNode
+    C2_N2a_t --- C2_N2a_f1
+    NF2b_nf["NF2b"]:::nfNode
+    C2_N2a_f1 -.-> NF2b_nf
+  end
+  subgraph C3_branch["C3: {P1,S13} → P2"]
+    C3_P2_t["T P2: 水は対処法"]:::trueNode
+    C3_P2_f0["F 無意識に水を求めていた<br/>(M5)"]:::falseNode
+    C3_P2_t --- C3_P2_f0
+    NF3a_nf["NF3a"]:::nfNode
+    C3_P2_f0 -.-> NF3a_nf
+    C3_P2_f1["F 水で毒を飲もうとしていた<br/>(M6)"]:::falseNode
+    C3_P2_t --- C3_P2_f1
+    NF3b_nf["NF3b"]:::nfNode
+    C3_P2_f1 -.-> NF3b_nf
+  end
+  subgraph C4_branch["C4: P2 → P3"]
+    C4_P3_t["T P3: 身体的な症状"]:::trueNode
+    C4_P3_f0["F パニック発作（精神的）<br/>(M4)"]:::falseNode
+    C4_P3_t --- C4_P3_f0
+    NF4a_nf["NF4a"]:::nfNode
+    C4_P3_f0 -.-> NF4a_nf
+  end
+  subgraph C5_branch["C5: P3 → P4"]
+    C5_P4_t["T P4: 不随意的な反復反応"]:::trueNode
+    C5_P4_f0["F 喉に異物が詰まっていた<br/>(M1)"]:::falseNode
+    C5_P4_t --- C5_P4_f0
+    NF5a_nf["NF5a"]:::nfNode
+    C5_P4_f0 -.-> NF5a_nf
+    C5_P4_f1["F 泥酔していた<br/>(M3)"]:::falseNode
+    C5_P4_t --- C5_P4_f1
+    NF5b_nf["NF5b"]:::nfNode
+    C5_P4_f1 -.-> NF5b_nf
+  end
+  subgraph NU1_ext_branch["NU1_ext: {P4,NT1} → NU1"]
+    NU1_ext_NU1_t["T NU1: しゃっくり"]:::trueNode
+    NU1_ext_NU1_f0["F 咳<br/>(M2)"]:::falseNode
+    NU1_ext_NU1_t --- NU1_ext_NU1_f0
+    NF6a_nf["NF6a"]:::nfNode
+    NU1_ext_NU1_f0 -.-> NF6a_nf
+  end
+</pre>
+</div>
+
+<div id="paths" class="tab-content">
+<h2>exploration paths</h2>
+<pre class="mermaid">
+graph LR
+  classDef pathNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  subgraph path_sg_0["パス A: 水の動機から入る"]
+    p0s0["Q1a(いいえ:N1a)"]:::pathNode
+    p0s1["Q1b(はい:P1)"]:::pathNode
+    p0s0 --> p0s1
+    p0s2["Q3a(はい:P2)"]:::pathNode
+    p0s1 --> p0s2
+    p0s3["Q4a(はい:P3)"]:::pathNode
+    p0s2 --> p0s3
+    p0s4["Q5a(はい:P4)"]:::pathNode
+    p0s3 --> p0s4
+  end
+  subgraph path_sg_1["パス B: 銃への感謝から入る"]
+    p1s0["Q2a(はい:N2a)"]:::pathNode
+    p1s1["Q1b(はい:P1)"]:::pathNode
+    p1s0 --> p1s1
+    p1s2["Q3a(はい:P2)"]:::pathNode
+    p1s1 --> p1s2
+    p1s3["Q4a(はい:P3)"]:::pathNode
+    p1s2 --> p1s3
+    p1s4["Q5a(はい:P4)"]:::pathNode
+    p1s3 --> p1s4
+  end
+  subgraph path_sg_2["パス C: 両エントリ経由"]
+    p2s0["Q2a(はい:N2a)"]:::pathNode
+    p2s1["Q1a(いいえ:N1a)"]:::pathNode
+    p2s0 --> p2s1
+    p2s2["Q1b(はい:P1)"]:::pathNode
+    p2s1 --> p2s2
+    p2s3["Q3a(はい:P2)"]:::pathNode
+    p2s2 --> p2s3
+    p2s4["Q4a(はい:P3)"]:::pathNode
+    p2s3 --> p2s4
+    p2s5["Q5a(はい:P4)"]:::pathNode
+    p2s4 --> p2s5
+  end
+</pre>
+</div>
+
+<div id="integrity" class="tab-content">
+<h2>integrity check</h2>
+<ul class="checks">
+<li class="issue">&#9888; initial_confirmed がトップレベルと _phase3 で重複（実害なし、データ冗長）</li>
+<li class="ok">&#10003; 全質問の reveals 先は全て propositions に存在</li>
+<li class="ok">&#10003; 全質問の recall_conditions が reveals 先の fc と一致（rc は冗長フィールド）</li>
+<li class="ok">&#10003; 全命題の formation_conditions の参照先が存在</li>
+<li class="ok">&#10003; 全モデル (12個) がカバー済み</li>
+<li class="ok">&#10003; clear_conditions がトップレベルと _phase6 で一致</li>
+<li class="ok">&#10003; 全質問の reveals が単一要素（1質問1命題）</li>
+
+</ul>
+</div>
+
+<script>
+  // Initialize mermaid - render all diagrams while all tabs visible
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, curve: 'basis' }
+  });
+
+  // After mermaid renders, hide non-active tabs
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var tabs = document.querySelectorAll('.tab-content');
+      for (var i = 1; i < tabs.length; i++) {
+        tabs[i].classList.add('hidden');
+      }
+    }, 500);
+  });
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.add('hidden');
+      });
+      document.querySelectorAll('.tab').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      var target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.remove('hidden');
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

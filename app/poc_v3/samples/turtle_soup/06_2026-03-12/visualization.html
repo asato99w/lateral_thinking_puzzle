@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ウミガメのスープ data_src</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: #fafafa; color: #333; padding: 20px; }
+  h1 { font-size: 1.6em; margin-bottom: 10px; }
+  h2 { font-size: 1.2em; margin: 20px 0 10px; padding: 8px 12px;
+       background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 2px; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+  .stat { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px;
+           padding: 10px 16px; min-width: 120px; }
+  .stat .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+  .stat .label { font-size: 0.85em; color: #666; }
+  .tabs { display: flex; gap: 4px; margin: 16px 0 0; border-bottom: 2px solid #e0e0e0; }
+  .tab { padding: 8px 16px; cursor: pointer; background: #f5f5f5;
+          border: 1px solid #e0e0e0; border-bottom: none; border-radius: 6px 6px 0 0;
+          font-size: 0.9em; user-select: none; }
+  .tab.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px;
+                 font-weight: bold; color: #1565c0; }
+  .tab-content { background: #fff; border: 1px solid #e0e0e0;
+                  border-top: none; padding: 16px; overflow-x: auto; }
+  .tab-content.hidden { display: none; }
+  .mermaid { text-align: center; }
+  ul.checks { list-style: none; padding: 8px 0; }
+  ul.checks li { padding: 4px 8px; font-size: 0.9em; }
+  li.issue { color: #e65100; }
+  li.ok { color: #2e7d32; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0; font-size: 0.8em; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-swatch { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #999; }
+  .note { font-size: 0.85em; color: #666; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h1>ウミガメのスープ — data_src.json</h1>
+
+<div class="stats">
+  <div class="stat"><div class="num">3</div><div class="label">tension</div></div>
+  <div class="stat"><div class="num">13</div><div class="label">model</div></div>
+  <div class="stat"><div class="num">12</div><div class="label">S prop</div></div>
+  <div class="stat"><div class="num">34</div><div class="label">proposition</div></div>
+  <div class="stat"><div class="num">34</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">5</div><div class="label">chain</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#e3f2fd"></div> S</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fff3e0"></div> N</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#e8f5e9"></div> P</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fce4ec"></div> NT</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f3e5f5"></div> NU</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f5f5f5"></div> NF</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="derivation">derivation</div>
+  <div class="tab" data-tab="questions">Q -&gt; prop</div>
+  <div class="tab" data-tab="division">model split</div>
+  <div class="tab" data-tab="chains">chain</div>
+  <div class="tab" data-tab="branches">branch / NF</div>
+  <div class="tab" data-tab="paths">path</div>
+  <div class="tab" data-tab="integrity">integrity</div>
+</div>
+
+<div id="derivation" class="tab-content">
+<h2>formation_conditions</h2>
+<p class="note">
+  S -&gt; N -&gt; P -&gt; NT -&gt; NU. Solid = fc, dotted = S derived_from.
+  Junction = AND. Multiple arrows to same node = OR.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef sNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  S1["S1: ある男がいた"]:::sNode
+  S2["S2: 男がレストランに入った"]:::sNode
+  S3["S3: 男は「ウミガメのスープ」を注文した"]:::sNode
+  S4["S4: 男はスープを一口飲んだ"]:::sNode
+  S5["S5: 男は店員に「これは本当にウミガメのスープか？」と尋ねた"]:::sNode
+  S6["S6: 店員は「はい、間違いなくウミガメのスープです」と答えた"]:::sNode
+  S7["S7: 男はその夜自殺した"]:::sNode
+  S8["S8: レストランがあった"]:::sNode
+  S9["S9: 店員がいた"]:::sNode
+  S10["S10: スープは本物のウミガメのスープだった"]:::sNode
+  S11["S11: 男はスープの正体を確認しようとした"]:::sNode
+  S12["S12: 確認行動はスープを飲んだ後に行われた"]:::sNode
+  P1["P1: 男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある"]:::pNode
+  P2["P2: 過去のスープ体験は食料の危機的状況に起因する"]:::pNode
+  P3["P3: 過去の体験は海での遭難に起因する"]:::pNode
+  P4["P4: 他者が男に対して意図的に偽って飲ませた"]:::pNode
+  N1a["N1a: スープの正体確認は味への不満によるものではない"]:::nNode
+  N1b["N1b: 男はスープの味を何かと比較していた"]:::nNode
+  N2b["N2b: 本物のウミガメのスープだと確認されたことが自殺の契機となった"]:::nNode
+  N2c["N2c: 男にとって本物のウミガメのスープであることが致命的な意味を持っていた"]:::nNode
+  N3b["N3b: 過去のスープ体験は日常生活での出来事ではなかった"]:::nNode
+  N3c["N3c: 過去のスープ体験は命に関わるような極限状況でのことだった"]:::nNode
+  N5a["N5a: 遭難時に男以外の人物がいた"]:::nNode
+  NF5a["NF5a: 遭難中、男たちは海上（船上または漂流中）にいた"]:::fNode
+  NT9["NT9: レストランのスープは以前飲んだものと味が異なっていた"]:::tNode
+  NU3["NU3: 遭難中に仲間の一人が死んだ"]:::uNode
+  NU4["NU4: 飲まされたスープは死んだ仲間の肉で作られていた"]:::uNode
+  NF1a["NF1a: スープの正体確認は宗教的な理由に関係していない"]:::fNode
+  NF1b["NF1b: スープの正体確認は約束や誓いに関するものではない"]:::fNode
+  NF1c["NF1c: スープの正体確認は男自身の罪悪感によるものではない"]:::fNode
+  NF1d["NF1d: 男の判断は見た目や匂いではなく味に基づいていた"]:::fNode
+  NF1e["NF1e: 男の反応は感情的な嫌悪や恐怖によるものではなかった"]:::fNode
+  NF1f["NF1f: 男のスープに関する判断は自身の飲食体験に基づいていた"]:::fNode
+  NF1g["NF1g: 男のスープの知識は他者からの伝聞ではなかった"]:::fNode
+  NF2a["NF2a: 自殺はスープの確認と無関係な出来事に起因するものではない"]:::fNode
+  NF2b["NF2b: スープの確認は自殺を思い止まるための行為ではなかった"]:::fNode
+  NF2c["NF2c: スープの確認で悟った内容は象徴的・感情的なものではなかった"]:::fNode
+  NF2d["NF2d: スープの確認で発覚したのは男自身の秘密ではなかった"]:::fNode
+  NF3a["NF3a: 過去のスープ体験は職業上の場面ではなかった"]:::fNode
+  NF3b["NF3b: 過去のスープ体験は家庭で配偶者から提供されたものではない"]:::fNode
+  NF3c["NF3c: 過去のスープ体験は入院・療養中のものではない"]:::fNode
+  NF3d["NF3d: 過去のスープ体験は儀式や旅行のような命に関わらない状況ではなかった"]:::fNode
+  NF3e["NF3e: 極限状況の原因は暴力や拘束・紛争によるものではなかった"]:::fNode
+  NF4a["NF4a: 食料危機は陸上での出来事ではなかった"]:::fNode
+  NF5b["NF5b: ウミガメのスープだと偽ったのは男自身ではなかった"]:::fNode
+  NF5c["NF5c: 男は他者にスープの正体を偽る側ではなかった"]:::fNode
+  S2 -.-> S8
+  S5 -.-> S9
+  S6 -.-> S9
+  S6 -.-> S10
+  S5 -.-> S11
+  S4 -.-> S12
+  S5 -.-> S12
+  N1b --> P1
+  N2c --> P1
+  N3c --> P2
+  j_P3_P2_S3(( ))
+  P2 --> j_P3_P2_S3
+  S3 --> j_P3_P2_S3
+  j_P3_P2_S3 --> P3
+  j_P4_N5a_P1(( ))
+  N5a --> j_P4_N5a_P1
+  P1 --> j_P4_N5a_P1
+  j_P4_N5a_P1 --> P4
+  S5 --> N1a
+  j_N1b_N1a_S4(( ))
+  N1a --> j_N1b_N1a_S4
+  S4 --> j_N1b_N1a_S4
+  j_N1b_N1a_S4 --> N1b
+  j_N2b_S7_S6(( ))
+  S7 --> j_N2b_S7_S6
+  S6 --> j_N2b_S7_S6
+  j_N2b_S7_S6 --> N2b
+  N2b --> N2c
+  P1 --> N3b
+  N3b --> N3c
+  P3 --> N5a
+  P3 --> NF5a
+  j_NT9_P1_S10(( ))
+  P1 --> j_NT9_P1_S10
+  S10 --> j_NT9_P1_S10
+  j_NT9_P1_S10 --> NT9
+  j_NU3_P2_P4(( ))
+  P2 --> j_NU3_P2_P4
+  P4 --> j_NU3_P2_P4
+  j_NU3_P2_P4 --> NU3
+  j_NU4_NU3_P4(( ))
+  NU3 --> j_NU4_NU3_P4
+  P4 --> j_NU4_NU3_P4
+  j_NU4_NU3_P4 --> NU4
+  S5 --> NF1a
+  S5 --> NF1b
+  S5 --> NF1c
+  j_NF1d_N1a_S4(( ))
+  N1a --> j_NF1d_N1a_S4
+  S4 --> j_NF1d_N1a_S4
+  j_NF1d_N1a_S4 --> NF1d
+  j_NF1e_N1a_S4(( ))
+  N1a --> j_NF1e_N1a_S4
+  S4 --> j_NF1e_N1a_S4
+  j_NF1e_N1a_S4 --> NF1e
+  N1b --> NF1f
+  N2c --> NF1f
+  N1b --> NF1g
+  N2c --> NF1g
+  j_NF2a_S7_S6(( ))
+  S7 --> j_NF2a_S7_S6
+  S6 --> j_NF2a_S7_S6
+  j_NF2a_S7_S6 --> NF2a
+  j_NF2b_S7_S6(( ))
+  S7 --> j_NF2b_S7_S6
+  S6 --> j_NF2b_S7_S6
+  j_NF2b_S7_S6 --> NF2b
+  N2b --> NF2c
+  N2b --> NF2d
+  P1 --> NF3a
+  P1 --> NF3b
+  P1 --> NF3c
+  N3b --> NF3d
+  N3c --> NF3e
+  j_NF4a_P2_S3(( ))
+  P2 --> j_NF4a_P2_S3
+  S3 --> j_NF4a_P2_S3
+  j_NF4a_P2_S3 --> NF4a
+  j_NF5b_N5a_P1(( ))
+  N5a --> j_NF5b_N5a_P1
+  P1 --> j_NF5b_N5a_P1
+  j_NF5b_N5a_P1 --> NF5b
+  j_NF5c_N5a_P1(( ))
+  N5a --> j_NF5c_N5a_P1
+  P1 --> j_NF5c_N5a_P1
+  j_NF5c_N5a_P1 --> NF5c
+</pre>
+</div>
+
+<div id="questions" class="tab-content">
+<h2>Q -&gt; proposition (reveals)</h2>
+<p class="note">O = yes, X = no</p>
+<pre class="mermaid">
+graph LR
+  classDef qNode fill:#e8eaf6,stroke:#283593,color:#1a237e
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  Q1a["Q1a X<br/>男が店員にスープの正体を尋ねたのは、味に不満があったからですか？"]:::qNode
+  N1a_q["N1a: スープの正体確認は味への不満によるものではない"]:::nNode
+  Q1b["Q1b O<br/>男はスープの味を、以前飲んだことのある何かと比較していましたか？"]:::qNode
+  N1b_q["N1b: 男はスープの味を何かと比較していた"]:::nNode
+  Q2a["Q2a O<br/>男が自殺した直接のきっかけは、スープが本物のウミガメのスープだと確認されたことですか？"]:::qNode
+  N2b_q["N2b: 本物のウミガメのスープだと確認されたことが自殺の契機となった"]:::nNode
+  Q2b["Q2b O<br/>本物のウミガメのスープであることが、男にとって致命的な意味を持っていましたか？"]:::qNode
+  N2c_q["N2c: 男にとって本物のウミガメのスープであることが致命的な意味を持っていた"]:::nNode
+  Q3["Q3 O<br/>男は以前にも「ウミガメのスープ」だと思ってスープを飲んだことがありますか？"]:::qNode
+  P1_q["P1: 男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある"]:::pNode
+  Q4a["Q4a O<br/>その体験は、日常生活での出来事ではなく、特別な状況でのことでしたか？"]:::qNode
+  N3b_q["N3b: 過去のスープ体験は日常生活での出来事ではなかった"]:::nNode
+  Q4b["Q4b O<br/>その特別な状況は、命に関わるような極限的なものでしたか？"]:::qNode
+  N3c_q["N3c: 過去のスープ体験は命に関わるような極限状況でのことだった"]:::nNode
+  Q4c["Q4c O<br/>その状況は、食料に困るような危機的なものでしたか？"]:::qNode
+  P2_q["P2: 過去のスープ体験は食料の危機的状況に起因する"]:::pNode
+  Q5["Q5 O<br/>その食料の危機は、海での遭難によるものですか？"]:::qNode
+  P3_q["P3: 過去の体験は海での遭難に起因する"]:::pNode
+  Q6a["Q6a O<br/>遭難時に男以外の人物がいましたか？"]:::qNode
+  N5a_q["N5a: 遭難時に男以外の人物がいた"]:::nNode
+  Q6b["Q6b O<br/>その人物が男に偽りの「ウミガメのスープ」を飲ませましたか？"]:::qNode
+  P4_q["P4: 他者が男に対して意図的に偽って飲ませた"]:::pNode
+  QF1a["QF1a X<br/>男がスープの正体を確認したのは、宗教的な理由からですか？"]:::qNode
+  NF1a_q["NF1a: スープの正体確認は宗教的な理由に関係していない"]:::fNode
+  QF1b["QF1b X<br/>男がスープの正体を確認したのは、誰かとの約束に関係していますか？"]:::qNode
+  NF1b_q["NF1b: スープの正体確認は約束や誓いに関するものではない"]:::fNode
+  QF1c["QF1c X<br/>男がスープの正体を確認したのは、男自身に罪悪感があったからですか？"]:::qNode
+  NF1c_q["NF1c: スープの正体確認は男自身の罪悪感によるものではない"]:::fNode
+  QF1d["QF1d O<br/>男が違和感を持ったのは、スープの味によるものですか？"]:::qNode
+  NF1d_q["NF1d: 男の判断は見た目や匂いではなく味に基づいていた"]:::fNode
+  QF1e["QF1e X<br/>男がスープに反応したのは、感情的な嫌悪や恐怖によるものですか？"]:::qNode
+  NF1e_q["NF1e: 男の反応は感情的な嫌悪や恐怖によるものではなかった"]:::fNode
+  QF1f["QF1f O<br/>男がスープの味を知っていたのは、自分自身が以前に飲んだからですか？"]:::qNode
+  NF1f_q["NF1f: 男のスープに関する判断は自身の飲食体験に基づいていた"]:::fNode
+  QF1g["QF1g X<br/>男がスープについて知っていたのは、他の人から聞いた話に基づいていますか？"]:::qNode
+  NF1g_q["NF1g: 男のスープの知識は他者からの伝聞ではなかった"]:::fNode
+  QF2a["QF2a X<br/>男が自殺したのは、スープの確認とは無関係な別の出来事が原因ですか？"]:::qNode
+  NF2a_q["NF2a: 自殺はスープの確認と無関係な出来事に起因するものではない"]:::fNode
+  QF2b["QF2b X<br/>男がスープの正体を確認したのは、自殺を思い止まろうとする試みでしたか？"]:::qNode
+  NF2b_q["NF2b: スープの確認は自殺を思い止まるための行為ではなかった"]:::fNode
+  QF2c["QF2c X<br/>スープの確認で男が悟ったのは、感情的・象徴的な意味に関することですか？"]:::qNode
+  NF2c_q["NF2c: スープの確認で悟った内容は象徴的・感情的なものではなかった"]:::fNode
+  QF2d["QF2d X<br/>スープの確認により、男自身の秘密が明らかになりましたか？"]:::qNode
+  NF2d_q["NF2d: スープの確認で発覚したのは男自身の秘密ではなかった"]:::fNode
+  QF3a["QF3a X<br/>男が以前スープを飲んだのは、仕事に関係する場面でしたか？"]:::qNode
+  NF3a_q["NF3a: 過去のスープ体験は職業上の場面ではなかった"]:::fNode
+  QF3b["QF3b X<br/>男が以前スープを飲んだのは、家庭で配偶者から出されたものでしたか？"]:::qNode
+  NF3b_q["NF3b: 過去のスープ体験は家庭で配偶者から提供されたものではない"]:::fNode
+  QF3c["QF3c X<br/>男が以前スープを飲んだのは、入院中や療養中のことでしたか？"]:::qNode
+  NF3c_q["NF3c: 過去のスープ体験は入院・療養中のものではない"]:::fNode
+  QF3d["QF3d X<br/>男が以前スープを飲んだのは、儀式や旅行のような命に関わらない場面でしたか？"]:::qNode
+  NF3d_q["NF3d: 過去のスープ体験は儀式や旅行のような命に関わらない状況ではなかった"]:::fNode
+  QF3e["QF3e X<br/>男が経験した極限状況は、暴力や拘束・紛争によるものでしたか？"]:::qNode
+  NF3e_q["NF3e: 極限状況の原因は暴力や拘束・紛争によるものではなかった"]:::fNode
+  QF4a["QF4a X<br/>食料の危機は陸上での出来事でしたか？"]:::qNode
+  NF4a_q["NF4a: 食料危機は陸上での出来事ではなかった"]:::fNode
+  QF5a["QF5a O<br/>遭難中、男たちは陸地ではなく海の上にいましたか？"]:::qNode
+  NF5a_q["NF5a: 遭難中、男たちは海上（船上または漂流中）にいた"]:::fNode
+  QF5b["QF5b X<br/>ウミガメのスープだと偽ったのは男自身ですか？"]:::qNode
+  NF5b_q["NF5b: ウミガメのスープだと偽ったのは男自身ではなかった"]:::fNode
+  QF5c["QF5c X<br/>男が他の人に対して「ウミガメのスープだ」と偽りましたか？"]:::qNode
+  NF5c_q["NF5c: 男は他者にスープの正体を偽る側ではなかった"]:::fNode
+  QT9["QT9 O<br/>レストランで飲んだスープは、以前飲んだものと味が違いましたか？"]:::qNode
+  NT9_q["NT9: レストランのスープは以前飲んだものと味が異なっていた"]:::tNode
+  QU3["QU3 O<br/>遭難中に仲間の一人が死にましたか？"]:::qNode
+  NU3_q["NU3: 遭難中に仲間の一人が死んだ"]:::uNode
+  QU4["QU4 O<br/>飲まされたスープは、死んだ仲間の肉で作られていましたか？"]:::qNode
+  NU4_q["NU4: 飲まされたスープは死んだ仲間の肉で作られていた"]:::uNode
+  Q1a -->|reveals| N1a_q
+  Q1b -->|reveals| N1b_q
+  Q2a -->|reveals| N2b_q
+  Q2b -->|reveals| N2c_q
+  Q3 -->|reveals| P1_q
+  Q4a -->|reveals| N3b_q
+  Q4b -->|reveals| N3c_q
+  Q4c -->|reveals| P2_q
+  Q5 -->|reveals| P3_q
+  Q6a -->|reveals| N5a_q
+  Q6b -->|reveals| P4_q
+  QF1a -->|reveals| NF1a_q
+  QF1b -->|reveals| NF1b_q
+  QF1c -->|reveals| NF1c_q
+  QF1d -->|reveals| NF1d_q
+  QF1e -->|reveals| NF1e_q
+  QF1f -->|reveals| NF1f_q
+  QF1g -->|reveals| NF1g_q
+  QF2a -->|reveals| NF2a_q
+  QF2b -->|reveals| NF2b_q
+  QF2c -->|reveals| NF2c_q
+  QF2d -->|reveals| NF2d_q
+  QF3a -->|reveals| NF3a_q
+  QF3b -->|reveals| NF3b_q
+  QF3c -->|reveals| NF3c_q
+  QF3d -->|reveals| NF3d_q
+  QF3e -->|reveals| NF3e_q
+  QF4a -->|reveals| NF4a_q
+  QF5a -->|reveals| NF5a_q
+  QF5b -->|reveals| NF5b_q
+  QF5c -->|reveals| NF5c_q
+  QT9 -->|reveals| NT9_q
+  QU3 -->|reveals| NU3_q
+  QU4 -->|reveals| NU4_q
+</pre>
+</div>
+
+<div id="division" class="tab-content">
+<h2>model division hierarchy</h2>
+<pre class="mermaid">
+graph TD
+  classDef trueSet fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseSet fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef propNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  ALL["T, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12"]
+  P1_div["P1: 男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある"]:::propNode
+  P1_true["T: T, M1, M2, M3, M4, M5, M6, M7, M8, M9"]:::trueSet
+  P1_false["F: M10, M11, M12"]:::falseSet
+  ALL --> P1_div
+  P1_div -->|TRUE| P1_true
+  P1_div -->|FALSE| P1_false
+  P2_div["P2: 過去のスープ体験は食料の危機的状況に起因する"]:::propNode
+  P2_true["T: T, M1, M2, M4, M6"]:::trueSet
+  P2_false["F: M3, M5, M7, M8, M9"]:::falseSet
+  P1_true --> P2_div
+  P2_div -->|TRUE| P2_true
+  P2_div -->|FALSE| P2_false
+  P3_div["P3: 過去の体験は海での遭難に起因する"]:::propNode
+  P3_true["T: T, M1, M4"]:::trueSet
+  P3_false["F: M2, M6"]:::falseSet
+  P2_true --> P3_div
+  P3_div -->|TRUE| P3_true
+  P3_div -->|FALSE| P3_false
+  P4_div["P4: 他者が男に対して意図的に偽って飲ませた"]:::propNode
+  P4_true["T: T, M4"]:::trueSet
+  P4_false["F: M1"]:::falseSet
+  P3_true --> P4_div
+  P4_div -->|TRUE| P4_true
+  P4_div -->|FALSE| P4_false
+</pre>
+</div>
+
+<div id="chains" class="tab-content">
+<h2>tactical chains</h2>
+<p class="note">C1-C5 + extensions. Parsed from _phase3 description.</p>
+<pre class="mermaid">
+graph TD
+  classDef srcNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef midNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef tgtNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef extNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uniNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  subgraph C1["C1: 動機の探索 → 観測事実の深掘り → 時間軸の拡張"]
+    direction LR
+    C1_S4_S5_S12["S4_S5_S12: {S4,S5,S12}"]:::srcNode
+    C1_N1a["N1a"]:::midNode
+    C1_S4_S5_S12 --> C1_N1a
+    C1_N1a_S4["N1a_S4: {N1a,S4}"]:::midNode
+    C1_N1a -->|"観測事実の深掘り"| C1_N1a_S4
+    C1_N1b["N1b"]:::midNode
+    C1_N1a_S4 --> C1_N1b
+    C1_N1b["N1b"]:::midNode
+    C1_N1b -->|"時間軸の拡張"| C1_N1b
+    C1_P1["P1"]:::tgtNode
+    C1_N1b --> C1_P1
+  end
+  subgraph C2["C2: 因果の逆転 → 矛盾の指摘 → 時間軸の拡張"]
+    direction LR
+    C2_S7_S6["S7_S6: {S7,S6}"]:::srcNode
+    C2_N2b["N2b"]:::midNode
+    C2_S7_S6 --> C2_N2b
+    C2_N2b["N2b"]:::midNode
+    C2_N2b -->|"矛盾の指摘"| C2_N2b
+    C2_N2c["N2c"]:::midNode
+    C2_N2b --> C2_N2c
+    C2_N2c["N2c"]:::midNode
+    C2_N2c -->|"時間軸の拡張"| C2_N2c
+    C2_P1["P1"]:::tgtNode
+    C2_N2c --> C2_P1
+  end
+  subgraph C3["C3: 段階的絞り込み"]
+    direction LR
+    C3_P1["P1"]:::srcNode
+    C3_N3b["N3b"]:::midNode
+    C3_P1 -->|"段階的絞り込み"| C3_N3b
+    C3_N3c["N3c"]:::midNode
+    C3_N3b -->|"段階的絞り込み"| C3_N3c
+    C3_P2["P2"]:::tgtNode
+    C3_N3c --> C3_P2
+  end
+  subgraph C4["C4: 段階的絞り込み"]
+    direction LR
+    C4_P2_S3["P2_S3: {P2,S3}"]:::srcNode
+    C4_P3["P3"]:::tgtNode
+    C4_P2_S3 --> C4_P3
+  end
+  subgraph C5["C5: 登場人物の探索 → 段階的絞り込み"]
+    direction LR
+    C5_P3["P3"]:::srcNode
+    C5_N5a["N5a"]:::midNode
+    C5_P3 --> C5_N5a
+    C5_N5a_P1["N5a_P1: {N5a,P1}"]:::midNode
+    C5_N5a -->|"段階的絞り込み"| C5_N5a_P1
+    C5_P4["P4"]:::tgtNode
+    C5_N5a_P1 --> C5_P4
+  end
+  NT9_ext["NT9: "]:::extNode
+  C1 --> NT9_ext
+  NU3_uni["NU3: "]:::uniNode
+  NT1_ext --> NU3_uni
+  NU4_uni["NU4: "]:::uniNode
+  NT1_ext --> NU4_uni
+</pre>
+</div>
+
+<div id="branches" class="tab-content">
+<h2>chain branches / rejection (_phase9)</h2>
+<p class="note">T = true side, F = false side (parallel). Dotted = generated NF proposition.</p>
+<pre class="mermaid">
+graph TD
+  classDef trueNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseNode fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef nfNode fill:#f5f5f5,stroke:#757575,color:#424242
+  subgraph C1_branch["C1: S → N1a → N1b → P1"]
+    C1_N1a_t["T N1a: スープの正体確認は味への不満によるものではない"]:::trueNode
+    C1_N1a_f0["F 宗教的・文化的禁忌の確認のために正体を尋ねた<br/>(M10)"]:::falseNode
+    C1_N1a_t --- C1_N1a_f0
+    NF1a_nf["NF1a"]:::nfNode
+    C1_N1a_f0 -.-> NF1a_nf
+    C1_N1a_f1["F 約束や誓いの履行としての確認<br/>(M11)"]:::falseNode
+    C1_N1a_t --- C1_N1a_f1
+    NF1b_nf["NF1b"]:::nfNode
+    C1_N1a_f1 -.-> NF1b_nf
+    C1_N1a_f2["F 罪悪感・疑念からの確認<br/>(M12)"]:::falseNode
+    C1_N1a_t --- C1_N1a_f2
+    NF1c_nf["NF1c"]:::nfNode
+    C1_N1a_f2 -.-> NF1c_nf
+    C1_N1b_t["T N1b: 男はスープの味を何かと比較していた"]:::trueNode
+    C1_N1b_f0["F 味ではなく見た目や匂いで判断した<br/>()"]:::falseNode
+    C1_N1b_t --- C1_N1b_f0
+    NF1d_nf["NF1d"]:::nfNode
+    C1_N1b_f0 -.-> NF1d_nf
+    C1_N1b_f1["F 味の照合ではなく感情的な反応（嫌悪・恐怖）で残した<br/>(M11)"]:::falseNode
+    C1_N1b_t --- C1_N1b_f1
+    NF1e_nf["NF1e"]:::nfNode
+    C1_N1b_f1 -.-> NF1e_nf
+    C1_P1_t["T P1: 男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある"]:::trueNode
+    C1_P1_f0["F 知識・伝聞に基づく比較（自分では飲んでいない）<br/>(M10)"]:::falseNode
+    C1_P1_t --- C1_P1_f0
+    NF1f_nf["NF1f"]:::nfNode
+    C1_P1_f0 -.-> NF1f_nf
+    C1_P1_f1["F 他者の体験の伝聞に基づく比較<br/>()"]:::falseNode
+    C1_P1_t --- C1_P1_f1
+    NF1g_nf["NF1g"]:::nfNode
+    C1_P1_f1 -.-> NF1g_nf
+  end
+  subgraph C2_branch["C2: S → N2b → N2c → P1"]
+    C2_N2b_t["T N2b: 本物のウミガメのスープだと確認されたことが自殺の契機となった"]:::trueNode
+    C2_N2b_f0["F 確認行為自体は無関係で、別の出来事が自殺の原因<br/>(M8, M9)"]:::falseNode
+    C2_N2b_t --- C2_N2b_f0
+    NF2a_nf["NF2a"]:::nfNode
+    C2_N2b_f0 -.-> NF2a_nf
+    C2_N2b_f1["F 確認は自殺を思い止まるための行為だったが失敗した<br/>()"]:::falseNode
+    C2_N2b_t --- C2_N2b_f1
+    NF2b_nf["NF2b"]:::nfNode
+    C2_N2b_f1 -.-> NF2b_nf
+    C2_N2c_t["T N2c: 男にとって本物のウミガメのスープであることが致命的な意味を持っていた"]:::trueNode
+    C2_N2c_f0["F 致命的ではなく象徴的・感情的な意味<br/>(M11)"]:::falseNode
+    C2_N2c_t --- C2_N2c_f0
+    NF2c_nf["NF2c"]:::nfNode
+    C2_N2c_f0 -.-> NF2c_nf
+    C2_N2c_f1["F 致命的な意味は個人的な秘密の露見に関わる<br/>(M12)"]:::falseNode
+    C2_N2c_t --- C2_N2c_f1
+    NF2d_nf["NF2d"]:::nfNode
+    C2_N2c_f1 -.-> NF2d_nf
+    C2_P1_t["T P1: 男は以前に「ウミガメのスープ」だと思ってスープを飲んだ経験がある"]:::trueNode
+    C2_P1_f0["F 知識・伝聞に基づく比較（自分では飲んでいない）<br/>(M10)"]:::falseNode
+    C2_P1_t --- C2_P1_f0
+    C2_P1_f1["F 他者の体験の伝聞に基づく比較<br/>()"]:::falseNode
+    C2_P1_t --- C2_P1_f1
+  end
+  subgraph C3_branch["C3: P1 → N3b → N3c → P2"]
+    C3_N3b_t["T N3b: 過去のスープ体験は日常生活での出来事ではなかった"]:::trueNode
+    C3_N3b_f0["F 職業上の経験として飲んだ（料理人・調査員等）<br/>(M5, M9)"]:::falseNode
+    C3_N3b_t --- C3_N3b_f0
+    NF3a_nf["NF3a"]:::nfNode
+    C3_N3b_f0 -.-> NF3a_nf
+    C3_N3b_f1["F 家庭で配偶者に提供されて飲んだ<br/>(M8)"]:::falseNode
+    C3_N3b_t --- C3_N3b_f1
+    NF3b_nf["NF3b"]:::nfNode
+    C3_N3b_f1 -.-> NF3b_nf
+    C3_N3b_f2["F 入院・療養中に出された食事<br/>(M7)"]:::falseNode
+    C3_N3b_t --- C3_N3b_f2
+    NF3c_nf["NF3c"]:::nfNode
+    C3_N3b_f2 -.-> NF3c_nf
+    C3_N3c_t["T N3c: 過去のスープ体験は命に関わるような極限状況でのことだった"]:::trueNode
+    C3_N3c_f0["F 非日常的だが命には関わらない特別な状況（儀式・旅行等）<br/>(M10)"]:::falseNode
+    C3_N3c_t --- C3_N3c_f0
+    NF3d_nf["NF3d"]:::nfNode
+    C3_N3c_f0 -.-> NF3d_nf
+    C3_P2_t["T P2: 過去のスープ体験は食料の危機的状況に起因する"]:::trueNode
+    C3_P2_f0["F 食料以外の生命の危機（暴力・拘束・紛争等）に起因する<br/>(M3)"]:::falseNode
+    C3_P2_t --- C3_P2_f0
+    NF3e_nf["NF3e"]:::nfNode
+    C3_P2_f0 -.-> NF3e_nf
+  end
+  subgraph C4_branch["C4: {P2, S3} → P3"]
+    C4_P3_t["T P3: 過去の体験は海での遭難に起因する"]:::trueNode
+    C4_P3_f0["F 陸上での食料危機（貧困・飢饉等）<br/>(M2, M6)"]:::falseNode
+    C4_P3_t --- C4_P3_f0
+    NF4a_nf["NF4a"]:::nfNode
+    C4_P3_f0 -.-> NF4a_nf
+  end
+  subgraph C5_branch["C5: {P3} → N5a → P4"]
+    C5_P3_entry_t["T P3_entry: 海上（船上・漂流中）で遭難していた"]:::trueNode
+    C5_P3_entry_f0["F 海経由だが陸地（島）に漂着していた<br/>(M4)"]:::falseNode
+    C5_P3_entry_t --- C5_P3_entry_f0
+    NF5a_nf["NF5a"]:::nfNode
+    C5_P3_entry_f0 -.-> NF5a_nf
+    C5_N5a_t["T N5a: 遭難時に男以外の人物がいた"]:::trueNode
+    C5_P4_t["T P4: 他者が男に対して意図的に偽って飲ませた"]:::trueNode
+    C5_P4_f0["F 男自身が自己欺瞞した（他者は偽っていない）<br/>(M1)"]:::falseNode
+    C5_P4_t --- C5_P4_f0
+    NF5b_nf["NF5b"]:::nfNode
+    C5_P4_f0 -.-> NF5b_nf
+    C5_P4_f1["F 男が他者を欺いた（加害者側）<br/>(M12)"]:::falseNode
+    C5_P4_t --- C5_P4_f1
+    NF5c_nf["NF5c"]:::nfNode
+    C5_P4_f1 -.-> NF5c_nf
+  end
+</pre>
+</div>
+
+<div id="paths" class="tab-content">
+<h2>exploration paths</h2>
+<pre class="mermaid">
+graph LR
+  classDef pathNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  subgraph path_sg_0["パス A: 味の確認行動から入る"]
+    p0s0["Q1a(いいえ:N1a)"]:::pathNode
+    p0s1["Q1b(はい:N1b)"]:::pathNode
+    p0s0 --> p0s1
+    p0s2["Q3(はい:P1)"]:::pathNode
+    p0s1 --> p0s2
+    p0s3["Q4a(はい:N3b)"]:::pathNode
+    p0s2 --> p0s3
+    p0s4["Q4b(はい:N3c)"]:::pathNode
+    p0s3 --> p0s4
+    p0s5["Q4c(はい:P2)"]:::pathNode
+    p0s4 --> p0s5
+    p0s6["Q5(はい:P3)"]:::pathNode
+    p0s5 --> p0s6
+    p0s7["Q6a(はい:N5a)"]:::pathNode
+    p0s6 --> p0s7
+    p0s8["Q6b(はい:P4)"]:::pathNode
+    p0s7 --> p0s8
+  end
+  subgraph path_sg_1["パス B: 自殺の因果から入る"]
+    p1s0["Q2a(はい:N2b)"]:::pathNode
+    p1s1["Q2b(はい:N2c)"]:::pathNode
+    p1s0 --> p1s1
+    p1s2["Q3(はい:P1)"]:::pathNode
+    p1s1 --> p1s2
+    p1s3["Q4a(はい:N3b)"]:::pathNode
+    p1s2 --> p1s3
+    p1s4["Q4b(はい:N3c)"]:::pathNode
+    p1s3 --> p1s4
+    p1s5["Q4c(はい:P2)"]:::pathNode
+    p1s4 --> p1s5
+    p1s6["Q5(はい:P3)"]:::pathNode
+    p1s5 --> p1s6
+    p1s7["Q6a(はい:N5a)"]:::pathNode
+    p1s6 --> p1s7
+    p1s8["Q6b(はい:P4)"]:::pathNode
+    p1s7 --> p1s8
+  end
+  subgraph path_sg_2["パス C: 混合ルート"]
+    p2s0["Q1a(いいえ:N1a)"]:::pathNode
+    p2s1["Q2a(はい:N2b)"]:::pathNode
+    p2s0 --> p2s1
+    p2s2["Q2b(はい:N2c)"]:::pathNode
+    p2s1 --> p2s2
+    p2s3["Q3(はい:P1)"]:::pathNode
+    p2s2 --> p2s3
+    p2s4["Q4a(はい:N3b)"]:::pathNode
+    p2s3 --> p2s4
+    p2s5["Q4b(はい:N3c)"]:::pathNode
+    p2s4 --> p2s5
+    p2s6["Q4c(はい:P2)"]:::pathNode
+    p2s5 --> p2s6
+    p2s7["Q5(はい:P3)"]:::pathNode
+    p2s6 --> p2s7
+    p2s8["Q6a(はい:N5a)"]:::pathNode
+    p2s7 --> p2s8
+    p2s9["Q6b(はい:P4)"]:::pathNode
+    p2s8 --> p2s9
+  end
+</pre>
+</div>
+
+<div id="integrity" class="tab-content">
+<h2>integrity check</h2>
+<ul class="checks">
+<li class="issue">&#9888; initial_confirmed がトップレベルと _phase3 で重複（実害なし、データ冗長）</li>
+<li class="ok">&#10003; 全質問の reveals 先は全て propositions に存在</li>
+<li class="ok">&#10003; 全命題の formation_conditions の参照先が存在</li>
+<li class="ok">&#10003; 全モデル (12個) がカバー済み</li>
+<li class="ok">&#10003; clear_conditions がトップレベルと _phase6 で一致</li>
+<li class="ok">&#10003; 全質問の reveals が単一要素（1質問1命題）</li>
+
+</ul>
+</div>
+
+<script>
+  // Initialize mermaid - render all diagrams while all tabs visible
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, curve: 'basis' }
+  });
+
+  // After mermaid renders, hide non-active tabs
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var tabs = document.querySelectorAll('.tab-content');
+      for (var i = 1; i < tabs.length; i++) {
+        tabs[i].classList.add('hidden');
+      }
+    }, 500);
+  });
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.add('hidden');
+      });
+      document.querySelectorAll('.tab').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      var target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.remove('hidden');
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

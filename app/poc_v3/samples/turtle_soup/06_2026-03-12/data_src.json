@@ -746,6 +746,247 @@
       ],
       "entailment_conditions": null,
       "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "スープの正体確認は宗教的な理由に関係していない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1b",
+      "label": "スープの正体確認は約束や誓いに関するものではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1c",
+      "label": "スープの正体確認は男自身の罪悪感によるものではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1d",
+      "label": "男の判断は見た目や匂いではなく味に基づいていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N1a",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1e",
+      "label": "男の反応は感情的な嫌悪や恐怖によるものではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N1a",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1f",
+      "label": "男のスープに関する判断は自身の飲食体験に基づいていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N1b"
+        ],
+        [
+          "N2c"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1g",
+      "label": "男のスープの知識は他者からの伝聞ではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N1b"
+        ],
+        [
+          "N2c"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "自殺はスープの確認と無関係な出来事に起因するものではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S7",
+          "S6"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2b",
+      "label": "スープの確認は自殺を思い止まるための行為ではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S7",
+          "S6"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2c",
+      "label": "スープの確認で悟った内容は象徴的・感情的なものではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N2b"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2d",
+      "label": "スープの確認で発覚したのは男自身の秘密ではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N2b"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3a",
+      "label": "過去のスープ体験は職業上の場面ではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3b",
+      "label": "過去のスープ体験は家庭で配偶者から提供されたものではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3c",
+      "label": "過去のスープ体験は入院・療養中のものではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3d",
+      "label": "過去のスープ体験は儀式や旅行のような命に関わらない状況ではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N3b"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3e",
+      "label": "極限状況の原因は暴力や拘束・紛争によるものではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N3c"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4a",
+      "label": "食料危機は陸上での出来事ではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P2",
+          "S3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5b",
+      "label": "ウミガメのスープだと偽ったのは男自身ではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N5a",
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5c",
+      "label": "男は他者にスープの正体を偽る側ではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "N5a",
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     }
   ],
   "questions": [
@@ -916,6 +1157,220 @@
       "prerequisites": [
         "NU3"
       ]
+    },
+    {
+      "id": "QF1a",
+      "text": "男がスープの正体を確認したのは、宗教的な理由からですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QF1b",
+      "text": "男がスープの正体を確認したのは、誰かとの約束に関係していますか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QF1c",
+      "text": "男がスープの正体を確認したのは、男自身に罪悪感があったからですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QF1d",
+      "text": "男が違和感を持ったのは、スープの味によるものですか？",
+      "answer": "はい",
+      "reveals": [
+        "NF1d"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N1a"
+      ]
+    },
+    {
+      "id": "QF1e",
+      "text": "男がスープに反応したのは、感情的な嫌悪や恐怖によるものですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1e"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N1a"
+      ]
+    },
+    {
+      "id": "QF1f",
+      "text": "男がスープの味を知っていたのは、自分自身が以前に飲んだからですか？",
+      "answer": "はい",
+      "reveals": [
+        "NF1f"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QF1g",
+      "text": "男がスープについて知っていたのは、他の人から聞いた話に基づいていますか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1g"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QF2a",
+      "text": "男が自殺したのは、スープの確認とは無関係な別の出来事が原因ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "QF2b",
+      "text": "男がスープの正体を確認したのは、自殺を思い止まろうとする試みでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2b"
+      ],
+      "mechanism": "link",
+      "prerequisites": []
+    },
+    {
+      "id": "QF2c",
+      "text": "スープの確認で男が悟ったのは、感情的・象徴的な意味に関することですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2c"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "N2b"
+      ]
+    },
+    {
+      "id": "QF2d",
+      "text": "スープの確認により、男自身の秘密が明らかになりましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2d"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "N2b"
+      ]
+    },
+    {
+      "id": "QF3a",
+      "text": "男が以前スープを飲んだのは、仕事に関係する場面でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ]
+    },
+    {
+      "id": "QF3b",
+      "text": "男が以前スープを飲んだのは、家庭で配偶者から出されたものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ]
+    },
+    {
+      "id": "QF3c",
+      "text": "男が以前スープを飲んだのは、入院中や療養中のことでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ]
+    },
+    {
+      "id": "QF3d",
+      "text": "男が以前スープを飲んだのは、儀式や旅行のような命に関わらない場面でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3d"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N3b"
+      ]
+    },
+    {
+      "id": "QF3e",
+      "text": "男が経験した極限状況は、暴力や拘束・紛争によるものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3e"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N3c"
+      ]
+    },
+    {
+      "id": "QF4a",
+      "text": "食料の危機は陸上での出来事でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P2"
+      ]
+    },
+    {
+      "id": "QF5b",
+      "text": "ウミガメのスープだと偽ったのは男自身ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N5a"
+      ]
+    },
+    {
+      "id": "QF5c",
+      "text": "男が他の人に対して「ウミガメのスープだ」と偽りましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "N5a"
+      ]
     }
   ],
   "_phase4": {
@@ -960,34 +1415,179 @@
   },
   "_phase5": {
     "t_facts": [
-      {"id": "T1", "label": "男は船乗りだった", "deducible": false, "entailment_conditions": null},
-      {"id": "T2", "label": "男は仲間と船で遭難し、食料が尽きた", "deducible": false, "entailment_conditions": null},
-      {"id": "T3", "label": "仲間の一人が死んだ", "deducible": false, "entailment_conditions": null},
-      {"id": "T4", "label": "残った仲間が死んだ仲間の肉でスープを作った", "deducible": false, "entailment_conditions": null},
-      {"id": "T5", "label": "仲間は男に「ウミガメのスープだ」と偽って飲ませた", "deducible": true, "entailment_conditions": [["P4", "P1"]]},
-      {"id": "T6", "label": "男はウミガメのスープだと信じて飲んだ", "deducible": true, "entailment_conditions": [["P1"]]},
-      {"id": "T7", "label": "男は助けられた", "deducible": true, "entailment_conditions": [["P3", "S2"]]},
-      {"id": "T8", "label": "レストランで本物のウミガメのスープを注文した", "deducible": true, "entailment_conditions": [["S3", "S10"]]},
-      {"id": "T9", "label": "一口飲んで味が違うことに気づいた", "deducible": false, "entailment_conditions": null},
-      {"id": "T10", "label": "以前飲まされたものは本物のウミガメのスープではなかったと悟った", "deducible": true, "entailment_conditions": [["P4"]]},
-      {"id": "T11", "label": "飲まされたものが人肉だったと理解した", "deducible": false, "entailment_conditions": null},
-      {"id": "T12", "label": "絶望して自殺した", "deducible": false, "entailment_conditions": null}
+      {
+        "id": "T1",
+        "label": "男は船乗りだった",
+        "deducible": false,
+        "entailment_conditions": null
+      },
+      {
+        "id": "T2",
+        "label": "男は仲間と船で遭難し、食料が尽きた",
+        "deducible": false,
+        "entailment_conditions": null
+      },
+      {
+        "id": "T3",
+        "label": "仲間の一人が死んだ",
+        "deducible": false,
+        "entailment_conditions": null
+      },
+      {
+        "id": "T4",
+        "label": "残った仲間が死んだ仲間の肉でスープを作った",
+        "deducible": false,
+        "entailment_conditions": null
+      },
+      {
+        "id": "T5",
+        "label": "仲間は男に「ウミガメのスープだ」と偽って飲ませた",
+        "deducible": true,
+        "entailment_conditions": [
+          [
+            "P4",
+            "P1"
+          ]
+        ]
+      },
+      {
+        "id": "T6",
+        "label": "男はウミガメのスープだと信じて飲んだ",
+        "deducible": true,
+        "entailment_conditions": [
+          [
+            "P1"
+          ]
+        ]
+      },
+      {
+        "id": "T7",
+        "label": "男は助けられた",
+        "deducible": true,
+        "entailment_conditions": [
+          [
+            "P3",
+            "S2"
+          ]
+        ]
+      },
+      {
+        "id": "T8",
+        "label": "レストランで本物のウミガメのスープを注文した",
+        "deducible": true,
+        "entailment_conditions": [
+          [
+            "S3",
+            "S10"
+          ]
+        ]
+      },
+      {
+        "id": "T9",
+        "label": "一口飲んで味が違うことに気づいた",
+        "deducible": false,
+        "entailment_conditions": null
+      },
+      {
+        "id": "T10",
+        "label": "以前飲まされたものは本物のウミガメのスープではなかったと悟った",
+        "deducible": true,
+        "entailment_conditions": [
+          [
+            "P4"
+          ]
+        ]
+      },
+      {
+        "id": "T11",
+        "label": "飲まされたものが人肉だったと理解した",
+        "deducible": false,
+        "entailment_conditions": null
+      },
+      {
+        "id": "T12",
+        "label": "絶望して自殺した",
+        "deducible": false,
+        "entailment_conditions": null
+      }
     ],
-    "c_final": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12", "P1", "P2", "P3", "P4"],
+    "c_final": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8",
+      "S9",
+      "S10",
+      "S11",
+      "S12",
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+    ],
     "chain_extensions": [
-      {"t_fact_id": "T9", "source_chain": "C1", "propositions": ["NT9"], "questions": ["QT9"]}
+      {
+        "t_fact_id": "T9",
+        "source_chain": "C1",
+        "propositions": [
+          "NT9"
+        ],
+        "questions": [
+          "QT9"
+        ]
+      }
     ],
-    "unique_elements": ["T1", "T3", "T4", "T11"]
-  },
-  "_phase6": {
-    "clear_conditions": [["T3", "T4"]],
-    "required_unique_elements": ["T3", "T4"],
-    "chain_designs": [
-      {"target": "T3", "source": "C_final", "propositions": ["NU3"], "questions": ["QU3"]},
-      {"target": "T4", "source": "C_final", "propositions": ["NU4"], "questions": ["QU4"]}
+    "unique_elements": [
+      "T1",
+      "T3",
+      "T4",
+      "T11"
     ]
   },
-  "clear_conditions": [["T3", "T4"]],
+  "_phase6": {
+    "clear_conditions": [
+      [
+        "T3",
+        "T4"
+      ]
+    ],
+    "required_unique_elements": [
+      "T3",
+      "T4"
+    ],
+    "chain_designs": [
+      {
+        "target": "T3",
+        "source": "C_final",
+        "propositions": [
+          "NU3"
+        ],
+        "questions": [
+          "QU3"
+        ]
+      },
+      {
+        "target": "T4",
+        "source": "C_final",
+        "propositions": [
+          "NU4"
+        ],
+        "questions": [
+          "QU4"
+        ]
+      }
+    ]
+  },
+  "clear_conditions": [
+    [
+      "T3",
+      "T4"
+    ]
+  ],
   "_phase9": {
     "chain_branches": [
       {
@@ -1366,16 +1966,206 @@
     "generated": {
       "propositions": [
         {
+          "id": "NF1a",
+          "source_chain": "C1",
+          "source_step": "N1a",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF1b",
+          "source_chain": "C1",
+          "source_step": "N1a",
+          "parallel_index": 1
+        },
+        {
+          "id": "NF1c",
+          "source_chain": "C1",
+          "source_step": "N1a",
+          "parallel_index": 2
+        },
+        {
+          "id": "NF1d",
+          "source_chain": "C1",
+          "source_step": "N1b",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF1e",
+          "source_chain": "C1",
+          "source_step": "N1b",
+          "parallel_index": 1
+        },
+        {
+          "id": "NF1f",
+          "source_chain": "C1",
+          "source_step": "P1",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF1g",
+          "source_chain": "C1",
+          "source_step": "P1",
+          "parallel_index": 1
+        },
+        {
+          "id": "NF2a",
+          "source_chain": "C2",
+          "source_step": "N2b",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF2b",
+          "source_chain": "C2",
+          "source_step": "N2b",
+          "parallel_index": 1
+        },
+        {
+          "id": "NF2c",
+          "source_chain": "C2",
+          "source_step": "N2c",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF2d",
+          "source_chain": "C2",
+          "source_step": "N2c",
+          "parallel_index": 1
+        },
+        {
+          "id": "NF3a",
+          "source_chain": "C3",
+          "source_step": "N3b",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF3b",
+          "source_chain": "C3",
+          "source_step": "N3b",
+          "parallel_index": 1
+        },
+        {
+          "id": "NF3c",
+          "source_chain": "C3",
+          "source_step": "N3b",
+          "parallel_index": 2
+        },
+        {
+          "id": "NF3d",
+          "source_chain": "C3",
+          "source_step": "N3c",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF3e",
+          "source_chain": "C3",
+          "source_step": "P2",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF4a",
+          "source_chain": "C4",
+          "source_step": "P3",
+          "parallel_index": 0
+        },
+        {
           "id": "NF5a",
           "source_chain": "C5",
           "source_step": "P3_entry",
           "parallel_index": 0
+        },
+        {
+          "id": "NF5b",
+          "source_chain": "C5",
+          "source_step": "P4",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF5c",
+          "source_chain": "C5",
+          "source_step": "P4",
+          "parallel_index": 1
         }
       ],
       "questions": [
         {
+          "id": "QF1a",
+          "reveals_proposition": "NF1a"
+        },
+        {
+          "id": "QF1b",
+          "reveals_proposition": "NF1b"
+        },
+        {
+          "id": "QF1c",
+          "reveals_proposition": "NF1c"
+        },
+        {
+          "id": "QF1d",
+          "reveals_proposition": "NF1d"
+        },
+        {
+          "id": "QF1e",
+          "reveals_proposition": "NF1e"
+        },
+        {
+          "id": "QF1f",
+          "reveals_proposition": "NF1f"
+        },
+        {
+          "id": "QF1g",
+          "reveals_proposition": "NF1g"
+        },
+        {
+          "id": "QF2a",
+          "reveals_proposition": "NF2a"
+        },
+        {
+          "id": "QF2b",
+          "reveals_proposition": "NF2b"
+        },
+        {
+          "id": "QF2c",
+          "reveals_proposition": "NF2c"
+        },
+        {
+          "id": "QF2d",
+          "reveals_proposition": "NF2d"
+        },
+        {
+          "id": "QF3a",
+          "reveals_proposition": "NF3a"
+        },
+        {
+          "id": "QF3b",
+          "reveals_proposition": "NF3b"
+        },
+        {
+          "id": "QF3c",
+          "reveals_proposition": "NF3c"
+        },
+        {
+          "id": "QF3d",
+          "reveals_proposition": "NF3d"
+        },
+        {
+          "id": "QF3e",
+          "reveals_proposition": "NF3e"
+        },
+        {
+          "id": "QF4a",
+          "reveals_proposition": "NF4a"
+        },
+        {
           "id": "QF5a",
           "reveals_proposition": "NF5a"
+        },
+        {
+          "id": "QF5b",
+          "reveals_proposition": "NF5b"
+        },
+        {
+          "id": "QF5c",
+          "reveals_proposition": "NF5c"
         }
       ]
     }
