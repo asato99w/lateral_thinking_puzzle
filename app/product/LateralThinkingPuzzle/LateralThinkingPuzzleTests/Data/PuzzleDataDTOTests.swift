@@ -23,8 +23,8 @@ struct PuzzleDataDTOTests {
         let dto = try JSONDecoder().decode(V2PuzzleDataDTO.self, from: data)
 
         #expect(dto.title == "バーの男")
-        #expect(dto.descriptors.count == 19)
-        #expect(dto.questions.count == 19)
+        #expect(dto.descriptors.count == 23)
+        #expect(dto.questions.count == 15)
     }
 
     @Test func test_decodeDesertManJSON_succeeds() throws {
@@ -42,8 +42,8 @@ struct PuzzleDataDTOTests {
         let puzzle = dto.toDomain(derivationMode: .v3)
 
         #expect(puzzle.title == "バーの男")
-        #expect(puzzle.descriptors.count == 19)
-        #expect(puzzle.questions.count == 19)
+        #expect(puzzle.descriptors.count == 23)
+        #expect(puzzle.questions.count == 15)
     }
 
     @Test func test_desertManToDomain_succeeds() throws {
