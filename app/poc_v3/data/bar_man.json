@@ -82,11 +82,7 @@
       "id": "N1a",
       "label": "バーテンダーは男に危害を加えようとしたのではない",
       "negation_of": "H1a",
-      "formation_conditions": [
-        [
-          "S5"
-        ]
-      ],
+      "formation_conditions": null,
       "entailment_conditions": null,
       "rejection_conditions": [
         [
@@ -114,11 +110,7 @@
       "id": "N3a",
       "label": "男が水を求めたのは単に喉が渇いたからではない",
       "negation_of": "H3a",
-      "formation_conditions": [
-        [
-          "S4"
-        ]
-      ],
+      "formation_conditions": null,
       "entailment_conditions": null,
       "rejection_conditions": [
         [
@@ -146,11 +138,7 @@
       "id": "N4a",
       "label": "バーテンダーの行動は個人的な恨みや怒りからではなかった",
       "negation_of": "H4a",
-      "formation_conditions": [
-        [
-          "P1"
-        ]
-      ],
+      "formation_conditions": null,
       "entailment_conditions": null,
       "rejection_conditions": [
         [
@@ -178,11 +166,7 @@
       "id": "N5a",
       "label": "男の困りごとは精神的・心理的な問題ではなかった",
       "negation_of": "H5a",
-      "formation_conditions": [
-        [
-          "P3"
-        ]
-      ],
+      "formation_conditions": null,
       "entailment_conditions": null,
       "rejection_conditions": [
         [
@@ -235,11 +219,7 @@
       "id": "NF2a",
       "label": "「水をください」は暗号や合言葉ではなかった",
       "negation_of": "HF2a",
-      "formation_conditions": [
-        [
-          "S10"
-        ]
-      ],
+      "formation_conditions": null,
       "entailment_conditions": null,
       "rejection_conditions": [
         [
@@ -267,11 +247,7 @@
       "id": "NF2b",
       "label": "男は催眠や暗示にかかっていなかった",
       "negation_of": "HF2b",
-      "formation_conditions": [
-        [
-          "S4"
-        ]
-      ],
+      "formation_conditions": null,
       "entailment_conditions": null,
       "rejection_conditions": [
         [
@@ -299,11 +275,7 @@
       "id": "NF4a",
       "label": "バーテンダーは冗談で銃を向けたのではなかった",
       "negation_of": "HF4a",
-      "formation_conditions": [
-        [
-          "P1"
-        ]
-      ],
+      "formation_conditions": null,
       "entailment_conditions": null,
       "rejection_conditions": [
         [
@@ -331,11 +303,7 @@
       "id": "NF4b",
       "label": "バーテンダーは外部の危険に対処するために銃を向けたのではなかった",
       "negation_of": "HF4b",
-      "formation_conditions": [
-        [
-          "P1"
-        ]
-      ],
+      "formation_conditions": null,
       "entailment_conditions": null,
       "rejection_conditions": [
         [
@@ -392,7 +360,7 @@
       ],
       "mechanism": "observation",
       "prerequisites": [],
-      "topic_category": "前提の確認"
+      "topic_category": "状況の確認"
     },
     {
       "id": "Q3a",

@@ -149,7 +149,7 @@ def check_formation_refs(data: dict) -> list[str]:
     all_valid_ids = descriptor_ids | set(data.get("initial_confirmed", []))
     for d in descriptors:
         did = d["id"]
-        for cond_group in d.get("formation_conditions", []):
+        for cond_group in d.get("formation_conditions") or []:
             for ref in cond_group:
                 if ref not in all_valid_ids:
                     errors.append(f"命題 '{did}' の formation_conditions 参照 '{ref}' が存在しない")
