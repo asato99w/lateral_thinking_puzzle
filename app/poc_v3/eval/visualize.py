@@ -386,22 +386,23 @@ def _check_integrity(data, propositions, questions, s_props):
     if not any("reveals unknown" in i for i in issues):
         ok.append("全質問の reveals 先は全て propositions に存在")
 
-    # 2. recall_conditions match formation_conditions (if rc present)
-    mismatches = []
-    has_rc = any("recall_conditions" in q for q in questions.values())
-    if has_rc:
-        for qid, q in questions.items():
-            for rev in q.get("reveals", []):
-                prop = propositions.get(rev, {})
-                rc = q.get("recall_conditions")
-                fc = prop.get("formation_conditions")
-                if rc and fc and _normalize_conds(rc) != _normalize_conds(fc):
-                    mismatches.append(f"{qid}: recall != fc for {rev}")
-        if mismatches:
-            for m in mismatches:
-                issues.append(m)
-        else:
-            ok.append("全質問の recall_conditions が reveals 先の fc と一致（rc は冗長フィールド）")
+    # 2. negation_of の対称性検証
+    neg_issues = []
+    for pid, prop in propositions.items():
+        neg = prop.get("negation_of")
+        if neg is not None:
+            target = propositions.get(neg)
+            if target is None:
+                neg_issues.append(f"{pid}: negation_of '{neg}' が propositions に存在しない")
+            elif target.get("negation_of") != pid:
+                neg_issues.append(f"{pid}.negation_of={neg} だが {neg}.negation_of={target.get('negation_of')}（非対称）")
+    if neg_issues:
+        for ni in neg_issues:
+            issues.append(ni)
+    else:
+        has_neg = any(prop.get("negation_of") for prop in propositions.values())
+        if has_neg:
+            ok.append("negation_of の対称性が保たれている")
 
     # 3. Formation conditions reference valid IDs
     all_ids = set(propositions.keys()) | set(s_props.keys())

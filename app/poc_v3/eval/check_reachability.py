@@ -34,15 +34,15 @@ def _get_reveals(q: dict) -> list[str]:
 
 def _is_base(d: dict) -> bool:
     """基礎命題かどうか（formation_conditions も entailment_conditions も持たない）"""
-    return "formation_conditions" not in d and "entailment_conditions" not in d
+    return d.get("formation_conditions") is None and d.get("entailment_conditions") is None
 
 
 def _has_formation(d: dict) -> bool:
-    return "formation_conditions" in d
+    return d.get("formation_conditions") is not None
 
 
 def _has_entailment(d: dict) -> bool:
-    return "entailment_conditions" in d
+    return d.get("entailment_conditions") is not None
 
 
 def check_base_descriptor_reachability(data: dict) -> list[str]:
@@ -171,8 +171,8 @@ def _transitive_deps(pid: str, piece_deps: dict[str, set[str]]) -> set[str]:
     return visited
 
 
-def check_recall_scope(data: dict) -> list[str]:
-    """v2: 各ピースの想起スコープの検証。"""
+def check_availability_scope(data: dict) -> list[str]:
+    """v2: 各ピースの質問利用可能性スコープの検証。"""
     if _is_v3(data):
         return []
     errors = []
@@ -201,9 +201,9 @@ def check_recall_scope(data: dict) -> list[str]:
     entailment_conds = {d["id"]: d["entailment_conditions"] for d in descriptors if _has_entailment(d)}
     rejection_conds: dict[str, list[list[str]]] = {}
     for d in descriptors:
-        rc = d.get("rejection_conditions")
-        if rc is not None:
-            rejection_conds[d["id"]] = rc
+        rejc = d.get("rejection_conditions")
+        if rejc is not None:
+            rejection_conds[d["id"]] = rejc
 
     for piece in data.get("pieces", []):
         pid = piece["id"]
@@ -217,33 +217,26 @@ def check_recall_scope(data: dict) -> list[str]:
         derivable = _derivable_descriptors(allowed_confirmed, formation_conds, entailment_conds, rejection_conds or None)
         allowed = allowed_confirmed | derivable
 
+        d_lookup = {dd["id"]: dd for dd in descriptors}
         for mid in piece.get("members", []):
             for q in reveals_map.get(mid, []):
                 qid = q["id"]
-                # recall_conditions があればそれを使用、なければ reveals 先の fc
-                recall = q.get("recall_conditions")
-                if recall is None:
-                    reveals = _get_reveals(q)
-                    if reveals:
-                        d_lookup = {dd["id"]: dd for dd in descriptors}
-                        dd = d_lookup.get(reveals[0])
-                        if dd is not None:
-                            recall = dd.get("formation_conditions")
-                if not recall:
+                fc = _get_availability_fc(q, d_lookup)
+                if not fc:
                     continue
                 has_valid_group = any(
                     all(ref in allowed for ref in cond_group)
-                    for cond_group in recall
+                    for cond_group in fc
                 )
                 if not has_valid_group:
                     out_of_scope = []
-                    for i, cond_group in enumerate(recall):
+                    for i, cond_group in enumerate(fc):
                         for ref in cond_group:
                             if ref not in allowed:
                                 out_of_scope.append(f"[{i}]:'{ref}'")
                     errors.append(
                         f"ピース '{pid}': question '{qid}' の "
-                        f"recall_conditions にスコープ内のグループがない（スコープ外: {', '.join(out_of_scope)}）"
+                        f"reveals 先の fc にスコープ内のグループがない（スコープ外: {', '.join(out_of_scope)}）"
                     )
     return errors
 
@@ -265,12 +258,29 @@ def check_orphan_descriptors(data: dict) -> list[str]:
     return warnings
 
 
-def check_recall_reachability_v3(data: dict) -> list[str]:
-    """v3: 各質問の想起条件（reveals 先の fc）が initial_confirmed + 先行 reveals から到達可能か。
+def _get_availability_fc(q: dict, descriptor_map: dict) -> list[list[str]] | None:
+    """質問の利用可能条件を返す。
 
-    recall_conditions は reveals される命題の formation_conditions から導出される。
-    質問に recall_conditions フィールドがある場合（v2 互換）はそちらを使用する。
+    - 回答が「はい」→ reveals 先の命題の fc
+    - 回答が「いいえ」→ reveals 先の命題の negation_of が指す命題の fc
     """
+    reveals = _get_reveals(q)
+    if not reveals:
+        return None
+    d = descriptor_map.get(reveals[0])
+    if d is None:
+        return None
+    if q.get("answer") == "いいえ":
+        neg = d.get("negation_of")
+        if neg is not None:
+            target = descriptor_map.get(neg)
+            if target is not None:
+                return target.get("formation_conditions")
+    return d.get("formation_conditions")
+
+
+def check_formation_reachability_v3(data: dict) -> list[str]:
+    """v3: 各質問の利用可能条件が initial_confirmed + 先行 reveals から到達可能か。"""
     errors = []
     initial = set(data.get("initial_confirmed", []))
     descriptors = _get_descriptors(data)
@@ -279,9 +289,9 @@ def check_recall_reachability_v3(data: dict) -> list[str]:
     entailment_conds = {d["id"]: d["entailment_conditions"] for d in descriptors if _has_entailment(d)}
     rejection_conds: dict[str, list[list[str]]] = {}
     for d in descriptors:
-        rc = d.get("rejection_conditions")
-        if rc is not None:
-            rejection_conds[d["id"]] = rc
+        rejc = d.get("rejection_conditions")
+        if rejc is not None:
+            rejection_conds[d["id"]] = rejc
 
     # 全 reveals を集めた confirmed で最大到達可能集合を求める
     all_reveals: set[str] = set()
@@ -294,28 +304,21 @@ def check_recall_reachability_v3(data: dict) -> list[str]:
 
     for q in data.get("questions", []):
         qid = q["id"]
-        # recall_conditions があればそれを使用、なければ reveals 先の fc を使用
-        recall = q.get("recall_conditions")
-        if recall is None:
-            reveals = _get_reveals(q)
-            if reveals:
-                d = descriptor_map.get(reveals[0])
-                if d is not None:
-                    recall = d.get("formation_conditions")
-        if not recall:
+        fc = _get_availability_fc(q, descriptor_map)
+        if not fc:
             continue
         has_valid_group = any(
             all(ref in reachable for ref in cond_group)
-            for cond_group in recall
+            for cond_group in fc
         )
         if not has_valid_group:
             out_of_scope = []
-            for i, cond_group in enumerate(recall):
+            for i, cond_group in enumerate(fc):
                 unreachable = [ref for ref in cond_group if ref not in reachable]
                 if unreachable:
                     out_of_scope.append(f"[{i}]: {unreachable}")
             errors.append(
-                f"question '{qid}' の想起条件（reveals 先の fc）が到達不能: {', '.join(out_of_scope)}"
+                f"question '{qid}' の利用可能条件が到達不能: {', '.join(out_of_scope)}"
             )
     return errors
 
@@ -327,14 +330,14 @@ def run(path: str) -> tuple[bool, list[str]]:
     if is_v3:
         checks = [
             ("命題の到達可能性", check_proposition_reachability),
-            ("想起条件の到達可能性", check_recall_reachability_v3),
+            ("利用可能条件の到達可能性", check_formation_reachability_v3),
             ("孤立命題の検出", check_orphan_descriptors),
         ]
     else:
         checks = [
             ("基礎命題の到達可能性", check_base_descriptor_reachability),
             ("ピース構成命題の到達可能性", check_piece_member_reachability),
-            ("想起スコープの整合性", check_recall_scope),
+            ("利用可能スコープの整合性", check_availability_scope),
             ("孤立命題の検出", check_orphan_descriptors),
         ]
 

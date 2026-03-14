@@ -145,15 +145,33 @@ def _derivable_from(
     return (confirmed | derived) - available
 
 
-def check_recall_derivability(data: dict) -> list[str]:
-    """想起条件（reveals 先の fc）が対応ステップの input から導出可能か。
+def _get_availability_fc(q: dict, descriptor_map: dict) -> list[list[str]] | None:
+    """質問の利用可能条件を返す。
 
-    想起条件は OR-of-AND なので、少なくとも1つのグループが
+    - 回答が「はい」→ reveals 先の命題の fc
+    - 回答が「いいえ」→ reveals 先の命題の negation_of が指す命題の fc
+    """
+    reveals = _get_reveals(q)
+    if not reveals:
+        return None
+    d = descriptor_map.get(reveals[0])
+    if d is None:
+        return None
+    if q.get("answer") == "いいえ":
+        neg = d.get("negation_of")
+        if neg is not None:
+            target = descriptor_map.get(neg)
+            if target is not None:
+                return target.get("formation_conditions")
+    return d.get("formation_conditions")
+
+
+def check_availability_derivability(data: dict) -> list[str]:
+    """質問の利用可能条件が対応ステップの input から導出可能か。
+
+    利用可能条件は OR-of-AND なので、少なくとも1つのグループが
     完全にステップの累積入力から導出可能であれば OK。
     cumulative_available のベースラインには initial_confirmed を含める。
-
-    recall_conditions が質問に存在する場合（v2 互換）はそちらを使用し、
-    存在しない場合は reveals 先の formation_conditions を使用する。
     """
     errors = []
     question_map = {q["id"]: q for q in data.get("questions", [])}
@@ -191,30 +209,23 @@ def check_recall_derivability(data: dict) -> list[str]:
                 q = question_map.get(qid)
                 if q is None:
                     continue
-                # recall_conditions があればそれを使用、なければ reveals 先の fc
-                recall = q.get("recall_conditions")
-                if recall is None:
-                    reveals = _get_reveals(q)
-                    if reveals:
-                        d = descriptor_map.get(reveals[0])
-                        if d is not None:
-                            recall = d.get("formation_conditions")
-                if not recall:
+                fc = _get_availability_fc(q, descriptor_map)
+                if not fc:
                     continue
                 # OR-of-AND: 少なくとも1つのグループが全て reachable なら OK
                 has_valid_group = any(
                     all(ref in reachable for ref in cond_group)
-                    for cond_group in recall
+                    for cond_group in fc
                 )
                 if not has_valid_group:
                     out_of_scope = []
-                    for j, cond_group in enumerate(recall):
+                    for j, cond_group in enumerate(fc):
                         unreachable = [ref for ref in cond_group if ref not in reachable]
                         if unreachable:
                             out_of_scope.append(f"[{j}]: {unreachable}")
                     errors.append(
                         f"_piece_chains '{chain_id}' step[{i}]: "
-                        f"質問 '{qid}' の想起条件にステップ input から "
+                        f"質問 '{qid}' の利用可能条件にステップ input から "
                         f"導出可能なグループがない（{', '.join(out_of_scope)}）"
                     )
 
@@ -271,7 +282,7 @@ def run(path: str) -> tuple[bool, list[str]]:
         ("連鎖ステップの質問存在", check_chain_question_coverage),
         ("output の網羅性", check_output_coverage),
         ("reveals のステップ範囲", check_reveals_scope),
-        ("recall_conditions の導出可能性", check_recall_derivability),
+        ("利用可能条件の導出可能性", check_availability_derivability),
         ("reveals のピース帰属", check_reveals_piece_membership),
     ]
 

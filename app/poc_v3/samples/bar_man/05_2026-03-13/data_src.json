@@ -1,0 +1,1799 @@
+{
+  "title": "バーの男",
+  "S": "ある男がバーに入り、バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた。男は「ありがとう」と言って帰った。なぜだろう？",
+  "T": "男はしゃっくりが止まらなくて困っていた。水を飲めば治ると思いバーに立ち寄ったが、バーテンダーはしゃっくりに気づき、驚かせて止めてやろうと銃を向けた。しゃっくりが止まった男は水が不要になり、「ありがとう」と言って帰った。",
+  "_phase1": {
+    "tensions": [
+      {
+        "id": "α",
+        "label": "男がバーでアルコールではなく水を求めた。水を必要とする特別な理由がある",
+        "parent": null
+      },
+      {
+        "id": "β1",
+        "label": "バーテンダーが水の注文に対して銃を向けた。予測不能な反応",
+        "parent": "β"
+      },
+      {
+        "id": "β2",
+        "label": "バーテンダーの行為は意図的で、男に関する何かの察知に基づいていた",
+        "parent": "β"
+      },
+      {
+        "id": "γ1",
+        "label": "男は銃を向けられたことに感謝した。銃を向ける行為が有益だった",
+        "parent": "γ"
+      },
+      {
+        "id": "γ2",
+        "label": "男は水を受け取らずに帰った。当初の目的（水を飲むこと）が不要になった",
+        "parent": "γ"
+      }
+    ],
+    "models": [
+      {
+        "id": "T",
+        "label": "しゃっくり・驚愕療法",
+        "summary": "しゃっくりが止まらず水で治そうとバーに来た。バーテンダーがしゃっくりに気づき驚かせて止めようと銃を向けた。しゃっくりが止まり水不要になり感謝して帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M1",
+        "label": "喉の詰まり・咳の誘発",
+        "summary": "喉に異物が詰まり水で流そうとバーに来た。バーテンダーが苦しそうな様子に気づき銃で驚かせて咳を誘発。異物が取れ水不要になり感謝して帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M2",
+        "label": "過呼吸・呼吸停止誘発",
+        "summary": "過呼吸で水を飲んで落ち着こうとバーに来た。バーテンダーが異常な呼吸に気づき銃で驚かせて一瞬息を止めさせた。呼吸が正常化し水不要になり感謝して帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M3",
+        "label": "動悸・アドレナリン効果",
+        "summary": "動悸がして水を飲んで落ち着こうとバーに来た。バーテンダーが異常に気づき銃のショックでアドレナリンを分泌させた。心拍が正常化し水不要になり感謝して帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M4",
+        "label": "酔い覚まし",
+        "summary": "酔いすぎて水で覚まそうとバーに入った。バーテンダーが酔っ払いに気づき銃を向けて一気に酔いを覚まさせた。酔いが覚め水不要になり感謝して帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M5",
+        "label": "自殺願望・危機介入",
+        "summary": "自殺を考えている男が水を口実にバーに入った。バーテンダーが尋常でない様子を察知し銃を向けて脅した。我に返り感謝して帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M6",
+        "label": "暗号取引",
+        "summary": "「水をください」は裏取引の暗号。バーテンダーが暗号を認識し取引手順として銃を見せた。取引完了し感謝して帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M7",
+        "label": "演技の練習",
+        "summary": "男とバーテンダーは劇の脚本を練習中。「水をください」「銃を向ける」「ありがとう」は全てセリフ。練習終了後に帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M8",
+        "label": "強盗の下見・犯行断念",
+        "summary": "強盗を計画した男がバーの様子を探りに来て水を頼んだ。バーテンダーが不審な様子に気づき銃を向けた。男は犯行を断念し感謝して帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M9",
+        "label": "賭け",
+        "summary": "友人と「バーで水を頼んだらどうなるか」の賭けをした。バーテンダーの反応で賭けに勝ち感謝して帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M10",
+        "label": "常連の冗談",
+        "summary": "常連客とバーテンダーの定番ジョーク。「水をください」に銃を向ける応酬。交流を楽しみ感謝して帰った。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M11",
+        "label": "薬の服用・勘違い",
+        "summary": "薬を飲むために水が必要だった。バーテンダーが錠剤を見て違法薬物と勘違いし銃を向けた。誤解が解け感謝して帰ったが水は飲めなかった。",
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      }
+    ],
+    "relaxation_patterns": {
+      "T": {
+        "α": "身体症状の治療目的",
+        "β1": "症状解消のための驚愕療法",
+        "β2": "症状の観察",
+        "γ1": "症状解消への感謝",
+        "γ2": "症状解消により不要"
+      },
+      "M1": {
+        "α": "身体症状の治療目的",
+        "β1": "症状解消のための驚愕療法",
+        "β2": "症状の観察",
+        "γ1": "症状解消への感謝",
+        "γ2": "症状解消により不要"
+      },
+      "M2": {
+        "α": "身体症状の治療目的",
+        "β1": "症状解消のための驚愕療法",
+        "β2": "症状の観察",
+        "γ1": "症状解消への感謝",
+        "γ2": "症状解消により不要"
+      },
+      "M3": {
+        "α": "身体症状の治療目的",
+        "β1": "症状解消のための驚愕療法",
+        "β2": "症状の観察",
+        "γ1": "症状解消への感謝",
+        "γ2": "症状解消により不要"
+      },
+      "M4": {
+        "α": "身体症状の治療目的",
+        "β1": "症状解消のための驚愕療法",
+        "β2": "症状の観察",
+        "γ1": "症状解消への感謝",
+        "γ2": "症状解消により不要"
+      },
+      "M5": {
+        "α": "水は口実（真の目的が別にある）",
+        "β1": "心理的介入としての脅し",
+        "β2": "心理状態の察知",
+        "γ1": "危機介入への感謝",
+        "γ2": "水は最初から不要"
+      },
+      "M6": {
+        "α": "暗号・符丁としての発話",
+        "β1": "取引手順の一環",
+        "β2": "暗号の認識",
+        "γ1": "取引成功への感謝",
+        "γ2": "水は最初から不要"
+      },
+      "M7": {
+        "α": "脚本上の台詞",
+        "β1": "脚本上の動作",
+        "β2": "-",
+        "γ1": "練習完了への感謝",
+        "γ2": "水は最初から不要"
+      },
+      "M8": {
+        "α": "偵察目的の注文",
+        "β1": "犯罪意図への対抗",
+        "β2": "不審行動の察知",
+        "γ1": "抑止への感謝",
+        "γ2": "水は偵察目的で不要"
+      },
+      "M9": {
+        "α": "賭けのための行動",
+        "β1": "注文への定型反応",
+        "β2": "-",
+        "γ1": "賭け成功への感謝",
+        "γ2": "水は最初から不要"
+      },
+      "M10": {
+        "α": "冗談の定型句",
+        "β1": "冗談への応酬",
+        "β2": "常連の認識",
+        "γ1": "交流への感謝",
+        "γ2": "水は最初から不要"
+      },
+      "M11": {
+        "α": "薬の服用手段",
+        "β1": "危険物と誤認した威嚇",
+        "β2": "錠剤の目撃",
+        "γ1": "弁明受理への感謝",
+        "γ2": "-"
+      }
+    },
+    "variant_groups": [
+      {
+        "group_id": "G1",
+        "label": "身体症状・驚愕療法",
+        "representative": "T",
+        "members": [
+          "T",
+          "M1",
+          "M2",
+          "M3",
+          "M4"
+        ],
+        "shared_pattern": {
+          "α": "身体症状の治療目的",
+          "β1": "症状解消のための驚愕療法",
+          "β2": "症状の観察",
+          "γ1": "症状解消への感謝",
+          "γ2": "症状解消により不要"
+        }
+      }
+    ],
+    "abstract_models": [
+      {
+        "id": "G1",
+        "label": "身体症状を水で治そうとした男に、バーテンダーが症状に気づき驚愕療法として銃を向け、症状が解消し水が不要になった",
+        "representative": "T",
+        "members": [
+          "T",
+          "M1",
+          "M2",
+          "M3",
+          "M4"
+        ],
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M5",
+        "label": "自殺願望・危機介入",
+        "members": [
+          "M5"
+        ],
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M6",
+        "label": "暗号取引",
+        "members": [
+          "M6"
+        ],
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M7",
+        "label": "演技の練習",
+        "members": [
+          "M7"
+        ],
+        "tension_subset": [
+          "α",
+          "β1",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M8",
+        "label": "強盗の下見・犯行断念",
+        "members": [
+          "M8"
+        ],
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M9",
+        "label": "賭け",
+        "members": [
+          "M9"
+        ],
+        "tension_subset": [
+          "α",
+          "β1",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M10",
+        "label": "常連の冗談",
+        "members": [
+          "M10"
+        ],
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M11",
+        "label": "薬の服用・勘違い",
+        "members": [
+          "M11"
+        ],
+        "tension_subset": [
+          "α",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      }
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "G1": [
+        "男は身体症状に困っていた",
+        "水を飲めば治ると考えバーに立ち寄った",
+        "バーテンダーは男の身体症状に気づいた",
+        "バーテンダーは驚かせて症状を止めようとして銃を向けた（驚愕療法）",
+        "驚きにより症状が即座に解消した",
+        "症状解消により水が不要になった",
+        "男は症状解消への感謝を述べて帰った"
+      ],
+      "M5": [
+        "男は自殺を考えていた",
+        "水は口実でバーに入った",
+        "バーテンダーは男の尋常でない様子を察知した",
+        "バーテンダーは銃を向けて心理的に介入した",
+        "男は我に返り自殺を思い留まった",
+        "水は最初から不要だった",
+        "男は危機介入に感謝して帰った"
+      ],
+      "M6": [
+        "「水をください」は裏取引の暗号だった",
+        "バーテンダーは暗号を認識した",
+        "銃を見せることが取引手順の一環だった",
+        "取引が成立した",
+        "水は符丁に過ぎず最初から不要だった",
+        "男は取引成功に感謝して帰った"
+      ],
+      "M7": [
+        "男とバーテンダーは劇の脚本を練習していた",
+        "全ての行動は脚本上のセリフ・動作だった",
+        "練習が完了した",
+        "水は脚本上のセリフであり不要だった"
+      ],
+      "M8": [
+        "男は強盗を計画しバーの様子を偵察に来た",
+        "水を口実に注文した",
+        "バーテンダーは不審な行動を察知した",
+        "バーテンダーは威嚇として銃を向けた",
+        "男は犯行を断念した",
+        "水は偵察の口実であり不要だった",
+        "男は抑止への感謝を述べて帰った"
+      ],
+      "M9": [
+        "男は友人と賭けをしていた",
+        "バーで水を頼むこと自体が賭けの行動だった",
+        "バーテンダーは特に察知せず反応した",
+        "賭けの条件を満たした",
+        "水は最初から不要だった",
+        "男は賭け成功に感謝して帰った"
+      ],
+      "M10": [
+        "男は常連客でバーテンダーとの定番ジョークがあった",
+        "「水をください」は冗談の定型句",
+        "バーテンダーは常連を認識して応酬した",
+        "水は冗談の一部で不要だった",
+        "男は交流に感謝して帰った"
+      ],
+      "M11": [
+        "男は薬を飲むために水が必要だった",
+        "バーテンダーは男が取り出した錠剤を目撃した",
+        "バーテンダーは違法薬物と勘違いして銃を向けた",
+        "誤解が解け弁明が受理された",
+        "しかし水は飲めなかった"
+      ]
+    },
+    "step2a_axis_mapping": {
+      "axes": [
+        "水を求めた理由",
+        "BTの認識対象",
+        "銃を向けた意図",
+        "結果",
+        "水の最終状態"
+      ],
+      "matrix": {
+        "G1": [
+          "症状治療のため",
+          "男の身体症状",
+          "驚愕療法（治療的）",
+          "症状解消",
+          "解消により不要に"
+        ],
+        "M5": [
+          "口実",
+          "心理的異変",
+          "心理的介入",
+          "自殺断念",
+          "元から不要"
+        ],
+        "M6": [
+          "暗号（取引の符丁）",
+          "暗号の意味",
+          "取引手順の遂行",
+          "取引成立",
+          "元から不要"
+        ],
+        "M7": [
+          "脚本のセリフ",
+          "なし",
+          "脚本の動作",
+          "練習完了",
+          "元から不要"
+        ],
+        "M8": [
+          "偵察の口実",
+          "不審な行動",
+          "犯罪への威嚇",
+          "犯行断念",
+          "元から不要"
+        ],
+        "M9": [
+          "賭けの行動",
+          "なし",
+          "定型反応",
+          "賭け成立",
+          "元から不要"
+        ],
+        "M10": [
+          "冗談の定型句",
+          "常連の認識",
+          "冗談の応酬",
+          "交流完了",
+          "元から不要"
+        ],
+        "M11": [
+          "薬の服用",
+          "錠剤の目撃",
+          "薬物誤認による威嚇",
+          "誤解解消",
+          "依然必要"
+        ]
+      }
+    },
+    "step2b_grouping": {
+      "水を求めた理由": {
+        "実際に水が必要": [
+          "G1",
+          "M11"
+        ],
+        "口実・偵察": [
+          "M5",
+          "M8"
+        ],
+        "符丁・セリフ・形式": [
+          "M6",
+          "M7",
+          "M9",
+          "M10"
+        ]
+      },
+      "BTの認識対象": {
+        "男の状態を察知": [
+          "G1",
+          "M5",
+          "M8",
+          "M11"
+        ],
+        "事前の関係・知識": [
+          "M6",
+          "M10"
+        ],
+        "認識なし": [
+          "M7",
+          "M9"
+        ]
+      },
+      "銃を向けた意図": {
+        "男を助ける意図": [
+          "G1",
+          "M5"
+        ],
+        "威嚇・対抗": [
+          "M8",
+          "M11"
+        ],
+        "手順・形式": [
+          "M6",
+          "M7",
+          "M9",
+          "M10"
+        ]
+      }
+    },
+    "division_propositions": [
+      {
+        "id": "P1",
+        "label": "バーテンダーが銃を向けたのは、男について何かを察知・認識したからだった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M5",
+          "M6",
+          "M8",
+          "M10",
+          "M11"
+        ],
+        "false_models": [
+          "M7",
+          "M9"
+        ]
+      },
+      {
+        "id": "P2",
+        "label": "男は何かに困っていた（身体的・心理的な問題を抱えていた）",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M5",
+          "M11"
+        ],
+        "false_models": [
+          "M6",
+          "M7",
+          "M8",
+          "M9",
+          "M10"
+        ]
+      },
+      {
+        "id": "P3",
+        "label": "男は実際に水を飲むことを目的としていた",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M11"
+        ],
+        "false_models": [
+          "M5",
+          "M6",
+          "M7",
+          "M8",
+          "M9",
+          "M10"
+        ]
+      },
+      {
+        "id": "P4",
+        "label": "銃を向けられた結果、男が水を求めていた理由が解消された",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1"
+        ],
+        "false_models": [
+          "M5",
+          "M6",
+          "M7",
+          "M8",
+          "M9",
+          "M10",
+          "M11"
+        ]
+      }
+    ],
+    "division_hierarchy": [
+      {
+        "proposition_id": "P1",
+        "true_set": [
+          "G1",
+          "M5",
+          "M6",
+          "M8",
+          "M10",
+          "M11"
+        ],
+        "false_set": [
+          "M7",
+          "M9"
+        ],
+        "children": [
+          {
+            "proposition_id": "P2",
+            "true_set": [
+              "G1",
+              "M5",
+              "M11"
+            ],
+            "false_set": [
+              "M6",
+              "M8",
+              "M10"
+            ],
+            "children": [
+              {
+                "proposition_id": "P3",
+                "true_set": [
+                  "G1",
+                  "M11"
+                ],
+                "false_set": [
+                  "M5"
+                ],
+                "children": [
+                  {
+                    "proposition_id": "P4",
+                    "true_set": [
+                      "G1"
+                    ],
+                    "false_set": [
+                      "M11"
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "t_abstract_position": {
+      "final_true_set": [
+        "G1"
+      ],
+      "unrejectable_variants": [
+        "T",
+        "M1",
+        "M2",
+        "M3",
+        "M4"
+      ],
+      "note": "G1内のモデルは全て「身体症状・驚愕療法」の緩和パターンを共有するバリアントであり、分割命題では区別不可能。症状の具体的種類（しゃっくり、喉の詰まり等）は分割の対象外。"
+    }
+  },
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11",
+    "S12",
+    "S13",
+    "S14"
+  ],
+  "_phase3": {
+    "s_propositions": [
+      {
+        "id": "S1",
+        "label": "ある男がいた",
+        "type": "atomic"
+      },
+      {
+        "id": "S2",
+        "label": "男はバーに入った",
+        "type": "atomic"
+      },
+      {
+        "id": "S3",
+        "label": "バーテンダーがいた",
+        "type": "atomic"
+      },
+      {
+        "id": "S4",
+        "label": "男はバーテンダーに「水をください」と頼んだ",
+        "type": "atomic"
+      },
+      {
+        "id": "S5",
+        "label": "バーテンダーは男に銃を向けた",
+        "type": "atomic"
+      },
+      {
+        "id": "S6",
+        "label": "男は「ありがとう」と言った",
+        "type": "atomic"
+      },
+      {
+        "id": "S7",
+        "label": "男は帰った",
+        "type": "atomic"
+      },
+      {
+        "id": "S8",
+        "label": "バーがあった",
+        "type": "derived",
+        "derived_from": [
+          "S2"
+        ]
+      },
+      {
+        "id": "S9",
+        "label": "男はバーの外から来た",
+        "type": "derived",
+        "derived_from": [
+          "S2"
+        ]
+      },
+      {
+        "id": "S10",
+        "label": "男は水を求めた",
+        "type": "derived",
+        "derived_from": [
+          "S4"
+        ]
+      },
+      {
+        "id": "S11",
+        "label": "バーテンダーは銃を持っていた",
+        "type": "derived",
+        "derived_from": [
+          "S5"
+        ]
+      },
+      {
+        "id": "S12",
+        "label": "男が水を求めた後にバーテンダーが銃を向けた",
+        "type": "derived",
+        "derived_from": [
+          "S4",
+          "S5"
+        ]
+      },
+      {
+        "id": "S13",
+        "label": "銃を向けられた後に男は「ありがとう」と言って帰った",
+        "type": "derived",
+        "derived_from": [
+          "S5",
+          "S6",
+          "S7"
+        ]
+      },
+      {
+        "id": "S14",
+        "label": "男は感謝を表明した",
+        "type": "derived",
+        "derived_from": [
+          "S6"
+        ]
+      }
+    ],
+    "initial_confirmed": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8",
+      "S9",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14"
+    ],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_upper",
+        "source": [
+          "S5"
+        ],
+        "target": "P1",
+        "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "S5(銃を向けた) →[動機の探索]→ 銃を向けた動機がある →[段階的絞り込み]→ P1(男について察知した)"
+      },
+      {
+        "id": "C2",
+        "type": "S_to_upper",
+        "source": [
+          "S10"
+        ],
+        "target": "P2",
+        "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "S10(水を求めた) →[動機の探索]→ 水を求めた理由がある →[段階的絞り込み]→ P2(困りごとを抱えていた)"
+      },
+      {
+        "id": "C3",
+        "type": "S_to_upper",
+        "source": [
+          "S6",
+          "S5"
+        ],
+        "target": "P1",
+        "tactic": "矛盾の指摘 → 動機の探索",
+        "description": "S6(ありがとう) + S5(銃) →[矛盾の指摘]→ 銃と感謝の矛盾、銃は有害でなかった →[動機の探索]→ P1(察知に基づく行為だった)"
+      },
+      {
+        "id": "C4",
+        "type": "upper_to_lower",
+        "source": [
+          "P1",
+          "S10"
+        ],
+        "target": "P2",
+        "tactic": "観測事実の深掘り → 段階的絞り込み",
+        "description": "P1(察知に基づく) + S10(水を求めた) →[観測事実の深掘り]→ 何を察知したか →[段階的絞り込み]→ P2(困りごとを抱えていた)",
+        "fc_source": "P1 は C1 の reveals"
+      },
+      {
+        "id": "C5",
+        "type": "upper_to_lower",
+        "source": [
+          "P2",
+          "S10"
+        ],
+        "target": "P3",
+        "tactic": "観測事実の深掘り → 段階的絞り込み",
+        "description": "P2(困りごとあり) + S10(水を求めた) →[観測事実の深掘り]→ 困りごとと水の関係 →[段階的絞り込み]→ P3(水を飲む目的だった)",
+        "fc_source": "P2 は C2 または C4 の reveals"
+      },
+      {
+        "id": "C6",
+        "type": "upper_to_lower",
+        "source": [
+          "P3",
+          "S5"
+        ],
+        "target": "P4",
+        "tactic": "因果の逆転 → 段階的絞り込み",
+        "description": "P3(水は飲む目的) + S5(銃を向けた) →[因果の逆転]→ 銃で何が変わったか →[段階的絞り込み]→ P4(水の理由が解消した)",
+        "fc_source": "P3 は C5 の reveals"
+      }
+    ]
+  },
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "バーテンダーが銃を向けたのは、男について何かを察知・認識したからだった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "男は何かに困っていた（身体的・心理的な問題を抱えていた）",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "男は実際に水を飲むことを目的としていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P2",
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "銃を向けられた結果、男が水を求めていた理由が解消された",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P3",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "バーテンダーが銃を向けたのは水の注文に怒ったからではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "H1a"
+    },
+    {
+      "id": "N2a",
+      "label": "男が水を求めたのは喉の渇きからではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "H2a"
+    },
+    {
+      "id": "N3a",
+      "label": "銃を向けられたことは男にとって有益な結果をもたらした",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S5",
+          "S6"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N7a",
+      "label": "男は水を飲まなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "H7a"
+    },
+    {
+      "id": "NU1",
+      "label": "男の困りごとは身体的な症状だった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "T1",
+      "label": "男はしゃっくりが止まらなくて困っていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "NU1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "この場面は芝居や演技の練習ではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF1a"
+    },
+    {
+      "id": "NF2a",
+      "label": "「水をください」は暗号や符丁ではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF2a"
+    },
+    {
+      "id": "NF2b",
+      "label": "男は偵察や犯罪目的でバーに来たのではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF2b"
+    },
+    {
+      "id": "NF2c",
+      "label": "男は賭けのために水を注文したのではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF2c"
+    },
+    {
+      "id": "NF2d",
+      "label": "男とバーテンダーは顔見知りではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF2d"
+    },
+    {
+      "id": "NF5a",
+      "label": "水は口実ではなく、男は実際に水を必要としていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P2",
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF5a"
+    },
+    {
+      "id": "NF6a",
+      "label": "銃を向けられた後、男は水を必要としなくなった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P3",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF6a"
+    },
+    {
+      "id": "H1a",
+      "label": "バーテンダーが銃を向けたのは水の注文に怒ったからだった",
+      "_truth_value": false,
+      "negation_of": "N1a",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "H2a",
+      "label": "男が水を求めたのは喉の渇きからだった",
+      "_truth_value": false,
+      "negation_of": "N2a",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "H7a",
+      "label": "男は水を飲んだ",
+      "_truth_value": false,
+      "negation_of": "N7a",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1a",
+      "label": "この場面は芝居や演技の練習だった",
+      "_truth_value": false,
+      "negation_of": "NF1a",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "「水をください」は暗号や符丁だった",
+      "_truth_value": false,
+      "negation_of": "NF2a",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2b",
+      "label": "男は偵察や犯罪目的でバーに来た",
+      "_truth_value": false,
+      "negation_of": "NF2b",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2c",
+      "label": "男は賭けのために水を注文した",
+      "_truth_value": false,
+      "negation_of": "NF2c",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2d",
+      "label": "男とバーテンダーは顔見知りだった",
+      "_truth_value": false,
+      "negation_of": "NF2d",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5a",
+      "label": "水は口実で、男には別の目的があった",
+      "_truth_value": false,
+      "negation_of": "NF5a",
+      "formation_conditions": [
+        [
+          "P2",
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6a",
+      "label": "銃を向けられた後も男は依然として水が必要だった",
+      "_truth_value": false,
+      "negation_of": "NF6a",
+      "formation_conditions": [
+        [
+          "P3",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "バーテンダーが銃を向けたのは、水の注文に腹を立てたからですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q1b",
+      "text": "バーテンダーは男について何かに気づきましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2a",
+      "text": "男が水を求めたのは喉が渇いたからですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2b",
+      "text": "男は何かに困っていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q3a",
+      "text": "銃を向けられたことは、結果的に男にとって良いことでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "N3a"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q4a",
+      "text": "バーテンダーが気づいたのは、男が何かに困っている様子でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5a",
+      "text": "男の困りごとは、水を飲めば解決するものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6a",
+      "text": "銃を向けられたことで、男の困りごとは解消しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q7a",
+      "text": "男は最終的に水を飲みましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N7a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QU1",
+      "text": "男の困りごとは身体的なものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "NU1"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QU2",
+      "text": "男はしゃっくりに困っていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "T1"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "男とバーテンダーは芝居や演技の練習をしていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2a",
+      "text": "「水をください」は暗号や合言葉でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2b",
+      "text": "男は偵察や犯罪目的でバーに来ましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF2c",
+      "text": "男は賭けのために水を注文しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF2d",
+      "text": "男とバーテンダーは顔見知りでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2d"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF5a",
+      "text": "水は口実で、本当は別の目的がありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF6a",
+      "text": "銃を向けられた後も、男は依然として水が必要でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    }
+  ],
+  "_phase4": {
+    "chain_mapping": {
+      "C1": [
+        "Q1a",
+        "Q1b"
+      ],
+      "C2": [
+        "Q2a",
+        "Q2b",
+        "Q7a"
+      ],
+      "C3": [
+        "Q3a"
+      ],
+      "C4": [
+        "Q4a"
+      ],
+      "C5": [
+        "Q5a"
+      ],
+      "C6": [
+        "Q6a"
+      ]
+    },
+    "exploration_paths": [
+      {
+        "name": "パスA: 銃の動機から入る",
+        "sequence": "Q1a(いいえ:N1a) → Q1b(はい:P1) → Q2b(はい:P2) → Q5a(はい:P3) → Q6a(はい:P4)"
+      },
+      {
+        "name": "パスB: 水の動機から入る",
+        "sequence": "Q2a(いいえ:N2a) → Q2b(はい:P2) → Q5a(はい:P3) → Q6a(はい:P4) + Q1b(はい:P1)"
+      },
+      {
+        "name": "パスC: 感謝の矛盾から入る",
+        "sequence": "Q3a(はい:N3a) → Q1b(はい:P1) → Q4a(はい:P2) → Q5a(はい:P3) → Q6a(はい:P4)"
+      }
+    ]
+  },
+  "_phase5": {
+    "t_facts": [
+      {
+        "id": "T1",
+        "label": "男はしゃっくりが止まらなくて困っていた",
+        "deducible": false,
+        "entailment_conditions": null
+      },
+      {
+        "id": "T2",
+        "label": "水を飲めば治ると思いバーに立ち寄った",
+        "deducible": true,
+        "entailment_conditions": [
+          [
+            "P2",
+            "P3"
+          ]
+        ]
+      },
+      {
+        "id": "T3",
+        "label": "バーテンダーはしゃっくりに気づいた",
+        "deducible": false,
+        "entailment_conditions": null,
+        "note": "T1+P1で導出可能（T1確定後）"
+      },
+      {
+        "id": "T4",
+        "label": "驚かせて止めてやろうと銃を向けた",
+        "deducible": false,
+        "entailment_conditions": null,
+        "note": "T1+P4で導出可能（T1確定後）"
+      },
+      {
+        "id": "T5",
+        "label": "しゃっくりが止まった",
+        "deducible": false,
+        "entailment_conditions": null,
+        "note": "T1+P4で導出可能（T1確定後）"
+      },
+      {
+        "id": "T6",
+        "label": "水が不要になった",
+        "deducible": true,
+        "entailment_conditions": [
+          [
+            "P4"
+          ]
+        ]
+      }
+    ],
+    "c_final": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8",
+      "S9",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+    ],
+    "chain_extensions": [],
+    "unique_elements": [
+      "T1"
+    ]
+  },
+  "clear_conditions": [
+    [
+      "T1"
+    ]
+  ],
+  "_phase6": {
+    "clear_conditions": [
+      [
+        "T1"
+      ]
+    ],
+    "required_unique_elements": [
+      "T1"
+    ],
+    "chain_designs": [
+      {
+        "target": "T1",
+        "source": "C_final",
+        "chain": "P4 →[段階的絞り込み]→ NU1(身体的症状) →[段階的絞り込み]→ T1(しゃっくり)",
+        "propositions": [
+          "NU1",
+          "T1"
+        ],
+        "questions": [
+          "QU1",
+          "QU2"
+        ]
+      }
+    ],
+    "tension_resolution_check": {
+      "α": "T1(しゃっくり) + P3(水目的) → しゃっくりを水で治そうとした",
+      "β1": "T1 + P4(銃で解消) → 驚愕療法として銃を向けた",
+      "β2": "T1 + P1(察知) → しゃっくりに気づいた",
+      "γ1": "T1 + P4 → しゃっくり解消への感謝",
+      "γ2": "P4 → 理由解消 → 水不要",
+      "result": "全緊張が解消される。PASS"
+    }
+  },
+  "_phase9": {
+    "iteration": 1,
+    "chains_analyzed": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+    ],
+    "branch_analysis": [
+      {
+        "chain": "C1",
+        "step": "P1",
+        "true_proposition": "察知に基づく行為だった",
+        "parallels": [
+          {
+            "model": "M7",
+            "parallel": "脚本・演技の動作として銃を向けた"
+          },
+          {
+            "model": "M9",
+            "parallel": "定型反応として銃を向けた（察知なし）"
+          }
+        ]
+      },
+      {
+        "chain": "C2",
+        "step": "P2",
+        "true_proposition": "困りごとを抱えていた",
+        "parallels": [
+          {
+            "model": "M6",
+            "parallel": "暗号・符丁として注文した"
+          },
+          {
+            "model": "M8",
+            "parallel": "偵察の口実として注文した"
+          },
+          {
+            "model": "M10",
+            "parallel": "冗談の定型句として注文した"
+          },
+          {
+            "model": "M9",
+            "parallel": "賭けの行動として注文した"
+          },
+          {
+            "model": "M7",
+            "parallel": "脚本のセリフとして注文した"
+          }
+        ]
+      },
+      {
+        "chain": "C3",
+        "step": "N3a",
+        "true_proposition": "銃は有益な結果をもたらした",
+        "parallels": [
+          {
+            "model": "M11",
+            "parallel": "銃は脅威だったが別の理由で感謝した"
+          }
+        ]
+      },
+      {
+        "chain": "C4",
+        "step": "P2",
+        "true_proposition": "困りごとを察知した",
+        "parallels": [
+          {
+            "model": "M6",
+            "parallel": "暗号の意味を認識した"
+          },
+          {
+            "model": "M8",
+            "parallel": "不審行動を察知した"
+          },
+          {
+            "model": "M10",
+            "parallel": "常連客を認識した"
+          }
+        ]
+      },
+      {
+        "chain": "C5",
+        "step": "P3",
+        "true_proposition": "水を飲む目的だった",
+        "parallels": [
+          {
+            "model": "M5",
+            "parallel": "水は口実だった（別の目的があった）"
+          }
+        ]
+      },
+      {
+        "chain": "C6",
+        "step": "P4",
+        "true_proposition": "銃で水の理由が解消された",
+        "parallels": [
+          {
+            "model": "M11",
+            "parallel": "銃を向けられても水の理由は解消されなかった"
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "all_models": [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7",
+        "M8",
+        "M9",
+        "M10",
+        "M11"
+      ],
+      "covered": {
+        "M1-M4": "G1バリアント（棄却不可能）",
+        "M5": "C5/P3",
+        "M6": "C2/P2, C4/P2",
+        "M7": "C1/P1, C2/P2",
+        "M8": "C2/P2, C4/P2",
+        "M9": "C1/P1, C2/P2",
+        "M10": "C2/P2, C4/P2",
+        "M11": "C3/N3a, C6/P4"
+      },
+      "uncovered": "なし"
+    },
+    "nf_propositions": [
+      "NF1a",
+      "NF2a",
+      "NF2b",
+      "NF2c",
+      "NF2d",
+      "NF5a",
+      "NF6a"
+    ],
+    "qf_questions": [
+      "QF1a",
+      "QF2a",
+      "QF2b",
+      "QF2c",
+      "QF2d",
+      "QF5a",
+      "QF6a"
+    ]
+  }
+}

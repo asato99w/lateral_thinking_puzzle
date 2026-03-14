@@ -1,0 +1,573 @@
+{
+  "title": "バーの男",
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11",
+    "S12",
+    "S13",
+    "S14"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "バーテンダーが銃を向けたのは、男について何かを察知・認識したからだった",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "男は何かに困っていた（身体的・心理的な問題を抱えていた）",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "男は実際に水を飲むことを目的としていた",
+      "formation_conditions": [
+        [
+          "P2",
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "銃を向けられた結果、男が水を求めていた理由が解消された",
+      "formation_conditions": [
+        [
+          "P3",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "バーテンダーが銃を向けたのは水の注文に怒ったからではない",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "H1a"
+    },
+    {
+      "id": "N2a",
+      "label": "男が水を求めたのは喉の渇きからではない",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "H2a"
+    },
+    {
+      "id": "N3a",
+      "label": "銃を向けられたことは男にとって有益な結果をもたらした",
+      "formation_conditions": [
+        [
+          "S5",
+          "S6"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N7a",
+      "label": "男は水を飲まなかった",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "H7a"
+    },
+    {
+      "id": "NU1",
+      "label": "男の困りごとは身体的な症状だった",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "T1",
+      "label": "男はしゃっくりが止まらなくて困っていた",
+      "formation_conditions": [
+        [
+          "NU1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "この場面は芝居や演技の練習ではない",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF1a"
+    },
+    {
+      "id": "NF2a",
+      "label": "「水をください」は暗号や符丁ではない",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF2a"
+    },
+    {
+      "id": "NF2b",
+      "label": "男は偵察や犯罪目的でバーに来たのではない",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF2b"
+    },
+    {
+      "id": "NF2c",
+      "label": "男は賭けのために水を注文したのではない",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF2c"
+    },
+    {
+      "id": "NF2d",
+      "label": "男とバーテンダーは顔見知りではない",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF2d"
+    },
+    {
+      "id": "NF5a",
+      "label": "水は口実ではなく、男は実際に水を必要としていた",
+      "formation_conditions": [
+        [
+          "P2",
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF5a"
+    },
+    {
+      "id": "NF6a",
+      "label": "銃を向けられた後、男は水を必要としなくなった",
+      "formation_conditions": [
+        [
+          "P3",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null,
+      "negation_of": "HF6a"
+    },
+    {
+      "id": "H1a",
+      "label": "バーテンダーが銃を向けたのは水の注文に怒ったからだった",
+      "negation_of": "N1a",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "H2a",
+      "label": "男が水を求めたのは喉の渇きからだった",
+      "negation_of": "N2a",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "H7a",
+      "label": "男は水を飲んだ",
+      "negation_of": "N7a",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1a",
+      "label": "この場面は芝居や演技の練習だった",
+      "negation_of": "NF1a",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "「水をください」は暗号や符丁だった",
+      "negation_of": "NF2a",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2b",
+      "label": "男は偵察や犯罪目的でバーに来た",
+      "negation_of": "NF2b",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2c",
+      "label": "男は賭けのために水を注文した",
+      "negation_of": "NF2c",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2d",
+      "label": "男とバーテンダーは顔見知りだった",
+      "negation_of": "NF2d",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5a",
+      "label": "水は口実で、男には別の目的があった",
+      "negation_of": "NF5a",
+      "formation_conditions": [
+        [
+          "P2",
+          "S10"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6a",
+      "label": "銃を向けられた後も男は依然として水が必要だった",
+      "negation_of": "NF6a",
+      "formation_conditions": [
+        [
+          "P3",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "バーテンダーが銃を向けたのは、水の注文に腹を立てたからですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q1b",
+      "text": "バーテンダーは男について何かに気づきましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2a",
+      "text": "男が水を求めたのは喉が渇いたからですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2b",
+      "text": "男は何かに困っていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q3a",
+      "text": "銃を向けられたことは、結果的に男にとって良いことでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "N3a"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q4a",
+      "text": "バーテンダーが気づいたのは、男が何かに困っている様子でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5a",
+      "text": "男の困りごとは、水を飲めば解決するものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6a",
+      "text": "銃を向けられたことで、男の困りごとは解消しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q7a",
+      "text": "男は最終的に水を飲みましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N7a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QU1",
+      "text": "男の困りごとは身体的なものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "NU1"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QU2",
+      "text": "男はしゃっくりに困っていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "T1"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "男とバーテンダーは芝居や演技の練習をしていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2a",
+      "text": "「水をください」は暗号や合言葉でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2b",
+      "text": "男は偵察や犯罪目的でバーに来ましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF2c",
+      "text": "男は賭けのために水を注文しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF2d",
+      "text": "男とバーテンダーは顔見知りでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2d"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF5a",
+      "text": "水は口実で、本当は別の目的がありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF6a",
+      "text": "銃を向けられた後も、男は依然として水が必要でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    }
+  ],
+  "clear_conditions": [
+    [
+      "T1"
+    ]
+  ],
+  "statement": "ある男がバーに入り、バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた。男は「ありがとう」と言って帰った。なぜだろう？",
+  "truth": "男はしゃっくりが止まらなくて困っていた。水を飲めば治ると思いバーに立ち寄ったが、バーテンダーはしゃっくりに気づき、驚かせて止めてやろうと銃を向けた。しゃっくりが止まった男は水が不要になり、「ありがとう」と言って帰った。",
+  "id": "バーの男"
+}

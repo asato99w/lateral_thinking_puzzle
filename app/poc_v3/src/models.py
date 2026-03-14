@@ -9,6 +9,7 @@ from dataclasses import dataclass, field
 class Proposition:
     id: str
     label: str
+    negation_of: str | None = None  # 否定関係: 対称的（P.negation_of=Q ⇔ Q.negation_of=P）
     formation_conditions: list[list[str]] | None = None  # 仮説導出: confirmed → derived（1回パス）
     entailment_conditions: list[list[str]] | None = None  # 論理的導出: confirmed → confirmed（不動点計算）
     rejection_conditions: list[list[str]] | None = None  # confirmed により棄却される条件
@@ -26,7 +27,7 @@ class Piece:
 
 @dataclass
 class Question:
-    """質問。想起条件は reveals される命題の formation_conditions から導出される"""
+    """質問。reveals のみで形式化される"""
 
     id: str
     text: str
