@@ -152,10 +152,13 @@ def evaluate_hypotheses(state: GameState, puzzle: PuzzleData) -> tuple[list[str]
 
 
 def _check_conditions(conditions: list[list[str]], state: GameState) -> bool:
-    """OR of AND の条件判定: いずれかの条件セットが全て known（confirmed ∪ derived）であれば True。"""
-    known = state.known
+    """OR of AND の条件判定: いずれかの条件セットが全て confirmed であれば True。
+
+    v3 では confirmed のみで判定する。derived に入った命題を利用して
+    質問を飛ばせる問題（可視化と実態の不一致）を防ぐ。
+    """
     return any(
-        all(c in known for c in condition_set)
+        all(c in state.confirmed for c in condition_set)
         for condition_set in conditions
     )
 
@@ -182,7 +185,7 @@ def available_questions(state: GameState, puzzle: PuzzleData) -> list[Question]:
     """利用可能な質問を返す: 前提条件が満たされ、reveals 先の命題が形成可能で、未回答のもの
 
     - 前提条件（prerequisites）: confirmed のみで判定。対話上で確立された事実。
-    - 形成条件: reveals 先の命題の formation_conditions を known（confirmed ∪ derived）で判定。
+    - 形成条件: reveals 先の命題の formation_conditions を confirmed のみで判定。
     """
     result = []
     for q in puzzle.questions.values():

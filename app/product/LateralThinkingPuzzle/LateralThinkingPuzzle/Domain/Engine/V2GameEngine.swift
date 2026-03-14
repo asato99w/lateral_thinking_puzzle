@@ -8,13 +8,15 @@ enum DerivationMode: Sendable {
 struct V2Descriptor: Equatable, Sendable {
     let id: String
     let label: String
+    let negationOf: String?  // v3: 否定関係（対称的）
     let formationConditions: [[String]]?  // nil = 基礎記述素
     let entailmentConditions: [[String]]?  // v3: 論理的導出（confirmed → confirmed）
     let rejectionConditions: [[String]]?  // confirmed により棄却される条件
 
-    init(id: String, label: String, formationConditions: [[String]]?, entailmentConditions: [[String]]? = nil, rejectionConditions: [[String]]? = nil) {
+    init(id: String, label: String, negationOf: String? = nil, formationConditions: [[String]]?, entailmentConditions: [[String]]? = nil, rejectionConditions: [[String]]? = nil) {
         self.id = id
         self.label = label
+        self.negationOf = negationOf
         self.formationConditions = formationConditions
         self.entailmentConditions = entailmentConditions
         self.rejectionConditions = rejectionConditions

@@ -14,12 +14,21 @@ struct V2GameSession: GameSession {
 
     init(puzzle: V2PuzzleData) {
         self.puzzle = puzzle
-        self.state = V2GameEngine.initGame(puzzle: puzzle)
+        switch puzzle.derivationMode {
+        case .v2:
+            self.state = V2GameEngine.initGame(puzzle: puzzle)
+        case .v3:
+            self.state = V3GameEngine.initGame(puzzle: puzzle)
+        }
         self.questionMap = puzzle.questions
     }
 
     mutating func start() -> GameSessionStartResult {
-        let available = V2GameEngine.availableQuestions(state: state, puzzle: puzzle)
+        let available: [V2Question]
+        switch puzzle.derivationMode {
+        case .v2: available = V2GameEngine.availableQuestions(state: state, puzzle: puzzle)
+        case .v3: available = V3GameEngine.availableQuestions(state: state, puzzle: puzzle)
+        }
         let questions = available.map { mapToQuestion($0) }
         return GameSessionStartResult(openQuestions: questions)
     }
@@ -29,15 +38,25 @@ struct V2GameSession: GameSession {
             return GameSessionUpdateResult(openQuestions: [], isCleared: true, newQuestionIDs: [])
         }
 
-        let previousOpenIDs = Set(V2GameEngine.availableQuestions(state: state, puzzle: puzzle).map(\.id))
-        _ = V2GameEngine.answerQuestion(state: &state, question: v2q, puzzle: puzzle)
+        let previousOpenIDs: Set<String>
+        let available: [V2Question]
+        let isCleared: Bool
 
-        let available = V2GameEngine.availableQuestions(state: state, puzzle: puzzle)
+        switch puzzle.derivationMode {
+        case .v2:
+            previousOpenIDs = Set(V2GameEngine.availableQuestions(state: state, puzzle: puzzle).map(\.id))
+            _ = V2GameEngine.answerQuestion(state: &state, question: v2q, puzzle: puzzle)
+            available = V2GameEngine.availableQuestions(state: state, puzzle: puzzle)
+            isCleared = V2GameEngine.checkComplete(state: state, puzzle: puzzle)
+        case .v3:
+            previousOpenIDs = Set(V3GameEngine.availableQuestions(state: state, puzzle: puzzle).map(\.id))
+            _ = V3GameEngine.answerQuestion(state: &state, question: v2q, puzzle: puzzle)
+            available = V3GameEngine.availableQuestions(state: state, puzzle: puzzle)
+            isCleared = V3GameEngine.checkComplete(state: state, puzzle: puzzle)
+        }
+
         let openQuestions = available.map { mapToQuestion($0) }
-
         let newIDs = Set(openQuestions.map(\.id)).subtracting(previousOpenIDs)
-
-        let isCleared = V2GameEngine.checkComplete(state: state, puzzle: puzzle)
 
         return GameSessionUpdateResult(
             openQuestions: openQuestions,

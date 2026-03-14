@@ -3,12 +3,14 @@ import Foundation
 struct V2DescriptorDTO: Codable {
     let id: String
     let label: String
+    let negationOf: String?
     let formationConditions: [[String]]?
     let entailmentConditions: [[String]]?
     let rejectionConditions: [[String]]?
 
     enum CodingKeys: String, CodingKey {
         case id, label
+        case negationOf = "negation_of"
         case formationConditions = "formation_conditions"
         case entailmentConditions = "entailment_conditions"
         case rejectionConditions = "rejection_conditions"
@@ -93,7 +95,7 @@ struct V2PuzzleDataDTO: Codable {
 
     func toDomain(derivationMode: DerivationMode = .v2) -> V2PuzzleData {
         let descriptorsMap = Dictionary(uniqueKeysWithValues: descriptors.map {
-            ($0.id, V2Descriptor(id: $0.id, label: $0.label, formationConditions: $0.formationConditions, entailmentConditions: $0.entailmentConditions, rejectionConditions: $0.rejectionConditions))
+            ($0.id, V2Descriptor(id: $0.id, label: $0.label, negationOf: $0.negationOf, formationConditions: $0.formationConditions, entailmentConditions: $0.entailmentConditions, rejectionConditions: $0.rejectionConditions))
         })
 
         let piecesMap = Dictionary(uniqueKeysWithValues: pieces.map {
