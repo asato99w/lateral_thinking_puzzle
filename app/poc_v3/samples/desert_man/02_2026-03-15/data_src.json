@@ -1,0 +1,756 @@
+{
+  "title": "砂漠の男",
+  "S": "砂漠の真ん中で裸の男が死んでいた。手には折れたマッチ棒を握りしめている。",
+  "T": "男は数人で熱気球に乗っていたが、高度が下がり始めた。荷物を全て捨て、服も脱いで軽量化したが足りず、くじ引き（マッチの長さ）で一人が飛び降りることになった。短いマッチを引いた男が飛び降りて死亡した。",
+  "_phase1": {
+    "tensions": [
+      {"id": "α1", "label": "砂漠の真ん中という到達困難な場所にいる（到達手段・理由が不明）", "parent": "α"},
+      {"id": "α2", "label": "死亡している（死因が不明）", "parent": "α"},
+      {"id": "β", "label": "砂漠で裸であること（砂漠環境では衣服による保護が必要であり、裸は非合理的）", "parent": null},
+      {"id": "γ1", "label": "マッチ棒が折れている（通常の使用法である火をつける行為とは異なる状態）", "parent": "γ"},
+      {"id": "γ2", "label": "マッチ棒を握りしめている（死の直前まで手放さなかったことは、マッチ棒に特別な意味があることを示唆）", "parent": "γ"}
+    ],
+    "models": [
+      {
+        "id": "T",
+        "label": "熱気球からの転落",
+        "summary": "熱気球の高度低下で軽量化のため服も脱いだが不十分で、マッチの長さによるくじ引きで負けた男が飛び降りて死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M1",
+        "label": "砂漠の賭博場での敗北",
+        "summary": "砂漠の賭博場で全財産と服を賭けて失い、最後のマッチの長さの賭けにも負け、裸で砂漠に追放されて死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M2",
+        "label": "犯罪組織による砂漠放置",
+        "summary": "犯罪組織に裸にされて砂漠の真ん中に放置された。唯一渡されたマッチで火を起こそうとしたが折れ、脱水で死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M3",
+        "label": "車両故障による砂漠遭難",
+        "summary": "砂漠で車が故障し遭難。暑さの錯乱で服を脱ぎ、最後のマッチで狼煙を上げようとしたが折れ、脱水で死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M4",
+        "label": "宗教的砂漠苦行",
+        "summary": "宗教的修行として裸で砂漠を横断する苦行中、信仰の象徴として持っていたマッチが折れたが握りしめ続け、脱水で死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M5",
+        "label": "砂漠での決闘",
+        "summary": "砂漠で決闘するため公平性確保のために裸になり、マッチの長さで先攻を決めた後、負けて死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M6",
+        "label": "サバイバルゲーム参加",
+        "summary": "砂漠でのサバイバルゲームにルールとして裸で参加。支給されたマッチ1本で火を起こそうとしたが折れ、脱水で死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M7",
+        "label": "小型飛行機の不時着",
+        "summary": "小型飛行機が砂漠に不時着し衝撃で衣服が破損。生存者同士でマッチのくじ引きにより助けを呼ぶ役を決め、出発した男が途中で死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M8",
+        "label": "難民の砂漠横断",
+        "summary": "砂漠を徒歩で横断中の難民グループが水を使い果たし、暑さで服を脱いだ。マッチのくじ引きで水を探す役を決め、出発した男が途中で死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M9",
+        "label": "探検隊の遭難",
+        "summary": "砂漠探検隊が遭難し、砂嵐で衣服が飛ばされた。マッチのくじ引きで偵察役を決め、出発した男が途中で死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M10",
+        "label": "軍事捕虜の砂漠放置",
+        "summary": "軍事捕虜として裸で砂漠に放置された。マッチ1本だけ渡され、火を起こそうとしたが折れ、脱水で死亡した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M11",
+        "label": "脱獄犯の砂漠逃走",
+        "summary": "砂漠近くの刑務所から脱獄し、追跡回避のため囚人服を捨てた。マッチで火を起こそうとしたが折れ、砂漠で脱水死した。",
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M12",
+        "label": "砂漠の放浪者",
+        "summary": "ホームレスの男が砂漠をさまよい、暑さで服を脱いで脱水死した。マッチは喫煙用の偶然の所持品。",
+        "tension_subset": ["α1", "α2", "β"]
+      }
+    ],
+    "relaxation_patterns": {
+      "T": {
+        "α1": "空路（熱気球）による砂漠上空からの到達",
+        "α2": "飛び降りによる落下死",
+        "β": "緊急時の自発的軽量化（生存目的で自ら脱衣）",
+        "γ1": "くじ引き手段として折った（長さの比較）",
+        "γ2": "運命を決定した結果の象徴"
+      },
+      "M1": {
+        "α1": "賭博の敗北による追放",
+        "α2": "追放後の脱水死",
+        "β": "賭けの敗北で服を喪失",
+        "γ1": "くじ引き手段として折った（長さの比較）",
+        "γ2": "運命を決定した結果の象徴"
+      },
+      "M2": {
+        "α1": "他者による強制的連行・放置",
+        "α2": "放置後の脱水死",
+        "β": "罰・屈辱としての強制的脱衣",
+        "γ1": "火を起こそうとして折れた",
+        "γ2": "最後の希望としての執着"
+      },
+      "M3": {
+        "α1": "車両故障による遭難",
+        "α2": "遭難後の脱水死",
+        "β": "暑さによる錯乱的脱衣",
+        "γ1": "火を起こそうとして折れた（狼煙）",
+        "γ2": "最後の希望としての執着"
+      },
+      "M4": {
+        "α1": "修行としての自発的入砂漠",
+        "α2": "苦行中の脱水死",
+        "β": "修行規則としての脱衣",
+        "γ1": "象徴的行為として折った",
+        "γ2": "精神的支柱としての執着"
+      },
+      "M5": {
+        "α1": "決闘場所としての合意的選択",
+        "α2": "決闘による死",
+        "β": "公平性確保のための脱衣",
+        "γ1": "くじ引き手段として折った（長さの比較）",
+        "γ2": "運命を決定した結果の象徴"
+      },
+      "M6": {
+        "α1": "ゲーム参加による自発的入砂漠",
+        "α2": "ゲーム中の脱水死",
+        "β": "ゲーム規則としての脱衣",
+        "γ1": "火を起こそうとして折れた",
+        "γ2": "最後の希望としての執着"
+      },
+      "M7": {
+        "α1": "空路（飛行機）による砂漠到達",
+        "α2": "不時着後の脱水死",
+        "β": "衝撃・事故による衣服損壊",
+        "γ1": "くじ引き手段として折った（長さの比較）",
+        "γ2": "運命を決定した結果の象徴"
+      },
+      "M8": {
+        "α1": "徒歩での砂漠横断中",
+        "α2": "横断中の脱水死",
+        "β": "暑さによる自発的脱衣",
+        "γ1": "くじ引き手段として折った（長さの比較）",
+        "γ2": "運命を決定した結果の象徴"
+      },
+      "M9": {
+        "α1": "探検中の遭難",
+        "α2": "遭難後の脱水死",
+        "β": "砂嵐による衣服喪失",
+        "γ1": "くじ引き手段として折った（長さの比較）",
+        "γ2": "運命を決定した結果の象徴"
+      },
+      "M10": {
+        "α1": "他者による強制的連行・放置",
+        "α2": "放置後の脱水死",
+        "β": "捕虜としての強制的脱衣",
+        "γ1": "火を起こそうとして折れた",
+        "γ2": "最後の希望としての執着"
+      },
+      "M11": {
+        "α1": "脱獄後の逃走",
+        "α2": "逃走中の脱水死",
+        "β": "追跡回避のための自発的脱衣",
+        "γ1": "火を起こそうとして折れた",
+        "γ2": "最後の希望としての執着"
+      },
+      "M12": {
+        "α1": "放浪による砂漠への到達",
+        "α2": "放浪中の脱水死",
+        "β": "暑さによる脱衣",
+        "γ1": "-",
+        "γ2": "-"
+      }
+    },
+    "variant_groups": [
+      {
+        "group_id": "G1",
+        "label": "他者による強制的砂漠放置と火起こしの失敗",
+        "representative": "M2",
+        "members": ["M2", "M10"],
+        "shared_pattern": {
+          "α1": "他者による強制的連行・放置",
+          "α2": "放置後の脱水死",
+          "β": "他者による強制的脱衣",
+          "γ1": "火を起こそうとして折れた",
+          "γ2": "最後の希望としての執着"
+        }
+      }
+    ],
+    "abstract_models": [
+      {
+        "id": "T",
+        "label": "熱気球からの転落",
+        "members": ["T"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M1",
+        "label": "砂漠の賭博場での敗北",
+        "members": ["M1"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "G1",
+        "label": "他者による強制的砂漠放置と火起こしの失敗",
+        "representative": "M2",
+        "members": ["M2", "M10"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M3",
+        "label": "車両故障による砂漠遭難",
+        "members": ["M3"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M4",
+        "label": "宗教的砂漠苦行",
+        "members": ["M4"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M5",
+        "label": "砂漠での決闘",
+        "members": ["M5"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M6",
+        "label": "サバイバルゲーム参加",
+        "members": ["M6"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M7",
+        "label": "小型飛行機の不時着",
+        "members": ["M7"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M8",
+        "label": "難民の砂漠横断",
+        "members": ["M8"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M9",
+        "label": "探検隊の遭難",
+        "members": ["M9"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M11",
+        "label": "脱獄犯の砂漠逃走",
+        "members": ["M11"],
+        "tension_subset": ["α1", "α2", "β", "γ1", "γ2"]
+      },
+      {
+        "id": "M12",
+        "label": "砂漠の放浪者",
+        "members": ["M12"],
+        "tension_subset": ["α1", "α2", "β"]
+      }
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "T": [
+        "男は数人で熱気球に乗っていた",
+        "熱気球の高度が下がり始めた",
+        "搭乗者たちは軽量化のため荷物を全て捨てた",
+        "搭乗者たちは軽量化のため服も脱いだ",
+        "軽量化しても高度低下が止まらなかった",
+        "くじ引き（マッチの長さ）で一人が飛び降りることになった",
+        "男は短いマッチを引いた",
+        "男は熱気球から飛び降りて死亡した"
+      ],
+      "M1": [
+        "男は砂漠の賭博場で賭けをしていた",
+        "男は全財産を賭けて失った",
+        "男は衣服まで賭けて失った",
+        "最後にマッチの長さで賭けをした",
+        "男は短いマッチを引いて負けた",
+        "男は裸で砂漠に追放された",
+        "男は脱水で死亡した"
+      ],
+      "G1": [
+        "男は犯罪組織または軍に捕まった",
+        "男は裸にされた",
+        "男は砂漠の真ん中に放置された",
+        "マッチ1本だけ渡された",
+        "男はマッチで火を起こそうとしたが折れた",
+        "男は脱水で死亡した"
+      ],
+      "M3": [
+        "男は砂漠を車で移動中だった",
+        "車が故障して動かなくなった",
+        "暑さによる錯乱状態で服を脱いだ",
+        "マッチで狼煙を上げようとしたが折れた",
+        "男は脱水で死亡した"
+      ],
+      "M4": [
+        "男は宗教的修行者だった",
+        "修行の規則として裸で砂漠を横断した",
+        "マッチを信仰の象徴として持っていた",
+        "マッチが折れたが握りしめ続けた",
+        "男は苦行中に脱水で死亡した"
+      ],
+      "M5": [
+        "男はある人物と砂漠で決闘することになった",
+        "公平性のため裸になった",
+        "マッチの長さで先攻を決めた",
+        "男は短いマッチを引いた",
+        "決闘で負けて死亡した"
+      ],
+      "M6": [
+        "男はサバイバルゲームに参加した",
+        "ルールとして裸で砂漠に放置された",
+        "マッチ1本のみ支給された",
+        "マッチで火を起こそうとしたが折れた",
+        "男は脱水で死亡した"
+      ],
+      "M7": [
+        "男は小型飛行機の乗客だった",
+        "飛行機が砂漠に不時着した",
+        "衝撃で衣服が破損した",
+        "生存者同士でマッチくじ引きで助けを呼ぶ役を決めた",
+        "男は短いマッチを引いた",
+        "救助を求めて出発したが途中で脱水死した"
+      ],
+      "M8": [
+        "男は難民グループの一員だった",
+        "砂漠を徒歩で横断中だった",
+        "水が尽きた",
+        "暑さで服を脱いだ",
+        "マッチくじ引きで水を探す役を決めた",
+        "男は短いマッチを引いて出発し脱水死した"
+      ],
+      "M9": [
+        "男は砂漠探検隊の一員だった",
+        "探検中に遭難した",
+        "砂嵐で衣服が飛ばされた",
+        "マッチくじ引きで偵察役を決めた",
+        "男は短いマッチを引いて出発し脱水死した"
+      ],
+      "M11": [
+        "男は砂漠近くの刑務所に収監されていた",
+        "脱獄に成功した",
+        "追跡回避のため囚人服を捨てた",
+        "マッチで火を起こそうとしたが折れた",
+        "砂漠で脱水死した"
+      ],
+      "M12": [
+        "男はホームレスだった",
+        "砂漠をさまよっていた",
+        "暑さで服を脱いだ",
+        "マッチは喫煙用の偶然の所持品だった",
+        "脱水で死亡した"
+      ]
+    },
+    "division_propositions": [
+      {
+        "id": "P1",
+        "label": "男は乗り物に乗っていた",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M3", "M7"],
+        "false_models": ["M1", "G1", "M4", "M5", "M6", "M8", "M9", "M11", "M12"]
+      },
+      {
+        "id": "P2",
+        "label": "男は空中にいた",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M7"],
+        "false_models": ["M1", "G1", "M3", "M4", "M5", "M6", "M8", "M9", "M11", "M12"]
+      },
+      {
+        "id": "P3",
+        "label": "マッチ棒は物事を決めるために使われた",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M1", "M5", "M7", "M8", "M9"],
+        "false_models": ["G1", "M3", "M4", "M6", "M11", "M12"]
+      },
+      {
+        "id": "P4",
+        "label": "男は複数人のグループの中にいた",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M1", "G1", "M5", "M6", "M7", "M8", "M9"],
+        "false_models": ["M3", "M4", "M11", "M12"]
+      },
+      {
+        "id": "P5",
+        "label": "グループの中で誰かが命を落とす決定がなされた",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M5"],
+        "false_models": ["M1", "G1", "M3", "M4", "M6", "M7", "M8", "M9", "M11", "M12"]
+      },
+      {
+        "id": "P6",
+        "label": "乗り物の重量を減らす必要があった",
+        "truth_value_in_T": true,
+        "true_models": ["T"],
+        "false_models": ["M1", "G1", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M11", "M12"]
+      }
+    ],
+    "derivation_graph": {
+      "single_derivations": [
+        {"from": "P2", "to": "P1", "reason": "空中にいた → 乗り物に乗っていた"},
+        {"from": "P3", "to": "P4", "reason": "くじ引きには複数人が必要 → グループにいた"},
+        {"from": "P5", "to": "P4", "reason": "誰かが命を落とす決定にはグループが必要 → グループにいた"},
+        {"from": "P6", "to": "P1", "reason": "乗り物の重量を減らす → 乗り物に乗っていた"}
+      ],
+      "combination_derivations": [],
+      "independent_axes": ["P2", "P3", "P5", "P6"],
+      "root_propositions": ["P1", "P4"]
+    },
+    "provisional_fc": {
+      "P2": [["P1"]],
+      "P3": [["P4"]],
+      "P5": [["P4"]],
+      "P6": [["P1"]]
+    }
+  },
+  "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10"],
+  "_phase3": {
+    "s_propositions": [
+      {"id": "S1", "label": "男がいた", "type": "atomic"},
+      {"id": "S2", "label": "男は砂漠の真ん中にいた", "type": "atomic"},
+      {"id": "S3", "label": "男は裸だった", "type": "atomic"},
+      {"id": "S4", "label": "男は死んでいた", "type": "atomic"},
+      {"id": "S5", "label": "マッチ棒は折れていた", "type": "atomic"},
+      {"id": "S6", "label": "男はマッチ棒を握りしめていた", "type": "atomic"},
+      {"id": "S7", "label": "砂漠があった", "type": "derived", "derived_from": ["S2"]},
+      {"id": "S8", "label": "男はマッチ棒を持っていた", "type": "derived", "derived_from": ["S6"]},
+      {"id": "S9", "label": "マッチ棒があった", "type": "derived", "derived_from": ["S6"]},
+      {"id": "S10", "label": "男は死ぬまでマッチ棒を手放さなかった", "type": "derived", "derived_from": ["S4", "S6"]}
+    ],
+    "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10"],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_root",
+        "source": ["S2", "S4"],
+        "target": "P1",
+        "intermediates": ["I1"],
+        "tactic": "常識的仮説の排除 > 手段の探索 → 段階的絞り込み",
+        "description": "S2+S4 →[常識的仮説の排除 > 手段の探索]→ I1(男は自力でこの場所に来たのではない) →[段階的絞り込み]→ P1"
+      },
+      {
+        "id": "C2",
+        "type": "S_to_root",
+        "source": ["S2", "S3", "S4"],
+        "target": "P4",
+        "intermediates": ["I2", "I3"],
+        "tactic": "因果の逆転 → 登場人物の探索 → 段階的絞り込み",
+        "description": "S2+S3+S4 →[因果の逆転]→ I2(男がこの状態になった経緯に何らかの出来事があった) →[登場人物の探索]→ I3(その出来事に男以外の人物が関わっていた) →[段階的絞り込み]→ P4"
+      },
+      {
+        "id": "C3",
+        "type": "toward_concrete",
+        "source": ["P1"],
+        "target": "P2",
+        "intermediates": ["I4"],
+        "tactic": "段階的絞り込み → 段階的絞り込み",
+        "description": "P1 →[段階的絞り込み]→ I4(乗り物は地上のものではなかった) →[段階的絞り込み]→ P2",
+        "fc_source": "P1 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C4",
+        "type": "toward_concrete",
+        "source": ["P4", "S5"],
+        "target": "P3",
+        "intermediates": ["I5"],
+        "tactic": "観測事実の深掘り → 段階的絞り込み",
+        "description": "P4+S5 →[観測事実の深掘り]→ I5(マッチ棒はグループの中で何かの目的に使われた) →[段階的絞り込み]→ P3",
+        "fc_source": "P4 は連鎖 C2 の reveals"
+      },
+      {
+        "id": "C5",
+        "type": "toward_concrete",
+        "source": ["P4", "S4"],
+        "target": "P5",
+        "intermediates": ["I6", "I7"],
+        "tactic": "因果の逆転 → 動機の探索 → 段階的絞り込み",
+        "description": "P4+S4 →[因果の逆転]→ I6(グループに危機的な状況があった) →[動機の探索]→ I7(危機を解決するために誰かが行動する必要があった) →[段階的絞り込み]→ P5",
+        "fc_source": "P4 は連鎖 C2 の reveals"
+      },
+      {
+        "id": "C6",
+        "type": "toward_concrete",
+        "source": ["P1", "S3"],
+        "target": "P6",
+        "intermediates": ["I8", "I9"],
+        "tactic": "因果の逆転 → 動機の探索 → 段階的絞り込み",
+        "description": "P1+S3 →[因果の逆転]→ I8(男が裸なのは乗り物に関連する理由がある) →[動機の探索]→ I9(乗り物の問題を解決するために服を脱ぐ必要があった) →[段階的絞り込み]→ P6",
+        "fc_source": "P1 は連鎖 C1 の reveals"
+      }
+    ],
+    "confirmed_fc": {
+      "P1": [["S2", "S4"]],
+      "P2": [["P1"]],
+      "P3": [["P4", "S5"]],
+      "P4": [["S2", "S3", "S4"]],
+      "P5": [["P4", "S4"]],
+      "P6": [["P1", "S3"]]
+    },
+    "generated_intermediates": ["I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9"]
+  },
+  "propositions": [
+    {"id": "P1", "label": "男は乗り物に乗っていた", "_truth_value": true, "formation_conditions": [["S2", "S4"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "P2", "label": "男は空中にいた", "_truth_value": true, "formation_conditions": [["P1"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "P3", "label": "マッチ棒は物事を決めるために使われた", "_truth_value": true, "formation_conditions": [["P4", "S5"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "P4", "label": "男は複数人のグループの中にいた", "_truth_value": true, "formation_conditions": [["S2", "S3", "S4"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "P5", "label": "グループの中で誰かが命を落とす決定がなされた", "_truth_value": true, "formation_conditions": [["P4", "S4"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "P6", "label": "乗り物の重量を減らす必要があった", "_truth_value": true, "formation_conditions": [["P1", "S3"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "N1a", "label": "男は自分の力でこの場所に来たのではない", "_truth_value": true, "negation_of": "H1a", "formation_conditions": [["S2", "S4"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "H1a", "label": "男は自分の力でこの場所に来た", "_truth_value": false, "negation_of": "N1a", "formation_conditions": [["S2"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "I2", "label": "男は何かのトラブルに巻き込まれた", "_truth_value": true, "formation_conditions": [["S2", "S3", "S4"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "I3", "label": "トラブルに男以外の人物が関わっていた", "_truth_value": true, "formation_conditions": [["I2"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "N3a", "label": "乗り物は地上を走るものではなかった", "_truth_value": true, "negation_of": "H3a", "formation_conditions": [["P1"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "H3a", "label": "乗り物は地上を走るものだった", "_truth_value": false, "negation_of": "N3a", "formation_conditions": [["P1"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "I5", "label": "マッチ棒はグループの中で何かの目的に使われた", "_truth_value": true, "formation_conditions": [["P4", "S5"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "I6", "label": "グループに危機的な状況があった", "_truth_value": true, "formation_conditions": [["P4", "S4"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "I7", "label": "危機を解決するために誰かが行動する必要があった", "_truth_value": true, "formation_conditions": [["I6"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "I8", "label": "男が裸なのは乗り物に関連する理由がある", "_truth_value": true, "formation_conditions": [["P1", "S3"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "I9", "label": "乗り物の問題を解決するために服を脱ぐ必要があった", "_truth_value": true, "formation_conditions": [["I8"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "NT1", "label": "男は乗り物から飛び降りた", "_truth_value": true, "formation_conditions": [["P2", "P5"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "NU1", "label": "乗り物は飛行機ではなかった", "_truth_value": true, "negation_of": "HU1", "formation_conditions": [["P2"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "HU1", "label": "乗り物は飛行機だった", "_truth_value": false, "negation_of": "NU1", "formation_conditions": [["P2"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "NU2", "label": "乗り物は熱気球だった", "_truth_value": true, "formation_conditions": [["P2"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "NF1", "label": "男は他者に連れてこられたのではない", "_truth_value": true, "negation_of": "HF1", "formation_conditions": [["S2", "S4"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "HF1", "label": "男は他者に連れてこられた", "_truth_value": false, "negation_of": "NF1", "formation_conditions": [["S2", "S4"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "NF2", "label": "男の行動は自発的なものではなかった", "_truth_value": true, "negation_of": "HF2", "formation_conditions": [["S2", "S3", "S4"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "HF2", "label": "男はこの状態に自ら望んでなった", "_truth_value": false, "negation_of": "NF2", "formation_conditions": [["S2", "S3", "S4"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "NF7", "label": "マッチ棒は火をつけるためには使われなかった", "_truth_value": true, "negation_of": "HF7", "formation_conditions": [["S5"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "HF7", "label": "マッチ棒は火をつけるために使われた", "_truth_value": false, "negation_of": "NF7", "formation_conditions": [["S5"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "NF9", "label": "選ばれた人に生存の見込みはなかった", "_truth_value": true, "negation_of": "HF9", "formation_conditions": [["P5"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "HF9", "label": "選ばれた人には生存の見込みがあった", "_truth_value": false, "negation_of": "NF9", "formation_conditions": [["P5"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "NF11", "label": "服は意図的に脱がれたものである", "_truth_value": true, "negation_of": "HF11", "formation_conditions": [["S3"]], "entailment_conditions": null, "rejection_conditions": null},
+    {"id": "HF11", "label": "服は事故や自然現象で失われた", "_truth_value": false, "negation_of": "NF11", "formation_conditions": [["S3"]], "entailment_conditions": null, "rejection_conditions": null}
+  ],
+  "questions": [
+    {"id": "Q1a", "text": "男は自分の力でこの場所に来ましたか？", "answer": "いいえ", "reveals": ["N1a"], "mechanism": "observation", "prerequisites": []},
+    {"id": "Q1b", "text": "男は何かの乗り物に乗っていましたか？", "answer": "はい", "reveals": ["P1"], "mechanism": "observation", "prerequisites": []},
+    {"id": "Q2a", "text": "男は何かのトラブルに巻き込まれましたか？", "answer": "はい", "reveals": ["I2"], "mechanism": "observation", "prerequisites": []},
+    {"id": "Q2b", "text": "そのトラブルに男以外の人物が関わっていましたか？", "answer": "はい", "reveals": ["I3"], "mechanism": "observation", "prerequisites": ["I2"]},
+    {"id": "Q2c", "text": "男は複数人のグループの中にいましたか？", "answer": "はい", "reveals": ["P4"], "mechanism": "observation", "prerequisites": []},
+    {"id": "Q3a", "text": "その乗り物は地上を走るものでしたか？", "answer": "いいえ", "reveals": ["N3a"], "mechanism": "observation", "prerequisites": ["P1"]},
+    {"id": "Q3b", "text": "男は空中にいましたか？", "answer": "はい", "reveals": ["P2"], "mechanism": "observation", "prerequisites": []},
+    {"id": "Q4a", "text": "マッチ棒はグループの中で使われましたか？", "answer": "はい", "reveals": ["I5"], "mechanism": "link", "prerequisites": ["P4"]},
+    {"id": "Q4b", "text": "マッチ棒は何かを決めるために使われましたか？", "answer": "はい", "reveals": ["P3"], "mechanism": "observation", "prerequisites": []},
+    {"id": "Q5a", "text": "グループに何か危機的な状況がありましたか？", "answer": "はい", "reveals": ["I6"], "mechanism": "observation", "prerequisites": ["P4"]},
+    {"id": "Q5b", "text": "その危機で誰かが何かの行動をとる必要がありましたか？", "answer": "はい", "reveals": ["I7"], "mechanism": "observation", "prerequisites": ["I6"]},
+    {"id": "Q5c", "text": "グループの中で、誰が犠牲になるか決める必要がありましたか？", "answer": "はい", "reveals": ["P5"], "mechanism": "observation", "prerequisites": ["I7"]},
+    {"id": "Q6a", "text": "男が裸なのは乗り物と関係がありますか？", "answer": "はい", "reveals": ["I8"], "mechanism": "link", "prerequisites": ["P1"]},
+    {"id": "Q6b", "text": "乗り物の問題を解決するために服を脱ぐ必要がありましたか？", "answer": "はい", "reveals": ["I9"], "mechanism": "observation", "prerequisites": ["I8"]},
+    {"id": "Q6c", "text": "乗り物の重さを減らす必要がありましたか？", "answer": "はい", "reveals": ["P6"], "mechanism": "observation", "prerequisites": ["I9"]},
+    {"id": "QT1", "text": "男は乗り物から飛び降りましたか？", "answer": "はい", "reveals": ["NT1"], "mechanism": "observation", "prerequisites": ["P2"]},
+    {"id": "QU1a", "text": "乗り物は飛行機でしたか？", "answer": "いいえ", "reveals": ["NU1"], "mechanism": "observation", "prerequisites": ["P2"]},
+    {"id": "QU1b", "text": "乗り物は熱気球でしたか？", "answer": "はい", "reveals": ["NU2"], "mechanism": "observation", "prerequisites": ["P2"]},
+    {"id": "QF1", "text": "男は誰かにこの場所に連れてこられましたか？", "answer": "いいえ", "reveals": ["NF1"], "mechanism": "observation", "prerequisites": []},
+    {"id": "QF2", "text": "男はこの状態に自ら望んでなりましたか？", "answer": "いいえ", "reveals": ["NF2"], "mechanism": "observation", "prerequisites": []},
+    {"id": "QF7", "text": "マッチ棒は火をつけるために使われましたか？", "answer": "いいえ", "reveals": ["NF7"], "mechanism": "observation", "prerequisites": []},
+    {"id": "QF9", "text": "選ばれた人は生き残れる見込みがありましたか？", "answer": "いいえ", "reveals": ["NF9"], "mechanism": "observation", "prerequisites": ["P5"]},
+    {"id": "QF11", "text": "服は事故や自然現象で失われましたか？", "answer": "いいえ", "reveals": ["NF11"], "mechanism": "observation", "prerequisites": []}
+  ],
+  "_phase4": {
+    "chain_mapping": {
+      "C1": ["Q1a", "Q1b"],
+      "C2": ["Q2a", "Q2b", "Q2c"],
+      "C3": ["Q3a", "Q3b"],
+      "C4": ["Q4a", "Q4b"],
+      "C5": ["Q5a", "Q5b", "Q5c"],
+      "C6": ["Q6a", "Q6b", "Q6c"]
+    },
+    "exploration_paths": [
+      {
+        "name": "パス A: 乗り物ルート",
+        "sequence": "Q1a(いいえ:N1a) → Q1b(はい:P1) → Q3a(いいえ:N3a) → Q3b(はい:P2) → Q6a(はい:I8) → Q6b(はい:I9) → Q6c(はい:P6) → Q2c(はい:P4) → Q4b(はい:P3) → Q5a(はい:I6) → Q5c(はい:P5)"
+      },
+      {
+        "name": "パス B: グループルート",
+        "sequence": "Q2a(はい:I2) → Q2b(はい:I3) → Q2c(はい:P4) → Q4a(はい:I5) → Q4b(はい:P3) → Q5a(はい:I6) → Q5b(はい:I7) → Q5c(はい:P5) → Q1b(はい:P1) → Q3b(はい:P2) → Q6c(はい:P6)"
+      },
+      {
+        "name": "パス C: 混合ルート",
+        "sequence": "Q1b(はい:P1) → Q2c(はい:P4) → Q4b(はい:P3) → Q3b(はい:P2) → Q5c(はい:P5) → Q6c(はい:P6)"
+      }
+    ]
+  },
+  "clear_conditions": [["NU2", "P6", "P5", "P3"]],
+  "_phase5": {
+    "t_facts": [
+      {"id": "T1", "label": "男は数人で熱気球に乗っていた", "deducible": false, "entailment_conditions": null},
+      {"id": "T2", "label": "熱気球の高度が下がり始めた", "deducible": false, "entailment_conditions": null},
+      {"id": "T3", "label": "搭乗者たちは軽量化のため荷物を全て捨てた", "deducible": false, "entailment_conditions": null},
+      {"id": "T4", "label": "搭乗者たちは軽量化のため服も脱いだ", "deducible": false, "entailment_conditions": null},
+      {"id": "T5", "label": "軽量化しても高度低下が止まらなかった", "deducible": false, "entailment_conditions": null},
+      {"id": "T6", "label": "くじ引き（マッチの長さ）で一人が飛び降りることになった", "deducible": false, "entailment_conditions": null},
+      {"id": "T7", "label": "男は短いマッチを引いた", "deducible": false, "entailment_conditions": null},
+      {"id": "T8", "label": "男は熱気球から飛び降りて死亡した", "deducible": false, "entailment_conditions": null}
+    ],
+    "c_final": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "P1", "P2", "P3", "P4", "P5", "P6"],
+    "chain_extensions": [
+      {"t_fact_id": "T8", "source_chain": "C3+C5", "propositions": ["NT1"], "questions": ["QT1"]}
+    ],
+    "unique_elements": ["T1", "T2", "T3", "T5", "T7"]
+  },
+  "_phase6": {
+    "clear_conditions": [["NU2", "P6", "P5", "P3"]],
+    "required_unique_elements": ["T1"],
+    "chain_designs": [
+      {"target": "T1", "source": "C_final", "propositions": ["NU1", "HU1", "NU2"], "questions": ["QU1a", "QU1b"]}
+    ],
+    "tension_resolution": {
+      "α1": "NU2(熱気球) + NT1(飛び降り) → 空から砂漠の真ん中に到達",
+      "α2": "P5(命の決定) + NT1(飛び降り) → 落下死",
+      "β": "P6(重量削減) → 軽量化のため脱衣",
+      "γ1": "P3(マッチで決め事) → くじ引きで折った",
+      "γ2": "P3+P5 → 運命を決めたマッチを握りしめた"
+    }
+  },
+  "topic_categories": [
+    {"id": "状況の確認", "name": "状況の確認"},
+    {"id": "原因と動機", "name": "原因と動機"},
+    {"id": "人物と背景", "name": "人物と背景"},
+    {"id": "前提の確認", "name": "前提の確認"}
+  ],
+  "_phase10": {
+    "assignments": [
+      {"question_id": "Q1a", "tactic": "常識的仮説の排除", "category": "前提の確認"},
+      {"question_id": "Q1b", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "Q2a", "tactic": "因果の逆転", "category": "原因と動機"},
+      {"question_id": "Q2b", "tactic": "登場人物の探索", "category": "人物と背景"},
+      {"question_id": "Q2c", "tactic": "段階的絞り込み", "category": "人物と背景"},
+      {"question_id": "Q3a", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "Q3b", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "Q4a", "tactic": "観測事実の深掘り", "category": "状況の確認"},
+      {"question_id": "Q4b", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "Q5a", "tactic": "因果の逆転", "category": "原因と動機"},
+      {"question_id": "Q5b", "tactic": "動機の探索", "category": "原因と動機"},
+      {"question_id": "Q5c", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "Q6a", "tactic": "因果の逆転", "category": "原因と動機"},
+      {"question_id": "Q6b", "tactic": "動機の探索", "category": "原因と動機"},
+      {"question_id": "Q6c", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "QT1", "tactic": "手段の探索", "category": "状況の確認"},
+      {"question_id": "QU1a", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "QU1b", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "QF1", "tactic": "常識的仮説の排除", "category": "前提の確認"},
+      {"question_id": "QF2", "tactic": "常識的仮説の排除", "category": "前提の確認"},
+      {"question_id": "QF7", "tactic": "常識的仮説の排除", "category": "前提の確認"},
+      {"question_id": "QF9", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "QF11", "tactic": "常識的仮説の排除", "category": "前提の確認"}
+    ],
+    "initial_open_distribution": {
+      "状況の確認": ["Q1b", "Q3b", "Q4b"],
+      "原因と動機": ["Q2a"],
+      "人物と背景": ["Q2c"],
+      "前提の確認": ["Q1a", "QF1", "QF2", "QF7", "QF11"]
+    },
+    "balance": {
+      "状況の確認": 11,
+      "原因と動機": 5,
+      "人物と背景": 2,
+      "前提の確認": 5
+    }
+  },
+  "_phase8": {
+    "review": "全質問の想起条件をレビュー。跳躍なし。境界ケース（P4.fc, P5.fc, P6.fc が S 命題のみで derivable）は prerequisites による実質的な順序制御で解消済み。修正不要。",
+    "iterations": 1
+  },
+  "_phase9": {
+    "chain_branches": [
+      {
+        "chain_id": "C1",
+        "chain_path": "S2+S4 → N1a → P1",
+        "branches": [
+          {"at_step": "P1", "true_side_label": "乗り物に乗っていた", "parallels": [{"label": "他者に連れてこられた", "models": ["G1", "M1"]}]}
+        ]
+      },
+      {
+        "chain_id": "C2",
+        "chain_path": "S → I2 → I3 → P4",
+        "branches": [
+          {"at_step": "I2", "true_side_label": "トラブルに巻き込まれた", "parallels": [{"label": "自発的にこの状態になった", "models": ["M4", "M5"]}]},
+          {"at_step": "I3", "true_side_label": "他者が関わっていた", "parallels": [{"label": "一人だった", "models": ["M3", "M4", "M11", "M12"]}]}
+        ]
+      },
+      {
+        "chain_id": "C4",
+        "chain_path": "P4+S5 → I5 → P3",
+        "branches": [
+          {"at_step": "P3", "true_side_label": "物事を決めるため", "parallels": [{"label": "火をつけるために使われた", "models": ["G1", "M3", "M6", "M11"]}]}
+        ]
+      },
+      {
+        "chain_id": "C5",
+        "chain_path": "P4+S4 → I6 → I7 → P5",
+        "branches": [
+          {"at_step": "P5", "true_side_label": "命を落とす決定", "parallels": [{"label": "生存可能な危険な役割", "models": ["M7", "M8", "M9"]}]}
+        ]
+      },
+      {
+        "chain_id": "C6",
+        "chain_path": "P1+S3 → I8 → I9 → P6",
+        "branches": [
+          {"at_step": "I8", "true_side_label": "裸は乗り物に関連", "parallels": [{"label": "服は事故で失われた", "models": ["M7", "M9"]}]}
+        ]
+      }
+    ],
+    "coverage": {
+      "all_models": ["M1", "G1", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M11", "M12"],
+      "model_coverage": {
+        "M1": [{"chain": "C1", "step": "P1"}],
+        "G1": [{"chain": "C1", "step": "P1"}, {"chain": "C4", "step": "P3"}],
+        "M3": [{"chain": "C4", "step": "P3"}],
+        "M4": [{"chain": "C2", "step": "I2"}],
+        "M5": [{"chain": "C2", "step": "I2"}],
+        "M6": [{"chain": "C4", "step": "P3"}],
+        "M7": [{"chain": "C5", "step": "P5"}, {"chain": "C6", "step": "I8"}],
+        "M8": [{"chain": "C5", "step": "P5"}],
+        "M9": [{"chain": "C5", "step": "P5"}, {"chain": "C6", "step": "I8"}],
+        "M11": [{"chain": "C4", "step": "P3"}],
+        "M12": [{"chain": "C2", "step": "I3"}]
+      },
+      "uncovered": [],
+      "uncovered_notes": "全モデルが分岐によりカバー済み。加えて全モデルが分割命題P1〜P6のいずれかで棄却される。"
+    },
+    "generated": {
+      "propositions": [
+        {"id": "NF1", "source_chain": "C1", "source_step": "P1", "parallel_index": 0},
+        {"id": "NF2", "source_chain": "C2", "source_step": "I2", "parallel_index": 0},
+        {"id": "NF7", "source_chain": "C4", "source_step": "P3", "parallel_index": 0},
+        {"id": "NF9", "source_chain": "C5", "source_step": "P5", "parallel_index": 0},
+        {"id": "NF11", "source_chain": "C6", "source_step": "I8", "parallel_index": 0}
+      ],
+      "questions": [
+        {"id": "QF1", "reveals_proposition": "NF1"},
+        {"id": "QF2", "reveals_proposition": "NF2"},
+        {"id": "QF7", "reveals_proposition": "NF7"},
+        {"id": "QF9", "reveals_proposition": "NF9"},
+        {"id": "QF11", "reveals_proposition": "NF11"}
+      ]
+    }
+  }
+}

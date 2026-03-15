@@ -1,0 +1,680 @@
+{
+  "title": "砂漠の男",
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "男は乗り物に乗っていた",
+      "formation_conditions": [
+        [
+          "S2",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "男は空中にいた",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "マッチ棒は物事を決めるために使われた",
+      "formation_conditions": [
+        [
+          "P4",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "男は複数人のグループの中にいた",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "グループの中で誰かが命を落とす決定がなされた",
+      "formation_conditions": [
+        [
+          "P4",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "乗り物の重量を減らす必要があった",
+      "formation_conditions": [
+        [
+          "P1",
+          "S3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "男は自分の力でこの場所に来たのではない",
+      "negation_of": "H1a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1a",
+      "label": "男は自分の力でこの場所に来た",
+      "negation_of": "N1a",
+      "formation_conditions": [
+        [
+          "S2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I2",
+      "label": "男は何かのトラブルに巻き込まれた",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I3",
+      "label": "トラブルに男以外の人物が関わっていた",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3a",
+      "label": "乗り物は地上を走るものではなかった",
+      "negation_of": "H3a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "H3a",
+      "label": "乗り物は地上を走るものだった",
+      "negation_of": "N3a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "マッチ棒はグループの中で何かの目的に使われた",
+      "formation_conditions": [
+        [
+          "P4",
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "グループに危機的な状況があった",
+      "formation_conditions": [
+        [
+          "P4",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I7",
+      "label": "危機を解決するために誰かが行動する必要があった",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I8",
+      "label": "男が裸なのは乗り物に関連する理由がある",
+      "formation_conditions": [
+        [
+          "P1",
+          "S3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I9",
+      "label": "乗り物の問題を解決するために服を脱ぐ必要があった",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NT1",
+      "label": "男は乗り物から飛び降りた",
+      "formation_conditions": [
+        [
+          "P2",
+          "P5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NU1",
+      "label": "乗り物は飛行機ではなかった",
+      "negation_of": "HU1",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HU1",
+      "label": "乗り物は飛行機だった",
+      "negation_of": "NU1",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NU2",
+      "label": "乗り物は熱気球だった",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1",
+      "label": "男は他者に連れてこられたのではない",
+      "negation_of": "HF1",
+      "formation_conditions": [
+        [
+          "S2",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1",
+      "label": "男は他者に連れてこられた",
+      "negation_of": "NF1",
+      "formation_conditions": [
+        [
+          "S2",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2",
+      "label": "男の行動は自発的なものではなかった",
+      "negation_of": "HF2",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2",
+      "label": "男はこの状態に自ら望んでなった",
+      "negation_of": "NF2",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3",
+          "S4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF7",
+      "label": "マッチ棒は火をつけるためには使われなかった",
+      "negation_of": "HF7",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF7",
+      "label": "マッチ棒は火をつけるために使われた",
+      "negation_of": "NF7",
+      "formation_conditions": [
+        [
+          "S5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF9",
+      "label": "選ばれた人に生存の見込みはなかった",
+      "negation_of": "HF9",
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF9",
+      "label": "選ばれた人には生存の見込みがあった",
+      "negation_of": "NF9",
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF11",
+      "label": "服は意図的に脱がれたものである",
+      "negation_of": "HF11",
+      "formation_conditions": [
+        [
+          "S3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF11",
+      "label": "服は事故や自然現象で失われた",
+      "negation_of": "NF11",
+      "formation_conditions": [
+        [
+          "S3"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "男は自分の力でこの場所に来ましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q1b",
+      "text": "男は何かの乗り物に乗っていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q2a",
+      "text": "男は何かのトラブルに巻き込まれましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q2b",
+      "text": "そのトラブルに男以外の人物が関わっていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I2"
+      ]
+    },
+    {
+      "id": "Q2c",
+      "text": "男は複数人のグループの中にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q3a",
+      "text": "その乗り物は地上を走るものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ]
+    },
+    {
+      "id": "Q3b",
+      "text": "男は空中にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q4a",
+      "text": "マッチ棒はグループの中で使われましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P4"
+      ]
+    },
+    {
+      "id": "Q4b",
+      "text": "マッチ棒は何かを決めるために使われましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "Q5a",
+      "text": "グループに何か危機的な状況がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P4"
+      ]
+    },
+    {
+      "id": "Q5b",
+      "text": "その危機で誰かが何かの行動をとる必要がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I6"
+      ]
+    },
+    {
+      "id": "Q5c",
+      "text": "グループの中で、誰が犠牲になるか決める必要がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ]
+    },
+    {
+      "id": "Q6a",
+      "text": "男が裸なのは乗り物と関係がありますか？",
+      "answer": "はい",
+      "reveals": [
+        "I8"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P1"
+      ]
+    },
+    {
+      "id": "Q6b",
+      "text": "乗り物の問題を解決するために服を脱ぐ必要がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I9"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I8"
+      ]
+    },
+    {
+      "id": "Q6c",
+      "text": "乗り物の重さを減らす必要がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I9"
+      ]
+    },
+    {
+      "id": "QT1",
+      "text": "男は乗り物から飛び降りましたか？",
+      "answer": "はい",
+      "reveals": [
+        "NT1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P2"
+      ]
+    },
+    {
+      "id": "QU1a",
+      "text": "乗り物は飛行機でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NU1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P2"
+      ]
+    },
+    {
+      "id": "QU1b",
+      "text": "乗り物は熱気球でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "NU2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P2"
+      ]
+    },
+    {
+      "id": "QF1",
+      "text": "男は誰かにこの場所に連れてこられましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QF2",
+      "text": "男はこの状態に自ら望んでなりましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QF7",
+      "text": "マッチ棒は火をつけるために使われましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    },
+    {
+      "id": "QF9",
+      "text": "選ばれた人は生き残れる見込みがありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF9"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P5"
+      ]
+    },
+    {
+      "id": "QF11",
+      "text": "服は事故や自然現象で失われましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF11"
+      ],
+      "mechanism": "observation",
+      "prerequisites": []
+    }
+  ],
+  "clear_conditions": [
+    [
+      "NU2",
+      "P6",
+      "P5",
+      "P3"
+    ]
+  ],
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "statement": "砂漠の真ん中で裸の男が死んでいた。手には折れたマッチ棒を握りしめている。",
+  "truth": "男は数人で熱気球に乗っていたが、高度が下がり始めた。荷物を全て捨て、服も脱いで軽量化したが足りず、くじ引き（マッチの長さ）で一人が飛び降りることになった。短いマッチを引いた男が飛び降りて死亡した。",
+  "id": "砂漠の男"
+}

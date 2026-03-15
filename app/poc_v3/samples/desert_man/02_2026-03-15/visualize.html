@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>砂漠の男 data_src</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: #fafafa; color: #333; padding: 20px; }
+  h1 { font-size: 1.6em; margin-bottom: 10px; }
+  h2 { font-size: 1.2em; margin: 20px 0 10px; padding: 8px 12px;
+       background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 2px; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+  .stat { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px;
+           padding: 10px 16px; min-width: 120px; }
+  .stat .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+  .stat .label { font-size: 0.85em; color: #666; }
+  .tabs { display: flex; gap: 4px; margin: 16px 0 0; border-bottom: 2px solid #e0e0e0; }
+  .tab { padding: 8px 16px; cursor: pointer; background: #f5f5f5;
+          border: 1px solid #e0e0e0; border-bottom: none; border-radius: 6px 6px 0 0;
+          font-size: 0.9em; user-select: none; }
+  .tab.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px;
+                 font-weight: bold; color: #1565c0; }
+  .tab-content { background: #fff; border: 1px solid #e0e0e0;
+                  border-top: none; padding: 16px; overflow-x: auto; }
+  .tab-content.hidden { display: none; }
+  .mermaid { text-align: center; }
+  ul.checks { list-style: none; padding: 8px 0; }
+  ul.checks li { padding: 4px 8px; font-size: 0.9em; }
+  li.issue { color: #e65100; }
+  li.ok { color: #2e7d32; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0; font-size: 0.8em; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-swatch { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #999; }
+  .note { font-size: 0.85em; color: #666; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h1>砂漠の男 — data_src.json</h1>
+
+<div class="stats">
+  <div class="stat"><div class="num">5</div><div class="label">tension</div></div>
+  <div class="stat"><div class="num">13</div><div class="label">model</div></div>
+  <div class="stat"><div class="num">10</div><div class="label">S prop</div></div>
+  <div class="stat"><div class="num">31</div><div class="label">proposition</div></div>
+  <div class="stat"><div class="num">23</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">6</div><div class="label">chain</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#e3f2fd"></div> S</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fff3e0"></div> N</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#e8f5e9"></div> P</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fce4ec"></div> NT</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f3e5f5"></div> NU</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f5f5f5"></div> NF</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="deriv_graph">derivation graph</div>
+  <div class="tab" data-tab="derivation">fc flow</div>
+  <div class="tab" data-tab="questions">Q -&gt; prop</div>
+  <div class="tab" data-tab="division">model split</div>
+  <div class="tab" data-tab="chains">chain</div>
+  <div class="tab" data-tab="branches">branch / NF</div>
+  <div class="tab" data-tab="paths">path</div>
+  <div class="tab" data-tab="integrity">integrity</div>
+</div>
+
+<div id="deriv_graph" class="tab-content">
+<h2>derivation graph (_phase2)</h2>
+<p class="note">
+  Conceptual derivation: A &rarr; B means confirming A makes B redundant.
+  Blue = independent axis, green = root (S-reachable), purple = composite, orange = derived.
+  Dashed = combination derivation.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef axisNode fill:#42a5f5,stroke:#1565c0,color:#fff
+  classDef rootNode fill:#4caf50,stroke:#2e7d32,color:#fff
+  classDef compositeNode fill:#9c27b0,stroke:#6a1b9a,color:#fff
+  classDef derivedNode fill:#ff9800,stroke:#e65100,color:#fff
+  classDef defaultNode fill:#e0e0e0,stroke:#757575,color:#424242
+  P1["P1: 男は乗り物に乗っていた"]:::rootNode
+  P2["P2: 男は空中にいた"]:::axisNode
+  P3["P3: マッチ棒は物事を決めるために使われた"]:::axisNode
+  P4["P4: 男は複数人のグループの中にいた"]:::rootNode
+  P5["P5: グループの中で誰かが命を落とす決定がなされた"]:::axisNode
+  P6["P6: 乗り物の重量を減らす必要があった"]:::axisNode
+  P2 -->|"空中にいた → 乗り物に乗っていた"| P1
+  P3 -->|"くじ引きには複数人が必要 → グループに..."| P4
+  P5 -->|"誰かが命を落とす決定にはグループが必要 ..."| P4
+  P6 -->|"乗り物の重量を減らす → 乗り物に乗って..."| P1
+</pre>
+</div>
+
+<div id="derivation" class="tab-content">
+<h2>formation_conditions</h2>
+<p class="note">
+  S -&gt; N -&gt; P -&gt; NT -&gt; NU. Solid = fc, dotted = S derived_from.
+  Junction = AND. Multiple arrows to same node = OR.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef sNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  S1["S1: 男がいた"]:::sNode
+  S2["S2: 男は砂漠の真ん中にいた"]:::sNode
+  S3["S3: 男は裸だった"]:::sNode
+  S4["S4: 男は死んでいた"]:::sNode
+  S5["S5: マッチ棒は折れていた"]:::sNode
+  S6["S6: 男はマッチ棒を握りしめていた"]:::sNode
+  S7["S7: 砂漠があった"]:::sNode
+  S8["S8: 男はマッチ棒を持っていた"]:::sNode
+  S9["S9: マッチ棒があった"]:::sNode
+  S10["S10: 男は死ぬまでマッチ棒を手放さなかった"]:::sNode
+  P1["P1: 男は乗り物に乗っていた"]:::pNode
+  P2["P2: 男は空中にいた"]:::pNode
+  P3["P3: マッチ棒は物事を決めるために使われた"]:::pNode
+  P4["P4: 男は複数人のグループの中にいた"]:::pNode
+  P5["P5: グループの中で誰かが命を落とす決定がなされた"]:::pNode
+  P6["P6: 乗り物の重量を減らす必要があった"]:::pNode
+  N1a["N1a: 男は自分の力でこの場所に来たのではない"]:::nNode
+  H1a["H1a: 男は自分の力でこの場所に来た"]:::nNode
+  I2["I2: 男は何かのトラブルに巻き込まれた"]:::nNode
+  I3["I3: トラブルに男以外の人物が関わっていた"]:::nNode
+  N3a["N3a: 乗り物は地上を走るものではなかった"]:::nNode
+  H3a["H3a: 乗り物は地上を走るものだった"]:::nNode
+  I5["I5: マッチ棒はグループの中で何かの目的に使われた"]:::nNode
+  I6["I6: グループに危機的な状況があった"]:::nNode
+  I7["I7: 危機を解決するために誰かが行動する必要があった"]:::nNode
+  I8["I8: 男が裸なのは乗り物に関連する理由がある"]:::nNode
+  I9["I9: 乗り物の問題を解決するために服を脱ぐ必要があった"]:::nNode
+  NT1["NT1: 男は乗り物から飛び降りた"]:::tNode
+  NU1["NU1: 乗り物は飛行機ではなかった"]:::uNode
+  HU1["HU1: 乗り物は飛行機だった"]:::nNode
+  NU2["NU2: 乗り物は熱気球だった"]:::uNode
+  NF1["NF1: 男は他者に連れてこられたのではない"]:::fNode
+  HF1["HF1: 男は他者に連れてこられた"]:::nNode
+  NF2["NF2: 男の行動は自発的なものではなかった"]:::fNode
+  HF2["HF2: 男はこの状態に自ら望んでなった"]:::nNode
+  NF7["NF7: マッチ棒は火をつけるためには使われなかった"]:::fNode
+  HF7["HF7: マッチ棒は火をつけるために使われた"]:::nNode
+  NF9["NF9: 選ばれた人に生存の見込みはなかった"]:::fNode
+  HF9["HF9: 選ばれた人には生存の見込みがあった"]:::nNode
+  NF11["NF11: 服は意図的に脱がれたものである"]:::fNode
+  HF11["HF11: 服は事故や自然現象で失われた"]:::nNode
+  S2 -.-> S7
+  S6 -.-> S8
+  S6 -.-> S9
+  S4 -.-> S10
+  S6 -.-> S10
+  j_P1_S2_S4(( ))
+  S2 --> j_P1_S2_S4
+  S4 --> j_P1_S2_S4
+  j_P1_S2_S4 --> P1
+  P1 --> P2
+  j_P3_P4_S5(( ))
+  P4 --> j_P3_P4_S5
+  S5 --> j_P3_P4_S5
+  j_P3_P4_S5 --> P3
+  j_P4_S2_S3_S4(( ))
+  S2 --> j_P4_S2_S3_S4
+  S3 --> j_P4_S2_S3_S4
+  S4 --> j_P4_S2_S3_S4
+  j_P4_S2_S3_S4 --> P4
+  j_P5_P4_S4(( ))
+  P4 --> j_P5_P4_S4
+  S4 --> j_P5_P4_S4
+  j_P5_P4_S4 --> P5
+  j_P6_P1_S3(( ))
+  P1 --> j_P6_P1_S3
+  S3 --> j_P6_P1_S3
+  j_P6_P1_S3 --> P6
+  j_N1a_S2_S4(( ))
+  S2 --> j_N1a_S2_S4
+  S4 --> j_N1a_S2_S4
+  j_N1a_S2_S4 --> N1a
+  S2 --> H1a
+  j_I2_S2_S3_S4(( ))
+  S2 --> j_I2_S2_S3_S4
+  S3 --> j_I2_S2_S3_S4
+  S4 --> j_I2_S2_S3_S4
+  j_I2_S2_S3_S4 --> I2
+  I2 --> I3
+  P1 --> N3a
+  P1 --> H3a
+  j_I5_P4_S5(( ))
+  P4 --> j_I5_P4_S5
+  S5 --> j_I5_P4_S5
+  j_I5_P4_S5 --> I5
+  j_I6_P4_S4(( ))
+  P4 --> j_I6_P4_S4
+  S4 --> j_I6_P4_S4
+  j_I6_P4_S4 --> I6
+  I6 --> I7
+  j_I8_P1_S3(( ))
+  P1 --> j_I8_P1_S3
+  S3 --> j_I8_P1_S3
+  j_I8_P1_S3 --> I8
+  I8 --> I9
+  j_NT1_P2_P5(( ))
+  P2 --> j_NT1_P2_P5
+  P5 --> j_NT1_P2_P5
+  j_NT1_P2_P5 --> NT1
+  P2 --> NU1
+  P2 --> HU1
+  P2 --> NU2
+  j_NF1_S2_S4(( ))
+  S2 --> j_NF1_S2_S4
+  S4 --> j_NF1_S2_S4
+  j_NF1_S2_S4 --> NF1
+  j_HF1_S2_S4(( ))
+  S2 --> j_HF1_S2_S4
+  S4 --> j_HF1_S2_S4
+  j_HF1_S2_S4 --> HF1
+  j_NF2_S2_S3_S4(( ))
+  S2 --> j_NF2_S2_S3_S4
+  S3 --> j_NF2_S2_S3_S4
+  S4 --> j_NF2_S2_S3_S4
+  j_NF2_S2_S3_S4 --> NF2
+  j_HF2_S2_S3_S4(( ))
+  S2 --> j_HF2_S2_S3_S4
+  S3 --> j_HF2_S2_S3_S4
+  S4 --> j_HF2_S2_S3_S4
+  j_HF2_S2_S3_S4 --> HF2
+  S5 --> NF7
+  S5 --> HF7
+  P5 --> NF9
+  P5 --> HF9
+  S3 --> NF11
+  S3 --> HF11
+</pre>
+</div>
+
+<div id="questions" class="tab-content">
+<h2>Q -&gt; proposition (reveals)</h2>
+<p class="note">O = yes, X = no</p>
+<pre class="mermaid">
+graph LR
+  classDef qNode fill:#e8eaf6,stroke:#283593,color:#1a237e
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  Q1a["Q1a X<br/>男は自分の力でこの場所に来ましたか？"]:::qNode
+  N1a_q["N1a: 男は自分の力でこの場所に来たのではない"]:::nNode
+  Q1b["Q1b O<br/>男は何かの乗り物に乗っていましたか？"]:::qNode
+  P1_q["P1: 男は乗り物に乗っていた"]:::pNode
+  Q2a["Q2a O<br/>男は何かのトラブルに巻き込まれましたか？"]:::qNode
+  I2_q["I2: 男は何かのトラブルに巻き込まれた"]:::nNode
+  Q2b["Q2b O<br/>そのトラブルに男以外の人物が関わっていましたか？"]:::qNode
+  I3_q["I3: トラブルに男以外の人物が関わっていた"]:::nNode
+  Q2c["Q2c O<br/>男は複数人のグループの中にいましたか？"]:::qNode
+  P4_q["P4: 男は複数人のグループの中にいた"]:::pNode
+  Q3a["Q3a X<br/>その乗り物は地上を走るものでしたか？"]:::qNode
+  N3a_q["N3a: 乗り物は地上を走るものではなかった"]:::nNode
+  Q3b["Q3b O<br/>男は空中にいましたか？"]:::qNode
+  P2_q["P2: 男は空中にいた"]:::pNode
+  Q4a["Q4a O<br/>マッチ棒はグループの中で使われましたか？"]:::qNode
+  I5_q["I5: マッチ棒はグループの中で何かの目的に使われた"]:::nNode
+  Q4b["Q4b O<br/>マッチ棒は何かを決めるために使われましたか？"]:::qNode
+  P3_q["P3: マッチ棒は物事を決めるために使われた"]:::pNode
+  Q5a["Q5a O<br/>グループに何か危機的な状況がありましたか？"]:::qNode
+  I6_q["I6: グループに危機的な状況があった"]:::nNode
+  Q5b["Q5b O<br/>その危機で誰かが何かの行動をとる必要がありましたか？"]:::qNode
+  I7_q["I7: 危機を解決するために誰かが行動する必要があった"]:::nNode
+  Q5c["Q5c O<br/>グループの中で、誰が犠牲になるか決める必要がありましたか？"]:::qNode
+  P5_q["P5: グループの中で誰かが命を落とす決定がなされた"]:::pNode
+  Q6a["Q6a O<br/>男が裸なのは乗り物と関係がありますか？"]:::qNode
+  I8_q["I8: 男が裸なのは乗り物に関連する理由がある"]:::nNode
+  Q6b["Q6b O<br/>乗り物の問題を解決するために服を脱ぐ必要がありましたか？"]:::qNode
+  I9_q["I9: 乗り物の問題を解決するために服を脱ぐ必要があった"]:::nNode
+  Q6c["Q6c O<br/>乗り物の重さを減らす必要がありましたか？"]:::qNode
+  P6_q["P6: 乗り物の重量を減らす必要があった"]:::pNode
+  QF1["QF1 X<br/>男は誰かにこの場所に連れてこられましたか？"]:::qNode
+  NF1_q["NF1: 男は他者に連れてこられたのではない"]:::fNode
+  QF11["QF11 X<br/>服は事故や自然現象で失われましたか？"]:::qNode
+  NF11_q["NF11: 服は意図的に脱がれたものである"]:::fNode
+  QF2["QF2 X<br/>男はこの状態に自ら望んでなりましたか？"]:::qNode
+  NF2_q["NF2: 男の行動は自発的なものではなかった"]:::fNode
+  QF7["QF7 X<br/>マッチ棒は火をつけるために使われましたか？"]:::qNode
+  NF7_q["NF7: マッチ棒は火をつけるためには使われなかった"]:::fNode
+  QF9["QF9 X<br/>選ばれた人は生き残れる見込みがありましたか？"]:::qNode
+  NF9_q["NF9: 選ばれた人に生存の見込みはなかった"]:::fNode
+  QT1["QT1 O<br/>男は乗り物から飛び降りましたか？"]:::qNode
+  NT1_q["NT1: 男は乗り物から飛び降りた"]:::tNode
+  QU1a["QU1a X<br/>乗り物は飛行機でしたか？"]:::qNode
+  NU1_q["NU1: 乗り物は飛行機ではなかった"]:::uNode
+  QU1b["QU1b O<br/>乗り物は熱気球でしたか？"]:::qNode
+  NU2_q["NU2: 乗り物は熱気球だった"]:::uNode
+  Q1a -->|reveals| N1a_q
+  Q1b -->|reveals| P1_q
+  Q2a -->|reveals| I2_q
+  Q2b -->|reveals| I3_q
+  Q2c -->|reveals| P4_q
+  Q3a -->|reveals| N3a_q
+  Q3b -->|reveals| P2_q
+  Q4a -->|reveals| I5_q
+  Q4b -->|reveals| P3_q
+  Q5a -->|reveals| I6_q
+  Q5b -->|reveals| I7_q
+  Q5c -->|reveals| P5_q
+  Q6a -->|reveals| I8_q
+  Q6b -->|reveals| I9_q
+  Q6c -->|reveals| P6_q
+  QF1 -->|reveals| NF1_q
+  QF11 -->|reveals| NF11_q
+  QF2 -->|reveals| NF2_q
+  QF7 -->|reveals| NF7_q
+  QF9 -->|reveals| NF9_q
+  QT1 -->|reveals| NT1_q
+  QU1a -->|reveals| NU1_q
+  QU1b -->|reveals| NU2_q
+</pre>
+</div>
+
+<div id="division" class="tab-content">
+<h2>model division hierarchy</h2>
+<pre class="mermaid">
+graph TD
+  classDef trueSet fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseSet fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef propNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  ALL["T, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12"]
+</pre>
+</div>
+
+<div id="chains" class="tab-content">
+<h2>tactical chains</h2>
+<p class="note">C1-C5 + extensions. Parsed from _phase3 description.</p>
+<pre class="mermaid">
+graph TD
+  classDef srcNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef midNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef tgtNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef extNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uniNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  subgraph C1["C1: 常識的仮説の排除 #gt; 手段の探索 → 段階的絞り込み"]
+    direction LR
+    C1_I1["I1: 男は自力でこの場所に来たのではない"]:::srcNode
+    C1_P1["P1"]:::tgtNode
+    C1_I1 --> C1_P1
+  end
+  subgraph C2["C2: 因果の逆転 → 登場人物の探索 → 段階的絞り込み"]
+    direction LR
+    C2_I2["I2: 男がこの状態になった経緯に何らかの出来事があった"]:::srcNode
+    C2_I3["I3: その出来事に男以外の人物が関わっていた"]:::midNode
+    C2_I2 -->|"段階的絞り込み"| C2_I3
+    C2_P4["P4"]:::tgtNode
+    C2_I3 --> C2_P4
+  end
+  subgraph C3["C3: 段階的絞り込み → 段階的絞り込み"]
+    direction LR
+    C3_P1["P1"]:::srcNode
+    C3_I4["I4: 乗り物は地上のものではなかった"]:::midNode
+    C3_P1 -->|"段階的絞り込み"| C3_I4
+    C3_P2["P2"]:::tgtNode
+    C3_I4 --> C3_P2
+  end
+  subgraph C4["C4: 観測事実の深掘り → 段階的絞り込み"]
+    direction LR
+    C4_I5["I5: マッチ棒はグループの中で何かの目的に使われた"]:::srcNode
+    C4_P3["P3"]:::tgtNode
+    C4_I5 --> C4_P3
+  end
+  subgraph C5["C5: 因果の逆転 → 動機の探索 → 段階的絞り込み"]
+    direction LR
+    C5_I6["I6: グループに危機的な状況があった"]:::srcNode
+    C5_I7["I7: 危機を解決するために誰かが行動する必要があった"]:::midNode
+    C5_I6 -->|"段階的絞り込み"| C5_I7
+    C5_P5["P5"]:::tgtNode
+    C5_I7 --> C5_P5
+  end
+  subgraph C6["C6: 因果の逆転 → 動機の探索 → 段階的絞り込み"]
+    direction LR
+    C6_I8["I8: 男が裸なのは乗り物に関連する理由がある"]:::srcNode
+    C6_I9["I9: 乗り物の問題を解決するために服を脱ぐ必要があった"]:::midNode
+    C6_I8 -->|"段階的絞り込み"| C6_I9
+    C6_P6["P6"]:::tgtNode
+    C6_I9 --> C6_P6
+  end
+  NT1_ext["NT1: "]:::extNode
+  C3+C5 --> NT1_ext
+  NU1_uni["NU1: "]:::uniNode
+  NT1_ext --> NU1_uni
+  HU1_uni["HU1: "]:::uniNode
+  NT1_ext --> HU1_uni
+  NU2_uni["NU2: "]:::uniNode
+  NT1_ext --> NU2_uni
+</pre>
+</div>
+
+<div id="branches" class="tab-content">
+<h2>chain branches / rejection (_phase9)</h2>
+<p class="note">T = true side, F = false side (parallel). Dotted = generated NF proposition.</p>
+<pre class="mermaid">
+graph TD
+  classDef trueNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseNode fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef nfNode fill:#f5f5f5,stroke:#757575,color:#424242
+  subgraph C1_branch["C1: S2+S4 → N1a → P1"]
+    C1_P1_t["T P1: 乗り物に乗っていた"]:::trueNode
+    C1_P1_f0["F 他者に連れてこられた<br/>(G1, M1)"]:::falseNode
+    C1_P1_t --- C1_P1_f0
+    NF1_nf["NF1"]:::nfNode
+    C1_P1_f0 -.-> NF1_nf
+  end
+  subgraph C2_branch["C2: S → I2 → I3 → P4"]
+    C2_I2_t["T I2: トラブルに巻き込まれた"]:::trueNode
+    C2_I2_f0["F 自発的にこの状態になった<br/>(M4, M5)"]:::falseNode
+    C2_I2_t --- C2_I2_f0
+    NF2_nf["NF2"]:::nfNode
+    C2_I2_f0 -.-> NF2_nf
+    C2_I3_t["T I3: 他者が関わっていた"]:::trueNode
+    C2_I3_f0["F 一人だった<br/>(M3, M4, M11, M12)"]:::falseNode
+    C2_I3_t --- C2_I3_f0
+  end
+  subgraph C4_branch["C4: P4+S5 → I5 → P3"]
+    C4_P3_t["T P3: 物事を決めるため"]:::trueNode
+    C4_P3_f0["F 火をつけるために使われた<br/>(G1, M3, M6, M11)"]:::falseNode
+    C4_P3_t --- C4_P3_f0
+    NF7_nf["NF7"]:::nfNode
+    C4_P3_f0 -.-> NF7_nf
+  end
+  subgraph C5_branch["C5: P4+S4 → I6 → I7 → P5"]
+    C5_P5_t["T P5: 命を落とす決定"]:::trueNode
+    C5_P5_f0["F 生存可能な危険な役割<br/>(M7, M8, M9)"]:::falseNode
+    C5_P5_t --- C5_P5_f0
+    NF9_nf["NF9"]:::nfNode
+    C5_P5_f0 -.-> NF9_nf
+  end
+  subgraph C6_branch["C6: P1+S3 → I8 → I9 → P6"]
+    C6_I8_t["T I8: 裸は乗り物に関連"]:::trueNode
+    C6_I8_f0["F 服は事故で失われた<br/>(M7, M9)"]:::falseNode
+    C6_I8_t --- C6_I8_f0
+    NF11_nf["NF11"]:::nfNode
+    C6_I8_f0 -.-> NF11_nf
+  end
+</pre>
+</div>
+
+<div id="paths" class="tab-content">
+<h2>exploration paths</h2>
+<pre class="mermaid">
+graph LR
+  classDef pathNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  subgraph path_sg_0["パス A: 乗り物ルート"]
+    p0s0["Q1a(いいえ:N1a)"]:::pathNode
+    p0s1["Q1b(はい:P1)"]:::pathNode
+    p0s0 --> p0s1
+    p0s2["Q3a(いいえ:N3a)"]:::pathNode
+    p0s1 --> p0s2
+    p0s3["Q3b(はい:P2)"]:::pathNode
+    p0s2 --> p0s3
+    p0s4["Q6a(はい:I8)"]:::pathNode
+    p0s3 --> p0s4
+    p0s5["Q6b(はい:I9)"]:::pathNode
+    p0s4 --> p0s5
+    p0s6["Q6c(はい:P6)"]:::pathNode
+    p0s5 --> p0s6
+    p0s7["Q2c(はい:P4)"]:::pathNode
+    p0s6 --> p0s7
+    p0s8["Q4b(はい:P3)"]:::pathNode
+    p0s7 --> p0s8
+    p0s9["Q5a(はい:I6)"]:::pathNode
+    p0s8 --> p0s9
+    p0s10["Q5c(はい:P5)"]:::pathNode
+    p0s9 --> p0s10
+  end
+  subgraph path_sg_1["パス B: グループルート"]
+    p1s0["Q2a(はい:I2)"]:::pathNode
+    p1s1["Q2b(はい:I3)"]:::pathNode
+    p1s0 --> p1s1
+    p1s2["Q2c(はい:P4)"]:::pathNode
+    p1s1 --> p1s2
+    p1s3["Q4a(はい:I5)"]:::pathNode
+    p1s2 --> p1s3
+    p1s4["Q4b(はい:P3)"]:::pathNode
+    p1s3 --> p1s4
+    p1s5["Q5a(はい:I6)"]:::pathNode
+    p1s4 --> p1s5
+    p1s6["Q5b(はい:I7)"]:::pathNode
+    p1s5 --> p1s6
+    p1s7["Q5c(はい:P5)"]:::pathNode
+    p1s6 --> p1s7
+    p1s8["Q1b(はい:P1)"]:::pathNode
+    p1s7 --> p1s8
+    p1s9["Q3b(はい:P2)"]:::pathNode
+    p1s8 --> p1s9
+    p1s10["Q6c(はい:P6)"]:::pathNode
+    p1s9 --> p1s10
+  end
+  subgraph path_sg_2["パス C: 混合ルート"]
+    p2s0["Q1b(はい:P1)"]:::pathNode
+    p2s1["Q2c(はい:P4)"]:::pathNode
+    p2s0 --> p2s1
+    p2s2["Q4b(はい:P3)"]:::pathNode
+    p2s1 --> p2s2
+    p2s3["Q3b(はい:P2)"]:::pathNode
+    p2s2 --> p2s3
+    p2s4["Q5c(はい:P5)"]:::pathNode
+    p2s3 --> p2s4
+    p2s5["Q6c(はい:P6)"]:::pathNode
+    p2s4 --> p2s5
+  end
+</pre>
+</div>
+
+<div id="integrity" class="tab-content">
+<h2>integrity check</h2>
+<ul class="checks">
+<li class="issue">&#9888; initial_confirmed がトップレベルと _phase3 で重複（実害なし、データ冗長）</li>
+<li class="ok">&#10003; 全質問の reveals 先は全て propositions に存在</li>
+<li class="ok">&#10003; negation_of の対称性が保たれている</li>
+<li class="ok">&#10003; 全命題の formation_conditions の参照先が存在</li>
+<li class="ok">&#10003; 全モデル (11個) がカバー済み</li>
+<li class="ok">&#10003; clear_conditions がトップレベルと _phase6 で一致</li>
+<li class="ok">&#10003; 全質問の reveals が単一要素（1質問1命題）</li>
+
+</ul>
+</div>
+
+<script>
+  // Initialize mermaid - render all diagrams while all tabs visible
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, curve: 'basis' }
+  });
+
+  // After mermaid renders, hide non-active tabs
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var tabs = document.querySelectorAll('.tab-content');
+      for (var i = 1; i < tabs.length; i++) {
+        tabs[i].classList.add('hidden');
+      }
+    }, 500);
+  });
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.add('hidden');
+      });
+      document.querySelectorAll('.tab').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      var target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.remove('hidden');
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
