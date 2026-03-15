@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>バーの男: 導出関係図</title>
+<style>
+  body { font-family: sans-serif; background: #1a1a2e; color: #e0e0e0; margin: 40px; }
+  h1 { color: #fff; font-size: 20px; }
+  .legend { margin: 20px 0; font-size: 13px; line-height: 2; }
+  svg text { font-family: sans-serif; }
+</style>
+</head>
+<body>
+<h1>バーの男: 分割命題の導出関係</h1>
+<div class="legend">
+  <span style="color:#e65100">■ T の具象命題</span>&nbsp;&nbsp;
+  <span style="color:#ce93d8">■ 複合命題（組み合わせ導出）</span>&nbsp;&nbsp;
+  <span style="color:#42a5f5">■ 独立軸</span>&nbsp;&nbsp;
+  <span style="color:#4caf50">■ 導出される抽象命題（S から到達可能）</span>
+</div>
+
+<svg width="850" height="560" viewBox="0 0 850 560">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ff6b6b"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ce93d8"/>
+    </marker>
+  </defs>
+
+  <!-- P_T (top) -->
+  <rect x="270" y="30" width="310" height="44" rx="8" fill="#e65100" opacity="0.9"/>
+  <text x="425" y="47" text-anchor="middle" fill="#fff" font-size="11">P_T: しゃっくりに困り水で治そうとしたが</text>
+  <text x="425" y="63" text-anchor="middle" fill="#fff" font-size="11">バーテンダーが気づいて驚かせて止めた</text>
+
+  <!-- P_T → NU1 -->
+  <line x1="425" y1="74" x2="425" y2="116" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- NU1 -->
+  <rect x="295" y="120" width="260" height="38" rx="8" fill="#e65100" opacity="0.75"/>
+  <text x="425" y="144" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">NU1: 症状はしゃっくりだった</text>
+
+  <!-- NU1 → NT1 -->
+  <line x1="425" y1="158" x2="425" y2="196" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- NT1 (combination) -->
+  <rect x="260" y="200" width="330" height="38" rx="8" fill="#9c27b0" opacity="0.75"/>
+  <text x="425" y="224" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">NT1: 驚かせて症状を止めようとした</text>
+  <text x="600" y="218" fill="#ce93d8" font-size="10">= P4 + P5 の複合</text>
+
+  <!-- NT1 → P4 -->
+  <line x1="350" y1="238" x2="250" y2="316" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- NT1 → P5 -->
+  <line x1="500" y1="238" x2="600" y2="316" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- P4 (independent axis 1) -->
+  <rect x="120" y="320" width="260" height="38" rx="8" fill="#42a5f5" opacity="0.9"/>
+  <text x="250" y="344" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">P4: 身体的な症状を治すため水を求めた</text>
+
+  <!-- P5 (independent axis 2) -->
+  <rect x="470" y="320" width="260" height="38" rx="8" fill="#42a5f5" opacity="0.9"/>
+  <text x="600" y="344" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">P5: 察知して銃を向けた</text>
+
+  <!-- P4 → P3 -->
+  <line x1="200" y1="358" x2="150" y2="436" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- P4 → P2 -->
+  <line x1="300" y1="358" x2="350" y2="436" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- P5 → P1 -->
+  <line x1="600" y1="358" x2="600" y2="436" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- P3 -->
+  <rect x="50" y="440" width="220" height="38" rx="8" fill="#4caf50" opacity="0.85"/>
+  <text x="160" y="464" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">P3: 何かに困っていた</text>
+
+  <!-- P2 -->
+  <rect x="290" y="440" width="220" height="38" rx="8" fill="#4caf50" opacity="0.85"/>
+  <text x="400" y="464" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">P2: 水を文字通り求めていた</text>
+
+  <!-- P1 -->
+  <rect x="530" y="440" width="220" height="38" rx="8" fill="#4caf50" opacity="0.85"/>
+  <text x="640" y="464" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">P1: 銃が望ましい結果をもたらした</text>
+
+  <!-- Labels -->
+  <text x="250" y="510" text-anchor="middle" fill="#888" font-size="11">← 軸1: 男の問題 →</text>
+  <text x="640" y="510" text-anchor="middle" fill="#888" font-size="11">軸2: BTの行動</text>
+
+  <!-- Arrow labels -->
+  <text x="275" y="290" fill="#ff6b6b" font-size="10">導出</text>
+  <text x="530" y="290" fill="#ff6b6b" font-size="10">導出</text>
+  <text x="145" y="400" fill="#ff6b6b" font-size="10">導出</text>
+  <text x="335" y="400" fill="#ff6b6b" font-size="10">導出</text>
+  <text x="612" y="400" fill="#ff6b6b" font-size="10">導出</text>
+</svg>
+</body>
+</html>

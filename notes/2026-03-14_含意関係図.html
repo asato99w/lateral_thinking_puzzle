@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>分割命題の概念的含意関係</title>
+<style>
+  body { font-family: sans-serif; background: #1a1a2e; color: #e0e0e0; margin: 40px; }
+  h1 { color: #fff; font-size: 20px; }
+  .legend { margin: 20px 0; font-size: 13px; }
+  .legend span { display: inline-block; margin-right: 20px; }
+  .arrow-label { color: #aaa; font-size: 12px; }
+  svg text { font-family: sans-serif; }
+</style>
+</head>
+<body>
+<h1>分割命題の概念的含意関係（P1' = 欺瞞）</h1>
+<div class="legend">
+  <span>🟦 独立命題（他から消費されない・他を消費しない）</span>
+  <span>🟩 消費者（他の命題を消費する）</span>
+  <span>🟨 消費される命題（上位命題の確認で不要になる）</span>
+  <span>→ A→B: Aを確認するとBが不要になる</span>
+</div>
+<svg width="800" height="520" viewBox="0 0 800 520">
+  <!-- Arrows (implication: A confirms → B redundant) -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ff6b6b"/>
+    </marker>
+  </defs>
+
+  <!-- P6 → P5 -->
+  <line x1="400" y1="370" x2="400" y2="268" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="412" y="320" fill="#ff6b6b" font-size="11">消費</text>
+
+  <!-- P5 → P4 -->
+  <line x1="400" y1="228" x2="400" y2="128" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="412" y="178" fill="#ff6b6b" font-size="11">消費</text>
+
+  <!-- P6 → P3 -->
+  <line x1="370" y1="380" x2="220" y2="268" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="270" y="340" fill="#ff6b6b" font-size="11">消費</text>
+
+  <!-- P3 → P1' -->
+  <line x1="200" y1="228" x2="200" y2="128" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="212" y="178" fill="#ff6b6b" font-size="11">消費</text>
+
+  <!-- P2 (independent) -->
+  <!-- P7 (independent) -->
+
+  <!-- Nodes -->
+  <!-- P1' consumed -->
+  <rect x="130" y="88" width="140" height="40" rx="8" fill="#e6b800" opacity="0.85"/>
+  <text x="200" y="113" text-anchor="middle" fill="#1a1a2e" font-size="13" font-weight="bold">P1': 欺瞞があった</text>
+
+  <!-- P4 consumed -->
+  <rect x="330" y="88" width="140" height="40" rx="8" fill="#e6b800" opacity="0.85"/>
+  <text x="400" y="113" text-anchor="middle" fill="#1a1a2e" font-size="13" font-weight="bold">P4: 深刻な状況</text>
+
+  <!-- P3 -->
+  <rect x="130" y="228" width="140" height="40" rx="8" fill="#4caf50" opacity="0.85"/>
+  <text x="200" y="253" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">P3: 偽られた側</text>
+
+  <!-- P5 -->
+  <rect x="330" y="228" width="140" height="40" rx="8" fill="#4caf50" opacity="0.85"/>
+  <text x="400" y="253" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">P5: 生存の危機</text>
+
+  <!-- P6 -->
+  <rect x="280" y="370" width="240" height="40" rx="8" fill="#4caf50" opacity="0.85"/>
+  <text x="400" y="395" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">P6: 飢餓救済目的</text>
+
+  <!-- P2 independent -->
+  <rect x="590" y="88" width="170" height="40" rx="8" fill="#42a5f5" opacity="0.85"/>
+  <text x="675" y="113" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">P2: 悟り→自殺の因果</text>
+
+  <!-- P7 independent -->
+  <rect x="590" y="228" width="170" height="40" rx="8" fill="#42a5f5" opacity="0.85"/>
+  <text x="675" y="253" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">P7: 道徳的禁忌食材</text>
+
+  <!-- Labels for groups -->
+  <text x="300" y="470" text-anchor="middle" fill="#888" font-size="12">含意チェーン（消費関係）</text>
+  <text x="675" y="310" text-anchor="middle" fill="#888" font-size="12">独立（消費関係なし）</text>
+
+  <!-- Dashed box around independent -->
+  <rect x="575" y="70" width="200" height="220" rx="12" fill="none" stroke="#42a5f5" stroke-width="1" stroke-dasharray="6,4" opacity="0.5"/>
+
+  <!-- Dashed box around chain -->
+  <rect x="115" y="70" width="400" height="360" rx="12" fill="none" stroke="#ff6b6b" stroke-width="1" stroke-dasharray="6,4" opacity="0.3"/>
+</svg>
+</body>
+</html>
