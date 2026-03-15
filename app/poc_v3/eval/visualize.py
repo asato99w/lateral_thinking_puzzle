@@ -30,8 +30,12 @@ def build_html(data: dict) -> str:
     chain_extensions = data.get("_phase5", {}).get("chain_extensions", [])
     chain_designs = data.get("_phase6", {}).get("chain_designs", [])
     generated = data.get("_phase9", {}).get("generated", {})
+    derivation_graph = data.get("_phase2", {}).get("derivation_graph", {})
 
     # --- Build Mermaid diagrams ---
+
+    # Diagram 0: Derivation Graph (conceptual derivation relationships)
+    deriv_graph_lines = _build_derivation_graph_diagram(derivation_graph, division_props, propositions)
 
     # Diagram 1: Proposition Derivation Flow (NF excluded)
     derivation_lines = _build_derivation_diagram(propositions, s_props)
@@ -57,6 +61,7 @@ def build_html(data: dict) -> str:
     # --- Build HTML ---
     return _render_html(
         title=title,
+        deriv_graph_diagram="\n".join(deriv_graph_lines),
         derivation_diagram="\n".join(derivation_lines),
         question_diagram="\n".join(q_lines),
         division_diagram="\n".join(div_lines),
@@ -66,6 +71,84 @@ def build_html(data: dict) -> str:
         integrity=integrity,
         data=data,
     )
+
+
+def _build_derivation_graph_diagram(derivation_graph, division_props, propositions):
+    """導出関係グラフ (_phase2.derivation_graph) を描画する"""
+    lines = [
+        "graph TD",
+        "  classDef axisNode fill:#42a5f5,stroke:#1565c0,color:#fff",
+        "  classDef rootNode fill:#4caf50,stroke:#2e7d32,color:#fff",
+        "  classDef compositeNode fill:#9c27b0,stroke:#6a1b9a,color:#fff",
+        "  classDef derivedNode fill:#ff9800,stroke:#e65100,color:#fff",
+        "  classDef defaultNode fill:#e0e0e0,stroke:#757575,color:#424242",
+    ]
+
+    if not derivation_graph:
+        lines.append('  empty["No derivation_graph in _phase2"]')
+        return lines
+
+    independent_axes = set(derivation_graph.get("independent_axes", []))
+    root_props = set(derivation_graph.get("root_propositions", []))
+    single_derivs = derivation_graph.get("single_derivations", [])
+    combo_derivs = derivation_graph.get("combination_derivations", [])
+
+    # Collect all node IDs
+    all_nodes = set()
+    composite_nodes = set()
+    for sd in single_derivs:
+        all_nodes.add(sd["from"])
+        all_nodes.add(sd["to"])
+    for cd in combo_derivs:
+        for f in cd["from"]:
+            all_nodes.add(f)
+        comp = cd.get("composite", "")
+        if comp:
+            all_nodes.add(comp)
+            composite_nodes.add(comp)
+    all_nodes.update(independent_axes)
+    all_nodes.update(root_props)
+
+    # Build label map from division_propositions and propositions
+    label_map = {}
+    for dp in division_props:
+        label_map[dp["id"]] = dp["label"]
+    for pid, prop in propositions.items():
+        if pid not in label_map:
+            label_map[pid] = prop.get("label", pid)
+
+    # Define nodes
+    for nid in sorted(all_nodes):
+        label = label_map.get(nid, nid)
+        short_label = label[:30] + "..." if len(label) > 30 else label
+        if nid in independent_axes:
+            cls = "axisNode"
+        elif nid in root_props:
+            cls = "rootNode"
+        elif nid in composite_nodes:
+            cls = "compositeNode"
+        else:
+            cls = "derivedNode"
+        lines.append(f'  {nid}["{nid}: {_esc(short_label)}"]:::{cls}')
+
+    # Single derivation edges (from → to = "from derives to, from is more concrete")
+    for sd in single_derivs:
+        reason = sd.get("reason", "")
+        short_reason = reason[:20] + "..." if len(reason) > 20 else reason
+        if short_reason:
+            lines.append(f'  {sd["from"]} -->|"{_esc(short_reason)}"| {sd["to"]}')
+        else:
+            lines.append(f'  {sd["from"]} --> {sd["to"]}')
+
+    # Combination derivation edges
+    for cd in combo_derivs:
+        comp = cd.get("composite", "")
+        if comp:
+            # from members → composite (dashed)
+            for f in cd["from"]:
+                lines.append(f"  {f} -.-> {comp}")
+
+    return lines
 
 
 def _build_derivation_diagram(propositions, s_props):
@@ -459,8 +542,9 @@ def _normalize_conds(conds):
     return sorted([sorted(g) for g in conds])
 
 
-def _render_html(*, title, derivation_diagram, question_diagram, division_diagram,
-                 chain_diagram, branch_diagram, path_diagram, integrity, data):
+def _render_html(*, title, deriv_graph_diagram, derivation_diagram, question_diagram,
+                 division_diagram, chain_diagram, branch_diagram, path_diagram,
+                 integrity, data):
     issues_html = ""
     for issue in integrity["issues"]:
         issues_html += f'<li class="issue">&#9888; {html.escape(issue)}</li>\n'
@@ -535,13 +619,26 @@ def _render_html(*, title, derivation_diagram, question_diagram, division_diagra
 </div>
 
 <div class="tabs">
-  <div class="tab active" data-tab="derivation">derivation</div>
+  <div class="tab active" data-tab="deriv_graph">derivation graph</div>
+  <div class="tab" data-tab="derivation">fc flow</div>
   <div class="tab" data-tab="questions">Q -&gt; prop</div>
   <div class="tab" data-tab="division">model split</div>
   <div class="tab" data-tab="chains">chain</div>
   <div class="tab" data-tab="branches">branch / NF</div>
   <div class="tab" data-tab="paths">path</div>
   <div class="tab" data-tab="integrity">integrity</div>
+</div>
+
+<div id="deriv_graph" class="tab-content">
+<h2>derivation graph (_phase2)</h2>
+<p class="note">
+  Conceptual derivation: A &rarr; B means confirming A makes B redundant.
+  Blue = independent axis, green = root (S-reachable), purple = composite, orange = derived.
+  Dashed = combination derivation.
+</p>
+<pre class="mermaid">
+{deriv_graph_diagram}
+</pre>
 </div>
 
 <div id="derivation" class="tab-content">
