@@ -12,7 +12,10 @@
       "difficulty": 1,
       "tier": "free",
       "bundled": true,
-      "locales": ["ja"]
+      "locales": [
+        "ja",
+        "en"
+      ]
     },
     {
       "id": "bar_man",
@@ -26,7 +29,9 @@
       "difficulty": 2,
       "tier": "free",
       "bundled": true,
-      "locales": ["ja"]
+      "locales": [
+        "ja"
+      ]
     },
     {
       "id": "desert_man",
@@ -40,7 +45,9 @@
       "difficulty": 3,
       "tier": "free",
       "bundled": true,
-      "locales": ["ja"]
+      "locales": [
+        "ja"
+      ]
     },
     {
       "id": "forbidden_basement",
@@ -54,7 +61,9 @@
       "difficulty": 2,
       "tier": "free",
       "bundled": true,
-      "locales": ["ja"]
+      "locales": [
+        "ja"
+      ]
     },
     {
       "id": "poisonous_mushroom",
@@ -68,7 +77,9 @@
       "difficulty": 2,
       "tier": "free",
       "bundled": true,
-      "locales": ["ja"]
+      "locales": [
+        "ja"
+      ]
     }
   ],
   "packs": [
@@ -79,7 +90,13 @@
       "description_ja": "人気の水平思考パズル",
       "description_en": "Popular lateral thinking puzzles",
       "icon": "📦",
-      "puzzle_ids": ["turtle_soup", "bar_man", "desert_man", "forbidden_basement", "poisonous_mushroom"],
+      "puzzle_ids": [
+        "turtle_soup",
+        "bar_man",
+        "desert_man",
+        "forbidden_basement",
+        "poisonous_mushroom"
+      ],
       "tier": "free"
     }
   ]
