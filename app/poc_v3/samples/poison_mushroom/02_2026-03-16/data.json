@@ -1,0 +1,796 @@
+{
+  "title": "毒キノコ",
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "男にとって、毒キノコしかないことの重要性は、食用キノコの不在にあった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "男はキノコの状態から、その場所への人の出入りについて推論した",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "男の安堵は、生命や安全に関わるものだった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "男はキノコ狩り（食用キノコの採取）のためにその場所に来ていた",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "毒キノコしかないことが、その場所に人がいる（来た）証拠となった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "男はキノコ狩り中に山で遭難し、毒キノコしか残っていないことから人が近くにいて助かる見込みがあると判断した",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I7",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I1",
+      "label": "毒キノコしかないことが安堵につながる何らかの情報的理由がある",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S4",
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I2",
+      "label": "男には安堵する前に何らかの不安や懸念があった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I3",
+      "label": "男の不安は深刻な問題に関するものだった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I4",
+      "label": "食用キノコがないのには何らかの原因がある",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "食用キノコの不在に注目したのは、食用キノコに関心があったからだ",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "食用キノコの不在は、自然現象ではなく人為的な理由による",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I7",
+      "label": "男はキノコ狩り中に生命に関わる困難に陥っていた",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P3",
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "男の安堵は毒キノコ自体に直接的な価値があるからではない",
+      "negation_of": "H1a",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1a",
+      "label": "男の安堵は毒キノコ自体に直接的な価値があるからだ",
+      "negation_of": "N1a",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N2b",
+      "label": "男の不安は日常的な不便や些細な問題ではなかった",
+      "negation_of": "H2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H2b",
+      "label": "男の不安は日常的な不便や些細な問題だった",
+      "negation_of": "N2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N5a",
+      "label": "食用キノコがないのは自然環境の理由ではない",
+      "negation_of": "H5a",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H5a",
+      "label": "食用キノコがないのは自然環境の理由だ",
+      "negation_of": "N5a",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1b",
+      "label": "安堵の理由は毒キノコの見分けやすさではない",
+      "negation_of": "HF1b",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1b",
+      "label": "安堵の理由は毒キノコの見分けやすさだ",
+      "negation_of": "NF1b",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "安堵は特定の目標達成によるものではない",
+      "negation_of": "HF2a",
+      "formation_conditions": [
+        [
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "安堵は特定の目標達成によるものだ",
+      "negation_of": "NF2a",
+      "formation_conditions": [
+        [
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2c",
+      "label": "男の不安は仕事や職務に関する問題ではなかった",
+      "negation_of": "HF2c",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2c",
+      "label": "男の不安は仕事や職務に関する問題だった",
+      "negation_of": "NF2c",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2d",
+      "label": "安堵は他者の安全に関するものではなかった",
+      "negation_of": "HF2d",
+      "formation_conditions": [
+        [
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2d",
+      "label": "安堵は他者の安全に関するものだった",
+      "negation_of": "NF2d",
+      "formation_conditions": [
+        [
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3a",
+      "label": "食用キノコがないのはその場所では普通ではない",
+      "negation_of": "HF3a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3a",
+      "label": "食用キノコがないのはその場所では普通だ",
+      "negation_of": "NF3a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3b",
+      "label": "食用キノコの不在は季節的な理由ではない",
+      "negation_of": "HF3b",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3b",
+      "label": "食用キノコの不在は季節的な理由だ",
+      "negation_of": "NF3b",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4a",
+      "label": "男は食用キノコがないこと自体を歓迎してはいない",
+      "negation_of": "HF4a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4a",
+      "label": "男は食用キノコがないことを歓迎した",
+      "negation_of": "NF4a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4b",
+      "label": "男はキノコの専門家ではない",
+      "negation_of": "HF4b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4b",
+      "label": "男はキノコの専門家だ",
+      "negation_of": "NF4b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5c",
+      "label": "食用キノコは管理目的で除去されたわけではない",
+      "negation_of": "HF5c",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5c",
+      "label": "食用キノコは管理目的で除去された",
+      "negation_of": "NF5c",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5d",
+      "label": "毒キノコしかないのは人が来ていない証拠ではない",
+      "negation_of": "HF5d",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5d",
+      "label": "毒キノコしかないのは人が来ていない証拠だ",
+      "negation_of": "NF5d",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6b",
+      "label": "男はケガをしたわけではない",
+      "negation_of": "HF6b",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6b",
+      "label": "男はケガをした",
+      "negation_of": "NF6b",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6c",
+      "label": "安堵の理由は食料の確保ではない",
+      "negation_of": "HF6c",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6c",
+      "label": "安堵の理由は食料の確保だ",
+      "negation_of": "NF6c",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "毒キノコ自体に何か価値があるから安堵したのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q1b",
+      "text": "男にとって重要だったのは、毒キノコがあることではなく、食用キノコがないことですか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q2a",
+      "text": "男が安堵する前に、何か不安や心配事がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2b",
+      "text": "その不安は、日常的な不便や些細な問題ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N2b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I2"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q2c",
+      "text": "男の安堵は、生命や安全に関わるものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3a",
+      "text": "食用キノコがない理由について、男は考えましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q3b",
+      "text": "男はキノコの状態から、その場所に人が来たかどうかについて考えましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I4"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4a",
+      "text": "男が食用キノコの不在を気にしたのは、食用キノコに関心があったからですか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q4b",
+      "text": "男はキノコ狩りのためにその場所に来ていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q5a",
+      "text": "食用キノコがないのは、もともとそこに生えていないからですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q5b",
+      "text": "食用キノコは、誰かに先に採られていたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6a",
+      "text": "男はキノコ狩り中に山で遭難していましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P4"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1b",
+      "text": "毒キノコが見分けやすいことが安堵の理由ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2a",
+      "text": "男は特定の目標を達成したから安堵しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF2c",
+      "text": "男の不安は仕事や職務に関する問題でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I2"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF2d",
+      "text": "安堵は他者の安全に関するものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2d"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF3a",
+      "text": "食用キノコがないのは、その場所では普通のことですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF3b",
+      "text": "食用キノコがない原因は、季節的なものですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4a",
+      "text": "男は食用キノコがないこと自体を歓迎しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF4b",
+      "text": "男はキノコに関する専門家（教育者や管理者）ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF5c",
+      "text": "食用キノコは管理目的で除去されたのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF5d",
+      "text": "毒キノコしかないのは、人が来ていない証拠ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5d"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF6b",
+      "text": "男はキノコ狩り中にケガをしましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF6c",
+      "text": "人がいることで食料を得られると安堵しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "原因と動機"
+    }
+  ],
+  "statement": "男は、辺りに毒キノコしかないのを見て安堵した。なぜだろうか。",
+  "truth": "男はキノコ狩りの最中に山で遭難していた。辺りに毒キノコしか残っていないということは、食用キノコは誰かが既に採った＝この辺りに人が来ているということ。近くに人里や他の採集者がいると分かり、助かる見込みがあると安堵した。",
+  "id": "毒キノコ"
+}

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>毒キノコ data_src</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: #fafafa; color: #333; padding: 20px; }
+  h1 { font-size: 1.6em; margin-bottom: 10px; }
+  h2 { font-size: 1.2em; margin: 20px 0 10px; padding: 8px 12px;
+       background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 2px; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+  .stat { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px;
+           padding: 10px 16px; min-width: 120px; }
+  .stat .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+  .stat .label { font-size: 0.85em; color: #666; }
+  .tabs { display: flex; gap: 4px; margin: 16px 0 0; border-bottom: 2px solid #e0e0e0; }
+  .tab { padding: 8px 16px; cursor: pointer; background: #f5f5f5;
+          border: 1px solid #e0e0e0; border-bottom: none; border-radius: 6px 6px 0 0;
+          font-size: 0.9em; user-select: none; }
+  .tab.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px;
+                 font-weight: bold; color: #1565c0; }
+  .tab-content { background: #fff; border: 1px solid #e0e0e0;
+                  border-top: none; padding: 16px; overflow-x: auto; }
+  .tab-content.hidden { display: none; }
+  .mermaid { text-align: center; }
+  ul.checks { list-style: none; padding: 8px 0; }
+  ul.checks li { padding: 4px 8px; font-size: 0.9em; }
+  li.issue { color: #e65100; }
+  li.ok { color: #2e7d32; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0; font-size: 0.8em; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-swatch { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #999; }
+  .note { font-size: 0.85em; color: #666; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h1>毒キノコ — data_src.json</h1>
+
+<div class="stats">
+  <div class="stat"><div class="num">3</div><div class="label">tension</div></div>
+  <div class="stat"><div class="num">13</div><div class="label">model</div></div>
+  <div class="stat"><div class="num">9</div><div class="label">S prop</div></div>
+  <div class="stat"><div class="num">43</div><div class="label">proposition</div></div>
+  <div class="stat"><div class="num">24</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">6</div><div class="label">chain</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#e3f2fd"></div> S</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fff3e0"></div> N</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#e8f5e9"></div> P</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fce4ec"></div> NT</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f3e5f5"></div> NU</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f5f5f5"></div> NF</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="deriv_graph">derivation graph</div>
+  <div class="tab" data-tab="derivation">fc flow</div>
+  <div class="tab" data-tab="questions">Q -&gt; prop</div>
+  <div class="tab" data-tab="division">model split</div>
+  <div class="tab" data-tab="chains">chain</div>
+  <div class="tab" data-tab="branches">branch / NF</div>
+  <div class="tab" data-tab="paths">path</div>
+  <div class="tab" data-tab="integrity">integrity</div>
+</div>
+
+<div id="deriv_graph" class="tab-content">
+<h2>derivation graph (_phase2)</h2>
+<p class="note">
+  Conceptual derivation: A &rarr; B means confirming A makes B redundant.
+  Blue = independent axis, green = root (S-reachable), purple = composite, orange = derived.
+  Dashed = combination derivation.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef axisNode fill:#42a5f5,stroke:#1565c0,color:#fff
+  classDef rootNode fill:#4caf50,stroke:#2e7d32,color:#fff
+  classDef compositeNode fill:#9c27b0,stroke:#6a1b9a,color:#fff
+  classDef derivedNode fill:#ff9800,stroke:#e65100,color:#fff
+  classDef defaultNode fill:#e0e0e0,stroke:#757575,color:#424242
+  P1["P1: 男にとって、毒キノコしかないことの重要性は、食用キノコの不在..."]:::rootNode
+  P2["P2: 男はキノコの状態から、その場所への人の出入りについて推論した"]:::derivedNode
+  P3["P3: 男の安堵は、生命や安全に関わるものだった"]:::axisNode
+  P4["P4: 男はキノコ狩り（食用キノコの採取）のためにその場所に来ていた"]:::derivedNode
+  P5["P5: 毒キノコしかないことが、その場所に人がいる（来た）証拠となっ..."]:::axisNode
+  P5 -->|"「人がいた証拠」から方向性を落とすと「人..."| P2
+  P2 -->|"「人の出入りの推論」から推論内容を落とす..."| P1
+  P4 -->|"「キノコ狩り目的」から活動の具体内容を落..."| P1
+</pre>
+</div>
+
+<div id="derivation" class="tab-content">
+<h2>formation_conditions</h2>
+<p class="note">
+  S -&gt; N -&gt; P -&gt; NT -&gt; NU. Solid = fc, dotted = S derived_from.
+  Junction = AND. Multiple arrows to same node = OR.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef sNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  S1["S1: ある男がいた"]:::sNode
+  S2["S2: 辺りにキノコがあった"]:::sNode
+  S3["S3: そのキノコは毒キノコだった"]:::sNode
+  S4["S4: 辺りには毒キノコしかなかった"]:::sNode
+  S5["S5: 男はそれを見た（視覚的に確認した）"]:::sNode
+  S6["S6: 男は安堵した"]:::sNode
+  S7["S7: 男は毒キノコと識別できた"]:::sNode
+  S8["S8: 男は辺りに食用キノコがないことを認識した"]:::sNode
+  S9["S9: 安堵の原因は毒キノコしかないことに関係する"]:::sNode
+  P1["P1: 男にとって、毒キノコしかないことの重要性は、食用キノコの不在にあった"]:::pNode
+  P2["P2: 男はキノコの状態から、その場所への人の出入りについて推論した"]:::pNode
+  P3["P3: 男の安堵は、生命や安全に関わるものだった"]:::pNode
+  P4["P4: 男はキノコ狩り（食用キノコの採取）のためにその場所に来ていた"]:::pNode
+  P5["P5: 毒キノコしかないことが、その場所に人がいる（来た）証拠となった"]:::pNode
+  FP["FP: 男はキノコ狩り中に山で遭難し、毒キノコしか残っていないことから人が近くにいて助かる見込みがあると判断した"]:::nNode
+  I1["I1: 毒キノコしかないことが安堵につながる何らかの情報的理由がある"]:::nNode
+  I2["I2: 男には安堵する前に何らかの不安や懸念があった"]:::nNode
+  I3["I3: 男の不安は深刻な問題に関するものだった"]:::nNode
+  I4["I4: 食用キノコがないのには何らかの原因がある"]:::nNode
+  I5["I5: 食用キノコの不在に注目したのは、食用キノコに関心があったからだ"]:::nNode
+  I6["I6: 食用キノコの不在は、自然現象ではなく人為的な理由による"]:::nNode
+  I7["I7: 男はキノコ狩り中に生命に関わる困難に陥っていた"]:::nNode
+  N1a["N1a: 男の安堵は毒キノコ自体に直接的な価値があるからではない"]:::nNode
+  H1a["H1a: 男の安堵は毒キノコ自体に直接的な価値があるからだ"]:::nNode
+  N2b["N2b: 男の不安は日常的な不便や些細な問題ではなかった"]:::nNode
+  H2b["H2b: 男の不安は日常的な不便や些細な問題だった"]:::nNode
+  N5a["N5a: 食用キノコがないのは自然環境の理由ではない"]:::nNode
+  H5a["H5a: 食用キノコがないのは自然環境の理由だ"]:::nNode
+  NF1b["NF1b: 安堵の理由は毒キノコの見分けやすさではない"]:::fNode
+  HF1b["HF1b: 安堵の理由は毒キノコの見分けやすさだ"]:::nNode
+  NF2a["NF2a: 安堵は特定の目標達成によるものではない"]:::fNode
+  HF2a["HF2a: 安堵は特定の目標達成によるものだ"]:::nNode
+  NF2c["NF2c: 男の不安は仕事や職務に関する問題ではなかった"]:::fNode
+  HF2c["HF2c: 男の不安は仕事や職務に関する問題だった"]:::nNode
+  NF2d["NF2d: 安堵は他者の安全に関するものではなかった"]:::fNode
+  HF2d["HF2d: 安堵は他者の安全に関するものだった"]:::nNode
+  NF3a["NF3a: 食用キノコがないのはその場所では普通ではない"]:::fNode
+  HF3a["HF3a: 食用キノコがないのはその場所では普通だ"]:::nNode
+  NF3b["NF3b: 食用キノコの不在は季節的な理由ではない"]:::fNode
+  HF3b["HF3b: 食用キノコの不在は季節的な理由だ"]:::nNode
+  NF4a["NF4a: 男は食用キノコがないこと自体を歓迎してはいない"]:::fNode
+  HF4a["HF4a: 男は食用キノコがないことを歓迎した"]:::nNode
+  NF4b["NF4b: 男はキノコの専門家ではない"]:::fNode
+  HF4b["HF4b: 男はキノコの専門家だ"]:::nNode
+  NF5c["NF5c: 食用キノコは管理目的で除去されたわけではない"]:::fNode
+  HF5c["HF5c: 食用キノコは管理目的で除去された"]:::nNode
+  NF5d["NF5d: 毒キノコしかないのは人が来ていない証拠ではない"]:::fNode
+  HF5d["HF5d: 毒キノコしかないのは人が来ていない証拠だ"]:::nNode
+  NF6b["NF6b: 男はケガをしたわけではない"]:::fNode
+  HF6b["HF6b: 男はケガをした"]:::nNode
+  NF6c["NF6c: 安堵の理由は食料の確保ではない"]:::fNode
+  HF6c["HF6c: 安堵の理由は食料の確保だ"]:::nNode
+  S3 -.-> S7
+  S5 -.-> S7
+  S4 -.-> S8
+  S5 -.-> S8
+  S4 -.-> S9
+  S6 -.-> S9
+  S4 --> P1
+  I4 --> P2
+  I3 --> P3
+  I5 --> P4
+  I6 --> P5
+  j_FP_I7_P5(( ))
+  I7 --> j_FP_I7_P5
+  P5 --> j_FP_I7_P5
+  j_FP_I7_P5 --> FP
+  j_I1_S4_S6(( ))
+  S4 --> j_I1_S4_S6
+  S6 --> j_I1_S4_S6
+  j_I1_S4_S6 --> I1
+  S6 --> I2
+  I2 --> I3
+  P1 --> I4
+  P1 --> I5
+  P2 --> I6
+  j_I7_P3_P4(( ))
+  P3 --> j_I7_P3_P4
+  P4 --> j_I7_P3_P4
+  j_I7_P3_P4 --> I7
+  S4 --> N1a
+  S4 --> H1a
+  I2 --> N2b
+  I2 --> H2b
+  P2 --> N5a
+  P2 --> H5a
+  S4 --> NF1b
+  S4 --> HF1b
+  S6 --> NF2a
+  S6 --> HF2a
+  I2 --> NF2c
+  I2 --> HF2c
+  S6 --> NF2d
+  S6 --> HF2d
+  P1 --> NF3a
+  P1 --> HF3a
+  I4 --> NF3b
+  I4 --> HF3b
+  P1 --> NF4a
+  P1 --> HF4a
+  I5 --> NF4b
+  I5 --> HF4b
+  P2 --> NF5c
+  P2 --> HF5c
+  P2 --> NF5d
+  P2 --> HF5d
+  I7 --> NF6b
+  I7 --> HF6b
+  I7 --> NF6c
+  I7 --> HF6c
+</pre>
+</div>
+
+<div id="questions" class="tab-content">
+<h2>Q -&gt; proposition (reveals)</h2>
+<p class="note">O = yes, X = no</p>
+<pre class="mermaid">
+graph LR
+  classDef qNode fill:#e8eaf6,stroke:#283593,color:#1a237e
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  Q1a["Q1a X<br/>毒キノコ自体に何か価値があるから安堵したのですか？"]:::qNode
+  N1a_q["N1a: 男の安堵は毒キノコ自体に直接的な価値があるからではない"]:::nNode
+  Q1b["Q1b O<br/>男にとって重要だったのは、毒キノコがあることではなく、食用キノコがないことですか？"]:::qNode
+  P1_q["P1: 男にとって、毒キノコしかないことの重要性は、食用キノコの不在にあった"]:::pNode
+  Q2a["Q2a O<br/>男が安堵する前に、何か不安や心配事がありましたか？"]:::qNode
+  I2_q["I2: 男には安堵する前に何らかの不安や懸念があった"]:::nNode
+  Q2b["Q2b X<br/>その不安は、日常的な不便や些細な問題ですか？"]:::qNode
+  N2b_q["N2b: 男の不安は日常的な不便や些細な問題ではなかった"]:::nNode
+  Q2c["Q2c O<br/>男の安堵は、生命や安全に関わるものでしたか？"]:::qNode
+  P3_q["P3: 男の安堵は、生命や安全に関わるものだった"]:::pNode
+  Q3a["Q3a O<br/>食用キノコがない理由について、男は考えましたか？"]:::qNode
+  I4_q["I4: 食用キノコがないのには何らかの原因がある"]:::nNode
+  Q3b["Q3b O<br/>男はキノコの状態から、その場所に人が来たかどうかについて考えましたか？"]:::qNode
+  P2_q["P2: 男はキノコの状態から、その場所への人の出入りについて推論した"]:::pNode
+  Q4a["Q4a O<br/>男が食用キノコの不在を気にしたのは、食用キノコに関心があったからですか？"]:::qNode
+  I5_q["I5: 食用キノコの不在に注目したのは、食用キノコに関心があったからだ"]:::nNode
+  Q4b["Q4b O<br/>男はキノコ狩りのためにその場所に来ていましたか？"]:::qNode
+  P4_q["P4: 男はキノコ狩り（食用キノコの採取）のためにその場所に来ていた"]:::pNode
+  Q5a["Q5a X<br/>食用キノコがないのは、もともとそこに生えていないからですか？"]:::qNode
+  N5a_q["N5a: 食用キノコがないのは自然環境の理由ではない"]:::nNode
+  Q5b["Q5b O<br/>食用キノコは、誰かに先に採られていたのですか？"]:::qNode
+  P5_q["P5: 毒キノコしかないことが、その場所に人がいる（来た）証拠となった"]:::pNode
+  Q6a["Q6a O<br/>男はキノコ狩り中に山で遭難していましたか？"]:::qNode
+  I7_q["I7: 男はキノコ狩り中に生命に関わる困難に陥っていた"]:::nNode
+  QF1b["QF1b X<br/>毒キノコが見分けやすいことが安堵の理由ですか？"]:::qNode
+  NF1b_q["NF1b: 安堵の理由は毒キノコの見分けやすさではない"]:::fNode
+  QF2a["QF2a X<br/>男は特定の目標を達成したから安堵しましたか？"]:::qNode
+  NF2a_q["NF2a: 安堵は特定の目標達成によるものではない"]:::fNode
+  QF2c["QF2c X<br/>男の不安は仕事や職務に関する問題でしたか？"]:::qNode
+  NF2c_q["NF2c: 男の不安は仕事や職務に関する問題ではなかった"]:::fNode
+  QF2d["QF2d X<br/>安堵は他者の安全に関するものでしたか？"]:::qNode
+  NF2d_q["NF2d: 安堵は他者の安全に関するものではなかった"]:::fNode
+  QF3a["QF3a X<br/>食用キノコがないのは、その場所では普通のことですか？"]:::qNode
+  NF3a_q["NF3a: 食用キノコがないのはその場所では普通ではない"]:::fNode
+  QF3b["QF3b X<br/>食用キノコがない原因は、季節的なものですか？"]:::qNode
+  NF3b_q["NF3b: 食用キノコの不在は季節的な理由ではない"]:::fNode
+  QF4a["QF4a X<br/>男は食用キノコがないこと自体を歓迎しましたか？"]:::qNode
+  NF4a_q["NF4a: 男は食用キノコがないこと自体を歓迎してはいない"]:::fNode
+  QF4b["QF4b X<br/>男はキノコに関する専門家（教育者や管理者）ですか？"]:::qNode
+  NF4b_q["NF4b: 男はキノコの専門家ではない"]:::fNode
+  QF5c["QF5c X<br/>食用キノコは管理目的で除去されたのですか？"]:::qNode
+  NF5c_q["NF5c: 食用キノコは管理目的で除去されたわけではない"]:::fNode
+  QF5d["QF5d X<br/>毒キノコしかないのは、人が来ていない証拠ですか？"]:::qNode
+  NF5d_q["NF5d: 毒キノコしかないのは人が来ていない証拠ではない"]:::fNode
+  QF6b["QF6b X<br/>男はキノコ狩り中にケガをしましたか？"]:::qNode
+  NF6b_q["NF6b: 男はケガをしたわけではない"]:::fNode
+  QF6c["QF6c X<br/>人がいることで食料を得られると安堵しましたか？"]:::qNode
+  NF6c_q["NF6c: 安堵の理由は食料の確保ではない"]:::fNode
+  Q1a -->|reveals| N1a_q
+  Q1b -->|reveals| P1_q
+  Q2a -->|reveals| I2_q
+  Q2b -->|reveals| N2b_q
+  Q2c -->|reveals| P3_q
+  Q3a -->|reveals| I4_q
+  Q3b -->|reveals| P2_q
+  Q4a -->|reveals| I5_q
+  Q4b -->|reveals| P4_q
+  Q5a -->|reveals| N5a_q
+  Q5b -->|reveals| P5_q
+  Q6a -->|reveals| I7_q
+  QF1b -->|reveals| NF1b_q
+  QF2a -->|reveals| NF2a_q
+  QF2c -->|reveals| NF2c_q
+  QF2d -->|reveals| NF2d_q
+  QF3a -->|reveals| NF3a_q
+  QF3b -->|reveals| NF3b_q
+  QF4a -->|reveals| NF4a_q
+  QF4b -->|reveals| NF4b_q
+  QF5c -->|reveals| NF5c_q
+  QF5d -->|reveals| NF5d_q
+  QF6b -->|reveals| NF6b_q
+  QF6c -->|reveals| NF6c_q
+</pre>
+</div>
+
+<div id="division" class="tab-content">
+<h2>model division hierarchy</h2>
+<pre class="mermaid">
+graph TD
+  classDef trueSet fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseSet fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef propNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  ALL["T, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12"]
+</pre>
+</div>
+
+<div id="chains" class="tab-content">
+<h2>tactical chains</h2>
+<p class="note">C1-C5 + extensions. Parsed from _phase3 description.</p>
+<pre class="mermaid">
+graph TD
+  classDef srcNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef midNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef tgtNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef extNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uniNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  subgraph C1["C1: 動機の探索 → 段階的絞り込み"]
+    direction LR
+    C1_S4_S6["S4_S6: {S4,S6}"]:::srcNode
+    C1_I1["I1: 情報的理由がある"]:::midNode
+    C1_S4_S6 -->|"段階的絞り込み"| C1_I1
+    C1_P1["P1: 食用不在が重要"]:::tgtNode
+    C1_I1 --> C1_P1
+  end
+  subgraph C2["C2: 動機の探索 → 段階的絞り込み → 段階的絞り込み"]
+    direction LR
+    C2_S6["S6"]:::srcNode
+    C2_I2["I2: 不安があった"]:::midNode
+    C2_S6 -->|"段階的絞り込み"| C2_I2
+    C2_I3["I3: 深刻な問題"]:::midNode
+    C2_I2 -->|"段階的絞り込み"| C2_I3
+    C2_P3["P3: 生命・安全"]:::tgtNode
+    C2_I3 --> C2_P3
+  end
+  subgraph C3["C3: 因果の逆転 → 段階的絞り込み"]
+    direction LR
+    C3_P1_S4["P1_S4: {P1,S4}"]:::srcNode
+    C3_I4["I4: 食用不在に原因がある"]:::midNode
+    C3_P1_S4 -->|"段階的絞り込み"| C3_I4
+    C3_P2["P2: 人の出入りの推論"]:::tgtNode
+    C3_I4 --> C3_P2
+  end
+  subgraph C4["C4: 動機の探索 → 段階的絞り込み"]
+    direction LR
+    C4_P1_S5["P1_S5: {P1,S5}"]:::srcNode
+    C4_I5["I5: 食用に関心があった"]:::midNode
+    C4_P1_S5 -->|"段階的絞り込み"| C4_I5
+    C4_P4["P4: キノコ狩り目的"]:::tgtNode
+    C4_I5 --> C4_P4
+  end
+  subgraph C5["C5: 観測事実の深掘り → 段階的絞り込み"]
+    direction LR
+    C5_P2_S4["P2_S4: {P2,S4}"]:::srcNode
+    C5_I6["I6: 食用不在は人為的理由"]:::midNode
+    C5_P2_S4 -->|"段階的絞り込み"| C5_I6
+    C5_P5["P5: 人がいた証拠"]:::tgtNode
+    C5_I6 --> C5_P5
+  end
+  subgraph C6["C6: 段階的絞り込み → 段階的絞り込み"]
+    direction LR
+    C6_P3_P4["P3_P4: {P3,P4}"]:::srcNode
+    C6_I7["I7: キノコ狩り中に困難"]:::midNode
+    C6_P3_P4 -->|"段階的絞り込み with P5"| C6_I7
+    C6_FP["FP"]:::tgtNode
+    C6_I7 --> C6_FP
+  end
+</pre>
+</div>
+
+<div id="branches" class="tab-content">
+<h2>chain branches / rejection (_phase9)</h2>
+<p class="note">T = true side, F = false side (parallel). Dotted = generated NF proposition.</p>
+<pre class="mermaid">
+graph TD
+  classDef trueNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseNode fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef nfNode fill:#f5f5f5,stroke:#757575,color:#424242
+</pre>
+</div>
+
+<div id="paths" class="tab-content">
+<h2>exploration paths</h2>
+<pre class="mermaid">
+graph LR
+  classDef pathNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  subgraph path_sg_0["パス A: 食用不在→人の出入り"]
+    p0s0["Q1b(はい:P1)"]:::pathNode
+    p0s1["Q3a(はい:I4)"]:::pathNode
+    p0s0 --> p0s1
+    p0s2["Q3b(はい:P2)"]:::pathNode
+    p0s1 --> p0s2
+    p0s3["Q5b(はい:P5)"]:::pathNode
+    p0s2 --> p0s3
+    p0s4["Q2c(はい:P3)"]:::pathNode
+    p0s3 --> p0s4
+    p0s5["Q4b(はい:P4)"]:::pathNode
+    p0s4 --> p0s5
+    p0s6["Q6a(はい:I7)"]:::pathNode
+    p0s5 --> p0s6
+    p0s7["FP derived"]:::pathNode
+    p0s6 --> p0s7
+    p0s8["クリア"]:::pathNode
+    p0s7 --> p0s8
+  end
+  subgraph path_sg_1["パス B: 安堵の深刻さ"]
+    p1s0["Q2a(はい:I2)"]:::pathNode
+    p1s1["Q2b(いいえ:N2b)"]:::pathNode
+    p1s0 --> p1s1
+    p1s2["Q2c(はい:P3)"]:::pathNode
+    p1s1 --> p1s2
+    p1s3["Q1b(はい:P1)"]:::pathNode
+    p1s2 --> p1s3
+    p1s4["Q4b(はい:P4)"]:::pathNode
+    p1s3 --> p1s4
+    p1s5["Q6a(はい:I7)"]:::pathNode
+    p1s4 --> p1s5
+    p1s6["Q5b(はい:P5)"]:::pathNode
+    p1s5 --> p1s6
+    p1s7["FP derived"]:::pathNode
+    p1s6 --> p1s7
+    p1s8["クリア"]:::pathNode
+    p1s7 --> p1s8
+  end
+  subgraph path_sg_2["パス C: 排除先行"]
+    p2s0["Q1a(いいえ:N1a)"]:::pathNode
+    p2s1["Q1b(はい:P1)"]:::pathNode
+    p2s0 --> p2s1
+    p2s2["Q4a(はい:I5)"]:::pathNode
+    p2s1 --> p2s2
+    p2s3["Q4b(はい:P4)"]:::pathNode
+    p2s2 --> p2s3
+    p2s4["Q5a(いいえ:N5a)"]:::pathNode
+    p2s3 --> p2s4
+    p2s5["Q5b(はい:P5)"]:::pathNode
+    p2s4 --> p2s5
+    p2s6["Q2c(はい:P3)"]:::pathNode
+    p2s5 --> p2s6
+    p2s7["Q6a(はい:I7)"]:::pathNode
+    p2s6 --> p2s7
+    p2s8["FP derived"]:::pathNode
+    p2s7 --> p2s8
+    p2s9["クリア"]:::pathNode
+    p2s8 --> p2s9
+  end
+</pre>
+</div>
+
+<div id="integrity" class="tab-content">
+<h2>integrity check</h2>
+<ul class="checks">
+<li class="issue">&#9888; initial_confirmed がトップレベルと _phase3 で重複（実害なし、データ冗長）</li>
+<li class="ok">&#10003; 全質問の reveals 先は全て propositions に存在</li>
+<li class="ok">&#10003; negation_of の対称性が保たれている</li>
+<li class="ok">&#10003; 全命題の formation_conditions の参照先が存在</li>
+<li class="ok">&#10003; 全モデル (0個) がカバー済み</li>
+<li class="ok">&#10003; 全質問の reveals が単一要素（1質問1命題）</li>
+
+</ul>
+</div>
+
+<script>
+  // Initialize mermaid - render all diagrams while all tabs visible
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, curve: 'basis' }
+  });
+
+  // After mermaid renders, hide non-active tabs
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var tabs = document.querySelectorAll('.tab-content');
+      for (var i = 1; i < tabs.length; i++) {
+        tabs[i].classList.add('hidden');
+      }
+    }, 500);
+  });
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.add('hidden');
+      });
+      document.querySelectorAll('.tab').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      var target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.remove('hidden');
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1652 @@
+{
+  "title": "毒キノコ",
+  "S": "男は、辺りに毒キノコしかないのを見て安堵した。なぜだろうか。",
+  "T": "男はキノコ狩りの最中に山で遭難していた。辺りに毒キノコしか残っていないということは、食用キノコは誰かが既に採った＝この辺りに人が来ているということ。近くに人里や他の採集者がいると分かり、助かる見込みがあると安堵した。",
+  "_phase1": {
+    "tensions": [
+      {
+        "id": "α",
+        "label": "毒キノコしかないことに対する安堵のパラドックス — 毒キノコしかないことは通常ネガティブな状況であるにも関わらず男は安堵した",
+        "parent": null
+      },
+      {
+        "id": "α1",
+        "label": "毒キノコしかないことの情報的意味 — この事実が食用不在以外のどのようなポジティブ情報を持つか",
+        "parent": "α"
+      },
+      {
+        "id": "α2",
+        "label": "安堵が生じる状況的文脈 — 男の先行する不安・懸念は何で、毒キノコしかないことでなぜ解消されるか",
+        "parent": "α"
+      }
+    ],
+    "models": [
+      {
+        "id": "T",
+        "label": "遭難者の人跡推論",
+        "summary": "キノコ狩り中に山で遭難。毒キノコしか残っていない→食用キノコは誰かが採った→人がいる→助かる見込み→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M1",
+        "label": "毒キノコ研究者",
+        "summary": "毒キノコの研究者で特定種を探索中。毒キノコしかない→目的素材が豊富→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M2",
+        "label": "同行者の誤食防止",
+        "summary": "キノコに詳しくない同行者の誤食を懸念。毒キノコのみ→明らかに毒なので誤食リスク低→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M3",
+        "label": "毒素利用者",
+        "summary": "害虫駆除や薬品製造のため毒キノコを採取する目的。毒キノコしかない→素材が豊富→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M4",
+        "label": "秘密スポットの守護者",
+        "summary": "秘密のキノコスポットを他人に知られたくない。毒キノコしかない→食用がなく人が来ない→秘密が守られる→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M5",
+        "label": "サバイバル教官",
+        "summary": "野外訓練で食用・毒キノコの識別を教える教官。毒キノコのみ→食べてはいけないと明確に判断できる教材→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M6",
+        "label": "キノコアレルギー持ち",
+        "summary": "食用キノコのアレルギー持ち。同行者に食べることを勧められるのが苦痛。毒キノコしかない→食べる圧力なし→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M7",
+        "label": "管理区域の巡回者",
+        "summary": "立入制限区域の森林管理者。毒キノコしかない→食用キノコがなく不法侵入者が来ない→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M8",
+        "label": "キノコ狩り競技者",
+        "summary": "キノコ狩り大会でライバルのエリアを偵察。毒キノコしかない→ライバルが不利→自分の優位→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M9",
+        "label": "中毒患者の治療医",
+        "summary": "毒キノコ中毒患者の治療中、毒の種類特定のため現場調査。毒キノコしかない→種類限定→治療方針が絞れる→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M10",
+        "label": "毒殺事件の捜査官",
+        "summary": "毒キノコによる殺人事件の捜査。毒キノコしかない場所の発見→犯人の毒入手経路特定→捜査前進→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M11",
+        "label": "ペットの安全確保",
+        "summary": "キノコを食べる癖のある犬と散歩中。毒キノコしかない→犬が嫌って食べない→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M12",
+        "label": "菌類生態系の研究者",
+        "summary": "特定の毒キノコ群落の生態研究。毒キノコしかない→食用キノコに圧迫されず生態系が健全→安堵",
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      }
+    ],
+    "relaxation_patterns": {
+      "T": {
+        "α1": "食用キノコの不在→人が先に採った→人の存在の逆推論",
+        "α2": "遭難→救助希望→人の存在が救助の見込み"
+      },
+      "M1": {
+        "α1": "毒キノコ自体が目的の素材として直接的価値",
+        "α2": "研究目的の素材確保の必要性"
+      },
+      "M2": {
+        "α1": "毒キノコのみ→誤食リスクが低い安全指標",
+        "α2": "同行者の安全への懸念"
+      },
+      "M3": {
+        "α1": "毒キノコ自体が目的の素材として直接的価値",
+        "α2": "実用目的の素材確保の必要性"
+      },
+      "M4": {
+        "α1": "食用不在→人が来ていない不在推論",
+        "α2": "秘密スポットの秘匿の必要性"
+      },
+      "M5": {
+        "α1": "毒キノコのみ→判断の明確さによる教育的明瞭さ",
+        "α2": "教育の場としての適切さの必要性"
+      },
+      "M6": {
+        "α1": "食用不在→食べる機会の不在による回避",
+        "α2": "アレルギーによる食事強制への不安"
+      },
+      "M7": {
+        "α1": "食用不在→人が来ない不在推論",
+        "α2": "管理区域の安全確認の責任"
+      },
+      "M8": {
+        "α1": "毒キノコのみ→ライバルの不利を示す競争的指標",
+        "α2": "競争での優位性への希求"
+      },
+      "M9": {
+        "α1": "毒キノコのみ→毒種限定による医療的確定",
+        "α2": "患者治療の切迫性"
+      },
+      "M10": {
+        "α1": "毒キノコのみ→犯行証拠としての捜査的指標",
+        "α2": "捜査進展の必要性"
+      },
+      "M11": {
+        "α1": "毒キノコのみ→誤食リスクが低い安全指標",
+        "α2": "ペットの安全への懸念"
+      },
+      "M12": {
+        "α1": "毒キノコのみ→生態系健全さの生態学的指標",
+        "α2": "研究対象の保全の必要性"
+      }
+    },
+    "variant_groups": [
+      {
+        "group_id": "G2",
+        "label": "毒キノコの直接的利用価値による素材確保",
+        "representative": "M1",
+        "members": [
+          "M1",
+          "M3"
+        ],
+        "shared_pattern": {
+          "α1": "毒キノコ自体が目的の素材として直接的価値",
+          "α2": "特定目的の素材確保の必要性"
+        }
+      },
+      {
+        "group_id": "G3",
+        "label": "毒キノコのみ→誤食リスク回避による安全確保",
+        "representative": "M2",
+        "members": [
+          "M2",
+          "M11"
+        ],
+        "shared_pattern": {
+          "α1": "毒キノコのみ→誤食リスクが低い安全指標",
+          "α2": "同行する存在の安全への懸念"
+        }
+      },
+      {
+        "group_id": "G4",
+        "label": "食用不在→人の不在確認→保護対象の安全",
+        "representative": "M4",
+        "members": [
+          "M4",
+          "M7"
+        ],
+        "shared_pattern": {
+          "α1": "食用不在→人の不在の推論",
+          "α2": "保護対象が荒らされていないことの確認"
+        }
+      }
+    ],
+    "abstract_models": [
+      {
+        "id": "G1",
+        "label": "食用不在→人の存在を逆推論→危機的状況からの救助",
+        "representative": "T",
+        "members": [
+          "T"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "G2",
+        "label": "毒キノコの直接的利用価値による素材確保",
+        "representative": "M1",
+        "members": [
+          "M1",
+          "M3"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "G3",
+        "label": "毒キノコのみ→誤食リスク回避による安全確保",
+        "representative": "M2",
+        "members": [
+          "M2",
+          "M11"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "G4",
+        "label": "食用不在→人の不在確認→保護対象の安全",
+        "representative": "M4",
+        "members": [
+          "M4",
+          "M7"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M5",
+        "label": "毒キノコのみ→教育的に明確な判断材料",
+        "members": [
+          "M5"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M6",
+        "label": "食用不在→食べる機会なし→アレルギー等の回避",
+        "members": [
+          "M6"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M8",
+        "label": "ライバルエリアの不利→競争的優位",
+        "members": [
+          "M8"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M9",
+        "label": "毒種の限定→医療的情報の確定",
+        "members": [
+          "M9"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M10",
+        "label": "犯行証拠の特定→捜査の進展",
+        "members": [
+          "M10"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      },
+      {
+        "id": "M12",
+        "label": "毒キノコのみ→生態系の健全さ",
+        "members": [
+          "M12"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2"
+        ]
+      }
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "G1": [
+        "男はキノコ狩りのために山に来ていた",
+        "男は山中で遭難し、自力では下山できない状態だった",
+        "食用キノコが残っていない→誰かが先に採った→人がこの辺りに来ている",
+        "人が近くにいるなら助けてもらえる→助かる見込み→安堵"
+      ],
+      "G2": [
+        "男は毒キノコ自体を目的として野外に来ていた（研究用素材・薬剤原料等）",
+        "毒キノコが豊富にある場所を探していた",
+        "毒キノコしかない→目的の素材が豊富→安堵"
+      ],
+      "G3": [
+        "男は同行する存在がキノコを誤食することを懸念していた",
+        "食用と毒の混在は誤食リスクが高い",
+        "毒キノコしかない→誤食リスクが低い→安堵"
+      ],
+      "G4": [
+        "男は特定の区域に人が来ないことを望んでいた",
+        "食用キノコがあると人を引き付けるが、毒キノコしかなければ人が来る動機がない",
+        "毒キノコしかない→食用がない→人が来ない→保護対象が安全→安堵"
+      ],
+      "M5": [
+        "男は野外教育の教官でキノコの識別訓練を行っていた",
+        "毒キノコのみ→全て食べてはいけないと明確に教えられる",
+        "安全な教材→教育上安堵"
+      ],
+      "M6": [
+        "男は食用キノコにアレルギーがあり食べることを勧められるのが苦痛",
+        "毒キノコしかない→食用キノコがない→食べる圧力がかからない→安堵"
+      ],
+      "M8": [
+        "男はキノコ狩り大会に参加中でライバルのエリアを偵察していた",
+        "毒キノコしかない→ライバルのエリアに食用キノコがない→自分が有利→安堵"
+      ],
+      "M9": [
+        "男は医者で毒キノコ中毒の患者を治療中",
+        "毒の種類特定のため現場を調査",
+        "毒キノコしかない→毒の種類が限定される→治療方針を絞れる→安堵"
+      ],
+      "M10": [
+        "男は捜査官で毒キノコによる殺人事件を捜査中",
+        "犯人の毒入手経路を特定するため現場を調査",
+        "毒キノコしかない場所を発見→犯行の証拠→捜査前進→安堵"
+      ],
+      "M12": [
+        "男は菌類学者で特定の毒キノコ群落の生態を研究中",
+        "食用キノコの侵入は毒キノコの生育環境を圧迫する",
+        "毒キノコしかない→生態系が健全→研究対象が保全→安堵"
+      ]
+    },
+    "division_propositions": [
+      {
+        "id": "P1",
+        "label": "男にとって、毒キノコしかないことの重要性は、食用キノコの不在にあった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "G4",
+          "M6",
+          "M8"
+        ],
+        "false_models": [
+          "G2",
+          "G3",
+          "M5",
+          "M9",
+          "M10",
+          "M12"
+        ]
+      },
+      {
+        "id": "P2",
+        "label": "男はキノコの状態から、その場所への人の出入りについて推論した",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "G4"
+        ],
+        "false_models": [
+          "G2",
+          "G3",
+          "M5",
+          "M6",
+          "M8",
+          "M9",
+          "M10",
+          "M12"
+        ]
+      },
+      {
+        "id": "P3",
+        "label": "男の安堵は、生命や安全に関わるものだった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "G3"
+        ],
+        "false_models": [
+          "G2",
+          "G4",
+          "M5",
+          "M6",
+          "M8",
+          "M9",
+          "M10",
+          "M12"
+        ]
+      },
+      {
+        "id": "P4",
+        "label": "男はキノコ狩り（食用キノコの採取）のためにその場所に来ていた",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M8"
+        ],
+        "false_models": [
+          "G2",
+          "G3",
+          "G4",
+          "M5",
+          "M6",
+          "M9",
+          "M10",
+          "M12"
+        ]
+      },
+      {
+        "id": "P5",
+        "label": "毒キノコしかないことが、その場所に人がいる（来た）証拠となった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1"
+        ],
+        "false_models": [
+          "G2",
+          "G3",
+          "G4",
+          "M5",
+          "M6",
+          "M8",
+          "M9",
+          "M10",
+          "M12"
+        ]
+      }
+    ]
+  },
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "_phase3": {
+    "derivation_graph": {
+      "single_derivations": [
+        {
+          "from": "P5",
+          "to": "P2",
+          "reason": "「人がいた証拠」から方向性を落とすと「人の出入りについて推論した」が得られる"
+        },
+        {
+          "from": "P2",
+          "to": "P1",
+          "reason": "「人の出入りの推論」から推論内容を落とすと「食用不在が重要」が得られる"
+        },
+        {
+          "from": "P4",
+          "to": "P1",
+          "reason": "「キノコ狩り目的」から活動の具体内容を落とすと「食用不在が重要」が得られる"
+        }
+      ],
+      "combination_derivations": [],
+      "independent_axes": [
+        "P5",
+        "P3"
+      ],
+      "root_propositions": [
+        "P1",
+        "P3"
+      ]
+    },
+    "fp": {
+      "id": "FP",
+      "label": "男はキノコ狩り中に山で遭難し、毒キノコしか残っていないことから人が近くにいて助かる見込みがあると判断した",
+      "true_models": [
+        "G1"
+      ],
+      "derivations_from_fp": [
+        {
+          "to": "P3",
+          "reason": "「遭難し…助かる見込み」→ 安堵が生命に関わる"
+        },
+        {
+          "to": "P4",
+          "reason": "「キノコ狩り中」→ キノコ狩り目的"
+        },
+        {
+          "to": "P5",
+          "reason": "「毒キノコしか残っていない→人が近くにいると判断」→ 人がいた証拠"
+        }
+      ]
+    },
+    "clear_validation": {
+      "tensions_resolved": [
+        {
+          "tension_id": "α1",
+          "mechanism": "FP→P5→P2→P1: 食用不在→人が先に採った→人がいる。毒キノコしかないことの情報的意味が解明"
+        },
+        {
+          "tension_id": "α2",
+          "mechanism": "FP→P3: 遭難→人がいる→助かる見込み→安堵。安堵の文脈が解明"
+        }
+      ],
+      "all_resolved": true,
+      "fp_prime": null
+    },
+    "provisional_fc": {
+      "P1": null,
+      "P2": [
+        [
+          "P1"
+        ]
+      ],
+      "P3": null,
+      "P4": [
+        [
+          "P1"
+        ]
+      ],
+      "P5": [
+        [
+          "P2"
+        ]
+      ],
+      "FP": [
+        [
+          "P3",
+          "P4",
+          "P5"
+        ]
+      ]
+    },
+    "unrejectable_models": {
+      "models": [
+        "G1"
+      ],
+      "reason": "FP および P5 は G1 のみが true。G1 = {T} で、全分割命題を通じて T と区別できるモデルがない"
+    },
+    "added_propositions": []
+  },
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9"
+  ],
+  "_phase4": {
+    "s_propositions": [
+      {
+        "id": "S1",
+        "label": "ある男がいた",
+        "type": "atomic"
+      },
+      {
+        "id": "S2",
+        "label": "辺りにキノコがあった",
+        "type": "atomic"
+      },
+      {
+        "id": "S3",
+        "label": "そのキノコは毒キノコだった",
+        "type": "atomic"
+      },
+      {
+        "id": "S4",
+        "label": "辺りには毒キノコしかなかった",
+        "type": "atomic"
+      },
+      {
+        "id": "S5",
+        "label": "男はそれを見た（視覚的に確認した）",
+        "type": "atomic"
+      },
+      {
+        "id": "S6",
+        "label": "男は安堵した",
+        "type": "atomic"
+      },
+      {
+        "id": "S7",
+        "label": "男は毒キノコと識別できた",
+        "type": "derived",
+        "derived_from": [
+          "S3",
+          "S5"
+        ]
+      },
+      {
+        "id": "S8",
+        "label": "男は辺りに食用キノコがないことを認識した",
+        "type": "derived",
+        "derived_from": [
+          "S4",
+          "S5"
+        ]
+      },
+      {
+        "id": "S9",
+        "label": "安堵の原因は毒キノコしかないことに関係する",
+        "type": "derived",
+        "derived_from": [
+          "S4",
+          "S6"
+        ]
+      }
+    ],
+    "initial_confirmed": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8",
+      "S9"
+    ],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_root",
+        "source": [
+          "S4",
+          "S6"
+        ],
+        "target": "P1",
+        "intermediates": [
+          "I1"
+        ],
+        "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "{S4,S6} →[動機の探索]→ I1(情報的理由がある) →[段階的絞り込み]→ P1(食用不在が重要)"
+      },
+      {
+        "id": "C2",
+        "type": "S_to_root",
+        "source": [
+          "S6"
+        ],
+        "target": "P3",
+        "intermediates": [
+          "I2",
+          "I3"
+        ],
+        "tactic": "動機の探索 → 段階的絞り込み → 段階的絞り込み",
+        "description": "{S6} →[動機の探索]→ I2(不安があった) →[段階的絞り込み]→ I3(深刻な問題) →[段階的絞り込み]→ P3(生命・安全)"
+      },
+      {
+        "id": "C3",
+        "type": "toward_concrete",
+        "source": [
+          "P1",
+          "S4"
+        ],
+        "target": "P2",
+        "intermediates": [
+          "I4"
+        ],
+        "tactic": "因果の逆転 → 段階的絞り込み",
+        "description": "{P1,S4} →[因果の逆転]→ I4(食用不在に原因がある) →[段階的絞り込み]→ P2(人の出入りの推論)",
+        "fc_source": "P1 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C4",
+        "type": "toward_concrete",
+        "source": [
+          "P1",
+          "S5"
+        ],
+        "target": "P4",
+        "intermediates": [
+          "I5"
+        ],
+        "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "{P1,S5} →[動機の探索]→ I5(食用に関心があった) →[段階的絞り込み]→ P4(キノコ狩り目的)",
+        "fc_source": "P1 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C5",
+        "type": "toward_concrete",
+        "source": [
+          "P2",
+          "S4"
+        ],
+        "target": "P5",
+        "intermediates": [
+          "I6"
+        ],
+        "tactic": "観測事実の深掘り → 段階的絞り込み",
+        "description": "{P2,S4} →[観測事実の深掘り]→ I6(食用不在は人為的理由) →[段階的絞り込み]→ P5(人がいた証拠)",
+        "fc_source": "P2 は連鎖 C3 の reveals"
+      },
+      {
+        "id": "C6",
+        "type": "toward_concrete",
+        "source": [
+          "P3",
+          "P4",
+          "P5"
+        ],
+        "target": "FP",
+        "intermediates": [
+          "I7"
+        ],
+        "tactic": "段階的絞り込み → 段階的絞り込み",
+        "description": "{P3,P4} →[段階的絞り込み]→ I7(キノコ狩り中に困難) →[段階的絞り込み with P5]→ FP",
+        "fc_source": "P3 は C2、P4 は C4、P5 は C5 の reveals"
+      }
+    ],
+    "generated_intermediates": [
+      "I1",
+      "I2",
+      "I3",
+      "I4",
+      "I5",
+      "I6",
+      "I7"
+    ]
+  },
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "男にとって、毒キノコしかないことの重要性は、食用キノコの不在にあった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "男はキノコの状態から、その場所への人の出入りについて推論した",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "男の安堵は、生命や安全に関わるものだった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "男はキノコ狩り（食用キノコの採取）のためにその場所に来ていた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "毒キノコしかないことが、その場所に人がいる（来た）証拠となった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "男はキノコ狩り中に山で遭難し、毒キノコしか残っていないことから人が近くにいて助かる見込みがあると判断した",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I7",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I1",
+      "label": "毒キノコしかないことが安堵につながる何らかの情報的理由がある",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S4",
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I2",
+      "label": "男には安堵する前に何らかの不安や懸念があった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I3",
+      "label": "男の不安は深刻な問題に関するものだった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I4",
+      "label": "食用キノコがないのには何らかの原因がある",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "食用キノコの不在に注目したのは、食用キノコに関心があったからだ",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "食用キノコの不在は、自然現象ではなく人為的な理由による",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I7",
+      "label": "男はキノコ狩り中に生命に関わる困難に陥っていた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P3",
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "男の安堵は毒キノコ自体に直接的な価値があるからではない",
+      "_truth_value": true,
+      "negation_of": "H1a",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1a",
+      "label": "男の安堵は毒キノコ自体に直接的な価値があるからだ",
+      "_truth_value": false,
+      "negation_of": "N1a",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N2b",
+      "label": "男の不安は日常的な不便や些細な問題ではなかった",
+      "_truth_value": true,
+      "negation_of": "H2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H2b",
+      "label": "男の不安は日常的な不便や些細な問題だった",
+      "_truth_value": false,
+      "negation_of": "N2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N5a",
+      "label": "食用キノコがないのは自然環境の理由ではない",
+      "_truth_value": true,
+      "negation_of": "H5a",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H5a",
+      "label": "食用キノコがないのは自然環境の理由だ",
+      "_truth_value": false,
+      "negation_of": "N5a",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1b",
+      "label": "安堵の理由は毒キノコの見分けやすさではない",
+      "_truth_value": true,
+      "negation_of": "HF1b",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1b",
+      "label": "安堵の理由は毒キノコの見分けやすさだ",
+      "_truth_value": false,
+      "negation_of": "NF1b",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "安堵は特定の目標達成によるものではない",
+      "_truth_value": true,
+      "negation_of": "HF2a",
+      "formation_conditions": [
+        [
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "安堵は特定の目標達成によるものだ",
+      "_truth_value": false,
+      "negation_of": "NF2a",
+      "formation_conditions": [
+        [
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2c",
+      "label": "男の不安は仕事や職務に関する問題ではなかった",
+      "_truth_value": true,
+      "negation_of": "HF2c",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2c",
+      "label": "男の不安は仕事や職務に関する問題だった",
+      "_truth_value": false,
+      "negation_of": "NF2c",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2d",
+      "label": "安堵は他者の安全に関するものではなかった",
+      "_truth_value": true,
+      "negation_of": "HF2d",
+      "formation_conditions": [
+        [
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2d",
+      "label": "安堵は他者の安全に関するものだった",
+      "_truth_value": false,
+      "negation_of": "NF2d",
+      "formation_conditions": [
+        [
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3a",
+      "label": "食用キノコがないのはその場所では普通ではない",
+      "_truth_value": true,
+      "negation_of": "HF3a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3a",
+      "label": "食用キノコがないのはその場所では普通だ",
+      "_truth_value": false,
+      "negation_of": "NF3a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3b",
+      "label": "食用キノコの不在は季節的な理由ではない",
+      "_truth_value": true,
+      "negation_of": "HF3b",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3b",
+      "label": "食用キノコの不在は季節的な理由だ",
+      "_truth_value": false,
+      "negation_of": "NF3b",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4a",
+      "label": "男は食用キノコがないこと自体を歓迎してはいない",
+      "_truth_value": true,
+      "negation_of": "HF4a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4a",
+      "label": "男は食用キノコがないことを歓迎した",
+      "_truth_value": false,
+      "negation_of": "NF4a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4b",
+      "label": "男はキノコの専門家ではない",
+      "_truth_value": true,
+      "negation_of": "HF4b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4b",
+      "label": "男はキノコの専門家だ",
+      "_truth_value": false,
+      "negation_of": "NF4b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5c",
+      "label": "食用キノコは管理目的で除去されたわけではない",
+      "_truth_value": true,
+      "negation_of": "HF5c",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5c",
+      "label": "食用キノコは管理目的で除去された",
+      "_truth_value": false,
+      "negation_of": "NF5c",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5d",
+      "label": "毒キノコしかないのは人が来ていない証拠ではない",
+      "_truth_value": true,
+      "negation_of": "HF5d",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5d",
+      "label": "毒キノコしかないのは人が来ていない証拠だ",
+      "_truth_value": false,
+      "negation_of": "NF5d",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6b",
+      "label": "男はケガをしたわけではない",
+      "_truth_value": true,
+      "negation_of": "HF6b",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6b",
+      "label": "男はケガをした",
+      "_truth_value": false,
+      "negation_of": "NF6b",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6c",
+      "label": "安堵の理由は食料の確保ではない",
+      "_truth_value": true,
+      "negation_of": "HF6c",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6c",
+      "label": "安堵の理由は食料の確保だ",
+      "_truth_value": false,
+      "negation_of": "NF6c",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "毒キノコ自体に何か価値があるから安堵したのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q1b",
+      "text": "男にとって重要だったのは、毒キノコがあることではなく、食用キノコがないことですか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q2a",
+      "text": "男が安堵する前に、何か不安や心配事がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2b",
+      "text": "その不安は、日常的な不便や些細な問題ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N2b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I2"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q2c",
+      "text": "男の安堵は、生命や安全に関わるものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3a",
+      "text": "食用キノコがない理由について、男は考えましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q3b",
+      "text": "男はキノコの状態から、その場所に人が来たかどうかについて考えましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I4"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4a",
+      "text": "男が食用キノコの不在を気にしたのは、食用キノコに関心があったからですか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q4b",
+      "text": "男はキノコ狩りのためにその場所に来ていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q5a",
+      "text": "食用キノコがないのは、もともとそこに生えていないからですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q5b",
+      "text": "食用キノコは、誰かに先に採られていたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6a",
+      "text": "男はキノコ狩り中に山で遭難していましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P4"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1b",
+      "text": "毒キノコが見分けやすいことが安堵の理由ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2a",
+      "text": "男は特定の目標を達成したから安堵しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF2c",
+      "text": "男の不安は仕事や職務に関する問題でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I2"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF2d",
+      "text": "安堵は他者の安全に関するものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2d"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF3a",
+      "text": "食用キノコがないのは、その場所では普通のことですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF3b",
+      "text": "食用キノコがない原因は、季節的なものですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4a",
+      "text": "男は食用キノコがないこと自体を歓迎しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF4b",
+      "text": "男はキノコに関する専門家（教育者や管理者）ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF5c",
+      "text": "食用キノコは管理目的で除去されたのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF5d",
+      "text": "毒キノコしかないのは、人が来ていない証拠ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5d"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF6b",
+      "text": "男はキノコ狩り中にケガをしましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF6c",
+      "text": "人がいることで食料を得られると安堵しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "原因と動機"
+    }
+  ],
+  "_phase5": {
+    "chain_mapping": {
+      "C1": [
+        "Q1a",
+        "Q1b"
+      ],
+      "C2": [
+        "Q2a",
+        "Q2b",
+        "Q2c"
+      ],
+      "C3": [
+        "Q3a",
+        "Q3b"
+      ],
+      "C4": [
+        "Q4a",
+        "Q4b"
+      ],
+      "C5": [
+        "Q5a",
+        "Q5b"
+      ],
+      "C6": [
+        "Q6a"
+      ]
+    },
+    "exploration_paths": [
+      {
+        "name": "パス A: 食用不在→人の出入り",
+        "sequence": "Q1b(はい:P1) → Q3a(はい:I4) → Q3b(はい:P2) → Q5b(はい:P5) → Q2c(はい:P3) → Q4b(はい:P4) → Q6a(はい:I7) → FP derived → クリア"
+      },
+      {
+        "name": "パス B: 安堵の深刻さ",
+        "sequence": "Q2a(はい:I2) → Q2b(いいえ:N2b) → Q2c(はい:P3) → Q1b(はい:P1) → Q4b(はい:P4) → Q6a(はい:I7) → Q5b(はい:P5) → FP derived → クリア"
+      },
+      {
+        "name": "パス C: 排除先行",
+        "sequence": "Q1a(いいえ:N1a) → Q1b(はい:P1) → Q4a(はい:I5) → Q4b(はい:P4) → Q5a(いいえ:N5a) → Q5b(はい:P5) → Q2c(はい:P3) → Q6a(はい:I7) → FP derived → クリア"
+      }
+    ]
+  }
+}
