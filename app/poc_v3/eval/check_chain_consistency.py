@@ -269,12 +269,103 @@ def check_reveals_piece_membership(data: dict) -> list[str]:
     return errors
 
 
+def check_fc_chain_consistency(data: dict) -> list[str]:
+    """_phase4.tactical_chains の連鎖構造と propositions の fc が整合するか。
+
+    連鎖 source → intermediates → target において:
+    - target の fc は最後の intermediate を参照すべき
+    - 各 intermediate の fc は前段（source または前の intermediate）を参照すべき
+    fc が source を直接参照し intermediate をスキップしている場合、
+    連鎖が段階的オープンとして機能しない。
+    """
+    errors = []
+    phase4 = data.get("_phase4", {})
+    chains = phase4.get("tactical_chains", [])
+    if not chains:
+        return []
+
+    # 命題マップ
+    props = {p["id"]: p for p in data.get("propositions", [])}
+    initial = set(data.get("initial_confirmed", []))
+
+    for chain in chains:
+        cid = chain.get("id", "?")
+        source = chain.get("source", [])
+        intermediates = chain.get("intermediates", [])
+        target = chain.get("target", "")
+
+        if not intermediates:
+            errors.append(f"連鎖 '{cid}': intermediates が空（中間命題なし）")
+            continue
+
+        # 連鎖のステップ列を構築: source → intermediates[0] → ... → intermediates[-1] → target
+        steps = intermediates + [target]
+
+        for i, step_id in enumerate(steps):
+            prop = props.get(step_id)
+            if prop is None:
+                errors.append(f"連鎖 '{cid}': ステップ '{step_id}' が propositions に存在しない")
+                continue
+
+            fc = prop.get("formation_conditions")
+            if fc is None:
+                errors.append(f"連鎖 '{cid}': '{step_id}' に formation_conditions がない")
+                continue
+
+            # 前段の命題を特定
+            if i == 0:
+                # 最初の intermediate: 前段は source
+                expected_predecessors = set(source)
+                predecessor_label = f"source {source}"
+            else:
+                # 後続: 前段は直前の intermediate
+                prev_id = steps[i - 1]
+                expected_predecessors = {prev_id}
+                predecessor_label = f"前段 '{prev_id}'"
+
+            # fc のいずれかの AND グループが前段を参照しているか
+            refs_predecessor = False
+            all_fc_refs: set[str] = set()
+            for and_group in fc:
+                all_fc_refs.update(and_group)
+                if expected_predecessors & set(and_group):
+                    refs_predecessor = True
+
+            if not refs_predecessor:
+                # 前段をスキップしている
+                # source のみ参照（intermediate をスキップ）のケースを特定
+                source_set = set(source)
+                refs_only_source = all_fc_refs and all_fc_refs <= (source_set | initial)
+                if i > 0 and refs_only_source:
+                    errors.append(
+                        f"連鎖 '{cid}': '{step_id}' の fc={fc} が "
+                        f"{predecessor_label} をスキップし source を直接参照 "
+                        f"→ 段階的オープンが機能しない"
+                    )
+                elif i > 0:
+                    errors.append(
+                        f"連鎖 '{cid}': '{step_id}' の fc={fc} が "
+                        f"{predecessor_label} を参照していない"
+                    )
+                else:
+                    # 最初の intermediate が source を参照していない
+                    # source が全て initial_confirmed なら fc は initial のみでも可
+                    if not (source_set <= initial and all_fc_refs <= initial):
+                        errors.append(
+                            f"連鎖 '{cid}': '{step_id}' の fc={fc} が "
+                            f"{predecessor_label} を参照していない"
+                        )
+
+    return errors
+
+
 def run(path: str) -> tuple[bool, list[str]]:
     data = load_data(path)
 
     # _piece_chains も _tactical_chains もなければスキップ
     has_chains = "_piece_chains" in data or "_tactical_chains" in data
-    if not has_chains:
+    has_phase4 = "_phase4" in data and "tactical_chains" in data.get("_phase4", {})
+    if not has_chains and not has_phase4:
         print("  SKIP: 連鎖メタ情報なし")
         return True, []
 
@@ -284,6 +375,7 @@ def run(path: str) -> tuple[bool, list[str]]:
         ("reveals のステップ範囲", check_reveals_scope),
         ("利用可能条件の導出可能性", check_availability_derivability),
         ("reveals のピース帰属", check_reveals_piece_membership),
+        ("連鎖構造と fc の整合性", check_fc_chain_consistency),
     ]
 
     all_errors: list[str] = []
