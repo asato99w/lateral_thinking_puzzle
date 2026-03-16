@@ -154,7 +154,7 @@ def _build_derivation_graph_diagram(derivation_graph, division_props, propositio
     # Define nodes
     for nid in sorted(all_nodes):
         label = label_map.get(nid, nid)
-        short_label = label[:30] + "..." if len(label) > 30 else label
+        short_label = label[:50] + "..." if len(label) > 50 else label
         if nid in independent_axes:
             cls = "axisNode"
         elif nid in root_props:
@@ -168,7 +168,7 @@ def _build_derivation_graph_diagram(derivation_graph, division_props, propositio
     # Single derivation edges (from → to = "from derives to, from is more concrete")
     for sd in single_derivs:
         reason = sd.get("reason", "")
-        short_reason = reason[:20] + "..." if len(reason) > 20 else reason
+        short_reason = reason[:40] + "..." if len(reason) > 40 else reason
         if short_reason:
             lines.append(f'  {sd["from"]} -->|"{_esc(short_reason)}"| {sd["to"]}')
         else:
@@ -631,7 +631,8 @@ def _render_html(*, title, deriv_graph_diagram, derivation_diagram, question_dia
   .tab-content {{ background: #fff; border: 1px solid #e0e0e0;
                   border-top: none; padding: 16px; overflow-x: auto; }}
   .tab-content.hidden {{ display: none; }}
-  .mermaid {{ text-align: center; }}
+  .mermaid {{ text-align: center; overflow-x: auto; }}
+  .mermaid svg {{ min-width: 800px; min-height: 400px; }}
   ul.checks {{ list-style: none; padding: 8px 0; }}
   ul.checks li {{ padding: 4px 8px; font-size: 0.9em; }}
   li.issue {{ color: #e65100; }}
@@ -749,7 +750,17 @@ def _render_html(*, title, deriv_graph_diagram, derivation_diagram, question_dia
     startOnLoad: true,
     theme: 'default',
     securityLevel: 'loose',
-    flowchart: {{ htmlLabels: true, curve: 'basis' }}
+    flowchart: {{
+      htmlLabels: true,
+      curve: 'basis',
+      useMaxWidth: false,
+      nodeSpacing: 30,
+      rankSpacing: 60,
+      padding: 15
+    }},
+    themeVariables: {{
+      fontSize: '14px'
+    }}
   }});
 
   // After mermaid renders, hide non-active tabs
