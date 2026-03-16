@@ -494,21 +494,21 @@
     "division_propositions": [
       {
         "id": "P1",
-        "label": "男は身体的または心理的な症状を抱えていた",
+        "label": "男は何らかの身体的・心理的な不調を抱えていた",
         "truth_value_in_T": true,
         "true_models": ["G1", "M7", "M8", "M9"],
         "false_models": ["G2", "G3", "M6", "M10", "M13", "M14", "M15"]
       },
       {
         "id": "P2",
-        "label": "男が水を求めた理由は水を飲むこと以外にあった",
+        "label": "男にとって水を飲むことは最終目的ではなく手段だった",
         "truth_value_in_T": true,
         "true_models": ["G1", "G2", "M7", "M8", "M9", "M10", "M14"],
         "false_models": ["G3", "M6", "M13", "M15"]
       },
       {
         "id": "P3",
-        "label": "バーテンダーはその場で男の外見的な異常を察知して行動した",
+        "label": "バーテンダーはその場で男の異変の兆候を察知して行動した",
         "truth_value_in_T": true,
         "true_models": ["G1", "M7", "M8"],
         "false_models": ["G2", "G3", "M6", "M9", "M10", "M13", "M14", "M15"]
@@ -522,14 +522,14 @@
       },
       {
         "id": "P5",
-        "label": "バーテンダーは男を助ける目的で銃を向けた",
+        "label": "バーテンダーは男を助ける意図で銃を向けた",
         "truth_value_in_T": true,
         "true_models": ["G1", "G3", "M6", "M7", "M9", "M13", "M15"],
         "false_models": ["G2", "M8", "M10", "M14"]
       },
       {
         "id": "P6",
-        "label": "男が抱えていた問題は身体的な症状だった",
+        "label": "男が抱えていた不調は身体的なものだった",
         "truth_value_in_T": true,
         "true_models": ["G1", "M8"],
         "false_models": ["G2", "G3", "M6", "M7", "M9", "M10", "M13", "M14", "M15"]
@@ -542,5 +542,187 @@
         "false_models": ["G2", "M9", "M14"]
       }
     ]
+  },
+  "clear_conditions": [["FP"]],
+  "_phase3": {
+    "derivation_graph": {
+      "single_derivations": [
+        {"from": "P6", "to": "P1", "reason": "身体的な不調 → 「身体的」を落とす → 不調を抱えていた"},
+        {"from": "P3", "to": "P1", "reason": "男の異変の兆候を察知 → 男に異変があった → 不調を抱えていた"},
+        {"from": "P8", "to": "P3", "reason": "察知しショックで治そうとした → 「ショック・治す」を落とす → 察知して行動した"},
+        {"from": "P8", "to": "P4", "reason": "ショックを与えて治そうとした → 「察知・治す」を落とす → ショック目的"},
+        {"from": "P8", "to": "P5", "reason": "不調を治そうとした → 「察知・ショック」を落とす → 助ける意図"},
+        {"from": "P9", "to": "P6", "reason": "身体的な不調を抱え水で治る → 「水で治る」を落とす → 身体的な不調"},
+        {"from": "P9", "to": "P2", "reason": "不調を水で治ると考えていた → 「身体的」を落とす → 水は手段"}
+      ],
+      "combination_derivations": [],
+      "independent_axes": ["P8", "P9", "P7"],
+      "root_propositions": ["P1", "P2", "P4", "P5", "P7"]
+    },
+    "fp": {
+      "id": "FP",
+      "label": "男はしゃっくりに困っており、面識のないバーテンダーがしゃっくりに気づき驚かせて止めるために銃を向けた",
+      "true_models": ["G1"],
+      "derivations_from_fp": [
+        {"to": "P8", "reason": "「しゃっくり→不調」「驚かせ→ショック」に抽象化"},
+        {"to": "P9", "reason": "「しゃっくり→身体的不調」＋常識（しゃっくり→水で治す）"},
+        {"to": "P7", "reason": "「面識のないバーテンダー」→事前面識なし"}
+      ]
+    },
+    "clear_validation": {
+      "tensions_resolved": [
+        {"tension_id": "α1", "mechanism": "FP: しゃっくりに気づき → BTが水の要求から兆候を読み取った"},
+        {"tension_id": "α2", "mechanism": "FP: 驚かせて止めるために → 驚かせる手段として銃を選択"},
+        {"tension_id": "β1", "mechanism": "FP→P8→P5: 治療目的 → 脅威ではなく善意だと理解"},
+        {"tension_id": "β2", "mechanism": "FP: しゃっくりが止まった（暗示）→ 実利に対する感謝"},
+        {"tension_id": "γ1", "mechanism": "FP→P9→P2: 水はしゃっくり緩和の手段"},
+        {"tension_id": "γ2", "mechanism": "FP: 驚きでしゃっくりが止まり水が不要に"}
+      ],
+      "all_resolved": true,
+      "fp_prime": null
+    },
+    "provisional_fc": {
+      "FP": [["P8", "P9", "P7"]],
+      "P8": [["P3", "P4", "P5"]],
+      "P9": [["P6", "P2"]],
+      "P3": [["P1"]],
+      "P6": [["P1"]]
+    },
+    "unrejectable_models": {
+      "models": ["G1"],
+      "reason": "G1内のバリアント（T:しゃっくり, M1:過呼吸, M2:低体温）は全分割命題を共有する。具象的な差異（症状の種類）は分割命題の粒度では区別されない"
+    },
+    "added_propositions": [
+      {
+        "id": "P8",
+        "label": "バーテンダーはその場で男の不調の兆候を察知し、ショックを与えて不調を治そうとした",
+        "truth_value_in_T": true,
+        "true_models": ["G1", "M7"],
+        "false_models": ["G2", "G3", "M6", "M8", "M9", "M10", "M13", "M14", "M15"]
+      },
+      {
+        "id": "P9",
+        "label": "男は身体的な不調を抱え、水を飲めばそれが治ると考えていた",
+        "truth_value_in_T": true,
+        "true_models": ["G1", "M8"],
+        "false_models": ["G2", "G3", "M6", "M7", "M9", "M10", "M13", "M14", "M15"]
+      }
+    ]
+  },
+  "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12"],
+  "_phase4": {
+    "s_propositions": [
+      {"id": "S1", "label": "ある男がいた", "type": "atomic"},
+      {"id": "S2", "label": "男がバーに入った", "type": "atomic"},
+      {"id": "S3", "label": "バーにバーテンダーがいた", "type": "atomic"},
+      {"id": "S4", "label": "男はバーテンダーに「水をください」と頼んだ", "type": "atomic"},
+      {"id": "S5", "label": "バーテンダーは男に銃を向けた", "type": "atomic"},
+      {"id": "S6", "label": "男は「ありがとう」と言った", "type": "atomic"},
+      {"id": "S7", "label": "男は帰った", "type": "atomic"},
+      {"id": "S8", "label": "バーがあった", "type": "derived", "derived_from": ["S2"]},
+      {"id": "S9", "label": "男はバーの外から来た", "type": "derived", "derived_from": ["S2"]},
+      {"id": "S10", "label": "男は水を求めた", "type": "derived", "derived_from": ["S4"]},
+      {"id": "S11", "label": "バーテンダーは銃を持っていた", "type": "derived", "derived_from": ["S5"]},
+      {"id": "S12", "label": "水の要求が銃を向ける行為より時間的に先だった", "type": "derived", "derived_from": ["S4", "S5"]}
+    ],
+    "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12"],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_root",
+        "source": ["S10"],
+        "target": "P1",
+        "intermediates": ["I1"],
+        "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "S10(水を求めた) →[動機の探索]→ I1(水を求めた特別な事情) →[段階的絞り込み]→ P1(不調)"
+      },
+      {
+        "id": "C2",
+        "type": "S_to_root",
+        "source": ["S10"],
+        "target": "P2",
+        "intermediates": ["I2"],
+        "tactic": "常識的仮説の排除 → 段階的絞り込み",
+        "description": "S10(水を求めた) →[常識的仮説の排除]→ I2(喉の渇きではない) →[段階的絞り込み]→ P2(水は手段)"
+      },
+      {
+        "id": "C3",
+        "type": "S_to_root",
+        "source": ["S5"],
+        "target": "P4",
+        "intermediates": ["I3"],
+        "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "S5(銃を向けた) →[動機の探索]→ I3(銃には明確な目的) →[段階的絞り込み]→ P4(ショック目的)"
+      },
+      {
+        "id": "C4",
+        "type": "S_to_root",
+        "source": ["S5", "S6"],
+        "target": "P5",
+        "intermediates": ["I4"],
+        "tactic": "矛盾の指摘 → 段階的絞り込み",
+        "description": "{S5(銃), S6(ありがとう)} →[矛盾の指摘]→ I4(銃は害を与える行為ではなかった) →[段階的絞り込み]→ P5(善意)"
+      },
+      {
+        "id": "C5",
+        "type": "S_to_root",
+        "source": ["S2"],
+        "target": "P7",
+        "intermediates": ["I5"],
+        "tactic": "観測事実の深掘り → 段階的絞り込み",
+        "description": "S2(バーに入った) →[観測事実の深掘り]→ I5(たまたま立ち寄った) →[段階的絞り込み]→ P7(事前面識なし)"
+      },
+      {
+        "id": "C6",
+        "type": "toward_concrete",
+        "source": ["P1", "S5"],
+        "target": "P3",
+        "intermediates": ["I6"],
+        "tactic": "因果の逆転 → 段階的絞り込み",
+        "description": "{P1(不調), S5(銃)} →[因果の逆転]→ I6(BTは不調に気づいていた) →[段階的絞り込み]→ P3(その場で察知)",
+        "fc_source": "P1 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C7",
+        "type": "toward_concrete",
+        "source": ["P1", "S10"],
+        "target": "P6",
+        "intermediates": ["I7"],
+        "tactic": "因果の逆転 → 段階的絞り込み",
+        "description": "{P1(不調), S10(水)} →[因果の逆転]→ I7(水で改善できる不調) →[段階的絞り込み]→ P6(身体的)",
+        "fc_source": "P1 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C8",
+        "type": "toward_concrete",
+        "source": ["P3", "P4", "P5"],
+        "target": "P8",
+        "intermediates": ["I8"],
+        "tactic": "因果の逆転 → 段階的絞り込み",
+        "description": "{P3(察知), P4(ショック), P5(善意)} →[因果の逆転]→ I8(察知した不調を治すための行動) →[段階的絞り込み]→ P8",
+        "fc_source": "P3はC6, P4はC3, P5はC4 の reveals"
+      },
+      {
+        "id": "C9",
+        "type": "toward_concrete",
+        "source": ["P6", "P2"],
+        "target": "P9",
+        "intermediates": ["I9"],
+        "tactic": "因果の逆転 → 段階的絞り込み",
+        "description": "{P6(身体的), P2(水は手段)} →[因果の逆転]→ I9(身体的不調を水で治そうとした) →[段階的絞り込み]→ P9",
+        "fc_source": "P6はC7, P2はC2 の reveals"
+      },
+      {
+        "id": "C10",
+        "type": "toward_concrete",
+        "source": ["P8", "P9", "P7"],
+        "target": "FP",
+        "intermediates": ["I10"],
+        "tactic": "段階的絞り込み",
+        "description": "{P8(察知+治療), P9(身体的+水), P7(初対面)} →[段階的絞り込み]→ I10(身体的不調にBTが気づき驚かせた) →[段階的絞り込み]→ FP",
+        "fc_source": "P8はC8, P9はC9, P7はC5 の reveals"
+      }
+    ],
+    "generated_intermediates": ["I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10"]
   }
 }
