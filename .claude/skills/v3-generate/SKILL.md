@@ -5,6 +5,11 @@ argument-hint: [パズル名] [--algo v1|v2|v3|v4|v5]
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
+## 実行制約
+
+- **エージェント（Agent ツール）を使用しないこと**。全工程を自身で直接実行する。サブエージェントへの委任は禁止
+- 各 Phase は順番に、1つずつ実行する
+
 # /v3-generate — v3 サンプル生成
 
 引数: `$ARGUMENTS`（パズル名 + オプション）
