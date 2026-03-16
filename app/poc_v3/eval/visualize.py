@@ -15,22 +15,56 @@ def load_data(path: str) -> dict:
 def build_html(data: dict) -> str:
     title = data.get("title", "Puzzle")
 
-    # --- Extract structures ---
+    # --- Extract structures (v3/v4 compatible) ---
     propositions = {p["id"]: p for p in data.get("propositions", [])}
     questions = {q["id"]: q for q in data.get("questions", [])}
-    s_props = {s["id"]: s for s in data.get("_phase3", {}).get("s_propositions", [])}
-    tactical_chains = data.get("_phase3", {}).get("tactical_chains", [])
+    # s_propositions: v3=_phase3, v4=_phase4
+    s_props = {s["id"]: s for s in (
+        data.get("_phase4", {}).get("s_propositions", [])
+        or data.get("_phase3", {}).get("s_propositions", [])
+    )}
+    # tactical_chains: v3=_phase3, v4=_phase4
+    tactical_chains = (
+        data.get("_phase4", {}).get("tactical_chains", [])
+        or data.get("_phase3", {}).get("tactical_chains", [])
+    )
     division_props = data.get("_phase2", {}).get("division_propositions", [])
     division_hierarchy = data.get("_phase2", {}).get("division_hierarchy", [])
     models = data.get("_phase1", {}).get("models", [])
     tensions = data.get("_phase1", {}).get("tensions", [])
-    chain_branches = data.get("_phase9", {}).get("chain_branches", [])
-    chain_mapping = data.get("_phase4", {}).get("chain_mapping", {})
-    exploration_paths = data.get("_phase4", {}).get("exploration_paths", [])
-    chain_extensions = data.get("_phase5", {}).get("chain_extensions", [])
-    chain_designs = data.get("_phase6", {}).get("chain_designs", [])
-    generated = data.get("_phase9", {}).get("generated", {})
-    derivation_graph = data.get("_phase2", {}).get("derivation_graph", {})
+    # chain_branches: v3=_phase9, v4=_phase8
+    chain_branches = (
+        data.get("_phase8", {}).get("chain_branches", [])
+        or data.get("_phase9", {}).get("chain_branches", [])
+    )
+    # chain_mapping: v3=_phase4, v4=_phase5
+    chain_mapping = (
+        data.get("_phase5", {}).get("chain_mapping", {})
+        or data.get("_phase4", {}).get("chain_mapping", {})
+    )
+    # exploration_paths: v3=_phase4, v4=_phase5
+    exploration_paths = (
+        data.get("_phase5", {}).get("exploration_paths", [])
+        or data.get("_phase4", {}).get("exploration_paths", [])
+    )
+    chain_extensions = (
+        data.get("_phase5", {}).get("chain_extensions", [])
+        or data.get("_phase6", {}).get("chain_extensions", [])
+    )
+    chain_designs = (
+        data.get("_phase6", {}).get("chain_designs", [])
+        or data.get("_phase7", {}).get("chain_designs", [])
+    )
+    # generated: v3=_phase9, v4=_phase8
+    generated = (
+        data.get("_phase8", {}).get("generated", {})
+        or data.get("_phase9", {}).get("generated", {})
+    )
+    # derivation_graph: v3=_phase2, v4=_phase3
+    derivation_graph = (
+        data.get("_phase3", {}).get("derivation_graph", {})
+        or data.get("_phase2", {}).get("derivation_graph", {})
+    )
 
     # --- Build Mermaid diagrams ---
 
@@ -488,6 +522,12 @@ def _check_integrity(data, propositions, questions, s_props):
             ok.append("negation_of の対称性が保たれている")
 
     # 3. Formation conditions reference valid IDs
+    # Rebuild s_props for integrity check (v3/v4 compatible)
+    _s_props_list = (
+        data.get("_phase4", {}).get("s_propositions", [])
+        or data.get("_phase3", {}).get("s_propositions", [])
+    )
+    s_props = {s["id"]: s for s in _s_props_list}
     all_ids = set(propositions.keys()) | set(s_props.keys())
     for pid, prop in propositions.items():
         for fc_group in (prop.get("formation_conditions") or []):
@@ -498,7 +538,10 @@ def _check_integrity(data, propositions, questions, s_props):
         ok.append("全命題の formation_conditions の参照先が存在")
 
     # 4. Model coverage completeness
-    coverage = data.get("_phase9", {}).get("coverage", {})
+    coverage = (
+        data.get("_phase8", {}).get("coverage", {})
+        or data.get("_phase9", {}).get("coverage", {})
+    )
     uncovered = coverage.get("uncovered", [])
     if uncovered:
         issues.append(f"カバーされていないモデル: {uncovered}")
@@ -508,7 +551,10 @@ def _check_integrity(data, propositions, questions, s_props):
 
     # 5. Duplicate initial_confirmed
     top_ic = data.get("initial_confirmed", [])
-    phase3_ic = data.get("_phase3", {}).get("initial_confirmed", [])
+    phase3_ic = (
+        data.get("_phase4", {}).get("initial_confirmed", [])
+        or data.get("_phase3", {}).get("initial_confirmed", [])
+    )
     if top_ic and phase3_ic:
         if set(top_ic) == set(phase3_ic):
             issues.append("initial_confirmed がトップレベルと _phase3 で重複（実害なし、データ冗長）")
@@ -553,8 +599,8 @@ def _render_html(*, title, deriv_graph_diagram, derivation_diagram, question_dia
 
     n_props = len(data.get("propositions", []))
     n_questions = len(data.get("questions", []))
-    n_s = len(data.get("_phase3", {}).get("s_propositions", []))
-    n_chains = len(data.get("_phase3", {}).get("tactical_chains", []))
+    n_s = len(data.get("_phase4", {}).get("s_propositions", data.get("_phase3", {}).get("s_propositions", [])))
+    n_chains = len(data.get("_phase4", {}).get("tactical_chains", data.get("_phase3", {}).get("tactical_chains", [])))
     n_models = len(data.get("_phase1", {}).get("models", []))
     n_tensions = len(data.get("_phase1", {}).get("tensions", []))
 

@@ -1,0 +1,540 @@
+{
+  "title": "ウミガメのスープ",
+  "topic_categories": [
+    {"id": "状況の確認", "name": "状況の確認"},
+    {"id": "原因と動機", "name": "原因と動機"},
+    {"id": "人物と背景", "name": "人物と背景"},
+    {"id": "前提の確認", "name": "前提の確認"}
+  ],
+  "S": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口飲んだ男は店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜだろう？",
+  "T": "男は船乗りで、かつて仲間と船で遭難し、食料が尽きた。仲間の一人が死に、残った仲間は男に「ウミガメのスープだ」と言ってスープを飲ませた。実際にはそれは死んだ仲間の肉で作ったスープだった。レストランで本物のウミガメのスープを飲んだ男は、味が違うことに気づき、あのとき飲まされたものの正体を悟り、絶望して自殺した。",
+  "_phase1": {
+    "tensions": [
+      {"id": "α", "label": "確認行動の不自然さ: なぜ男はウミガメのスープの真偽を確認したのか", "parent": null},
+      {"id": "α1", "label": "男はウミガメのスープの味に対して事前の比較基準を持っている", "parent": "α"},
+      {"id": "α2", "label": "その比較基準は一口で判別可能なほど鮮烈な体験に基づく", "parent": "α"},
+      {"id": "β", "label": "確認結果と自殺の関連: 本物であることの確認がなぜ自殺につながるのか", "parent": null},
+      {"id": "β1", "label": "「本物のウミガメのスープである」という確認が否定的な推論を引き起こす論理構造がある", "parent": "β"},
+      {"id": "β2", "label": "その推論の結果として得られる認識が自殺に至るほど致命的である", "parent": "β"}
+    ],
+    "models": [
+      {"id": "T", "label": "遭難人肉偽装", "summary": "遭難で仲間の人肉スープを「ウミガメのスープ」と偽られ、本物を飲んで真実を悟り自殺", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M1", "label": "投薬偽装", "summary": "信頼する人物に薬物入りスープを「ウミガメのスープ」と偽られていた。味の差異で投薬を悟り裏切りに絶望", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M2", "label": "捕虜収容所人肉", "summary": "捕虜収容所で「ウミガメのスープ」と偽り他の捕虜の肉を飲まされた。味の差異で真実を悟り自殺", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M3", "label": "遭難動物肉偽装", "summary": "遭難中に嫌悪対象の動物肉スープを「ウミガメのスープ」と偽られた。味の差異で悟り心理的ショック", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M4", "label": "師匠の偽スープ", "summary": "料理人が師匠の「ウミガメのスープ」が偽物だと味で判明。料理人としてのアイデンティティ崩壊", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M5", "label": "自作スープ過失", "summary": "自作の「ウミガメのスープ」を家族に振る舞い家族が死亡。味の差異で自作の問題に気づき過失を認識", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M6", "label": "亡き妻の偽スープ", "summary": "亡き妻が「ウミガメのスープ」と称して作ったスープが本物と違い、禁忌的な正体を悟り思い出が汚染", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M7", "label": "レストラン詐欺", "summary": "通い詰めた高級レストランの「ウミガメのスープ」が偽物だと判明。散財に気づく", "tension_subset": ["α1", "α2", "β1"]},
+      {"id": "M8", "label": "アレルギー誤診", "summary": "ウミガメアレルギーと誤診され制限的生活。本物を飲んで無反応で誤診発覚、失われた人生に絶望", "tension_subset": ["β1", "β2"]},
+      {"id": "M9", "label": "幼少期毒物偽装", "summary": "子供の頃「ウミガメのスープ」と偽り毒物入りスープを飲まされ続けた。味の差異で発覚、親の害意に絶望", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M10", "label": "孤児院偽装", "summary": "孤児院で「ウミガメのスープ」と偽り代用品を出され予算着服。味の差異で搾取を認識", "tension_subset": ["α1", "α2", "β1"]},
+      {"id": "M12", "label": "極限誤食毒物", "summary": "無人島で自分が食べた「ウミガメ」が毒生物だった。味の差異で誤食に気づき毒蓄積を悟る", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M13", "label": "希少動物偽装", "summary": "航海中にコックの「ウミガメのスープ」が禁漁の希少動物だった。味の差異で発覚、犯罪加担に絶望", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M14", "label": "宗教儀式偽装", "summary": "宗教儀式で飲んだ「ウミガメのスープ」が偽物と判明。信仰の根拠崩壊に絶望", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M15", "label": "ウミガメ研究者", "summary": "ウミガメ研究者が本物のスープを飲んで愛する研究対象を食べたショック", "tension_subset": ["α1", "β1"]},
+      {"id": "M18", "label": "息子への自作過失", "summary": "死に際の息子に自作スープを飲ませたが味の差異で問題に気づき息子の死因が自己過失と認識", "tension_subset": ["α1", "α2", "β1", "β2"]}
+    ],
+    "relaxation_patterns": {
+      "T":   {"α1": "他者の欺瞞による偽装体験", "α2": "極限状況の体験による鮮烈さ", "β1": "味の差異→偽装発覚→食物の真実の推論", "β2": "人肉摂食の道徳的壊滅"},
+      "M1":  {"α1": "他者の欺瞞による偽装体験", "α2": "有害物質の身体的影響による鮮烈さ", "β1": "味の差異→偽装発覚→有害物質混入の推論", "β2": "信頼する人物の害意による心理的壊滅"},
+      "M2":  {"α1": "他者の欺瞞による偽装体験", "α2": "極限状況の体験による鮮烈さ", "β1": "味の差異→偽装発覚→食物の真実の推論", "β2": "人肉摂食の道徳的壊滅"},
+      "M3":  {"α1": "他者の欺瞞による偽装体験", "α2": "極限状況の体験による鮮烈さ", "β1": "味の差異→偽装発覚→食物の真実の推論", "β2": "嫌悪対象摂食の心理的ショック"},
+      "M4":  {"α1": "職業的経験による比較基準", "α2": "職業的訓練による鋭敏な味覚", "β1": "味の差異→師匠の偽装発覚→職業基盤の崩壊", "β2": "職業的アイデンティティの壊滅"},
+      "M5":  {"α1": "自作体験による比較基準", "α2": "家族の死と結びついた鮮烈さ", "β1": "味の差異→自作の問題発覚→自己過失の認識", "β2": "家族の死への責任の壊滅"},
+      "M6":  {"α1": "親密な他者の手作り体験", "α2": "感情的結びつき（死別）による鮮烈さ", "β1": "味の差異→他者の偽装発覚→思い出の汚染", "β2": "亡き人との思い出汚染の壊滅"},
+      "M7":  {"α1": "商業体験による比較基準", "α2": "特別な体験（高級）としての記憶", "β1": "味の差異→商業的偽装の発覚"},
+      "M8":  {"β1": "身体反応の不一致→医学的誤診の発覚", "β2": "失われた人生への絶望"},
+      "M9":  {"α1": "他者の欺瞞による偽装体験", "α2": "有害物質の身体的影響による鮮烈さ", "β1": "味の差異→偽装発覚→有害物質混入の推論", "β2": "信頼する人物の害意による心理的壊滅"},
+      "M10": {"α1": "組織的偽装による反復体験", "α2": "長期反復による刷り込み的記憶", "β1": "味の差異→組織的偽装発覚→搾取の認識"},
+      "M12": {"α1": "自作体験（極限状況での自己調達）", "α2": "極限状況の体験による鮮烈さ", "β1": "味の差異→誤同定発覚→有害物質摂取の認識", "β2": "身体的致命性（毒の蓄積）"},
+      "M13": {"α1": "他者の欺瞞による偽装体験", "α2": "特殊環境での体験による鮮烈さ", "β1": "味の差異→偽装発覚→犯罪加担の認識", "β2": "社会的・法的致命性"},
+      "M14": {"α1": "宗教的儀式での体験", "α2": "精神的体験（神聖さ）による鮮烈さ", "β1": "味の差異→儀式の偽装発覚→信仰根拠の崩壊", "β2": "信仰崩壊の実存的壊滅"},
+      "M15": {"α1": "専門知識による比較基準", "β1": "確認結果→愛着対象摂食のショック"},
+      "M18": {"α1": "自作体験による比較基準", "α2": "家族の死と結びついた鮮烈さ", "β1": "味の差異→自作の問題発覚→自己過失の認識", "β2": "家族の死への責任の壊滅"}
+    },
+    "variant_groups": [
+      {
+        "group_id": "G1",
+        "label": "極限状況での他者による偽装体験から味の差異で人肉摂食の真実を悟り道徳的に壊滅",
+        "representative": "T",
+        "members": ["T", "M2"],
+        "shared_pattern": {"α1": "他者の欺瞞による偽装体験", "α2": "極限状況の体験による鮮烈さ", "β1": "味の差異→偽装発覚→食物の真実の推論", "β2": "人肉摂食の道徳的壊滅"}
+      },
+      {
+        "group_id": "G2",
+        "label": "他者による有害物質偽装体験から味の差異で混入を悟り信頼する人物の害意に壊滅",
+        "representative": "M1",
+        "members": ["M1", "M9"],
+        "shared_pattern": {"α1": "他者の欺瞞による偽装体験", "α2": "有害物質の身体的影響による鮮烈さ", "β1": "味の差異→偽装発覚→有害物質混入の推論", "β2": "信頼する人物の害意による心理的壊滅"}
+      },
+      {
+        "group_id": "G3",
+        "label": "自作スープの問題を味の差異から悟り家族の死への自己過失を認識して壊滅",
+        "representative": "M5",
+        "members": ["M5", "M18"],
+        "shared_pattern": {"α1": "自作体験による比較基準", "α2": "家族の死と結びついた鮮烈さ", "β1": "味の差異→自作の問題発覚→自己過失の認識", "β2": "家族の死への責任の壊滅"}
+      }
+    ],
+    "abstract_models": [
+      {"id": "G1", "label": "極限状況での他者による偽装体験から味の差異で人肉摂食の真実を悟り道徳的に壊滅", "representative": "T", "members": ["T", "M2"], "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "G2", "label": "他者による有害物質偽装から味の差異で混入を悟り信頼者の害意に壊滅", "representative": "M1", "members": ["M1", "M9"], "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "G3", "label": "自作スープの問題を味の差異から悟り家族の死への過失を認識して壊滅", "representative": "M5", "members": ["M5", "M18"], "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M3", "label": "遭難動物肉偽装", "members": ["M3"], "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M4", "label": "師匠の偽スープ", "members": ["M4"], "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M6", "label": "亡き妻の偽スープ", "members": ["M6"], "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M7", "label": "レストラン詐欺", "members": ["M7"], "tension_subset": ["α1", "α2", "β1"]},
+      {"id": "M8", "label": "アレルギー誤診", "members": ["M8"], "tension_subset": ["β1", "β2"]},
+      {"id": "M10", "label": "孤児院偽装", "members": ["M10"], "tension_subset": ["α1", "α2", "β1"]},
+      {"id": "M12", "label": "極限誤食毒物", "members": ["M12"], "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M13", "label": "希少動物偽装", "members": ["M13"], "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M14", "label": "宗教儀式偽装", "members": ["M14"], "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M15", "label": "ウミガメ研究者", "members": ["M15"], "tension_subset": ["α1", "β1"]}
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "G1": ["男は過去に極限状況で食料が尽きた", "仲間の一人が死亡した", "残った仲間が死者の肉でスープを作り「ウミガメのスープだ」と偽って飲ませた", "男はそれをウミガメのスープだと信じて飲んだ", "レストランで本物を飲んで味が違うことに気づいた", "過去のスープが人肉だったと悟った", "道徳的壊滅から自殺した"],
+      "G2": ["男は信頼する人物と親密な関係にあった", "その人物がスープに有害物質を混入し「ウミガメのスープだ」と偽った", "有害物質による身体的影響があった", "レストランで本物を飲んで味が違い有害物質混入を悟った", "信頼する人物の害意を認識して自殺した"],
+      "G3": ["男は自分で「ウミガメのスープ」を作って家族に振る舞った", "スープに問題のある材料を使っていた", "家族がそのスープを飲んだ後に死亡した", "レストランで本物を飲んで味が違い自作スープの問題を悟った", "家族の死が自分の過失だと認識して自殺した"],
+      "M3": ["男は極限状況で仲間と遭難した", "仲間が嫌悪対象の動物肉でスープを作り偽った", "レストランで本物を飲んで味が違い悟った", "嫌悪対象を食べていた心理的ショックで自殺した"],
+      "M4": ["男は料理人で師匠のもとで修行した", "師匠は偽の食材で「ウミガメのスープ」を作っていた", "レストランで本物を飲んで師匠の偽装に気づいた", "料理人としてのアイデンティティが崩壊し自殺した"],
+      "M6": ["男の妻は故人である", "妻は生前「ウミガメのスープ」と称して禁忌的食材のスープを作っていた", "レストランで本物を飲んで味が違い妻のスープの正体を悟った", "亡き妻との思い出が汚染され自殺した"],
+      "M7": ["男は高級レストランに通い「ウミガメのスープ」を飲んでいた", "レストランは偽の食材を使い高額で提供していた", "別のレストランで本物を飲んで偽装に気づいた", "長年の散財を認識しショック"],
+      "M8": ["男はウミガメアレルギーと診断され制限的生活を送っていた", "レストランで飲んでも身体反応がなく確認した", "本物と分かり誤診だったと悟った", "不要な制限で失われた人生に絶望し自殺した"],
+      "M10": ["孤児院で「ウミガメのスープ」として安い代用品が出されていた", "施設は予算を着服していた", "レストランで本物を飲んで施設の偽装に気づいた", "搾取されていた認識にショック"],
+      "M12": ["男は無人島で遭難した", "自分でウミガメと思った毒生物を捕まえスープにして飲んだ", "レストランで本物を飲んで味が違い誤食に気づいた", "毒が体内に蓄積していると悟り自殺した"],
+      "M13": ["男は航海中にコックが出した「ウミガメのスープ」を飲んだ", "実際は禁漁の希少動物の肉だった", "レストランで本物を飲んで味が違い偽装に気づいた", "犯罪加担を認識し自殺した"],
+      "M14": ["男は宗教コミュニティに属し儀式で「ウミガメのスープ」を飲んだ", "実際は偽物のスープだった", "レストランで本物を飲んで味が違い偽物と気づいた", "信仰の根拠崩壊に絶望し自殺した"],
+      "M15": ["男はウミガメ研究者で愛着を持っていた", "レストランでスープを注文し専門知識で確認した", "愛する研究対象を食べたショック"]
+    },
+    "division_propositions": [
+      {
+        "id": "P1",
+        "label": "男は過去にウミガメのスープだとして飲んだスープの味を記憶していた",
+        "truth_value_in_T": true,
+        "true_models": ["G1", "G2", "G3", "M3", "M4", "M6", "M7", "M10", "M12", "M13", "M14"],
+        "false_models": ["M8", "M15"]
+      },
+      {
+        "id": "P2",
+        "label": "過去のスープには他者が男に偽りの説明をした欺瞞があった",
+        "truth_value_in_T": true,
+        "true_models": ["G1", "G2", "M3", "M4", "M6", "M7", "M10", "M13", "M14"],
+        "false_models": ["G3", "M8", "M12", "M15"]
+      },
+      {
+        "id": "P3",
+        "label": "過去のスープを飲んだ状況は生命の危機を伴う極限的なものだった",
+        "truth_value_in_T": true,
+        "true_models": ["G1", "M3", "M12"],
+        "false_models": ["G2", "G3", "M4", "M6", "M7", "M8", "M10", "M13", "M14", "M15"]
+      },
+      {
+        "id": "P4",
+        "label": "過去のスープの正体は人が通常食するものではなかった",
+        "truth_value_in_T": true,
+        "true_models": ["G1", "M3", "M6", "M12", "M13"],
+        "false_models": ["G2", "G3", "M4", "M7", "M8", "M10", "M14", "M15"]
+      },
+      {
+        "id": "P5",
+        "label": "男が悟った真実には人の死が直接的に関わっていた",
+        "truth_value_in_T": true,
+        "true_models": ["G1", "G3"],
+        "false_models": ["G2", "M3", "M4", "M6", "M7", "M8", "M10", "M12", "M13", "M14", "M15"]
+      },
+      {
+        "id": "P6",
+        "label": "過去のスープについて欺瞞を行った人物は男と個人的に親密な信頼関係にあった",
+        "truth_value_in_T": true,
+        "true_models": ["G1", "G2", "M3", "M4", "M6"],
+        "false_models": ["G3", "M7", "M8", "M10", "M12", "M13", "M14", "M15"]
+      }
+    ]
+  },
+  "clear_conditions": [["FP"]],
+  "_phase3": {
+    "derivation_graph": {
+      "single_derivations": [
+        {"from": "P7", "to": "P3", "reason": "極限状況で仲間から偽られた→（仲間の欺瞞を落とす）→極限状況だった"},
+        {"from": "P7", "to": "P6", "reason": "極限状況で仲間から偽られた→（極限状況を落とす）→親密な人物の欺瞞"},
+        {"from": "P6", "to": "P2", "reason": "親密な人物の欺瞞→（親密を落とす）→欺瞞があった"}
+      ],
+      "combination_derivations": [],
+      "independent_axes": ["P1", "P4", "P5", "P7"],
+      "root_propositions": ["P1", "P2", "P3", "P4", "P5"]
+    },
+    "fp": {
+      "id": "FP",
+      "label": "男は過去に極限状況で親密な仲間から「ウミガメのスープだ」と偽られ、死んだ人間の肉で作られたスープを飲み、その味を記憶していた",
+      "true_models": ["G1"],
+      "derivations_from_fp": [
+        {"to": "P1", "reason": "スープを飲み味を記憶していた→味を記憶していた"},
+        {"to": "P4", "reason": "死んだ人間の肉で作られたスープ→人が通常食するものではなかった"},
+        {"to": "P5", "reason": "死んだ人間の肉→人の死が直接的に関わっていた"},
+        {"to": "P7", "reason": "極限状況で親密な仲間から偽られて飲んだ→P7"}
+      ]
+    },
+    "clear_validation": {
+      "tensions_resolved": [
+        {"tension_id": "α1", "mechanism": "FP→P1: 過去に飲んだスープの味が比較基準"},
+        {"tension_id": "α2", "mechanism": "FP: 極限状況+人肉→鮮烈な記憶"},
+        {"tension_id": "β1", "mechanism": "FP+S: 本物の味≠記憶の味→過去のスープはウミガメではなかった→人肉"},
+        {"tension_id": "β2", "mechanism": "FP: 人肉摂食の認識→道徳的壊滅→自殺"}
+      ],
+      "all_resolved": true,
+      "fp_prime": null
+    },
+    "provisional_fc": {
+      "FP": [["P1", "P4", "P5", "P7"]],
+      "P7": [["P3", "P6"]],
+      "P6": [["P2"]]
+    },
+    "unrejectable_models": {
+      "models": ["G1"],
+      "reason": "G1は全分割命題を共有するバリアント群であり、内部の差異（遭難の舞台設定）はパズル探索として重要度が低い"
+    },
+    "added_propositions": [
+      {
+        "id": "P7",
+        "label": "男は生命の危機を伴う極限状況で、親密な仲間からスープの正体を偽られて飲んだ",
+        "truth_value_in_T": true,
+        "true_models": ["G1", "M3"],
+        "false_models": ["G2", "G3", "M4", "M6", "M7", "M8", "M10", "M12", "M13", "M14", "M15"]
+      }
+    ]
+  },
+  "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12"],
+  "_phase4": {
+    "s_propositions": [
+      {"id": "S1", "label": "ある男がいた", "type": "atomic"},
+      {"id": "S2", "label": "男はレストランに入った", "type": "atomic"},
+      {"id": "S3", "label": "男は「ウミガメのスープ」を注文した", "type": "atomic"},
+      {"id": "S4", "label": "男はスープを一口飲んだ", "type": "atomic"},
+      {"id": "S5", "label": "男は店員に「これは本当にウミガメのスープか？」と尋ねた", "type": "atomic"},
+      {"id": "S6", "label": "店員は「はい、間違いなくウミガメのスープです」と答えた", "type": "atomic"},
+      {"id": "S7", "label": "男はその夜、自殺した", "type": "atomic"},
+      {"id": "S8", "label": "レストランがあった", "type": "derived", "derived_from": ["S2"]},
+      {"id": "S9", "label": "店員がいた", "type": "derived", "derived_from": ["S5"]},
+      {"id": "S10", "label": "男はレストランの外から来た", "type": "derived", "derived_from": ["S2"]},
+      {"id": "S11", "label": "男はスープの真偽を確認した", "type": "derived", "derived_from": ["S5"]},
+      {"id": "S12", "label": "スープは本物のウミガメのスープだった", "type": "derived", "derived_from": ["S6"]}
+    ],
+    "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12"],
+    "tactical_chains": [
+      {
+        "id": "C1", "type": "S_to_root", "source": ["S4", "S5"], "target": "P1",
+        "intermediates": ["I1"], "tactic": "観測事実の深掘り → 時間軸の拡張",
+        "description": "{S4,S5} →[観測事実の深掘り]→ I1(味の判断基準がある) →[時間軸の拡張]→ P1"
+      },
+      {
+        "id": "C2", "type": "S_to_root", "source": ["S11", "S12", "S7"], "target": "P2",
+        "intermediates": ["I3", "I4"], "tactic": "因果の逆転 → ラベルと実体の乖離 → 段階的絞り込み",
+        "description": "{S11,S12,S7} →[因果の逆転]→ I3(確認が否定的意味) →[ラベルと実体の乖離]→ I4(過去のスープはウミガメではなかった) →[段階的絞り込み]→ P2"
+      },
+      {
+        "id": "C3", "type": "S_to_root", "source": ["S1", "S7"], "target": "P3",
+        "intermediates": ["I5", "I6"], "tactic": "人物像の探索 → 時間軸の拡張 → 段階的絞り込み",
+        "description": "{S1,S7} →[人物像の探索]→ I5(深刻な背景事情) →[時間軸の拡張]→ I6(過去に危機的体験) →[段階的絞り込み]→ P3"
+      },
+      {
+        "id": "C4", "type": "S_to_root", "source": ["S7", "S11"], "target": "P4",
+        "intermediates": ["I7", "I8"], "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "{S7,S11} →[動機の探索]→ I7(衝撃的な真実) →[段階的絞り込み]→ I8(スープの正体に関する真実) →[段階的絞り込み]→ P4"
+      },
+      {
+        "id": "C5", "type": "S_to_root", "source": ["S7", "S11"], "target": "P5",
+        "intermediates": ["I9"], "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "{I7} →[段階的絞り込み]→ I9(生死に関わる深刻さ) →[段階的絞り込み]→ P5",
+        "fc_source": "I7 は C4 と共有（S7, S11 起点）"
+      },
+      {
+        "id": "C6", "type": "toward_concrete", "source": ["P2"], "target": "P6",
+        "intermediates": ["I10"], "tactic": "段階的絞り込み",
+        "description": "{P2} →[段階的絞り込み]→ I10(直接的な関わり) →[段階的絞り込み]→ P6",
+        "fc_source": "P2 は C2 の reveals"
+      },
+      {
+        "id": "C7", "type": "toward_concrete", "source": ["P3", "P6"], "target": "P7",
+        "intermediates": ["I11"], "tactic": "登場人物の探索 → 段階的絞り込み",
+        "description": "{P3,P6} →[登場人物の探索]→ I11(極限状況を共に経験した仲間) → {I11,P2} →[段階的絞り込み]→ P7",
+        "fc_source": "P3 は C3、P6 は C6、P2 は C2 の reveals"
+      },
+      {
+        "id": "C8", "type": "toward_concrete", "source": ["P1", "P4", "P5", "P7"], "target": "FP",
+        "intermediates": ["I12", "I13"], "tactic": "段階的絞り込み → 直接同定",
+        "description": "{P7,P4} →[段階的絞り込み]→ I12(極限で偽られたスープは通常食さないもの) → {I12,P5} →[段階的絞り込み]→ I13(死んだ人間の肉) → {I13,P1} →[直接同定]→ FP",
+        "fc_source": "P1 は C1、P4 は C4、P5 は C5、P7 は C7 の reveals"
+      }
+    ],
+    "generated_intermediates": ["I1", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10", "I11", "I12", "I13"],
+    "confirmed_fc": {
+      "I1": [["S4", "S5"]],
+      "P1": [["I1"]],
+      "I3": [["S11", "S12", "S7"]],
+      "I4": [["I3"]],
+      "P2": [["I4"]],
+      "I5": [["S1", "S7"]],
+      "I6": [["I5"]],
+      "P3": [["I6"]],
+      "I7": [["S7", "S11"]],
+      "I8": [["I7"]],
+      "P4": [["I8"]],
+      "I9": [["I7"]],
+      "P5": [["I9"]],
+      "I10": [["P2"]],
+      "P6": [["I10"]],
+      "I11": [["P3", "P6"]],
+      "P7": [["I11", "P2"]],
+      "I12": [["P7", "P4"]],
+      "I13": [["I12", "P5"]],
+      "FP": [["I13", "P1"]]
+    }
+  },
+  "propositions": [
+    {"id": "P1", "label": "男は過去にウミガメのスープだとして飲んだスープの味を記憶していた", "_truth_value": true, "formation_conditions": [["I1"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "P2", "label": "過去のスープには他者が男に偽りの説明をした欺瞞があった", "_truth_value": true, "formation_conditions": [["I4"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "P3", "label": "過去のスープを飲んだ状況は生命の危機を伴う極限的なものだった", "_truth_value": true, "formation_conditions": [["I6"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "P4", "label": "過去のスープの正体は人が通常食するものではなかった", "_truth_value": true, "formation_conditions": [["I8"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "P5", "label": "男が悟った真実には人の死が直接的に関わっていた", "_truth_value": true, "formation_conditions": [["I9"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "P6", "label": "過去のスープについて欺瞞を行った人物は男と個人的に親密な信頼関係にあった", "_truth_value": true, "formation_conditions": [["I10"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "P7", "label": "男は生命の危機を伴う極限状況で、親密な仲間からスープの正体を偽られて飲んだ", "_truth_value": true, "formation_conditions": [["I11", "P2"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "FP", "label": "男は過去に極限状況で親密な仲間から「ウミガメのスープだ」と偽られ、死んだ人間の肉で作られたスープを飲み、その味を記憶していた", "_truth_value": true, "formation_conditions": [["I13", "P1"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I1", "label": "男にはスープの味を判断する基準があった", "_truth_value": true, "formation_conditions": [["S4", "S5"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I3", "label": "本物のウミガメのスープであることの確認が男にとって否定的な意味を持った", "_truth_value": true, "formation_conditions": [["S11", "S12", "S7"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I4", "label": "男が過去に「ウミガメのスープ」として飲んだものは実際にはウミガメのスープではなかった", "_truth_value": true, "formation_conditions": [["I3"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I5", "label": "男の自殺には日常的でない深刻な背景事情がある", "_truth_value": true, "formation_conditions": [["S1", "S7"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I6", "label": "男は過去に危機的な体験をしたことがある", "_truth_value": true, "formation_conditions": [["I5"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I7", "label": "男が知った真実は自殺に至るほど衝撃的だった", "_truth_value": true, "formation_conditions": [["S7", "S11"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I8", "label": "衝撃的な真実はスープの正体に関するものだった", "_truth_value": true, "formation_conditions": [["I7"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I9", "label": "スープに関する真実は生死に関わる深刻さだった", "_truth_value": true, "formation_conditions": [["I7"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I10", "label": "欺瞞を行った人物は男と直接的な関わりがあった", "_truth_value": true, "formation_conditions": [["P2"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I11", "label": "極限状況を男と共に経験した仲間がいた", "_truth_value": true, "formation_conditions": [["P3", "P6"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I12", "label": "極限状況で偽られて飲んだスープの正体は通常食さないものだった", "_truth_value": true, "formation_conditions": [["P7", "P4"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "I13", "label": "スープは死んだ人間の肉で作られていた", "_truth_value": true, "formation_conditions": [["I12", "P5"]], "negation_of": null, "rejection_conditions": null},
+    {"id": "N1a", "label": "男がスープの真偽を確認した理由は味の不味さではない", "_truth_value": true, "formation_conditions": [["S4", "S5"]], "negation_of": "H1a", "rejection_conditions": null},
+    {"id": "H1a", "label": "男がスープの真偽を確認した理由は味の不味さだった", "_truth_value": false, "formation_conditions": [["S4", "S5"]], "negation_of": "N1a", "rejection_conditions": null},
+    {"id": "N3a", "label": "男の自殺はその日のレストラン以外の出来事が原因ではない", "_truth_value": true, "formation_conditions": [["S1", "S7"]], "negation_of": "H3a", "rejection_conditions": null},
+    {"id": "H3a", "label": "男の自殺はその日のレストラン以外の出来事が原因だった", "_truth_value": false, "formation_conditions": [["S1", "S7"]], "negation_of": "N3a", "rejection_conditions": null},
+    {"id": "N4c", "label": "過去のスープの正体は普通の食べ物ではなかった", "_truth_value": true, "formation_conditions": [["I8"]], "negation_of": "H4c", "rejection_conditions": null},
+    {"id": "H4c", "label": "過去のスープの正体は普通の食べ物だった", "_truth_value": false, "formation_conditions": [["I8"]], "negation_of": "N4c", "rejection_conditions": null},
+    {"id": "NF1a", "label": "男の判断基準は実際に飲んだ経験に基づくものだった", "_truth_value": true, "formation_conditions": [["I1"]], "negation_of": "HF1a", "rejection_conditions": null},
+    {"id": "HF1a", "label": "男の判断基準は専門知識や伝聞によるもので実際に飲んだ経験に基づくものではなかった", "_truth_value": false, "formation_conditions": [["I1"]], "negation_of": "NF1a", "rejection_conditions": null},
+    {"id": "NF2a", "label": "過去のスープの正体について男自身の誤認ではなく他者の関与があった", "_truth_value": true, "formation_conditions": [["I4"]], "negation_of": "HF2a", "rejection_conditions": null},
+    {"id": "HF2a", "label": "過去のスープの正体は男自身の誤認によるものだった", "_truth_value": false, "formation_conditions": [["I4"]], "negation_of": "NF2a", "rejection_conditions": null},
+    {"id": "NF3a", "label": "過去のスープを飲んだ状況は心理的トラウマだけでなく生命の危機を伴うものだった", "_truth_value": true, "formation_conditions": [["I6"]], "negation_of": "HF3a", "rejection_conditions": null},
+    {"id": "HF3a", "label": "過去のスープを飲んだ状況は生命の危機を伴わない心理的トラウマを伴うものだった", "_truth_value": false, "formation_conditions": [["I6"]], "negation_of": "NF3a", "rejection_conditions": null},
+    {"id": "NF4a", "label": "過去のスープの正体は食材そのものが通常食するものではなかった", "_truth_value": true, "formation_conditions": [["I8"]], "negation_of": "HF4a", "rejection_conditions": null},
+    {"id": "HF4a", "label": "過去のスープの正体は通常の食材だが倫理的に問題のある調達方法だった", "_truth_value": false, "formation_conditions": [["I8"]], "negation_of": "NF4a", "rejection_conditions": null},
+    {"id": "NF5a", "label": "男が悟った真実はアイデンティティや信仰ではなく人の死に関わるものだった", "_truth_value": true, "formation_conditions": [["I9"]], "negation_of": "HF5a", "rejection_conditions": null},
+    {"id": "HF5a", "label": "男が悟った真実はアイデンティティや信仰に関わるもので人の死は関わっていなかった", "_truth_value": false, "formation_conditions": [["I9"]], "negation_of": "NF5a", "rejection_conditions": null},
+    {"id": "NF6a", "label": "欺瞞者と男の関係は組織的・制度的ではなく個人的なものだった", "_truth_value": true, "formation_conditions": [["P2"]], "negation_of": "HF6a", "rejection_conditions": null},
+    {"id": "HF6a", "label": "欺瞞者と男の関係は組織的・制度的なものだった", "_truth_value": false, "formation_conditions": [["P2"]], "negation_of": "NF6a", "rejection_conditions": null},
+    {"id": "NF6b", "label": "欺瞞者は男と職業的・指導的関係ではなく個人的に親密な信頼関係にあった", "_truth_value": true, "formation_conditions": [["I10"]], "negation_of": "HF6b", "rejection_conditions": null},
+    {"id": "HF6b", "label": "欺瞞者は男と職業的・指導的な関係にあった", "_truth_value": false, "formation_conditions": [["I10"]], "negation_of": "NF6b", "rejection_conditions": null},
+    {"id": "NF8a", "label": "スープの正体は動物の肉ではなかった", "_truth_value": true, "formation_conditions": [["I12", "P5"]], "negation_of": "HF8a", "rejection_conditions": null},
+    {"id": "HF8a", "label": "スープの正体は嫌悪対象の動物の肉だった", "_truth_value": false, "formation_conditions": [["I12", "P5"]], "negation_of": "NF8a", "rejection_conditions": null}
+  ],
+  "questions": [
+    {"id": "Q1a", "text": "男がスープの真偽を確認したのは、味が不味かったからですか？", "answer": "いいえ", "reveals": ["N1a"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "Q1b", "text": "男にはスープの味を判断する基準がありましたか？", "answer": "はい", "reveals": ["I1"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q1c", "text": "男は以前にもウミガメのスープだとして飲んだことがありますか？", "answer": "はい", "reveals": ["P1"], "mechanism": "observation", "prerequisites": [], "topic_category": "人物と背景"},
+    {"id": "Q2a", "text": "本物のウミガメのスープであることの確認が男の自殺のきっかけになりましたか？", "answer": "はい", "reveals": ["I3"], "mechanism": "observation", "prerequisites": [], "topic_category": "原因と動機"},
+    {"id": "Q2b", "text": "男が以前に「ウミガメのスープ」として飲んだものは、実はウミガメのスープではなかったのですか？", "answer": "はい", "reveals": ["I4"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "Q2c", "text": "過去のスープについて他者が男に偽りの説明をした欺瞞がありましたか？", "answer": "はい", "reveals": ["P2"], "mechanism": "observation", "prerequisites": ["I4"], "topic_category": "状況の確認"},
+    {"id": "Q3a", "text": "男の自殺はその日のレストランでの出来事とは無関係な原因によるものですか？", "answer": "いいえ", "reveals": ["N3a"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "Q3b", "text": "男の自殺にはスープに関連した深刻な背景事情がありますか？", "answer": "はい", "reveals": ["I5"], "mechanism": "observation", "prerequisites": [], "topic_category": "人物と背景"},
+    {"id": "Q3c", "text": "男は過去に危機的な体験をしたことがありますか？", "answer": "はい", "reveals": ["I6"], "mechanism": "observation", "prerequisites": ["I5"], "topic_category": "人物と背景"},
+    {"id": "Q3d", "text": "過去のスープを飲んだ状況は生命の危機を伴う極限的なものでしたか？", "answer": "はい", "reveals": ["P3"], "mechanism": "observation", "prerequisites": ["I6"], "topic_category": "状況の確認"},
+    {"id": "Q4a", "text": "男が知った真実は自殺するほど衝撃的なものでしたか？", "answer": "はい", "reveals": ["I7"], "mechanism": "observation", "prerequisites": [], "topic_category": "原因と動機"},
+    {"id": "Q4b", "text": "衝撃的な真実はスープの正体に関するものでしたか？", "answer": "はい", "reveals": ["I8"], "mechanism": "observation", "prerequisites": ["I7"], "topic_category": "状況の確認"},
+    {"id": "Q4c", "text": "過去のスープの正体は普通の食べ物（魚やエビなど）でしたか？", "answer": "いいえ", "reveals": ["N4c"], "mechanism": "observation", "prerequisites": ["I8"], "topic_category": "前提の確認"},
+    {"id": "Q4d", "text": "過去のスープの正体は人が通常食するものではありませんでしたか？", "answer": "はい", "reveals": ["P4"], "mechanism": "observation", "prerequisites": ["I8"], "topic_category": "状況の確認"},
+    {"id": "Q5a", "text": "スープに関する真実は生死に関わる深刻さでしたか？", "answer": "はい", "reveals": ["I9"], "mechanism": "observation", "prerequisites": ["I7"], "topic_category": "状況の確認"},
+    {"id": "Q5b", "text": "男が悟った真実には人の死が直接的に関わっていましたか？", "answer": "はい", "reveals": ["P5"], "mechanism": "observation", "prerequisites": ["I9"], "topic_category": "状況の確認"},
+    {"id": "Q6a", "text": "欺瞞を行った人物は男と直接的な関わりがありましたか？", "answer": "はい", "reveals": ["I10"], "mechanism": "observation", "prerequisites": ["P2"], "topic_category": "人物と背景"},
+    {"id": "Q6b", "text": "欺瞞を行った人物は男と個人的に親密な信頼関係にありましたか？", "answer": "はい", "reveals": ["P6"], "mechanism": "observation", "prerequisites": ["I10"], "topic_category": "人物と背景"},
+    {"id": "Q7a", "text": "極限状況を男と共に経験した仲間がいましたか？", "answer": "はい", "reveals": ["I11"], "mechanism": "observation", "prerequisites": ["P3"], "topic_category": "人物と背景"},
+    {"id": "Q7b", "text": "男は極限状況で仲間からスープの正体を偽られて飲みましたか？", "answer": "はい", "reveals": ["P7"], "mechanism": "observation", "prerequisites": ["I11"], "topic_category": "状況の確認"},
+    {"id": "Q8a", "text": "極限状況で偽られて飲んだスープの正体は人が通常食するものではありませんでしたか？", "answer": "はい", "reveals": ["I12"], "mechanism": "observation", "prerequisites": ["P7"], "topic_category": "状況の確認"},
+    {"id": "Q8b", "text": "スープは死んだ人間の肉で作られていましたか？", "answer": "はい", "reveals": ["I13"], "mechanism": "observation", "prerequisites": ["I12"], "topic_category": "状況の確認"},
+    {"id": "Q8c", "text": "男は本物のウミガメのスープの味と記憶の味の違いから、過去に飲まされたスープが人肉だったと悟りましたか？", "answer": "はい", "reveals": ["FP"], "mechanism": "link", "prerequisites": ["I13"], "topic_category": "状況の確認"},
+    {"id": "QF1a", "text": "男の判断基準は、専門知識や伝聞によるもので、実際に飲んだ経験に基づくものではありませんでしたか？", "answer": "いいえ", "reveals": ["NF1a"], "mechanism": "rejection", "prerequisites": ["I1"], "topic_category": "人物と背景"},
+    {"id": "QF2a", "text": "過去のスープの正体について、男自身の思い込みや誤認によるものでしたか？", "answer": "いいえ", "reveals": ["NF2a"], "mechanism": "rejection", "prerequisites": ["I4"], "topic_category": "前提の確認"},
+    {"id": "QF3a", "text": "過去のスープを飲んだ状況は、生命の危機を伴わない心理的なトラウマによるものでしたか？", "answer": "いいえ", "reveals": ["NF3a"], "mechanism": "rejection", "prerequisites": ["I6"], "topic_category": "状況の確認"},
+    {"id": "QF4a", "text": "過去のスープの正体は通常の食材だが、その調達方法に倫理的な問題がありましたか？", "answer": "いいえ", "reveals": ["NF4a"], "mechanism": "rejection", "prerequisites": ["I8"], "topic_category": "前提の確認"},
+    {"id": "QF5a", "text": "男が悟った真実は、人の死ではなくアイデンティティや信仰に関わるものでしたか？", "answer": "いいえ", "reveals": ["NF5a"], "mechanism": "rejection", "prerequisites": ["I9"], "topic_category": "原因と動機"},
+    {"id": "QF6a", "text": "欺瞞を行った人物と男の関係は、組織や制度を通じたものでしたか？", "answer": "いいえ", "reveals": ["NF6a"], "mechanism": "rejection", "prerequisites": ["P2"], "topic_category": "人物と背景"},
+    {"id": "QF6b", "text": "欺瞞を行った人物は、男の職業上の上司や師匠のような関係でしたか？", "answer": "いいえ", "reveals": ["NF6b"], "mechanism": "rejection", "prerequisites": ["I10"], "topic_category": "人物と背景"},
+    {"id": "QF8a", "text": "スープの正体は嫌悪対象の動物の肉でしたか？", "answer": "いいえ", "reveals": ["NF8a"], "mechanism": "rejection", "prerequisites": ["I12"], "topic_category": "状況の確認"}
+  ],
+  "_phase5": {
+    "chain_mapping": {
+      "C1": ["Q1a", "Q1b", "Q1c"],
+      "C2": ["Q2a", "Q2b", "Q2c"],
+      "C3": ["Q3a", "Q3b", "Q3c", "Q3d"],
+      "C4": ["Q4a", "Q4b", "Q4c", "Q4d"],
+      "C5": ["Q5a", "Q5b"],
+      "C6": ["Q6a", "Q6b"],
+      "C7": ["Q7a", "Q7b"],
+      "C8": ["Q8a", "Q8b", "Q8c"]
+    },
+    "exploration_paths": [
+      {"name": "パスA: 確認行動から入る", "sequence": "Q1a→Q1b(I1)→Q1c(P1)→Q2a(I3)→Q2b(I4)→Q2c(P2)→Q6a(I10)→Q6b(P6)→Q3b(I5)→Q3c(I6)→Q3d(P3)→Q7a(I11)→Q7b(P7)→Q4a(I7)→Q4b(I8)→Q4d(P4)→Q5a(I9)→Q5b(P5)→Q8a(I12)→Q8b(I13)→Q8c(FP)"},
+      {"name": "パスB: 自殺の動機から入る", "sequence": "Q4a(I7)→Q4b(I8)→Q4d(P4)→Q5a(I9)→Q5b(P5)→Q2a(I3)→Q2b(I4)→Q2c(P2)→Q6a(I10)→Q6b(P6)→Q1b(I1)→Q1c(P1)→Q3b(I5)→Q3c(I6)→Q3d(P3)→Q7a(I11)→Q7b(P7)→Q8a(I12)→Q8b(I13)→Q8c(FP)"},
+      {"name": "パスC: 人物背景から入る", "sequence": "Q3a→Q3b(I5)→Q3c(I6)→Q3d(P3)→Q1b(I1)→Q1c(P1)→Q2a(I3)→Q2b(I4)→Q2c(P2)→Q6a(I10)→Q6b(P6)→Q7a(I11)→Q7b(P7)→Q4a(I7)→Q4b(I8)→Q4d(P4)→Q5a(I9)→Q5b(P5)→Q8a(I12)→Q8b(I13)→Q8c(FP)"}
+    ]
+  },
+  "_phase8": {
+    "chain_branches": [
+      {
+        "chain_id": "C1",
+        "chain_path": "S4,S5 → I1 → P1",
+        "branches": [
+          {
+            "at_step": "P1",
+            "true_side_label": "過去にウミガメのスープだとして飲んだ味を記憶していた",
+            "parallels": [
+              {"label": "専門知識や伝聞により味のイメージを持っていた（飲んだ経験なし）", "models": ["M15"]}
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C2",
+        "chain_path": "S11,S12,S7 → I3 → I4 → P2",
+        "branches": [
+          {
+            "at_step": "P2",
+            "true_side_label": "他者が偽りの説明をした欺瞞があった",
+            "parallels": [
+              {"label": "欺瞞はなく男自身が誤認していた", "models": ["G3", "M12"]}
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C3",
+        "chain_path": "S1,S7 → I5 → I6 → P3",
+        "branches": [
+          {
+            "at_step": "P3",
+            "true_side_label": "生命の危機を伴う極限的な状況だった",
+            "parallels": [
+              {"label": "生命の危機ではないが強い心理的トラウマを伴う状況だった", "models": ["G2", "M4", "M6", "M13", "M14"]}
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C4",
+        "chain_path": "S7,S11 → I7 → I8 → P4",
+        "branches": [
+          {
+            "at_step": "P4",
+            "true_side_label": "通常食するものではなかった",
+            "parallels": [
+              {"label": "通常の食材だが倫理的に問題がある調達方法だった", "models": ["M13"]}
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C5",
+        "chain_path": "I7 → I9 → P5",
+        "branches": [
+          {
+            "at_step": "I9",
+            "true_side_label": "生死に関わる深刻さだった",
+            "parallels": [
+              {"label": "アイデンティティや信仰に関わる深刻さだった", "models": ["M4", "M14"]}
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C6",
+        "chain_path": "P2 → I10 → P6",
+        "branches": [
+          {
+            "at_step": "I10",
+            "true_side_label": "直接的な関わりがあった",
+            "parallels": [
+              {"label": "組織的・制度的な関係だった", "models": ["M7", "M10", "M14"]}
+            ]
+          },
+          {
+            "at_step": "P6",
+            "true_side_label": "個人的に親密な信頼関係にあった",
+            "parallels": [
+              {"label": "職業的・指導的な関係だった", "models": ["M4", "M13"]}
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C8",
+        "chain_path": "P7,P4 → I12 → I13 → FP",
+        "branches": [
+          {
+            "at_step": "I13",
+            "true_side_label": "死んだ人間の肉",
+            "parallels": [
+              {"label": "嫌悪対象の動物の肉だった", "models": ["M3"]}
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "all_models": ["G2", "G3", "M3", "M4", "M6", "M7", "M8", "M10", "M12", "M13", "M14", "M15"],
+      "model_coverage": {
+        "G2": [{"chain": "C3", "step": "P3"}],
+        "G3": [{"chain": "C2", "step": "P2"}],
+        "M3": [{"chain": "C8", "step": "I13"}],
+        "M4": [{"chain": "C3", "step": "P3"}, {"chain": "C5", "step": "I9"}, {"chain": "C6", "step": "P6"}],
+        "M6": [{"chain": "C3", "step": "P3"}],
+        "M7": [{"chain": "C6", "step": "I10"}],
+        "M8": [{"chain": "C1", "step": "P1"}],
+        "M10": [{"chain": "C6", "step": "I10"}],
+        "M12": [{"chain": "C2", "step": "P2"}],
+        "M13": [{"chain": "C4", "step": "P4"}, {"chain": "C6", "step": "P6"}],
+        "M14": [{"chain": "C3", "step": "P3"}, {"chain": "C5", "step": "I9"}, {"chain": "C6", "step": "I10"}],
+        "M15": [{"chain": "C1", "step": "P1"}]
+      },
+      "uncovered": [],
+      "uncovered_notes": ""
+    },
+    "generated": {
+      "propositions": [
+        {"id": "NF1a", "source_chain": "C1", "source_step": "P1", "parallel_index": 0},
+        {"id": "HF1a", "source_chain": "C1", "source_step": "P1", "parallel_index": 0},
+        {"id": "NF2a", "source_chain": "C2", "source_step": "P2", "parallel_index": 0},
+        {"id": "HF2a", "source_chain": "C2", "source_step": "P2", "parallel_index": 0},
+        {"id": "NF3a", "source_chain": "C3", "source_step": "P3", "parallel_index": 0},
+        {"id": "HF3a", "source_chain": "C3", "source_step": "P3", "parallel_index": 0},
+        {"id": "NF4a", "source_chain": "C4", "source_step": "P4", "parallel_index": 0},
+        {"id": "HF4a", "source_chain": "C4", "source_step": "P4", "parallel_index": 0},
+        {"id": "NF5a", "source_chain": "C5", "source_step": "I9", "parallel_index": 0},
+        {"id": "HF5a", "source_chain": "C5", "source_step": "I9", "parallel_index": 0},
+        {"id": "NF6a", "source_chain": "C6", "source_step": "I10", "parallel_index": 0},
+        {"id": "HF6a", "source_chain": "C6", "source_step": "I10", "parallel_index": 0},
+        {"id": "NF6b", "source_chain": "C6", "source_step": "P6", "parallel_index": 0},
+        {"id": "HF6b", "source_chain": "C6", "source_step": "P6", "parallel_index": 0},
+        {"id": "NF8a", "source_chain": "C8", "source_step": "I13", "parallel_index": 0},
+        {"id": "HF8a", "source_chain": "C8", "source_step": "I13", "parallel_index": 0}
+      ],
+      "questions": [
+        {"id": "QF1a", "reveals_proposition": "NF1a"},
+        {"id": "QF2a", "reveals_proposition": "NF2a"},
+        {"id": "QF3a", "reveals_proposition": "NF3a"},
+        {"id": "QF4a", "reveals_proposition": "NF4a"},
+        {"id": "QF5a", "reveals_proposition": "NF5a"},
+        {"id": "QF6a", "reveals_proposition": "NF6a"},
+        {"id": "QF6b", "reveals_proposition": "NF6b"},
+        {"id": "QF8a", "reveals_proposition": "NF8a"}
+      ]
+    }
+  }
+}

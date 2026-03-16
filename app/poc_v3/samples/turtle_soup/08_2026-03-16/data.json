@@ -1,0 +1,912 @@
+{
+  "title": "ウミガメのスープ",
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11",
+    "S12"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "男は過去にウミガメのスープだとして飲んだスープの味を記憶していた",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "過去のスープには他者が男に偽りの説明をした欺瞞があった",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "過去のスープを飲んだ状況は生命の危機を伴う極限的なものだった",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "過去のスープの正体は人が通常食するものではなかった",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "男が悟った真実には人の死が直接的に関わっていた",
+      "formation_conditions": [
+        [
+          "I9"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "過去のスープについて欺瞞を行った人物は男と個人的に親密な信頼関係にあった",
+      "formation_conditions": [
+        [
+          "I10"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P7",
+      "label": "男は生命の危機を伴う極限状況で、親密な仲間からスープの正体を偽られて飲んだ",
+      "formation_conditions": [
+        [
+          "I11",
+          "P2"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "男は過去に極限状況で親密な仲間から「ウミガメのスープだ」と偽られ、死んだ人間の肉で作られたスープを飲み、その味を記憶していた",
+      "formation_conditions": [
+        [
+          "I13",
+          "P1"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I1",
+      "label": "男にはスープの味を判断する基準があった",
+      "formation_conditions": [
+        [
+          "S4",
+          "S5"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I3",
+      "label": "本物のウミガメのスープであることの確認が男にとって否定的な意味を持った",
+      "formation_conditions": [
+        [
+          "S11",
+          "S12",
+          "S7"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I4",
+      "label": "男が過去に「ウミガメのスープ」として飲んだものは実際にはウミガメのスープではなかった",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "男の自殺には日常的でない深刻な背景事情がある",
+      "formation_conditions": [
+        [
+          "S1",
+          "S7"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "男は過去に危機的な体験をしたことがある",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I7",
+      "label": "男が知った真実は自殺に至るほど衝撃的だった",
+      "formation_conditions": [
+        [
+          "S7",
+          "S11"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I8",
+      "label": "衝撃的な真実はスープの正体に関するものだった",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I9",
+      "label": "スープに関する真実は生死に関わる深刻さだった",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I10",
+      "label": "欺瞞を行った人物は男と直接的な関わりがあった",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I11",
+      "label": "極限状況を男と共に経験した仲間がいた",
+      "formation_conditions": [
+        [
+          "P3",
+          "P6"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I12",
+      "label": "極限状況で偽られて飲んだスープの正体は通常食さないものだった",
+      "formation_conditions": [
+        [
+          "P7",
+          "P4"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I13",
+      "label": "スープは死んだ人間の肉で作られていた",
+      "formation_conditions": [
+        [
+          "I12",
+          "P5"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "男がスープの真偽を確認した理由は味の不味さではない",
+      "formation_conditions": [
+        [
+          "S4",
+          "S5"
+        ]
+      ],
+      "negation_of": "H1a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1a",
+      "label": "男がスープの真偽を確認した理由は味の不味さだった",
+      "formation_conditions": [
+        [
+          "S4",
+          "S5"
+        ]
+      ],
+      "negation_of": "N1a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3a",
+      "label": "男の自殺はその日のレストラン以外の出来事が原因ではない",
+      "formation_conditions": [
+        [
+          "S1",
+          "S7"
+        ]
+      ],
+      "negation_of": "H3a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "H3a",
+      "label": "男の自殺はその日のレストラン以外の出来事が原因だった",
+      "formation_conditions": [
+        [
+          "S1",
+          "S7"
+        ]
+      ],
+      "negation_of": "N3a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "N4c",
+      "label": "過去のスープの正体は普通の食べ物ではなかった",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "negation_of": "H4c",
+      "rejection_conditions": null
+    },
+    {
+      "id": "H4c",
+      "label": "過去のスープの正体は普通の食べ物だった",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "negation_of": "N4c",
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "男の判断基準は実際に飲んだ経験に基づくものだった",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "negation_of": "HF1a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1a",
+      "label": "男の判断基準は専門知識や伝聞によるもので実際に飲んだ経験に基づくものではなかった",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "negation_of": "NF1a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "過去のスープの正体について男自身の誤認ではなく他者の関与があった",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "negation_of": "HF2a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "過去のスープの正体は男自身の誤認によるものだった",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "negation_of": "NF2a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3a",
+      "label": "過去のスープを飲んだ状況は心理的トラウマだけでなく生命の危機を伴うものだった",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "negation_of": "HF3a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3a",
+      "label": "過去のスープを飲んだ状況は生命の危機を伴わない心理的トラウマを伴うものだった",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "negation_of": "NF3a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4a",
+      "label": "過去のスープの正体は食材そのものが通常食するものではなかった",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "negation_of": "HF4a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4a",
+      "label": "過去のスープの正体は通常の食材だが倫理的に問題のある調達方法だった",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "negation_of": "NF4a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5a",
+      "label": "男が悟った真実はアイデンティティや信仰ではなく人の死に関わるものだった",
+      "formation_conditions": [
+        [
+          "I9"
+        ]
+      ],
+      "negation_of": "HF5a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5a",
+      "label": "男が悟った真実はアイデンティティや信仰に関わるもので人の死は関わっていなかった",
+      "formation_conditions": [
+        [
+          "I9"
+        ]
+      ],
+      "negation_of": "NF5a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6a",
+      "label": "欺瞞者と男の関係は組織的・制度的ではなく個人的なものだった",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "negation_of": "HF6a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6a",
+      "label": "欺瞞者と男の関係は組織的・制度的なものだった",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ],
+      "negation_of": "NF6a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6b",
+      "label": "欺瞞者は男と職業的・指導的関係ではなく個人的に親密な信頼関係にあった",
+      "formation_conditions": [
+        [
+          "I10"
+        ]
+      ],
+      "negation_of": "HF6b",
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6b",
+      "label": "欺瞞者は男と職業的・指導的な関係にあった",
+      "formation_conditions": [
+        [
+          "I10"
+        ]
+      ],
+      "negation_of": "NF6b",
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF8a",
+      "label": "スープの正体は動物の肉ではなかった",
+      "formation_conditions": [
+        [
+          "I12",
+          "P5"
+        ]
+      ],
+      "negation_of": "HF8a",
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF8a",
+      "label": "スープの正体は嫌悪対象の動物の肉だった",
+      "formation_conditions": [
+        [
+          "I12",
+          "P5"
+        ]
+      ],
+      "negation_of": "NF8a",
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "男がスープの真偽を確認したのは、味が不味かったからですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q1b",
+      "text": "男にはスープの味を判断する基準がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q1c",
+      "text": "男は以前にもウミガメのスープだとして飲んだことがありますか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q2a",
+      "text": "本物のウミガメのスープであることの確認が男の自殺のきっかけになりましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2b",
+      "text": "男が以前に「ウミガメのスープ」として飲んだものは、実はウミガメのスープではなかったのですか？",
+      "answer": "はい",
+      "reveals": [
+        "I4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q2c",
+      "text": "過去のスープについて他者が男に偽りの説明をした欺瞞がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I4"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3a",
+      "text": "男の自殺はその日のレストランでの出来事とは無関係な原因によるものですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q3b",
+      "text": "男の自殺にはスープに関連した深刻な背景事情がありますか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q3c",
+      "text": "男は過去に危機的な体験をしたことがありますか？",
+      "answer": "はい",
+      "reveals": [
+        "I6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I5"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q3d",
+      "text": "過去のスープを飲んだ状況は生命の危機を伴う極限的なものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4a",
+      "text": "男が知った真実は自殺するほど衝撃的なものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q4b",
+      "text": "衝撃的な真実はスープの正体に関するものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I8"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4c",
+      "text": "過去のスープの正体は普通の食べ物（魚やエビなど）でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N4c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q4d",
+      "text": "過去のスープの正体は人が通常食するものではありませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5a",
+      "text": "スープに関する真実は生死に関わる深刻さでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I9"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5b",
+      "text": "男が悟った真実には人の死が直接的に関わっていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I9"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6a",
+      "text": "欺瞞を行った人物は男と直接的な関わりがありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I10"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P2"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q6b",
+      "text": "欺瞞を行った人物は男と個人的に親密な信頼関係にありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q7a",
+      "text": "極限状況を男と共に経験した仲間がいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I11"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P3"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q7b",
+      "text": "男は極限状況で仲間からスープの正体を偽られて飲みましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I11"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8a",
+      "text": "極限状況で偽られて飲んだスープの正体は人が通常食するものではありませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I12"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8b",
+      "text": "スープは死んだ人間の肉で作られていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I13"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I12"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8c",
+      "text": "男は本物のウミガメのスープの味と記憶の味の違いから、過去に飲まされたスープが人肉だったと悟りましたか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I13"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "男の判断基準は、専門知識や伝聞によるもので、実際に飲んだ経験に基づくものではありませんでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "rejection",
+      "prerequisites": [
+        "I1"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF2a",
+      "text": "過去のスープの正体について、男自身の思い込みや誤認によるものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "rejection",
+      "prerequisites": [
+        "I4"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF3a",
+      "text": "過去のスープを飲んだ状況は、生命の危機を伴わない心理的なトラウマによるものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3a"
+      ],
+      "mechanism": "rejection",
+      "prerequisites": [
+        "I6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF4a",
+      "text": "過去のスープの正体は通常の食材だが、その調達方法に倫理的な問題がありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4a"
+      ],
+      "mechanism": "rejection",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF5a",
+      "text": "男が悟った真実は、人の死ではなくアイデンティティや信仰に関わるものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5a"
+      ],
+      "mechanism": "rejection",
+      "prerequisites": [
+        "I9"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF6a",
+      "text": "欺瞞を行った人物と男の関係は、組織や制度を通じたものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6a"
+      ],
+      "mechanism": "rejection",
+      "prerequisites": [
+        "P2"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF6b",
+      "text": "欺瞞を行った人物は、男の職業上の上司や師匠のような関係でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6b"
+      ],
+      "mechanism": "rejection",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF8a",
+      "text": "スープの正体は嫌悪対象の動物の肉でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF8a"
+      ],
+      "mechanism": "rejection",
+      "prerequisites": [
+        "I12"
+      ],
+      "topic_category": "状況の確認"
+    }
+  ],
+  "statement": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口飲んだ男は店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜだろう？",
+  "truth": "男は船乗りで、かつて仲間と船で遭難し、食料が尽きた。仲間の一人が死に、残った仲間は男に「ウミガメのスープだ」と言ってスープを飲ませた。実際にはそれは死んだ仲間の肉で作ったスープだった。レストランで本物のウミガメのスープを飲んだ男は、味が違うことに気づき、あのとき飲まされたものの正体を悟り、絶望して自殺した。",
+  "id": "ウミガメのスープ"
+}
