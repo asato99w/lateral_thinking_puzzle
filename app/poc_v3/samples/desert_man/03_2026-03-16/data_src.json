@@ -2765,254 +2765,216 @@
     ]
   },
   "_phase8": {
-    "chain_branches": {
-      "C1": {
-        "steps": [
+    "chain_branches": [
+      {
+        "chain_id": "C1",
+        "chain_path": "{S3,S5} →[常識的仮説の排除]→ I1(歩いて来たのではない) →[手段の探索]→ P1(乗り物に乗っていた)",
+        "branches": [
           {
-            "node": "I1",
-            "label": "歩いて来たのではない",
-            "existing_coverage": "Q1a → I1（既存）",
-            "new_branches": []
+            "at_step": "I1",
+            "true_side_label": "歩いて来たのではない",
+            "parallels": [
+              {
+                "label": "歩いて来たのではないの否定（既存H*で対応）",
+                "models": []
+              }
+            ]
           },
           {
-            "node": "P1",
-            "label": "乗り物に乗っていた",
-            "existing_coverage": null,
-            "new_branches": [
+            "at_step": "P1",
+            "true_side_label": "乗り物に乗っていた",
+            "parallels": [
               {
-                "id": "HF1b",
                 "label": "他者に連れてこられた",
-                "nf": "NF1b",
-                "qf": "QF1b"
+                "models": []
               },
               {
-                "id": "HF1c",
                 "label": "精神的な問題で砂漠に来た",
-                "nf": "NF1c",
-                "qf": "QF1c"
+                "models": []
               }
             ]
           }
         ]
       },
-      "C2": {
-        "steps": [
+      {
+        "chain_id": "C2",
+        "chain_path": "{S5,S3} →[常識的仮説の排除]→ I3(単なる脱水や遭難ではない) →[段階的絞り込み]→ P7(切迫した身体的危険に直面していた)",
+        "branches": [
           {
-            "node": "I3",
-            "label": "脱水ではない",
-            "existing_coverage": "Q2a → I3（既存）",
-            "new_branches": []
+            "at_step": "I3",
+            "true_side_label": "脱水ではない",
+            "parallels": [
+              {
+                "label": "脱水ではないの否定（既存H*で対応）",
+                "models": []
+              }
+            ]
           },
           {
-            "node": "P7",
-            "label": "切迫した危険",
-            "existing_coverage": null,
-            "new_branches": [
+            "at_step": "P7",
+            "true_side_label": "切迫した危険",
+            "parallels": [
               {
-                "id": "HF2b",
                 "label": "緩やかな衰弱で死んだ",
-                "nf": "NF2b",
-                "qf": "QF2b"
+                "models": []
               }
             ]
           }
         ]
       },
-      "C3": {
-        "steps": [
+      {
+        "chain_id": "C3",
+        "chain_path": "{S4} →[常識的仮説の排除]→ I4(元々裸ではなく服を失った) →[動機の探索]→ P4(自分の意思で服を脱いだ)",
+        "branches": [
           {
-            "node": "I4",
-            "label": "元々裸ではなく服を失った",
-            "existing_coverage": "Q3a → I4（既存）",
-            "new_branches": []
+            "at_step": "I4",
+            "true_side_label": "元々裸ではなく服を失った",
+            "parallels": [
+              {
+                "label": "元々裸ではなく服を失ったの否定（既存H*で対応）",
+                "models": []
+              }
+            ]
           },
           {
-            "node": "P4",
-            "label": "自発的脱衣",
-            "existing_coverage": null,
-            "new_branches": [
+            "at_step": "P4",
+            "true_side_label": "自発的脱衣",
+            "parallels": [
               {
-                "id": "HF3b",
                 "label": "外力や事故で服を失った",
-                "nf": "NF3b",
-                "qf": "QF3b"
+                "models": []
               },
               {
-                "id": "HF3c",
                 "label": "他者に服を脱がされた",
-                "nf": "NF3c",
-                "qf": "QF3c"
+                "models": []
               }
             ]
           }
         ]
       },
-      "C4": {
-        "steps": [
+      {
+        "chain_id": "C4",
+        "chain_path": "{S5,S4,S3} →[登場人物の探索]→ I6(他者の関与が示唆される) →[段階的絞り込み]→ P3(男以外の人物がいた)",
+        "branches": [
           {
-            "node": "I6",
-            "label": "他者の関与",
-            "existing_coverage": "Q4a → I6（既存）",
-            "new_branches": []
+            "at_step": "I6",
+            "true_side_label": "他者の関与",
+            "parallels": [
+              {
+                "label": "他者の関与の否定（既存H*で対応）",
+                "models": []
+              }
+            ]
           },
           {
-            "node": "P3",
-            "label": "他者がいた",
-            "existing_coverage": null,
-            "new_branches": [
+            "at_step": "P3",
+            "true_side_label": "他者がいた",
+            "parallels": [
               {
-                "id": "HF4b",
                 "label": "近くの人物は敵対的だった",
-                "nf": "NF4b",
-                "qf": "QF4b"
+                "models": []
               }
             ]
           }
         ]
       },
-      "C5": {
-        "steps": [
+      {
+        "chain_id": "C5",
+        "chain_path": "{P1,S3} →[段階的絞り込み]→ I8(地上の乗り物ではなかった) →[段階的絞り込み]→ P2(空中にいた)",
+        "branches": [
           {
-            "node": "I8",
-            "label": "地上ではない",
-            "existing_coverage": "Q5a → I8（既存）",
-            "new_branches": []
-          },
-          {
-            "node": "P2",
-            "label": "空中",
-            "existing_coverage": null,
-            "new_branches": []
+            "at_step": "I8",
+            "true_side_label": "地上ではない",
+            "parallels": [
+              {
+                "label": "地上ではないの否定（既存H*で対応）",
+                "models": []
+              }
+            ]
           }
         ]
       },
-      "C6": {
-        "steps": [
+      {
+        "chain_id": "C6",
+        "chain_path": "{P2,P7} →[手段の探索]→ I9(空中から地上に落下した) →[因果の逆転]→ P6(死因は高所からの落下)",
+        "branches": [
           {
-            "node": "I9",
-            "label": "空中から落下",
-            "existing_coverage": null,
-            "new_branches": []
-          },
-          {
-            "node": "P6",
-            "label": "落下死",
-            "existing_coverage": null,
-            "new_branches": [
+            "at_step": "P6",
+            "true_side_label": "落下死",
+            "parallels": [
               {
-                "id": "HF6a",
                 "label": "乗り物は衝突・墜落した",
-                "nf": "NF6a",
-                "qf": "QF6a"
+                "models": []
               }
             ]
           }
         ]
       },
-      "C7": {
-        "steps": [
+      {
+        "chain_id": "C7",
+        "chain_path": "{P4} →[動機の探索]→ I10(脱衣には実用的理由があった) →[段階的絞り込み]→ P5(物理的問題への対処だった)",
+        "branches": [
           {
-            "node": "I10",
-            "label": "実用的理由",
-            "existing_coverage": null,
-            "new_branches": [
+            "at_step": "I10",
+            "true_side_label": "実用的理由",
+            "parallels": [
               {
-                "id": "HF7a",
                 "label": "儀式的・宗教的な理由",
-                "nf": "NF7a",
-                "qf": "QF7a"
+                "models": []
               },
               {
-                "id": "HF7b",
                 "label": "ルールや条件による",
-                "nf": "NF7b",
-                "qf": "QF7b"
+                "models": []
               },
               {
-                "id": "HF7c",
                 "label": "脱獄のため",
-                "nf": "NF7c",
-                "qf": "QF7c"
+                "models": []
               }
             ]
           },
           {
-            "node": "P5",
-            "label": "物理的問題",
-            "existing_coverage": null,
-            "new_branches": [
+            "at_step": "P5",
+            "true_side_label": "物理的問題",
+            "parallels": [
               {
-                "id": "HF8a",
                 "label": "暑さのため",
-                "nf": "NF8a",
-                "qf": "QF8a"
+                "models": []
               }
             ]
           }
         ]
       },
-      "C8": {
-        "steps": [
-          {
-            "node": "I11",
-            "label": "脱衣と危険は関連",
-            "existing_coverage": null,
-            "new_branches": []
-          },
-          {
-            "node": "P9",
-            "label": "緊急事態対処",
-            "existing_coverage": null,
-            "new_branches": []
-          }
-        ]
+      {
+        "chain_id": "C8",
+        "chain_path": "{P5,P7} →[因果の逆転]→ I11(脱衣と危険は同一の緊急事態に起因) →[段階的絞り込み]→ P9(切迫した緊急事態への対処だった)",
+        "branches": []
       },
-      "C9": {
-        "steps": [
+      {
+        "chain_id": "C9",
+        "chain_path": "{P3,S6,S7,S8} →[観測事実の深掘り]→ I12(マッチは他者から渡された) →[動機の探索]→ P8(特定の目的で渡された)",
+        "branches": [
           {
-            "node": "I12",
-            "label": "他者から渡された",
-            "existing_coverage": null,
-            "new_branches": [
+            "at_step": "I12",
+            "true_side_label": "他者から渡された",
+            "parallels": [
               {
-                "id": "HF9a",
                 "label": "個人的な持ち物だった",
-                "nf": "NF9a",
-                "qf": "QF9a"
+                "models": []
               },
               {
-                "id": "HF9b",
                 "label": "偶然手に入った",
-                "nf": "NF9b",
-                "qf": "QF9b"
+                "models": []
               }
             ]
-          },
-          {
-            "node": "P8",
-            "label": "特定目的",
-            "existing_coverage": null,
-            "new_branches": []
           }
         ]
       },
-      "C10": {
-        "steps": [
-          {
-            "node": "I13",
-            "label": "全要素同一事態",
-            "existing_coverage": null,
-            "new_branches": []
-          },
-          {
-            "node": "FP",
-            "label": "最終命題",
-            "existing_coverage": null,
-            "new_branches": []
-          }
-        ]
+      {
+        "chain_id": "C10",
+        "chain_path": "{P6,P8,P9} →[因果の逆転]→ I13(全要素は同一事態に起因) →[段階的絞り込み]→ FP",
+        "branches": []
       }
-    },
+    ],
     "coverage": {
       "all_models": [
         "G1",
@@ -3078,53 +3040,139 @@
       "uncovered_notes": "M7は真側命題P6(落下死≠暴露死),P3(他者あり≠なし),P8(目的で渡された≠自分の装備)の確認により棄却される"
     },
     "generated": {
-      "nf_count": 13,
-      "hf_count": 13,
-      "qf_count": 13,
-      "nf_ids": [
-        "NF1b",
-        "NF1c",
-        "NF2b",
-        "NF3b",
-        "NF3c",
-        "NF4b",
-        "NF6a",
-        "NF7a",
-        "NF7b",
-        "NF7c",
-        "NF8a",
-        "NF9a",
-        "NF9b"
+      "propositions": [
+        {
+          "id": "NF1b",
+          "source_chain": "C1",
+          "source_step": "P1",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF1c",
+          "source_chain": "C1",
+          "source_step": "P1",
+          "parallel_index": 1
+        },
+        {
+          "id": "NF2b",
+          "source_chain": "C2",
+          "source_step": "P7",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF3b",
+          "source_chain": "C3",
+          "source_step": "P4",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF3c",
+          "source_chain": "C3",
+          "source_step": "P4",
+          "parallel_index": 1
+        },
+        {
+          "id": "NF4b",
+          "source_chain": "C4",
+          "source_step": "P3",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF6a",
+          "source_chain": "C6",
+          "source_step": "P6",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF7a",
+          "source_chain": "C7",
+          "source_step": "I10",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF7b",
+          "source_chain": "C7",
+          "source_step": "I10",
+          "parallel_index": 1
+        },
+        {
+          "id": "NF7c",
+          "source_chain": "C7",
+          "source_step": "I10",
+          "parallel_index": 2
+        },
+        {
+          "id": "NF8a",
+          "source_chain": "C7",
+          "source_step": "P5",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF9a",
+          "source_chain": "C9",
+          "source_step": "I12",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF9b",
+          "source_chain": "C9",
+          "source_step": "I12",
+          "parallel_index": 1
+        }
       ],
-      "hf_ids": [
-        "HF1b",
-        "HF1c",
-        "HF2b",
-        "HF3b",
-        "HF3c",
-        "HF4b",
-        "HF6a",
-        "HF7a",
-        "HF7b",
-        "HF7c",
-        "HF8a",
-        "HF9a",
-        "HF9b"
-      ],
-      "qf_ids": [
-        "QF1b",
-        "QF1c",
-        "QF2b",
-        "QF3b",
-        "QF3c",
-        "QF4b",
-        "QF6a",
-        "QF7a",
-        "QF7b",
-        "QF7c",
-        "QF8a",
-        "QF9a",
-        "QF9b"
+      "questions": [
+        {
+          "id": "QF1b",
+          "reveals_proposition": "NF1b"
+        },
+        {
+          "id": "QF1c",
+          "reveals_proposition": "NF1c"
+        },
+        {
+          "id": "QF2b",
+          "reveals_proposition": "NF2b"
+        },
+        {
+          "id": "QF3b",
+          "reveals_proposition": "NF3b"
+        },
+        {
+          "id": "QF3c",
+          "reveals_proposition": "NF3c"
+        },
+        {
+          "id": "QF4b",
+          "reveals_proposition": "NF4b"
+        },
+        {
+          "id": "QF6a",
+          "reveals_proposition": "NF6a"
+        },
+        {
+          "id": "QF7a",
+          "reveals_proposition": "NF7a"
+        },
+        {
+          "id": "QF7b",
+          "reveals_proposition": "NF7b"
+        },
+        {
+          "id": "QF7c",
+          "reveals_proposition": "NF7c"
+        },
+        {
+          "id": "QF8a",
+          "reveals_proposition": "NF8a"
+        },
+        {
+          "id": "QF9a",
+          "reveals_proposition": "NF9a"
+        },
+        {
+          "id": "QF9b",
+          "reveals_proposition": "NF9b"
+        }
       ]
     }
   },
