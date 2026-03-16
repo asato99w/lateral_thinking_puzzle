@@ -58,7 +58,7 @@
     },
     {
       "id": "poisonous_mushroom",
-      "engine_version": "v2",
+      "engine_version": "v3",
       "odr_tag": "puzzle-poisonous-mushroom",
       "title_ja": "毒キノコ",
       "title_en": "Poisonous Mushroom",
