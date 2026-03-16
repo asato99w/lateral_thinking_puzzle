@@ -25,7 +25,8 @@
   .tab-content { background: #fff; border: 1px solid #e0e0e0;
                   border-top: none; padding: 16px; overflow-x: auto; }
   .tab-content.hidden { display: none; }
-  .mermaid { text-align: center; }
+  .mermaid { text-align: center; overflow-x: auto; }
+  .mermaid svg { min-width: 800px; min-height: 400px; }
   ul.checks { list-style: none; padding: 8px 0; }
   ul.checks li { padding: 4px 8px; font-size: 0.9em; }
   li.issue { color: #e65100; }
@@ -83,14 +84,14 @@ graph TD
   classDef compositeNode fill:#9c27b0,stroke:#6a1b9a,color:#fff
   classDef derivedNode fill:#ff9800,stroke:#e65100,color:#fff
   classDef defaultNode fill:#e0e0e0,stroke:#757575,color:#424242
-  P1["P1: 男にとって、毒キノコしかないことの重要性は、食用キノコの不在..."]:::rootNode
+  P1["P1: 男にとって、毒キノコしかないことの重要性は、食用キノコの不在にあった"]:::rootNode
   P2["P2: 男はキノコの状態から、その場所への人の出入りについて推論した"]:::derivedNode
   P3["P3: 男の安堵は、生命や安全に関わるものだった"]:::axisNode
   P4["P4: 男はキノコ狩り（食用キノコの採取）のためにその場所に来ていた"]:::derivedNode
-  P5["P5: 毒キノコしかないことが、その場所に人がいる（来た）証拠となっ..."]:::axisNode
-  P5 -->|"「人がいた証拠」から方向性を落とすと「人..."| P2
-  P2 -->|"「人の出入りの推論」から推論内容を落とす..."| P1
-  P4 -->|"「キノコ狩り目的」から活動の具体内容を落..."| P1
+  P5["P5: 毒キノコしかないことが、その場所に人がいる（来た）証拠となった"]:::axisNode
+  P5 -->|"「人がいた証拠」から方向性を落とすと「人の出入りについて推論した」が得られる"| P2
+  P2 -->|"「人の出入りの推論」から推論内容を落とすと「食用不在が重要」が得られる"| P1
+  P4 -->|"「キノコ狩り目的」から活動の具体内容を落とすと「食用不在が重要」が得られる"| P1
 </pre>
 </div>
 
@@ -490,7 +491,17 @@ graph LR
     startOnLoad: true,
     theme: 'default',
     securityLevel: 'loose',
-    flowchart: { htmlLabels: true, curve: 'basis' }
+    flowchart: {
+      htmlLabels: true,
+      curve: 'basis',
+      useMaxWidth: false,
+      nodeSpacing: 30,
+      rankSpacing: 60,
+      padding: 15
+    },
+    themeVariables: {
+      fontSize: '14px'
+    }
   });
 
   // After mermaid renders, hide non-active tabs
