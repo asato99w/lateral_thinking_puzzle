@@ -1,15 +1,15 @@
 ---
 name: v3-generate
 description: v3統合アルゴリズムを適用し、パズルのサンプルデータを段階的に生成する。
-argument-hint: [パズル名] [--algo v1|v2|v3|v4]
+argument-hint: [パズル名] [--algo v1|v2|v3|v4|v5]
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # /v3-generate — v3 サンプル生成
 
 引数: `$ARGUMENTS`（パズル名 + オプション）
-- 例: `/v3-generate desert_man`（デフォルト: v4 アルゴリズム）
-- 例: `/v3-generate turtle_soup --algo v3`
+- 例: `/v3-generate desert_man`（デフォルト: v5 アルゴリズム）
+- 例: `/v3-generate turtle_soup --algo v4`
 
 ## アルゴリズム選択
 
@@ -20,7 +20,8 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 | `--algo v1` | `theory_v3/integration/algorithms/統合アルゴリズム.md` |
 | `--algo v2` | `theory_v3/integration/algorithms/統合アルゴリズムv2.md` |
 | `--algo v3` | `theory_v3/integration/algorithms/統合アルゴリズムv3.md` |
-| `--algo v4`（デフォルト） | `theory_v3/integration/algorithms/統合アルゴリズムv4.md` |
+| `--algo v4` | `theory_v3/integration/algorithms/統合アルゴリズムv4.md` |
+| `--algo v5`（デフォルト） | `theory_v3/integration/algorithms/統合アルゴリズムv5.md` |
 
 各 Phase で使用する規則ファイルは、選択されたアルゴリズムファイル内の記載に従う。
 
