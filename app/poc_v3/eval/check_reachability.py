@@ -330,27 +330,35 @@ def _get_availability_fc(q: dict, descriptor_map: dict) -> list[list[str]] | Non
 
 
 def check_formation_reachability_v3(data: dict) -> list[str]:
-    """v3: 各質問の利用可能条件が initial_confirmed + 先行 reveals から到達可能か。"""
+    """v3: 各質問の利用可能条件が confirmed 可能な命題で構成されているか。
+
+    エンジン (engine.py) は質問のオープン判定を confirmed のみで行う。
+    fc 条件の命題が confirmable でなければ質問は永遠にオープンしない。
+    """
     errors = []
     initial = set(data.get("initial_confirmed", []))
+
+    # confirmable = confirmed になりうる命題集合
+    revealable: set[str] = set()
+    for q in data.get("questions", []):
+        revealable.update(_get_reveals(q))
+
     descriptors = _get_descriptors(data)
     descriptor_map = {d["id"]: d for d in descriptors}
-    formation_conds = {d["id"]: d["formation_conditions"] for d in descriptors if _has_formation(d)}
     entailment_conds = {d["id"]: d["entailment_conditions"] for d in descriptors if _has_entailment(d)}
-    rejection_conds: dict[str, list[list[str]]] = {}
-    for d in descriptors:
-        rejc = d.get("rejection_conditions")
-        if rejc is not None:
-            rejection_conds[d["id"]] = rejc
 
-    # 全 reveals を集めた confirmed で最大到達可能集合を求める
-    all_reveals: set[str] = set()
-    for q in data.get("questions", []):
-        all_reveals.update(_get_reveals(q))
-
-    max_confirmed = initial | all_reveals
-    derivable = _derivable_descriptors(max_confirmed, formation_conds, entailment_conds, rejection_conds or None)
-    reachable = max_confirmed | derivable
+    confirmable = initial | revealable
+    changed = True
+    while changed:
+        changed = False
+        for did, conds in entailment_conds.items():
+            if did in confirmable:
+                continue
+            for cond_group in conds:
+                if all(c in confirmable for c in cond_group):
+                    confirmable.add(did)
+                    changed = True
+                    break
 
     for q in data.get("questions", []):
         qid = q["id"]
@@ -358,17 +366,17 @@ def check_formation_reachability_v3(data: dict) -> list[str]:
         if not fc:
             continue
         has_valid_group = any(
-            all(ref in reachable for ref in cond_group)
+            all(ref in confirmable for ref in cond_group)
             for cond_group in fc
         )
         if not has_valid_group:
             out_of_scope = []
             for i, cond_group in enumerate(fc):
-                unreachable = [ref for ref in cond_group if ref not in reachable]
-                if unreachable:
-                    out_of_scope.append(f"[{i}]: {unreachable}")
+                unconfirmable = [ref for ref in cond_group if ref not in confirmable]
+                if unconfirmable:
+                    out_of_scope.append(f"[{i}]: {unconfirmable}")
             errors.append(
-                f"question '{qid}' の利用可能条件が到達不能: {', '.join(out_of_scope)}"
+                f"question '{qid}' の利用可能条件が到達不能（fc条件が confirm 不可能）: {', '.join(out_of_scope)}"
             )
     return errors
 
