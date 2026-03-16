@@ -41,7 +41,7 @@
       "negation_of": null,
       "formation_conditions": [
         [
-          "S4"
+          "I1"
         ]
       ],
       "rejection_conditions": null
@@ -788,6 +788,54 @@
         "I7"
       ],
       "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q1c",
+      "text": "毒キノコしかないことに、安堵につながる何らかの意味がありますか？",
+      "answer": "はい",
+      "reveals": [
+        "I1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2d",
+      "text": "男の不安は深刻なものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I2"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5c",
+      "text": "食用キノコがないのは人為的な理由ですか？",
+      "answer": "はい",
+      "reveals": [
+        "I6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6b",
+      "text": "男は、近くに人がいると分かり、助かる見込みがあると安堵したのですか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "状況の確認"
     }
   ],
   "statement": "男は、辺りに毒キノコしかないのを見て安堵した。なぜだろうか。",

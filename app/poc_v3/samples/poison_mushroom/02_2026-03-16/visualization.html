@@ -45,7 +45,7 @@
   <div class="stat"><div class="num">13</div><div class="label">model</div></div>
   <div class="stat"><div class="num">9</div><div class="label">S prop</div></div>
   <div class="stat"><div class="num">43</div><div class="label">proposition</div></div>
-  <div class="stat"><div class="num">24</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">28</div><div class="label">question</div></div>
   <div class="stat"><div class="num">6</div><div class="label">chain</div></div>
 </div>
 
@@ -166,7 +166,7 @@ graph TD
   S5 -.-> S8
   S4 -.-> S9
   S6 -.-> S9
-  S4 --> P1
+  I1 --> P1
   I4 --> P2
   I3 --> P3
   I5 --> P4
@@ -236,12 +236,16 @@ graph LR
   N1a_q["N1a: 男の安堵は毒キノコ自体に直接的な価値があるからではない"]:::nNode
   Q1b["Q1b O<br/>男にとって重要だったのは、毒キノコがあることではなく、食用キノコがないことですか？"]:::qNode
   P1_q["P1: 男にとって、毒キノコしかないことの重要性は、食用キノコの不在にあった"]:::pNode
+  Q1c["Q1c O<br/>毒キノコしかないことに、安堵につながる何らかの意味がありますか？"]:::qNode
+  I1_q["I1: 毒キノコしかないことが安堵につながる何らかの情報的理由がある"]:::nNode
   Q2a["Q2a O<br/>男が安堵する前に、何か不安や心配事がありましたか？"]:::qNode
   I2_q["I2: 男には安堵する前に何らかの不安や懸念があった"]:::nNode
   Q2b["Q2b X<br/>その不安は、日常的な不便や些細な問題ですか？"]:::qNode
   N2b_q["N2b: 男の不安は日常的な不便や些細な問題ではなかった"]:::nNode
   Q2c["Q2c O<br/>男の安堵は、生命や安全に関わるものでしたか？"]:::qNode
   P3_q["P3: 男の安堵は、生命や安全に関わるものだった"]:::pNode
+  Q2d["Q2d O<br/>男の不安は深刻なものでしたか？"]:::qNode
+  I3_q["I3: 男の不安は深刻な問題に関するものだった"]:::nNode
   Q3a["Q3a O<br/>食用キノコがない理由について、男は考えましたか？"]:::qNode
   I4_q["I4: 食用キノコがないのには何らかの原因がある"]:::nNode
   Q3b["Q3b O<br/>男はキノコの状態から、その場所に人が来たかどうかについて考えましたか？"]:::qNode
@@ -254,8 +258,12 @@ graph LR
   N5a_q["N5a: 食用キノコがないのは自然環境の理由ではない"]:::nNode
   Q5b["Q5b O<br/>食用キノコは、誰かに先に採られていたのですか？"]:::qNode
   P5_q["P5: 毒キノコしかないことが、その場所に人がいる（来た）証拠となった"]:::pNode
+  Q5c["Q5c O<br/>食用キノコがないのは人為的な理由ですか？"]:::qNode
+  I6_q["I6: 食用キノコの不在は、自然現象ではなく人為的な理由による"]:::nNode
   Q6a["Q6a O<br/>男はキノコ狩り中に山で遭難していましたか？"]:::qNode
   I7_q["I7: 男はキノコ狩り中に生命に関わる困難に陥っていた"]:::nNode
+  Q6b["Q6b O<br/>男は、近くに人がいると分かり、助かる見込みがあると安堵したのですか？"]:::qNode
+  FP_q["FP: 男はキノコ狩り中に山で遭難し、毒キノコしか残っていないことから人が近くにいて助かる見込みがあると判断した"]:::nNode
   QF1b["QF1b X<br/>毒キノコが見分けやすいことが安堵の理由ですか？"]:::qNode
   NF1b_q["NF1b: 安堵の理由は毒キノコの見分けやすさではない"]:::fNode
   QF2a["QF2a X<br/>男は特定の目標を達成したから安堵しましたか？"]:::qNode
@@ -282,16 +290,20 @@ graph LR
   NF6c_q["NF6c: 安堵の理由は食料の確保ではない"]:::fNode
   Q1a -->|reveals| N1a_q
   Q1b -->|reveals| P1_q
+  Q1c -->|reveals| I1_q
   Q2a -->|reveals| I2_q
   Q2b -->|reveals| N2b_q
   Q2c -->|reveals| P3_q
+  Q2d -->|reveals| I3_q
   Q3a -->|reveals| I4_q
   Q3b -->|reveals| P2_q
   Q4a -->|reveals| I5_q
   Q4b -->|reveals| P4_q
   Q5a -->|reveals| N5a_q
   Q5b -->|reveals| P5_q
+  Q5c -->|reveals| I6_q
   Q6a -->|reveals| I7_q
+  Q6b -->|reveals| FP_q
   QF1b -->|reveals| NF1b_q
   QF2a -->|reveals| NF2a_q
   QF2c -->|reveals| NF2c_q
