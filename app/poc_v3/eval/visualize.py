@@ -196,28 +196,52 @@ def _build_derivation_diagram(propositions, s_props):
         "  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242",
     ]
 
+    # Exclude H*/HF* (negation targets) and NF* (rejection props) to reduce diagram size
+    excluded_prefixes = ("H", "HF", "NF")
+    filtered_props = {pid: prop for pid, prop in propositions.items()
+                      if not any(pid.startswith(px) and (len(pid) > len(px) and not pid[len(px)].isalpha())
+                                 for px in excluded_prefixes)
+                      and not (pid.startswith("H") and pid[1:2].isdigit())}
+    # More robust: exclude by prefix pattern H*, HF*, NF*
+    filtered_props = {}
+    for pid, prop in propositions.items():
+        skip = False
+        for px in ("HF", "NF"):
+            if pid.startswith(px) and len(pid) > len(px) and not pid[len(px):len(px)+1].isalpha():
+                skip = True
+                break
+        if not skip and pid.startswith("H") and len(pid) > 1 and not pid[1:2].isalpha():
+            skip = True
+        if not skip:
+            filtered_props[pid] = prop
+    filtered_ids = set(filtered_props.keys()) | set(s_props.keys())
+
     # Pass 1: define all nodes
     for sp in s_props.values():
         sid = sp["id"]
         lines.append(f'  {sid}["{sid}: {_esc(sp["label"])}"]:::sNode')
 
-    for pid, prop in propositions.items():
+    for pid, prop in filtered_props.items():
         lines.append(f'  {pid}["{pid}: {_esc(prop["label"])}"]:::{_node_class(pid)}')
 
-    # Pass 2: define all edges
+    # Pass 2: define all edges (only between included nodes)
     for sp in s_props.values():
         sid = sp["id"]
         for parent in sp.get("derived_from", []):
-            lines.append(f"  {parent} -.-> {sid}")
+            if parent in filtered_ids:
+                lines.append(f"  {parent} -.-> {sid}")
 
-    for pid, prop in propositions.items():
+    for pid, prop in filtered_props.items():
         for fc_group in prop.get("formation_conditions") or []:
-            if len(fc_group) == 1:
-                lines.append(f"  {fc_group[0]} --> {pid}")
+            valid_sources = [src for src in fc_group if src in filtered_ids]
+            if not valid_sources:
+                continue
+            if len(valid_sources) == 1:
+                lines.append(f"  {valid_sources[0]} --> {pid}")
             else:
-                jid = f"j_{pid}_{'_'.join(fc_group)}"
+                jid = f"j_{pid}_{'_'.join(valid_sources)}"
                 lines.append(f"  {jid}(( ))")
-                for src in fc_group:
+                for src in valid_sources:
                     lines.append(f"  {src} --> {jid}")
                 lines.append(f"  {jid} --> {pid}")
     return lines
