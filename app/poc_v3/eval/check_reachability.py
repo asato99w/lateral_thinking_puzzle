@@ -241,6 +241,56 @@ def check_availability_scope(data: dict) -> list[str]:
     return errors
 
 
+def check_confirmability(data: dict) -> list[str]:
+    """v3: 全命題が confirm 可能かを検証する。
+
+    命題が confirmed になる手段は以下のみ:
+      1. initial_confirmed に含まれる
+      2. いずれかの質問の reveals に含まれる
+      3. entailment_conditions による論理的導出（confirmed → confirmed）
+
+    上記いずれにも該当しない命題は永遠に confirmed にならない。
+    """
+    if not _is_v3(data):
+        return []
+
+    errors = []
+    initial = set(data.get("initial_confirmed", []))
+
+    revealable: set[str] = set()
+    for q in data.get("questions", []):
+        revealable.update(_get_reveals(q))
+
+    descriptors = _get_descriptors(data)
+    entailment_conds = {d["id"]: d["entailment_conditions"] for d in descriptors if _has_entailment(d)}
+
+    # initial + 全 reveals から entailment の不動点計算
+    confirmable = initial | revealable
+    changed = True
+    while changed:
+        changed = False
+        for did, conds in entailment_conds.items():
+            if did in confirmable:
+                continue
+            for cond_group in conds:
+                if all(c in confirmable for c in cond_group):
+                    confirmable.add(did)
+                    changed = True
+                    break
+
+    for d in descriptors:
+        did = d["id"]
+        if did in confirmable:
+            continue
+        # H* 命題（「いいえ」回答の仮説側）は confirm されない設計のため除外
+        if d.get("negation_of") is not None and d.get("_truth_value") is False:
+            continue
+        errors.append(
+            f"命題 '{did}' ({d.get('label', '')}) が confirm 不可能"
+        )
+    return errors
+
+
 def check_orphan_descriptors(data: dict) -> list[str]:
     """孤立基礎命題の検出。"""
     warnings = []
@@ -330,6 +380,7 @@ def run(path: str) -> tuple[bool, list[str]]:
     if is_v3:
         checks = [
             ("命題の到達可能性", check_proposition_reachability),
+            ("命題の confirm 可能性", check_confirmability),
             ("利用可能条件の到達可能性", check_formation_reachability_v3),
             ("孤立命題の検出", check_orphan_descriptors),
         ]
