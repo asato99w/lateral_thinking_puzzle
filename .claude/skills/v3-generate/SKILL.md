@@ -43,9 +43,10 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 
 ### 1. 準備
 
-1. `$ARGUMENTS` から `--algo` オプションを解析する（なければ v4）
+1. `$ARGUMENTS` から `--algo` オプションを解析する（なければ v5）
 2. `app/poc_v3/samples/{puzzle}/` を確認し、次の連番を決定する
 3. `{nn}_{YYYY-MM-DD}/` ディレクトリと `history/` を作成する
+4. `history/00_メタ情報.md` を作成し、適用アルゴリズムのバージョンとファイルパスを記録する
 
 ### 2. アルゴリズムの段階的適用
 
