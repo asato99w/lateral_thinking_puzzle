@@ -53,7 +53,7 @@
     },
     {
       "id": "forbidden_basement",
-      "engine_version": "v2",
+      "engine_version": "v3",
       "odr_tag": "puzzle-forbidden-basement",
       "title_ja": "禁じられた地下室",
       "title_en": "The Forbidden Basement",
