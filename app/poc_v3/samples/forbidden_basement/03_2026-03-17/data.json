@@ -1,0 +1,954 @@
+{
+  "title": "禁じられた地下室",
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11",
+    "S12"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "女性はドアを開ける前から地下室の中にいた",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "女性は犯罪の被害者だった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "女性が驚いた原因は地下室内に実在する異常な対象ではなかった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S8",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "地下室の状態は女性が見た時点と警察が確認した時点で変わらなかった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "女性が驚いた体験は客観的に検証可能な現象だった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "女性は地下室に監禁されていた",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P7",
+      "label": "女性がドアを開けた先は普通の外の世界だった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I1",
+      "label": "「開けてはいけない」の理由は地下室の中に異常なものがあるからではなかった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S4",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I2",
+      "label": "女性は通報すべき被害を受けていた",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "女性の驚きは実在する何かに基づいていた",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S7",
+          "S8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "女性は自らの意思ではなく地下室の中にいた",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P1",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I7",
+      "label": "女性が見て驚いたものは実在する正常なものだった",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P3",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I8",
+      "label": "女性は監禁された地下室から自力で外の世界に出た",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P6",
+          "P7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "女性は地下室に監禁されており、ドアを開けて初めて普通の外の世界を目にした",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "禁止の理由は地下室内の危険物ではなかった",
+      "negation_of": "H1a",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1a",
+      "label": "禁止の理由は地下室内の危険物だった",
+      "negation_of": "N1a",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N2a",
+      "label": "女性の通報は地下室の中で見たものについてではなかった",
+      "negation_of": "H2a",
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H2a",
+      "label": "女性は地下室の中で見たものについて通報した",
+      "negation_of": "N2a",
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3a",
+      "label": "女性が驚いたのは怖いものや危険なものではなかった",
+      "negation_of": "H3a",
+      "formation_conditions": [
+        [
+          "S8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H3a",
+      "label": "女性は怖いものや危険なものを見て驚いた",
+      "negation_of": "N3a",
+      "formation_conditions": [
+        [
+          "S8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "地下室の異常物が女性の通報後に片付けられたのではなかった",
+      "negation_of": "HF1a",
+      "formation_conditions": [
+        [
+          "S4",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1a",
+      "label": "地下室の異常物が女性の通報後に片付けられた",
+      "negation_of": "NF1a",
+      "formation_conditions": [
+        [
+          "S4",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1b",
+      "label": "「開けてはいけない」は女性を保護する意図ではなかった",
+      "negation_of": "HF1b",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1b",
+      "label": "「開けてはいけない」は女性を保護する意図だった",
+      "negation_of": "NF1b",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "女性は他者の犯罪を目撃して通報したのではなかった",
+      "negation_of": "HF2a",
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "女性は他者の犯罪を目撃して通報した",
+      "negation_of": "NF2a",
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2b",
+      "label": "女性の被害は医学的な問題ではなかった",
+      "negation_of": "HF2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2b",
+      "label": "女性の被害は医学的な問題だった",
+      "negation_of": "NF2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3b",
+      "label": "女性の驚きは幻覚や記憶の錯覚によるものではなかった",
+      "negation_of": "HF3b",
+      "formation_conditions": [
+        [
+          "S8",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3b",
+      "label": "女性の驚きは幻覚や記憶の錯覚によるものだった",
+      "negation_of": "NF3b",
+      "formation_conditions": [
+        [
+          "S8",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4b",
+      "label": "地下室は以前も正常な状態だった",
+      "negation_of": "HF4b",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4b",
+      "label": "地下室は以前は異常な状態だった",
+      "negation_of": "NF4b",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5a",
+      "label": "女性の驚きは実在しないもの（幻覚等）によるものではなかった",
+      "negation_of": "HF5a",
+      "formation_conditions": [
+        [
+          "S7",
+          "S8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5a",
+      "label": "女性の驚きは実在しないもの（幻覚等）によるものだった",
+      "negation_of": "NF5a",
+      "formation_conditions": [
+        [
+          "S7",
+          "S8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5b",
+      "label": "女性が見たものは一時的な現象で後から確認できなくなったのではなかった",
+      "negation_of": "HF5b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5b",
+      "label": "女性が見たものは一時的な現象で後から確認できなくなった",
+      "negation_of": "NF5b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6a",
+      "label": "女性は自分の意思で入って出られなくなったのではなかった",
+      "negation_of": "HF6a",
+      "formation_conditions": [
+        [
+          "P1",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6a",
+      "label": "女性は自分の意思で入って出られなくなった",
+      "negation_of": "NF6a",
+      "formation_conditions": [
+        [
+          "P1",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6b",
+      "label": "女性の閉じ込めは事故ではなかった",
+      "negation_of": "HF6b",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6b",
+      "label": "女性の閉じ込めは事故だった",
+      "negation_of": "NF6b",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF7a",
+      "label": "女性の驚きは何かの不在によるものではなかった",
+      "negation_of": "HF7a",
+      "formation_conditions": [
+        [
+          "P3",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF7a",
+      "label": "女性は何かの不在に驚いた",
+      "negation_of": "NF7a",
+      "formation_conditions": [
+        [
+          "P3",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF7b",
+      "label": "女性が見た正常なものは日用品等ではなかった",
+      "negation_of": "HF7b",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF7b",
+      "label": "女性が見た正常なものは日用品等だった",
+      "negation_of": "NF7b",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF8a",
+      "label": "女性は脱出せずに外を見たのではなかった",
+      "negation_of": "HF8a",
+      "formation_conditions": [
+        [
+          "P6",
+          "P7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF8a",
+      "label": "女性は脱出せずに外を見た（窓等で）",
+      "negation_of": "NF8a",
+      "formation_conditions": [
+        [
+          "P6",
+          "P7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF8b",
+      "label": "女性は以前に外の世界を見たことがなかった",
+      "negation_of": "HF8b",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF8b",
+      "label": "女性は以前にも外の世界を見たことがあった",
+      "negation_of": "NF8b",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "地下室の中に危険なものがあるから「開けてはいけない」と言われたのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q1b",
+      "text": "「開けてはいけない」の理由は地下室の中の異常とは別の事情でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q1c",
+      "text": "女性はドアを開ける前から地下室の中にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q2a",
+      "text": "女性は地下室で見たものについて警察に通報しに行きましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2b",
+      "text": "女性には自分自身に関する被害を通報する必要がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q2c",
+      "text": "女性は犯罪の被害者でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q3a",
+      "text": "女性は地下室の中で怖いものや不気味なものを見て驚きましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q3c",
+      "text": "女性が驚いた原因は地下室内に実在する異常な対象ではありませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q4b",
+      "text": "地下室の状態は女性が見た時点と警察が確認した時点で変わっていませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5a",
+      "text": "女性が驚いたのは実際に存在するものを見たからですか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5b",
+      "text": "女性が驚いた体験は他の人でも確認できる客観的な現象でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6a",
+      "text": "女性は自分の意思ではなく地下室にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I6"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6b",
+      "text": "女性は地下室に監禁されていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P6"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q7a",
+      "text": "女性が見て驚いたものは実在する正常なものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I7"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q7b",
+      "text": "女性がドアを開けた先は普通の外の世界でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P7"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8a",
+      "text": "女性は監禁された地下室から自力で外の世界に出ましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I8"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8b",
+      "text": "女性は地下室に監禁されており、ドアを開けて初めて普通の外の世界を目にしましたか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "地下室に異常なものがあったが、女性の通報後に誰かが片付けたのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF1b",
+      "text": "「開けてはいけない」は女性を保護するための言葉でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2a",
+      "text": "女性は他者が被害を受けた犯罪を目撃して通報しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF2b",
+      "text": "女性の問題は犯罪ではなく医学的なものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF3b",
+      "text": "女性は地下室で幻覚や記憶の錯覚を体験しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4b",
+      "text": "地下室は以前は異常な状態でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF5a",
+      "text": "女性が驚いたのは実際には存在しないもの（幻覚や夢など）を見たからですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF5b",
+      "text": "女性が見たものは一時的な現象で後から確認できなくなりましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF6a",
+      "text": "女性は自分で地下室に入ったが出られなくなったのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF6b",
+      "text": "女性が地下室にいたのは事故的な閉じ込めでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF7a",
+      "text": "女性が驚いたのはあるべきものがなかった（不在だった）からですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF7a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF7b",
+      "text": "女性が見た正常なものは地下室内の日用品などでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF7b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF8a",
+      "text": "女性は脱出せずに窓などから外の世界を見ましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF8a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF8b",
+      "text": "女性は以前にも外の世界を見たことがありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF8b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "人物と背景"
+    }
+  ],
+  "statement": "絶対に開けてはいけないと言われていた地下室のドアを開けた女性。中に入って見たものに驚き、すぐに警察に駆け込んだ。しかし地下室の中には何も異常なものはなかった。",
+  "truth": "女性は地下室に監禁されていた。「開けてはいけないドア」とは監禁部屋から外に出るドアのこと。ドアを開けたら普通の外の世界が見えた。「何も異常なものはなかった」のは外の世界が普通だから。彼女は自分の監禁を通報するために警察に行った。",
+  "id": "禁じられた地下室"
+}

@@ -1,0 +1,2812 @@
+{
+  "title": "禁じられた地下室",
+  "S": "絶対に開けてはいけないと言われていた地下室のドアを開けた女性。中に入って見たものに驚き、すぐに警察に駆け込んだ。しかし地下室の中には何も異常なものはなかった。",
+  "T": "女性は地下室に監禁されていた。「開けてはいけないドア」とは監禁部屋から外に出るドアのこと。ドアを開けたら普通の外の世界が見えた。「何も異常なものはなかった」のは外の世界が普通だから。彼女は自分の監禁を通報するために警察に行った。",
+  "_phase1": {
+    "tensions": [
+      {
+        "id": "α",
+        "label": "驚きと「異常なし」の矛盾: 中に入って見たものに驚いたのに、地下室の中には何も異常なものはなかった",
+        "parent": null
+      },
+      {
+        "id": "α1",
+        "label": "驚きの対象の正体: 何に驚いたのか",
+        "parent": "α"
+      },
+      {
+        "id": "α2",
+        "label": "驚きと「異常なし」の両立メカニズム: 驚くべきものがあるのになぜ「異常なものはない」のか",
+        "parent": "α"
+      },
+      {
+        "id": "β",
+        "label": "警察通報と「異常なし」の矛盾: すぐに警察に駆け込んだのに、何も異常なものはなかった",
+        "parent": null
+      },
+      {
+        "id": "β1",
+        "label": "通報の動機: 何を通報しに行ったのか",
+        "parent": "β"
+      },
+      {
+        "id": "β2",
+        "label": "通報と「異常なし」の両立メカニズム: 通報すべきことがあるのになぜ「異常なものはない」のか",
+        "parent": "β"
+      },
+      {
+        "id": "γ",
+        "label": "禁止の文脈: 「絶対に開けてはいけないと言われていた」の背景が不明",
+        "parent": null
+      },
+      {
+        "id": "γ1",
+        "label": "禁止の発信者と目的: 誰がなぜ開けてはいけないと言ったのか",
+        "parent": "γ"
+      },
+      {
+        "id": "γ2",
+        "label": "禁止を破った動機: なぜ女性はドアを開けたのか",
+        "parent": "γ"
+      }
+    ],
+    "models": [
+      {
+        "id": "T",
+        "label": "監禁脱出",
+        "summary": "女性は地下室に監禁されていた。ドアを開けて普通の外の世界を見て驚き、監禁を警察に通報した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M1",
+        "label": "精神施設の不当収容",
+        "summary": "女性は精神施設の地下室に不当収容されていた。ドアを開けて外を見て驚き、不当収容を通報した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M2",
+        "label": "カルト施設からの脱出",
+        "summary": "女性はカルト教団の施設に閉じ込められていた。ドアを開けて普通の世界を見て驚き、カルトを通報した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M3",
+        "label": "虐待家庭からの脱出",
+        "summary": "女性は虐待者に地下室に閉じ込められていた。ドアを開けて外を見て驚き、虐待を通報した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M4",
+        "label": "犯罪証拠の事後除去（死体）",
+        "summary": "地下室で死体を発見し通報したが、警察到着前に犯人が死体を移動した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M5",
+        "label": "犯罪証拠の事後除去（違法物品）",
+        "summary": "地下室で違法物品を発見し通報したが、警察到着前に犯人が物品を除去した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M6",
+        "label": "犯罪証拠の事後除去（違法設備）",
+        "summary": "地下室で違法活動設備を発見し通報したが、警察到着前に犯人が清掃した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M7",
+        "label": "幻覚による誤認",
+        "summary": "女性は幻覚を引き起こす医学的状態があり、地下室で幻覚を見て警察に通報したが実際には何もなかった。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M8",
+        "label": "失踪者の遺品の発見",
+        "summary": "地下室で行方不明者の私物を発見。私物は「異常なもの」ではないが犯罪の証拠となりうるため通報した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M9",
+        "label": "予想された内容物の不在",
+        "summary": "地下室に何かがあるはずだと聞いていたが空だった。空であること自体に驚き、証拠隠滅を通報した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M10",
+        "label": "いるべき人の不在",
+        "summary": "地下室に監禁されている人がいると推測してドアを開けたが誰もいなかった。行方不明を通報した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M11",
+        "label": "自身への監視装置の事後撤去",
+        "summary": "地下室で自分を対象とした監視装置を発見。通報したが警察到着前に犯人が装置を撤去した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M12",
+        "label": "記憶のフラッシュバック",
+        "summary": "女性は過去に地下室で犯罪を目撃した記憶を抑圧していた。ドアを開けた瞬間にフラッシュバックし過去の犯罪を通報した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M13",
+        "label": "他者（監禁被害者）の発見",
+        "summary": "地下室に監禁されていた他者を発見。人は「もの」ではないため「異常なものはなかった」。監禁を通報した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M14",
+        "label": "非視覚的刺激",
+        "summary": "ドアを開けたら異様な匂いや温度を感じて驚いた。通報したが到着時には匂いが消散していた。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M15",
+        "label": "既知状態との乖離による証拠隠滅認知",
+        "summary": "以前の地下室の状態を知っていた女性が、完全に清掃された地下室を見て驚き証拠隠滅を通報した。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      }
+    ],
+    "relaxation_patterns": {
+      "T": {
+        "α1": "長期隔離後の外界との初遭遇",
+        "α2": "外界は文字通り正常",
+        "β1": "自身の被害の自己通報",
+        "β2": "外界は正常",
+        "γ1": "拘束者が脱出防止のため禁止",
+        "γ2": "脱出の意志"
+      },
+      "M1": {
+        "α1": "長期隔離後の外界との初遭遇",
+        "α2": "外界は文字通り正常",
+        "β1": "自身の被害の自己通報",
+        "β2": "外界は正常",
+        "γ1": "拘束者が脱出防止のため禁止",
+        "γ2": "脱出の意志"
+      },
+      "M2": {
+        "α1": "長期隔離後の外界との初遭遇",
+        "α2": "外界は文字通り正常",
+        "β1": "自身の被害の自己通報",
+        "β2": "外界は正常",
+        "γ1": "拘束者が脱出防止のため禁止",
+        "γ2": "脱出の意志"
+      },
+      "M3": {
+        "α1": "長期隔離後の外界との初遭遇",
+        "α2": "外界は文字通り正常",
+        "β1": "自身の被害の自己通報",
+        "β2": "外界は正常",
+        "γ1": "拘束者が脱出防止のため禁止",
+        "γ2": "脱出の意志"
+      },
+      "M4": {
+        "α1": "犯罪の物的証拠の直接目撃",
+        "α2": "通報中の犯人による証拠除去",
+        "β1": "他者に対する犯罪の目撃通報",
+        "β2": "証拠除去により物的異常が消失",
+        "γ1": "犯罪者が発覚防止のため禁止",
+        "γ2": "好奇心"
+      },
+      "M5": {
+        "α1": "犯罪の物的証拠の直接目撃",
+        "α2": "通報中の犯人による証拠除去",
+        "β1": "他者に対する犯罪の目撃通報",
+        "β2": "証拠除去により物的異常が消失",
+        "γ1": "犯罪者が発覚防止のため禁止",
+        "γ2": "好奇心"
+      },
+      "M6": {
+        "α1": "犯罪の物的証拠の直接目撃",
+        "α2": "通報中の犯人による証拠除去",
+        "β1": "他者に対する犯罪の目撃通報",
+        "β2": "証拠除去により物的異常が消失",
+        "γ1": "犯罪者が発覚防止のため禁止",
+        "γ2": "好奇心"
+      },
+      "M7": {
+        "α1": "医学的原因による虚偽の知覚",
+        "α2": "客観的には何も存在しない",
+        "β1": "虚偽の知覚を事実と信じての通報",
+        "β2": "実際には何も異常なし",
+        "γ1": "家族の医学的配慮による禁止",
+        "γ2": "-"
+      },
+      "M8": {
+        "α1": "文脈が日用品に犯罪的意味を付与",
+        "α2": "物品自体は日用品で異常でない",
+        "β1": "犯罪の間接証拠としての通報",
+        "β2": "日用品は客観的に異常でない",
+        "γ1": "犯罪者が発覚防止のため禁止",
+        "γ2": "疑念に基づく探索"
+      },
+      "M9": {
+        "α1": "予想される内容物の不在",
+        "α2": "空＝「異常なもの」の物理的不在",
+        "β1": "証拠隠滅の疑いでの通報",
+        "β2": "空室は物的に異常でない",
+        "γ1": "犯罪者が発覚防止のため禁止",
+        "γ2": "調査目的"
+      },
+      "M10": {
+        "α1": "予想される人物の不在",
+        "α2": "不在＝「異常なもの」の不在",
+        "β1": "行方不明/犯罪の通報",
+        "β2": "何もない＝異常なし",
+        "γ1": "犯罪者/関係者が禁止",
+        "γ2": "捜索目的"
+      },
+      "M11": {
+        "α1": "自己を対象とした犯罪装置の発見",
+        "α2": "通報中の犯人による装置撤去",
+        "β1": "自身に対する犯罪の通報",
+        "β2": "装置撤去により物的異常が消失",
+        "γ1": "犯罪者が発覚防止のため禁止",
+        "γ2": "好奇心"
+      },
+      "M12": {
+        "α1": "過去の記憶の無意識的想起",
+        "α2": "過去の痕跡は消失済み",
+        "β1": "想起された過去の犯罪の通報",
+        "β2": "現在は物的異常なし",
+        "γ1": "犯罪者/関係者のトラウマ回避配慮",
+        "γ2": "-"
+      },
+      "M13": {
+        "α1": "予想外の人物の存在",
+        "α2": "人は「もの」の範疇に含まれない",
+        "β1": "監禁犯罪の通報",
+        "β2": "人は「異常なもの」に該当しない",
+        "γ1": "監禁犯が発覚防止のため禁止",
+        "γ2": "好奇心/捜索"
+      },
+      "M14": {
+        "α1": "視覚以外の感覚による異常検知",
+        "α2": "感覚刺激は「もの」でない/消散",
+        "β1": "危険事態の通報",
+        "β2": "物的な「もの」は存在しない",
+        "γ1": "危険の知悉者による禁止",
+        "γ2": "好奇心"
+      },
+      "M15": {
+        "α1": "既知の過去状態との乖離の認知",
+        "α2": "現在は文字通り正常",
+        "β1": "証拠隠滅の疑いでの通報",
+        "β2": "現在は物的異常なし",
+        "γ1": "犯罪者が発覚防止のため禁止",
+        "γ2": "過去の記憶に基づく調査"
+      }
+    },
+    "variant_groups": [
+      {
+        "group_id": "G1",
+        "label": "拘束からの脱出: 長期拘束後にドアを開けて外界を発見し自身の被害を通報",
+        "representative": "T",
+        "members": [
+          "T",
+          "M1",
+          "M2",
+          "M3"
+        ],
+        "shared_pattern": {
+          "α1": "長期隔離後の外界との初遭遇",
+          "α2": "外界は文字通り正常",
+          "β1": "自身の被害の自己通報",
+          "β2": "外界は正常",
+          "γ1": "拘束者が脱出防止のため禁止",
+          "γ2": "脱出の意志"
+        }
+      },
+      {
+        "group_id": "G2",
+        "label": "犯罪証拠の事後除去: 犯罪証拠を目撃し通報するが到着前に犯人が証拠を除去",
+        "representative": "M4",
+        "members": [
+          "M4",
+          "M5",
+          "M6"
+        ],
+        "shared_pattern": {
+          "α1": "犯罪の物的証拠の直接目撃",
+          "α2": "通報中の犯人による証拠除去",
+          "β1": "他者に対する犯罪の目撃通報",
+          "β2": "証拠除去により物的異常が消失",
+          "γ1": "犯罪者が発覚防止のため禁止",
+          "γ2": "好奇心"
+        }
+      }
+    ],
+    "abstract_models": [
+      {
+        "id": "G1",
+        "label": "拘束からの脱出: 長期拘束後にドアを開けて外界を発見し自身の被害を通報",
+        "representative": "T",
+        "members": [
+          "T",
+          "M1",
+          "M2",
+          "M3"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "G2",
+        "label": "犯罪証拠の事後除去: 犯罪証拠を目撃し通報するが到着前に犯人が証拠を除去",
+        "representative": "M4",
+        "members": [
+          "M4",
+          "M5",
+          "M6"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M7",
+        "label": "幻覚による誤認: 医学的原因で幻覚を見て通報するが客観的には何もない",
+        "members": [
+          "M7"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M8",
+        "label": "文脈的意味の付与: 日用品に犯罪的文脈を読み取り通報するが物品自体は異常でない",
+        "members": [
+          "M8"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M9",
+        "label": "予想された内容物の不在: あるべきものがない空室に驚き証拠隠滅を通報",
+        "members": [
+          "M9"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M10",
+        "label": "予想された人物の不在: いるべき人がいないことに驚き行方不明を通報",
+        "members": [
+          "M10"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M11",
+        "label": "自己対象犯罪装置の事後撤去: 自分への監視装置を発見し通報するが到着前に犯人が撤去",
+        "members": [
+          "M11"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M12",
+        "label": "記憶のフラッシュバック: 過去の犯罪記憶が蘇り通報するが現在は痕跡なし",
+        "members": [
+          "M12"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M13",
+        "label": "人物の発見: 監禁された他者を発見し通報。人は「もの」ではないため「異常なものはなかった」",
+        "members": [
+          "M13"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M14",
+        "label": "非視覚的感覚による異常検知: 匂い等の非視覚的刺激で驚き通報するが物的な「もの」はない",
+        "members": [
+          "M14"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M15",
+        "label": "既知状態との乖離: 以前の状態と異なる正常さに証拠隠滅を認知し通報",
+        "members": [
+          "M15"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      }
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "G1": [
+        "女性は何者かに地下室に長期間閉じ込められていた",
+        "閉じ込めた者が脱出防止のため「開けてはいけない」と言った",
+        "女性は脱出を試みてドアを開けた",
+        "ドアの向こうには普通の外の世界が広がっていた",
+        "長期間外界を見ていなかったため外の世界に驚いた",
+        "自分の被害（拘束）を通報するために警察に行った"
+      ],
+      "G2": [
+        "地下室に犯罪の物的証拠が保管されていた",
+        "犯罪者が発覚防止のため「開けてはいけない」と言った",
+        "女性は好奇心でドアを開け犯罪証拠を発見し驚いた",
+        "すぐに警察に通報した",
+        "通報中に犯罪者が証拠を除去した",
+        "警察到着時には何も残っていなかった"
+      ],
+      "M7": [
+        "女性は幻覚を引き起こす医学的状態がある",
+        "家族が幻覚誘発を恐れ「開けてはいけない」と言った",
+        "女性はドアを開け幻覚を見て驚いた",
+        "幻覚を事実と信じて警察に通報した",
+        "客観的には地下室に何もなかった"
+      ],
+      "M8": [
+        "地下室に行方不明者の私物が保管されていた",
+        "犯罪者が発覚防止のため「開けてはいけない」と言った",
+        "女性は疑念からドアを開け失踪者の持ち物を発見し驚いた",
+        "犯罪の手がかりとして警察に通報した",
+        "私物は日用品であり「異常なもの」ではなかった"
+      ],
+      "M9": [
+        "地下室に何かがあるはずだという情報を得ていた",
+        "関係者が「開けてはいけない」と言った",
+        "女性は確認のためドアを開けたが空だった",
+        "空であること自体に驚き証拠隠滅を通報した",
+        "空の部屋には「異常なもの」はなかった"
+      ],
+      "M10": [
+        "地下室に監禁されている人がいると推測していた",
+        "関係者が「開けてはいけない」と言った",
+        "女性は捜索のためドアを開けたが誰もいなかった",
+        "いるべき人がいないことに驚き行方不明を通報した",
+        "人がいない＝「異常なもの」はなかった"
+      ],
+      "M11": [
+        "地下室に女性を対象とした監視装置が設置されていた",
+        "ストーカーが「開けてはいけない」と言った",
+        "女性は好奇心でドアを開け監視装置を発見し驚いた",
+        "ストーキングを警察に通報した",
+        "通報中にストーカーが装置を撤去した"
+      ],
+      "M12": [
+        "女性は過去に地下室で犯罪を目撃した記憶を抑圧していた",
+        "関係者がトラウマ回避のため「開けてはいけない」と言った",
+        "ドアを開けた瞬間に記憶がフラッシュバックした",
+        "過去の犯罪を警察に通報した",
+        "現在の地下室には犯罪の痕跡はなかった"
+      ],
+      "M13": [
+        "地下室に他者が監禁されていた",
+        "監禁犯が発覚防止のため「開けてはいけない」と言った",
+        "女性はドアを開け監禁された人を発見し驚いた",
+        "監禁犯罪を警察に通報した",
+        "人は「もの」ではないため「異常なものはなかった」"
+      ],
+      "M14": [
+        "地下室に危険な匂いや異常な温度があった",
+        "危険を知る人が「開けてはいけない」と言った",
+        "女性はドアを開け異常な匂い/温度に驚いた",
+        "危険を警察に通報した",
+        "到着時には匂いが消散し物的な異常はなかった"
+      ],
+      "M15": [
+        "女性は以前の地下室の状態を知っていた",
+        "犯罪者が「開けてはいけない」と言った",
+        "女性は確認のためドアを開けた",
+        "以前と完全に異なり清掃されていたことに驚いた",
+        "証拠隠滅を通報した",
+        "清掃後の部屋は正常で「異常なもの」はなかった"
+      ]
+    },
+    "division_propositions": [
+      {
+        "id": "P1",
+        "label": "女性はドアを開ける前から地下室の中にいた",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1"
+        ],
+        "false_models": [
+          "G2",
+          "M7",
+          "M8",
+          "M9",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M14",
+          "M15"
+        ]
+      },
+      {
+        "id": "P2",
+        "label": "女性は犯罪の被害者だった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M11"
+        ],
+        "false_models": [
+          "G2",
+          "M7",
+          "M8",
+          "M9",
+          "M10",
+          "M12",
+          "M13",
+          "M14",
+          "M15"
+        ]
+      },
+      {
+        "id": "P3",
+        "label": "女性が驚いた原因は地下室内に実在する異常な対象ではなかった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M7",
+          "M8",
+          "M9",
+          "M10",
+          "M12",
+          "M15"
+        ],
+        "false_models": [
+          "G2",
+          "M11",
+          "M13",
+          "M14"
+        ]
+      },
+      {
+        "id": "P4",
+        "label": "地下室の状態は女性が見た時点と警察が確認した時点で変わらなかった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M7",
+          "M8",
+          "M9",
+          "M10",
+          "M12",
+          "M13",
+          "M15"
+        ],
+        "false_models": [
+          "G2",
+          "M11",
+          "M14"
+        ]
+      },
+      {
+        "id": "P5",
+        "label": "女性が驚いた体験は客観的に検証可能な現象だった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "G2",
+          "M8",
+          "M9",
+          "M10",
+          "M11",
+          "M13",
+          "M14",
+          "M15"
+        ],
+        "false_models": [
+          "M7",
+          "M12"
+        ]
+      }
+    ]
+  },
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "_phase3": {
+    "derivation_graph": {
+      "single_derivations": [
+        {
+          "from": "P6",
+          "to": "P1",
+          "reason": "監禁の犯罪性を落とし位置のみ残す → 地下室の中にいた"
+        },
+        {
+          "from": "P6",
+          "to": "P2",
+          "reason": "監禁の場所を落とし被害者性のみ残す → 犯罪の被害者"
+        },
+        {
+          "from": "P7",
+          "to": "P3",
+          "reason": "外の世界は地下室内部ではない → 地下室内の異常対象ではない"
+        },
+        {
+          "from": "P7",
+          "to": "P4",
+          "reason": "外の世界は恒常的に正常 → 状態が変わらなかった"
+        },
+        {
+          "from": "P7",
+          "to": "P5",
+          "reason": "外の世界を見た体験は客観的 → 検証可能な現象"
+        }
+      ],
+      "combination_derivations": [],
+      "independent_axes": [
+        "P6",
+        "P7"
+      ],
+      "root_propositions": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ]
+    },
+    "fp": {
+      "id": "FP",
+      "label": "女性は地下室に監禁されており、ドアを開けて初めて普通の外の世界を目にした",
+      "true_models": [
+        "G1"
+      ],
+      "derivations_from_fp": [
+        {
+          "to": "P6",
+          "reason": "FP から外の世界に関する情報を落とす → 地下室に監禁されていた"
+        },
+        {
+          "to": "P7",
+          "reason": "FP から監禁に関する情報を落とす → ドアの先は普通の外の世界だった"
+        }
+      ]
+    },
+    "clear_validation": {
+      "tensions_resolved": [
+        {
+          "tension_id": "α1",
+          "mechanism": "P7+P6: 監禁されていた女性が初めて外の世界を見た驚き"
+        },
+        {
+          "tension_id": "α2",
+          "mechanism": "P7: 外の世界は文字通り異常でない"
+        },
+        {
+          "tension_id": "β1",
+          "mechanism": "P6: 自分の監禁を通報。P2も含意"
+        },
+        {
+          "tension_id": "β2",
+          "mechanism": "P7: 外の世界は普通。通報は監禁の事実について"
+        },
+        {
+          "tension_id": "γ1",
+          "mechanism": "P6+S: 監禁犯が脱出防止のため禁止した"
+        },
+        {
+          "tension_id": "γ2",
+          "mechanism": "P6: 脱出の試み"
+        }
+      ],
+      "all_resolved": true,
+      "fp_prime": null
+    },
+    "provisional_fc": {
+      "P6": [
+        [
+          "P1",
+          "P2"
+        ]
+      ],
+      "P7": [
+        [
+          "P3",
+          "P4",
+          "P5"
+        ]
+      ],
+      "FP": [
+        [
+          "P6",
+          "P7"
+        ]
+      ]
+    },
+    "unrejectable_models": {
+      "models": [
+        "G1"
+      ],
+      "reason": "G1メンバー（T,M1,M2,M3）は全分割命題を共有し、拘束者の身元という具象的差異のみ"
+    },
+    "added_propositions_note": "P6 and P7 added as intermediate propositions in derivation graph",
+    "added_propositions": [
+      {
+        "id": "P6",
+        "label": "女性は地下室に監禁されていた",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1"
+        ],
+        "false_models": [
+          "G2",
+          "M7",
+          "M8",
+          "M9",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M14",
+          "M15"
+        ]
+      },
+      {
+        "id": "P7",
+        "label": "女性がドアを開けた先は普通の外の世界だった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1"
+        ],
+        "false_models": [
+          "G2",
+          "M7",
+          "M8",
+          "M9",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M14",
+          "M15"
+        ]
+      }
+    ]
+  },
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11",
+    "S12"
+  ],
+  "_phase4": {
+    "s_propositions": [
+      {
+        "id": "S1",
+        "label": "女性がいた",
+        "type": "atomic"
+      },
+      {
+        "id": "S2",
+        "label": "地下室があった",
+        "type": "atomic"
+      },
+      {
+        "id": "S3",
+        "label": "地下室にドアがあった",
+        "type": "atomic"
+      },
+      {
+        "id": "S4",
+        "label": "そのドアは「絶対に開けてはいけない」と言われていた",
+        "type": "atomic"
+      },
+      {
+        "id": "S5",
+        "label": "女性がそのドアを開けた",
+        "type": "atomic"
+      },
+      {
+        "id": "S6",
+        "label": "女性は中に入った",
+        "type": "atomic"
+      },
+      {
+        "id": "S7",
+        "label": "女性は何かを見た",
+        "type": "atomic"
+      },
+      {
+        "id": "S8",
+        "label": "女性はそれに驚いた",
+        "type": "atomic"
+      },
+      {
+        "id": "S9",
+        "label": "女性はすぐに警察に駆け込んだ",
+        "type": "atomic"
+      },
+      {
+        "id": "S10",
+        "label": "地下室の中には何も異常なものはなかった",
+        "type": "atomic"
+      },
+      {
+        "id": "S11",
+        "label": "誰かが女性に「開けてはいけない」と言った",
+        "type": "derived",
+        "derived_from": [
+          "S4"
+        ]
+      },
+      {
+        "id": "S12",
+        "label": "女性は禁止を破ってドアを開けた",
+        "type": "derived",
+        "derived_from": [
+          "S4",
+          "S5"
+        ]
+      }
+    ],
+    "initial_confirmed": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8",
+      "S9",
+      "S10",
+      "S11",
+      "S12"
+    ],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_root",
+        "source": [
+          "S4",
+          "S10"
+        ],
+        "target": "P1",
+        "intermediates": [
+          "I1"
+        ],
+        "tactic": "矛盾の指摘 → ラベルと実体の乖離",
+        "description": "{S4,S10} →[矛盾の指摘]→ I1 →[ラベルと実体の乖離]→ P1"
+      },
+      {
+        "id": "C2",
+        "type": "S_to_root",
+        "source": [
+          "S9"
+        ],
+        "target": "P2",
+        "intermediates": [
+          "I2"
+        ],
+        "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "{S9} →[動機の探索]→ I2 →[段階的絞り込み]→ P2"
+      },
+      {
+        "id": "C3",
+        "type": "S_to_root",
+        "source": [
+          "S8",
+          "S10"
+        ],
+        "target": "P3",
+        "intermediates": [],
+        "tactic": "矛盾の指摘",
+        "description": "{S8,S10} →[矛盾の指摘]→ P3"
+      },
+      {
+        "id": "C4",
+        "type": "S_to_root",
+        "source": [
+          "S10"
+        ],
+        "target": "P4",
+        "intermediates": [],
+        "tactic": "観測事実の深掘り",
+        "description": "{S10} →[観測事実の深掘り]→ P4"
+      },
+      {
+        "id": "C5",
+        "type": "S_to_root",
+        "source": [
+          "S7",
+          "S8"
+        ],
+        "target": "P5",
+        "intermediates": [
+          "I5"
+        ],
+        "tactic": "観測事実の深掘り → 段階的絞り込み",
+        "description": "{S7,S8} →[観測事実の深掘り]→ I5 →[段階的絞り込み]→ P5"
+      },
+      {
+        "id": "C6",
+        "type": "toward_concrete",
+        "source": [
+          "P1",
+          "P2"
+        ],
+        "target": "P6",
+        "intermediates": [
+          "I6"
+        ],
+        "tactic": "段階的絞り込み → 段階的絞り込み",
+        "description": "{P1,P2} →[段階的絞り込み]→ I6 →[段階的絞り込み]→ P6",
+        "fc_source": "P1はC1、P2はC2のreveals"
+      },
+      {
+        "id": "C7",
+        "type": "toward_concrete",
+        "source": [
+          "P3",
+          "P5"
+        ],
+        "target": "P7",
+        "intermediates": [
+          "I7"
+        ],
+        "tactic": "段階的絞り込み → 段階的絞り込み",
+        "description": "{P3,P5} →[段階的絞り込み]→ I7 →[段階的絞り込み]→ P7",
+        "fc_source": "P3はC3、P5はC5のreveals"
+      },
+      {
+        "id": "C8",
+        "type": "toward_concrete",
+        "source": [
+          "P6",
+          "P7"
+        ],
+        "target": "FP",
+        "intermediates": [
+          "I8"
+        ],
+        "tactic": "段階的絞り込み → 直接同定",
+        "description": "{P6,P7} →[段階的絞り込み]→ I8 →[直接同定]→ FP",
+        "fc_source": "P6はC6、P7はC7のreveals"
+      }
+    ],
+    "generated_intermediates": [
+      "I1",
+      "I2",
+      "I5",
+      "I6",
+      "I7",
+      "I8"
+    ]
+  },
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "女性はドアを開ける前から地下室の中にいた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "女性は犯罪の被害者だった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "女性が驚いた原因は地下室内に実在する異常な対象ではなかった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S8",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "地下室の状態は女性が見た時点と警察が確認した時点で変わらなかった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "女性が驚いた体験は客観的に検証可能な現象だった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "女性は地下室に監禁されていた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P7",
+      "label": "女性がドアを開けた先は普通の外の世界だった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I1",
+      "label": "「開けてはいけない」の理由は地下室の中に異常なものがあるからではなかった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S4",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I2",
+      "label": "女性は通報すべき被害を受けていた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "女性の驚きは実在する何かに基づいていた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S7",
+          "S8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "女性は自らの意思ではなく地下室の中にいた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P1",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I7",
+      "label": "女性が見て驚いたものは実在する正常なものだった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P3",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I8",
+      "label": "女性は監禁された地下室から自力で外の世界に出た",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P6",
+          "P7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "女性は地下室に監禁されており、ドアを開けて初めて普通の外の世界を目にした",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "禁止の理由は地下室内の危険物ではなかった",
+      "_truth_value": true,
+      "negation_of": "H1a",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1a",
+      "label": "禁止の理由は地下室内の危険物だった",
+      "_truth_value": false,
+      "negation_of": "N1a",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N2a",
+      "label": "女性の通報は地下室の中で見たものについてではなかった",
+      "_truth_value": true,
+      "negation_of": "H2a",
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H2a",
+      "label": "女性は地下室の中で見たものについて通報した",
+      "_truth_value": false,
+      "negation_of": "N2a",
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3a",
+      "label": "女性が驚いたのは怖いものや危険なものではなかった",
+      "_truth_value": true,
+      "negation_of": "H3a",
+      "formation_conditions": [
+        [
+          "S8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H3a",
+      "label": "女性は怖いものや危険なものを見て驚いた",
+      "_truth_value": false,
+      "negation_of": "N3a",
+      "formation_conditions": [
+        [
+          "S8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "地下室の異常物が女性の通報後に片付けられたのではなかった",
+      "_truth_value": true,
+      "negation_of": "HF1a",
+      "formation_conditions": [
+        [
+          "S4",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1a",
+      "label": "地下室の異常物が女性の通報後に片付けられた",
+      "_truth_value": false,
+      "negation_of": "NF1a",
+      "formation_conditions": [
+        [
+          "S4",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1b",
+      "label": "「開けてはいけない」は女性を保護する意図ではなかった",
+      "_truth_value": true,
+      "negation_of": "HF1b",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1b",
+      "label": "「開けてはいけない」は女性を保護する意図だった",
+      "_truth_value": false,
+      "negation_of": "NF1b",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "女性は他者の犯罪を目撃して通報したのではなかった",
+      "_truth_value": true,
+      "negation_of": "HF2a",
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "女性は他者の犯罪を目撃して通報した",
+      "_truth_value": false,
+      "negation_of": "NF2a",
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2b",
+      "label": "女性の被害は医学的な問題ではなかった",
+      "_truth_value": true,
+      "negation_of": "HF2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2b",
+      "label": "女性の被害は医学的な問題だった",
+      "_truth_value": false,
+      "negation_of": "NF2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3b",
+      "label": "女性の驚きは幻覚や記憶の錯覚によるものではなかった",
+      "_truth_value": true,
+      "negation_of": "HF3b",
+      "formation_conditions": [
+        [
+          "S8",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3b",
+      "label": "女性の驚きは幻覚や記憶の錯覚によるものだった",
+      "_truth_value": false,
+      "negation_of": "NF3b",
+      "formation_conditions": [
+        [
+          "S8",
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4b",
+      "label": "地下室は以前も正常な状態だった",
+      "_truth_value": true,
+      "negation_of": "HF4b",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4b",
+      "label": "地下室は以前は異常な状態だった",
+      "_truth_value": false,
+      "negation_of": "NF4b",
+      "formation_conditions": [
+        [
+          "S10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5a",
+      "label": "女性の驚きは実在しないもの（幻覚等）によるものではなかった",
+      "_truth_value": true,
+      "negation_of": "HF5a",
+      "formation_conditions": [
+        [
+          "S7",
+          "S8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5a",
+      "label": "女性の驚きは実在しないもの（幻覚等）によるものだった",
+      "_truth_value": false,
+      "negation_of": "NF5a",
+      "formation_conditions": [
+        [
+          "S7",
+          "S8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5b",
+      "label": "女性が見たものは一時的な現象で後から確認できなくなったのではなかった",
+      "_truth_value": true,
+      "negation_of": "HF5b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5b",
+      "label": "女性が見たものは一時的な現象で後から確認できなくなった",
+      "_truth_value": false,
+      "negation_of": "NF5b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6a",
+      "label": "女性は自分の意思で入って出られなくなったのではなかった",
+      "_truth_value": true,
+      "negation_of": "HF6a",
+      "formation_conditions": [
+        [
+          "P1",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6a",
+      "label": "女性は自分の意思で入って出られなくなった",
+      "_truth_value": false,
+      "negation_of": "NF6a",
+      "formation_conditions": [
+        [
+          "P1",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6b",
+      "label": "女性の閉じ込めは事故ではなかった",
+      "_truth_value": true,
+      "negation_of": "HF6b",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6b",
+      "label": "女性の閉じ込めは事故だった",
+      "_truth_value": false,
+      "negation_of": "NF6b",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF7a",
+      "label": "女性の驚きは何かの不在によるものではなかった",
+      "_truth_value": true,
+      "negation_of": "HF7a",
+      "formation_conditions": [
+        [
+          "P3",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF7a",
+      "label": "女性は何かの不在に驚いた",
+      "_truth_value": false,
+      "negation_of": "NF7a",
+      "formation_conditions": [
+        [
+          "P3",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF7b",
+      "label": "女性が見た正常なものは日用品等ではなかった",
+      "_truth_value": true,
+      "negation_of": "HF7b",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF7b",
+      "label": "女性が見た正常なものは日用品等だった",
+      "_truth_value": false,
+      "negation_of": "NF7b",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF8a",
+      "label": "女性は脱出せずに外を見たのではなかった",
+      "_truth_value": true,
+      "negation_of": "HF8a",
+      "formation_conditions": [
+        [
+          "P6",
+          "P7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF8a",
+      "label": "女性は脱出せずに外を見た（窓等で）",
+      "_truth_value": false,
+      "negation_of": "NF8a",
+      "formation_conditions": [
+        [
+          "P6",
+          "P7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF8b",
+      "label": "女性は以前に外の世界を見たことがなかった",
+      "_truth_value": true,
+      "negation_of": "HF8b",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF8b",
+      "label": "女性は以前にも外の世界を見たことがあった",
+      "_truth_value": false,
+      "negation_of": "NF8b",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "地下室の中に危険なものがあるから「開けてはいけない」と言われたのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q1b",
+      "text": "「開けてはいけない」の理由は地下室の中の異常とは別の事情でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q1c",
+      "text": "女性はドアを開ける前から地下室の中にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q2a",
+      "text": "女性は地下室で見たものについて警察に通報しに行きましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2b",
+      "text": "女性には自分自身に関する被害を通報する必要がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q2c",
+      "text": "女性は犯罪の被害者でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q3a",
+      "text": "女性は地下室の中で怖いものや不気味なものを見て驚きましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q3c",
+      "text": "女性が驚いた原因は地下室内に実在する異常な対象ではありませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q4b",
+      "text": "地下室の状態は女性が見た時点と警察が確認した時点で変わっていませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5a",
+      "text": "女性が驚いたのは実際に存在するものを見たからですか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5b",
+      "text": "女性が驚いた体験は他の人でも確認できる客観的な現象でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6a",
+      "text": "女性は自分の意思ではなく地下室にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I6"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6b",
+      "text": "女性は地下室に監禁されていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P6"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q7a",
+      "text": "女性が見て驚いたものは実在する正常なものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I7"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q7b",
+      "text": "女性がドアを開けた先は普通の外の世界でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P7"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8a",
+      "text": "女性は監禁された地下室から自力で外の世界に出ましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I8"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8b",
+      "text": "女性は地下室に監禁されており、ドアを開けて初めて普通の外の世界を目にしましたか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "地下室に異常なものがあったが、女性の通報後に誰かが片付けたのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF1b",
+      "text": "「開けてはいけない」は女性を保護するための言葉でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2a",
+      "text": "女性は他者が被害を受けた犯罪を目撃して通報しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF2b",
+      "text": "女性の問題は犯罪ではなく医学的なものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF3b",
+      "text": "女性は地下室で幻覚や記憶の錯覚を体験しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4b",
+      "text": "地下室は以前は異常な状態でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF5a",
+      "text": "女性が驚いたのは実際には存在しないもの（幻覚や夢など）を見たからですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF5b",
+      "text": "女性が見たものは一時的な現象で後から確認できなくなりましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF6a",
+      "text": "女性は自分で地下室に入ったが出られなくなったのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF6b",
+      "text": "女性が地下室にいたのは事故的な閉じ込めでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF7a",
+      "text": "女性が驚いたのはあるべきものがなかった（不在だった）からですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF7a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF7b",
+      "text": "女性が見た正常なものは地下室内の日用品などでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF7b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF8a",
+      "text": "女性は脱出せずに窓などから外の世界を見ましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF8a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF8b",
+      "text": "女性は以前にも外の世界を見たことがありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF8b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "人物と背景"
+    }
+  ],
+  "_phase5": {
+    "chain_mapping": {
+      "C1": [
+        "Q1a",
+        "Q1b",
+        "Q1c"
+      ],
+      "C2": [
+        "Q2a",
+        "Q2b",
+        "Q2c"
+      ],
+      "C3": [
+        "Q3a",
+        "Q3c"
+      ],
+      "C4": [
+        "Q4b"
+      ],
+      "C5": [
+        "Q5a",
+        "Q5b"
+      ],
+      "C6": [
+        "Q6a",
+        "Q6b"
+      ],
+      "C7": [
+        "Q7a",
+        "Q7b"
+      ],
+      "C8": [
+        "Q8a",
+        "Q8b"
+      ]
+    },
+    "exploration_paths": [
+      {
+        "name": "パスA: 禁止の理由から入る",
+        "sequence": "Q1a(いいえ)→Q1b(はい:I1)→Q1c(はい:P1)→Q2b(はい:I2)→Q2c(はい:P2)→Q6a(はい:I6)→Q6b(はい:P6)→Q3b(はい:I3)→Q3c(はい:P3)→Q5a(はい:I5)→Q5b(はい:P5)→Q7a(はい:I7)→Q7b(はい:P7)→Q8a(はい:I8)→Q8b(はい:FP)"
+      },
+      {
+        "name": "パスB: 驚きの矛盾から入る",
+        "sequence": "Q3a(いいえ)→Q3b(はい:I3)→Q3c(はい:P3)→Q5a(はい:I5)→Q5b(はい:P5)→Q7a(はい:I7)→Q7b(はい:P7)→Q1b(はい:I1)→Q1c(はい:P1)→Q2b(はい:I2)→Q2c(はい:P2)→Q6a(はい:I6)→Q6b(はい:P6)→Q8a(はい:I8)→Q8b(はい:FP)"
+      },
+      {
+        "name": "パスC: 警察への通報から入る",
+        "sequence": "Q2a(いいえ)→Q2b(はい:I2)→Q2c(はい:P2)→Q1b(はい:I1)→Q1c(はい:P1)→Q6a(はい:I6)→Q6b(はい:P6)→Q4a(はい:I4)→Q4b(はい:P4)→Q5a(はい:I5)→Q5b(はい:P5)→Q3b(はい:I3)→Q3c(はい:P3)→Q7a(はい:I7)→Q7b(はい:P7)→Q8a(はい:I8)→Q8b(はい:FP)"
+      }
+    ]
+  },
+  "_phase8": {
+    "chain_branches": [
+      {
+        "chain_id": "C1",
+        "chain_path": "{S4,S10}→I1→P1",
+        "branches": [
+          {
+            "at_step": "I1",
+            "true_side_label": "禁止理由は中の異常ではない",
+            "parallels": [
+              {
+                "label": "異常物があったが事後除去",
+                "models": [
+                  "G2",
+                  "M11",
+                  "M14"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P1",
+            "true_side_label": "女性は最初から中にいた",
+            "parallels": [
+              {
+                "label": "禁止は女性を保護する意図",
+                "models": [
+                  "M7",
+                  "M12",
+                  "M14"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C2",
+        "chain_path": "{S9}→I2→P2",
+        "branches": [
+          {
+            "at_step": "I2",
+            "true_side_label": "自分の被害通報",
+            "parallels": [
+              {
+                "label": "他者の犯罪目撃通報",
+                "models": [
+                  "G2",
+                  "M8",
+                  "M13"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P2",
+            "true_side_label": "犯罪の被害者",
+            "parallels": [
+              {
+                "label": "医学的問題/パニック",
+                "models": [
+                  "M7"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C3",
+        "chain_path": "{S8,S10}→I3→P3",
+        "branches": [
+          {
+            "at_step": "I3",
+            "true_side_label": "異常物発見の驚きでない",
+            "parallels": [
+              {
+                "label": "異常物発見だが後に消失",
+                "models": [
+                  "G2",
+                  "M11",
+                  "M14"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P3",
+            "true_side_label": "地下室内の異常対象でない",
+            "parallels": [
+              {
+                "label": "幻覚/記憶の錯覚",
+                "models": [
+                  "M7",
+                  "M12"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C4",
+        "chain_path": "{S10}→I4→P4",
+        "branches": [
+          {
+            "at_step": "I4",
+            "true_side_label": "終始正常",
+            "parallels": [
+              {
+                "label": "事後的な証拠除去の結果",
+                "models": [
+                  "G2",
+                  "M11",
+                  "M14"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P4",
+            "true_side_label": "状態変化なし",
+            "parallels": [
+              {
+                "label": "以前は異常だった",
+                "models": [
+                  "M12",
+                  "M15"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C5",
+        "chain_path": "{S7,S8}→I5→P5",
+        "branches": [
+          {
+            "at_step": "I5",
+            "true_side_label": "実在する何かに基づく",
+            "parallels": [
+              {
+                "label": "実在しないもの（幻覚等）",
+                "models": [
+                  "M7",
+                  "M12"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P5",
+            "true_side_label": "客観的に検証可能",
+            "parallels": [
+              {
+                "label": "一時的現象で後から確認不能",
+                "models": [
+                  "M14"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C6",
+        "chain_path": "{P1,P2}→I6→P6",
+        "branches": [
+          {
+            "at_step": "I6",
+            "true_side_label": "自分の意思でなく中にいた",
+            "parallels": [
+              {
+                "label": "自分で入ったが出られなくなった",
+                "models": []
+              }
+            ]
+          },
+          {
+            "at_step": "P6",
+            "true_side_label": "監禁",
+            "parallels": [
+              {
+                "label": "事故的な閉じ込め",
+                "models": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C7",
+        "chain_path": "{P3,P5}→I7→P7",
+        "branches": [
+          {
+            "at_step": "I7",
+            "true_side_label": "実在する正常なもの",
+            "parallels": [
+              {
+                "label": "何かの不在に驚いた",
+                "models": [
+                  "M9",
+                  "M10"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P7",
+            "true_side_label": "外の世界",
+            "parallels": [
+              {
+                "label": "日用品・空の部屋等",
+                "models": [
+                  "M8",
+                  "M9",
+                  "M15"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C8",
+        "chain_path": "{P6,P7}→I8→FP",
+        "branches": [
+          {
+            "at_step": "I8",
+            "true_side_label": "自力で外に出た",
+            "parallels": [
+              {
+                "label": "脱出せず窓等で見た",
+                "models": []
+              }
+            ]
+          },
+          {
+            "at_step": "FP",
+            "true_side_label": "監禁+初めて外を見た",
+            "parallels": [
+              {
+                "label": "以前にも外を見た経験あり",
+                "models": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "all_models": [
+        "G2",
+        "M7",
+        "M8",
+        "M9",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15"
+      ],
+      "model_coverage": {
+        "G2": [
+          {
+            "chain": "C1",
+            "step": "I1"
+          },
+          {
+            "chain": "C2",
+            "step": "I2"
+          },
+          {
+            "chain": "C3",
+            "step": "I3"
+          },
+          {
+            "chain": "C4",
+            "step": "I4"
+          }
+        ],
+        "M7": [
+          {
+            "chain": "C1",
+            "step": "P1"
+          },
+          {
+            "chain": "C2",
+            "step": "P2"
+          },
+          {
+            "chain": "C3",
+            "step": "P3"
+          },
+          {
+            "chain": "C5",
+            "step": "I5"
+          }
+        ],
+        "M8": [
+          {
+            "chain": "C2",
+            "step": "I2"
+          },
+          {
+            "chain": "C7",
+            "step": "P7"
+          }
+        ],
+        "M9": [
+          {
+            "chain": "C7",
+            "step": "I7"
+          },
+          {
+            "chain": "C7",
+            "step": "P7"
+          }
+        ],
+        "M10": [
+          {
+            "chain": "C7",
+            "step": "I7"
+          }
+        ],
+        "M11": [
+          {
+            "chain": "C1",
+            "step": "I1"
+          },
+          {
+            "chain": "C3",
+            "step": "I3"
+          },
+          {
+            "chain": "C4",
+            "step": "I4"
+          }
+        ],
+        "M12": [
+          {
+            "chain": "C1",
+            "step": "P1"
+          },
+          {
+            "chain": "C3",
+            "step": "P3"
+          },
+          {
+            "chain": "C4",
+            "step": "P4"
+          },
+          {
+            "chain": "C5",
+            "step": "I5"
+          }
+        ],
+        "M13": [
+          {
+            "chain": "C2",
+            "step": "I2"
+          }
+        ],
+        "M14": [
+          {
+            "chain": "C1",
+            "step": "I1"
+          },
+          {
+            "chain": "C3",
+            "step": "I3"
+          },
+          {
+            "chain": "C4",
+            "step": "I4"
+          },
+          {
+            "chain": "C5",
+            "step": "P5"
+          }
+        ],
+        "M15": [
+          {
+            "chain": "C4",
+            "step": "P4"
+          },
+          {
+            "chain": "C7",
+            "step": "P7"
+          }
+        ]
+      },
+      "uncovered": [],
+      "uncovered_notes": ""
+    },
+    "generated": {
+      "propositions": [
+        {
+          "id": "NF1a",
+          "source_chain": "C1",
+          "source_step": "I1",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF1b",
+          "source_chain": "C1",
+          "source_step": "P1",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF2a",
+          "source_chain": "C2",
+          "source_step": "I2",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF2b",
+          "source_chain": "C2",
+          "source_step": "P2",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF3a",
+          "source_chain": "C3",
+          "source_step": "I3",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF3b",
+          "source_chain": "C3",
+          "source_step": "P3",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF4a",
+          "source_chain": "C4",
+          "source_step": "I4",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF4b",
+          "source_chain": "C4",
+          "source_step": "P4",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF5a",
+          "source_chain": "C5",
+          "source_step": "I5",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF5b",
+          "source_chain": "C5",
+          "source_step": "P5",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF6a",
+          "source_chain": "C6",
+          "source_step": "I6",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF6b",
+          "source_chain": "C6",
+          "source_step": "P6",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF7a",
+          "source_chain": "C7",
+          "source_step": "I7",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF7b",
+          "source_chain": "C7",
+          "source_step": "P7",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF8a",
+          "source_chain": "C8",
+          "source_step": "I8",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF8b",
+          "source_chain": "C8",
+          "source_step": "FP",
+          "parallel_index": 0
+        }
+      ],
+      "questions": [
+        {
+          "id": "QF1a",
+          "reveals_proposition": "NF1a"
+        },
+        {
+          "id": "QF1b",
+          "reveals_proposition": "NF1b"
+        },
+        {
+          "id": "QF2a",
+          "reveals_proposition": "NF2a"
+        },
+        {
+          "id": "QF2b",
+          "reveals_proposition": "NF2b"
+        },
+        {
+          "id": "QF3a",
+          "reveals_proposition": "NF3a"
+        },
+        {
+          "id": "QF3b",
+          "reveals_proposition": "NF3b"
+        },
+        {
+          "id": "QF4a",
+          "reveals_proposition": "NF4a"
+        },
+        {
+          "id": "QF4b",
+          "reveals_proposition": "NF4b"
+        },
+        {
+          "id": "QF5a",
+          "reveals_proposition": "NF5a"
+        },
+        {
+          "id": "QF5b",
+          "reveals_proposition": "NF5b"
+        },
+        {
+          "id": "QF6a",
+          "reveals_proposition": "NF6a"
+        },
+        {
+          "id": "QF6b",
+          "reveals_proposition": "NF6b"
+        },
+        {
+          "id": "QF7a",
+          "reveals_proposition": "NF7a"
+        },
+        {
+          "id": "QF7b",
+          "reveals_proposition": "NF7b"
+        },
+        {
+          "id": "QF8a",
+          "reveals_proposition": "NF8a"
+        },
+        {
+          "id": "QF8b",
+          "reveals_proposition": "NF8b"
+        }
+      ]
+    }
+  },
+  "_phase10": {
+    "step_a_thinning": {
+      "thinned": [
+        {
+          "id": "I3",
+          "label": "女性の驚きは異常なものを発見した驚きではなかった",
+          "reason": "P3との概念的距離が不十分。ラベルが高類似。",
+          "kept_id": "P3",
+          "fc_rewiring": "P3.fc: [[I3]]→[[S8,S10]]"
+        },
+        {
+          "id": "I4",
+          "label": "地下室は終始正常な状態だった",
+          "reason": "P4とほぼ同義。終始正常≈状態変化なし。",
+          "kept_id": "P4",
+          "fc_rewiring": "P4.fc: [[I4]]→[[S10]]"
+        }
+      ],
+      "summary": {
+        "before": {
+          "propositions": 54,
+          "questions": 36
+        },
+        "after": {
+          "propositions": 48,
+          "questions": 32
+        },
+        "removed_propositions": [
+          "I3",
+          "I4",
+          "NF3a",
+          "HF3a",
+          "NF4a",
+          "HF4a"
+        ],
+        "removed_questions": [
+          "Q3b",
+          "Q4a",
+          "QF3a",
+          "QF4a"
+        ]
+      }
+    },
+    "step_b_entailment": {
+      "entailed": [],
+      "note": "純粋な情報合成で導出できる命題ペアは見つからなかった。全ての導出関係に推論ステップが介在する。"
+    }
+  }
+}
