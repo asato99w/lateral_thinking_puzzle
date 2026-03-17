@@ -83,6 +83,10 @@ enum V3GameEngine {
     static func availableQuestions(state: V2GameState, puzzle: V2PuzzleData) -> [V2Question] {
         puzzle.questions.values.filter { q in
             guard !state.answered.contains(q.id) else { return false }
+            // reveals 先が全て confirmed なら表示しない（既知の情報）
+            if !q.reveals.isEmpty && q.reveals.allSatisfy({ state.confirmed.contains($0) }) {
+                return false
+            }
             // prerequisites: confirmed のみで判定
             if !q.prerequisites.isEmpty && !q.prerequisites.allSatisfy({ state.confirmed.contains($0) }) {
                 return false
