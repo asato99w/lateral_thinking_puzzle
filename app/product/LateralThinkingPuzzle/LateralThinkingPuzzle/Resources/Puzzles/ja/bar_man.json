@@ -2,7 +2,7 @@
   "title": "バーの男",
   "clear_conditions": [
     [
-      "I9"
+      "FP"
     ]
   ],
   "initial_confirmed": [
@@ -170,26 +170,6 @@
         [
           "P2",
           "P4"
-        ]
-      ]
-    },
-    {
-      "id": "I9",
-      "label": "初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治した",
-      "negation_of": null,
-      "formation_conditions": [
-        [
-          "I7",
-          "I8",
-          "P3"
-        ]
-      ],
-      "rejection_conditions": null,
-      "entailment_conditions": [
-        [
-          "I7",
-          "I8",
-          "P3"
         ]
       ]
     },
@@ -554,6 +534,26 @@
         ]
       ],
       "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき、驚かせることで反応を止めた",
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I7",
+          "I8",
+          "P3"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I7",
+          "I8",
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
     }
   ],
   "questions": [
@@ -748,20 +748,6 @@
       "topic_category": "原因と動機"
     },
     {
-      "id": "Q9a",
-      "text": "初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治しましたか？",
-      "answer": "はい",
-      "reveals": [
-        "I9"
-      ],
-      "mechanism": "link",
-      "prerequisites": [
-        "P3",
-        "I5"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
       "id": "QF1a",
       "text": "男が水を求めたのは衝動的でしたか？",
       "answer": "いいえ",
@@ -917,6 +903,19 @@
         "I8"
       ],
       "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q9b",
+      "text": "男は身体的反応を止めたくて水を求めたが、バーテンダーが驚かせて止めましたか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "状況の確認"
     }
   ],
   "topic_categories": [

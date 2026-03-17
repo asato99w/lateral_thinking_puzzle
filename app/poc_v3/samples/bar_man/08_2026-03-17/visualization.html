@@ -84,7 +84,7 @@ graph TD
   classDef compositeNode fill:#9c27b0,stroke:#6a1b9a,color:#fff
   classDef derivedNode fill:#ff9800,stroke:#e65100,color:#fff
   classDef defaultNode fill:#e0e0e0,stroke:#757575,color:#424242
-  FP["FP: FP"]:::compositeNode
+  FP["FP: 男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき、驚か..."]:::compositeNode
   IP1["IP1: IP1"]:::compositeNode
   IP2["IP2: IP2"]:::compositeNode
   P1["P1: 男は何らかの困りごとを抱えてバーに来た"]:::axisNode
@@ -152,10 +152,10 @@ graph TD
   I6["I6: 銃を向けた行為が男の困りごとの解消につながった"]:::nNode
   I7["I7: 男は不随意の身体的反応に対して水が効くと考えた"]:::nNode
   I8["I8: バーテンダーは男の異常を察知した上で介入した"]:::nNode
-  I9["I9: 初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治した"]:::nNode
   N1a["N1a: 男が水を求めたのは単なる喉の渇きからではなかった"]:::nNode
   N2a["N2a: バーテンダーが銃を向けたのは男を脅すためではなかった"]:::nNode
   N5a["N5a: 男の困りごとは精神的・感情的なものではなかった"]:::nNode
+  FP["FP: 男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき、驚かせることで反応を止めた"]:::nNode
   S2 -.-> S8
   S2 -.-> S9
   S4 -.-> S10
@@ -187,14 +187,14 @@ graph TD
   P2 --> j_I8_P2_P4
   P4 --> j_I8_P2_P4
   j_I8_P2_P4 --> I8
-  j_I9_I7_I8_P3(( ))
-  I7 --> j_I9_I7_I8_P3
-  I8 --> j_I9_I7_I8_P3
-  P3 --> j_I9_I7_I8_P3
-  j_I9_I7_I8_P3 --> I9
   S10 --> N1a
   S5 --> N2a
   P1 --> N5a
+  j_FP_I7_I8_P3(( ))
+  I7 --> j_FP_I7_I8_P3
+  I8 --> j_FP_I7_I8_P3
+  P3 --> j_FP_I7_I8_P3
+  j_FP_I7_I8_P3 --> FP
 </pre>
 </div>
 
@@ -241,8 +241,8 @@ graph LR
   I7_q["I7: 男は不随意の身体的反応に対して水が効くと考えた"]:::nNode
   Q8a["Q8a O<br/>バーテンダーは男の異常を察知した上で行動しましたか？"]:::qNode
   I8_q["I8: バーテンダーは男の異常を察知した上で介入した"]:::nNode
-  Q9a["Q9a O<br/>初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治しましたか？"]:::qNode
-  I9_q["I9: 初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治した"]:::nNode
+  Q9b["Q9b O<br/>男は身体的反応を止めたくて水を求めたが、バーテンダーが驚かせて止めましたか？"]:::qNode
+  FP_q["FP: 男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき、驚かせることで反応を止めた"]:::nNode
   QF1a["QF1a X<br/>男が水を求めたのは衝動的でしたか？"]:::qNode
   NF1a_q["NF1a: 男が水を求めたのは衝動的ではなかった"]:::fNode
   QF1b["QF1b X<br/>男は任務や使命でバーに来ましたか？"]:::qNode
@@ -285,7 +285,7 @@ graph LR
   Q6b -->|reveals| P4_q
   Q7a -->|reveals| I7_q
   Q8a -->|reveals| I8_q
-  Q9a -->|reveals| I9_q
+  Q9b -->|reveals| FP_q
   QF1a -->|reveals| NF1a_q
   QF1b -->|reveals| NF1b_q
   QF2a -->|reveals| NF2a_q
@@ -378,8 +378,8 @@ graph TD
   subgraph C9["C9: 段階的絞り込み"]
     direction LR
     C9_I7_I8_P3["I7_I8_P3: {I7,I8,P3}"]:::srcNode
-    C9_I9["I9"]:::tgtNode
-    C9_I7_I8_P3 --> C9_I9
+    C9_FP["FP"]:::tgtNode
+    C9_I7_I8_P3 --> C9_FP
   end
 </pre>
 </div>
@@ -469,11 +469,9 @@ graph TD
     C8_I8_f0 -.-> NF8a_nf
   end
   subgraph C9_branch["C9: {IP1,IP2,P3} → I9 → FP"]
-    C9_I9_t["T I9: その場の察知で対処"]:::trueNode
-    C9_I9_f0["F 事前打ち合わせで対処<br/>(G4, M10, M11)"]:::falseNode
-    C9_I9_t --- C9_I9_f0
-    NF9a_nf["NF9a"]:::nfNode
-    C9_I9_f0 -.-> NF9a_nf
+    C9_FP_t["T FP: その場の察知で対処"]:::trueNode
+    C9_FP_f0["F 事前打ち合わせで対処<br/>(G4, M10, M11)"]:::falseNode
+    C9_FP_t --- C9_FP_f0
   end
 </pre>
 </div>

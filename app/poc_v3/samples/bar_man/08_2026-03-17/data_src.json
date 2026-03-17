@@ -731,7 +731,7 @@
   },
   "clear_conditions": [
     [
-      "I9"
+      "FP"
     ]
   ],
   "_phase3": {
@@ -1183,10 +1183,10 @@
           "I8",
           "P3"
         ],
-        "target": "I9",
+        "target": "FP",
         "intermediates": [],
         "tactic": "段階的絞り込み",
-        "description": "{I7, I8, P3} →[段階的絞り込み]→ I9",
+        "description": "{I7, I8, P3} →[段階的絞り込み]→ FP",
         "fc_source": "I7 は C7, I8 は C8, P3 は C3 の reveals"
       }
     ],
@@ -1197,8 +1197,7 @@
       "I5",
       "I6",
       "I7",
-      "I8",
-      "I9"
+      "I8"
     ]
   },
   "propositions": [
@@ -1364,27 +1363,6 @@
         [
           "P2",
           "P4"
-        ]
-      ]
-    },
-    {
-      "id": "I9",
-      "label": "初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治した",
-      "_truth_value": true,
-      "negation_of": null,
-      "formation_conditions": [
-        [
-          "I7",
-          "I8",
-          "P3"
-        ]
-      ],
-      "rejection_conditions": null,
-      "entailment_conditions": [
-        [
-          "I7",
-          "I8",
-          "P3"
         ]
       ]
     },
@@ -1781,6 +1759,27 @@
         ]
       ],
       "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき、驚かせることで反応を止めた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I7",
+          "I8",
+          "P3"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I7",
+          "I8",
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
     }
   ],
   "questions": [
@@ -1975,20 +1974,6 @@
       "topic_category": "原因と動機"
     },
     {
-      "id": "Q9a",
-      "text": "初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治しましたか？",
-      "answer": "はい",
-      "reveals": [
-        "I9"
-      ],
-      "mechanism": "link",
-      "prerequisites": [
-        "P3",
-        "I5"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
       "id": "QF1a",
       "text": "男が水を求めたのは衝動的でしたか？",
       "answer": "いいえ",
@@ -2144,6 +2129,19 @@
         "I8"
       ],
       "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q9b",
+      "text": "男は身体的反応を止めたくて水を求めたが、バーテンダーが驚かせて止めましたか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "状況の確認"
     }
   ],
   "_phase8": {
@@ -2350,7 +2348,7 @@
         "chain_path": "{IP1,IP2,P3} → I9 → FP",
         "branches": [
           {
-            "at_step": "I9",
+            "at_step": "FP",
             "true_side_label": "その場の察知で対処",
             "parallels": [
               {
@@ -2642,7 +2640,7 @@
         "Q8a"
       ],
       "C9": [
-        "Q9a"
+        "Q9b"
       ]
     },
     "exploration_paths": [
@@ -2880,11 +2878,11 @@
           "fc_rewiring": "I9.fc内IP2→I8"
         },
         {
-          "id": "FP",
-          "label": "男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき驚かせることで反応を止めた",
-          "reason": "I9+既知文脈(IP1)の復唱",
-          "kept_id": "I9",
-          "fc_rewiring": "clear_conditions=[[\"I9\"]]"
+          "id": "I9",
+          "label": "初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治した",
+          "reason": "FP+既知文脈の要約であり、FPは定義的に間引き不可",
+          "kept_id": "FP",
+          "fc_rewiring": "FP.fc=[[I7,I8,P3]], FP.entailment=[[I7,I8,P3]]"
         }
       ],
       "summary": {
@@ -2900,16 +2898,16 @@
           "I4",
           "IP1",
           "IP2",
-          "FP",
           "NF4a",
-          "HF4a"
+          "HF4a",
+          "I9"
         ],
         "removed_questions": [
           "Q4a",
           "Q7b",
           "Q8b",
-          "Q9b",
-          "QF4a"
+          "QF4a",
+          "Q9a"
         ]
       }
     },
@@ -2926,7 +2924,7 @@
           "reason": "P2(助ける意図)はP2+P4の論理的結合で察知+介入を含意"
         },
         {
-          "id": "I9",
+          "id": "FP",
           "entailment_conditions": [
             [
               "I7",
@@ -2934,7 +2932,7 @@
               "P3"
             ]
           ],
-          "reason": "I7+I8+P3の情報要約・結合で推論なし"
+          "reason": "I7+I8+P3の情報要約・結合で推論なし（I9から移転）"
         }
       ]
     }
