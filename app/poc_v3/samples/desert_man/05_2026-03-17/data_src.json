@@ -1306,7 +1306,12 @@
           "I2b"
         ]
       ],
-      "rejection_conditions": null
+      "rejection_conditions": null,
+      "entailment_conditions": [
+        [
+          "I2b"
+        ]
+      ]
     },
     {
       "id": "P4",
@@ -1348,7 +1353,8 @@
       "_truth_value": true,
       "formation_conditions": [
         [
-          "I7"
+          "P2",
+          "P5"
         ]
       ],
       "rejection_conditions": null
@@ -1461,18 +1467,6 @@
       "formation_conditions": [
         [
           "I5"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "I7",
-      "label": "くじ引きの結果が男の死を直接決定した",
-      "_truth_value": true,
-      "formation_conditions": [
-        [
-          "P2",
-          "P5"
         ]
       ],
       "rejection_conditions": null
@@ -1942,17 +1936,6 @@
       "topic_category": "状況の確認"
     },
     {
-      "id": "Q7a",
-      "text": "くじ引きの結果が男の死を直接決定しましたか？",
-      "answer": "はい",
-      "reveals": [
-        "I7"
-      ],
-      "mechanism": "link",
-      "prerequisites": [],
-      "topic_category": "状況の確認"
-    },
-    {
       "id": "Q7b",
       "text": "マッチのくじ引きで犠牲者を決めましたか？",
       "answer": "はい",
@@ -2086,7 +2069,6 @@
         "Q6b"
       ],
       "C7": [
-        "Q7a",
         "Q7b"
       ],
       "C8": [
@@ -2115,31 +2097,49 @@
         {
           "id": "I6",
           "label": "男と他の人々は同じ乗り物で空中にいた",
-          "reason": "P6「数人で空飛ぶ乗り物に乗っていた」とほぼ同義。概念的距離不十分",
+          "reason": "P6とほぼ同義。概念的距離不十分",
           "kept_id": "P6",
-          "fc_rewiring": "P6.fc: [[I6]] → [[P1, P3]]"
+          "fc_rewiring": "P6.fc: [[I6]] -> [[P1, P3]]"
+        },
+        {
+          "id": "I7",
+          "label": "くじ引きの結果が男の死を直接決定した",
+          "reason": "P2+P5が既知の文脈でP7と実質同義。概念的距離不十分",
+          "kept_id": "P7",
+          "fc_rewiring": "P7.fc: [[I7]] -> [[P2, P5]]"
         }
       ],
       "summary": {
         "before": {
-          "propositions": 40,
-          "questions": 30
-        },
-        "after": {
           "propositions": 39,
           "questions": 29
         },
+        "after": {
+          "propositions": 38,
+          "questions": 28
+        },
         "removed_propositions": [
-          "I6"
+          "I6",
+          "I7"
         ],
         "removed_questions": [
-          "Q6a"
+          "Q6a",
+          "Q7a"
         ]
       }
     },
     "step_b_entailment": {
-      "entailed": [],
-      "note": "全命題ペアを評価したが、純粋な論理的結合（推論なし）で導出できる命題は見つからなかった"
+      "entailed": [
+        {
+          "id": "P3",
+          "entailment_conditions": [
+            [
+              "I2b"
+            ]
+          ],
+          "reason": "I2b「空飛ぶ乗り物だった」からP3「上空から到達した」は情報縮約（乗り物情報を落とし到達経路を残す）。推論なし"
+        }
+      ]
     }
   },
   "_phase8": {
@@ -2781,11 +2781,9 @@
           "P5"
         ],
         "target": "P7",
-        "intermediates": [
-          "I7"
-        ],
+        "intermediates": [],
         "tactic": "段階的絞り込み",
-        "description": "{P2,P5} →[段階的絞り込み]→ I7(くじ引きの結果が男の死を直接決定した) → P7(マッチのくじ引きで集団の犠牲者を決めた)",
+        "description": "{P2,P5} →[段階的絞り込み]→ P7(マッチのくじ引きで集団の犠牲者を決めた) [I7間引き済み]",
         "fc_source": "P2 は C4 の reveals、P5 は C5 の reveals"
       },
       {
@@ -2815,7 +2813,6 @@
       "I4b",
       "I5",
       "I5b",
-      "I7",
       "I8"
     ],
     "confirmed_fc": {
@@ -2852,7 +2849,8 @@
       ],
       "P7": [
         [
-          "I7"
+          "P2",
+          "P5"
         ]
       ],
       "FP": [
@@ -2905,12 +2903,6 @@
       "I5b": [
         [
           "I5"
-        ]
-      ],
-      "I7": [
-        [
-          "P2",
-          "P5"
         ]
       ],
       "I8": [

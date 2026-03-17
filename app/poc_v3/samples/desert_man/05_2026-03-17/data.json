@@ -62,7 +62,12 @@
           "I2b"
         ]
       ],
-      "rejection_conditions": null
+      "rejection_conditions": null,
+      "entailment_conditions": [
+        [
+          "I2b"
+        ]
+      ]
     },
     {
       "id": "P4",
@@ -100,7 +105,8 @@
       "label": "マッチのくじ引きで集団の犠牲者を決めた",
       "formation_conditions": [
         [
-          "I7"
+          "P2",
+          "P5"
         ]
       ],
       "rejection_conditions": null
@@ -203,17 +209,6 @@
       "formation_conditions": [
         [
           "I5"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "I7",
-      "label": "くじ引きの結果が男の死を直接決定した",
-      "formation_conditions": [
-        [
-          "P2",
-          "P5"
         ]
       ],
       "rejection_conditions": null
@@ -656,17 +651,6 @@
       "answer": "はい",
       "reveals": [
         "P6"
-      ],
-      "mechanism": "link",
-      "prerequisites": [],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q7a",
-      "text": "くじ引きの結果が男の死を直接決定しましたか？",
-      "answer": "はい",
-      "reveals": [
-        "I7"
       ],
       "mechanism": "link",
       "prerequisites": [],
