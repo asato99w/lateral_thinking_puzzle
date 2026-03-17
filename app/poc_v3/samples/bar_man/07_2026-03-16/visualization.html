@@ -45,8 +45,8 @@
   <div class="stat"><div class="num">6</div><div class="label">tension</div></div>
   <div class="stat"><div class="num">16</div><div class="label">model</div></div>
   <div class="stat"><div class="num">12</div><div class="label">S prop</div></div>
-  <div class="stat"><div class="num">57</div><div class="label">proposition</div></div>
-  <div class="stat"><div class="num">41</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">48</div><div class="label">proposition</div></div>
+  <div class="stat"><div class="num">35</div><div class="label">question</div></div>
   <div class="stat"><div class="num">10</div><div class="label">chain</div></div>
 </div>
 
@@ -141,19 +141,15 @@ graph TD
   FP["FP: 男はしゃっくりに困っており、面識のないバーテンダーがしゃっくりに気づき驚かせて止めるために銃を向けた"]:::nNode
   I1a["I1a: 男が水を求めた背景に通常とは異なる事情がある"]:::nNode
   I1b["I1b: 男は何かに困っていた"]:::nNode
-  I2a["I2a: 男が水を求めたのは喉の渇きからではなかった"]:::nNode
   I2b["I2b: 男は特定の目的のために水を必要としていた"]:::nNode
   I3a["I3a: 銃を向けたのは男に特定の効果を与えるためだった"]:::nNode
   I3b["I3b: バーテンダーは男に何らかの反応を引き起こそうとした"]:::nNode
-  I4a["I4a: 銃を向けられたことは男にとって不利益ではなかった"]:::nNode
   I4b["I4b: 銃を向ける行為は男に利益をもたらした"]:::nNode
   I5["I5: 男はたまたまこのバーに立ち寄った"]:::nNode
   I6a["I6a: バーテンダーは男の不調に何らかの形で気づいていた"]:::nNode
   I6b["I6b: バーテンダーは男の外面的な兆候から不調を察知した"]:::nNode
   I7a["I7a: 男の不調と水の要求には関連がある"]:::nNode
   I7b["I7b: 男の不調は水で緩和が期待できるものだった"]:::nNode
-  I8["I8: バーテンダーは察知した不調を治すためにショックを与えた"]:::nNode
-  I9["I9: 男は身体的不調の緩和手段として水を求めてバーに来た"]:::nNode
   I10["I10: 身体的不調をバーテンダーがその場で見抜き驚かせて治そうとした"]:::nNode
   N1a["N1a: 男が水を求めたのは単純に喉が渇いていたからではない"]:::nNode
   N3a["N3a: 銃を向けた目的は脅迫や威嚇ではなかった"]:::nNode
@@ -171,20 +167,25 @@ graph TD
   I4b --> P5
   I7b --> P6
   I5 --> P7
-  I8 --> P8
-  I9 --> P9
+  j_P8_P5_P4_P3(( ))
+  P5 --> j_P8_P5_P4_P3
+  P4 --> j_P8_P5_P4_P3
+  P3 --> j_P8_P5_P4_P3
+  j_P8_P5_P4_P3 --> P8
+  j_P9_P6_P2(( ))
+  P6 --> j_P9_P6_P2
+  P2 --> j_P9_P6_P2
+  j_P9_P6_P2 --> P9
   I10 --> FP
   S10 --> I1a
   I1a --> I1b
-  S10 --> I2a
-  I2a --> I2b
+  S10 --> I2b
   S5 --> I3a
   I3a --> I3b
-  j_I4a_S5_S6(( ))
-  S5 --> j_I4a_S5_S6
-  S6 --> j_I4a_S5_S6
-  j_I4a_S5_S6 --> I4a
-  I4a --> I4b
+  j_I4b_S5_S6(( ))
+  S5 --> j_I4b_S5_S6
+  S6 --> j_I4b_S5_S6
+  j_I4b_S5_S6 --> I4b
   S2 --> I5
   j_I6a_P1_S5(( ))
   P1 --> j_I6a_P1_S5
@@ -196,15 +197,6 @@ graph TD
   S10 --> j_I7a_P1_S10
   j_I7a_P1_S10 --> I7a
   I7a --> I7b
-  j_I8_P3_P4_P5(( ))
-  P3 --> j_I8_P3_P4_P5
-  P4 --> j_I8_P3_P4_P5
-  P5 --> j_I8_P3_P4_P5
-  j_I8_P3_P4_P5 --> I8
-  j_I9_P6_P2(( ))
-  P6 --> j_I9_P6_P2
-  P2 --> j_I9_P6_P2
-  j_I9_P6_P2 --> I9
   j_I10_P8_P9_P7(( ))
   P8 --> j_I10_P8_P9_P7
   P9 --> j_I10_P8_P9_P7
@@ -242,8 +234,6 @@ graph LR
   I1b_q["I1b: 男は何かに困っていた"]:::nNode
   Q1d["Q1d O<br/>男は何らかの身体的・心理的な不調を抱えていましたか？"]:::qNode
   P1_q["P1: 男は何らかの身体的・心理的な不調を抱えていた"]:::pNode
-  Q2a["Q2a O<br/>男が水を求めたのは喉の渇きからではなかったのですか？"]:::qNode
-  I2a_q["I2a: 男が水を求めたのは喉の渇きからではなかった"]:::nNode
   Q2b["Q2b O<br/>男は特定の目的のために水を必要としていましたか？"]:::qNode
   I2b_q["I2b: 男は特定の目的のために水を必要としていた"]:::nNode
   Q2c["Q2c O<br/>男にとって水を飲むことは最終目的ではなく手段でしたか？"]:::qNode
@@ -258,8 +248,6 @@ graph LR
   P4_q["P4: バーテンダーが銃を向けた目的は男にショック・驚きを与えることだった"]:::pNode
   Q4a["Q4a O<br/>銃を向けられたことと「ありがとう」に直接的な因果関係がありますか？"]:::qNode
   N4a_q["N4a: 銃を向けられたことと感謝の間には直接的な因果関係がある"]:::nNode
-  Q4b["Q4b O<br/>銃を向けられたことは男にとって不利益ではありませんでしたか？"]:::qNode
-  I4a_q["I4a: 銃を向けられたことは男にとって不利益ではなかった"]:::nNode
   Q4c["Q4c O<br/>銃を向ける行為は男に利益をもたらしましたか？"]:::qNode
   I4b_q["I4b: 銃を向ける行為は男に利益をもたらした"]:::nNode
   Q4d["Q4d O<br/>バーテンダーは男を助ける意図で銃を向けましたか？"]:::qNode
@@ -280,12 +268,8 @@ graph LR
   I7b_q["I7b: 男の不調は水で緩和が期待できるものだった"]:::nNode
   Q7c["Q7c O<br/>男が抱えていた不調は身体的なものでしたか？"]:::qNode
   P6_q["P6: 男が抱えていた不調は身体的なものだった"]:::pNode
-  Q8a["Q8a O<br/>バーテンダーは察知した不調を治すためにショックを与えましたか？"]:::qNode
-  I8_q["I8: バーテンダーは察知した不調を治すためにショックを与えた"]:::nNode
   Q8b["Q8b O<br/>バーテンダーはその場で男の不調を察知し、ショックを与えて治そうとしましたか？"]:::qNode
   P8_q["P8: バーテンダーはその場で男の不調の兆候を察知し、ショックを与えて不調を治そうとした"]:::pNode
-  Q9a["Q9a O<br/>男は身体的不調の緩和手段として水を求めてバーに来ましたか？"]:::qNode
-  I9_q["I9: 男は身体的不調の緩和手段として水を求めてバーに来た"]:::nNode
   Q9b["Q9b O<br/>男は身体的な不調を抱え、水を飲めばそれが治ると考えていましたか？"]:::qNode
   P9_q["P9: 男は身体的な不調を抱え、水を飲めばそれが治ると考えていた"]:::pNode
   QF10a["QF10a X<br/>不調は驚きやショックでは止まらない性質のものでしたか？"]:::qNode
@@ -308,17 +292,12 @@ graph LR
   NF6a_q["NF6a: バーテンダーが気づいたのは男の不調の兆候であり、男の身元や過去の事情ではなかった"]:::fNode
   QF7a["QF7a X<br/>男の不調は水では改善できないものでしたか？"]:::qNode
   NF7a_q["NF7a: 男の不調は水を飲むことで直接的に改善が期待できるものだった"]:::fNode
-  QF8a["QF8a X<br/>バーテンダーの行動では男の不調は解消しませんでしたか？"]:::qNode
-  NF8a_q["NF8a: バーテンダーの行動の結果、男の不調は実際に解消した"]:::fNode
-  QF9a["QF9a X<br/>男の不調は慢性的・長期的なものでしたか？"]:::qNode
-  NF9a_q["NF9a: 男の不調は突発的・一時的なものだった"]:::fNode
   Q10a -->|reveals| I10_q
   Q10b -->|reveals| FP_q
   Q1a -->|reveals| N1a_q
   Q1b -->|reveals| I1a_q
   Q1c -->|reveals| I1b_q
   Q1d -->|reveals| P1_q
-  Q2a -->|reveals| I2a_q
   Q2b -->|reveals| I2b_q
   Q2c -->|reveals| P2_q
   Q3a -->|reveals| N3a_q
@@ -326,7 +305,6 @@ graph LR
   Q3c -->|reveals| I3b_q
   Q3d -->|reveals| P4_q
   Q4a -->|reveals| N4a_q
-  Q4b -->|reveals| I4a_q
   Q4c -->|reveals| I4b_q
   Q4d -->|reveals| P5_q
   Q5a -->|reveals| I5_q
@@ -337,9 +315,7 @@ graph LR
   Q7a -->|reveals| I7a_q
   Q7b -->|reveals| I7b_q
   Q7c -->|reveals| P6_q
-  Q8a -->|reveals| I8_q
   Q8b -->|reveals| P8_q
-  Q9a -->|reveals| I9_q
   Q9b -->|reveals| P9_q
   QF10a -->|reveals| NF10a_q
   QF1a -->|reveals| NF1a_q
@@ -351,8 +327,6 @@ graph LR
   QF5a -->|reveals| NF5a_q
   QF6a -->|reveals| NF6a_q
   QF7a -->|reveals| NF7a_q
-  QF8a -->|reveals| NF8a_q
-  QF9a -->|reveals| NF9a_q
 </pre>
 </div>
 
@@ -387,7 +361,7 @@ graph TD
     C1_P1["P1"]:::tgtNode
     C1_I1b --> C1_P1
   end
-  subgraph C2["C2: 常識的仮説の排除 → 観測事実の深掘り"]
+  subgraph C2["C2: 観測事実の深掘り"]
     direction LR
     C2_S10["S10"]:::srcNode
     C2_I2a["I2a: 男が水を求めたのは喉の渇きからではなかった"]:::midNode
@@ -407,7 +381,7 @@ graph TD
     C3_P4["P4"]:::tgtNode
     C3_I3b --> C3_P4
   end
-  subgraph C4["C4: 矛盾の指摘 → 段階的絞り込み"]
+  subgraph C4["C4: 段階的絞り込み"]
     direction LR
     C4_S5_S6["S5_S6: {S5,S6}"]:::srcNode
     C4_I4a["I4a: 銃を向けられたことは男にとって不利益ではなかった"]:::midNode
@@ -500,9 +474,6 @@ graph TD
     C1_P1_t --- C1_P1_f0
   end
   subgraph C2_branch["C2: S10 → I2a → I2b → P2"]
-    C2_I2a_t["T I2a: 喉の渇きからではなかった"]:::trueNode
-    C2_I2a_f0["F 喉の渇きから水を求めた<br/>(G3, M6, M13, M15)"]:::falseNode
-    C2_I2a_t --- C2_I2a_f0
     C2_I2b_t["T I2b: 特定の目的のために水を必要としていた"]:::trueNode
     C2_I2b_f0["F 水は口実や合図であり実際に飲む必要はなかった<br/>(G2, M10, M14)"]:::falseNode
     C2_I2b_t --- C2_I2b_f0
@@ -534,9 +505,6 @@ graph TD
     C3_P4_t --- C3_P4_f0
   end
   subgraph C4_branch["C4: S5,S6 → I4a → I4b → P5"]
-    C4_I4a_t["T I4a: 不利益ではなかった"]:::trueNode
-    C4_I4a_f0["F 銃を向けられたことと感謝は無関係だった<br/>()"]:::falseNode
-    C4_I4a_t --- C4_I4a_f0
     C4_I4b_t["T I4b: 利益をもたらした"]:::trueNode
     C4_I4b_f0["F 利益は偶然であり意図的ではなかった<br/>(M8)"]:::falseNode
     C4_I4b_t --- C4_I4b_f0
@@ -591,25 +559,11 @@ graph TD
     C7_P6_t --- C7_P6_f0
   end
   subgraph C8_branch["C8: P3,P4,P5 → I8 → P8"]
-    C8_I8_t["T I8: 察知した不調を治すためにショックを与えた"]:::trueNode
-    C8_I8_f0["F ショックの結果不調は解消せず別の利益を得た<br/>(M7)"]:::falseNode
-    C8_I8_t --- C8_I8_f0
-    NF8a_nf["NF8a"]:::nfNode
-    C8_I8_f0 -.-> NF8a_nf
-    HF8a_nf["HF8a"]:::nfNode
-    C8_I8_f0 -.-> HF8a_nf
     C8_P8_t["T P8: 不調を察知しショックで治そうとした"]:::trueNode
     C8_P8_f0["F 不調の察知はあったが治療目的ではなかった<br/>()"]:::falseNode
     C8_P8_t --- C8_P8_f0
   end
   subgraph C9_branch["C9: P6,P2 → I9 → P9"]
-    C9_I9_t["T I9: 身体的不調の緩和手段として水を求めた"]:::trueNode
-    C9_I9_f0["F 身体的不調は慢性的で水は一時凌ぎだった<br/>(M8)"]:::falseNode
-    C9_I9_t --- C9_I9_f0
-    NF9a_nf["NF9a"]:::nfNode
-    C9_I9_f0 -.-> NF9a_nf
-    HF9a_nf["HF9a"]:::nfNode
-    C9_I9_f0 -.-> HF9a_nf
     C9_P9_t["T P9: 水を飲めばそれが治ると考えていた"]:::trueNode
     C9_P9_f0["F 水は不調そのものではなく副次的な症状への対処だった<br/>()"]:::falseNode
     C9_P9_t --- C9_P9_f0
