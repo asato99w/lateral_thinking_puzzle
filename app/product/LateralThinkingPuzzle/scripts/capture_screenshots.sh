@@ -6,6 +6,7 @@
 #   ./scripts/capture_screenshots.sh                # 全サイズ・全言語
 #   ./scripts/capture_screenshots.sh 6.5            # 6.5インチ・全言語
 #   ./scripts/capture_screenshots.sh 6.5 ja         # 6.5インチ・日本語のみ
+#   ./scripts/capture_screenshots.sh 13             # 13インチiPad・全言語
 #   ./scripts/capture_screenshots.sh all en          # 全サイズ・英語のみ
 #
 # 出力先: docs/apple/screenshots/{サイズ}/{言語}/
@@ -42,18 +43,27 @@ get_device_type() {
     case "$1" in
         6.7) echo "com.apple.CoreSimulator.SimDeviceType.iPhone-16-Pro-Max" ;;
         6.5) echo "com.apple.CoreSimulator.SimDeviceType.iPhone-11-Pro-Max" ;;
+        13)  echo "com.apple.CoreSimulator.SimDeviceType.iPad-Pro-13-inch-M4-8GB" ;;
     esac
 }
 get_sim_name() {
     case "$1" in
         6.7) echo "Screenshot_iPhone16ProMax" ;;
         6.5) echo "Screenshot_iPhone11ProMax" ;;
+        13)  echo "Screenshot_iPadPro13" ;;
     esac
 }
 get_display_name() {
     case "$1" in
         6.7) echo "iPhone 16 Pro Max (6.7\")" ;;
         6.5) echo "iPhone 11 Pro Max (6.5\")" ;;
+        13)  echo "iPad Pro 13\" (M4)" ;;
+    esac
+}
+get_platform() {
+    case "$1" in
+        13)  echo "iOS Simulator" ;;
+        *)   echo "iOS Simulator" ;;
     esac
 }
 get_lang_display() {
@@ -68,7 +78,7 @@ ARG_SIZE="${1:-all}"
 ARG_LANG="${2:-all}"
 
 if [[ "$ARG_SIZE" == "all" ]]; then
-    TARGET_SIZES=("6.7" "6.5")
+    TARGET_SIZES=("6.7" "6.5" "13")
 else
     TARGET_SIZES=("$ARG_SIZE")
 fi
