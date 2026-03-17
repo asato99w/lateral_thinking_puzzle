@@ -191,6 +191,9 @@ def available_questions(state: GameState, puzzle: PuzzleData) -> list[Question]:
     for q in puzzle.questions.values():
         if q.id in state.answered:
             continue
+        # reveals 先が全て confirmed なら表示しない（既知の情報）
+        if q.reveals and all(r in state.confirmed for r in q.reveals):
+            continue
         if q.prerequisites and not all(p in state.confirmed for p in q.prerequisites):
             continue
         fc = _question_availability_conditions(q, puzzle)
