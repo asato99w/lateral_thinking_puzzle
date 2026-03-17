@@ -295,6 +295,9 @@ def check_fc_chain_consistency(data: dict) -> list[str]:
         target = chain.get("target", "")
 
         if not intermediates:
+            # Phase 10（間引き）後は空の intermediates を許容する
+            if "_phase10" in data:
+                continue
             errors.append(f"連鎖 '{cid}': intermediates が空（中間命題なし）")
             continue
 

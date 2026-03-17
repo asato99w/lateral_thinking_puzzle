@@ -120,7 +120,9 @@
       "label": "バーテンダーはその場で男の不調の兆候を察知し、ショックを与えて不調を治そうとした",
       "formation_conditions": [
         [
-          "I8"
+          "P5",
+          "P4",
+          "P3"
         ]
       ],
       "negation_of": null,
@@ -131,7 +133,8 @@
       "label": "男は身体的な不調を抱え、水を飲めばそれが治ると考えていた",
       "formation_conditions": [
         [
-          "I9"
+          "P6",
+          "P2"
         ]
       ],
       "negation_of": null,
@@ -171,33 +174,11 @@
       "rejection_conditions": null
     },
     {
-      "id": "I2a",
-      "label": "男が水を求めたのは喉の渇きからではなかった",
-      "formation_conditions": [
-        [
-          "S10"
-        ]
-      ],
-      "negation_of": "H2a",
-      "rejection_conditions": null
-    },
-    {
-      "id": "H2a",
-      "label": "男が水を求めたのは喉の渇きからだった",
-      "formation_conditions": [
-        [
-          "S10"
-        ]
-      ],
-      "negation_of": "I2a",
-      "rejection_conditions": null
-    },
-    {
       "id": "I2b",
       "label": "男は特定の目的のために水を必要としていた",
       "formation_conditions": [
         [
-          "I2a"
+          "S10"
         ]
       ],
       "negation_of": null,
@@ -226,23 +207,12 @@
       "rejection_conditions": null
     },
     {
-      "id": "I4a",
-      "label": "銃を向けられたことは男にとって不利益ではなかった",
-      "formation_conditions": [
-        [
-          "S5",
-          "S6"
-        ]
-      ],
-      "negation_of": null,
-      "rejection_conditions": null
-    },
-    {
       "id": "I4b",
       "label": "銃を向ける行為は男に利益をもたらした",
       "formation_conditions": [
         [
-          "I4a"
+          "S5",
+          "S6"
         ]
       ],
       "negation_of": null,
@@ -300,31 +270,6 @@
       "formation_conditions": [
         [
           "I7a"
-        ]
-      ],
-      "negation_of": null,
-      "rejection_conditions": null
-    },
-    {
-      "id": "I8",
-      "label": "バーテンダーは察知した不調を治すためにショックを与えた",
-      "formation_conditions": [
-        [
-          "P3",
-          "P4",
-          "P5"
-        ]
-      ],
-      "negation_of": null,
-      "rejection_conditions": null
-    },
-    {
-      "id": "I9",
-      "label": "男は身体的不調の緩和手段として水を求めてバーに来た",
-      "formation_conditions": [
-        [
-          "P6",
-          "P2"
         ]
       ],
       "negation_of": null,
@@ -460,7 +405,7 @@
       "label": "男の水の目的は何かを緩和・解消するためだった",
       "formation_conditions": [
         [
-          "I2a"
+          "S10"
         ]
       ],
       "negation_of": "HF2b",
@@ -471,7 +416,7 @@
       "label": "男の水は入店の口実や合図としての意味しかなかった",
       "formation_conditions": [
         [
-          "I2a"
+          "S10"
         ]
       ],
       "negation_of": "NF2b",
@@ -526,7 +471,8 @@
       "label": "銃を向けたのは男を助ける意図があったからだった",
       "formation_conditions": [
         [
-          "I4a"
+          "S5",
+          "S6"
         ]
       ],
       "negation_of": "HF4a",
@@ -537,7 +483,8 @@
       "label": "銃を向けた結果の利益は偶然であり、意図的に助けたのではなかった",
       "formation_conditions": [
         [
-          "I4a"
+          "S5",
+          "S6"
         ]
       ],
       "negation_of": "NF4a",
@@ -607,52 +554,6 @@
         ]
       ],
       "negation_of": "NF7a",
-      "rejection_conditions": null
-    },
-    {
-      "id": "NF8a",
-      "label": "バーテンダーの行動の結果、男の不調は実際に解消した",
-      "formation_conditions": [
-        [
-          "I8"
-        ]
-      ],
-      "negation_of": "HF8a",
-      "rejection_conditions": null
-    },
-    {
-      "id": "HF8a",
-      "label": "バーテンダーの行動では男の不調は解消せず、別の利益を得た",
-      "formation_conditions": [
-        [
-          "I8"
-        ]
-      ],
-      "negation_of": "NF8a",
-      "rejection_conditions": null
-    },
-    {
-      "id": "NF9a",
-      "label": "男の不調は突発的・一時的なものだった",
-      "formation_conditions": [
-        [
-          "P6",
-          "P2"
-        ]
-      ],
-      "negation_of": "HF9a",
-      "rejection_conditions": null
-    },
-    {
-      "id": "HF9a",
-      "label": "男の不調は慢性的・長期的なものだった",
-      "formation_conditions": [
-        [
-          "P6",
-          "P2"
-        ]
-      ],
-      "negation_of": "NF9a",
       "rejection_conditions": null
     },
     {
@@ -728,17 +629,6 @@
       "topic_category": "状況の確認"
     },
     {
-      "id": "Q2a",
-      "text": "男が水を求めたのは喉の渇きからではなかったのですか？",
-      "answer": "はい",
-      "reveals": [
-        "I2a"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "前提の確認"
-    },
-    {
       "id": "Q2b",
       "text": "男は特定の目的のために水を必要としていましたか？",
       "answer": "はい",
@@ -746,9 +636,7 @@
         "I2b"
       ],
       "mechanism": "observation",
-      "prerequisites": [
-        "I2a"
-      ],
+      "prerequisites": [],
       "topic_category": "状況の確認"
     },
     {
@@ -824,17 +712,6 @@
       "topic_category": "前提の確認"
     },
     {
-      "id": "Q4b",
-      "text": "銃を向けられたことは男にとって不利益ではありませんでしたか？",
-      "answer": "はい",
-      "reveals": [
-        "I4a"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "原因と動機"
-    },
-    {
       "id": "Q4c",
       "text": "銃を向ける行為は男に利益をもたらしましたか？",
       "answer": "はい",
@@ -842,9 +719,7 @@
         "I4b"
       ],
       "mechanism": "observation",
-      "prerequisites": [
-        "I4a"
-      ],
+      "prerequisites": [],
       "topic_category": "状況の確認"
     },
     {
@@ -963,20 +838,6 @@
       "topic_category": "状況の確認"
     },
     {
-      "id": "Q8a",
-      "text": "バーテンダーは察知した不調を治すためにショックを与えましたか？",
-      "answer": "はい",
-      "reveals": [
-        "I8"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [
-        "P3",
-        "P4"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
       "id": "Q8b",
       "text": "バーテンダーはその場で男の不調を察知し、ショックを与えて治そうとしましたか？",
       "answer": "はい",
@@ -985,20 +846,9 @@
       ],
       "mechanism": "link",
       "prerequisites": [
-        "I8"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q9a",
-      "text": "男は身体的不調の緩和手段として水を求めてバーに来ましたか？",
-      "answer": "はい",
-      "reveals": [
-        "I9"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [
-        "P6"
+        "P3",
+        "P4",
+        "P5"
       ],
       "topic_category": "状況の確認"
     },
@@ -1011,7 +861,8 @@
       ],
       "mechanism": "link",
       "prerequisites": [
-        "I9"
+        "P6",
+        "P2"
       ],
       "topic_category": "状況の確認"
     },
@@ -1074,9 +925,7 @@
         "NF2b"
       ],
       "mechanism": "rejection",
-      "prerequisites": [
-        "I2a"
-      ],
+      "prerequisites": [],
       "topic_category": "前提の確認"
     },
     {
@@ -1111,9 +960,7 @@
         "NF4a"
       ],
       "mechanism": "rejection",
-      "prerequisites": [
-        "I4a"
-      ],
+      "prerequisites": [],
       "topic_category": "原因と動機"
     },
     {
@@ -1152,32 +999,6 @@
         "I7a"
       ],
       "topic_category": "前提の確認"
-    },
-    {
-      "id": "QF8a",
-      "text": "バーテンダーの行動では男の不調は解消しませんでしたか？",
-      "answer": "いいえ",
-      "reveals": [
-        "NF8a"
-      ],
-      "mechanism": "rejection",
-      "prerequisites": [
-        "I8"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "QF9a",
-      "text": "男の不調は慢性的・長期的なものでしたか？",
-      "answer": "いいえ",
-      "reveals": [
-        "NF9a"
-      ],
-      "mechanism": "rejection",
-      "prerequisites": [
-        "P6"
-      ],
-      "topic_category": "状況の確認"
     },
     {
       "id": "QF10a",
