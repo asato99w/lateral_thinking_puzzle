@@ -45,8 +45,8 @@
   <div class="stat"><div class="num">6</div><div class="label">tension</div></div>
   <div class="stat"><div class="num">15</div><div class="label">model</div></div>
   <div class="stat"><div class="num">13</div><div class="label">S prop</div></div>
-  <div class="stat"><div class="num">52</div><div class="label">proposition</div></div>
-  <div class="stat"><div class="num">35</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">46</div><div class="label">proposition</div></div>
+  <div class="stat"><div class="num">30</div><div class="label">question</div></div>
   <div class="stat"><div class="num">9</div><div class="label">chain</div></div>
 </div>
 
@@ -84,9 +84,9 @@ graph TD
   classDef compositeNode fill:#9c27b0,stroke:#6a1b9a,color:#fff
   classDef derivedNode fill:#ff9800,stroke:#e65100,color:#fff
   classDef defaultNode fill:#e0e0e0,stroke:#757575,color:#424242
-  FP["FP: 男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき、驚か..."]:::compositeNode
-  IP1["IP1: 男は不随意の身体的反応に困り、水で治せると考えてバーに来た"]:::compositeNode
-  IP2["IP2: バーテンダーは男の異常を察知し、驚かせて治そうとした結果、男の異常が即座に解消された"]:::compositeNode
+  FP["FP: FP"]:::compositeNode
+  IP1["IP1: IP1"]:::compositeNode
+  IP2["IP2: IP2"]:::compositeNode
   P1["P1: 男は何らかの困りごとを抱えてバーに来た"]:::axisNode
   P2["P2: バーテンダーは男を助ける意図で銃を向けた"]:::axisNode
   P3["P3: 男とバーテンダーの間に事前の関係・取り決めはなかった"]:::axisNode
@@ -148,15 +148,11 @@ graph TD
   I1["I1: 男がバーで水を求めた背後には、水を飲むこと自体を超えた目的があった"]:::nNode
   I2["I2: 銃を向けた行為は男にとって有害ではなく、むしろ有益だった"]:::nNode
   I3["I3: 男はバーの通常の客として入店した"]:::nNode
-  I4["I4: 男は水を飲むためにバーに立ち寄った"]:::nNode
   I5["I5: 男の困りごとは身体の機能に関するものだった"]:::nNode
   I6["I6: 銃を向けた行為が男の困りごとの解消につながった"]:::nNode
   I7["I7: 男は不随意の身体的反応に対して水が効くと考えた"]:::nNode
   I8["I8: バーテンダーは男の異常を察知した上で介入した"]:::nNode
   I9["I9: 初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治した"]:::nNode
-  IP1["IP1: 男は不随意の身体的反応に困り、水で治せると考えてバーに来た"]:::nNode
-  IP2["IP2: バーテンダーは男の異常を察知し、驚かせて治そうとした結果、男の異常が即座に解消された"]:::nNode
-  FP["FP: 男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき、驚かせることで反応を止めた"]:::nNode
   N1a["N1a: 男が水を求めたのは単なる喉の渇きからではなかった"]:::nNode
   N2a["N2a: バーテンダーが銃を向けたのは男を脅すためではなかった"]:::nNode
   N5a["N5a: 男の困りごとは精神的・感情的なものではなかった"]:::nNode
@@ -174,14 +170,13 @@ graph TD
   I3 --> P3
   I6 --> P4
   I5 --> P5
-  I4 --> P6
+  S4 --> P6
   S10 --> I1
   j_I2_S5_S6(( ))
   S5 --> j_I2_S5_S6
   S6 --> j_I2_S5_S6
   j_I2_S5_S6 --> I2
   S2 --> I3
-  S4 --> I4
   P1 --> I5
   P1 --> I6
   j_I7_P5_P6(( ))
@@ -192,14 +187,11 @@ graph TD
   P2 --> j_I8_P2_P4
   P4 --> j_I8_P2_P4
   j_I8_P2_P4 --> I8
-  j_I9_IP1_IP2_P3(( ))
-  IP1 --> j_I9_IP1_IP2_P3
-  IP2 --> j_I9_IP1_IP2_P3
-  P3 --> j_I9_IP1_IP2_P3
-  j_I9_IP1_IP2_P3 --> I9
-  I7 --> IP1
-  I8 --> IP2
-  I9 --> FP
+  j_I9_I7_I8_P3(( ))
+  I7 --> j_I9_I7_I8_P3
+  I8 --> j_I9_I7_I8_P3
+  P3 --> j_I9_I7_I8_P3
+  j_I9_I7_I8_P3 --> I9
   S10 --> N1a
   S5 --> N2a
   P1 --> N5a
@@ -233,8 +225,6 @@ graph LR
   I3_q["I3: 男はバーの通常の客として入店した"]:::nNode
   Q3b["Q3b O<br/>男とバーテンダーは初対面でしたか？"]:::qNode
   P3_q["P3: 男とバーテンダーの間に事前の関係・取り決めはなかった"]:::pNode
-  Q4a["Q4a O<br/>男は水を飲みにバーに来ましたか？"]:::qNode
-  I4_q["I4: 男は水を飲むためにバーに立ち寄った"]:::nNode
   Q4b["Q4b O<br/>男はバーに来る前から水を飲みたいと思っていましたか？"]:::qNode
   P6_q["P6: 男はバーに来た時点で水を飲みたいという意図を持っていた"]:::pNode
   Q5a["Q5a X<br/>男の困りごとは精神的・感情的なものでしたか？"]:::qNode
@@ -249,16 +239,10 @@ graph LR
   P4_q["P4: 銃を向けた驚き・恐怖が男の異常な状態を即座に解消した"]:::pNode
   Q7a["Q7a O<br/>男は水を飲めば身体の反応が治まると考えていましたか？"]:::qNode
   I7_q["I7: 男は不随意の身体的反応に対して水が効くと考えた"]:::nNode
-  Q7b["Q7b O<br/>男は不随意の身体的反応に困り、水で治そうとしてバーに来ましたか？"]:::qNode
-  IP1_q["IP1: 男は不随意の身体的反応に困り、水で治せると考えてバーに来た"]:::nNode
   Q8a["Q8a O<br/>バーテンダーは男の異常を察知した上で行動しましたか？"]:::qNode
   I8_q["I8: バーテンダーは男の異常を察知した上で介入した"]:::nNode
-  Q8b["Q8b O<br/>バーテンダーは察知して驚かせ、実際に男の異常が治りましたか？"]:::qNode
-  IP2_q["IP2: バーテンダーは男の異常を察知し、驚かせて治そうとした結果、男の異常が即座に解消された"]:::nNode
   Q9a["Q9a O<br/>初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治しましたか？"]:::qNode
   I9_q["I9: 初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治した"]:::nNode
-  Q9b["Q9b O<br/>男は身体的反応を止めたくて水を求めたが、バーテンダーが驚かせて止めましたか？"]:::qNode
-  FP_q["FP: 男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき、驚かせることで反応を止めた"]:::nNode
   QF1a["QF1a X<br/>男が水を求めたのは衝動的でしたか？"]:::qNode
   NF1a_q["NF1a: 男が水を求めたのは衝動的ではなかった"]:::fNode
   QF1b["QF1b X<br/>男は任務や使命でバーに来ましたか？"]:::qNode
@@ -271,8 +255,6 @@ graph LR
   NF3a_q["NF3a: 男は計画的にこのバーに来たのではなかった"]:::fNode
   QF3b["QF3b X<br/>男はバーテンダーの知人でしたか？"]:::qNode
   NF3b_q["NF3b: 男はバーテンダーの知人ではなかった"]:::fNode
-  QF4a["QF4a X<br/>男の水の要求は口実でしたか？"]:::qNode
-  NF4a_q["NF4a: 男の水の要求は口実ではなかった"]:::fNode
   QF5b["QF5b X<br/>男の困りごとは生死に関わるものでしたか？"]:::qNode
   NF5b_q["NF5b: 男の困りごとは生死に関わるものではなかった"]:::fNode
   QF5c["QF5c X<br/>男の困りごとは意識レベルの異常でしたか？"]:::qNode
@@ -295,7 +277,6 @@ graph LR
   Q2c -->|reveals| P2_q
   Q3a -->|reveals| I3_q
   Q3b -->|reveals| P3_q
-  Q4a -->|reveals| I4_q
   Q4b -->|reveals| P6_q
   Q5a -->|reveals| N5a_q
   Q5b -->|reveals| I5_q
@@ -303,18 +284,14 @@ graph LR
   Q6a -->|reveals| I6_q
   Q6b -->|reveals| P4_q
   Q7a -->|reveals| I7_q
-  Q7b -->|reveals| IP1_q
   Q8a -->|reveals| I8_q
-  Q8b -->|reveals| IP2_q
   Q9a -->|reveals| I9_q
-  Q9b -->|reveals| FP_q
   QF1a -->|reveals| NF1a_q
   QF1b -->|reveals| NF1b_q
   QF2a -->|reveals| NF2a_q
   QF2b -->|reveals| NF2b_q
   QF3a -->|reveals| NF3a_q
   QF3b -->|reveals| NF3b_q
-  QF4a -->|reveals| NF4a_q
   QF5b -->|reveals| NF5b_q
   QF5c -->|reveals| NF5c_q
   QF6a -->|reveals| NF6a_q
@@ -368,13 +345,11 @@ graph TD
     C3_P3["P3"]:::tgtNode
     C3_I3 --> C3_P3
   end
-  subgraph C4["C4: 観測事実の深掘り"]
+  subgraph C4["C4: 直接同定"]
     direction LR
     C4_S4["S4: 水をくださいと頼んだ"]:::srcNode
-    C4_I4["I4: 水を飲むためにバーに立ち寄った"]:::midNode
-    C4_S4 --> C4_I4
     C4_P6["P6"]:::tgtNode
-    C4_I4 --> C4_P6
+    C4_S4 --> C4_P6
   end
   subgraph C5["C5: 段階的絞り込み → 段階的絞り込み"]
     direction LR
@@ -394,23 +369,17 @@ graph TD
   end
   subgraph C7["C7: 因果の逆転"]
     direction LR
-    C7_I7["I7: 水が身体反応に効くと考えた"]:::srcNode
-    C7_IP1["IP1"]:::tgtNode
-    C7_I7 --> C7_IP1
+    C7_I7["I7"]:::tgtNode
   end
   subgraph C8["C8: 因果の逆転"]
     direction LR
-    C8_I8["I8: 異常を察知して介入"]:::srcNode
-    C8_IP2["IP2"]:::tgtNode
-    C8_I8 --> C8_IP2
+    C8_I8["I8"]:::tgtNode
   end
   subgraph C9["C9: 段階的絞り込み"]
     direction LR
-    C9_IP1_IP2_P3["IP1_IP2_P3: {IP1,IP2,P3}"]:::srcNode
-    C9_I9["I9: 初対面のBTが身体異常に気づき驚かせて治した"]:::midNode
-    C9_IP1_IP2_P3 --> C9_I9
-    C9_FP["FP"]:::tgtNode
-    C9_I9 --> C9_FP
+    C9_I7_I8_P3["I7_I8_P3: {I7,I8,P3}"]:::srcNode
+    C9_I9["I9"]:::tgtNode
+    C9_I7_I8_P3 --> C9_I9
   end
 </pre>
 </div>
@@ -460,11 +429,6 @@ graph TD
     C3_P3_f0 -.-> NF3b_nf
   end
   subgraph C4_branch["C4: S4 → I4 → P6"]
-    C4_I4_t["T I4: 水を飲みに来た"]:::trueNode
-    C4_I4_f0["F 水は口実だった<br/>(G4, M10)"]:::falseNode
-    C4_I4_t --- C4_I4_f0
-    NF4a_nf["NF4a"]:::nfNode
-    C4_I4_f0 -.-> NF4a_nf
   end
   subgraph C5_branch["C5: P1 → I5 → P5"]
     C5_I5_t["T I5: 身体の機能"]:::trueNode

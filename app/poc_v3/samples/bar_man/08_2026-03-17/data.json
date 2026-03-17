@@ -2,7 +2,7 @@
   "title": "バーの男",
   "clear_conditions": [
     [
-      "FP"
+      "I9"
     ]
   ],
   "initial_confirmed": [
@@ -82,7 +82,7 @@
       "negation_of": null,
       "formation_conditions": [
         [
-          "I4"
+          "S4"
         ]
       ],
       "rejection_conditions": null
@@ -117,17 +117,6 @@
       "formation_conditions": [
         [
           "S2"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "I4",
-      "label": "男は水を飲むためにバーに立ち寄った",
-      "negation_of": null,
-      "formation_conditions": [
-        [
-          "S4"
         ]
       ],
       "rejection_conditions": null
@@ -176,7 +165,13 @@
           "P4"
         ]
       ],
-      "rejection_conditions": null
+      "rejection_conditions": null,
+      "entailment_conditions": [
+        [
+          "P2",
+          "P4"
+        ]
+      ]
     },
     {
       "id": "I9",
@@ -184,45 +179,19 @@
       "negation_of": null,
       "formation_conditions": [
         [
-          "IP1",
-          "IP2",
+          "I7",
+          "I8",
           "P3"
         ]
       ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "IP1",
-      "label": "男は不随意の身体的反応に困り、水で治せると考えてバーに来た",
-      "negation_of": null,
-      "formation_conditions": [
+      "rejection_conditions": null,
+      "entailment_conditions": [
         [
-          "I7"
+          "I7",
+          "I8",
+          "P3"
         ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "IP2",
-      "label": "バーテンダーは男の異常を察知し、驚かせて治そうとした結果、男の異常が即座に解消された",
-      "negation_of": null,
-      "formation_conditions": [
-        [
-          "I8"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "FP",
-      "label": "男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき、驚かせることで反応を止めた",
-      "negation_of": null,
-      "formation_conditions": [
-        [
-          "I9"
-        ]
-      ],
-      "rejection_conditions": null
+      ]
     },
     {
       "id": "N1a",
@@ -425,28 +394,6 @@
       "rejection_conditions": null
     },
     {
-      "id": "NF4a",
-      "label": "男の水の要求は口実ではなかった",
-      "negation_of": "HF4a",
-      "formation_conditions": [
-        [
-          "S4"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "HF4a",
-      "label": "男の水の要求は口実だった",
-      "negation_of": "NF4a",
-      "formation_conditions": [
-        [
-          "S4"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
       "id": "NF5b",
       "label": "男の困りごとは生死に関わるものではなかった",
       "negation_of": "HF5b",
@@ -588,8 +535,8 @@
       "negation_of": "HF9a",
       "formation_conditions": [
         [
-          "IP1",
-          "IP2",
+          "I7",
+          "I8",
           "P3"
         ]
       ],
@@ -601,8 +548,8 @@
       "negation_of": "NF9a",
       "formation_conditions": [
         [
-          "IP1",
-          "IP2",
+          "I7",
+          "I8",
           "P3"
         ]
       ],
@@ -699,17 +646,6 @@
       "topic_category": "人物と背景"
     },
     {
-      "id": "Q4a",
-      "text": "男は水を飲みにバーに来ましたか？",
-      "answer": "はい",
-      "reveals": [
-        "I4"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "状況の確認"
-    },
-    {
       "id": "Q4b",
       "text": "男はバーに来る前から水を飲みたいと思っていましたか？",
       "answer": "はい",
@@ -799,19 +735,6 @@
       "topic_category": "原因と動機"
     },
     {
-      "id": "Q7b",
-      "text": "男は不随意の身体的反応に困り、水で治そうとしてバーに来ましたか？",
-      "answer": "はい",
-      "reveals": [
-        "IP1"
-      ],
-      "mechanism": "link",
-      "prerequisites": [
-        "P5"
-      ],
-      "topic_category": "原因と動機"
-    },
-    {
       "id": "Q8a",
       "text": "バーテンダーは男の異常を察知した上で行動しましたか？",
       "answer": "はい",
@@ -825,19 +748,6 @@
       "topic_category": "原因と動機"
     },
     {
-      "id": "Q8b",
-      "text": "バーテンダーは察知して驚かせ、実際に男の異常が治りましたか？",
-      "answer": "はい",
-      "reveals": [
-        "IP2"
-      ],
-      "mechanism": "link",
-      "prerequisites": [
-        "I8"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
       "id": "Q9a",
       "text": "初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治しましたか？",
       "answer": "はい",
@@ -848,19 +758,6 @@
       "prerequisites": [
         "P3",
         "I5"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q9b",
-      "text": "男は身体的反応を止めたくて水を求めたが、バーテンダーが驚かせて止めましたか？",
-      "answer": "はい",
-      "reveals": [
-        "FP"
-      ],
-      "mechanism": "link",
-      "prerequisites": [
-        "I9"
       ],
       "topic_category": "状況の確認"
     },
@@ -929,17 +826,6 @@
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "人物と背景"
-    },
-    {
-      "id": "QF4a",
-      "text": "男の水の要求は口実でしたか？",
-      "answer": "いいえ",
-      "reveals": [
-        "NF4a"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "前提の確認"
     },
     {
       "id": "QF5b",

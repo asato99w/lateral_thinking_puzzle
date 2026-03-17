@@ -731,7 +731,7 @@
   },
   "clear_conditions": [
     [
-      "FP"
+      "I9"
     ]
   ],
   "_phase3": {
@@ -1117,11 +1117,9 @@
           "S4"
         ],
         "target": "P6",
-        "intermediates": [
-          "I4"
-        ],
-        "tactic": "観測事実の深掘り",
-        "description": "S4(水をくださいと頼んだ) →[観測事実の深掘り]→ I4(水を飲むためにバーに立ち寄った) → P6"
+        "intermediates": [],
+        "tactic": "直接同定",
+        "description": "S4(水をくださいと頼んだ) →[直接同定]→ P6"
       },
       {
         "id": "C5",
@@ -1158,12 +1156,10 @@
           "P5",
           "P6"
         ],
-        "target": "IP1",
-        "intermediates": [
-          "I7"
-        ],
+        "target": "I7",
+        "intermediates": [],
         "tactic": "因果の逆転",
-        "description": "{P5(身体反応), P6(水の意図)} →[因果の逆転]→ I7(水が身体反応に効くと考えた) → IP1",
+        "description": "{P5(身体反応), P6(水の意図)} →[因果の逆転]→ I7",
         "fc_source": "P5 は C5 の reveals, P6 は C4 の reveals"
       },
       {
@@ -1173,36 +1169,31 @@
           "P2",
           "P4"
         ],
-        "target": "IP2",
-        "intermediates": [
-          "I8"
-        ],
+        "target": "I8",
+        "intermediates": [],
         "tactic": "因果の逆転",
-        "description": "{P2(助ける意図), P4(驚きで解消)} →[因果の逆転]→ I8(異常を察知して介入) → IP2",
+        "description": "{P2(助ける意図), P4(驚きで解消)} →[因果の逆転]→ I8",
         "fc_source": "P2 は C2 の reveals, P4 は C6 の reveals"
       },
       {
         "id": "C9",
         "type": "toward_concrete",
         "source": [
-          "IP1",
-          "IP2",
+          "I7",
+          "I8",
           "P3"
         ],
-        "target": "FP",
-        "intermediates": [
-          "I9"
-        ],
+        "target": "I9",
+        "intermediates": [],
         "tactic": "段階的絞り込み",
-        "description": "{IP1, IP2, P3} →[段階的絞り込み]→ I9(初対面のBTが身体異常に気づき驚かせて治した) → FP",
-        "fc_source": "IP1 は C7, IP2 は C8, P3 は C3 の reveals"
+        "description": "{I7, I8, P3} →[段階的絞り込み]→ I9",
+        "fc_source": "I7 は C7, I8 は C8, P3 は C3 の reveals"
       }
     ],
     "generated_intermediates": [
       "I1",
       "I2",
       "I3",
-      "I4",
       "I5",
       "I6",
       "I7",
@@ -1278,7 +1269,7 @@
       "negation_of": null,
       "formation_conditions": [
         [
-          "I4"
+          "S4"
         ]
       ],
       "rejection_conditions": null
@@ -1316,18 +1307,6 @@
       "formation_conditions": [
         [
           "S2"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "I4",
-      "label": "男は水を飲むためにバーに立ち寄った",
-      "_truth_value": true,
-      "negation_of": null,
-      "formation_conditions": [
-        [
-          "S4"
         ]
       ],
       "rejection_conditions": null
@@ -1380,7 +1359,13 @@
           "P4"
         ]
       ],
-      "rejection_conditions": null
+      "rejection_conditions": null,
+      "entailment_conditions": [
+        [
+          "P2",
+          "P4"
+        ]
+      ]
     },
     {
       "id": "I9",
@@ -1389,48 +1374,19 @@
       "negation_of": null,
       "formation_conditions": [
         [
-          "IP1",
-          "IP2",
+          "I7",
+          "I8",
           "P3"
         ]
       ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "IP1",
-      "label": "男は不随意の身体的反応に困り、水で治せると考えてバーに来た",
-      "_truth_value": true,
-      "negation_of": null,
-      "formation_conditions": [
+      "rejection_conditions": null,
+      "entailment_conditions": [
         [
-          "I7"
+          "I7",
+          "I8",
+          "P3"
         ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "IP2",
-      "label": "バーテンダーは男の異常を察知し、驚かせて治そうとした結果、男の異常が即座に解消された",
-      "_truth_value": true,
-      "negation_of": null,
-      "formation_conditions": [
-        [
-          "I8"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "FP",
-      "label": "男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき、驚かせることで反応を止めた",
-      "_truth_value": true,
-      "negation_of": null,
-      "formation_conditions": [
-        [
-          "I9"
-        ]
-      ],
-      "rejection_conditions": null
+      ]
     },
     {
       "id": "N1a",
@@ -1651,30 +1607,6 @@
       "rejection_conditions": null
     },
     {
-      "id": "NF4a",
-      "label": "男の水の要求は口実ではなかった",
-      "_truth_value": true,
-      "negation_of": "HF4a",
-      "formation_conditions": [
-        [
-          "S4"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "HF4a",
-      "label": "男の水の要求は口実だった",
-      "_truth_value": false,
-      "negation_of": "NF4a",
-      "formation_conditions": [
-        [
-          "S4"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
       "id": "NF5b",
       "label": "男の困りごとは生死に関わるものではなかった",
       "_truth_value": true,
@@ -1829,8 +1761,8 @@
       "negation_of": "HF9a",
       "formation_conditions": [
         [
-          "IP1",
-          "IP2",
+          "I7",
+          "I8",
           "P3"
         ]
       ],
@@ -1843,8 +1775,8 @@
       "negation_of": "NF9a",
       "formation_conditions": [
         [
-          "IP1",
-          "IP2",
+          "I7",
+          "I8",
           "P3"
         ]
       ],
@@ -1941,17 +1873,6 @@
       "topic_category": "人物と背景"
     },
     {
-      "id": "Q4a",
-      "text": "男は水を飲みにバーに来ましたか？",
-      "answer": "はい",
-      "reveals": [
-        "I4"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "状況の確認"
-    },
-    {
       "id": "Q4b",
       "text": "男はバーに来る前から水を飲みたいと思っていましたか？",
       "answer": "はい",
@@ -2041,19 +1962,6 @@
       "topic_category": "原因と動機"
     },
     {
-      "id": "Q7b",
-      "text": "男は不随意の身体的反応に困り、水で治そうとしてバーに来ましたか？",
-      "answer": "はい",
-      "reveals": [
-        "IP1"
-      ],
-      "mechanism": "link",
-      "prerequisites": [
-        "P5"
-      ],
-      "topic_category": "原因と動機"
-    },
-    {
       "id": "Q8a",
       "text": "バーテンダーは男の異常を察知した上で行動しましたか？",
       "answer": "はい",
@@ -2067,19 +1975,6 @@
       "topic_category": "原因と動機"
     },
     {
-      "id": "Q8b",
-      "text": "バーテンダーは察知して驚かせ、実際に男の異常が治りましたか？",
-      "answer": "はい",
-      "reveals": [
-        "IP2"
-      ],
-      "mechanism": "link",
-      "prerequisites": [
-        "I8"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
       "id": "Q9a",
       "text": "初対面のバーテンダーが男の身体的な異常に気づき、驚かせて治しましたか？",
       "answer": "はい",
@@ -2090,19 +1985,6 @@
       "prerequisites": [
         "P3",
         "I5"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q9b",
-      "text": "男は身体的反応を止めたくて水を求めたが、バーテンダーが驚かせて止めましたか？",
-      "answer": "はい",
-      "reveals": [
-        "FP"
-      ],
-      "mechanism": "link",
-      "prerequisites": [
-        "I9"
       ],
       "topic_category": "状況の確認"
     },
@@ -2171,17 +2053,6 @@
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "人物と背景"
-    },
-    {
-      "id": "QF4a",
-      "text": "男の水の要求は口実でしたか？",
-      "answer": "いいえ",
-      "reveals": [
-        "NF4a"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "前提の確認"
     },
     {
       "id": "QF5b",
@@ -2379,21 +2250,7 @@
       {
         "chain_id": "C4",
         "chain_path": "S4 → I4 → P6",
-        "branches": [
-          {
-            "at_step": "I4",
-            "true_side_label": "水を飲みに来た",
-            "parallels": [
-              {
-                "label": "水は口実だった",
-                "models": [
-                  "G4",
-                  "M10"
-                ]
-              }
-            ]
-          }
-        ]
+        "branches": []
       },
       {
         "chain_id": "C5",
@@ -2652,12 +2509,6 @@
           "parallel_index": 0
         },
         {
-          "id": "NF4a",
-          "source_chain": "C4",
-          "source_step": "I4",
-          "parallel_index": 0
-        },
-        {
           "id": "NF5b",
           "source_chain": "C5",
           "source_step": "I5",
@@ -2726,10 +2577,6 @@
           "reveals_proposition": "NF3b"
         },
         {
-          "id": "QF4a",
-          "reveals_proposition": "NF4a"
-        },
-        {
           "id": "QF5b",
           "reveals_proposition": "NF5b"
         },
@@ -2777,7 +2624,6 @@
         "Q3b"
       ],
       "C4": [
-        "Q4a",
         "Q4b"
       ],
       "C5": [
@@ -2790,16 +2636,13 @@
         "Q6b"
       ],
       "C7": [
-        "Q7a",
-        "Q7b"
+        "Q7a"
       ],
       "C8": [
-        "Q8a",
-        "Q8b"
+        "Q8a"
       ],
       "C9": [
-        "Q9a",
-        "Q9b"
+        "Q9a"
       ]
     },
     "exploration_paths": [
@@ -3010,6 +2853,90 @@
       "原因と動機": 9,
       "人物と背景": 4,
       "前提の確認": 7
+    }
+  },
+  "_phase10": {
+    "step_a_thinning": {
+      "thinned": [
+        {
+          "id": "I4",
+          "label": "男は水を飲むためにバーに立ち寄った",
+          "reason": "P6と同一情報の言い換え",
+          "kept_id": "P6",
+          "fc_rewiring": "P6.fc=[[S4]]"
+        },
+        {
+          "id": "IP1",
+          "label": "男は不随意の身体的反応に困り、水で治せると考えてバーに来た",
+          "reason": "I7+既知文脈(P5,P6)の復唱",
+          "kept_id": "I7",
+          "fc_rewiring": "I9.fc内IP1→I7"
+        },
+        {
+          "id": "IP2",
+          "label": "バーテンダーは男の異常を察知し、驚かせて治そうとした結果、解消された",
+          "reason": "I8+既知文脈(P2,P4)の復唱",
+          "kept_id": "I8",
+          "fc_rewiring": "I9.fc内IP2→I8"
+        },
+        {
+          "id": "FP",
+          "label": "男は不随意の身体的反応を止めたくて水を求めてバーに入ったが、初対面のバーテンダーがそれに気づき驚かせることで反応を止めた",
+          "reason": "I9+既知文脈(IP1)の復唱",
+          "kept_id": "I9",
+          "fc_rewiring": "clear_conditions=[[\"I9\"]]"
+        }
+      ],
+      "summary": {
+        "before": {
+          "propositions": 52,
+          "questions": 35
+        },
+        "after": {
+          "propositions": 46,
+          "questions": 30
+        },
+        "removed_propositions": [
+          "I4",
+          "IP1",
+          "IP2",
+          "FP",
+          "NF4a",
+          "HF4a"
+        ],
+        "removed_questions": [
+          "Q4a",
+          "Q7b",
+          "Q8b",
+          "Q9b",
+          "QF4a"
+        ]
+      }
+    },
+    "step_b_entailment": {
+      "entailed": [
+        {
+          "id": "I8",
+          "entailment_conditions": [
+            [
+              "P2",
+              "P4"
+            ]
+          ],
+          "reason": "P2(助ける意図)はP2+P4の論理的結合で察知+介入を含意"
+        },
+        {
+          "id": "I9",
+          "entailment_conditions": [
+            [
+              "I7",
+              "I8",
+              "P3"
+            ]
+          ],
+          "reason": "I7+I8+P3の情報要約・結合で推論なし"
+        }
+      ]
     }
   }
 }
