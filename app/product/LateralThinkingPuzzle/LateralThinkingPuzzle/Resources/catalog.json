@@ -67,6 +67,22 @@
         "ja",
         "en"
       ]
+    },
+    {
+      "id": "cassette_tape",
+      "engine_version": "v3",
+      "odr_tag": "puzzle-cassette-tape",
+      "title_ja": "カセットテープ",
+      "title_en": "Cassette Tape",
+      "statement_preview_ja": "ある男が自室で銃で頭を撃って死んでいた。そばのカセットテープを再生すると「もう生きていけない…」という遺書が録音されていた。しかし警察はこれを殺人と断定した。",
+      "statement_preview_en": "A man was found dead in his room, shot in the head. A cassette tape nearby played a recorded suicide note saying 'I can't go on...' Yet the police determined it was murder.",
+      "icon": "📼",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false,
+      "locales": [
+        "ja"
+      ]
     }
   ],
   "packs": [

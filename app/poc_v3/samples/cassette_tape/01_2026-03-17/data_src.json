@@ -1,0 +1,618 @@
+{
+  "title": "カセットテープ",
+  "S": "ある男が自室で銃で頭を撃って死んでいた。そばのカセットテープを再生すると「もう生きていけない…」という遺書が録音されていた。しかし警察はこれを殺人と断定した。",
+  "T": "もし本当に自殺なら、録音後に銃で自殺した時点でテープはまだ回り続けているはず。しかしテープは巻き戻されて最初から再生できる状態だった。つまり、誰かが録音後にテープを巻き戻した。第三者がいた証拠であり、殺人と断定された。",
+  "_phase1": {
+    "tensions": [
+      {"id": "α1", "label": "遺書テープが存在するのに自殺ではないとされた（遺書は自殺の最も直接的な証拠なのに否定された）", "parent": "α"},
+      {"id": "α2", "label": "自室で銃で頭を撃つという自殺パターンに合致する死因・現場状況なのに殺人とされた", "parent": "α"},
+      {"id": "β1", "label": "現場に自殺では説明できない物理的・論理的矛盾が存在した", "parent": "β"},
+      {"id": "β2", "label": "その矛盾は殺人を断定できるほど論理的に決定的であった（推測や疑いではなく確信）", "parent": "β"}
+    ],
+    "models": [
+      {"id": "T", "label": "テープの巻き戻し", "summary": "自殺なら録音後にテープは回り続けるはず。テープが巻き戻されて再生可能な状態だった＝録音後に第三者がテープを巻き戻した", "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "M1", "label": "銃創の弾道角度", "summary": "銃創の弾道角度が自分の手で撃てる角度ではなかった。法医学的分析により他者による発砲が証明された", "tension_subset": ["α2", "β1", "β2"]},
+      {"id": "M2", "label": "銃の指紋", "summary": "銃に男の指紋がなく他者の指紋が検出された。男以外の人物が銃を操作したことが証明された", "tension_subset": ["α2", "β1", "β2"]},
+      {"id": "M3", "label": "硝煙反応", "summary": "男の手に硝煙反応がなく、銃を撃っていないことが化学的に証明された", "tension_subset": ["α2", "β1", "β2"]},
+      {"id": "M4", "label": "声の不一致", "summary": "テープに録音された声が男本人のものではなかった。声紋分析により遺書が第三者に偽造されたことが判明", "tension_subset": ["α1", "β1", "β2"]},
+      {"id": "M5", "label": "争いの痕跡", "summary": "部屋に家具が倒れるなど争った形跡があり、自殺する人間の部屋としては不自然だった", "tension_subset": ["α2", "β1"]},
+      {"id": "M6", "label": "防御傷", "summary": "男の腕や手に防御傷があり、他者から暴行を受けた痕跡が法医学的に確認された", "tension_subset": ["α2", "β1", "β2"]},
+      {"id": "M7", "label": "時刻の不一致", "summary": "テープの録音時刻と法医学的な死亡推定時刻が大きく乖離しており、遺書と死亡が別のタイミングの出来事だった", "tension_subset": ["α1", "β1"]},
+      {"id": "M8", "label": "遺書の不自然さ", "summary": "遺書の言い回しに不自然な点があり、脅迫下で録音されたものと推定された", "tension_subset": ["α1", "β1"]},
+      {"id": "M9", "label": "目撃証言", "summary": "近隣住人が死亡推定時刻の前後に第三者が部屋を出入りするのを目撃していた", "tension_subset": ["α2", "β1"]},
+      {"id": "M10", "label": "テープの編集痕跡", "summary": "テープに音声の切り貼り・編集の痕跡があり、遺書が捏造されたものと判明した", "tension_subset": ["α1", "β1", "β2"]},
+      {"id": "M11", "label": "毒物検出", "summary": "男の体内から毒物が検出され、銃創の前に毒殺されていた。銃による自殺は偽装だった", "tension_subset": ["α2", "β1", "β2"]},
+      {"id": "M12", "label": "銃の所持状況", "summary": "男が銃を所持する法的記録や合理的理由がなく、銃は第三者が持ち込んだものだった", "tension_subset": ["α2", "β1"]},
+      {"id": "M13", "label": "血痕パターン", "summary": "血痕の飛散パターンが自分で頭を撃った場合の弾道シミュレーションと一致しなかった", "tension_subset": ["α2", "β1", "β2"]},
+      {"id": "M14", "label": "外部施錠", "summary": "部屋のドアが外側から施錠されており、死後に第三者が部屋を出て鍵をかけたことが証明された", "tension_subset": ["α2", "β1", "β2"]}
+    ],
+    "relaxation_patterns": {
+      "T": {
+        "α1": "テープの物理的状態（巻き戻し）が第三者の介在を証明し、遺書は偽装工作の一部と判明",
+        "α2": "第三者の介在が証明され、自殺状況は偽装",
+        "β1": "カセットテープの巻き戻し状態が自殺では説明不能な物理的矛盾",
+        "β2": "テープの動作原理上、録音後の自動巻き戻しは不可能であり、論理的に第三者の介在が必須"
+      },
+      "M1": {
+        "α1": "-",
+        "α2": "銃創の弾道角度が自分では撃てない位置にあり他者による発砲を証明",
+        "β1": "法医学的弾道分析",
+        "β2": "物理的に自傷不可能な角度は科学的に客観的"
+      },
+      "M2": {
+        "α1": "-",
+        "α2": "銃に男の指紋がなく他者の指紋があり他者が銃を使用したことを証明",
+        "β1": "指紋分析",
+        "β2": "指紋は科学的・客観的証拠"
+      },
+      "M3": {
+        "α1": "-",
+        "α2": "男の手に硝煙反応がなく自分で発砲していないことを化学的に証明",
+        "β1": "化学分析（硝煙反応検査）",
+        "β2": "硝煙反応は化学的・客観的証拠"
+      },
+      "M4": {
+        "α1": "テープの声が本人のものではなく遺書が第三者に捏造されたことを証明",
+        "α2": "-",
+        "β1": "声紋分析",
+        "β2": "声紋は科学的・客観的証拠"
+      },
+      "M5": {
+        "α1": "-",
+        "α2": "部屋に争った形跡があり他者がいたことを示唆",
+        "β1": "物理的痕跡（家具の転倒等）",
+        "β2": "-"
+      },
+      "M6": {
+        "α1": "-",
+        "α2": "男の体に防御傷があり他者から暴行を受けたことを証明",
+        "β1": "法医学的外傷分析",
+        "β2": "防御傷は医学的・客観的証拠"
+      },
+      "M7": {
+        "α1": "テープの録音時刻と死亡推定時刻が大きく乖離し遺書と死亡が別のイベント",
+        "α2": "-",
+        "β1": "時刻分析（テープの録音特性と法医学的死亡推定）",
+        "β2": "-"
+      },
+      "M8": {
+        "α1": "遺書に不自然な言い回しがあり第三者に強制されて録音された可能性を示唆",
+        "α2": "-",
+        "β1": "言語分析",
+        "β2": "-"
+      },
+      "M9": {
+        "α1": "-",
+        "α2": "近隣住人が第三者の出入りを目撃しており他者がいたことを証明",
+        "β1": "目撃証言",
+        "β2": "-"
+      },
+      "M10": {
+        "α1": "テープに編集・切り貼りの痕跡があり遺書が捏造されたことを証明",
+        "α2": "-",
+        "β1": "テープの技術的分析",
+        "β2": "編集痕跡は物理的・客観的証拠"
+      },
+      "M11": {
+        "α1": "-",
+        "α2": "男の体内から毒物が検出され銃創ではなく毒物が真の死因。銃は偽装",
+        "β1": "毒物検出（化学分析）",
+        "β2": "毒物は化学的・客観的証拠"
+      },
+      "M12": {
+        "α1": "-",
+        "α2": "男が銃を合法的に所持する記録がなく銃が第三者のものである可能性を示唆",
+        "β1": "銃の登録・所持記録の確認",
+        "β2": "-"
+      },
+      "M13": {
+        "α1": "-",
+        "α2": "血痕の飛散パターンが自殺の場合の弾道と一致せず他者による発砲を証明",
+        "β1": "血痕パターン分析（法医学）",
+        "β2": "血痕パターンは科学的・客観的証拠"
+      },
+      "M14": {
+        "α1": "-",
+        "α2": "部屋が外側から施錠されており死後に第三者が部屋を出たことを証明",
+        "β1": "施錠状態の確認",
+        "β2": "施錠は客観的・物理的事実"
+      }
+    },
+    "variant_groups": [
+      {
+        "group_id": "G1",
+        "label": "傷の形態学的分析（弾道角度・血痕パターン）による自傷否定",
+        "representative": "M1",
+        "members": ["M1", "M13"],
+        "shared_pattern": {
+          "α1": "-",
+          "α2": "傷の物理的パターン分析により自傷が不可能と証明",
+          "β1": "法医学的形態分析",
+          "β2": "科学的分析による客観的証拠"
+        }
+      },
+      {
+        "group_id": "G2",
+        "label": "接触痕跡分析（指紋・硝煙）による他者関与証明",
+        "representative": "M2",
+        "members": ["M2", "M3"],
+        "shared_pattern": {
+          "α1": "-",
+          "α2": "銃または手の痕跡分析により他者の関与を証明",
+          "β1": "科学的痕跡分析",
+          "β2": "科学的分析による客観的証拠"
+        }
+      },
+      {
+        "group_id": "G3",
+        "label": "テープの科学的分析（声紋・編集痕跡）による遺書偽造証明",
+        "representative": "M4",
+        "members": ["M4", "M10"],
+        "shared_pattern": {
+          "α1": "テープの科学的分析により遺書が偽造されたことを証明",
+          "α2": "-",
+          "β1": "テープの科学的分析",
+          "β2": "科学的分析による客観的証拠"
+        }
+      }
+    ],
+    "abstract_models": [
+      {"id": "T", "label": "テープの物理的動作状態（巻き戻し）が第三者の介在を証明", "members": ["T"], "tension_subset": ["α1", "α2", "β1", "β2"]},
+      {"id": "G1", "label": "傷の形態学的分析による自傷否定", "representative": "M1", "members": ["M1", "M13"], "tension_subset": ["α2", "β1", "β2"]},
+      {"id": "G2", "label": "接触痕跡分析による他者関与証明", "representative": "M2", "members": ["M2", "M3"], "tension_subset": ["α2", "β1", "β2"]},
+      {"id": "G3", "label": "テープの科学的分析による遺書偽造証明", "representative": "M4", "members": ["M4", "M10"], "tension_subset": ["α1", "β1", "β2"]},
+      {"id": "M5", "label": "争いの痕跡による他者関与示唆", "members": ["M5"], "tension_subset": ["α2", "β1"]},
+      {"id": "M6", "label": "追加外傷（防御傷）による暴行証明", "members": ["M6"], "tension_subset": ["α2", "β1", "β2"]},
+      {"id": "M7", "label": "録音と死亡の時刻矛盾による遺書信頼性否定", "members": ["M7"], "tension_subset": ["α1", "β1"]},
+      {"id": "M8", "label": "遺書の言語的不自然さによる偽造示唆", "members": ["M8"], "tension_subset": ["α1", "β1"]},
+      {"id": "M9", "label": "目撃証言による第三者存在証明", "members": ["M9"], "tension_subset": ["α2", "β1"]},
+      {"id": "M11", "label": "毒物検出による死因偽装証明", "members": ["M11"], "tension_subset": ["α2", "β1", "β2"]},
+      {"id": "M12", "label": "銃の所持状況不整合による第三者関与示唆", "members": ["M12"], "tension_subset": ["α2", "β1"]},
+      {"id": "M14", "label": "外部施錠による第三者存在証明", "members": ["M14"], "tension_subset": ["α2", "β1", "β2"]}
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "T": [
+        "テープに遺書が録音されていた",
+        "テープは巻き戻されて最初から再生できる状態だった",
+        "録音後にテープが回り続けるのが正常な動作であり、巻き戻しは異常",
+        "第三者が録音後にテープを巻き戻した",
+        "第三者の存在が証明され殺人と断定された"
+      ],
+      "G1": [
+        "遺体の銃創を法医学的に分析した",
+        "弾道角度または血痕パターンが自傷と不整合だった",
+        "物理的に自分では撃てない傷であることが証明された",
+        "他者が銃を発砲したことが証明された"
+      ],
+      "G2": [
+        "銃および男の手を科学的に分析した",
+        "銃に男の指紋がない、または男の手に硝煙反応がない",
+        "男自身が銃を操作していないことが証明された",
+        "他者が銃を使用したことが証明された"
+      ],
+      "G3": [
+        "テープの録音内容を科学的に分析した",
+        "声紋が本人と一致しない、またはテープに編集の痕跡がある",
+        "遺書が第三者により偽造されたことが証明された",
+        "テープの内容自体が犯人の操作物であった"
+      ],
+      "M5": [
+        "部屋に争った形跡（家具の転倒等）があった",
+        "自殺する人の部屋に争いの痕跡があるのは不自然",
+        "他者との物理的衝突があったことが示唆された"
+      ],
+      "M6": [
+        "男の遺体に銃創以外の外傷（防御傷）があった",
+        "防御傷は他者からの攻撃に対する反射的防御の証拠",
+        "他者から暴行を受けたことが法医学的に確認された"
+      ],
+      "M7": [
+        "テープの録音時刻を技術的に分析した",
+        "録音時刻と法医学的死亡推定時刻が大きく乖離していた",
+        "遺書の録音と死亡が連続した行為ではなかった",
+        "時系列の矛盾が自殺の信憑性を否定した"
+      ],
+      "M8": [
+        "テープに録音された遺書の言語的特徴を分析した",
+        "不自然な言い回しや脅迫を示唆する特徴が見つかった",
+        "遺書が自発的なものではなく強制されたものと推定された"
+      ],
+      "M9": [
+        "近隣住人への聞き込みを実施した",
+        "死亡推定時刻の前後に第三者が部屋を出入りするのが目撃された",
+        "現場に男以外の人物がいたことが証言により確認された"
+      ],
+      "M11": [
+        "男の遺体を化学分析した",
+        "体内から毒物が検出された",
+        "銃創より先に毒物が投与されており真の死因は毒物だった",
+        "銃での自殺は偽装であり実際は毒殺だった"
+      ],
+      "M12": [
+        "男の銃所持に関する法的記録を調査した",
+        "合法的な所持記録も合理的な所持理由もなかった",
+        "銃は第三者が持ち込んだものだった"
+      ],
+      "M14": [
+        "部屋のドアの施錠状態を確認した",
+        "ドアが外側から施錠されていた",
+        "室内で死亡した人間が外側から施錠することは物理的に不可能",
+        "死後に第三者が部屋を出て鍵をかけたことが証明された"
+      ]
+    },
+    "division_propositions": [
+      {
+        "id": "P1",
+        "label": "殺人の決定的証拠はカセットテープに関連するものである",
+        "truth_value_in_T": true,
+        "true_models": ["T", "G3", "M7", "M8"],
+        "false_models": ["G1", "G2", "M5", "M6", "M9", "M11", "M12", "M14"]
+      },
+      {
+        "id": "P2",
+        "label": "男の死因は銃創である",
+        "truth_value_in_T": true,
+        "true_models": ["T", "G1", "G2", "G3", "M5", "M6", "M7", "M8", "M9", "M12", "M14"],
+        "false_models": ["M11"]
+      },
+      {
+        "id": "P3",
+        "label": "殺人の証拠は遺体の法医学的分析以外のものに基づく",
+        "truth_value_in_T": true,
+        "true_models": ["T", "G3", "M5", "M7", "M8", "M9", "M12", "M14"],
+        "false_models": ["G1", "G2", "M6", "M11"]
+      },
+      {
+        "id": "P4",
+        "label": "犯人はカセットテープの内容や物理的状態を改変した",
+        "truth_value_in_T": true,
+        "true_models": ["T", "G3"],
+        "false_models": ["G1", "G2", "M5", "M6", "M7", "M8", "M9", "M11", "M12", "M14"]
+      },
+      {
+        "id": "P5",
+        "label": "殺人の証拠は現場の物品の仕組みから生じる論理的矛盾に基づく",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M14"],
+        "false_models": ["G1", "G2", "G3", "M5", "M6", "M7", "M8", "M9", "M11", "M12"]
+      }
+    ]
+  },
+  "clear_conditions": [["FP"]],
+  "_phase3": {
+    "derivation_graph": {
+      "single_derivations": [
+        {"from": "P4", "to": "P1", "reason": "テープの改変が証拠 → 証拠はテープに関連する（改変の詳細を落とし関連に抽象化）"},
+        {"from": "P1", "to": "P3", "reason": "テープ関連の証拠 → 遺体の法医学的分析以外（テープという具体を落とし非遺体に抽象化）"},
+        {"from": "P5", "to": "P3", "reason": "物品の仕組みからの矛盾 → 遺体の法医学的分析以外（仕組みの具体を落とし非遺体に抽象化）"}
+      ],
+      "combination_derivations": [],
+      "independent_axes": ["P4", "P5", "P2"],
+      "root_propositions": ["P3", "P2"]
+    },
+    "fp": {
+      "id": "FP",
+      "label": "テープが巻き戻されて再生可能な状態にあったことが、録音後に第三者がテープを操作した証拠であり、男は銃で殺害された",
+      "true_models": ["T"],
+      "derivations_from_fp": [
+        {"to": "P4", "reason": "第三者がテープを操作した → テープの物理的状態が改変された（操作＝改変の上位概念）"},
+        {"to": "P5", "reason": "テープが巻き戻されて再生可能な状態にあった＝テープの動作原理上の矛盾 → 物品の仕組みから生じる論理的矛盾に基づく（テープ固有の情報を落とす）"},
+        {"to": "P2", "reason": "男は銃で殺害された → 死因は銃創（殺害の詳細を落とし死因のみに抽象化）"}
+      ]
+    },
+    "clear_validation": {
+      "tensions_resolved": [
+        {"tension_id": "α1", "mechanism": "テープが巻き戻されていた = 第三者が介在 → 遺書テープは偽装工作の一部。遺書があっても自殺ではない理由が説明される"},
+        {"tension_id": "α2", "mechanism": "第三者の操作が証明された → 自殺に見える状況は偽装であり実際は殺人"},
+        {"tension_id": "β1", "mechanism": "テープの巻き戻しという矛盾。自殺した人間は録音後にテープを巻き戻せない"},
+        {"tension_id": "β2", "mechanism": "テープの動作原理上、録音後に自動巻き戻しは不可能。論理的に第三者の介在が必須であり断定可能"}
+      ],
+      "all_resolved": true,
+      "fp_prime": null
+    },
+    "provisional_fc": {
+      "FP": [["P4", "P5", "P2"]],
+      "P4": [["P1"]],
+      "P5": [["P3"]],
+      "P1": [["P3"]]
+    },
+    "unrejectable_models": {
+      "models": ["T"],
+      "reason": "全競合モデルは少なくとも1つの分割命題でTと異なり、棄却可能。最もTに近いG3はP5=Fで棄却され、M14はP4=Fで棄却される"
+    },
+    "added_propositions": []
+  },
+  "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11"],
+  "_phase4": {
+    "s_propositions": [
+      {"id": "S1", "label": "ある男がいた", "type": "atomic"},
+      {"id": "S2", "label": "男は死んでいた", "type": "atomic"},
+      {"id": "S3", "label": "男は自室にいた", "type": "atomic"},
+      {"id": "S4", "label": "男は銃で頭を撃たれた状態だった", "type": "atomic"},
+      {"id": "S5", "label": "男のそばにカセットテープがあった", "type": "atomic"},
+      {"id": "S6", "label": "テープを再生した", "type": "atomic"},
+      {"id": "S7", "label": "テープに「もう生きていけない…」という内容が録音されていた", "type": "atomic"},
+      {"id": "S8", "label": "録音は遺書であった", "type": "atomic"},
+      {"id": "S9", "label": "警察が殺人と断定した", "type": "atomic"},
+      {"id": "S10", "label": "テープは再生可能な状態にあった", "type": "derived", "derived_from": ["S6"]},
+      {"id": "S11", "label": "遺書が存在した", "type": "derived", "derived_from": ["S7", "S8"]}
+    ],
+    "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11"],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_root",
+        "source": ["S9", "S4", "S8"],
+        "target": "P3",
+        "intermediates": ["I1"],
+        "tactic": "常識的仮説の排除 → 段階的絞り込み",
+        "description": "{S9,S4,S8} →[常識的仮説の排除]→ I1(外見上の自殺証拠以外に殺人を示す証拠が存在する) →[段階的絞り込み]→ P3"
+      },
+      {
+        "id": "C2",
+        "type": "S_to_root",
+        "source": ["S2", "S4"],
+        "target": "P2",
+        "intermediates": [],
+        "tactic": "観測事実の深掘り",
+        "description": "{S2,S4} →[観測事実の深掘り]→ P2（I2間引き済み）"
+      },
+      {
+        "id": "C3",
+        "type": "toward_concrete",
+        "source": ["P3", "S5"],
+        "target": "P1",
+        "intermediates": ["I3"],
+        "tactic": "段階的絞り込み → 段階的絞り込み",
+        "description": "{P3,S5} →[段階的絞り込み]→ I3(殺人の証拠は現場にある物品や媒体の分析に基づく) →[段階的絞り込み]→ P1",
+        "fc_source": "P3 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C4",
+        "type": "toward_concrete",
+        "source": ["P1"],
+        "target": "P4",
+        "intermediates": [],
+        "tactic": "因果の逆転",
+        "description": "{P1} →[因果の逆転]→ P4（I4間引き済み）",
+        "fc_source": "P1 は連鎖 C3 の reveals"
+      },
+      {
+        "id": "C5",
+        "type": "toward_concrete",
+        "source": ["P3"],
+        "target": "P5",
+        "intermediates": ["I5"],
+        "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "{P3} →[動機の探索]→ I5(殺人の証拠は論理的推論によって導かれるものである) →[段階的絞り込み]→ P5",
+        "fc_source": "P3 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C6",
+        "type": "toward_concrete",
+        "source": ["P4", "P5"],
+        "target": "FP",
+        "intermediates": ["I6"],
+        "tactic": "矛盾の指摘 → 因果の逆転",
+        "description": "{P4,P5} →[矛盾の指摘]→ I6(テープの物理的状態にテープの動作原理に矛盾する異常がある) →[因果の逆転]→ FP",
+        "fc_source": "P4 は連鎖 C4 の reveals、P5 は連鎖 C5 の reveals、P2 は連鎖 C2 の reveals"
+      }
+    ],
+    "generated_intermediates": ["I1", "I3", "I5", "I6"]
+  },
+  "propositions": [
+    {"id": "P1", "label": "殺人の決定的証拠はカセットテープに関連するものである", "_truth_value": true, "formation_conditions": [["I3"]], "rejection_conditions": null},
+    {"id": "P2", "label": "男の死因は銃創である", "_truth_value": true, "formation_conditions": [["S4"]], "rejection_conditions": null},
+    {"id": "P3", "label": "殺人の証拠は遺体の法医学的分析以外のものに基づく", "_truth_value": true, "formation_conditions": [["I1"]], "rejection_conditions": null},
+    {"id": "P4", "label": "犯人はカセットテープの内容や物理的状態を改変した", "_truth_value": true, "formation_conditions": [["P1"]], "rejection_conditions": null},
+    {"id": "P5", "label": "殺人の証拠は現場の物品の仕組みから生じる論理的矛盾に基づく", "_truth_value": true, "formation_conditions": [["I5"]], "rejection_conditions": null},
+    {"id": "I1", "label": "外見上の自殺証拠以外に殺人を示す証拠が存在する", "_truth_value": true, "formation_conditions": [["S9"]], "rejection_conditions": null},
+    {"id": "I3", "label": "殺人の証拠は現場にある物品や媒体の分析に基づく", "_truth_value": true, "formation_conditions": [["P3"]], "rejection_conditions": null},
+    {"id": "I5", "label": "殺人の証拠は論理的推論によって導かれるものである", "_truth_value": true, "formation_conditions": [["P3"]], "rejection_conditions": null},
+    {"id": "I6", "label": "テープの物理的状態にテープの動作原理に矛盾する異常がある", "_truth_value": true, "formation_conditions": [["P4", "P5"]], "entailment_conditions": [["P4", "P5"]], "rejection_conditions": null},
+    {"id": "FP", "label": "テープが巻き戻されて再生可能な状態にあったことが、録音後に第三者がテープを操作した証拠であり、男は銃で殺害された", "_truth_value": true, "formation_conditions": [["I6", "P2"]], "rejection_conditions": null},
+    {"id": "N1c", "label": "殺人の証拠は遺体の銃創や傷から直接得られたものではない", "_truth_value": true, "negation_of": "H1c", "formation_conditions": [["I1"]], "rejection_conditions": null},
+    {"id": "H1c", "label": "殺人の証拠は遺体の銃創や傷から直接得られた", "_truth_value": false, "negation_of": "N1c", "formation_conditions": [["I1"]], "rejection_conditions": null},
+    {"id": "N3c", "label": "殺人の証拠は目撃証言や外部の記録に基づくものではない", "_truth_value": true, "negation_of": "H3c", "formation_conditions": [["P3"]], "rejection_conditions": null},
+    {"id": "H3c", "label": "殺人の証拠は目撃証言や外部の記録に基づく", "_truth_value": false, "negation_of": "N3c", "formation_conditions": [["P3"]], "rejection_conditions": null},
+    {"id": "N4c", "label": "テープに音声の切り貼りや編集の痕跡はなかった", "_truth_value": true, "negation_of": "H4c", "formation_conditions": [["P1"]], "rejection_conditions": null},
+    {"id": "H4c", "label": "テープに音声の切り貼りや編集の痕跡があった", "_truth_value": false, "negation_of": "N4c", "formation_conditions": [["P1"]], "rejection_conditions": null},
+    {"id": "N5c", "label": "殺人の証拠は科学的な分析装置を使った検査から得られたものではない", "_truth_value": true, "negation_of": "H5c", "formation_conditions": [["P3"]], "rejection_conditions": null},
+    {"id": "H5c", "label": "殺人の証拠は科学的な分析装置を使った検査から得られた", "_truth_value": false, "negation_of": "N5c", "formation_conditions": [["P3"]], "rejection_conditions": null},
+    {"id": "N6c", "label": "テープの録音内容に不審な点はなかった", "_truth_value": true, "negation_of": "H6c", "formation_conditions": [["P4"]], "rejection_conditions": null},
+    {"id": "H6c", "label": "テープの録音内容に不審な点があった", "_truth_value": false, "negation_of": "N6c", "formation_conditions": [["P4"]], "rejection_conditions": null},
+    {"id": "NF1", "label": "部屋に争った形跡はなかった", "_truth_value": true, "negation_of": "HF1", "formation_conditions": [["I3"]], "rejection_conditions": null},
+    {"id": "HF1", "label": "部屋に争った形跡があった", "_truth_value": false, "negation_of": "NF1", "formation_conditions": [["I3"]], "rejection_conditions": null},
+    {"id": "NF2", "label": "部屋が外側から施錠されてはいなかった", "_truth_value": true, "negation_of": "HF2", "formation_conditions": [["I3"]], "rejection_conditions": null},
+    {"id": "HF2", "label": "部屋が外側から施錠されていた", "_truth_value": false, "negation_of": "NF2", "formation_conditions": [["I3"]], "rejection_conditions": null},
+    {"id": "NF3", "label": "テープの録音時刻と死亡推定時刻に矛盾はなかった", "_truth_value": true, "negation_of": "HF3", "formation_conditions": [["P1"]], "rejection_conditions": null},
+    {"id": "HF3", "label": "テープの録音時刻と死亡推定時刻に矛盾があった", "_truth_value": false, "negation_of": "NF3", "formation_conditions": [["P1"]], "rejection_conditions": null}
+  ],
+  "questions": [
+    {"id": "Q1a", "text": "殺人と断定した決定的な証拠が現場にありましたか？", "answer": "はい", "reveals": ["I1"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "Q1b", "text": "殺人の証拠は遺体の分析以外のものに基づきますか？", "answer": "はい", "reveals": ["P3"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q1c", "text": "殺人の証拠は遺体の銃創や傷から直接得られましたか？", "answer": "いいえ", "reveals": ["N1c"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "Q2b", "text": "男の死因は銃創ですか？", "answer": "はい", "reveals": ["P2"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q3a", "text": "殺人の証拠は現場にある物品の分析から得られましたか？", "answer": "はい", "reveals": ["I3"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q3b", "text": "殺人の決定的証拠はカセットテープに関連するものですか？", "answer": "はい", "reveals": ["P1"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q3c", "text": "殺人の証拠は目撃証言や外部の記録に基づくものですか？", "answer": "いいえ", "reveals": ["N3c"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "Q4b", "text": "犯人はカセットテープの内容や物理的状態を改変しましたか？", "answer": "はい", "reveals": ["P4"], "mechanism": "link", "prerequisites": [], "topic_category": "原因と動機"},
+    {"id": "Q4c", "text": "テープに音声の切り貼りや編集の痕跡がありましたか？", "answer": "いいえ", "reveals": ["N4c"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q5a", "text": "殺人の証拠は論理的推論によって導かれるものですか？", "answer": "はい", "reveals": ["I5"], "mechanism": "observation", "prerequisites": [], "topic_category": "原因と動機"},
+    {"id": "Q5b", "text": "殺人の証拠は現場の物品の仕組みから生じる論理的矛盾に基づきますか？", "answer": "はい", "reveals": ["P5"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q5c", "text": "殺人の証拠は科学的な分析装置を使った検査から得られましたか？", "answer": "いいえ", "reveals": ["N5c"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "Q6a", "text": "テープの物理的状態にテープの動作原理に矛盾する異常がありましたか？", "answer": "はい", "reveals": ["I6"], "mechanism": "anomaly", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "Q6b", "text": "テープが巻き戻されて再生可能な状態にあったことが第三者の存在を証明しましたか？", "answer": "はい", "reveals": ["FP"], "mechanism": "anomaly", "prerequisites": ["I6"], "topic_category": "原因と動機"},
+    {"id": "Q6c", "text": "テープの録音内容に不審な点がありましたか？", "answer": "いいえ", "reveals": ["N6c"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "QF1", "text": "部屋に争った形跡がありましたか？", "answer": "いいえ", "reveals": ["NF1"], "mechanism": "observation", "prerequisites": [], "topic_category": "人物と背景"},
+    {"id": "QF2", "text": "部屋が外側から施錠されていましたか？", "answer": "いいえ", "reveals": ["NF2"], "mechanism": "observation", "prerequisites": [], "topic_category": "人物と背景"},
+    {"id": "QF3", "text": "テープの録音時刻と死亡推定時刻に矛盾がありましたか？", "answer": "いいえ", "reveals": ["NF3"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"}
+  ],
+  "topic_categories": [
+    {"id": "状況の確認", "name": "状況の確認"},
+    {"id": "原因と動機", "name": "原因と動機"},
+    {"id": "人物と背景", "name": "人物と背景"},
+    {"id": "前提の確認", "name": "前提の確認"}
+  ],
+  "_phase5": {
+    "chain_mapping": {
+      "C1": ["Q1a", "Q1b", "Q1c"],
+      "C2": ["Q2b"],
+      "C3": ["Q3a", "Q3b", "Q3c"],
+      "C4": ["Q4b", "Q4c"],
+      "C5": ["Q5a", "Q5b", "Q5c"],
+      "C6": ["Q6a", "Q6b", "Q6c"]
+    },
+    "exploration_paths": [
+      {
+        "name": "パス A: 証拠の性質から入る",
+        "sequence": "Q1a(はい:I1) → Q1b(はい:P3) → Q3a(はい:I3) → Q3b(はい:P1) → Q4a(はい:I4) → Q4b(はい:P4) → Q5a(はい:I5) → Q5b(はい:P5) → Q6a(はい:I6) → Q2a(はい:I2) → Q2b(はい:P2) → Q6b(はい:FP)"
+      },
+      {
+        "name": "パス B: 死因から入る",
+        "sequence": "Q2a(はい:I2) → Q2b(はい:P2) → Q1a(はい:I1) → Q1c(いいえ:N1c) → Q1b(はい:P3) → Q3a(はい:I3) → Q3b(はい:P1) → Q4a(はい:I4) → Q4b(はい:P4) → Q5a(はい:I5) → Q5b(はい:P5) → Q6a(はい:I6) → Q6b(はい:FP)"
+      },
+      {
+        "name": "パス C: 推論方法から入る",
+        "sequence": "Q1a(はい:I1) → Q1b(はい:P3) → Q5a(はい:I5) → Q5c(いいえ:N5c) → Q5b(はい:P5) → Q3a(はい:I3) → Q3b(はい:P1) → Q4a(はい:I4) → Q6c(いいえ:N6c) → Q4b(はい:P4) → Q2a(はい:I2) → Q2b(はい:P2) → Q6a(はい:I6) → Q6b(はい:FP)"
+      }
+    ]
+  },
+  "_phase8": {
+    "chain_branches": [
+      {
+        "chain_id": "C1",
+        "chain_path": "S → I1 → P3",
+        "branches": [
+          {"at_step": "I1", "true_side_label": "外見上の自殺証拠以外に殺人を示す証拠が存在する", "parallels": [{"label": "自殺の証拠とされる銃創自体に自傷と一致しない法医学的所見があった", "models": ["G1", "G2", "M6"]}]},
+          {"at_step": "P3", "true_side_label": "殺人の証拠は遺体の法医学的分析以外のものに基づく", "parallels": [{"label": "殺人の証拠は遺体の法医学的分析に基づく", "models": ["G1", "G2", "M6", "M11"]}]}
+        ]
+      },
+      {
+        "chain_id": "C2",
+        "chain_path": "S → I2 → P2",
+        "branches": [
+          {"at_step": "I2", "true_side_label": "男が銃で撃たれた状況が死因に直結している", "parallels": [{"label": "銃で撃たれた状況は死因に直結していなかった（別の死因があった）", "models": ["M11"]}]},
+          {"at_step": "P2", "true_side_label": "男の死因は銃創である", "parallels": [{"label": "男の死因は銃創以外であった（毒物等）", "models": ["M11"]}]}
+        ]
+      },
+      {
+        "chain_id": "C3",
+        "chain_path": "P3 → I3 → P1",
+        "branches": [
+          {"at_step": "I3", "true_side_label": "殺人の証拠は現場にある物品や媒体の分析に基づく", "parallels": [{"label": "殺人の証拠は現場の物品ではなく外部の情報（証言・記録）に基づく", "models": ["M9", "M12"]}]},
+          {"at_step": "P1", "true_side_label": "殺人の決定的証拠はカセットテープに関連するものである", "parallels": [{"label": "殺人の証拠はカセットテープ以外の現場の物品に関連する（争いの痕跡・施錠等）", "models": ["M5", "M14"]}]}
+        ]
+      },
+      {
+        "chain_id": "C4",
+        "chain_path": "P1 → I4 → P4",
+        "branches": [
+          {"at_step": "I4", "true_side_label": "テープの分析から殺人の物的証拠が得られた", "parallels": [{"label": "テープの分析からは状況証拠のみが得られた（時刻の矛盾・言語の不自然さ等）", "models": ["M7", "M8"]}]},
+          {"at_step": "P4", "true_side_label": "犯人はカセットテープの内容や物理的状態を改変した", "parallels": [{"label": "テープの証拠は犯人の改変ではなくテープの科学的分析から得られた", "models": ["G3"]}]}
+        ]
+      },
+      {
+        "chain_id": "C5",
+        "chain_path": "P3 → I5 → P5",
+        "branches": [
+          {"at_step": "I5", "true_side_label": "殺人の証拠は論理的推論によって導かれるものである", "parallels": [{"label": "殺人の証拠は科学的・技術的分析から得られた", "models": ["G3", "M7", "M8"]}]},
+          {"at_step": "P5", "true_side_label": "殺人の証拠は現場の物品の仕組みから生じる論理的矛盾に基づく", "parallels": [{"label": "論理的推論の対象は物品の仕組みではなく人の行動パターンの矛盾である", "models": []}]}
+        ]
+      },
+      {
+        "chain_id": "C6",
+        "chain_path": "{P4,P5} → I6 → FP",
+        "branches": [
+          {"at_step": "I6", "true_side_label": "テープの物理的状態にテープの動作原理に矛盾する異常がある", "parallels": [{"label": "テープの改変は動作原理の矛盾ではなくテープの内容の矛盾として現れた", "models": ["G3"]}]},
+          {"at_step": "FP", "true_side_label": "テープが巻き戻されて再生可能な状態にあったことが第三者の存在を証明した", "parallels": [{"label": "テープの異常は第三者の操作ではなく機器の不具合によるものだった", "models": []}]}
+        ]
+      }
+    ],
+    "coverage": {
+      "all_models": ["G1", "G2", "G3", "M5", "M6", "M7", "M8", "M9", "M11", "M12", "M14"],
+      "model_coverage": {
+        "G1": [{"chain": "C1", "step": "I1"}, {"chain": "C1", "step": "P3"}],
+        "G2": [{"chain": "C1", "step": "I1"}, {"chain": "C1", "step": "P3"}],
+        "G3": [{"chain": "C4", "step": "P4"}, {"chain": "C5", "step": "I5"}, {"chain": "C6", "step": "I6"}],
+        "M5": [{"chain": "C3", "step": "P1"}],
+        "M6": [{"chain": "C1", "step": "I1"}, {"chain": "C1", "step": "P3"}],
+        "M7": [{"chain": "C4", "step": "I4"}],
+        "M8": [{"chain": "C4", "step": "I4"}],
+        "M9": [{"chain": "C3", "step": "I3"}],
+        "M11": [{"chain": "C2", "step": "I2"}, {"chain": "C2", "step": "P2"}, {"chain": "C1", "step": "P3"}],
+        "M12": [{"chain": "C3", "step": "I3"}],
+        "M14": [{"chain": "C3", "step": "P1"}]
+      },
+      "uncovered": [],
+      "uncovered_notes": "全モデルカバー済み"
+    },
+    "generated": {
+      "propositions": [
+        {"id": "NF1", "source_chain": "C3", "source_step": "P1", "parallel_index": 0},
+        {"id": "NF2", "source_chain": "C3", "source_step": "P1", "parallel_index": 0},
+        {"id": "NF3", "source_chain": "C4", "source_step": "I4", "parallel_index": 0}
+      ],
+      "questions": [
+        {"id": "QF1", "reveals_proposition": "NF1"},
+        {"id": "QF2", "reveals_proposition": "NF2"},
+        {"id": "QF3", "reveals_proposition": "NF3"}
+      ]
+    }
+  },
+  "_phase9": {
+    "assignments": [
+      {"question_id": "Q1a", "tactic": "常識的仮説の排除", "category": "前提の確認"},
+      {"question_id": "Q1b", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "Q1c", "tactic": "常識的仮説の排除(排除)", "category": "前提の確認"},
+      {"question_id": "Q2b", "tactic": "観測事実の深掘り", "category": "状況の確認"},
+      {"question_id": "Q3a", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "Q3b", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "Q3c", "tactic": "段階的絞り込み(排除)", "category": "前提の確認"},
+      {"question_id": "Q4b", "tactic": "因果の逆転", "category": "原因と動機"},
+      {"question_id": "Q4c", "tactic": "観測事実の深掘り(排除)", "category": "状況の確認"},
+      {"question_id": "Q5a", "tactic": "動機の探索", "category": "原因と動機"},
+      {"question_id": "Q5b", "tactic": "段階的絞り込み", "category": "状況の確認"},
+      {"question_id": "Q5c", "tactic": "動機の探索(排除)", "category": "前提の確認"},
+      {"question_id": "Q6a", "tactic": "矛盾の指摘", "category": "前提の確認"},
+      {"question_id": "Q6b", "tactic": "因果の逆転", "category": "原因と動機"},
+      {"question_id": "Q6c", "tactic": "矛盾の指摘(排除)", "category": "状況の確認"},
+      {"question_id": "QF1", "tactic": "段階的絞り込み(分岐)", "category": "人物と背景"},
+      {"question_id": "QF2", "tactic": "段階的絞り込み(分岐)", "category": "人物と背景"},
+      {"question_id": "QF3", "tactic": "観測事実の深掘り(分岐)", "category": "状況の確認"}
+    ],
+    "initial_open_distribution": {
+      "状況の確認": ["Q2b"],
+      "原因と動機": [],
+      "人物と背景": [],
+      "前提の確認": ["Q1a"]
+    },
+    "balance": {
+      "状況の確認": 8,
+      "原因と動機": 3,
+      "人物と背景": 2,
+      "前提の確認": 5
+    }
+  },
+  "_phase10": {
+    "step_a_thinning": {
+      "thinned": [
+        {"id": "I2", "label": "男が銃で撃たれた状況が死因に直結している", "reason": "P2「男の死因は銃創である」と同義の言い換え。概念的距離不十分", "kept_id": "P2", "fc_rewiring": "P2.fc: [[I2]]→[[S4]]"},
+        {"id": "I4", "label": "テープの分析から殺人の物的証拠が得られた", "reason": "P1「殺人の決定的証拠はカセットテープに関連するものである」とほぼ同義。概念的距離不十分", "kept_id": "P4", "fc_rewiring": "P4.fc: [[I4]]→[[P1]]"}
+      ],
+      "summary": {
+        "before": {"propositions": 28, "questions": 20},
+        "after": {"propositions": 26, "questions": 18},
+        "removed_propositions": ["I2", "I4"],
+        "removed_questions": ["Q2a", "Q4a"]
+      }
+    },
+    "step_b_entailment": {
+      "entailed": [
+        {"id": "I6", "entailment_conditions": [["P4", "P5"]], "reason": "P4(テープ改変)+P5(物品の仕組み矛盾)の純粋な論理的結合。推論の介在なし"}
+      ]
+    }
+  }
+}

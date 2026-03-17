@@ -1,0 +1,530 @@
+{
+  "title": "カセットテープ",
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "殺人の決定的証拠はカセットテープに関連するものである",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "男の死因は銃創である",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "殺人の証拠は遺体の法医学的分析以外のものに基づく",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "犯人はカセットテープの内容や物理的状態を改変した",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "殺人の証拠は現場の物品の仕組みから生じる論理的矛盾に基づく",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I1",
+      "label": "外見上の自殺証拠以外に殺人を示す証拠が存在する",
+      "formation_conditions": [
+        [
+          "S9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I3",
+      "label": "殺人の証拠は現場にある物品や媒体の分析に基づく",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "殺人の証拠は論理的推論によって導かれるものである",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "テープの物理的状態にテープの動作原理に矛盾する異常がある",
+      "formation_conditions": [
+        [
+          "P4",
+          "P5"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P4",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "テープが巻き戻されて再生可能な状態にあったことが、録音後に第三者がテープを操作した証拠であり、男は銃で殺害された",
+      "formation_conditions": [
+        [
+          "I6",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1c",
+      "label": "殺人の証拠は遺体の銃創や傷から直接得られたものではない",
+      "negation_of": "H1c",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1c",
+      "label": "殺人の証拠は遺体の銃創や傷から直接得られた",
+      "negation_of": "N1c",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3c",
+      "label": "殺人の証拠は目撃証言や外部の記録に基づくものではない",
+      "negation_of": "H3c",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H3c",
+      "label": "殺人の証拠は目撃証言や外部の記録に基づく",
+      "negation_of": "N3c",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N4c",
+      "label": "テープに音声の切り貼りや編集の痕跡はなかった",
+      "negation_of": "H4c",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H4c",
+      "label": "テープに音声の切り貼りや編集の痕跡があった",
+      "negation_of": "N4c",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N5c",
+      "label": "殺人の証拠は科学的な分析装置を使った検査から得られたものではない",
+      "negation_of": "H5c",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H5c",
+      "label": "殺人の証拠は科学的な分析装置を使った検査から得られた",
+      "negation_of": "N5c",
+      "formation_conditions": [
+        [
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N6c",
+      "label": "テープの録音内容に不審な点はなかった",
+      "negation_of": "H6c",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H6c",
+      "label": "テープの録音内容に不審な点があった",
+      "negation_of": "N6c",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1",
+      "label": "部屋に争った形跡はなかった",
+      "negation_of": "HF1",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1",
+      "label": "部屋に争った形跡があった",
+      "negation_of": "NF1",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2",
+      "label": "部屋が外側から施錠されてはいなかった",
+      "negation_of": "HF2",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2",
+      "label": "部屋が外側から施錠されていた",
+      "negation_of": "NF2",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3",
+      "label": "テープの録音時刻と死亡推定時刻に矛盾はなかった",
+      "negation_of": "HF3",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3",
+      "label": "テープの録音時刻と死亡推定時刻に矛盾があった",
+      "negation_of": "NF3",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "殺人と断定した決定的な証拠が現場にありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q1b",
+      "text": "殺人の証拠は遺体の分析以外のものに基づきますか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q1c",
+      "text": "殺人の証拠は遺体の銃創や傷から直接得られましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q2b",
+      "text": "男の死因は銃創ですか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3a",
+      "text": "殺人の証拠は現場にある物品の分析から得られましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3b",
+      "text": "殺人の決定的証拠はカセットテープに関連するものですか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3c",
+      "text": "殺人の証拠は目撃証言や外部の記録に基づくものですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N3c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q4b",
+      "text": "犯人はカセットテープの内容や物理的状態を改変しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q4c",
+      "text": "テープに音声の切り貼りや編集の痕跡がありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N4c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5a",
+      "text": "殺人の証拠は論理的推論によって導かれるものですか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q5b",
+      "text": "殺人の証拠は現場の物品の仕組みから生じる論理的矛盾に基づきますか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5c",
+      "text": "殺人の証拠は科学的な分析装置を使った検査から得られましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N5c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q6a",
+      "text": "テープの物理的状態にテープの動作原理に矛盾する異常がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I6"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q6b",
+      "text": "テープが巻き戻されて再生可能な状態にあったことが第三者の存在を証明しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": [
+        "I6"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q6c",
+      "text": "テープの録音内容に不審な点がありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N6c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1",
+      "text": "部屋に争った形跡がありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF2",
+      "text": "部屋が外側から施錠されていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF3",
+      "text": "テープの録音時刻と死亡推定時刻に矛盾がありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    }
+  ],
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "statement": "ある男が自室で銃で頭を撃って死んでいた。そばのカセットテープを再生すると「もう生きていけない…」という遺書が録音されていた。しかし警察はこれを殺人と断定した。",
+  "truth": "もし本当に自殺なら、録音後に銃で自殺した時点でテープはまだ回り続けているはず。しかしテープは巻き戻されて最初から再生できる状態だった。つまり、誰かが録音後にテープを巻き戻した。第三者がいた証拠であり、殺人と断定された。",
+  "id": "カセットテープ"
+}
