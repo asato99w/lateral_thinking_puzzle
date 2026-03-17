@@ -30,7 +30,8 @@
       "tier": "free",
       "bundled": true,
       "locales": [
-        "ja"
+        "ja",
+        "en"
       ]
     },
     {
