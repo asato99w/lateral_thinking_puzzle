@@ -1772,13 +1772,6 @@
           "P3"
         ]
       ],
-      "entailment_conditions": [
-        [
-          "I7",
-          "I8",
-          "P3"
-        ]
-      ],
       "rejection_conditions": null
     }
   ],
@@ -2922,17 +2915,6 @@
             ]
           ],
           "reason": "P2(助ける意図)はP2+P4の論理的結合で察知+介入を含意"
-        },
-        {
-          "id": "FP",
-          "entailment_conditions": [
-            [
-              "I7",
-              "I8",
-              "P3"
-            ]
-          ],
-          "reason": "I7+I8+P3の情報要約・結合で推論なし（I9から移転）"
         }
       ]
     }

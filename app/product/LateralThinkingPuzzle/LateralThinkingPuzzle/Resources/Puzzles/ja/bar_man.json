@@ -546,13 +546,6 @@
           "P3"
         ]
       ],
-      "entailment_conditions": [
-        [
-          "I7",
-          "I8",
-          "P3"
-        ]
-      ],
       "rejection_conditions": null
     }
   ],
