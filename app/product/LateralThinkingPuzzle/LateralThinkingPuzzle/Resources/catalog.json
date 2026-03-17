@@ -69,6 +69,22 @@
       ]
     },
     {
+      "id": "hole_and_money",
+      "engine_version": "v3",
+      "odr_tag": "puzzle-hole-and-money",
+      "title_ja": "穴と一万円",
+      "title_en": "The Hole and Ten Thousand Yen",
+      "statement_preview_ja": "男は自分が掘った穴から一万円札が出てきたのを見て、死を悟った。",
+      "statement_preview_en": "A man saw a ten-thousand-yen bill come out of a hole he had dug, and realized he was going to die.",
+      "icon": "🕳️",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false,
+      "locales": [
+        "ja"
+      ]
+    },
+    {
       "id": "cassette_tape",
       "engine_version": "v3",
       "odr_tag": "puzzle-cassette-tape",

@@ -1,0 +1,739 @@
+{
+  "title": "穴と一万円",
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "男が穴から取り出そうとしたものは金銭ではなかった",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "別の人間が元のものを持ち去り、代わりに金銭を入れていた",
+      "formation_conditions": [
+        [
+          "I11"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I10",
+          "I11"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "男は人里離れた場所にいた",
+      "formation_conditions": [
+        [
+          "I12"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "男がいた状況では金銭に交換価値がなかった",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "埋めてあったものは男が生き延びるために不可欠だった",
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I1",
+      "label": "男は生存のために不可欠な物品（金銭以外）を穴に埋めておいた",
+      "formation_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I2",
+      "label": "男は生存に不可欠な物品を埋めておいたが、別の人間がそれを持ち去り金銭を入れていた",
+      "formation_conditions": [
+        [
+          "I13"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I1",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I3",
+      "label": "男は以前この穴に何かを埋めていた",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "一万円札が見つかっても男の状況は改善しなかった",
+      "formation_conditions": [
+        [
+          "S3",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I10",
+      "label": "穴の中の一万円札は男以外の人間が入れた",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I11",
+      "label": "その人物は男が埋めたものを穴から持ち去った",
+      "formation_conditions": [
+        [
+          "I10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I12",
+      "label": "男は通常の商取引が存在しない環境にいた",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I13",
+      "label": "第三者が持ち去ったものは男の生存に不可欠な物品だった",
+      "formation_conditions": [
+        [
+          "I1",
+          "P2"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I1",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I14",
+      "label": "男は隔絶された場所で唯一の希望だった備蓄物資が失われていた",
+      "formation_conditions": [
+        [
+          "I2",
+          "P3"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I2",
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "男は人里離れた場所で遭難しており、以前自分が埋めた生存に不可欠な物品が別の人間に持ち去られ、代わりに金銭が入れられていた",
+      "formation_conditions": [
+        [
+          "I14"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "男が穴に埋めていたものはお金ではなかった",
+      "negation_of": "H1a",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1a",
+      "label": "男が穴に埋めていたものはお金だった",
+      "negation_of": "N1a",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "Ne2",
+      "label": "男は犯罪に関わっていなかった",
+      "negation_of": "He2",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "He2",
+      "label": "男は犯罪に関わっていた",
+      "negation_of": "Ne2",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "Ne3",
+      "label": "男は都市や街の中にいたのではなかった",
+      "negation_of": "He3",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "He3",
+      "label": "男は都市や街の中にいた",
+      "negation_of": "Ne3",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "男は穴の中のものを確認するために掘ったのではなかった",
+      "negation_of": "HF1a",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1a",
+      "label": "男は穴の中のものを確認するために掘った",
+      "negation_of": "NF1a",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "一万円札の存在が男への脅威だったわけではなかった",
+      "negation_of": "HF2a",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "一万円札の存在自体が男への脅威だった",
+      "negation_of": "NF2a",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4a",
+      "label": "穴を掘る行為自体が危険を引き起こしたわけではなかった",
+      "negation_of": "HF4a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4a",
+      "label": "穴を掘る行為自体が危険を引き起こした",
+      "negation_of": "NF4a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6a",
+      "label": "埋めてあったものは犯罪や取引に関わるものではなかった",
+      "negation_of": "HF6a",
+      "formation_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6a",
+      "label": "埋めてあったものは犯罪や取引に関わるものだった",
+      "negation_of": "NF6a",
+      "formation_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF7a",
+      "label": "穴の中の一万円札は男自身が以前入れたものではなかった",
+      "negation_of": "HF7a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF7a",
+      "label": "穴の中の一万円札は男自身が以前入れたものだった",
+      "negation_of": "NF7a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF8a",
+      "label": "穴に埋めたものは時間経過で劣化したのではなかった",
+      "negation_of": "HF8a",
+      "formation_conditions": [
+        [
+          "I10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF8a",
+      "label": "穴に埋めたものは時間経過で劣化した",
+      "negation_of": "NF8a",
+      "formation_conditions": [
+        [
+          "I10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF9a",
+      "label": "金銭の価値がインフレ等で失われたわけではなかった",
+      "negation_of": "HF9a",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF9a",
+      "label": "金銭の価値がインフレ等で失われた",
+      "negation_of": "NF9a",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "男は以前この穴に何かを埋めていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3",
+      "text": "男が穴から取り出そうとしたものは金銭以外でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4",
+      "text": "一万円札が出てきても、男にとっては何の助けにもなりませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q6",
+      "text": "男がいた状況ではお金に交換価値がありませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q9",
+      "text": "穴に埋めてあったものは男が生き延びるために不可欠でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q11",
+      "text": "男は生存に不可欠な金銭以外の物品を穴に埋めておいたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "I1"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q12",
+      "text": "穴の中の一万円札は男以外の誰かが入れたものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I10"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q13",
+      "text": "その人物は穴に埋めてあった元のものを持ち去りましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I11"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q14",
+      "text": "別の人間が元のものを持ち去り、代わりに金銭を入れたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q15",
+      "text": "男がいた場所には店舗や商取引の手段がありませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I12"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q16",
+      "text": "男は人里離れた場所にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q17",
+      "text": "第三者が持ち去ったものは男の生存に不可欠な物品でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I13"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q18",
+      "text": "男の生存に必要な物品が持ち去られ、代わりに金銭が入れられていたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "I2"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q19",
+      "text": "男は隔絶された場所で、備蓄していた生存物資を失った状態でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I14"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q20",
+      "text": "男は人里離れた場所で遭難中に、埋めておいた生存物品が別の人に持ち去られ金銭が残されていたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Qe1",
+      "text": "男が穴に埋めていたのはお金でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I3"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Qe2",
+      "text": "男は犯罪に関わっていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "Ne2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Qe3",
+      "text": "男は都市や街の中にいましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "Ne3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "男は穴の中にあるものを確認するために掘りましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I3"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF2a",
+      "text": "一万円札の存在自体が男にとって脅威でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4a",
+      "text": "穴を掘る行為自体が何か危険なことを引き起こしましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF6a",
+      "text": "埋めてあったものは犯罪や取引に関わるものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF7a",
+      "text": "穴の中の一万円札は男自身が以前入れたものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF7a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF8a",
+      "text": "穴に埋めたものは時間の経過で劣化しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF8a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF9a",
+      "text": "お金の価値がインフレなどで失われていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF9a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    }
+  ],
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "statement": "男は自分が掘った穴から一万円札が出てきたのを見て、死を悟った。",
+  "truth": "男は冬山で遭難し、以前自分が埋めておいた食料を掘り出そうとした。しかし穴から出てきたのは一万円札だけだった。別の遭難者が食料を食べ、代わりに金を埋めたのだ。極限状態では金銭は無価値であり、食料がなければ死ぬことを悟った。",
+  "id": "穴と一万円"
+}

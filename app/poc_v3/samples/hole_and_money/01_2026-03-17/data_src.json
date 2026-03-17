@@ -1,0 +1,2471 @@
+{
+  "title": "穴と一万円",
+  "S": "男は自分が掘った穴から一万円札が出てきたのを見て、死を悟った。",
+  "T": "男は冬山で遭難し、以前自分が埋めておいた食料を掘り出そうとした。しかし穴から出てきたのは一万円札だけだった。別の遭難者が食料を食べ、代わりに金を埋めたのだ。極限状態では金銭は無価値であり、食料がなければ死ぬことを悟った。",
+  "_phase1": {
+    "tensions": [
+      {
+        "id": "α1",
+        "label": "自分が掘った穴から予期しないもの（一万円札）が出てきた。なぜ金銭が穴に存在するのか",
+        "parent": "α"
+      },
+      {
+        "id": "α2",
+        "label": "男が穴を掘った目的と一万円札の間に乖離がある。穴を掘る目的は金銭の取得ではなかった",
+        "parent": "α"
+      },
+      {
+        "id": "β1",
+        "label": "一万円札の発見が何らかの致命的情報を伝えた。金銭の存在自体が情報伝達手段となるメカニズム",
+        "parent": "β"
+      },
+      {
+        "id": "β2",
+        "label": "その情報が死を悟るほど致命的であった。得られた情報の深刻さが生死に直結する",
+        "parent": "β"
+      },
+      {
+        "id": "γ1",
+        "label": "「自分が掘った穴」という限定。偶然ではなく、目的を持って掘った穴であり、過去の自分の行為との連続性がある",
+        "parent": null
+      }
+    ],
+    "models": [
+      {
+        "id": "T",
+        "label": "冬山遭難・食料備蓄消失",
+        "summary": "冬山で遭難し、以前埋めた食料を掘り出そうとしたが、別の遭難者に食べられ金だけが残っていた。食料なしでは死ぬ。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M1",
+        "label": "砂漠遭難・水備蓄消失",
+        "summary": "砂漠で遭難し、以前埋めた水を掘り出そうとしたが、別の旅行者に飲まれ金だけが残っていた。水なしでは死ぬ。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M2",
+        "label": "無人島遭難・医薬品消失",
+        "summary": "無人島で遭難し、以前埋めた医薬品を掘り出そうとしたが、別の漂着者に使われ金だけが残っていた。治療手段なしでは死ぬ。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M3",
+        "label": "地下シェルター・非常食消失",
+        "summary": "地下シェルターに避難し、埋めておいた非常食を掘り出そうとしたが、他の避難者に食べられ金だけが残っていた。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M4",
+        "label": "山中毒蛇・解毒剤消失",
+        "summary": "山中で毒蛇に噛まれ、以前埋めた解毒剤を掘り出そうとしたが、誰かに持ち去られ金だけが残っていた。解毒できなければ死ぬ。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M5",
+        "label": "逃亡中・逃走手段消失",
+        "summary": "犯罪組織から逃亡中に埋めておいた偽造パスポートを掘り出そうとしたが、追手に没収され金だけが残っていた。逃走できなければ殺される。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M6",
+        "label": "葬儀費用の消失",
+        "summary": "葬儀費用として庭に大金を埋めていたが、掘り出したら一万円しか残っていなかった。費用すら賄えない絶望。",
+        "tension_subset": [
+          "α1",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M7",
+        "label": "余命宣告下のタイムカプセル",
+        "summary": "余命宣告を受けた男が子供時代のタイムカプセルを掘り出し、過去の一万円札を見て残された時間の短さを実感した。",
+        "tension_subset": [
+          "α1",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M8",
+        "label": "戦時物資・インフレによる価値喪失",
+        "summary": "戦時中に物資を埋めておいたが、戦後掘り出したら金だけでハイパーインフレにより無価値。物資も金も失った。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M9",
+        "label": "金鉱脈の先取り",
+        "summary": "金鉱脈発見地に目印として金を埋めておいたが、掘り返すと一万円のみ。金鉱は先に採掘されており、借金で破滅。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M10",
+        "label": "死体隠蔽の発覚",
+        "summary": "殺人犯が死体を埋めた場所を掘り返したが、死体がなく一万円だけ。誰かが死体を発見し通報した証拠。逮捕と死刑が確実。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M11",
+        "label": "闇取引の裏切り暗号",
+        "summary": "闇取引で商品を穴に隠しておいたが、取引相手が回収し一万円だけ残した。極端に少ない代金は始末の合図。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M12",
+        "label": "治療費の枯渇",
+        "summary": "重病の家族の治療費を貯めて埋めていたが、家族が使い果たし一万円だけ戻されていた。治療断念で共に死ぬ。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M13",
+        "label": "密輸品の押収",
+        "summary": "密輸品を埋めておいたが、警察に押収され一万円だけ残されていた。逮捕は時間の問題。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M14",
+        "label": "登山・発煙筒消失",
+        "summary": "山中に非常用の発煙筒を埋めておいたが、遭難時に掘り出したら一万円だけ。救助手段がなく死を悟った。",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      }
+    ],
+    "relaxation_patterns": {
+      "T": {
+        "α1": "他者消費+金銭代替",
+        "α2": "生存資源の取得が目的",
+        "β1": "資源消失の証拠",
+        "β2": "極限状態での不可欠性",
+        "γ1": "自己の事前備蓄"
+      },
+      "M1": {
+        "α1": "他者消費+金銭代替",
+        "α2": "生存資源の取得が目的",
+        "β1": "資源消失の証拠",
+        "β2": "極限状態での不可欠性",
+        "γ1": "自己の事前備蓄"
+      },
+      "M2": {
+        "α1": "他者消費+金銭代替",
+        "α2": "生存資源の取得が目的",
+        "β1": "資源消失の証拠",
+        "β2": "極限状態での不可欠性",
+        "γ1": "自己の事前備蓄"
+      },
+      "M3": {
+        "α1": "他者消費+金銭代替",
+        "α2": "生存資源の取得が目的",
+        "β1": "資源消失の証拠",
+        "β2": "極限状態での不可欠性",
+        "γ1": "自己の事前備蓄"
+      },
+      "M4": {
+        "α1": "他者消費+金銭代替",
+        "α2": "生存資源の取得が目的",
+        "β1": "資源消失の証拠",
+        "β2": "極限状態での不可欠性",
+        "γ1": "自己の事前備蓄"
+      },
+      "M14": {
+        "α1": "他者消費+金銭代替",
+        "α2": "生存資源の取得が目的",
+        "β1": "資源消失の証拠",
+        "β2": "極限状態での不可欠性",
+        "γ1": "自己の事前備蓄"
+      },
+      "M5": {
+        "α1": "他者持去+金銭代替",
+        "α2": "逃走手段の取得が目的",
+        "β1": "逃走手段消失の証拠",
+        "β2": "捕捉による死",
+        "γ1": "自己の事前備蓄"
+      },
+      "M6": {
+        "α1": "家族等による持出",
+        "α2": "-",
+        "β1": "-",
+        "β2": "-",
+        "γ1": "自己の事前貯蓄"
+      },
+      "M7": {
+        "α1": "自己の過去の埋設",
+        "α2": "-",
+        "β1": "-",
+        "β2": "-",
+        "γ1": "自己の過去の行為"
+      },
+      "M8": {
+        "α1": "時間経過による状態変化",
+        "α2": "物資の取得が目的",
+        "β1": "価値喪失の現実化",
+        "β2": "生活手段の完全喪失",
+        "γ1": "自己の事前備蓄"
+      },
+      "M9": {
+        "α1": "自己設置の目印",
+        "α2": "金鉱の回収が目的",
+        "β1": "金鉱消失の証拠",
+        "β2": "借金による破滅",
+        "γ1": "自己の事前設置"
+      },
+      "M10": {
+        "α1": "第三者による差替",
+        "α2": "死体の確認が目的",
+        "β1": "死体発見の証拠",
+        "β2": "死刑の確実性",
+        "γ1": "自己の事前隠蔽"
+      },
+      "M11": {
+        "α1": "取引相手による差替",
+        "α2": "商品の保管が目的",
+        "β1": "暗号的金額による脅迫",
+        "β2": "組織による処刑",
+        "γ1": "自己の事前保管"
+      },
+      "M12": {
+        "α1": "家族による持出と残金",
+        "α2": "治療費の回収が目的",
+        "β1": "資金枯渇の証拠",
+        "β2": "治療不能による死",
+        "γ1": "自己の事前貯蓄"
+      },
+      "M13": {
+        "α1": "警察による押収",
+        "α2": "密輸品の回収が目的",
+        "β1": "発覚の証拠",
+        "β2": "法的制裁",
+        "γ1": "自己の事前隠蔽"
+      }
+    },
+    "variant_groups": [
+      {
+        "group_id": "G1",
+        "label": "極限状態での生存資源の他者消費と金銭代替。資源不在により生存不能",
+        "representative": "T",
+        "members": [
+          "T",
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "M14"
+        ],
+        "shared_pattern": {
+          "α1": "他者消費+金銭代替",
+          "α2": "生存資源の取得が目的",
+          "β1": "資源消失の証拠",
+          "β2": "極限状態での不可欠性",
+          "γ1": "自己の事前備蓄"
+        }
+      }
+    ],
+    "abstract_models": [
+      {
+        "id": "G1",
+        "label": "極限状態での生存資源の他者消費と金銭代替。資源不在により生存不能",
+        "representative": "T",
+        "members": [
+          "T",
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "M14"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M5",
+        "label": "逃走手段の他者持去と金銭代替。捕捉により死",
+        "members": [
+          "M5"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M8",
+        "label": "時間経過による備蓄物の価値変動。生活手段の完全喪失",
+        "members": [
+          "M8"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M9",
+        "label": "投資対象の先取りと経済的破滅",
+        "members": [
+          "M9"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M10",
+        "label": "隠蔽対象（死体）の発覚と刑罰",
+        "members": [
+          "M10"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M11",
+        "label": "暗号的金額による組織的脅迫",
+        "members": [
+          "M11"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M12",
+        "label": "備蓄資金の家族消費と治療断念",
+        "members": [
+          "M12"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M13",
+        "label": "違法物の警察押収と法的制裁",
+        "members": [
+          "M13"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M6",
+        "label": "貯蓄の部分的消失と絶望",
+        "members": [
+          "M6"
+        ],
+        "tension_subset": [
+          "α1",
+          "γ1"
+        ]
+      },
+      {
+        "id": "M7",
+        "label": "余命宣告下での懐旧",
+        "members": [
+          "M7"
+        ],
+        "tension_subset": [
+          "α1",
+          "γ1"
+        ]
+      }
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "G1": [
+        "男は極限環境で遭難していた",
+        "男は以前、非常時に備えて生存資源を埋めておいた",
+        "男は生き延びるためにその資源を掘り出そうとした",
+        "別の遭難者がその資源を消費した",
+        "遭難者は代金として金銭を残した",
+        "極限環境では金銭に交換価値がない",
+        "生存資源なしでは死ぬ"
+      ],
+      "M5": [
+        "男は犯罪組織から逃亡中だった",
+        "男は逃走用の偽造書類を埋めておいた",
+        "追手が逃走手段を発見し没収した",
+        "追手は発見の痕跡として金銭を残した",
+        "逃走手段がなければ捕まり殺される"
+      ],
+      "M8": [
+        "男は戦時中に物資と金銭を埋めた",
+        "戦後、物資は劣化して失われていた",
+        "残った金銭はハイパーインフレで無価値だった",
+        "物資も購買力もなく生存手段を失った"
+      ],
+      "M9": [
+        "男は金鉱脈を発見し位置の目印として金銭を埋めた",
+        "金鉱は別の者に先に採掘されていた",
+        "目印の金銭だけが残っていた",
+        "多額の借金を返済できず破滅した"
+      ],
+      "M10": [
+        "男は殺人を犯し死体を穴に埋めた",
+        "死体を確認するために掘り返した",
+        "第三者が死体を発見し撤去していた",
+        "金銭が発覚の証拠として残されていた",
+        "逮捕と死刑が確実になった"
+      ],
+      "M11": [
+        "男は闇取引の商品を穴に隠した",
+        "取引相手が商品を回収した",
+        "極端に少額の金銭だけが残された",
+        "少額は裏切りの暗号で処刑予告だった",
+        "組織に消される運命を悟った"
+      ],
+      "M12": [
+        "男は重病の家族の治療費を貯めて埋めていた",
+        "家族が治療費を使い果たした",
+        "最後の一万円だけが戻されていた",
+        "治療を続行できず共に死ぬ"
+      ],
+      "M13": [
+        "男は密輸品を穴に隠した",
+        "警察が密輸品を発見し押収した",
+        "金銭が痕跡として残されていた",
+        "逮捕は時間の問題で社会的に破滅する"
+      ],
+      "M6": [
+        "男は葬儀費用として大金を埋めていた",
+        "何者かが大部分を持ち去った",
+        "一万円だけが残っていた",
+        "費用を賄えない絶望"
+      ],
+      "M7": [
+        "男は余命宣告を受けていた",
+        "子供時代に埋めたタイムカプセルを掘り出した",
+        "過去の一万円札を見て時の流れを実感した",
+        "残された時間の短さへの絶望"
+      ]
+    },
+    "division_propositions": [
+      {
+        "id": "P1",
+        "label": "男が穴から取り出そうとしたものは金銭ではなかった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M5",
+          "M8",
+          "M10",
+          "M11",
+          "M13"
+        ],
+        "false_models": [
+          "M9",
+          "M12",
+          "M6",
+          "M7"
+        ]
+      },
+      {
+        "id": "P2",
+        "label": "別の人間が元のものを持ち去り、代わりに金銭を入れていた",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M5",
+          "M10",
+          "M11",
+          "M13"
+        ],
+        "false_models": [
+          "M8",
+          "M9",
+          "M12",
+          "M6",
+          "M7"
+        ]
+      },
+      {
+        "id": "P3",
+        "label": "男は人里離れた場所にいた",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1"
+        ],
+        "false_models": [
+          "M5",
+          "M8",
+          "M9",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M6",
+          "M7"
+        ]
+      },
+      {
+        "id": "P4",
+        "label": "男がいた状況では金銭に交換価値がなかった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M8"
+        ],
+        "false_models": [
+          "M5",
+          "M9",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M6",
+          "M7"
+        ]
+      },
+      {
+        "id": "P5",
+        "label": "埋めてあったものは男が生き延びるために不可欠だった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M5",
+          "M8",
+          "M12"
+        ],
+        "false_models": [
+          "M9",
+          "M10",
+          "M11",
+          "M13",
+          "M6",
+          "M7"
+        ]
+      }
+    ]
+  },
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "_phase3": {
+    "derivation_graph": {
+      "single_derivations": [
+        {
+          "from": "P3",
+          "to": "P4",
+          "reason": "人里離れた場所にいる → 商取引不能 → 金銭に交換価値がない"
+        },
+        {
+          "from": "P2",
+          "to": "P1",
+          "reason": "元のものを持ち去り金銭を代わりに入れた → 元のものは金銭ではなかった"
+        },
+        {
+          "from": "I1",
+          "to": "P1",
+          "reason": "生存に不可欠な非金銭物品を埋めた → 金銭ではなかった"
+        },
+        {
+          "from": "I1",
+          "to": "P5",
+          "reason": "生存に不可欠な非金銭物品を埋めた → 生存に不可欠だった"
+        },
+        {
+          "from": "I2",
+          "to": "I1",
+          "reason": "不可欠物品を埋め第三者に持ち去られた → 不可欠物品を埋めていた"
+        },
+        {
+          "from": "I2",
+          "to": "P2",
+          "reason": "不可欠物品を第三者に持ち去られ金銭代替 → 第三者が持ち去り金銭を入れた"
+        }
+      ],
+      "combination_derivations": [],
+      "independent_axes": [
+        "I2",
+        "P3"
+      ],
+      "root_propositions": [
+        "P1",
+        "P4",
+        "P5"
+      ]
+    },
+    "fp": {
+      "id": "FP",
+      "label": "男は人里離れた場所で遭難しており、以前自分が埋めた生存に不可欠な物品が別の人間に持ち去られ、代わりに金銭が入れられていた",
+      "true_models": [
+        "G1"
+      ],
+      "derivations_from_fp": [
+        {
+          "to": "I2",
+          "reason": "FP から場所情報を落とすと I2 が得られる"
+        },
+        {
+          "to": "P3",
+          "reason": "FP から物品・交換情報を落とすと P3 が得られる"
+        }
+      ]
+    },
+    "clear_validation": {
+      "tensions_resolved": [
+        {
+          "tension_id": "α1",
+          "mechanism": "P2: 別の人間が金銭を代わりに入れた"
+        },
+        {
+          "tension_id": "α2",
+          "mechanism": "P1: 目的は金銭以外の物品の取得だった"
+        },
+        {
+          "tension_id": "β1",
+          "mechanism": "P2+P5: 生存に不可欠な物品が消え金銭が残された = 資源消失の証拠"
+        },
+        {
+          "tension_id": "β2",
+          "mechanism": "P3+P4+P5: 人里離れた場所で金銭は無価値、資源不在は致命的"
+        },
+        {
+          "tension_id": "γ1",
+          "mechanism": "FP+initial_confirmed: 以前自分が埋めた場所を掘った"
+        }
+      ],
+      "all_resolved": true,
+      "fp_prime": null
+    },
+    "provisional_fc": {
+      "P2": [
+        [
+          "P1"
+        ]
+      ],
+      "P3": [
+        [
+          "P4"
+        ]
+      ],
+      "I1": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "I2": [
+        [
+          "I1",
+          "P2"
+        ]
+      ],
+      "FP": [
+        [
+          "I2",
+          "P3"
+        ]
+      ]
+    },
+    "unrejectable_models": {
+      "models": [
+        "G1"
+      ],
+      "reason": "G1 の全メンバー（T, M1, M2, M3, M4, M14）は全分割命題を共有し、生存資源の種類と極限環境の種類のみが異なる。これらはパズルの探索において区別する意義が低い表層的差異（バリアント）である"
+    },
+    "added_propositions": [
+      {
+        "id": "I1",
+        "label": "男は生存のために不可欠な物品（金銭以外）を穴に埋めておいた",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M5",
+          "M8"
+        ],
+        "false_models": [
+          "M9",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M6",
+          "M7"
+        ]
+      },
+      {
+        "id": "I2",
+        "label": "男は生存に不可欠な物品を埋めておいたが、別の人間がそれを持ち去り金銭を入れていた",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M5"
+        ],
+        "false_models": [
+          "M8",
+          "M9",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M6",
+          "M7"
+        ]
+      }
+    ]
+  },
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7"
+  ],
+  "_phase4": {
+    "s_propositions": [
+      {
+        "id": "S1",
+        "label": "ある男がいた",
+        "type": "atomic"
+      },
+      {
+        "id": "S2",
+        "label": "男は穴を掘った",
+        "type": "atomic"
+      },
+      {
+        "id": "S3",
+        "label": "穴から一万円札が出てきた",
+        "type": "atomic"
+      },
+      {
+        "id": "S4",
+        "label": "男は一万円札が出てきたのを見た",
+        "type": "atomic"
+      },
+      {
+        "id": "S5",
+        "label": "男は死を悟った",
+        "type": "atomic"
+      },
+      {
+        "id": "S6",
+        "label": "穴があった",
+        "type": "derived",
+        "derived_from": [
+          "S2"
+        ]
+      },
+      {
+        "id": "S7",
+        "label": "一万円札が穴の中にあった",
+        "type": "derived",
+        "derived_from": [
+          "S3"
+        ]
+      }
+    ],
+    "initial_confirmed": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7"
+    ],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_root",
+        "source": [
+          "S2",
+          "S3"
+        ],
+        "target": "P1",
+        "intermediates": [
+          "I3"
+        ],
+        "tactic": "観測事実の深掘り",
+        "description": "{S2,S3} →[観測事実の深掘り]→ I3(男は以前この穴に何かを埋めていた) → P1"
+      },
+      {
+        "id": "C2",
+        "type": "S_to_root",
+        "source": [
+          "S3",
+          "S5"
+        ],
+        "target": "P4",
+        "intermediates": [
+          "I5"
+        ],
+        "tactic": "矛盾の指摘",
+        "description": "{S3,S5} →[矛盾の指摘]→ I5(一万円札が見つかっても男の状況は改善しなかった) → P4"
+      },
+      {
+        "id": "C3",
+        "type": "S_to_root",
+        "source": [
+          "S2",
+          "S5"
+        ],
+        "target": "P5",
+        "intermediates": [],
+        "tactic": "因果の逆転",
+        "description": "{S2,S5} →[因果の逆転]→ P5"
+      },
+      {
+        "id": "C4",
+        "type": "toward_concrete",
+        "source": [
+          "P1",
+          "P5"
+        ],
+        "target": "I1",
+        "intermediates": [],
+        "tactic": "段階的絞り込み",
+        "description": "{P1,P5} →[段階的絞り込み]→ I1",
+        "fc_source": "P1 は C1、P5 は C3 の reveals"
+      },
+      {
+        "id": "C5",
+        "type": "toward_concrete",
+        "source": [
+          "P1",
+          "S3"
+        ],
+        "target": "P2",
+        "intermediates": [
+          "I10",
+          "I11"
+        ],
+        "tactic": "登場人物の探索 → 観測事実の深掘り",
+        "description": "{P1,S3} →[登場人物の探索]→ I10(穴の中の一万円札は男以外の人間が入れた) →[観測事実の深掘り]→ I11(その人物は男が埋めたものを穴から持ち去った) → P2",
+        "fc_source": "P1 は C1 の reveals"
+      },
+      {
+        "id": "C6",
+        "type": "toward_concrete",
+        "source": [
+          "P4"
+        ],
+        "target": "P3",
+        "intermediates": [
+          "I12"
+        ],
+        "tactic": "因果の逆転",
+        "description": "{P4} →[因果の逆転]→ I12(男は通常の商取引が存在しない環境にいた) → P3",
+        "fc_source": "P4 は C2 の reveals"
+      },
+      {
+        "id": "C7",
+        "type": "toward_concrete",
+        "source": [
+          "I1",
+          "P2"
+        ],
+        "target": "I2",
+        "intermediates": [
+          "I13"
+        ],
+        "tactic": "段階的絞り込み",
+        "description": "{I1,P2} →[段階的絞り込み]→ I13(第三者が持ち去ったものは男の生存に不可欠な物品だった) → I2",
+        "fc_source": "I1 は C4、P2 は C5 の reveals"
+      },
+      {
+        "id": "C8",
+        "type": "toward_concrete",
+        "source": [
+          "I2",
+          "P3"
+        ],
+        "target": "FP",
+        "intermediates": [
+          "I14"
+        ],
+        "tactic": "段階的絞り込み",
+        "description": "{I2,P3} →[段階的絞り込み]→ I14(男は隔絶された場所で唯一の希望だった備蓄物資が失われていた) → FP",
+        "fc_source": "I2 は C7、P3 は C6 の reveals"
+      }
+    ],
+    "generated_intermediates": [
+      "I3",
+      "I5",
+      "I10",
+      "I11",
+      "I12",
+      "I13",
+      "I14"
+    ]
+  },
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "男が穴から取り出そうとしたものは金銭ではなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "別の人間が元のものを持ち去り、代わりに金銭を入れていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "I11"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I10",
+          "I11"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "男は人里離れた場所にいた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "I12"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "男がいた状況では金銭に交換価値がなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "埋めてあったものは男が生き延びるために不可欠だった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I1",
+      "label": "男は生存のために不可欠な物品（金銭以外）を穴に埋めておいた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I2",
+      "label": "男は生存に不可欠な物品を埋めておいたが、別の人間がそれを持ち去り金銭を入れていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "I13"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I1",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I3",
+      "label": "男は以前この穴に何かを埋めていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "一万円札が見つかっても男の状況は改善しなかった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S3",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I10",
+      "label": "穴の中の一万円札は男以外の人間が入れた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I11",
+      "label": "その人物は男が埋めたものを穴から持ち去った",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "I10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I12",
+      "label": "男は通常の商取引が存在しない環境にいた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I13",
+      "label": "第三者が持ち去ったものは男の生存に不可欠な物品だった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "I1",
+          "P2"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I1",
+          "P2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I14",
+      "label": "男は隔絶された場所で唯一の希望だった備蓄物資が失われていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "I2",
+          "P3"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I2",
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "男は人里離れた場所で遭難しており、以前自分が埋めた生存に不可欠な物品が別の人間に持ち去られ、代わりに金銭が入れられていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "I14"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1a",
+      "label": "男が穴に埋めていたものはお金ではなかった",
+      "_truth_value": true,
+      "negation_of": "H1a",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1a",
+      "label": "男が穴に埋めていたものはお金だった",
+      "_truth_value": false,
+      "negation_of": "N1a",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "Ne2",
+      "label": "男は犯罪に関わっていなかった",
+      "_truth_value": true,
+      "negation_of": "He2",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "He2",
+      "label": "男は犯罪に関わっていた",
+      "_truth_value": false,
+      "negation_of": "Ne2",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "Ne3",
+      "label": "男は都市や街の中にいたのではなかった",
+      "_truth_value": true,
+      "negation_of": "He3",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "He3",
+      "label": "男は都市や街の中にいた",
+      "_truth_value": false,
+      "negation_of": "Ne3",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "男は穴の中のものを確認するために掘ったのではなかった",
+      "_truth_value": true,
+      "negation_of": "HF1a",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1a",
+      "label": "男は穴の中のものを確認するために掘った",
+      "_truth_value": false,
+      "negation_of": "NF1a",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "一万円札の存在が男への脅威だったわけではなかった",
+      "_truth_value": true,
+      "negation_of": "HF2a",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "一万円札の存在自体が男への脅威だった",
+      "_truth_value": false,
+      "negation_of": "NF2a",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4a",
+      "label": "穴を掘る行為自体が危険を引き起こしたわけではなかった",
+      "_truth_value": true,
+      "negation_of": "HF4a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4a",
+      "label": "穴を掘る行為自体が危険を引き起こした",
+      "_truth_value": false,
+      "negation_of": "NF4a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6a",
+      "label": "埋めてあったものは犯罪や取引に関わるものではなかった",
+      "_truth_value": true,
+      "negation_of": "HF6a",
+      "formation_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6a",
+      "label": "埋めてあったものは犯罪や取引に関わるものだった",
+      "_truth_value": false,
+      "negation_of": "NF6a",
+      "formation_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF7a",
+      "label": "穴の中の一万円札は男自身が以前入れたものではなかった",
+      "_truth_value": true,
+      "negation_of": "HF7a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF7a",
+      "label": "穴の中の一万円札は男自身が以前入れたものだった",
+      "_truth_value": false,
+      "negation_of": "NF7a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF8a",
+      "label": "穴に埋めたものは時間経過で劣化したのではなかった",
+      "_truth_value": true,
+      "negation_of": "HF8a",
+      "formation_conditions": [
+        [
+          "I10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF8a",
+      "label": "穴に埋めたものは時間経過で劣化した",
+      "_truth_value": false,
+      "negation_of": "NF8a",
+      "formation_conditions": [
+        [
+          "I10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF9a",
+      "label": "金銭の価値がインフレ等で失われたわけではなかった",
+      "_truth_value": true,
+      "negation_of": "HF9a",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF9a",
+      "label": "金銭の価値がインフレ等で失われた",
+      "_truth_value": false,
+      "negation_of": "NF9a",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "男は以前この穴に何かを埋めていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3",
+      "text": "男が穴から取り出そうとしたものは金銭以外でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4",
+      "text": "一万円札が出てきても、男にとっては何の助けにもなりませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q6",
+      "text": "男がいた状況ではお金に交換価値がありませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q9",
+      "text": "穴に埋めてあったものは男が生き延びるために不可欠でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q11",
+      "text": "男は生存に不可欠な金銭以外の物品を穴に埋めておいたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "I1"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q12",
+      "text": "穴の中の一万円札は男以外の誰かが入れたものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I10"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q13",
+      "text": "その人物は穴に埋めてあった元のものを持ち去りましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I11"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q14",
+      "text": "別の人間が元のものを持ち去り、代わりに金銭を入れたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q15",
+      "text": "男がいた場所には店舗や商取引の手段がありませんでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I12"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q16",
+      "text": "男は人里離れた場所にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q17",
+      "text": "第三者が持ち去ったものは男の生存に不可欠な物品でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I13"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q18",
+      "text": "男の生存に必要な物品が持ち去られ、代わりに金銭が入れられていたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "I2"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q19",
+      "text": "男は隔絶された場所で、備蓄していた生存物資を失った状態でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I14"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q20",
+      "text": "男は人里離れた場所で遭難中に、埋めておいた生存物品が別の人に持ち去られ金銭が残されていたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Qe1",
+      "text": "男が穴に埋めていたのはお金でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I3"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Qe2",
+      "text": "男は犯罪に関わっていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "Ne2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Qe3",
+      "text": "男は都市や街の中にいましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "Ne3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "男は穴の中にあるものを確認するために掘りましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I3"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF2a",
+      "text": "一万円札の存在自体が男にとって脅威でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4a",
+      "text": "穴を掘る行為自体が何か危険なことを引き起こしましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF6a",
+      "text": "埋めてあったものは犯罪や取引に関わるものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF7a",
+      "text": "穴の中の一万円札は男自身が以前入れたものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF7a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF8a",
+      "text": "穴に埋めたものは時間の経過で劣化しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF8a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF9a",
+      "text": "お金の価値がインフレなどで失われていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF9a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    }
+  ],
+  "_phase5": {
+    "chain_mapping": {
+      "C1": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Qe1"
+      ],
+      "C2": [
+        "Q4",
+        "Q5",
+        "Q6"
+      ],
+      "C3": [
+        "Q7",
+        "Q8",
+        "Q9"
+      ],
+      "C4": [
+        "Q10",
+        "Q11"
+      ],
+      "C5": [
+        "Q12",
+        "Q13",
+        "Q14"
+      ],
+      "C6": [
+        "Q15",
+        "Q16"
+      ],
+      "C7": [
+        "Q17",
+        "Q18"
+      ],
+      "C8": [
+        "Q19",
+        "Q20"
+      ]
+    },
+    "exploration_paths": [
+      {
+        "name": "パス A: 穴の中身から入る",
+        "sequence": "Q1(はい:I3) → Q2(はい:I4) → Q3(はい:P1) → Q7(はい:I7) → Q8(はい:I8) → Q9(はい:P5) → Q10(はい:I9) → Q11(はい:I1) → Q12(はい:I10) → Q13(はい:I11) → Q14(はい:P2) → Q17(はい:I13) → Q18(はい:I2) → Q4(はい:I5) → Q5(はい:I6) → Q6(はい:P4) → Q15(はい:I12) → Q16(はい:P3) → Q19(はい:I14) → Q20(はい:FP)"
+      },
+      {
+        "name": "パス B: 金銭の無意味さから入る",
+        "sequence": "Q4(はい:I5) → Q5(はい:I6) → Q6(はい:P4) → Q15(はい:I12) → Q16(はい:P3) → Q7(はい:I7) → Q8(はい:I8) → Q9(はい:P5) → Q1(はい:I3) → Q2(はい:I4) → Q3(はい:P1) → Q10(はい:I9) → Q11(はい:I1) → Q12(はい:I10) → Q13(はい:I11) → Q14(はい:P2) → Q17(はい:I13) → Q18(はい:I2) → Q19(はい:I14) → Q20(はい:FP)"
+      },
+      {
+        "name": "パス C: 生死の問題から入る",
+        "sequence": "Q7(はい:I7) → Q8(はい:I8) → Q9(はい:P5) → Q1(はい:I3) → Q2(はい:I4) → Q3(はい:P1) → Q4(はい:I5) → Q5(はい:I6) → Q6(はい:P4) → Q10(はい:I9) → Q11(はい:I1) → Q12(はい:I10) → Q13(はい:I11) → Q14(はい:P2) → Q15(はい:I12) → Q16(はい:P3) → Q17(はい:I13) → Q18(はい:I2) → Q19(はい:I14) → Q20(はい:FP)"
+      }
+    ]
+  },
+  "_phase10": {
+    "step_a_thinning": {
+      "thinned": [
+        {
+          "id": "I4",
+          "label": "男が埋めたものと一万円札は異なるものだった",
+          "reason": "P1と同義（一般化のみ）",
+          "kept_id": "P1",
+          "fc_rewiring": "P1.fc: [[I4]]→[[I3]]"
+        },
+        {
+          "id": "I6",
+          "label": "経済活動が成り立たなかった",
+          "reason": "P4と同義",
+          "kept_id": "P4",
+          "fc_rewiring": "P4.fc: [[I6]]→[[I5]]"
+        },
+        {
+          "id": "I7",
+          "label": "穴の中身が生死に直結",
+          "reason": "I8と同義",
+          "kept_id": "P5",
+          "fc_rewiring": "I8.fc→P5.fc: [[S2,S5]]"
+        },
+        {
+          "id": "I8",
+          "label": "穴のものがなければ死ぬ",
+          "reason": "P5と同義",
+          "kept_id": "P5",
+          "fc_rewiring": "P5.fc: [[I8]]→[[S2,S5]]"
+        },
+        {
+          "id": "I9",
+          "label": "金銭代替不能の生存品",
+          "reason": "I1と同義",
+          "kept_id": "I1",
+          "fc_rewiring": "I1.fc: [[I9]]→[[P1,P5]]"
+        }
+      ],
+      "summary": {
+        "before": {
+          "propositions": 42,
+          "questions": 32
+        },
+        "after": {
+          "propositions": 35,
+          "questions": 25
+        },
+        "removed_propositions": [
+          "I4",
+          "I6",
+          "I7",
+          "I8",
+          "I9",
+          "NF3a",
+          "HF3a",
+          "NF5a",
+          "HF5a",
+          "NF6a_dup"
+        ],
+        "removed_questions": [
+          "Q2",
+          "Q5",
+          "Q7",
+          "Q8",
+          "Q10",
+          "QF3a",
+          "QF5a"
+        ]
+      }
+    },
+    "step_b_entailment": {
+      "entailed": [
+        {
+          "id": "I1",
+          "entailment_conditions": [
+            [
+              "P1",
+              "P5"
+            ]
+          ],
+          "reason": "P1(非金銭)+P5(生存不可欠)の論理的結合"
+        },
+        {
+          "id": "P2",
+          "entailment_conditions": [
+            [
+              "I10",
+              "I11"
+            ]
+          ],
+          "reason": "I10(他者が金を入れた)+I11(元のものを持ち去った)の論理的結合"
+        },
+        {
+          "id": "I13",
+          "entailment_conditions": [
+            [
+              "I1",
+              "P2"
+            ]
+          ],
+          "reason": "I1(不可欠物品埋めた)+P2(持ち去り金替え)の論理的結合"
+        },
+        {
+          "id": "I2",
+          "entailment_conditions": [
+            [
+              "I1",
+              "P2"
+            ]
+          ],
+          "reason": "I1+P2の情報合成"
+        },
+        {
+          "id": "I14",
+          "entailment_conditions": [
+            [
+              "I2",
+              "P3"
+            ]
+          ],
+          "reason": "I2(物品喪失)+P3(人里離れ)の論理的結合"
+        }
+      ]
+    }
+  },
+  "_phase8": {
+    "chain_branches": [
+      {
+        "chain_id": "C1",
+        "chain_path": "S → I3 → I4 → P1",
+        "branches": [
+          {
+            "at_step": "I3",
+            "true_side_label": "以前何かを埋めていた",
+            "parallels": [
+              {
+                "label": "確認・処分のために掘った",
+                "models": [
+                  "M10"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "I4",
+            "true_side_label": "埋めたものと一万円札は異なる",
+            "parallels": [
+              {
+                "label": "埋めたものも金銭だった",
+                "models": [
+                  "M9",
+                  "M12",
+                  "M6"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C2",
+        "chain_path": "S → I5 → I6 → P4",
+        "branches": [
+          {
+            "at_step": "I5",
+            "true_side_label": "一万円が助けにならなかった",
+            "parallels": [
+              {
+                "label": "一万円の存在自体が脅威",
+                "models": [
+                  "M11"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "I6",
+            "true_side_label": "経済活動が成り立たなかった",
+            "parallels": [
+              {
+                "label": "金銭は使えるが額が足りない",
+                "models": [
+                  "M12",
+                  "M6",
+                  "M9"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C3",
+        "chain_path": "S → I7 → I8 → P5",
+        "branches": [
+          {
+            "at_step": "I7",
+            "true_side_label": "穴の中身が生死に直結",
+            "parallels": [
+              {
+                "label": "掘る行為自体が危険を露呈",
+                "models": [
+                  "M10"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "I8",
+            "true_side_label": "穴のものがなければ死ぬ",
+            "parallels": [
+              {
+                "label": "穴に危険物（証拠等）があった",
+                "models": [
+                  "M10",
+                  "M11",
+                  "M13"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C4",
+        "chain_path": "P1,P5 → I9 → I1",
+        "branches": [
+          {
+            "at_step": "I9",
+            "true_side_label": "金銭代替不能の生存品",
+            "parallels": [
+              {
+                "label": "犯罪・取引関連のもの",
+                "models": [
+                  "M10",
+                  "M11",
+                  "M13"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C5",
+        "chain_path": "P1,S3 → I10 → I11 → P2",
+        "branches": [
+          {
+            "at_step": "I10",
+            "true_side_label": "他の人間が金を入れた",
+            "parallels": [
+              {
+                "label": "男自身が金を入れていた",
+                "models": [
+                  "M9"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "I11",
+            "true_side_label": "元のものを持ち去った",
+            "parallels": [
+              {
+                "label": "元のものは劣化して消失",
+                "models": [
+                  "M8"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C6",
+        "chain_path": "P4 → I12 → P3",
+        "branches": [
+          {
+            "at_step": "I12",
+            "true_side_label": "商取引が存在しない環境",
+            "parallels": [
+              {
+                "label": "インフレで金銭価値喪失",
+                "models": [
+                  "M8"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C7",
+        "chain_path": "I1,P2 → I13 → I2",
+        "branches": [
+          {
+            "at_step": "I13",
+            "true_side_label": "持ち去り物は生存に不可欠",
+            "parallels": [
+              {
+                "label": "持ち去り物は犯罪関連品",
+                "models": [
+                  "M10",
+                  "M11",
+                  "M13"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C8",
+        "chain_path": "I2,P3 → I14 → FP",
+        "branches": [
+          {
+            "at_step": "I14",
+            "true_side_label": "隔絶+備蓄喪失",
+            "parallels": [
+              {
+                "label": "救助の可能性があった",
+                "models": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "all_models": [
+        "M5",
+        "M6",
+        "M7",
+        "M8",
+        "M9",
+        "M10",
+        "M11",
+        "M12",
+        "M13"
+      ],
+      "model_coverage": {
+        "M5": [
+          {
+            "chain": "C5",
+            "step": "I10",
+            "note": "P3 confirmed → M5 棄却（M5は社会内）"
+          }
+        ],
+        "M6": [
+          {
+            "chain": "C1",
+            "step": "I4"
+          },
+          {
+            "chain": "C2",
+            "step": "I6"
+          }
+        ],
+        "M7": [
+          {
+            "chain": "C1",
+            "step": "I4",
+            "note": "P1 confirmed → M7 棄却"
+          }
+        ],
+        "M8": [
+          {
+            "chain": "C5",
+            "step": "I11"
+          },
+          {
+            "chain": "C6",
+            "step": "I12"
+          }
+        ],
+        "M9": [
+          {
+            "chain": "C1",
+            "step": "I4"
+          },
+          {
+            "chain": "C5",
+            "step": "I10"
+          }
+        ],
+        "M10": [
+          {
+            "chain": "C1",
+            "step": "I3"
+          },
+          {
+            "chain": "C3",
+            "step": "I7"
+          },
+          {
+            "chain": "C3",
+            "step": "I8"
+          }
+        ],
+        "M11": [
+          {
+            "chain": "C2",
+            "step": "I5"
+          },
+          {
+            "chain": "C3",
+            "step": "I8"
+          }
+        ],
+        "M12": [
+          {
+            "chain": "C1",
+            "step": "I4"
+          },
+          {
+            "chain": "C2",
+            "step": "I6"
+          }
+        ],
+        "M13": [
+          {
+            "chain": "C3",
+            "step": "I8"
+          },
+          {
+            "chain": "C4",
+            "step": "I9"
+          }
+        ]
+      },
+      "uncovered": [],
+      "uncovered_notes": "全モデルが真側分割命題の確認またはNF質問によりカバーされる"
+    },
+    "generated": {
+      "propositions": [
+        {
+          "id": "NF1a",
+          "source_chain": "C1",
+          "source_step": "I3",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF2a",
+          "source_chain": "C2",
+          "source_step": "I5",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF3a",
+          "source_chain": "C2",
+          "source_step": "I6",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF4a",
+          "source_chain": "C3",
+          "source_step": "I7",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF5a",
+          "source_chain": "C3",
+          "source_step": "I8",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF6a",
+          "source_chain": "C4",
+          "source_step": "I9",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF7a",
+          "source_chain": "C5",
+          "source_step": "I10",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF8a",
+          "source_chain": "C5",
+          "source_step": "I11",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF9a",
+          "source_chain": "C6",
+          "source_step": "I12",
+          "parallel_index": 0
+        }
+      ],
+      "questions": [
+        {
+          "id": "QF1a",
+          "reveals_proposition": "NF1a"
+        },
+        {
+          "id": "QF2a",
+          "reveals_proposition": "NF2a"
+        },
+        {
+          "id": "QF3a",
+          "reveals_proposition": "NF3a"
+        },
+        {
+          "id": "QF4a",
+          "reveals_proposition": "NF4a"
+        },
+        {
+          "id": "QF5a",
+          "reveals_proposition": "NF5a"
+        },
+        {
+          "id": "QF6a",
+          "reveals_proposition": "NF6a"
+        },
+        {
+          "id": "QF7a",
+          "reveals_proposition": "NF7a"
+        },
+        {
+          "id": "QF8a",
+          "reveals_proposition": "NF8a"
+        },
+        {
+          "id": "QF9a",
+          "reveals_proposition": "NF9a"
+        }
+      ]
+    }
+  },
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "_phase9": {
+    "assignments": [
+      {
+        "question_id": "Q1",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q3",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q4",
+        "category": "前提の確認"
+      },
+      {
+        "question_id": "Q6",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q9",
+        "category": "原因と動機"
+      },
+      {
+        "question_id": "Q11",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q12",
+        "category": "人物と背景"
+      },
+      {
+        "question_id": "Q13",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q14",
+        "category": "人物と背景"
+      },
+      {
+        "question_id": "Q15",
+        "category": "原因と動機"
+      },
+      {
+        "question_id": "Q16",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q17",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q18",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q19",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q20",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Qe1",
+        "category": "前提の確認"
+      },
+      {
+        "question_id": "Qe2",
+        "category": "人物と背景"
+      },
+      {
+        "question_id": "Qe3",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "QF1a",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "QF2a",
+        "category": "前提の確認"
+      },
+      {
+        "question_id": "QF4a",
+        "category": "原因と動機"
+      },
+      {
+        "question_id": "QF6a",
+        "category": "前提の確認"
+      },
+      {
+        "question_id": "QF7a",
+        "category": "人物と背景"
+      },
+      {
+        "question_id": "QF8a",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "QF9a",
+        "category": "前提の確認"
+      }
+    ],
+    "initial_open_distribution": {
+      "状況の確認": [
+        "Q1",
+        "Qe3"
+      ],
+      "原因と動機": [
+        "Q9",
+        "QF4a"
+      ],
+      "人物と背景": [
+        "Qe2"
+      ],
+      "前提の確認": [
+        "Q4"
+      ]
+    },
+    "balance": {
+      "状況の確認": 13,
+      "原因と動機": 3,
+      "人物と背景": 4,
+      "前提の確認": 5
+    }
+  }
+}

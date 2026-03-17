@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>穴と一万円 data_src</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: #fafafa; color: #333; padding: 20px; }
+  h1 { font-size: 1.6em; margin-bottom: 10px; }
+  h2 { font-size: 1.2em; margin: 20px 0 10px; padding: 8px 12px;
+       background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 2px; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+  .stat { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px;
+           padding: 10px 16px; min-width: 120px; }
+  .stat .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+  .stat .label { font-size: 0.85em; color: #666; }
+  .tabs { display: flex; gap: 4px; margin: 16px 0 0; border-bottom: 2px solid #e0e0e0; }
+  .tab { padding: 8px 16px; cursor: pointer; background: #f5f5f5;
+          border: 1px solid #e0e0e0; border-bottom: none; border-radius: 6px 6px 0 0;
+          font-size: 0.9em; user-select: none; }
+  .tab.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px;
+                 font-weight: bold; color: #1565c0; }
+  .tab-content { background: #fff; border: 1px solid #e0e0e0;
+                  border-top: none; padding: 16px; overflow-x: auto; }
+  .tab-content.hidden { display: none; }
+  .mermaid { text-align: center; overflow-x: auto; }
+  .mermaid svg { min-width: 800px; min-height: 400px; }
+  ul.checks { list-style: none; padding: 8px 0; }
+  ul.checks li { padding: 4px 8px; font-size: 0.9em; }
+  li.issue { color: #e65100; }
+  li.ok { color: #2e7d32; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0; font-size: 0.8em; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-swatch { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #999; }
+  .note { font-size: 0.85em; color: #666; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h1>穴と一万円 — data_src.json</h1>
+
+<div class="stats">
+  <div class="stat"><div class="num">5</div><div class="label">tension</div></div>
+  <div class="stat"><div class="num">15</div><div class="label">model</div></div>
+  <div class="stat"><div class="num">7</div><div class="label">S prop</div></div>
+  <div class="stat"><div class="num">35</div><div class="label">proposition</div></div>
+  <div class="stat"><div class="num">25</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">8</div><div class="label">chain</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#e3f2fd"></div> S</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fff3e0"></div> N</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#e8f5e9"></div> P</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fce4ec"></div> NT</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f3e5f5"></div> NU</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f5f5f5"></div> NF</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="deriv_graph">derivation graph</div>
+  <div class="tab" data-tab="derivation">fc flow</div>
+  <div class="tab" data-tab="questions">Q -&gt; prop</div>
+  <div class="tab" data-tab="division">model split</div>
+  <div class="tab" data-tab="chains">chain</div>
+  <div class="tab" data-tab="branches">branch / NF</div>
+  <div class="tab" data-tab="paths">path</div>
+  <div class="tab" data-tab="integrity">integrity</div>
+</div>
+
+<div id="deriv_graph" class="tab-content">
+<h2>derivation graph (_phase2)</h2>
+<p class="note">
+  Conceptual derivation: A &rarr; B means confirming A makes B redundant.
+  Blue = independent axis, green = root (S-reachable), purple = composite, orange = derived.
+  Dashed = combination derivation.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef axisNode fill:#42a5f5,stroke:#1565c0,color:#fff
+  classDef rootNode fill:#4caf50,stroke:#2e7d32,color:#fff
+  classDef compositeNode fill:#9c27b0,stroke:#6a1b9a,color:#fff
+  classDef derivedNode fill:#ff9800,stroke:#e65100,color:#fff
+  classDef defaultNode fill:#e0e0e0,stroke:#757575,color:#424242
+  I1["I1: 男は生存のために不可欠な物品（金銭以外）を穴に埋めておいた"]:::derivedNode
+  I2["I2: 男は生存に不可欠な物品を埋めておいたが、別の人間がそれを持ち去り金銭を入れていた"]:::axisNode
+  P1["P1: 男が穴から取り出そうとしたものは金銭ではなかった"]:::rootNode
+  P2["P2: 別の人間が元のものを持ち去り、代わりに金銭を入れていた"]:::derivedNode
+  P3["P3: 男は人里離れた場所にいた"]:::axisNode
+  P4["P4: 男がいた状況では金銭に交換価値がなかった"]:::rootNode
+  P5["P5: 埋めてあったものは男が生き延びるために不可欠だった"]:::rootNode
+  P3 -->|"人里離れた場所にいる → 商取引不能 → 金銭に交換価値がない"| P4
+  P2 -->|"元のものを持ち去り金銭を代わりに入れた → 元のものは金銭ではなかった"| P1
+  I1 -->|"生存に不可欠な非金銭物品を埋めた → 金銭ではなかった"| P1
+  I1 -->|"生存に不可欠な非金銭物品を埋めた → 生存に不可欠だった"| P5
+  I2 -->|"不可欠物品を埋め第三者に持ち去られた → 不可欠物品を埋めていた"| I1
+  I2 -->|"不可欠物品を第三者に持ち去られ金銭代替 → 第三者が持ち去り金銭を入れた"| P2
+</pre>
+</div>
+
+<div id="derivation" class="tab-content">
+<h2>formation_conditions</h2>
+<p class="note">
+  S -&gt; N -&gt; P -&gt; NT -&gt; NU. Solid = fc, dotted = S derived_from.
+  Junction = AND. Multiple arrows to same node = OR.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef sNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  S1["S1: ある男がいた"]:::sNode
+  S2["S2: 男は穴を掘った"]:::sNode
+  S3["S3: 穴から一万円札が出てきた"]:::sNode
+  S4["S4: 男は一万円札が出てきたのを見た"]:::sNode
+  S5["S5: 男は死を悟った"]:::sNode
+  S6["S6: 穴があった"]:::sNode
+  S7["S7: 一万円札が穴の中にあった"]:::sNode
+  P1["P1: 男が穴から取り出そうとしたものは金銭ではなかった"]:::pNode
+  P2["P2: 別の人間が元のものを持ち去り、代わりに金銭を入れていた"]:::pNode
+  P3["P3: 男は人里離れた場所にいた"]:::pNode
+  P4["P4: 男がいた状況では金銭に交換価値がなかった"]:::pNode
+  P5["P5: 埋めてあったものは男が生き延びるために不可欠だった"]:::pNode
+  I1["I1: 男は生存のために不可欠な物品（金銭以外）を穴に埋めておいた"]:::nNode
+  I2["I2: 男は生存に不可欠な物品を埋めておいたが、別の人間がそれを持ち去り金銭を入れていた"]:::nNode
+  I3["I3: 男は以前この穴に何かを埋めていた"]:::nNode
+  I5["I5: 一万円札が見つかっても男の状況は改善しなかった"]:::nNode
+  I10["I10: 穴の中の一万円札は男以外の人間が入れた"]:::nNode
+  I11["I11: その人物は男が埋めたものを穴から持ち去った"]:::nNode
+  I12["I12: 男は通常の商取引が存在しない環境にいた"]:::nNode
+  I13["I13: 第三者が持ち去ったものは男の生存に不可欠な物品だった"]:::nNode
+  I14["I14: 男は隔絶された場所で唯一の希望だった備蓄物資が失われていた"]:::nNode
+  FP["FP: 男は人里離れた場所で遭難しており、以前自分が埋めた生存に不可欠な物品が別の人間に持ち去られ、代わりに金銭が入れられていた"]:::nNode
+  N1a["N1a: 男が穴に埋めていたものはお金ではなかった"]:::nNode
+  Ne2["Ne2: 男は犯罪に関わっていなかった"]:::nNode
+  He2["He2: 男は犯罪に関わっていた"]:::nNode
+  Ne3["Ne3: 男は都市や街の中にいたのではなかった"]:::nNode
+  He3["He3: 男は都市や街の中にいた"]:::nNode
+  S2 -.-> S6
+  S3 -.-> S7
+  I3 --> P1
+  I11 --> P2
+  I12 --> P3
+  I5 --> P4
+  j_P5_S2_S5(( ))
+  S2 --> j_P5_S2_S5
+  S5 --> j_P5_S2_S5
+  j_P5_S2_S5 --> P5
+  j_I1_P1_P5(( ))
+  P1 --> j_I1_P1_P5
+  P5 --> j_I1_P1_P5
+  j_I1_P1_P5 --> I1
+  I13 --> I2
+  j_I3_S2_S3(( ))
+  S2 --> j_I3_S2_S3
+  S3 --> j_I3_S2_S3
+  j_I3_S2_S3 --> I3
+  j_I5_S3_S5(( ))
+  S3 --> j_I5_S3_S5
+  S5 --> j_I5_S3_S5
+  j_I5_S3_S5 --> I5
+  P1 --> I10
+  I10 --> I11
+  P4 --> I12
+  j_I13_I1_P2(( ))
+  I1 --> j_I13_I1_P2
+  P2 --> j_I13_I1_P2
+  j_I13_I1_P2 --> I13
+  j_I14_I2_P3(( ))
+  I2 --> j_I14_I2_P3
+  P3 --> j_I14_I2_P3
+  j_I14_I2_P3 --> I14
+  I14 --> FP
+  I3 --> N1a
+  S1 --> Ne2
+  S1 --> He2
+  S1 --> Ne3
+  S1 --> He3
+</pre>
+</div>
+
+<div id="questions" class="tab-content">
+<h2>Q -&gt; proposition (reveals)</h2>
+<p class="note">O = yes, X = no</p>
+<pre class="mermaid">
+graph LR
+  classDef qNode fill:#e8eaf6,stroke:#283593,color:#1a237e
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  Q1["Q1 O<br/>男は以前この穴に何かを埋めていましたか？"]:::qNode
+  I3_q["I3: 男は以前この穴に何かを埋めていた"]:::nNode
+  Q11["Q11 O<br/>男は生存に不可欠な金銭以外の物品を穴に埋めておいたのですか？"]:::qNode
+  I1_q["I1: 男は生存のために不可欠な物品（金銭以外）を穴に埋めておいた"]:::nNode
+  Q12["Q12 O<br/>穴の中の一万円札は男以外の誰かが入れたものでしたか？"]:::qNode
+  I10_q["I10: 穴の中の一万円札は男以外の人間が入れた"]:::nNode
+  Q13["Q13 O<br/>その人物は穴に埋めてあった元のものを持ち去りましたか？"]:::qNode
+  I11_q["I11: その人物は男が埋めたものを穴から持ち去った"]:::nNode
+  Q14["Q14 O<br/>別の人間が元のものを持ち去り、代わりに金銭を入れたのですか？"]:::qNode
+  P2_q["P2: 別の人間が元のものを持ち去り、代わりに金銭を入れていた"]:::pNode
+  Q15["Q15 O<br/>男がいた場所には店舗や商取引の手段がありませんでしたか？"]:::qNode
+  I12_q["I12: 男は通常の商取引が存在しない環境にいた"]:::nNode
+  Q16["Q16 O<br/>男は人里離れた場所にいましたか？"]:::qNode
+  P3_q["P3: 男は人里離れた場所にいた"]:::pNode
+  Q17["Q17 O<br/>第三者が持ち去ったものは男の生存に不可欠な物品でしたか？"]:::qNode
+  I13_q["I13: 第三者が持ち去ったものは男の生存に不可欠な物品だった"]:::nNode
+  Q18["Q18 O<br/>男の生存に必要な物品が持ち去られ、代わりに金銭が入れられていたのですか？"]:::qNode
+  I2_q["I2: 男は生存に不可欠な物品を埋めておいたが、別の人間がそれを持ち去り金銭を入れていた"]:::nNode
+  Q19["Q19 O<br/>男は隔絶された場所で、備蓄していた生存物資を失った状態でしたか？"]:::qNode
+  I14_q["I14: 男は隔絶された場所で唯一の希望だった備蓄物資が失われていた"]:::nNode
+  Q20["Q20 O<br/>男は人里離れた場所で遭難中に、埋めておいた生存物品が別の人に持ち去られ金銭が残されていたのですか？"]:::qNode
+  FP_q["FP: 男は人里離れた場所で遭難しており、以前自分が埋めた生存に不可欠な物品が別の人間に持ち去られ、代わりに金銭が入れられていた"]:::nNode
+  Q3["Q3 O<br/>男が穴から取り出そうとしたものは金銭以外でしたか？"]:::qNode
+  P1_q["P1: 男が穴から取り出そうとしたものは金銭ではなかった"]:::pNode
+  Q4["Q4 O<br/>一万円札が出てきても、男にとっては何の助けにもなりませんでしたか？"]:::qNode
+  I5_q["I5: 一万円札が見つかっても男の状況は改善しなかった"]:::nNode
+  Q6["Q6 O<br/>男がいた状況ではお金に交換価値がありませんでしたか？"]:::qNode
+  P4_q["P4: 男がいた状況では金銭に交換価値がなかった"]:::pNode
+  Q9["Q9 O<br/>穴に埋めてあったものは男が生き延びるために不可欠でしたか？"]:::qNode
+  P5_q["P5: 埋めてあったものは男が生き延びるために不可欠だった"]:::pNode
+  QF1a["QF1a X<br/>男は穴の中にあるものを確認するために掘りましたか？"]:::qNode
+  NF1a_q["NF1a: 男は穴の中のものを確認するために掘ったのではなかった"]:::fNode
+  QF2a["QF2a X<br/>一万円札の存在自体が男にとって脅威でしたか？"]:::qNode
+  NF2a_q["NF2a: 一万円札の存在が男への脅威だったわけではなかった"]:::fNode
+  QF4a["QF4a X<br/>穴を掘る行為自体が何か危険なことを引き起こしましたか？"]:::qNode
+  NF4a_q["NF4a: 穴を掘る行為自体が危険を引き起こしたわけではなかった"]:::fNode
+  QF6a["QF6a X<br/>埋めてあったものは犯罪や取引に関わるものでしたか？"]:::qNode
+  NF6a_q["NF6a: 埋めてあったものは犯罪や取引に関わるものではなかった"]:::fNode
+  QF7a["QF7a X<br/>穴の中の一万円札は男自身が以前入れたものでしたか？"]:::qNode
+  NF7a_q["NF7a: 穴の中の一万円札は男自身が以前入れたものではなかった"]:::fNode
+  QF8a["QF8a X<br/>穴に埋めたものは時間の経過で劣化しましたか？"]:::qNode
+  NF8a_q["NF8a: 穴に埋めたものは時間経過で劣化したのではなかった"]:::fNode
+  QF9a["QF9a X<br/>お金の価値がインフレなどで失われていましたか？"]:::qNode
+  NF9a_q["NF9a: 金銭の価値がインフレ等で失われたわけではなかった"]:::fNode
+  Qe1["Qe1 X<br/>男が穴に埋めていたのはお金でしたか？"]:::qNode
+  N1a_q["N1a: 男が穴に埋めていたものはお金ではなかった"]:::nNode
+  Qe2["Qe2 X<br/>男は犯罪に関わっていましたか？"]:::qNode
+  Ne2_q["Ne2: 男は犯罪に関わっていなかった"]:::nNode
+  Qe3["Qe3 X<br/>男は都市や街の中にいましたか？"]:::qNode
+  Ne3_q["Ne3: 男は都市や街の中にいたのではなかった"]:::nNode
+  Q1 -->|reveals| I3_q
+  Q11 -->|reveals| I1_q
+  Q12 -->|reveals| I10_q
+  Q13 -->|reveals| I11_q
+  Q14 -->|reveals| P2_q
+  Q15 -->|reveals| I12_q
+  Q16 -->|reveals| P3_q
+  Q17 -->|reveals| I13_q
+  Q18 -->|reveals| I2_q
+  Q19 -->|reveals| I14_q
+  Q20 -->|reveals| FP_q
+  Q3 -->|reveals| P1_q
+  Q4 -->|reveals| I5_q
+  Q6 -->|reveals| P4_q
+  Q9 -->|reveals| P5_q
+  QF1a -->|reveals| NF1a_q
+  QF2a -->|reveals| NF2a_q
+  QF4a -->|reveals| NF4a_q
+  QF6a -->|reveals| NF6a_q
+  QF7a -->|reveals| NF7a_q
+  QF8a -->|reveals| NF8a_q
+  QF9a -->|reveals| NF9a_q
+  Qe1 -->|reveals| N1a_q
+  Qe2 -->|reveals| Ne2_q
+  Qe3 -->|reveals| Ne3_q
+</pre>
+</div>
+
+<div id="division" class="tab-content">
+<h2>model division hierarchy</h2>
+<pre class="mermaid">
+graph TD
+  classDef trueSet fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseSet fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef propNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  ALL["T, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14"]
+</pre>
+</div>
+
+<div id="chains" class="tab-content">
+<h2>tactical chains</h2>
+<p class="note">C1-C5 + extensions. Parsed from _phase3 description.</p>
+<pre class="mermaid">
+graph TD
+  classDef srcNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef midNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef tgtNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef extNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uniNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  subgraph C1["C1: 観測事実の深掘り"]
+    direction LR
+    C1_S2_S3["S2_S3: {S2,S3}"]:::srcNode
+    C1_I3["I3: 男は以前この穴に何かを埋めていた"]:::midNode
+    C1_S2_S3 --> C1_I3
+    C1_P1["P1"]:::tgtNode
+    C1_I3 --> C1_P1
+  end
+  subgraph C2["C2: 矛盾の指摘"]
+    direction LR
+    C2_S3_S5["S3_S5: {S3,S5}"]:::srcNode
+    C2_I5["I5: 一万円札が見つかっても男の状況は改善しなかった"]:::midNode
+    C2_S3_S5 --> C2_I5
+    C2_P4["P4"]:::tgtNode
+    C2_I5 --> C2_P4
+  end
+  subgraph C3["C3: 因果の逆転"]
+    direction LR
+    C3_S2_S5["S2_S5: {S2,S5}"]:::srcNode
+    C3_P5["P5"]:::tgtNode
+    C3_S2_S5 --> C3_P5
+  end
+  subgraph C4["C4: 段階的絞り込み"]
+    direction LR
+    C4_P1_P5["P1_P5: {P1,P5}"]:::srcNode
+    C4_I1["I1"]:::tgtNode
+    C4_P1_P5 --> C4_I1
+  end
+  subgraph C5["C5: 登場人物の探索 → 観測事実の深掘り"]
+    direction LR
+    C5_P1_S3["P1_S3: {P1,S3}"]:::srcNode
+    C5_I10["I10: 穴の中の一万円札は男以外の人間が入れた"]:::midNode
+    C5_P1_S3 -->|"観測事実の深掘り"| C5_I10
+    C5_I11["I11: その人物は男が埋めたものを穴から持ち去った"]:::midNode
+    C5_I10 --> C5_I11
+    C5_P2["P2"]:::tgtNode
+    C5_I11 --> C5_P2
+  end
+  subgraph C6["C6: 因果の逆転"]
+    direction LR
+    C6_P4["P4"]:::srcNode
+    C6_I12["I12: 男は通常の商取引が存在しない環境にいた"]:::midNode
+    C6_P4 --> C6_I12
+    C6_P3["P3"]:::tgtNode
+    C6_I12 --> C6_P3
+  end
+  subgraph C7["C7: 段階的絞り込み"]
+    direction LR
+    C7_I1_P2["I1_P2: {I1,P2}"]:::srcNode
+    C7_I13["I13: 第三者が持ち去ったものは男の生存に不可欠な物品だった"]:::midNode
+    C7_I1_P2 --> C7_I13
+    C7_I2["I2"]:::tgtNode
+    C7_I13 --> C7_I2
+  end
+  subgraph C8["C8: 段階的絞り込み"]
+    direction LR
+    C8_I2_P3["I2_P3: {I2,P3}"]:::srcNode
+    C8_I14["I14: 男は隔絶された場所で唯一の希望だった備蓄物資が失われていた"]:::midNode
+    C8_I2_P3 --> C8_I14
+    C8_FP["FP"]:::tgtNode
+    C8_I14 --> C8_FP
+  end
+</pre>
+</div>
+
+<div id="branches" class="tab-content">
+<h2>chain branches / rejection (_phase9)</h2>
+<p class="note">T = true side, F = false side (parallel). Dotted = generated NF proposition.</p>
+<pre class="mermaid">
+graph TD
+  classDef trueNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseNode fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef nfNode fill:#f5f5f5,stroke:#757575,color:#424242
+  subgraph C1_branch["C1: S → I3 → I4 → P1"]
+    C1_I3_t["T I3: 以前何かを埋めていた"]:::trueNode
+    C1_I3_f0["F 確認・処分のために掘った<br/>(M10)"]:::falseNode
+    C1_I3_t --- C1_I3_f0
+    NF1a_nf["NF1a"]:::nfNode
+    C1_I3_f0 -.-> NF1a_nf
+    C1_I4_t["T I4: 埋めたものと一万円札は異なる"]:::trueNode
+    C1_I4_f0["F 埋めたものも金銭だった<br/>(M9, M12, M6)"]:::falseNode
+    C1_I4_t --- C1_I4_f0
+  end
+  subgraph C2_branch["C2: S → I5 → I6 → P4"]
+    C2_I5_t["T I5: 一万円が助けにならなかった"]:::trueNode
+    C2_I5_f0["F 一万円の存在自体が脅威<br/>(M11)"]:::falseNode
+    C2_I5_t --- C2_I5_f0
+    NF2a_nf["NF2a"]:::nfNode
+    C2_I5_f0 -.-> NF2a_nf
+    C2_I6_t["T I6: 経済活動が成り立たなかった"]:::trueNode
+    C2_I6_f0["F 金銭は使えるが額が足りない<br/>(M12, M6, M9)"]:::falseNode
+    C2_I6_t --- C2_I6_f0
+    NF3a_nf["NF3a"]:::nfNode
+    C2_I6_f0 -.-> NF3a_nf
+  end
+  subgraph C3_branch["C3: S → I7 → I8 → P5"]
+    C3_I7_t["T I7: 穴の中身が生死に直結"]:::trueNode
+    C3_I7_f0["F 掘る行為自体が危険を露呈<br/>(M10)"]:::falseNode
+    C3_I7_t --- C3_I7_f0
+    NF4a_nf["NF4a"]:::nfNode
+    C3_I7_f0 -.-> NF4a_nf
+    C3_I8_t["T I8: 穴のものがなければ死ぬ"]:::trueNode
+    C3_I8_f0["F 穴に危険物（証拠等）があった<br/>(M10, M11, M13)"]:::falseNode
+    C3_I8_t --- C3_I8_f0
+    NF5a_nf["NF5a"]:::nfNode
+    C3_I8_f0 -.-> NF5a_nf
+  end
+  subgraph C4_branch["C4: P1,P5 → I9 → I1"]
+    C4_I9_t["T I9: 金銭代替不能の生存品"]:::trueNode
+    C4_I9_f0["F 犯罪・取引関連のもの<br/>(M10, M11, M13)"]:::falseNode
+    C4_I9_t --- C4_I9_f0
+    NF6a_nf["NF6a"]:::nfNode
+    C4_I9_f0 -.-> NF6a_nf
+  end
+  subgraph C5_branch["C5: P1,S3 → I10 → I11 → P2"]
+    C5_I10_t["T I10: 他の人間が金を入れた"]:::trueNode
+    C5_I10_f0["F 男自身が金を入れていた<br/>(M9)"]:::falseNode
+    C5_I10_t --- C5_I10_f0
+    NF7a_nf["NF7a"]:::nfNode
+    C5_I10_f0 -.-> NF7a_nf
+    C5_I11_t["T I11: 元のものを持ち去った"]:::trueNode
+    C5_I11_f0["F 元のものは劣化して消失<br/>(M8)"]:::falseNode
+    C5_I11_t --- C5_I11_f0
+    NF8a_nf["NF8a"]:::nfNode
+    C5_I11_f0 -.-> NF8a_nf
+  end
+  subgraph C6_branch["C6: P4 → I12 → P3"]
+    C6_I12_t["T I12: 商取引が存在しない環境"]:::trueNode
+    C6_I12_f0["F インフレで金銭価値喪失<br/>(M8)"]:::falseNode
+    C6_I12_t --- C6_I12_f0
+    NF9a_nf["NF9a"]:::nfNode
+    C6_I12_f0 -.-> NF9a_nf
+  end
+  subgraph C7_branch["C7: I1,P2 → I13 → I2"]
+    C7_I13_t["T I13: 持ち去り物は生存に不可欠"]:::trueNode
+    C7_I13_f0["F 持ち去り物は犯罪関連品<br/>(M10, M11, M13)"]:::falseNode
+    C7_I13_t --- C7_I13_f0
+  end
+  subgraph C8_branch["C8: I2,P3 → I14 → FP"]
+    C8_I14_t["T I14: 隔絶+備蓄喪失"]:::trueNode
+    C8_I14_f0["F 救助の可能性があった<br/>()"]:::falseNode
+    C8_I14_t --- C8_I14_f0
+  end
+</pre>
+</div>
+
+<div id="paths" class="tab-content">
+<h2>exploration paths</h2>
+<pre class="mermaid">
+graph LR
+  classDef pathNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  subgraph path_sg_0["パス A: 穴の中身から入る"]
+    p0s0["Q1(はい:I3)"]:::pathNode
+    p0s1["Q2(はい:I4)"]:::pathNode
+    p0s0 --> p0s1
+    p0s2["Q3(はい:P1)"]:::pathNode
+    p0s1 --> p0s2
+    p0s3["Q7(はい:I7)"]:::pathNode
+    p0s2 --> p0s3
+    p0s4["Q8(はい:I8)"]:::pathNode
+    p0s3 --> p0s4
+    p0s5["Q9(はい:P5)"]:::pathNode
+    p0s4 --> p0s5
+    p0s6["Q10(はい:I9)"]:::pathNode
+    p0s5 --> p0s6
+    p0s7["Q11(はい:I1)"]:::pathNode
+    p0s6 --> p0s7
+    p0s8["Q12(はい:I10)"]:::pathNode
+    p0s7 --> p0s8
+    p0s9["Q13(はい:I11)"]:::pathNode
+    p0s8 --> p0s9
+    p0s10["Q14(はい:P2)"]:::pathNode
+    p0s9 --> p0s10
+    p0s11["Q17(はい:I13)"]:::pathNode
+    p0s10 --> p0s11
+    p0s12["Q18(はい:I2)"]:::pathNode
+    p0s11 --> p0s12
+    p0s13["Q4(はい:I5)"]:::pathNode
+    p0s12 --> p0s13
+    p0s14["Q5(はい:I6)"]:::pathNode
+    p0s13 --> p0s14
+    p0s15["Q6(はい:P4)"]:::pathNode
+    p0s14 --> p0s15
+    p0s16["Q15(はい:I12)"]:::pathNode
+    p0s15 --> p0s16
+    p0s17["Q16(はい:P3)"]:::pathNode
+    p0s16 --> p0s17
+    p0s18["Q19(はい:I14)"]:::pathNode
+    p0s17 --> p0s18
+    p0s19["Q20(はい:FP)"]:::pathNode
+    p0s18 --> p0s19
+  end
+  subgraph path_sg_1["パス B: 金銭の無意味さから入る"]
+    p1s0["Q4(はい:I5)"]:::pathNode
+    p1s1["Q5(はい:I6)"]:::pathNode
+    p1s0 --> p1s1
+    p1s2["Q6(はい:P4)"]:::pathNode
+    p1s1 --> p1s2
+    p1s3["Q15(はい:I12)"]:::pathNode
+    p1s2 --> p1s3
+    p1s4["Q16(はい:P3)"]:::pathNode
+    p1s3 --> p1s4
+    p1s5["Q7(はい:I7)"]:::pathNode
+    p1s4 --> p1s5
+    p1s6["Q8(はい:I8)"]:::pathNode
+    p1s5 --> p1s6
+    p1s7["Q9(はい:P5)"]:::pathNode
+    p1s6 --> p1s7
+    p1s8["Q1(はい:I3)"]:::pathNode
+    p1s7 --> p1s8
+    p1s9["Q2(はい:I4)"]:::pathNode
+    p1s8 --> p1s9
+    p1s10["Q3(はい:P1)"]:::pathNode
+    p1s9 --> p1s10
+    p1s11["Q10(はい:I9)"]:::pathNode
+    p1s10 --> p1s11
+    p1s12["Q11(はい:I1)"]:::pathNode
+    p1s11 --> p1s12
+    p1s13["Q12(はい:I10)"]:::pathNode
+    p1s12 --> p1s13
+    p1s14["Q13(はい:I11)"]:::pathNode
+    p1s13 --> p1s14
+    p1s15["Q14(はい:P2)"]:::pathNode
+    p1s14 --> p1s15
+    p1s16["Q17(はい:I13)"]:::pathNode
+    p1s15 --> p1s16
+    p1s17["Q18(はい:I2)"]:::pathNode
+    p1s16 --> p1s17
+    p1s18["Q19(はい:I14)"]:::pathNode
+    p1s17 --> p1s18
+    p1s19["Q20(はい:FP)"]:::pathNode
+    p1s18 --> p1s19
+  end
+  subgraph path_sg_2["パス C: 生死の問題から入る"]
+    p2s0["Q7(はい:I7)"]:::pathNode
+    p2s1["Q8(はい:I8)"]:::pathNode
+    p2s0 --> p2s1
+    p2s2["Q9(はい:P5)"]:::pathNode
+    p2s1 --> p2s2
+    p2s3["Q1(はい:I3)"]:::pathNode
+    p2s2 --> p2s3
+    p2s4["Q2(はい:I4)"]:::pathNode
+    p2s3 --> p2s4
+    p2s5["Q3(はい:P1)"]:::pathNode
+    p2s4 --> p2s5
+    p2s6["Q4(はい:I5)"]:::pathNode
+    p2s5 --> p2s6
+    p2s7["Q5(はい:I6)"]:::pathNode
+    p2s6 --> p2s7
+    p2s8["Q6(はい:P4)"]:::pathNode
+    p2s7 --> p2s8
+    p2s9["Q10(はい:I9)"]:::pathNode
+    p2s8 --> p2s9
+    p2s10["Q11(はい:I1)"]:::pathNode
+    p2s9 --> p2s10
+    p2s11["Q12(はい:I10)"]:::pathNode
+    p2s10 --> p2s11
+    p2s12["Q13(はい:I11)"]:::pathNode
+    p2s11 --> p2s12
+    p2s13["Q14(はい:P2)"]:::pathNode
+    p2s12 --> p2s13
+    p2s14["Q15(はい:I12)"]:::pathNode
+    p2s13 --> p2s14
+    p2s15["Q16(はい:P3)"]:::pathNode
+    p2s14 --> p2s15
+    p2s16["Q17(はい:I13)"]:::pathNode
+    p2s15 --> p2s16
+    p2s17["Q18(はい:I2)"]:::pathNode
+    p2s16 --> p2s17
+    p2s18["Q19(はい:I14)"]:::pathNode
+    p2s17 --> p2s18
+    p2s19["Q20(はい:FP)"]:::pathNode
+    p2s18 --> p2s19
+  end
+</pre>
+</div>
+
+<div id="integrity" class="tab-content">
+<h2>integrity check</h2>
+<ul class="checks">
+<li class="issue">&#9888; initial_confirmed がトップレベルと _phase3 で重複（実害なし、データ冗長）</li>
+<li class="ok">&#10003; 全質問の reveals 先は全て propositions に存在</li>
+<li class="ok">&#10003; negation_of の対称性が保たれている</li>
+<li class="ok">&#10003; 全命題の formation_conditions の参照先が存在</li>
+<li class="ok">&#10003; 全モデル (9個) がカバー済み</li>
+<li class="ok">&#10003; 全質問の reveals が単一要素（1質問1命題）</li>
+
+</ul>
+</div>
+
+<script>
+  // Initialize mermaid - render all diagrams while all tabs visible
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: {
+      htmlLabels: true,
+      curve: 'basis',
+      useMaxWidth: false,
+      nodeSpacing: 30,
+      rankSpacing: 60,
+      padding: 15
+    },
+    themeVariables: {
+      fontSize: '14px'
+    }
+  });
+
+  // After mermaid renders, hide non-active tabs
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var tabs = document.querySelectorAll('.tab-content');
+      for (var i = 1; i < tabs.length; i++) {
+        tabs[i].classList.add('hidden');
+      }
+    }, 500);
+  });
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.add('hidden');
+      });
+      document.querySelectorAll('.tab').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      var target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.remove('hidden');
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
