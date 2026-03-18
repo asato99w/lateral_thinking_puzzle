@@ -1,0 +1,1089 @@
+{
+  "title": "音楽が止まった",
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "音楽が止まったことが彼女の死の原因だった",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "「音楽」は文字通りの音楽（楽曲・メロディ）だった",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "彼女は物理的に危険な場所にいた",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "彼女は視覚が制限された状態にあった",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "音楽は彼女に情報を伝えるガイドとして機能していた",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "音楽が伝えていた情報は空間的な位置に関するものだった",
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P7",
+      "label": "彼女は視覚が制限された状態で、音楽をガイドとして、物理的に危険な環境で活動していた",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P3",
+          "P4",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P8",
+      "label": "音楽のガイド情報の喪失が彼女の死因だった",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P9",
+      "label": "文字通りの音楽が彼女に情報を伝えるガイドとして機能していた",
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P2",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P10",
+      "label": "音楽が伝えていた空間的情報の喪失が彼女の死因だった",
+      "formation_conditions": [
+        [
+          "P6",
+          "P8"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P6",
+          "P8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P11",
+      "label": "彼女は視覚が制限された状態で、文字通りの音楽をガイドとして、物理的に危険な環境で活動していた",
+      "formation_conditions": [
+        [
+          "P7",
+          "P9"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P7",
+          "P9"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "彼女は視覚が制限された状態で物理的に危険な環境にいた。文字通りの音楽が空間的位置のガイドとして機能しており、音楽の停止で位置情報を失ったことが死因だった",
+      "formation_conditions": [
+        [
+          "I12"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I1",
+      "label": "彼女の死には音楽が関係している",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I2",
+      "label": "「音楽」は耳で聞こえる実際の音だった",
+      "formation_conditions": [
+        [
+          "S2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I3",
+      "label": "彼女がいた場所は死につながるような場所だった",
+      "formation_conditions": [
+        [
+          "S1",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I4",
+      "label": "彼女は通常とは異なる身体的状態にあった",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "音楽には何かの目的・役割があった",
+      "formation_conditions": [
+        [
+          "S2",
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "音楽のガイド機能が停止で失われた",
+      "formation_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I7",
+      "label": "音楽は彼女の活動で実用的な役割を果たしていた",
+      "formation_conditions": [
+        [
+          "P2",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I8",
+      "label": "ガイドへの依存と危険な場所にいたことは関連していた",
+      "formation_conditions": [
+        [
+          "P3",
+          "P4",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I12",
+      "label": "彼女は音楽のガイドなしでは生存できない状況にいた",
+      "formation_conditions": [
+        [
+          "P10",
+          "P11"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N_no1",
+      "label": "「音楽」は比喩や隠語ではなかった",
+      "negation_of": "H_no1",
+      "formation_conditions": [
+        [
+          "S2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H_no1",
+      "label": "「音楽」は比喩や隠語だった",
+      "negation_of": "N_no1",
+      "formation_conditions": [
+        [
+          "S2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N_no2",
+      "label": "彼女は病気や自然死ではなかった",
+      "negation_of": "H_no2",
+      "formation_conditions": [
+        [
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H_no2",
+      "label": "彼女は病気や自然死だった",
+      "negation_of": "N_no2",
+      "formation_conditions": [
+        [
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N_no3",
+      "label": "彼女は他の誰かに殺されたのではなかった",
+      "negation_of": "H_no3",
+      "formation_conditions": [
+        [
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H_no3",
+      "label": "彼女は他の誰かに殺された",
+      "negation_of": "N_no3",
+      "formation_conditions": [
+        [
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "因果は逆転しておらず、彼女の死が先ではなかった",
+      "negation_of": "HF1a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1a",
+      "label": "因果が逆転しており彼女の死が先で音楽停止は結果だった",
+      "negation_of": "NF1a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1b",
+      "label": "音楽の停止と彼女の死は偶然の同時発生ではなかった",
+      "negation_of": "HF1b",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1b",
+      "label": "音楽の停止と彼女の死は偶然の同時発生だった",
+      "negation_of": "NF1b",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1c",
+      "label": "音楽の停止と彼女の死は別々の出来事だった",
+      "negation_of": "HF1c",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1c",
+      "label": "音楽の停止と彼女の死は同一事象の別表現だった",
+      "negation_of": "NF1c",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "「音楽」は比喩や隠語ではなかった",
+      "negation_of": "HF2a",
+      "formation_conditions": [
+        [
+          "S2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "「音楽」は比喩や隠語だった",
+      "negation_of": "NF2a",
+      "formation_conditions": [
+        [
+          "S2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2b",
+      "label": "「音楽」は装置や機器の音ではなかった",
+      "negation_of": "HF2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2b",
+      "label": "「音楽」は装置や機器が出す音だった",
+      "negation_of": "NF2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3a",
+      "label": "彼女がいた場所はどこでも同じ結果にはならなかった",
+      "negation_of": "HF3a",
+      "formation_conditions": [
+        [
+          "S1",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3a",
+      "label": "彼女がいた場所はどこでも同じ結果になった",
+      "negation_of": "NF3a",
+      "formation_conditions": [
+        [
+          "S1",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3b",
+      "label": "場所の危険はルールや人間関係によるものではなかった",
+      "negation_of": "HF3b",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3b",
+      "label": "場所の危険はルールや人間関係に基づいていた",
+      "negation_of": "NF3b",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4a",
+      "label": "彼女は拘束や行動制限を受けていなかった",
+      "negation_of": "HF4a",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4a",
+      "label": "彼女は拘束や行動制限を受けていた",
+      "negation_of": "NF4a",
+      "formation_conditions": [
+        [
+          "S1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4b",
+      "label": "彼女の特殊な状態は意識に関するものではなかった",
+      "negation_of": "HF4b",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4b",
+      "label": "彼女の特殊な状態は意識に関するものだった",
+      "negation_of": "NF4b",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5a",
+      "label": "音楽は娯楽として流れていたのではなかった",
+      "negation_of": "HF5a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5a",
+      "label": "音楽は娯楽として流れていた",
+      "negation_of": "NF5a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5b",
+      "label": "音楽は制御や合図のためではなかった",
+      "negation_of": "HF5b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5b",
+      "label": "音楽は何かを制御したり合図を送るために使われていた",
+      "negation_of": "NF5b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF9a",
+      "label": "音楽が伝えていた情報はタイミングに関するものではなかった",
+      "negation_of": "HF9a",
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF9a",
+      "label": "音楽が伝えていた情報はタイミングに関するものだった",
+      "negation_of": "NF9a",
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6a",
+      "label": "音楽の停止は機器の故障によるものではなかった",
+      "negation_of": "HF6a",
+      "formation_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6a",
+      "label": "音楽の停止は機器の故障によるものだった",
+      "negation_of": "NF6a",
+      "formation_conditions": [
+        [
+          "P1",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "音楽が止まったことと彼女の死は関係がありますか？",
+      "answer": "はい",
+      "reveals": [
+        "I1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q1b",
+      "text": "音楽が止まったことが彼女の死の直接の原因ですか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q2a",
+      "text": "「音楽」は実際に耳で聞こえる音のことですか？",
+      "answer": "はい",
+      "reveals": [
+        "I2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q2b",
+      "text": "「音楽」は文字通りの音楽（楽曲やメロディ）のことですか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3a",
+      "text": "彼女がいた場所は彼女の死に関係がありますか？",
+      "answer": "はい",
+      "reveals": [
+        "I3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q3b",
+      "text": "彼女は物理的に危険な場所にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4a",
+      "text": "彼女は通常とは異なる身体的状態にありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q4b",
+      "text": "彼女は視覚が制限されていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5a",
+      "text": "音楽は何かの目的のために鳴っていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q5b",
+      "text": "音楽は彼女に情報を伝えるガイドとして機能していましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6a",
+      "text": "音楽のガイド機能が停止したことで彼女は重要な情報を失いましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I6"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P5"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6b",
+      "text": "ガイド情報の喪失が彼女の死の原因でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P8"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I6"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q7a",
+      "text": "音楽は彼女の活動で実用的な役割を果たしていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I7"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P5"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q7b",
+      "text": "文字通りの音楽がガイドとして使われていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P9"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P2"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8a",
+      "text": "彼女がガイドに依存していたことと危険な場所にいたことは関連していますか？",
+      "answer": "はい",
+      "reveals": [
+        "I8"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P5"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8b",
+      "text": "視覚が制限された状態で音楽をガイドにして危険な環境で活動していましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P7"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P4",
+        "P5"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q9b",
+      "text": "音楽が伝えていた情報は空間的な位置に関するものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P6"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P5"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q10b",
+      "text": "空間的な位置情報の喪失が彼女の直接の死因でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P10"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P6",
+        "P8"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q11b",
+      "text": "彼女は視覚が制限された状態で文字通りの音楽をガイドにして危険な環境で活動していましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P11"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P4",
+        "P2"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q12a",
+      "text": "彼女は音楽のガイドなしでは生存できない状況にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I12"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P10"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q12b",
+      "text": "彼女は視覚が制限された状態で音楽を位置ガイドにして危険な環境にいて、音楽停止で位置を見失い死亡しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I12"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q_no1",
+      "text": "「音楽」とは何かの比喩や隠語のことですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N_no1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q_no2",
+      "text": "彼女は病気や自然死で亡くなりましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N_no2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q_no3",
+      "text": "彼女は他の誰かに殺されましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N_no3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "彼女が先に死んで、その結果として音楽が止まったのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF1b",
+      "text": "音楽の停止と彼女の死は偶然同時に起きただけですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF1c",
+      "text": "「音楽が止まった」と「彼女が死んだ」は同じ出来事を別の言い方で表しているのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2a",
+      "text": "「音楽」は何かの比喩や隠語ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2b",
+      "text": "「音楽」は何かの装置や機器が出す音のことですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF3a",
+      "text": "彼女がどこにいたかは関係なく、同じ結果になりましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF3b",
+      "text": "彼女がいた場所の危険はルールや他者の行動によるものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I3"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4a",
+      "text": "彼女は拘束されたり行動を制限されていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF4b",
+      "text": "彼女の特殊な状態は意識に関するものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I4"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF5a",
+      "text": "音楽は娯楽や鑑賞のために流れていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF5b",
+      "text": "音楽は何かを制御したり合図を送るために使われていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I5"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF9a",
+      "text": "音楽が伝えていた情報はタイミングに関するものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF9a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P5"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF6a",
+      "text": "音楽の停止は機器の故障が原因でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "原因と動機"
+    }
+  ],
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "statement": "音楽が止まった。彼女は死んだ。",
+  "truth": "彼女は目隠しをした綱渡り師で、音楽が演技の位置ガイドだった。音楽が止まったことで位置を見失い、綱から落ちて死亡した。",
+  "id": "音楽が止まった"
+}

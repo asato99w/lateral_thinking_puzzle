@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>音楽が止まった data_src</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: #fafafa; color: #333; padding: 20px; }
+  h1 { font-size: 1.6em; margin-bottom: 10px; }
+  h2 { font-size: 1.2em; margin: 20px 0 10px; padding: 8px 12px;
+       background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 2px; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+  .stat { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px;
+           padding: 10px 16px; min-width: 120px; }
+  .stat .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+  .stat .label { font-size: 0.85em; color: #666; }
+  .tabs { display: flex; gap: 4px; margin: 16px 0 0; border-bottom: 2px solid #e0e0e0; }
+  .tab { padding: 8px 16px; cursor: pointer; background: #f5f5f5;
+          border: 1px solid #e0e0e0; border-bottom: none; border-radius: 6px 6px 0 0;
+          font-size: 0.9em; user-select: none; }
+  .tab.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px;
+                 font-weight: bold; color: #1565c0; }
+  .tab-content { background: #fff; border: 1px solid #e0e0e0;
+                  border-top: none; padding: 16px; overflow-x: auto; }
+  .tab-content.hidden { display: none; }
+  .mermaid { text-align: center; overflow-x: auto; }
+  .mermaid svg { min-width: 800px; min-height: 400px; }
+  ul.checks { list-style: none; padding: 8px 0; }
+  ul.checks li { padding: 4px 8px; font-size: 0.9em; }
+  li.issue { color: #e65100; }
+  li.ok { color: #2e7d32; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0; font-size: 0.8em; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-swatch { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #999; }
+  .note { font-size: 0.85em; color: #666; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h1>音楽が止まった — data_src.json</h1>
+
+<div class="stats">
+  <div class="stat"><div class="num">4</div><div class="label">tension</div></div>
+  <div class="stat"><div class="num">19</div><div class="label">model</div></div>
+  <div class="stat"><div class="num">5</div><div class="label">S prop</div></div>
+  <div class="stat"><div class="num">53</div><div class="label">proposition</div></div>
+  <div class="stat"><div class="num">37</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">12</div><div class="label">chain</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#e3f2fd"></div> S</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fff3e0"></div> N</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#e8f5e9"></div> P</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fce4ec"></div> NT</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f3e5f5"></div> NU</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f5f5f5"></div> NF</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="deriv_graph">derivation graph</div>
+  <div class="tab" data-tab="derivation">fc flow</div>
+  <div class="tab" data-tab="questions">Q -&gt; prop</div>
+  <div class="tab" data-tab="division">model split</div>
+  <div class="tab" data-tab="chains">chain</div>
+  <div class="tab" data-tab="branches">branch / NF</div>
+  <div class="tab" data-tab="paths">path</div>
+  <div class="tab" data-tab="integrity">integrity</div>
+</div>
+
+<div id="deriv_graph" class="tab-content">
+<h2>derivation graph (_phase2)</h2>
+<p class="note">
+  Conceptual derivation: A &rarr; B means confirming A makes B redundant.
+  Blue = independent axis, green = root (S-reachable), purple = composite, orange = derived.
+  Dashed = combination derivation.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef axisNode fill:#42a5f5,stroke:#1565c0,color:#fff
+  classDef rootNode fill:#4caf50,stroke:#2e7d32,color:#fff
+  classDef compositeNode fill:#9c27b0,stroke:#6a1b9a,color:#fff
+  classDef derivedNode fill:#ff9800,stroke:#e65100,color:#fff
+  classDef defaultNode fill:#e0e0e0,stroke:#757575,color:#424242
+  FP["FP: 彼女は視覚が制限された状態で物理的に危険な環境にいた。文字通りの音楽が空間的位置のガイドとして機能し..."]:::derivedNode
+  P1["P1: 音楽が止まったことが彼女の死の原因だった"]:::rootNode
+  P10["P10: 音楽が伝えていた空間的情報の喪失が彼女の死因だった"]:::axisNode
+  P11["P11: 彼女は視覚が制限された状態で、文字通りの音楽をガイドとして、物理的に危険な環境で活動していた"]:::axisNode
+  P2["P2: 「音楽」は文字通りの音楽（楽曲・メロディ）だった"]:::rootNode
+  P3["P3: 彼女は物理的に危険な場所にいた"]:::rootNode
+  P4["P4: 彼女は視覚が制限された状態にあった（目隠し・盲目等）"]:::rootNode
+  P5["P5: 音楽は彼女に空間的・時間的な情報を伝えるガイドとして機能していた"]:::rootNode
+  P6["P6: 音楽が伝えていた情報は空間的な位置に関するものだった"]:::derivedNode
+  P7["P7: 彼女は視覚が制限された状態で、音楽をガイドとして、物理的に危険な環境で活動していた"]:::derivedNode
+  P8["P8: 音楽のガイド情報の喪失が彼女の死因だった"]:::derivedNode
+  P9["P9: 文字通りの音楽が彼女に情報を伝えるガイドとして機能していた"]:::derivedNode
+  FP -->|"視覚制限・文字通り音楽・危険環境の情報を落とすと空間的情報喪失が死因"| P10
+  FP -->|"空間的・停止→死因の情報を落とすと視覚制限+文字通り音楽ガイド+危険環境"| P11
+  P10 -->|"死因の情報を落とすと空間的位置情報のガイド"| P6
+  P10 -->|"空間的の情報を落とすとガイド情報喪失が死因"| P8
+  P11 -->|"文字通りの音楽の情報を落とすと視覚制限+ガイド+危険環境"| P7
+  P11 -->|"視覚制限と危険環境の情報を落とすと文字通り音楽がガイド"| P9
+  P7 -->|"視覚制限とガイドの情報を落とすと物理的に危険な場所"| P3
+  P7 -->|"ガイドと危険環境の情報を落とすと視覚制限"| P4
+  P7 -->|"視覚制限と危険環境の情報を落とすと情報ガイド"| P5
+  P8 -->|"ガイド情報喪失の情報を落とすと音楽停止が死因"| P1
+  P8 -->|"死因の情報を落とすと情報ガイド"| P5
+  P9 -->|"ガイドの情報を落とすと文字通りの音楽"| P2
+  P9 -->|"文字通りの情報を落とすと情報ガイド"| P5
+  P6 -->|"空間的位置の情報を落とすと情報ガイド"| P5
+</pre>
+</div>
+
+<div id="derivation" class="tab-content">
+<h2>formation_conditions</h2>
+<p class="note">
+  S -&gt; N -&gt; P -&gt; NT -&gt; NU. Solid = fc, dotted = S derived_from.
+  Junction = AND. Multiple arrows to same node = OR.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef sNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  S1["S1: 彼女がいた"]:::sNode
+  S2["S2: 音楽が止まった"]:::sNode
+  S3["S3: 彼女は死んだ"]:::sNode
+  S4["S4: 音楽は止まる前に鳴っていた"]:::sNode
+  S5["S5: 彼女は死ぬ前は生きていた"]:::sNode
+  P1["P1: 音楽が止まったことが彼女の死の原因だった"]:::pNode
+  P2["P2: 「音楽」は文字通りの音楽（楽曲・メロディ）だった"]:::pNode
+  P3["P3: 彼女は物理的に危険な場所にいた"]:::pNode
+  P4["P4: 彼女は視覚が制限された状態にあった"]:::pNode
+  P5["P5: 音楽は彼女に情報を伝えるガイドとして機能していた"]:::pNode
+  P6["P6: 音楽が伝えていた情報は空間的な位置に関するものだった"]:::pNode
+  P7["P7: 彼女は視覚が制限された状態で、音楽をガイドとして、物理的に危険な環境で活動していた"]:::pNode
+  P8["P8: 音楽のガイド情報の喪失が彼女の死因だった"]:::pNode
+  P9["P9: 文字通りの音楽が彼女に情報を伝えるガイドとして機能していた"]:::pNode
+  P10["P10: 音楽が伝えていた空間的情報の喪失が彼女の死因だった"]:::pNode
+  P11["P11: 彼女は視覚が制限された状態で、文字通りの音楽をガイドとして、物理的に危険な環境で活動していた"]:::pNode
+  FP["FP: 彼女は視覚が制限された状態で物理的に危険な環境にいた。文字通りの音楽が空間的位置のガイドとして機能しており、音楽の停止で位置情報を失ったことが死因だった"]:::nNode
+  I1["I1: 彼女の死には音楽が関係している"]:::nNode
+  I2["I2: 「音楽」は耳で聞こえる実際の音だった"]:::nNode
+  I3["I3: 彼女がいた場所は死につながるような場所だった"]:::nNode
+  I4["I4: 彼女は通常とは異なる身体的状態にあった"]:::nNode
+  I5["I5: 音楽には何かの目的・役割があった"]:::nNode
+  I6["I6: 音楽のガイド機能が停止で失われた"]:::nNode
+  I7["I7: 音楽は彼女の活動で実用的な役割を果たしていた"]:::nNode
+  I8["I8: ガイドへの依存と危険な場所にいたことは関連していた"]:::nNode
+  I12["I12: 彼女は音楽のガイドなしでは生存できない状況にいた"]:::nNode
+  N_no1["N_no1: 「音楽」は比喩や隠語ではなかった"]:::nNode
+  N_no2["N_no2: 彼女は病気や自然死ではなかった"]:::nNode
+  N_no3["N_no3: 彼女は他の誰かに殺されたのではなかった"]:::nNode
+  S2 -.-> S4
+  S3 -.-> S5
+  I1 --> P1
+  I2 --> P2
+  I3 --> P3
+  I4 --> P4
+  I5 --> P5
+  P5 --> P6
+  I8 --> P7
+  I6 --> P8
+  I7 --> P9
+  j_P10_P6_P8(( ))
+  P6 --> j_P10_P6_P8
+  P8 --> j_P10_P6_P8
+  j_P10_P6_P8 --> P10
+  j_P11_P7_P9(( ))
+  P7 --> j_P11_P7_P9
+  P9 --> j_P11_P7_P9
+  j_P11_P7_P9 --> P11
+  I12 --> FP
+  j_I1_S2_S3(( ))
+  S2 --> j_I1_S2_S3
+  S3 --> j_I1_S2_S3
+  j_I1_S2_S3 --> I1
+  S2 --> I2
+  j_I3_S1_S3(( ))
+  S1 --> j_I3_S1_S3
+  S3 --> j_I3_S1_S3
+  j_I3_S1_S3 --> I3
+  S1 --> I4
+  j_I5_S2_S4(( ))
+  S2 --> j_I5_S2_S4
+  S4 --> j_I5_S2_S4
+  j_I5_S2_S4 --> I5
+  j_I6_P1_P5(( ))
+  P1 --> j_I6_P1_P5
+  P5 --> j_I6_P1_P5
+  j_I6_P1_P5 --> I6
+  j_I7_P2_P5(( ))
+  P2 --> j_I7_P2_P5
+  P5 --> j_I7_P2_P5
+  j_I7_P2_P5 --> I7
+  j_I8_P3_P4_P5(( ))
+  P3 --> j_I8_P3_P4_P5
+  P4 --> j_I8_P3_P4_P5
+  P5 --> j_I8_P3_P4_P5
+  j_I8_P3_P4_P5 --> I8
+  j_I12_P10_P11(( ))
+  P10 --> j_I12_P10_P11
+  P11 --> j_I12_P10_P11
+  j_I12_P10_P11 --> I12
+  S2 --> N_no1
+  S3 --> N_no2
+  S3 --> N_no3
+</pre>
+</div>
+
+<div id="questions" class="tab-content">
+<h2>Q -&gt; proposition (reveals)</h2>
+<p class="note">O = yes, X = no</p>
+<pre class="mermaid">
+graph LR
+  classDef qNode fill:#e8eaf6,stroke:#283593,color:#1a237e
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  Q10b["Q10b O<br/>空間的な位置情報の喪失が彼女の直接の死因でしたか？"]:::qNode
+  P10_q["P10: 音楽が伝えていた空間的情報の喪失が彼女の死因だった"]:::pNode
+  Q11b["Q11b O<br/>彼女は視覚が制限された状態で文字通りの音楽をガイドにして危険な環境で活動していましたか？"]:::qNode
+  P11_q["P11: 彼女は視覚が制限された状態で、文字通りの音楽をガイドとして、物理的に危険な環境で活動していた"]:::pNode
+  Q12a["Q12a O<br/>彼女は音楽のガイドなしでは生存できない状況にいましたか？"]:::qNode
+  I12_q["I12: 彼女は音楽のガイドなしでは生存できない状況にいた"]:::nNode
+  Q12b["Q12b O<br/>彼女は視覚が制限された状態で音楽を位置ガイドにして危険な環境にいて、音楽停止で位置を見失い死亡しましたか？"]:::qNode
+  FP_q["FP: 彼女は視覚が制限された状態で物理的に危険な環境にいた。文字通りの音楽が空間的位置のガイドとして機能しており、音楽の停止で位置情報を失ったことが死因だった"]:::nNode
+  Q1a["Q1a O<br/>音楽が止まったことと彼女の死は関係がありますか？"]:::qNode
+  I1_q["I1: 彼女の死には音楽が関係している"]:::nNode
+  Q1b["Q1b O<br/>音楽が止まったことが彼女の死の直接の原因ですか？"]:::qNode
+  P1_q["P1: 音楽が止まったことが彼女の死の原因だった"]:::pNode
+  Q2a["Q2a O<br/>「音楽」は実際に耳で聞こえる音のことですか？"]:::qNode
+  I2_q["I2: 「音楽」は耳で聞こえる実際の音だった"]:::nNode
+  Q2b["Q2b O<br/>「音楽」は文字通りの音楽（楽曲やメロディ）のことですか？"]:::qNode
+  P2_q["P2: 「音楽」は文字通りの音楽（楽曲・メロディ）だった"]:::pNode
+  Q3a["Q3a O<br/>彼女がいた場所は彼女の死に関係がありますか？"]:::qNode
+  I3_q["I3: 彼女がいた場所は死につながるような場所だった"]:::nNode
+  Q3b["Q3b O<br/>彼女は物理的に危険な場所にいましたか？"]:::qNode
+  P3_q["P3: 彼女は物理的に危険な場所にいた"]:::pNode
+  Q4a["Q4a O<br/>彼女は通常とは異なる身体的状態にありましたか？"]:::qNode
+  I4_q["I4: 彼女は通常とは異なる身体的状態にあった"]:::nNode
+  Q4b["Q4b O<br/>彼女は視覚が制限されていましたか？"]:::qNode
+  P4_q["P4: 彼女は視覚が制限された状態にあった"]:::pNode
+  Q5a["Q5a O<br/>音楽は何かの目的のために鳴っていましたか？"]:::qNode
+  I5_q["I5: 音楽には何かの目的・役割があった"]:::nNode
+  Q5b["Q5b O<br/>音楽は彼女に情報を伝えるガイドとして機能していましたか？"]:::qNode
+  P5_q["P5: 音楽は彼女に情報を伝えるガイドとして機能していた"]:::pNode
+  Q6a["Q6a O<br/>音楽のガイド機能が停止したことで彼女は重要な情報を失いましたか？"]:::qNode
+  I6_q["I6: 音楽のガイド機能が停止で失われた"]:::nNode
+  Q6b["Q6b O<br/>ガイド情報の喪失が彼女の死の原因でしたか？"]:::qNode
+  P8_q["P8: 音楽のガイド情報の喪失が彼女の死因だった"]:::pNode
+  Q7a["Q7a O<br/>音楽は彼女の活動で実用的な役割を果たしていましたか？"]:::qNode
+  I7_q["I7: 音楽は彼女の活動で実用的な役割を果たしていた"]:::nNode
+  Q7b["Q7b O<br/>文字通りの音楽がガイドとして使われていましたか？"]:::qNode
+  P9_q["P9: 文字通りの音楽が彼女に情報を伝えるガイドとして機能していた"]:::pNode
+  Q8a["Q8a O<br/>彼女がガイドに依存していたことと危険な場所にいたことは関連していますか？"]:::qNode
+  I8_q["I8: ガイドへの依存と危険な場所にいたことは関連していた"]:::nNode
+  Q8b["Q8b O<br/>視覚が制限された状態で音楽をガイドにして危険な環境で活動していましたか？"]:::qNode
+  P7_q["P7: 彼女は視覚が制限された状態で、音楽をガイドとして、物理的に危険な環境で活動していた"]:::pNode
+  Q9b["Q9b O<br/>音楽が伝えていた情報は空間的な位置に関するものでしたか？"]:::qNode
+  P6_q["P6: 音楽が伝えていた情報は空間的な位置に関するものだった"]:::pNode
+  QF1a["QF1a X<br/>彼女が先に死んで、その結果として音楽が止まったのですか？"]:::qNode
+  NF1a_q["NF1a: 因果は逆転しておらず、彼女の死が先ではなかった"]:::fNode
+  QF1b["QF1b X<br/>音楽の停止と彼女の死は偶然同時に起きただけですか？"]:::qNode
+  NF1b_q["NF1b: 音楽の停止と彼女の死は偶然の同時発生ではなかった"]:::fNode
+  QF1c["QF1c X<br/>「音楽が止まった」と「彼女が死んだ」は同じ出来事を別の言い方で表しているのですか？"]:::qNode
+  NF1c_q["NF1c: 音楽の停止と彼女の死は別々の出来事だった"]:::fNode
+  QF2a["QF2a X<br/>「音楽」は何かの比喩や隠語ですか？"]:::qNode
+  NF2a_q["NF2a: 「音楽」は比喩や隠語ではなかった"]:::fNode
+  QF2b["QF2b X<br/>「音楽」は何かの装置や機器が出す音のことですか？"]:::qNode
+  NF2b_q["NF2b: 「音楽」は装置や機器の音ではなかった"]:::fNode
+  QF3a["QF3a X<br/>彼女がどこにいたかは関係なく、同じ結果になりましたか？"]:::qNode
+  NF3a_q["NF3a: 彼女がいた場所はどこでも同じ結果にはならなかった"]:::fNode
+  QF3b["QF3b X<br/>彼女がいた場所の危険はルールや他者の行動によるものでしたか？"]:::qNode
+  NF3b_q["NF3b: 場所の危険はルールや人間関係によるものではなかった"]:::fNode
+  QF4a["QF4a X<br/>彼女は拘束されたり行動を制限されていましたか？"]:::qNode
+  NF4a_q["NF4a: 彼女は拘束や行動制限を受けていなかった"]:::fNode
+  QF4b["QF4b X<br/>彼女の特殊な状態は意識に関するものでしたか？"]:::qNode
+  NF4b_q["NF4b: 彼女の特殊な状態は意識に関するものではなかった"]:::fNode
+  QF5a["QF5a X<br/>音楽は娯楽や鑑賞のために流れていましたか？"]:::qNode
+  NF5a_q["NF5a: 音楽は娯楽として流れていたのではなかった"]:::fNode
+  QF5b["QF5b X<br/>音楽は何かを制御したり合図を送るために使われていましたか？"]:::qNode
+  NF5b_q["NF5b: 音楽は制御や合図のためではなかった"]:::fNode
+  QF6a["QF6a X<br/>音楽の停止は機器の故障が原因でしたか？"]:::qNode
+  NF6a_q["NF6a: 音楽の停止は機器の故障によるものではなかった"]:::fNode
+  QF9a["QF9a X<br/>音楽が伝えていた情報はタイミングに関するものでしたか？"]:::qNode
+  NF9a_q["NF9a: 音楽が伝えていた情報はタイミングに関するものではなかった"]:::fNode
+  Q_no1["Q_no1 X<br/>「音楽」とは何かの比喩や隠語のことですか？"]:::qNode
+  N_no1_q["N_no1: 「音楽」は比喩や隠語ではなかった"]:::nNode
+  Q_no2["Q_no2 X<br/>彼女は病気や自然死で亡くなりましたか？"]:::qNode
+  N_no2_q["N_no2: 彼女は病気や自然死ではなかった"]:::nNode
+  Q_no3["Q_no3 X<br/>彼女は他の誰かに殺されましたか？"]:::qNode
+  N_no3_q["N_no3: 彼女は他の誰かに殺されたのではなかった"]:::nNode
+  Q10b -->|reveals| P10_q
+  Q11b -->|reveals| P11_q
+  Q12a -->|reveals| I12_q
+  Q12b -->|reveals| FP_q
+  Q1a -->|reveals| I1_q
+  Q1b -->|reveals| P1_q
+  Q2a -->|reveals| I2_q
+  Q2b -->|reveals| P2_q
+  Q3a -->|reveals| I3_q
+  Q3b -->|reveals| P3_q
+  Q4a -->|reveals| I4_q
+  Q4b -->|reveals| P4_q
+  Q5a -->|reveals| I5_q
+  Q5b -->|reveals| P5_q
+  Q6a -->|reveals| I6_q
+  Q6b -->|reveals| P8_q
+  Q7a -->|reveals| I7_q
+  Q7b -->|reveals| P9_q
+  Q8a -->|reveals| I8_q
+  Q8b -->|reveals| P7_q
+  Q9b -->|reveals| P6_q
+  QF1a -->|reveals| NF1a_q
+  QF1b -->|reveals| NF1b_q
+  QF1c -->|reveals| NF1c_q
+  QF2a -->|reveals| NF2a_q
+  QF2b -->|reveals| NF2b_q
+  QF3a -->|reveals| NF3a_q
+  QF3b -->|reveals| NF3b_q
+  QF4a -->|reveals| NF4a_q
+  QF4b -->|reveals| NF4b_q
+  QF5a -->|reveals| NF5a_q
+  QF5b -->|reveals| NF5b_q
+  QF6a -->|reveals| NF6a_q
+  QF9a -->|reveals| NF9a_q
+  Q_no1 -->|reveals| N_no1_q
+  Q_no2 -->|reveals| N_no2_q
+  Q_no3 -->|reveals| N_no3_q
+</pre>
+</div>
+
+<div id="division" class="tab-content">
+<h2>model division hierarchy</h2>
+<pre class="mermaid">
+graph TD
+  classDef trueSet fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseSet fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef propNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  ALL["T, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15, M16, M17, M18"]
+</pre>
+</div>
+
+<div id="chains" class="tab-content">
+<h2>tactical chains</h2>
+<p class="note">C1-C5 + extensions. Parsed from _phase3 description.</p>
+<pre class="mermaid">
+graph TD
+  classDef srcNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef midNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef tgtNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef extNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uniNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  subgraph C1["C1: 動機の探索 → 段階的絞り込み"]
+    direction LR
+    C1_I1["I1: 彼女の死には音楽が関係している"]:::srcNode
+    C1_P1["P1"]:::tgtNode
+    C1_I1 --> C1_P1
+  end
+  subgraph C2["C2: ラベルと実体の乖離 → 段階的絞り込み"]
+    direction LR
+    C2_S2["S2"]:::srcNode
+    C2_I2["I2: 「音楽」は比喩や隠語ではなく実際の音だった"]:::midNode
+    C2_S2 -->|"段階的絞り込み"| C2_I2
+    C2_P2["P2"]:::tgtNode
+    C2_I2 --> C2_P2
+  end
+  subgraph C3["C3: 動機の探索 → 段階的絞り込み"]
+    direction LR
+    C3_I3["I3: 彼女がいた場所は死につながるような場所だった"]:::srcNode
+    C3_P3["P3"]:::tgtNode
+    C3_I3 --> C3_P3
+  end
+  subgraph C4["C4: 人物像の探索 → 段階的絞り込み"]
+    direction LR
+    C4_S1["S1"]:::srcNode
+    C4_I4["I4: 彼女は何らかの特殊な状態にあった"]:::midNode
+    C4_S1 -->|"段階的絞り込み"| C4_I4
+    C4_P4["P4"]:::tgtNode
+    C4_I4 --> C4_P4
+  end
+  subgraph C5["C5: 動機の探索 → 段階的絞り込み"]
+    direction LR
+    C5_I5["I5: 音楽には何かの目的・役割があった"]:::srcNode
+    C5_P5["P5"]:::tgtNode
+    C5_I5 --> C5_P5
+  end
+  subgraph C6["C6: 観測事実の深掘り → 段階的絞り込み"]
+    direction LR
+    C6_I6["I6: 音楽のガイド機能が停止で失われた"]:::srcNode
+    C6_P8["P8"]:::tgtNode
+    C6_I6 --> C6_P8
+  end
+  subgraph C7["C7: 段階的絞り込み → 観測事実の深掘り"]
+    direction LR
+    C7_I7["I7: 文字通りの音楽が機能的役割を持っていた"]:::srcNode
+    C7_P9["P9"]:::tgtNode
+    C7_I7 --> C7_P9
+  end
+  subgraph C8["C8: 段階的絞り込み → 観測事実の深掘り"]
+    direction LR
+    C8_I8["I8: 制限状態でガイドに依存しつつ危険な場所にいた"]:::srcNode
+    C8_P7["P7"]:::tgtNode
+    C8_I8 --> C8_P7
+  end
+  subgraph C9["C9: 段階的絞り込み"]
+    direction LR
+    C9_P5["P5"]:::srcNode
+    C9_P6["P6"]:::tgtNode
+    C9_P5 --> C9_P6
+  end
+  subgraph C10["C10: 段階的絞り込み"]
+    direction LR
+    C10_P10["P10"]:::tgtNode
+  end
+  subgraph C11["C11: 段階的絞り込み"]
+    direction LR
+    C11_P11["P11"]:::tgtNode
+  end
+  subgraph C12["C12: 段階的絞り込み → 段階的絞り込み"]
+    direction LR
+    C12_I12["I12: 音楽のガイドなしでは生存できない状況にいた"]:::srcNode
+    C12_FP["FP"]:::tgtNode
+    C12_I12 --> C12_FP
+  end
+</pre>
+</div>
+
+<div id="branches" class="tab-content">
+<h2>chain branches / rejection (_phase9)</h2>
+<p class="note">T = true side, F = false side (parallel). Dotted = generated NF proposition.</p>
+<pre class="mermaid">
+graph TD
+  classDef trueNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseNode fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef nfNode fill:#f5f5f5,stroke:#757575,color:#424242
+  subgraph C1_branch["C1: S2+S3 → I1 → P1"]
+    C1_I1_t["T I1: 死には音楽が関係している"]:::trueNode
+    C1_I1_f0["F 因果が逆転しており彼女の死が先だった<br/>(M6, M10)"]:::falseNode
+    C1_I1_t --- C1_I1_f0
+    NF1a_nf["NF1a"]:::nfNode
+    C1_I1_f0 -.-> NF1a_nf
+    C1_I1_f1["F 偶然の同時発生だった<br/>(M18)"]:::falseNode
+    C1_I1_t --- C1_I1_f1
+    NF1b_nf["NF1b"]:::nfNode
+    C1_I1_f1 -.-> NF1b_nf
+    C1_P1_t["T P1: 音楽停止が死の直接原因"]:::trueNode
+    C1_P1_f0["F 音楽停止と死は同一事象の別表現だった<br/>(M3, M11)"]:::falseNode
+    C1_P1_t --- C1_P1_f0
+    NF1c_nf["NF1c"]:::nfNode
+    C1_P1_f0 -.-> NF1c_nf
+  end
+  subgraph C2_branch["C2: S2 → I2 → P2"]
+    C2_I2_t["T I2: 実際に聞こえる音だった"]:::trueNode
+    C2_I2_f0["F 比喩や隠語だった<br/>(M15)"]:::falseNode
+    C2_I2_t --- C2_I2_f0
+    NF2a_nf["NF2a"]:::nfNode
+    C2_I2_f0 -.-> NF2a_nf
+    C2_P2_t["T P2: 文字通りの音楽だった"]:::trueNode
+    C2_P2_f0["F 装置や機器が出す音だった<br/>(M3, M9, M12, M17)"]:::falseNode
+    C2_P2_t --- C2_P2_f0
+    NF2b_nf["NF2b"]:::nfNode
+    C2_P2_f0 -.-> NF2b_nf
+  end
+  subgraph C3_branch["C3: S1+S3 → I3 → P3"]
+    C3_I3_t["T I3: 場所が死に関係"]:::trueNode
+    C3_I3_f0["F 場所はどこでも同じ結果だった<br/>(M6, M15)"]:::falseNode
+    C3_I3_t --- C3_I3_f0
+    NF3a_nf["NF3a"]:::nfNode
+    C3_I3_f0 -.-> NF3a_nf
+    C3_P3_t["T P3: 物理的に危険な場所"]:::trueNode
+    C3_P3_f0["F 危険はルールや人間関係に基づいていた<br/>(M4, M8)"]:::falseNode
+    C3_P3_t --- C3_P3_f0
+    NF3b_nf["NF3b"]:::nfNode
+    C3_P3_f0 -.-> NF3b_nf
+  end
+  subgraph C4_branch["C4: S1 → I4 → P4"]
+    C4_I4_t["T I4: 通常とは異なる身体的状態"]:::trueNode
+    C4_I4_f0["F 拘束や行動制限を受けていた<br/>(M4, M8, M17)"]:::falseNode
+    C4_I4_t --- C4_I4_f0
+    NF4a_nf["NF4a"]:::nfNode
+    C4_I4_f0 -.-> NF4a_nf
+    C4_P4_t["T P4: 視覚が制限されていた"]:::trueNode
+    C4_P4_f0["F 意識に関する制限だった<br/>(M3, M7, M9)"]:::falseNode
+    C4_P4_t --- C4_P4_f0
+    NF4b_nf["NF4b"]:::nfNode
+    C4_P4_f0 -.-> NF4b_nf
+  end
+  subgraph C5_branch["C5: S2+S4 → I5 → P5"]
+    C5_I5_t["T I5: 音楽に目的があった"]:::trueNode
+    C5_I5_f0["F 音楽は娯楽として流れていた<br/>(M6, M10, M18)"]:::falseNode
+    C5_I5_t --- C5_I5_f0
+    NF5a_nf["NF5a"]:::nfNode
+    C5_I5_f0 -.-> NF5a_nf
+    C5_P5_t["T P5: 情報ガイドとして機能"]:::trueNode
+    C5_P5_f0["F 制御や合図として使われていた<br/>(M2, M4, M7, M8, M13, M16, M17)"]:::falseNode
+    C5_P5_t --- C5_P5_f0
+    NF5b_nf["NF5b"]:::nfNode
+    C5_P5_f0 -.-> NF5b_nf
+  end
+  subgraph C9_branch["C9: P5 → I9 → P6"]
+    C9_I9_t["T I9: 情報の種類に特徴がある"]:::trueNode
+    C9_I9_f0["F 情報の種類は特定できない汎用的なものだった<br/>()"]:::falseNode
+    C9_I9_t --- C9_I9_f0
+    C9_P6_t["T P6: 空間的な位置情報"]:::trueNode
+    C9_P6_f0["F 時間的なタイミング情報だった<br/>(G2)"]:::falseNode
+    C9_P6_t --- C9_P6_f0
+    NF9a_nf["NF9a"]:::nfNode
+    C9_P6_f0 -.-> NF9a_nf
+  end
+  subgraph C6_branch["C6: P1+P5 → I6 → P8"]
+    C6_I6_t["T I6: ガイド機能が停止で失われた"]:::trueNode
+    C6_I6_f0["F 停止は機器の故障によるものだった<br/>(M12)"]:::falseNode
+    C6_I6_t --- C6_I6_f0
+    NF6a_nf["NF6a"]:::nfNode
+    C6_I6_f0 -.-> NF6a_nf
+    C6_P8_t["T P8: ガイド情報喪失が死因"]:::trueNode
+    C6_P8_f0["F ガイド喪失は間接的にのみ死因に寄与した<br/>()"]:::falseNode
+    C6_P8_t --- C6_P8_f0
+  end
+</pre>
+</div>
+
+<div id="paths" class="tab-content">
+<h2>exploration paths</h2>
+<pre class="mermaid">
+graph LR
+  classDef pathNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  subgraph path_sg_0["パス A: 因果方向から入る"]
+    p0s0["Q1a(はい:I1)"]:::pathNode
+    p0s1["Q1b(はい:P1)"]:::pathNode
+    p0s0 --> p0s1
+    p0s2["Q5a(はい:I5)"]:::pathNode
+    p0s1 --> p0s2
+    p0s3["Q5b(はい:P5)"]:::pathNode
+    p0s2 --> p0s3
+    p0s4["Q6a(はい:I6)"]:::pathNode
+    p0s3 --> p0s4
+    p0s5["Q6b(はい:P8)"]:::pathNode
+    p0s4 --> p0s5
+    p0s6["Q9a(はい:I9)"]:::pathNode
+    p0s5 --> p0s6
+    p0s7["Q9b(はい:P6)"]:::pathNode
+    p0s6 --> p0s7
+    p0s8["Q10a(はい:I10)"]:::pathNode
+    p0s7 --> p0s8
+    p0s9["Q10b(はい:P10)"]:::pathNode
+    p0s8 --> p0s9
+    p0s10["..."]:::pathNode
+    p0s9 --> p0s10
+  end
+  subgraph path_sg_1["パス B: 彼女の状態から入る"]
+    p1s0["Q4a(はい:I4)"]:::pathNode
+    p1s1["Q4b(はい:P4)"]:::pathNode
+    p1s0 --> p1s1
+    p1s2["Q3a(はい:I3)"]:::pathNode
+    p1s1 --> p1s2
+    p1s3["Q3b(はい:P3)"]:::pathNode
+    p1s2 --> p1s3
+    p1s4["Q5a(はい:I5)"]:::pathNode
+    p1s3 --> p1s4
+    p1s5["Q5b(はい:P5)"]:::pathNode
+    p1s4 --> p1s5
+    p1s6["Q8a(はい:I8)"]:::pathNode
+    p1s5 --> p1s6
+    p1s7["Q8b(はい:P7)"]:::pathNode
+    p1s6 --> p1s7
+    p1s8["..."]:::pathNode
+    p1s7 --> p1s8
+  end
+  subgraph path_sg_2["パス C: 音楽の正体から入る"]
+    p2s0["Q2a(はい:I2)"]:::pathNode
+    p2s1["Q2b(はい:P2)"]:::pathNode
+    p2s0 --> p2s1
+    p2s2["Q5a(はい:I5)"]:::pathNode
+    p2s1 --> p2s2
+    p2s3["Q5b(はい:P5)"]:::pathNode
+    p2s2 --> p2s3
+    p2s4["Q7a(はい:I7)"]:::pathNode
+    p2s3 --> p2s4
+    p2s5["Q7b(はい:P9)"]:::pathNode
+    p2s4 --> p2s5
+    p2s6["..."]:::pathNode
+    p2s5 --> p2s6
+  end
+</pre>
+</div>
+
+<div id="integrity" class="tab-content">
+<h2>integrity check</h2>
+<ul class="checks">
+<li class="issue">&#9888; カバーされていないモデル: [&#x27;M14&#x27;]</li>
+<li class="issue">&#9888; initial_confirmed がトップレベルと _phase3 で重複（実害なし、データ冗長）</li>
+<li class="ok">&#10003; 全質問の reveals 先は全て propositions に存在</li>
+<li class="ok">&#10003; negation_of の対称性が保たれている</li>
+<li class="ok">&#10003; 全命題の formation_conditions の参照先が存在</li>
+<li class="ok">&#10003; 全質問の reveals が単一要素（1質問1命題）</li>
+
+</ul>
+</div>
+
+<script>
+  // Initialize mermaid - render all diagrams while all tabs visible
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: {
+      htmlLabels: true,
+      curve: 'basis',
+      useMaxWidth: false,
+      nodeSpacing: 30,
+      rankSpacing: 60,
+      padding: 15
+    },
+    themeVariables: {
+      fontSize: '14px'
+    }
+  });
+
+  // After mermaid renders, hide non-active tabs
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var tabs = document.querySelectorAll('.tab-content');
+      for (var i = 1; i < tabs.length; i++) {
+        tabs[i].classList.add('hidden');
+      }
+    }, 500);
+  });
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.add('hidden');
+      });
+      document.querySelectorAll('.tab').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      var target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.remove('hidden');
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

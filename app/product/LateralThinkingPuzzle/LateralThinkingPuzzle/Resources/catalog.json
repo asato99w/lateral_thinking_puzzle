@@ -85,6 +85,22 @@
       ]
     },
     {
+      "id": "music_stopped",
+      "engine_version": "v3",
+      "odr_tag": "puzzle-music-stopped",
+      "title_ja": "音楽が止まった",
+      "title_en": "The Music Stopped",
+      "statement_preview_ja": "音楽が止まった。彼女は死んだ。",
+      "statement_preview_en": "The music stopped. She died.",
+      "icon": "🎵",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false,
+      "locales": [
+        "ja"
+      ]
+    },
+    {
       "id": "cassette_tape",
       "engine_version": "v3",
       "odr_tag": "puzzle-cassette-tape",
