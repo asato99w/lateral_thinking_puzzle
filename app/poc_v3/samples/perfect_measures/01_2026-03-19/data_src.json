@@ -1,0 +1,2810 @@
+{
+  "title": "万全の対策",
+  "S": "男は万全の対策に満足し、安心して眠りについた。翌朝、男は絶望した。",
+  "T": "男は騒音のひどい環境に住んでいた。高性能な耳栓を手に入れ、これで快適に眠れると満足して眠りについた。耳栓が優秀すぎて目覚ましの音も完全に遮断され、翌朝寝過ごしてしまった。",
+  "_phase1": {
+    "tensions": [
+      {
+        "id": "α1",
+        "label": "万全と評価した対策が期待通りの結果をもたらさなかった（対策失敗のメカニズム）",
+        "parent": "α"
+      },
+      {
+        "id": "α2",
+        "label": "結果が「絶望」レベルの深刻さをもたらした（結果の深刻さ）",
+        "parent": "α"
+      },
+      {
+        "id": "β1",
+        "label": "対策実施後に問題の兆候がなく安心して眠れた（問題の潜在性）",
+        "parent": "β"
+      },
+      {
+        "id": "β2",
+        "label": "問題が翌朝になって初めて顕在化した（発覚のタイミング）",
+        "parent": "β"
+      },
+      {
+        "id": "γ1",
+        "label": "何に困っていて対策が必要だったかが不明（対策の対象）",
+        "parent": "γ"
+      },
+      {
+        "id": "γ2",
+        "label": "具体的にどのような対策を講じたかが不明（対策の手段）",
+        "parent": "γ"
+      }
+    ],
+    "models": [
+      {
+        "id": "T",
+        "label": "騒音対策（耳栓）",
+        "summary": "騒音のひどい環境に住む男が高性能耳栓を入手。耳栓が目覚ましの音も遮断し、翌朝寝坊して絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M1",
+        "label": "寒さ対策（練炭ストーブ）",
+        "summary": "寒さに悩む男が練炭ストーブで部屋を暖めた。密閉空間でCOが蓄積し、翌朝一酸化炭素中毒の症状で絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M2",
+        "label": "防犯対策（厳重施錠）",
+        "summary": "空き巣を恐れた男が鍵・バリケードで家を厳重に施錠。翌朝鍵が故障して外に出られず、重要な用事に遅刻して絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M3",
+        "label": "光対策（遮光カーテン）",
+        "summary": "街灯の光に悩む男が完全遮光カーテンを設置。朝日も遮断され体内時計が狂い、翌朝大幅に寝坊して絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M4",
+        "label": "不眠対策（睡眠薬）",
+        "summary": "不眠に悩む男が睡眠薬を服用して眠った。薬が効きすぎて翌朝起きられず、寝坊して絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M5",
+        "label": "虫対策（殺虫剤＋密閉）",
+        "summary": "虫に悩む男が殺虫剤を撒いて部屋を密閉。化学物質を吸い込み、翌朝体調不良で絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M6",
+        "label": "台風対策（補強）",
+        "summary": "台風に備え窓を補強し物を片付けた男。台風の規模が想定を大幅に超え、翌朝甚大な被害を目撃して絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M7",
+        "label": "乾燥対策（加湿器）",
+        "summary": "乾燥に悩む男が加湿器をフル稼働させて眠った。湿度が上がりすぎて結露が発生し、翌朝重要書類が水浸しで絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M8",
+        "label": "試験対策（勉強）",
+        "summary": "試験前夜に完璧に勉強して安心して眠った。翌朝、試験範囲の変更を知り全く対応できず絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M9",
+        "label": "データ保護（バックアップ）",
+        "summary": "重要データのバックアップを完了して安心して眠った。翌朝、バックアップ先のドライブも元データも壊れていて絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M10",
+        "label": "花粉対策（密閉＋空気清浄）",
+        "summary": "花粉に悩む男が部屋を密閉し空気清浄機を稼働。換気不足でCO2が蓄積し、翌朝頭痛と倦怠感で絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M11",
+        "label": "旅行準備（荷造り）",
+        "summary": "旅行の荷造りを完璧に終えて安心して眠った。翌朝フライトキャンセルの通知を受け、旅行に行けず絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M12",
+        "label": "ペット保護（ケージ収容）",
+        "summary": "夜間のペットの安全のためケージに入れて眠った。翌朝ケージ内でペットが怪我をしていて絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M13",
+        "label": "暑さ対策（エアコン）",
+        "summary": "暑さに悩む男がエアコンを最強にして眠った。冷えすぎて翌朝体調不良になり、重要な仕事に支障が出て絶望した",
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      }
+    ],
+    "relaxation_patterns": {
+      "T": {
+        "α1": "感覚遮断の副作用（対象と同種の覚醒信号も遮断）",
+        "α2": "寝坊による時間的喪失",
+        "β1": "遮断が常時作動し覚醒信号に気づけない",
+        "β2": "覚醒信号（目覚まし）は翌朝にのみ発生する事象",
+        "γ1": "環境ストレス（感覚入力）",
+        "γ2": "感覚遮断デバイス"
+      },
+      "M1": {
+        "α1": "密閉環境の副作用（有害物質蓄積）",
+        "α2": "健康被害（生命の危険）",
+        "β1": "有害物質は無色無臭で感知不能",
+        "β2": "蓄積は時間経過で進行し翌朝に症状顕在化",
+        "γ1": "環境ストレス（温度）",
+        "γ2": "熱源＋密閉"
+      },
+      "M2": {
+        "α1": "封鎖の逆効果（防御→閉じ込め）",
+        "α2": "行動不能による機会喪失",
+        "β1": "睡眠中は脱出不要で問題に気づかない",
+        "β2": "外出は翌朝にのみ必要な行動",
+        "γ1": "外部脅威（侵入者）",
+        "γ2": "物理的封鎖"
+      },
+      "M3": {
+        "α1": "感覚遮断の副作用（対象と同種の覚醒信号も遮断）",
+        "α2": "寝坊による時間的喪失",
+        "β1": "遮断が常時作動し覚醒信号に気づけない",
+        "β2": "覚醒信号（朝日）は翌朝にのみ発生する事象",
+        "γ1": "環境ストレス（感覚入力）",
+        "γ2": "感覚遮断デバイス"
+      },
+      "M4": {
+        "α1": "薬物の過剰効果（覚醒抑制の持続）",
+        "α2": "寝坊による時間的喪失",
+        "β1": "薬効が睡眠中に持続し覚醒困難",
+        "β2": "覚醒の必要性は翌朝に生じる",
+        "γ1": "生理的不調（不眠）",
+        "γ2": "薬物投与"
+      },
+      "M5": {
+        "α1": "密閉環境の副作用（有害物質蓄積）",
+        "α2": "健康被害（生命の危険）",
+        "β1": "有害物質は無色無臭で感知不能",
+        "β2": "蓄積は時間経過で進行し翌朝に症状顕在化",
+        "γ1": "環境ストレス（害虫）",
+        "γ2": "化学物質＋密閉"
+      },
+      "M6": {
+        "α1": "対策の想定範囲超過（外部事象の規模が対策能力を超越）",
+        "α2": "甚大な物的被害",
+        "β1": "外部事象は対策後に進行し介入不能",
+        "β2": "被害は翌朝に目視確認で判明",
+        "γ1": "自然災害",
+        "γ2": "物理的補強"
+      },
+      "M7": {
+        "α1": "環境制御の過剰（目標値の超過）",
+        "α2": "重要物の物的損壊",
+        "β1": "環境制御は自動稼働で睡眠中に進行",
+        "β2": "損壊は翌朝に目視確認で判明",
+        "γ1": "環境ストレス（乾燥）",
+        "γ2": "環境制御デバイス（加湿）"
+      },
+      "M8": {
+        "α1": "対策前提の外部的崩壊（条件変更）",
+        "α2": "機会喪失（目標達成不可能）",
+        "β1": "条件変更は対策完了後に発生",
+        "β2": "変更は翌朝に情報伝達で判明",
+        "γ1": "将来イベントの準備",
+        "γ2": "知識・情報の準備"
+      },
+      "M9": {
+        "α1": "対策媒体の故障（保存先の物理的障害）",
+        "α2": "完全な情報喪失",
+        "β1": "処理は自動実行で睡眠中の故障に気づけない",
+        "β2": "故障は翌朝に確認操作で判明",
+        "γ1": "情報喪失リスク",
+        "γ2": "冗長化（バックアップ）"
+      },
+      "M10": {
+        "α1": "密閉環境の副作用（有害物質蓄積）",
+        "α2": "健康被害（生命の危険）",
+        "β1": "有害物質は無色無臭で感知不能",
+        "β2": "蓄積は時間経過で進行し翌朝に症状顕在化",
+        "γ1": "環境ストレス（花粉）",
+        "γ2": "密閉＋空気清浄"
+      },
+      "M11": {
+        "α1": "対策前提の外部的崩壊（条件変更）",
+        "α2": "機会喪失（目標達成不可能）",
+        "β1": "条件変更は対策完了後に発生",
+        "β2": "変更は翌朝に情報伝達で判明",
+        "γ1": "将来イベントの準備",
+        "γ2": "物品の準備"
+      },
+      "M12": {
+        "α1": "保護の逆効果（閉じ込めによる被害）",
+        "α2": "保護対象の健康被害",
+        "β1": "閉じ込めの悪影響は睡眠中に進行",
+        "β2": "被害は翌朝に目視確認で判明",
+        "γ1": "保護対象の安全",
+        "γ2": "物理的収容"
+      },
+      "M13": {
+        "α1": "環境制御の過剰（目標値の超過）",
+        "α2": "健康被害",
+        "β1": "環境制御は自動稼働で睡眠中に進行",
+        "β2": "症状は翌朝に身体感覚で判明",
+        "γ1": "環境ストレス（暑さ）",
+        "γ2": "環境制御デバイス（冷房）"
+      }
+    },
+    "variant_groups": [
+      {
+        "group_id": "G1",
+        "label": "感覚遮断の過剰効果（不快な感覚入力の遮断が覚醒信号も遮断→寝坊）",
+        "representative": "T",
+        "members": [
+          "T",
+          "M3"
+        ],
+        "shared_pattern": {
+          "α1": "感覚遮断の副作用（対象と同種の覚醒信号も遮断）",
+          "α2": "寝坊による時間的喪失",
+          "β1": "遮断が常時作動し覚醒信号に気づけない",
+          "β2": "覚醒信号は翌朝にのみ発生する事象",
+          "γ1": "環境ストレス（感覚入力）",
+          "γ2": "感覚遮断デバイス"
+        }
+      },
+      {
+        "group_id": "G2",
+        "label": "密閉環境の大気汚染（環境を密閉して問題を防ぐが有害物質が蓄積→健康被害）",
+        "representative": "M1",
+        "members": [
+          "M1",
+          "M5",
+          "M10"
+        ],
+        "shared_pattern": {
+          "α1": "密閉環境の副作用（有害物質蓄積）",
+          "α2": "健康被害（生命の危険）",
+          "β1": "有害物質は無色無臭で感知不能",
+          "β2": "蓄積は時間経過で進行し翌朝に症状顕在化",
+          "γ1": "環境ストレス",
+          "γ2": "密閉＋汚染源"
+        }
+      },
+      {
+        "group_id": "G3",
+        "label": "対策前提の外部的崩壊（対策完了後に外部条件が変化し対策が無効化→目標達成不可能）",
+        "representative": "M8",
+        "members": [
+          "M8",
+          "M11"
+        ],
+        "shared_pattern": {
+          "α1": "対策前提の外部的崩壊（条件変更）",
+          "α2": "機会喪失（目標達成不可能）",
+          "β1": "条件変更は対策完了後に発生",
+          "β2": "変更は翌朝に情報伝達で判明",
+          "γ1": "将来イベントの準備",
+          "γ2": "準備行為"
+        }
+      }
+    ],
+    "abstract_models": [
+      {
+        "id": "G1",
+        "label": "感覚遮断の過剰効果（覚醒信号も遮断→寝坊）",
+        "representative": "T",
+        "members": [
+          "T",
+          "M3"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "G2",
+        "label": "密閉環境の大気汚染（有害物質蓄積→健康被害）",
+        "representative": "M1",
+        "members": [
+          "M1",
+          "M5",
+          "M10"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "G3",
+        "label": "対策前提の外部的崩壊（条件変更→対策無効化）",
+        "representative": "M8",
+        "members": [
+          "M8",
+          "M11"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M2",
+        "label": "物理的封鎖の逆効果（防犯→閉じ込め）",
+        "members": [
+          "M2"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M4",
+        "label": "薬物の過剰効果（睡眠薬→覚醒困難→寝坊）",
+        "members": [
+          "M4"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M6",
+        "label": "対策の想定範囲超過（自然災害の規模が対策能力を超越）",
+        "members": [
+          "M6"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M7",
+        "label": "環境制御の過剰による物的損壊（加湿→結露→書類損壊）",
+        "members": [
+          "M7"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M9",
+        "label": "対策媒体の故障（バックアップ先の物理的障害→情報喪失）",
+        "members": [
+          "M9"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M12",
+        "label": "保護の逆効果（ケージ収容→保護対象の被害）",
+        "members": [
+          "M12"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      },
+      {
+        "id": "M13",
+        "label": "環境制御の過剰による健康被害（冷房→冷えすぎ→体調不良）",
+        "members": [
+          "M13"
+        ],
+        "tension_subset": [
+          "α1",
+          "α2",
+          "β1",
+          "β2",
+          "γ1",
+          "γ2"
+        ]
+      }
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "G1": [
+        "男は環境の不快な感覚入力に悩んでいた",
+        "感覚遮断デバイスを入手して使用した",
+        "デバイスは不快な感覚入力を効果的に遮断した",
+        "デバイスは覚醒に必要な感覚信号も同時に遮断した",
+        "男は翌朝起きられず寝坊した",
+        "寝坊により時間的損失が生じて絶望した"
+      ],
+      "G2": [
+        "男は環境有害因子に悩んでいた",
+        "環境を密閉して有害因子を排除した",
+        "密閉は有害因子の排除には成功した",
+        "密閉空間で有害物質が蓄積した",
+        "男は翌朝健康被害に陥った",
+        "健康被害により絶望した"
+      ],
+      "G3": [
+        "男は将来のイベントに備えて準備をした",
+        "準備は十分かつ適切に完了した",
+        "準備完了後に外部条件が変化した",
+        "変化により準備が全面的に無効化された",
+        "男は翌朝それを知り絶望した"
+      ],
+      "M2": [
+        "男は防犯（侵入者）に不安を感じていた",
+        "厳重な施錠とバリケードを設置した",
+        "施錠は侵入防止としては完璧に機能した",
+        "翌朝鍵が故障し男自身が外に出られなくなった",
+        "閉じ込めにより重要な用事に遅刻して絶望した"
+      ],
+      "M4": [
+        "男は不眠に悩んでいた",
+        "睡眠薬を服用して眠りについた",
+        "睡眠薬は入眠促進に成功した",
+        "薬効が過剰に持続し覚醒が困難になった",
+        "男は翌朝起きられず寝坊した",
+        "寝坊により時間的損失が生じて絶望した"
+      ],
+      "M6": [
+        "男は自然災害（台風）に備えていた",
+        "窓の補強や物品の片付け等の対策を実施した",
+        "対策は想定範囲内の規模に対しては十分だった",
+        "実際の災害は想定を大幅に超える規模だった",
+        "翌朝甚大な物的被害を目撃して絶望した"
+      ],
+      "M7": [
+        "男は乾燥に悩んでいた",
+        "加湿器をフル稼働させて眠った",
+        "加湿は乾燥の解消には成功した",
+        "過剰な加湿により結露が発生した",
+        "翌朝重要書類や電子機器が水浸しで絶望した"
+      ],
+      "M9": [
+        "男はデータ喪失のリスクに備えていた",
+        "バックアップを実施して眠った",
+        "バックアップ処理自体は正しく設定された",
+        "バックアップ先の記憶媒体が物理的に故障した",
+        "翌朝元データもバックアップも失われていて絶望した"
+      ],
+      "M12": [
+        "男はペットの安全を心配していた",
+        "ペットをケージに入れて保護した",
+        "ケージはペットの収容には成功した",
+        "ケージ内でペットが怪我をした",
+        "翌朝ペットの被害を発見して絶望した"
+      ],
+      "M13": [
+        "男は暑さに悩んでいた",
+        "エアコンを最強にして眠った",
+        "エアコンは冷却には成功した",
+        "過剰な冷却で体が冷えすぎた",
+        "翌朝体調不良になり重要な仕事に支障が出て絶望した"
+      ]
+    },
+    "division_propositions": [
+      {
+        "id": "P1",
+        "label": "対策は意図した問題に対して有効に機能した",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "G2",
+          "M2",
+          "M4",
+          "M7",
+          "M12",
+          "M13"
+        ],
+        "false_models": [
+          "G3",
+          "M6",
+          "M9"
+        ]
+      },
+      {
+        "id": "P2",
+        "label": "対策が意図した以上に効果を発揮した結果が問題を引き起こした",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M4",
+          "M7",
+          "M13"
+        ],
+        "false_models": [
+          "G2",
+          "M2",
+          "M12",
+          "G3",
+          "M6",
+          "M9"
+        ]
+      },
+      {
+        "id": "P3",
+        "label": "男は翌朝、予定の時刻に起きられなかった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M4"
+        ],
+        "false_models": [
+          "G2",
+          "M2",
+          "G3",
+          "M6",
+          "M7",
+          "M9",
+          "M12",
+          "M13"
+        ]
+      },
+      {
+        "id": "P4",
+        "label": "対策は特定の感覚刺激を直接遮断することを目的としていた",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1"
+        ],
+        "false_models": [
+          "G2",
+          "M2",
+          "M4",
+          "G3",
+          "M6",
+          "M7",
+          "M9",
+          "M12",
+          "M13"
+        ]
+      },
+      {
+        "id": "P5",
+        "label": "男の絶望の原因は時間的な損失だった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M2",
+          "M4"
+        ],
+        "false_models": [
+          "G2",
+          "G3",
+          "M6",
+          "M7",
+          "M9",
+          "M12",
+          "M13"
+        ]
+      },
+      {
+        "id": "P6",
+        "label": "対策の対象は男の睡眠を妨げる環境的要因だった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "G2",
+          "M7",
+          "M13"
+        ],
+        "false_models": [
+          "M2",
+          "M4",
+          "G3",
+          "M6",
+          "M9",
+          "M12"
+        ]
+      }
+    ]
+  },
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "_phase3": {
+    "derivation_graph": {
+      "single_derivations": [
+        {
+          "from": "P2",
+          "to": "P1",
+          "reason": "意図以上に効果を発揮した → 有効に機能した（過剰は機能の一形態）"
+        },
+        {
+          "from": "P3",
+          "to": "P5",
+          "reason": "予定の時刻に起きられなかった → 時間的損失（寝坊は時間的損失の一形態）"
+        },
+        {
+          "from": "P7",
+          "to": "P4",
+          "reason": "睡眠を妨げる感覚刺激の遮断 → 感覚刺激の遮断（「睡眠を妨げる」を落とす）"
+        },
+        {
+          "from": "P7",
+          "to": "P6",
+          "reason": "睡眠を妨げる感覚刺激の遮断 → 睡眠を妨げる環境的要因（「感覚刺激」を「環境的要因」に抽象化）"
+        },
+        {
+          "from": "P8",
+          "to": "P3",
+          "reason": "対策の過剰効果で起きられなかった → 起きられなかった（原因を落とす）"
+        },
+        {
+          "from": "P8",
+          "to": "P2",
+          "reason": "対策の過剰効果で起きられなかった → 過剰効果が問題（具体的結果を落とす）"
+        }
+      ],
+      "combination_derivations": [],
+      "independent_axes": [
+        "P7",
+        "P8"
+      ],
+      "root_propositions": [
+        "P1",
+        "P4",
+        "P5",
+        "P6"
+      ]
+    },
+    "fp": {
+      "id": "FP",
+      "label": "対策は睡眠を妨げる感覚刺激の遮断であり、遮断効果が覚醒信号にも及んで翌朝起きられなかった",
+      "true_models": [
+        "G1"
+      ],
+      "derivations_from_fp": [
+        {
+          "to": "P7",
+          "reason": "FP から失敗部分（覚醒信号遮断→起きられなかった）を落とすと P7 が得られる"
+        },
+        {
+          "to": "P8",
+          "reason": "FP から対策の性質（感覚刺激遮断）を「対策の過剰効果」に抽象化すると P8 が得られる"
+        }
+      ]
+    },
+    "clear_validation": {
+      "tensions_resolved": [
+        {
+          "tension_id": "α1",
+          "mechanism": "FP: 遮断効果が覚醒信号にも及んだ → 対策の副作用として失敗"
+        },
+        {
+          "tension_id": "α2",
+          "mechanism": "P3+P5: 予定時刻に起きられず時間的損失 → 絶望レベルの深刻さ"
+        },
+        {
+          "tension_id": "β1",
+          "mechanism": "FP: 遮断は常時作動だが覚醒信号は翌朝まで発生しない → 問題の兆候なし"
+        },
+        {
+          "tension_id": "β2",
+          "mechanism": "FP: 覚醒信号は翌朝に発生する事象 → 翌朝に初めて顕在化"
+        },
+        {
+          "tension_id": "γ1",
+          "mechanism": "P6+P4: 睡眠を妨げる環境的要因（感覚刺激）→ 対策の対象が判明"
+        },
+        {
+          "tension_id": "γ2",
+          "mechanism": "P7: 感覚刺激を遮断する対策 → 対策の手段が判明"
+        }
+      ],
+      "all_resolved": true,
+      "fp_prime": null
+    },
+    "provisional_fc": {
+      "I1": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "P1": [
+        [
+          "I1"
+        ]
+      ],
+      "I2": [
+        [
+          "S7"
+        ]
+      ],
+      "P5": [
+        [
+          "I2"
+        ]
+      ],
+      "I3": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "P6": [
+        [
+          "I3"
+        ]
+      ],
+      "I5": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "P4": [
+        [
+          "I5"
+        ]
+      ],
+      "I6": [
+        [
+          "P1",
+          "S7"
+        ]
+      ],
+      "P2": [
+        [
+          "I6"
+        ]
+      ],
+      "I7": [
+        [
+          "P5",
+          "S6"
+        ]
+      ],
+      "P3": [
+        [
+          "I7"
+        ]
+      ],
+      "I8": [
+        [
+          "P4",
+          "P6"
+        ]
+      ],
+      "P7": [
+        [
+          "I8"
+        ]
+      ],
+      "I9": [
+        [
+          "P2",
+          "P3"
+        ]
+      ],
+      "P8": [
+        [
+          "I9"
+        ]
+      ],
+      "I10": [
+        [
+          "P7",
+          "P8"
+        ]
+      ],
+      "FP": [
+        [
+          "I10"
+        ]
+      ]
+    },
+    "unrejectable_models": {
+      "models": [
+        "G1"
+      ],
+      "reason": "G1 は T と M3 のバリアント群。全分割命題を共有し、具象的差異（音 vs 光）のみ。導出グラフのどのレベルでも区別できない"
+    },
+    "added_propositions": [
+      {
+        "id": "P7",
+        "label": "男は睡眠を妨げる感覚刺激を遮断するための対策を講じた",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1"
+        ],
+        "false_models": [
+          "G2",
+          "M2",
+          "M4",
+          "G3",
+          "M6",
+          "M7",
+          "M9",
+          "M12",
+          "M13"
+        ]
+      },
+      {
+        "id": "P8",
+        "label": "対策の過剰な効果により男は翌朝起きられなかった",
+        "truth_value_in_T": true,
+        "true_models": [
+          "G1",
+          "M4"
+        ],
+        "false_models": [
+          "G2",
+          "M2",
+          "G3",
+          "M6",
+          "M7",
+          "M9",
+          "M12",
+          "M13"
+        ]
+      }
+    ]
+  },
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9"
+  ],
+  "_phase4": {
+    "s_propositions": [
+      {
+        "id": "S1",
+        "label": "ある男がいた",
+        "type": "atomic"
+      },
+      {
+        "id": "S2",
+        "label": "男は対策をした",
+        "type": "atomic"
+      },
+      {
+        "id": "S3",
+        "label": "男は対策を万全だと評価した",
+        "type": "atomic"
+      },
+      {
+        "id": "S4",
+        "label": "男は対策に満足した",
+        "type": "atomic"
+      },
+      {
+        "id": "S5",
+        "label": "男は安心して眠りについた",
+        "type": "atomic"
+      },
+      {
+        "id": "S6",
+        "label": "翌朝が来た",
+        "type": "atomic"
+      },
+      {
+        "id": "S7",
+        "label": "男は絶望した",
+        "type": "atomic"
+      },
+      {
+        "id": "S8",
+        "label": "対策は眠りにつく前に完了した",
+        "type": "derived",
+        "derived_from": [
+          "S2",
+          "S5"
+        ]
+      },
+      {
+        "id": "S9",
+        "label": "対策と絶望の間に一晩が経過した",
+        "type": "derived",
+        "derived_from": [
+          "S5",
+          "S6"
+        ]
+      }
+    ],
+    "initial_confirmed": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8",
+      "S9"
+    ],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_root",
+        "source": [
+          "S2",
+          "S3"
+        ],
+        "target": "P1",
+        "intermediates": [
+          "I1"
+        ],
+        "tactic": "動機の探索 → 段階的絞り込み",
+        "description": "S2+S3 →[動機の探索]→ I1(男は解決したい問題を抱えていた) →[段階的絞り込み]→ P1"
+      },
+      {
+        "id": "C2",
+        "type": "S_to_root",
+        "source": [
+          "S7"
+        ],
+        "target": "P5",
+        "intermediates": [
+          "I2"
+        ],
+        "tactic": "因果の逆転 → 段階的絞り込み",
+        "description": "S7 →[因果の逆転]→ I2(男の絶望には具体的な原因があった) →[段階的絞り込み]→ P5"
+      },
+      {
+        "id": "C3",
+        "type": "S_to_root",
+        "source": [
+          "S2",
+          "S5"
+        ],
+        "target": "P6",
+        "intermediates": [
+          "I3"
+        ],
+        "tactic": "観測事実の深掘り → 段階的絞り込み",
+        "description": "S2+S5 →[観測事実の深掘り]→ I3(対策は男が快適に眠るために講じたものだった) →[段階的絞り込み]→ P6"
+      },
+      {
+        "id": "C4",
+        "type": "S_to_root",
+        "source": [
+          "S2",
+          "S5"
+        ],
+        "target": "P4",
+        "intermediates": [
+          "I5"
+        ],
+        "tactic": "段階的絞り込み → 段階的絞り込み",
+        "description": "S2+S5 →[段階的絞り込み]→ I5(対策は外部からの何かを遮断・排除するものだった) →[段階的絞り込み]→ P4"
+      },
+      {
+        "id": "C5",
+        "type": "toward_concrete",
+        "source": [
+          "P1",
+          "S7"
+        ],
+        "target": "P2",
+        "intermediates": [
+          "I6"
+        ],
+        "tactic": "矛盾の指摘 → 段階的絞り込み",
+        "description": "P1+S7 →[矛盾の指摘]→ I6(対策は成功したにもかかわらず問題が生じた) →[段階的絞り込み]→ P2",
+        "fc_source": "P1 は連鎖 C1 の reveals"
+      },
+      {
+        "id": "C6",
+        "type": "toward_concrete",
+        "source": [
+          "P5",
+          "S6"
+        ],
+        "target": "P3",
+        "intermediates": [
+          "I7"
+        ],
+        "tactic": "因果の逆転 → 段階的絞り込み",
+        "description": "P5+S6 →[因果の逆転]→ I7(時間の損失は翌朝の予定に支障をきたしたことによる) →[段階的絞り込み]→ P3",
+        "fc_source": "P5 は連鎖 C2 の reveals"
+      },
+      {
+        "id": "C7",
+        "type": "toward_concrete",
+        "source": [
+          "P4",
+          "P6"
+        ],
+        "target": "P7",
+        "intermediates": [
+          "I8"
+        ],
+        "tactic": "観測事実の深掘り → 手段の探索",
+        "description": "P4+P6 →[観測事実の深掘り]→ I8(男は就寝時に感覚的に不快な環境に置かれていた) →[手段の探索]→ P7",
+        "fc_source": "P4 は連鎖 C4 の reveals, P6 は連鎖 C3 の reveals"
+      },
+      {
+        "id": "C8",
+        "type": "toward_concrete",
+        "source": [
+          "P2",
+          "P3"
+        ],
+        "target": "P8",
+        "intermediates": [],
+        "tactic": "因果の逆転",
+        "description": "P2+P3 →[因果の逆転]→ P8",
+        "fc_source": "P2 は連鎖 C5 の reveals, P3 は連鎖 C6 の reveals"
+      },
+      {
+        "id": "C9",
+        "type": "toward_concrete",
+        "source": [
+          "P7",
+          "P8"
+        ],
+        "target": "FP",
+        "intermediates": [
+          "I10"
+        ],
+        "tactic": "矛盾の指摘 → 直接同定",
+        "description": "P7+P8 →[矛盾の指摘]→ I10(対策が遮断した感覚刺激の中に覚醒に必要な信号が含まれていた) →[直接同定]→ FP",
+        "fc_source": "P7 は連鎖 C7 の reveals, P8 は連鎖 C8 の reveals"
+      }
+    ],
+    "generated_intermediates": [
+      "I1",
+      "I2",
+      "I3",
+      "I5",
+      "I6",
+      "I7",
+      "I8",
+      "I10"
+    ]
+  },
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "対策は意図した問題に対して有効に機能した",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "対策が意図した以上に効果を発揮した結果が問題を引き起こした",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "男は翌朝、予定の時刻に起きられなかった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "対策は特定の感覚刺激を直接遮断することを目的としていた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "男の絶望の原因は時間的な損失だった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "対策の対象は男の睡眠を妨げる環境的要因だった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P7",
+      "label": "男は睡眠を妨げる感覚刺激を遮断するための対策を講じた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P8",
+      "label": "対策の過剰な効果により男は翌朝起きられなかった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P2",
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null,
+      "entailment_conditions": [
+        [
+          "P2",
+          "P3"
+        ]
+      ]
+    },
+    {
+      "id": "I1",
+      "label": "男は解決したい問題を抱えていた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I2",
+      "label": "男の絶望は翌朝に判明した事態によるものだった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I3",
+      "label": "対策は男が快適に眠るために講じたものだった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I5",
+      "label": "対策は外部からの何かを遮断・排除するものだった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "対策は成功したにもかかわらず問題が生じた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P1",
+          "S7"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I7",
+      "label": "時間の損失は翌朝の予定に支障をきたしたことによる",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P5",
+          "S6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I8",
+      "label": "男は就寝時に感覚的に不快な環境に置かれていた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P4",
+          "P6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I10",
+      "label": "対策が遮断した感覚刺激の中に覚醒に必要な信号が含まれていた",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "P7",
+          "P8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "対策は睡眠を妨げる感覚刺激の遮断であり、遮断効果が覚醒信号にも及んで翌朝起きられなかった",
+      "_truth_value": true,
+      "negation_of": null,
+      "formation_conditions": [
+        [
+          "I10"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1c",
+      "label": "対策は完全には失敗していなかった",
+      "_truth_value": true,
+      "negation_of": "H1c",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1c",
+      "label": "対策は完全に失敗した",
+      "_truth_value": false,
+      "negation_of": "N1c",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N2c",
+      "label": "男の絶望は自身の健康上の問題によるものではなかった",
+      "_truth_value": true,
+      "negation_of": "H2c",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H2c",
+      "label": "男の絶望は自身の健康上の問題によるものだった",
+      "_truth_value": false,
+      "negation_of": "N2c",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3c",
+      "label": "対策の対象は温度ではなかった",
+      "_truth_value": true,
+      "negation_of": "H3c",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H3c",
+      "label": "対策の対象は温度だった",
+      "_truth_value": false,
+      "negation_of": "N3c",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "男の対策は将来のイベントに備えるためではなかった",
+      "_truth_value": true,
+      "negation_of": "HF1a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1a",
+      "label": "男の対策は将来のイベントに備えるためだった",
+      "_truth_value": false,
+      "negation_of": "NF1a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2b",
+      "label": "男の絶望は物やデータの損壊によるものではなかった",
+      "_truth_value": true,
+      "negation_of": "HF2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2b",
+      "label": "男の絶望は物やデータの損壊によるものだった",
+      "_truth_value": false,
+      "negation_of": "NF2b",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF3a",
+      "label": "対策は安全確保のためではなかった",
+      "_truth_value": true,
+      "negation_of": "HF3a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF3a",
+      "label": "対策は安全確保のためだった",
+      "_truth_value": false,
+      "negation_of": "NF3a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4a",
+      "label": "対策は男の身体に直接作用するものではなかった",
+      "_truth_value": true,
+      "negation_of": "HF4a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4a",
+      "label": "対策は男の身体に直接作用するものだった",
+      "_truth_value": false,
+      "negation_of": "NF4a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4b",
+      "label": "遮断の対象は物理的な物体や物質ではなかった",
+      "_truth_value": true,
+      "negation_of": "HF4b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4b",
+      "label": "遮断の対象は物理的な物体や物質だった",
+      "_truth_value": false,
+      "negation_of": "NF4b",
+      "formation_conditions": [
+        [
+          "I5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF5b",
+      "label": "問題は対策の副次的影響で生じたのではなかった",
+      "_truth_value": true,
+      "negation_of": "HF5b",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF5b",
+      "label": "問題は対策の副次的影響で生じた",
+      "_truth_value": false,
+      "negation_of": "NF5b",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF7a",
+      "label": "不快な感覚刺激は光ではなかった",
+      "_truth_value": true,
+      "negation_of": "HF7a",
+      "formation_conditions": [
+        [
+          "P4",
+          "P6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF7a",
+      "label": "不快な感覚刺激は光だった",
+      "_truth_value": false,
+      "negation_of": "NF7a",
+      "formation_conditions": [
+        [
+          "P4",
+          "P6"
+        ]
+      ],
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "男は何かに困っていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q1b",
+      "text": "対策は男の困りごとに対して有効でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I1"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q1c",
+      "text": "対策は完全に失敗したのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q2a",
+      "text": "男が絶望した原因は翌朝に判明した事態でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I2"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2b",
+      "text": "絶望の原因は時間に関する損失でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I2"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q2c",
+      "text": "男の絶望は自身の健康上の問題によるものですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N2c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I2"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3a",
+      "text": "対策は男が快適に眠るためのものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3b",
+      "text": "対策の対象は眠りを妨げる環境的な要因でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I3"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3c",
+      "text": "対策の対象は温度（暑さ・寒さ）でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N3c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I3"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4a",
+      "text": "対策は何かを遮断・排除するものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4b",
+      "text": "遮断の対象は感覚的な刺激でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I5"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5a",
+      "text": "対策が成功したにもかかわらず別の問題が生じましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I6"
+      ],
+      "mechanism": "anomaly",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q5b",
+      "text": "問題は対策が効きすぎたことで生じましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I6"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6a",
+      "text": "時間の損失は翌朝の予定に間に合わなかったことが原因ですか？",
+      "answer": "はい",
+      "reveals": [
+        "I7"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P5"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q6b",
+      "text": "男は翌朝、予定の時刻に起きられなかったのですか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q7a",
+      "text": "男は就寝時に感覚的に不快な環境にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I8"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q7b",
+      "text": "男は感覚的な不快さを遮断する対策を講じましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8b",
+      "text": "対策の過剰な効果が起きられなかった原因ですか？",
+      "answer": "はい",
+      "reveals": [
+        "P8"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P2",
+        "P3"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q9a",
+      "text": "対策が遮断した刺激の中に覚醒に必要な信号がありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I10"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P7"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q9b",
+      "text": "感覚刺激の遮断が覚醒信号にも及んだことが寝坊の原因ですか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I10"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "対策は将来のイベントに備えるためでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF2b",
+      "text": "男の絶望は物やデータが損壊したことによるものですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I2"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF3a",
+      "text": "対策は安全を確保するためのものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4a",
+      "text": "対策は薬など男の身体に直接作用するものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4b",
+      "text": "遮断の対象は物理的な物体や物質でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I5"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF5b",
+      "text": "問題は対策の意図した効果とは別の影響で生じましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "I6"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF7a",
+      "text": "不快な感覚刺激は光でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF7a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    }
+  ],
+  "_phase5": {
+    "chain_mapping": {
+      "C1": [
+        "Q1a",
+        "Q1b",
+        "Q1c"
+      ],
+      "C2": [
+        "Q2a",
+        "Q2b",
+        "Q2c"
+      ],
+      "C3": [
+        "Q3a",
+        "Q3b",
+        "Q3c"
+      ],
+      "C4": [
+        "Q4a",
+        "Q4b"
+      ],
+      "C5": [
+        "Q5a",
+        "Q5b"
+      ],
+      "C6": [
+        "Q6a",
+        "Q6b"
+      ],
+      "C7": [
+        "Q7a",
+        "Q7b"
+      ],
+      "C8": [
+        "Q8b"
+      ],
+      "C9": [
+        "Q9a",
+        "Q9b"
+      ]
+    },
+    "exploration_paths": [
+      {
+        "name": "パスA: 困りごと起点",
+        "sequence": "Q1a(はい:I1) → Q1b(はい:P1) → Q5a(はい:I6) → Q5b(はい:P2) → Q3a(はい:I3) → Q3b(はい:P6) → Q4a(はい:I5) → Q4b(はい:P4) → Q7a(はい:I8) → Q7b(はい:P7) → Q2a(はい:I2) → Q2b(はい:P5) → Q6a(はい:I7) → Q6b(はい:P3) → Q8a(はい:I9) → Q8b(はい:P8) → Q9a(はい:I10) → Q9b(はい:FP)"
+      },
+      {
+        "name": "パスB: 眠り起点",
+        "sequence": "Q3a(はい:I3) → Q3b(はい:P6) → Q4a(はい:I5) → Q4b(はい:P4) → Q7a(はい:I8) → Q7b(はい:P7) → Q1a(はい:I1) → Q1b(はい:P1) → Q5a(はい:I6) → Q5b(はい:P2) → Q2a(はい:I2) → Q2b(はい:P5) → Q6a(はい:I7) → Q6b(はい:P3) → Q8a(はい:I9) → Q8b(はい:P8) → Q9a(はい:I10) → Q9b(はい:FP)"
+      },
+      {
+        "name": "パスC: 絶望原因起点",
+        "sequence": "Q2a(はい:I2) → Q2b(はい:P5) → Q6a(はい:I7) → Q6b(はい:P3) → Q1a(はい:I1) → Q1b(はい:P1) → Q5a(はい:I6) → Q5b(はい:P2) → Q8a(はい:I9) → Q8b(はい:P8) → Q3a(はい:I3) → Q3b(はい:P6) → Q4a(はい:I5) → Q4b(はい:P4) → Q7a(はい:I8) → Q7b(はい:P7) → Q9a(はい:I10) → Q9b(はい:FP)"
+      }
+    ]
+  },
+  "_phase8": {
+    "chain_branches": [
+      {
+        "chain_id": "C1",
+        "chain_path": "S2+S3 → I1 → P1",
+        "branches": [
+          {
+            "at_step": "I1",
+            "true_side_label": "男は解決したい問題を抱えていた",
+            "parallels": [
+              {
+                "label": "男は将来のイベントに備えていた",
+                "models": [
+                  "G3"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P1",
+            "true_side_label": "対策は有効に機能した",
+            "parallels": [
+              {
+                "label": "対策は外部事象の想定超過で不十分だった",
+                "models": [
+                  "M6"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C2",
+        "chain_path": "S7 → I2 → P5",
+        "branches": [
+          {
+            "at_step": "I2",
+            "true_side_label": "翌朝に判明した事態",
+            "parallels": [
+              {
+                "label": "絶望の原因は外部からの予期しない知らせだった",
+                "models": [
+                  "G3"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P5",
+            "true_side_label": "時間的な損失",
+            "parallels": [
+              {
+                "label": "絶望は物やデータの損壊によるものだった",
+                "models": [
+                  "M6",
+                  "M7",
+                  "M9"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C3",
+        "chain_path": "S2+S5 → I3 → P6",
+        "branches": [
+          {
+            "at_step": "I3",
+            "true_side_label": "快適に眠るため",
+            "parallels": [
+              {
+                "label": "対策は安全を確保するためだった",
+                "models": [
+                  "M2",
+                  "M12"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P6",
+            "true_side_label": "環境的要因",
+            "parallels": [
+              {
+                "label": "対策対象は心理的な不安だった",
+                "models": [
+                  "M2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C4",
+        "chain_path": "S2+S5 → I5 → P4",
+        "branches": [
+          {
+            "at_step": "I5",
+            "true_side_label": "外部からの遮断・排除",
+            "parallels": [
+              {
+                "label": "対策は男の身体に直接作用するものだった",
+                "models": [
+                  "M4"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P4",
+            "true_side_label": "感覚刺激の遮断",
+            "parallels": [
+              {
+                "label": "遮断対象は物理的な物体や物質だった",
+                "models": [
+                  "M2",
+                  "G2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C5",
+        "chain_path": "P1+S7 → I6 → P2",
+        "branches": [
+          {
+            "at_step": "I6",
+            "true_side_label": "成功にもかかわらず問題発生",
+            "parallels": [
+              {
+                "label": "問題は対策の道具の故障で生じた",
+                "models": [
+                  "M2"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P2",
+            "true_side_label": "効きすぎた",
+            "parallels": [
+              {
+                "label": "問題は対策の副次的影響で生じた",
+                "models": [
+                  "G2",
+                  "M2",
+                  "M12"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C6",
+        "chain_path": "P5+S6 → I7 → P3",
+        "branches": [
+          {
+            "at_step": "I7",
+            "true_side_label": "予定に支障",
+            "parallels": [
+              {
+                "label": "時間の損失は物理的に閉じ込められたことによる",
+                "models": [
+                  "M2"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P3",
+            "true_side_label": "起きられなかった",
+            "parallels": [
+              {
+                "label": "男は起きたが外出できなかった",
+                "models": [
+                  "M2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C7",
+        "chain_path": "P4+P6 → I8 → P7",
+        "branches": [
+          {
+            "at_step": "I8",
+            "true_side_label": "感覚的に不快な環境",
+            "parallels": [
+              {
+                "label": "不快な感覚刺激は光だった",
+                "models": [
+                  "M3"
+                ]
+              }
+            ]
+          },
+          {
+            "at_step": "P7",
+            "true_side_label": "遮断する対策を講じた",
+            "parallels": [
+              {
+                "label": "不快さの発生源を除去する対策を講じた",
+                "models": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C8",
+        "chain_path": "P2+P3 → P8",
+        "branches": [
+          {
+            "at_step": "P8",
+            "true_side_label": "過剰効果が原因",
+            "parallels": [
+              {
+                "label": "起きられなかったのは対策とは別の理由だった",
+                "models": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chain_id": "C9",
+        "chain_path": "P7+P8 → I10 → FP",
+        "branches": [
+          {
+            "at_step": "I10",
+            "true_side_label": "遮断した刺激に覚醒信号が含まれていた",
+            "parallels": [
+              {
+                "label": "対策が覚醒信号を遮断したのは意図的だった",
+                "models": []
+              }
+            ]
+          },
+          {
+            "at_step": "FP",
+            "true_side_label": "遮断が覚醒信号に及んで寝坊した",
+            "parallels": [
+              {
+                "label": "覚醒信号と不快な刺激は異なる種類だった",
+                "models": [
+                  "M3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "all_models": [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7",
+        "M8",
+        "M9",
+        "M10",
+        "M11",
+        "M12",
+        "M13"
+      ],
+      "model_coverage": {
+        "M1": [
+          {
+            "chain": "C4",
+            "step": "P4"
+          }
+        ],
+        "M2": [
+          {
+            "chain": "C3",
+            "step": "I3"
+          },
+          {
+            "chain": "C4",
+            "step": "P4"
+          },
+          {
+            "chain": "C5",
+            "step": "P2"
+          },
+          {
+            "chain": "C6",
+            "step": "I7"
+          }
+        ],
+        "M3": [
+          {
+            "chain": "C7",
+            "step": "I8"
+          }
+        ],
+        "M4": [
+          {
+            "chain": "C4",
+            "step": "I5"
+          },
+          {
+            "chain": "C8",
+            "step": "I9"
+          }
+        ],
+        "M5": [
+          {
+            "chain": "C4",
+            "step": "P4"
+          }
+        ],
+        "M6": [
+          {
+            "chain": "C1",
+            "step": "P1"
+          },
+          {
+            "chain": "C2",
+            "step": "P5"
+          }
+        ],
+        "M7": [
+          {
+            "chain": "C2",
+            "step": "P5"
+          }
+        ],
+        "M8": [
+          {
+            "chain": "C1",
+            "step": "I1"
+          }
+        ],
+        "M9": [
+          {
+            "chain": "C2",
+            "step": "P5"
+          }
+        ],
+        "M10": [
+          {
+            "chain": "C4",
+            "step": "P4"
+          }
+        ],
+        "M11": [
+          {
+            "chain": "C1",
+            "step": "I1"
+          }
+        ],
+        "M12": [
+          {
+            "chain": "C3",
+            "step": "I3"
+          },
+          {
+            "chain": "C5",
+            "step": "P2"
+          }
+        ],
+        "M13": [
+          {
+            "chain": "C2",
+            "step": "P5"
+          }
+        ]
+      },
+      "uncovered": [],
+      "uncovered_notes": "全モデルカバー済み"
+    },
+    "generated": {
+      "propositions": [
+        {
+          "id": "NF1a",
+          "source_chain": "C1",
+          "source_step": "I1",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF2b",
+          "source_chain": "C2",
+          "source_step": "P5",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF3a",
+          "source_chain": "C3",
+          "source_step": "I3",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF4a",
+          "source_chain": "C4",
+          "source_step": "I5",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF4b",
+          "source_chain": "C4",
+          "source_step": "P4",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF5b",
+          "source_chain": "C5",
+          "source_step": "P2",
+          "parallel_index": 0
+        },
+        {
+          "id": "NF7a",
+          "source_chain": "C7",
+          "source_step": "I8",
+          "parallel_index": 0
+        }
+      ],
+      "questions": [
+        {
+          "id": "QF1a",
+          "reveals_proposition": "NF1a"
+        },
+        {
+          "id": "QF2b",
+          "reveals_proposition": "NF2b"
+        },
+        {
+          "id": "QF3a",
+          "reveals_proposition": "NF3a"
+        },
+        {
+          "id": "QF4a",
+          "reveals_proposition": "NF4a"
+        },
+        {
+          "id": "QF4b",
+          "reveals_proposition": "NF4b"
+        },
+        {
+          "id": "QF5b",
+          "reveals_proposition": "NF5b"
+        },
+        {
+          "id": "QF7a",
+          "reveals_proposition": "NF7a"
+        }
+      ]
+    }
+  },
+  "_phase10": {
+    "step_a_thinning": {
+      "evaluation": [
+        {
+          "pair": "I1→P1",
+          "judgment": "十分",
+          "reason": "問題の存在 vs 対策の有効性"
+        },
+        {
+          "pair": "I2→P5",
+          "judgment": "十分",
+          "reason": "翌朝の事態 vs 時間的損失"
+        },
+        {
+          "pair": "I3→P6",
+          "judgment": "十分",
+          "reason": "眠りのため vs 環境的要因"
+        },
+        {
+          "pair": "I5→P4",
+          "judgment": "十分",
+          "reason": "遮断・排除 vs 感覚刺激"
+        },
+        {
+          "pair": "I6→P2",
+          "judgment": "十分",
+          "reason": "成功+問題 vs 効きすぎ"
+        },
+        {
+          "pair": "I7→P3",
+          "judgment": "十分",
+          "reason": "予定支障 vs 起きられず"
+        },
+        {
+          "pair": "I8→P7",
+          "judgment": "十分",
+          "reason": "不快環境 vs 遮断対策"
+        },
+        {
+          "pair": "I9→P8",
+          "judgment": "不十分",
+          "reason": "覚醒妨害≈起きられなかった 同義的"
+        },
+        {
+          "pair": "I10→FP",
+          "judgment": "十分",
+          "reason": "部分情報 vs 全体像"
+        }
+      ],
+      "thinned": [
+        {
+          "id": "I9",
+          "label": "対策の効果が男の覚醒を妨げた",
+          "reason": "P8と同義的",
+          "kept_id": "P8",
+          "fc_rewiring": "P8.fc: [[I9]] → [[P2, P3]]"
+        }
+      ],
+      "summary": {
+        "before": {
+          "propositions": 38,
+          "questions": 28
+        },
+        "after": {
+          "propositions": 37,
+          "questions": 27
+        },
+        "removed_propositions": [
+          "I9"
+        ],
+        "removed_questions": [
+          "Q8a"
+        ]
+      }
+    },
+    "step_b_entailment": {
+      "candidates": [
+        {
+          "source": "P2+P3",
+          "target": "P8",
+          "logical": true,
+          "judgment": "設定する",
+          "reason": "P2の過剰効果→問題 + P3の起きられなかった = P8の過剰効果で起きられなかった（論理的結合）"
+        }
+      ],
+      "entailed": [
+        {
+          "id": "P8",
+          "entailment_conditions": [
+            [
+              "P2",
+              "P3"
+            ]
+          ],
+          "reason": "P2+P3の内容の論理的結合。P2の「問題」をP3の「起きられなかった」で具体化するだけで推論不要"
+        }
+      ]
+    }
+  },
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "_phase9": {
+    "assignments": [
+      {
+        "question_id": "Q1a",
+        "tactic": "動機の探索",
+        "category": "人物と背景"
+      },
+      {
+        "question_id": "Q1b",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q1c",
+        "tactic": "常識的仮説の排除",
+        "category": "前提の確認"
+      },
+      {
+        "question_id": "Q2a",
+        "tactic": "因果の逆転",
+        "category": "原因と動機"
+      },
+      {
+        "question_id": "Q2b",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q2c",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q3a",
+        "tactic": "観測事実の深掘り",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q3b",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q3c",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q4a",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q4b",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q5a",
+        "tactic": "矛盾の指摘",
+        "category": "前提の確認"
+      },
+      {
+        "question_id": "Q5b",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q6a",
+        "tactic": "因果の逆転",
+        "category": "原因と動機"
+      },
+      {
+        "question_id": "Q6b",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q7a",
+        "tactic": "観測事実の深掘り",
+        "category": "人物と背景"
+      },
+      {
+        "question_id": "Q7b",
+        "tactic": "手段の探索",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "Q8b",
+        "tactic": "因果の逆転",
+        "category": "原因と動機"
+      },
+      {
+        "question_id": "Q9a",
+        "tactic": "矛盾の指摘",
+        "category": "前提の確認"
+      },
+      {
+        "question_id": "Q9b",
+        "tactic": "直接同定",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "QF1a",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "QF2b",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "QF3a",
+        "tactic": "観測事実の深掘り",
+        "category": "前提の確認"
+      },
+      {
+        "question_id": "QF4a",
+        "tactic": "段階的絞り込み",
+        "category": "前提の確認"
+      },
+      {
+        "question_id": "QF4b",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      },
+      {
+        "question_id": "QF5b",
+        "tactic": "段階的絞り込み",
+        "category": "前提の確認"
+      },
+      {
+        "question_id": "QF7a",
+        "tactic": "段階的絞り込み",
+        "category": "状況の確認"
+      }
+    ],
+    "initial_open_distribution": {
+      "状況の確認": [
+        "Q1b",
+        "Q3a",
+        "Q4a",
+        "QF1a",
+        "QF4b"
+      ],
+      "原因と動機": [
+        "Q2a"
+      ],
+      "人物と背景": [
+        "Q1a"
+      ],
+      "前提の確認": [
+        "Q1c",
+        "QF3a",
+        "QF4a"
+      ]
+    },
+    "balance": {
+      "人物と背景": 2,
+      "状況の確認": 16,
+      "前提の確認": 6,
+      "原因と動機": 3
+    }
+  }
+}
