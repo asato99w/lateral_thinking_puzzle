@@ -1,0 +1,705 @@
+{
+  "title": "自らの声",
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6"
+  ],
+  "propositions": [
+    {
+      "id": "P1",
+      "label": "恐怖の原因は女自身の内部ではなく外部に存在する",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "女に対して意図的に害を与えようとする第三者が存在する",
+      "formation_conditions": [
+        [
+          "I3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P3",
+      "label": "女の声が通信デバイスを介して聞こえた",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P4",
+      "label": "脅威の原因となる存在が女と同じ部屋にいた",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "女の声は技術的手段を通じて聞こえた",
+      "formation_conditions": [
+        [
+          "I2"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "悪意ある第三者が技術的手段を用いて女の声を利用した",
+      "formation_conditions": [
+        [
+          "P2",
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "P7",
+      "label": "悪意ある第三者が通信デバイスを通じて女の声を利用した",
+      "formation_conditions": [
+        [
+          "P6",
+          "P3"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P6",
+          "P3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I1",
+      "label": "声の聞こえ方が通常と異なっていた",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I2",
+      "label": "自分の声が別の経路で再生・中継されていた",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I3",
+      "label": "外部の脅威は人為的なものである",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I4",
+      "label": "脅威源は女に物理的に近い場所にあった",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "声はリアルタイムで技術を介して聞こえた",
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "I8",
+      "label": "同室にいた人物が通信デバイスを使っており、女の声がそのデバイスに拾われた",
+      "formation_conditions": [
+        [
+          "P7",
+          "P4"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P7",
+          "P4"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "女を狙うストーカーが同じ部屋に潜んでおり、女が電話に出て声を発した時、電話越しにリアルタイムで自分の声が反射して聞こえた",
+      "formation_conditions": [
+        [
+          "I8"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N1c",
+      "label": "恐怖の原因は女の体調変化ではない",
+      "negation_of": "H1c",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H1c",
+      "label": "恐怖の原因は女の体調変化である",
+      "negation_of": "N1c",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N3c",
+      "label": "恐怖は超自然的現象とは関連しない",
+      "negation_of": "H3c",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H3c",
+      "label": "恐怖は超自然的な現象に関連する",
+      "negation_of": "N3c",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "N6c",
+      "label": "声は録音されたものではなかった",
+      "negation_of": "H6c",
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "H6c",
+      "label": "声は録音されたものだった",
+      "negation_of": "N6c",
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1a",
+      "label": "恐怖の原因は声の質の変化ではない",
+      "negation_of": "HF1a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1a",
+      "label": "恐怖の原因は声の質の変化である",
+      "negation_of": "NF1a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF1b",
+      "label": "恐怖の原因は女自身の意識や記憶の問題ではない",
+      "negation_of": "HF1b",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF1b",
+      "label": "恐怖の原因は女自身の意識や記憶の問題である",
+      "negation_of": "NF1b",
+      "formation_conditions": [
+        [
+          "I1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2a",
+      "label": "声は自然な反響ではなかった",
+      "negation_of": "HF2a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2a",
+      "label": "声は自然な反響だった",
+      "negation_of": "NF2a",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2b",
+      "label": "声は壁越しの音漏れではなかった",
+      "negation_of": "HF2b",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2b",
+      "label": "声は壁越しの音漏れだった",
+      "negation_of": "NF2b",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF2c",
+      "label": "声は模倣者のものではなかった",
+      "negation_of": "HF2c",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF2c",
+      "label": "声は模倣者のものだった",
+      "negation_of": "NF2c",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF4a",
+      "label": "脅威の原因は女から遠い場所にはなかった",
+      "negation_of": "HF4a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF4a",
+      "label": "脅威の原因は女から遠い場所にあった",
+      "negation_of": "NF4a",
+      "formation_conditions": [
+        [
+          "P1"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF6b",
+      "label": "声はリアルタイムの盗聴デバイスから聞こえたのではない",
+      "negation_of": "HF6b",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF6b",
+      "label": "声はリアルタイムの盗聴デバイスから聞こえた",
+      "negation_of": "NF6b",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "rejection_conditions": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1a",
+      "text": "声の聞こえ方は普段と異なっていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q1b",
+      "text": "恐怖の原因は女の外部にありますか？",
+      "answer": "はい",
+      "reveals": [
+        "P1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q1c",
+      "text": "女自身の体調の変化が恐怖の原因ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N1c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2a",
+      "text": "自分の声が普段と違う経路で聞こえてきましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q2b",
+      "text": "声は何らかの技術的手段を通じて聞こえましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3a",
+      "text": "脅威は人為的なものですか？",
+      "answer": "はい",
+      "reveals": [
+        "I3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q3b",
+      "text": "女に対して意図的に害を与えようとしている人物がいますか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q3c",
+      "text": "超自然的な現象が関係していますか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N3c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q4a",
+      "text": "脅威の原因は女に物理的に近い場所にありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4b",
+      "text": "脅威の原因となる存在は女と同じ部屋にいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5b",
+      "text": "第三者は技術的手段を用いて女の声を利用しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P6"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q6a",
+      "text": "声はリアルタイムで聞こえましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6b",
+      "text": "声は通信デバイスを介して聞こえましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6c",
+      "text": "聞こえた声は録音されたものでしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N6c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q7b",
+      "text": "第三者は通信デバイスを通じて女の声を利用しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P7"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8a",
+      "text": "同室にいた人物の通信デバイスに女の声が拾われていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I8"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P4",
+        "P3"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8b",
+      "text": "女を狙うストーカーが同じ部屋に潜んでおり、電話越しに声が反射して聞こえましたか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "I8"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "声の質が変化したことが恐怖の原因ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF1b",
+      "text": "女自身の意識や記憶に問題がありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF2a",
+      "text": "声は部屋の中で自然に反響したものですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2b",
+      "text": "声は壁越しの音漏れとして聞こえましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2c",
+      "text": "声は誰かが真似した声でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2c"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF4a",
+      "text": "脅威の原因は女から遠い場所にありましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P1"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF6b",
+      "text": "声はリアルタイムの盗聴デバイスから聞こえましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF6b"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    }
+  ],
+  "statement": "女は自らの声を聞き、恐怖に震えた。",
+  "truth": "女はストーカーからの無言電話に悩まされていた。ある夜、ベッドでくつろいでいると無言電話がかかってきた。出て声を発した時、相手の電話の背景に自分の声が聞こえた。ストーカーはベッドの下に潜んでいた。",
+  "id": "自らの声"
+}

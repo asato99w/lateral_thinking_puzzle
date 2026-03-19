@@ -1,0 +1,738 @@
+{
+  "title": "自らの声",
+  "S": "女は自らの声を聞き、恐怖に震えた。",
+  "T": "女はストーカーからの無言電話に悩まされていた。ある夜、ベッドでくつろいでいると無言電話がかかってきた。出て声を発した時、相手の電話の背景に自分の声が聞こえた。ストーカーはベッドの下に潜んでいた。",
+  "_phase1": {
+    "tensions": [
+      {"id": "α1", "label": "声が通常の発声フィードバック以外の経路で聞こえた", "parent": "α"},
+      {"id": "α2", "label": "「自らの声」であることの同定が恐怖の鍵となっている", "parent": "α"},
+      {"id": "β", "label": "自分の声が恐怖に直結する因果メカニズム", "parent": null}
+    ],
+    "models": [
+      {
+        "id": "T",
+        "label": "通信チャネルを通じたリアルタイム脅威認識",
+        "summary": "ストーカーがベッドの下から電話をかけており、女が電話に出て声を発した時、相手の電話の背景音として自分の声がリアルタイムで聞こえた。ストーカーが至近距離にいると気づき恐怖した。",
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M1",
+        "label": "盗聴器の発覚",
+        "summary": "部屋に盗聴器が仕掛けられており、別の場所で自分の声がスピーカーから再生されているのを偶然聞いた。秘密裏に盗聴されていたことに恐怖した。",
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M2",
+        "label": "AI合成音声の発覚",
+        "summary": "自分の声を使ったAI合成音声が存在することを発見した。自分が言っていないことが自分の声で再生され、なりすまし犯罪への恐怖を感じた。",
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M3",
+        "label": "超自然的な声の再現",
+        "summary": "誰もいない空間から自分の声が聞こえた。物理的に説明不能な現象に超自然的恐怖を感じた。",
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M4",
+        "label": "録音された声による脅迫",
+        "summary": "何者かが女の声を録音し、その録音を脅迫材料として再生した。自分の発言が録音され悪用されていることに恐怖した。",
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M5",
+        "label": "音響異常による侵入者認識",
+        "summary": "一人のはずの部屋で声を出したところ通常と異なる反響があり、室内に誰かが隠れていると気づいた。任意の音でも検知可能であり自分の声は偶然。",
+        "tension_subset": ["α1", "β"]
+      },
+      {
+        "id": "M6",
+        "label": "通信傍受の発覚",
+        "summary": "通話中に自分の声の異常な遅延エコーが聞こえ、通話が第三者に傍受されていることに気づいた。通信セキュリティの侵害に恐怖した。",
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M7",
+        "label": "記憶にない自己録音の発見",
+        "summary": "留守番電話や録音デバイスに、自分が残した記憶のないメッセージが録音されているのを発見した。記憶にない行動の証拠に恐怖した。",
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M8",
+        "label": "声質変化による病気認識",
+        "summary": "自分の声が発声時に通常と劇的に異なって聞こえ、重篤な病気の兆候だと気づいた。突然の声質変化に恐怖した。",
+        "tension_subset": ["α2", "β"]
+      },
+      {
+        "id": "M9",
+        "label": "他者の端末からの録音声再生",
+        "summary": "他者の電話やデバイスから自分の録音声が再生されるのを聞いた。自分の声を使って罠が仕掛けられていることに恐怖した。",
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M10",
+        "label": "物理的音漏れによるプライバシー喪失",
+        "summary": "壁越しや換気口を通じて、隣人に自分の声が筒抜けだったことに気づいた。プライベートな発言が漏洩していた可能性に恐怖した。",
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M11",
+        "label": "声の模倣者",
+        "summary": "自分の声を完璧に模倣する人物が近くにいることに気づいた。模倣者の存在と意図への恐怖を感じた。",
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M12",
+        "label": "意図しない発声（精神状態の異常）",
+        "summary": "自分が意図せず声を発しているのを知覚した。解離性障害など精神疾患の兆候に恐怖した。",
+        "tension_subset": ["α2", "β"]
+      },
+      {
+        "id": "M13",
+        "label": "監視映像上の自己音声",
+        "summary": "防犯カメラの映像に自分の声が記録されているのを発見した。知らないうちに映像と音声が監視・記録されていたことに恐怖した。",
+        "tension_subset": ["α1", "α2", "β"]
+      }
+    ],
+    "relaxation_patterns": {
+      "T": {
+        "α1": "リアルタイム音声反射（通信チャネル経由で自分の声が返ってくる）",
+        "α2": "自分の声が脅威源の至近距離を証明する",
+        "β": "差し迫った身体的脅威の即座の認識"
+      },
+      "M1": {
+        "α1": "環境設置型デバイスによる音声の外部出力",
+        "α2": "自分の発言内容の漏洩の証拠",
+        "β": "秘密監視によるプライバシー・安全への脅威"
+      },
+      "M2": {
+        "α1": "技術的合成による声の複製・再生",
+        "α2": "自分の声の無断複製の証拠",
+        "β": "なりすまし犯罪への恐怖"
+      },
+      "M3": {
+        "α1": "物理的に説明不能な経路での声の出現",
+        "α2": "自分の声の超自然的再現",
+        "β": "超自然的存在への恐怖"
+      },
+      "M4": {
+        "α1": "録音された声の再生",
+        "α2": "自分の声の悪意ある利用の証拠",
+        "β": "悪意ある第三者の意図への恐怖"
+      },
+      "M5": {
+        "α1": "音響的異常（反響パターンの変化）",
+        "α2": "-",
+        "β": "隠れた侵入者の存在への恐怖"
+      },
+      "M6": {
+        "α1": "通話盗聴による遅延エコー",
+        "α2": "通信傍受の証拠",
+        "β": "通信セキュリティ侵害への恐怖"
+      },
+      "M7": {
+        "α1": "録音デバイスでの再生",
+        "α2": "記憶にない自己行動の証拠",
+        "β": "意識障害・記憶喪失への恐怖"
+      },
+      "M8": {
+        "α1": "-",
+        "α2": "声質変化が病気の兆候",
+        "β": "重篤な病気への恐怖"
+      },
+      "M9": {
+        "α1": "他者端末からの録音再生",
+        "α2": "自分の声が罠に利用されている証拠",
+        "β": "悪意ある罠への恐怖"
+      },
+      "M10": {
+        "α1": "壁越しの物理的音漏れ",
+        "α2": "プライベート発言の漏洩の証拠",
+        "β": "プライバシー喪失への恐怖"
+      },
+      "M11": {
+        "α1": "模倣者による声の再現",
+        "α2": "自分の声の完璧な模倣の存在",
+        "β": "模倣者の意図への恐怖"
+      },
+      "M12": {
+        "α1": "-",
+        "α2": "意図しない自己発声の認識",
+        "β": "精神疾患への恐怖"
+      },
+      "M13": {
+        "α1": "監視カメラの音声録画",
+        "α2": "行動・発言の秘密記録の証拠",
+        "β": "秘密監視への恐怖"
+      }
+    },
+    "variant_groups": [
+      {
+        "group_id": "G1",
+        "label": "環境型秘密監視デバイスの発覚",
+        "representative": "M1",
+        "members": ["M1", "M13"],
+        "shared_pattern": {
+          "α1": "環境設置型デバイスによる音声の外部出力・記録",
+          "α2": "秘密の監視が行われていた証拠",
+          "β": "プライバシー・安全への脅威"
+        }
+      },
+      {
+        "group_id": "G2",
+        "label": "録音された声の悪意ある利用",
+        "representative": "M4",
+        "members": ["M4", "M9"],
+        "shared_pattern": {
+          "α1": "録音された声の再生",
+          "α2": "自分の声が悪意ある目的に利用されている",
+          "β": "悪意ある第三者の存在と意図への恐怖"
+        }
+      }
+    ],
+    "abstract_models": [
+      {
+        "id": "T",
+        "label": "通信チャネルを通じたリアルタイム脅威認識",
+        "members": ["T"],
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "G1",
+        "label": "環境型秘密監視デバイスの発覚",
+        "representative": "M1",
+        "members": ["M1", "M13"],
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M2",
+        "label": "AI合成音声の発覚",
+        "members": ["M2"],
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M3",
+        "label": "超自然的な声の再現",
+        "members": ["M3"],
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "G2",
+        "label": "録音された声の悪意ある利用",
+        "representative": "M4",
+        "members": ["M4", "M9"],
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M5",
+        "label": "音響異常による侵入者認識",
+        "members": ["M5"],
+        "tension_subset": ["α1", "β"]
+      },
+      {
+        "id": "M6",
+        "label": "通信傍受の発覚",
+        "members": ["M6"],
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M7",
+        "label": "記憶にない自己録音の発見",
+        "members": ["M7"],
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M8",
+        "label": "声質変化による病気認識",
+        "members": ["M8"],
+        "tension_subset": ["α2", "β"]
+      },
+      {
+        "id": "M10",
+        "label": "物理的音漏れによるプライバシー喪失",
+        "members": ["M10"],
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M11",
+        "label": "声の模倣者",
+        "members": ["M11"],
+        "tension_subset": ["α1", "α2", "β"]
+      },
+      {
+        "id": "M12",
+        "label": "意図しない発声（精神状態の異常）",
+        "members": ["M12"],
+        "tension_subset": ["α2", "β"]
+      }
+    ]
+  },
+  "_phase2": {
+    "model_propositions": {
+      "T": [
+        "女はストーカーに付きまとわれていた",
+        "ストーカーは繰り返し無言電話をかけていた",
+        "ストーカーは女の部屋に侵入しベッドの下に潜んだ",
+        "ストーカーはベッドの下から無言電話をかけた",
+        "女が電話に出て声を発した",
+        "女の声がストーカーの電話の背景音としてリアルタイムで聞こえた",
+        "声の反射からストーカーが至近距離にいると気づいた",
+        "差し迫った身体的脅威を認識し恐怖した"
+      ],
+      "G1": [
+        "何者かが女の生活空間に盗聴/監視デバイスを設置した",
+        "デバイスが女の声をリアルタイムで外部に中継/記録していた",
+        "女は偶然デバイス経由の自分の声の出力を聞いた",
+        "秘密裏に監視されていたことに気づいた",
+        "プライバシー・安全の侵害に恐怖した"
+      ],
+      "M2": [
+        "何者かが女の声のサンプルを取得した",
+        "AIを使って女の声を合成した",
+        "女は合成された自分の声を聞いた",
+        "声の無断複製・悪用に気づいた",
+        "なりすまし犯罪への恐怖を感じた"
+      ],
+      "M3": [
+        "女は物理的に声が存在しえない状況にいた",
+        "自分の声が物理法則に反して聞こえた",
+        "超自然的現象だと認識した",
+        "超自然的恐怖を感じた"
+      ],
+      "G2": [
+        "何者かが過去に女の声を密かに録音した",
+        "録音された声を女に対して悪意ある目的で再生した",
+        "女は自分の録音声を聞いた",
+        "声が悪用されていることに気づいた",
+        "録音者の悪意と意図に恐怖した"
+      ],
+      "M5": [
+        "女は一人のはずの部屋にいた",
+        "声を出したところ通常と異なる反響パターンがあった",
+        "音響異常から室内に誰かが隠れていると推定した",
+        "侵入者の存在に恐怖した"
+      ],
+      "M6": [
+        "女は通話をしていた",
+        "通話中に自分の声の異常な遅延エコーが聞こえた",
+        "通話が第三者に傍受されていると推定した",
+        "通信セキュリティ侵害に恐怖した"
+      ],
+      "M7": [
+        "録音デバイスに記憶にない自分の声のメッセージがあった",
+        "メッセージを残した記憶がなかった",
+        "記憶にない自己行動の証拠に直面した",
+        "意識障害・記憶喪失の可能性に恐怖した"
+      ],
+      "M8": [
+        "女が声を発した",
+        "自分の声が通常と劇的に異なって聞こえた",
+        "声質変化が重篤な病気の兆候だと気づいた",
+        "病気への恐怖を感じた"
+      ],
+      "M10": [
+        "壁や換気口を通じて声が隣接空間に漏れていた",
+        "自分の声が他者に筒抜けだったことに気づいた",
+        "プライベートな会話内容が漏洩していた可能性に気づいた",
+        "プライバシー喪失に恐怖した"
+      ],
+      "M11": [
+        "近くに女の声を完璧に模倣する人物がいた",
+        "女は自分の声が聞こえたが実は模倣者の声だった",
+        "模倣者の存在に気づいた",
+        "模倣者の目的や意図に恐怖した"
+      ],
+      "M12": [
+        "女が意図せず声を発していた",
+        "自分の意図しない発声を自覚した",
+        "自己の身体コントロール喪失に気づいた",
+        "精神疾患の兆候に恐怖した"
+      ]
+    },
+    "division_propositions": [
+      {
+        "id": "P1",
+        "label": "恐怖の原因は女自身の内部ではなく外部に存在する",
+        "truth_value_in_T": true,
+        "true_models": ["T", "G1", "M2", "M3", "G2", "M5", "M6", "M10", "M11"],
+        "false_models": ["M7", "M8", "M12"]
+      },
+      {
+        "id": "P2",
+        "label": "女に対して意図的に害を与えようとする第三者が存在する",
+        "truth_value_in_T": true,
+        "true_models": ["T", "G1", "M2", "G2", "M6", "M11"],
+        "false_models": ["M3", "M5", "M7", "M8", "M10", "M12"]
+      },
+      {
+        "id": "P3",
+        "label": "女の声が通信デバイスを介して聞こえた",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M6"],
+        "false_models": ["G1", "M2", "M3", "G2", "M5", "M7", "M8", "M10", "M11", "M12"]
+      },
+      {
+        "id": "P4",
+        "label": "脅威の原因となる存在が女と同じ部屋にいた",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M5"],
+        "false_models": ["G1", "M2", "M3", "G2", "M6", "M7", "M8", "M10", "M11", "M12"]
+      },
+      {
+        "id": "P5",
+        "label": "女の声は技術的手段を通じて聞こえた",
+        "truth_value_in_T": true,
+        "true_models": ["T", "G1", "M2", "G2", "M6", "M7"],
+        "false_models": ["M3", "M5", "M8", "M10", "M11", "M12"]
+      }
+    ]
+  },
+  "clear_conditions": [["FP"]],
+  "_phase3": {
+    "derivation_graph": {
+      "single_derivations": [
+        {"from": "P2", "to": "P1", "reason": "意図的に害を与える第三者は外部の存在 → 恐怖の原因は外部"},
+        {"from": "P4", "to": "P1", "reason": "同室の脅威的存在は外部的 → 恐怖の原因は外部"},
+        {"from": "P3", "to": "P5", "reason": "通信デバイスは技術的手段の下位概念"},
+        {"from": "P6", "to": "P2", "reason": "技術的手段の詳細を落とす → 悪意ある第三者が存在する"},
+        {"from": "P6", "to": "P5", "reason": "悪意ある第三者の詳細を落とす → 技術的手段で聞こえた"},
+        {"from": "P7", "to": "P6", "reason": "通信デバイスを技術的手段に一般化"},
+        {"from": "P7", "to": "P3", "reason": "悪意ある第三者の詳細を落とす → 通信デバイスを介して聞こえた"}
+      ],
+      "combination_derivations": [],
+      "independent_axes": ["P7", "P4"],
+      "root_propositions": ["P1", "P5"]
+    },
+    "fp": {
+      "id": "FP",
+      "label": "女を狙うストーカーが同じ部屋に潜んでおり、女が電話に出て声を発した時、電話越しにリアルタイムで自分の声が反射して聞こえた",
+      "true_models": ["T"],
+      "derivations_from_fp": [
+        {"to": "P7", "reason": "ストーカー（悪意ある第三者）が電話（通信デバイス）で声を利用 → 同室の情報を落とす"},
+        {"to": "P4", "reason": "ストーカーが同じ部屋に潜んでいた → ストーカーの特性を落とす → 脅威の存在が同室"}
+      ]
+    },
+    "clear_validation": {
+      "tensions_resolved": [
+        {"tension_id": "α1", "mechanism": "電話越しのリアルタイム反射 → 通信デバイスを介した非通常経路"},
+        {"tension_id": "α2", "mechanism": "自分の声が電話越しに聞こえたことで、電話の相手が至近距離にいると判明 → 自分の声であることが鍵"},
+        {"tension_id": "β", "mechanism": "ストーカーが同じ部屋に潜んでいた → 差し迫った身体的脅威の即座の認識"}
+      ],
+      "all_resolved": true,
+      "fp_prime": null
+    },
+    "provisional_fc": {
+      "P1": "S命題から（Phase 4 で確定）",
+      "P5": "S命題から（Phase 4 で確定）",
+      "P2": [["P1"]],
+      "P4": [["P1"]],
+      "P6": [["P2", "P5"]],
+      "P3": [["P5"]],
+      "P7": [["P6", "P3"]],
+      "FP": [["P7", "P4"]]
+    },
+    "unrejectable_models": {
+      "models": ["T"],
+      "reason": "全分割命題が確認されるとTのみが残る。Tと具象的差異のみで区別される他のモデルは存在しない。"
+    },
+    "added_propositions": [
+      {
+        "id": "P6",
+        "label": "悪意ある第三者が技術的手段を用いて女の声を利用した",
+        "truth_value_in_T": true,
+        "true_models": ["T", "G1", "M2", "G2", "M6"],
+        "false_models": ["M3", "M5", "M7", "M8", "M10", "M11", "M12"]
+      },
+      {
+        "id": "P7",
+        "label": "悪意ある第三者が通信デバイスを通じて女の声を利用した",
+        "truth_value_in_T": true,
+        "true_models": ["T", "M6"],
+        "false_models": ["G1", "M2", "M3", "G2", "M5", "M7", "M8", "M10", "M11", "M12"]
+      }
+    ]
+  },
+  "topic_categories": [
+    {"id": "状況の確認", "name": "状況の確認"},
+    {"id": "原因と動機", "name": "原因と動機"},
+    {"id": "人物と背景", "name": "人物と背景"},
+    {"id": "前提の確認", "name": "前提の確認"}
+  ],
+  "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6"],
+  "_phase4": {
+    "s_propositions": [
+      {"id": "S1", "label": "女がいた", "type": "atomic"},
+      {"id": "S2", "label": "女は声を聞いた", "type": "atomic"},
+      {"id": "S3", "label": "聞いた声は女自身の声だった", "type": "atomic"},
+      {"id": "S4", "label": "女は恐怖に震えた", "type": "atomic"},
+      {"id": "S5", "label": "女は恐怖を感じた", "type": "derived", "derived_from": ["S4"]},
+      {"id": "S6", "label": "声を聞いたことが恐怖に時間的に先行した", "type": "derived", "derived_from": ["S2", "S4"]}
+    ],
+    "initial_confirmed": ["S1", "S2", "S3", "S4", "S5", "S6"],
+    "tactical_chains": [
+      {
+        "id": "C1",
+        "type": "S_to_root",
+        "source": ["S2", "S3", "S4"],
+        "target": "P1",
+        "intermediates": ["I1"],
+        "tactic": "矛盾の指摘 → 段階的絞り込み",
+        "description": "{S2,S3,S4} →[矛盾の指摘]→ I1(声の聞こえ方が通常と異なっていた) →[段階的絞り込み]→ P1"
+      },
+      {
+        "id": "C2",
+        "type": "S_to_root",
+        "source": ["S2", "S3"],
+        "target": "P5",
+        "intermediates": ["I2"],
+        "tactic": "観測事実の深掘り → 段階的絞り込み",
+        "description": "{S2,S3} →[観測事実の深掘り]→ I2(自分の声が別の経路で再生・中継されていた) →[段階的絞り込み]→ P5"
+      },
+      {
+        "id": "C3",
+        "type": "toward_concrete",
+        "source": ["P1"],
+        "target": "P2",
+        "intermediates": ["I3"],
+        "tactic": "段階的絞り込み → 段階的絞り込み",
+        "description": "{P1} →[段階的絞り込み]→ I3(外部の脅威は人為的なものである) →[段階的絞り込み]→ P2",
+        "fc_source": "P1 は C1 の reveals"
+      },
+      {
+        "id": "C4",
+        "type": "toward_concrete",
+        "source": ["P1"],
+        "target": "P4",
+        "intermediates": ["I4"],
+        "tactic": "観測事実の深掘り → 段階的絞り込み",
+        "description": "{P1} →[観測事実の深掘り]→ I4(脅威源は女に物理的に近い場所にあった) →[段階的絞り込み]→ P4",
+        "fc_source": "P1 は C1 の reveals"
+      },
+      {
+        "id": "C5",
+        "type": "toward_concrete",
+        "source": ["P2", "P5"],
+        "target": "P6",
+        "intermediates": [],
+        "tactic": "段階的絞り込み",
+        "description": "{P2,P5} →[段階的絞り込み]→ P6",
+        "fc_source": "P2 は C3 の reveals, P5 は C2 の reveals"
+      },
+      {
+        "id": "C6",
+        "type": "toward_concrete",
+        "source": ["P5"],
+        "target": "P3",
+        "intermediates": ["I6"],
+        "tactic": "段階的絞り込み → 段階的絞り込み",
+        "description": "{P5} →[段階的絞り込み]→ I6(声はリアルタイムで技術を介して聞こえた) →[段階的絞り込み]→ P3",
+        "fc_source": "P5 は C2 の reveals"
+      },
+      {
+        "id": "C7",
+        "type": "toward_concrete",
+        "source": ["P6", "P3"],
+        "target": "P7",
+        "intermediates": [],
+        "tactic": "段階的絞り込み",
+        "description": "{P6,P3} →[段階的絞り込み]→ P7",
+        "fc_source": "P6 は C5 の reveals, P3 は C6 の reveals"
+      },
+      {
+        "id": "C8",
+        "type": "toward_concrete",
+        "source": ["P7", "P4"],
+        "target": "FP",
+        "intermediates": ["I8"],
+        "tactic": "段階的絞り込み → 段階的絞り込み",
+        "description": "{P7,P4} →[段階的絞り込み]→ I8(同室にいた人物が通信デバイスを使っており女の声がデバイスに拾われた) →[段階的絞り込み]→ FP",
+        "fc_source": "P7 は C7 の reveals, P4 は C4 の reveals"
+      }
+    ],
+    "generated_intermediates": ["I1", "I2", "I3", "I4", "I6", "I8"]
+  },
+  "propositions": [
+    {"id": "P1", "label": "恐怖の原因は女自身の内部ではなく外部に存在する", "_truth_value": true, "formation_conditions": [["I1"]], "rejection_conditions": null},
+    {"id": "P2", "label": "女に対して意図的に害を与えようとする第三者が存在する", "_truth_value": true, "formation_conditions": [["I3"]], "rejection_conditions": null},
+    {"id": "P3", "label": "女の声が通信デバイスを介して聞こえた", "_truth_value": true, "formation_conditions": [["I6"]], "rejection_conditions": null},
+    {"id": "P4", "label": "脅威の原因となる存在が女と同じ部屋にいた", "_truth_value": true, "formation_conditions": [["I4"]], "rejection_conditions": null},
+    {"id": "P5", "label": "女の声は技術的手段を通じて聞こえた", "_truth_value": true, "formation_conditions": [["I2"]], "rejection_conditions": null},
+    {"id": "P6", "label": "悪意ある第三者が技術的手段を用いて女の声を利用した", "_truth_value": true, "formation_conditions": [["P2", "P5"]], "rejection_conditions": null},
+    {"id": "P7", "label": "悪意ある第三者が通信デバイスを通じて女の声を利用した", "_truth_value": true, "formation_conditions": [["P6", "P3"]], "entailment_conditions": [["P6", "P3"]], "rejection_conditions": null},
+    {"id": "I1", "label": "声の聞こえ方が通常と異なっていた", "_truth_value": true, "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "I2", "label": "自分の声が別の経路で再生・中継されていた", "_truth_value": true, "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "I3", "label": "外部の脅威は人為的なものである", "_truth_value": true, "formation_conditions": [["P1"]], "rejection_conditions": null},
+    {"id": "I4", "label": "脅威源は女に物理的に近い場所にあった", "_truth_value": true, "formation_conditions": [["P1"]], "rejection_conditions": null},
+    {"id": "I6", "label": "声はリアルタイムで技術を介して聞こえた", "_truth_value": true, "formation_conditions": [["P5"]], "rejection_conditions": null},
+    {"id": "I8", "label": "同室にいた人物が通信デバイスを使っており、女の声がそのデバイスに拾われた", "_truth_value": true, "formation_conditions": [["P7", "P4"]], "entailment_conditions": [["P7", "P4"]], "rejection_conditions": null},
+    {"id": "FP", "label": "女を狙うストーカーが同じ部屋に潜んでおり、女が電話に出て声を発した時、電話越しにリアルタイムで自分の声が反射して聞こえた", "_truth_value": true, "formation_conditions": [["I8"]], "rejection_conditions": null},
+    {"id": "N1c", "label": "恐怖の原因は女の体調変化ではない", "_truth_value": true, "negation_of": "H1c", "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "H1c", "label": "恐怖の原因は女の体調変化である", "_truth_value": false, "negation_of": "N1c", "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "N3c", "label": "恐怖は超自然的現象とは関連しない", "_truth_value": true, "negation_of": "H3c", "formation_conditions": [["P1"]], "rejection_conditions": null},
+    {"id": "H3c", "label": "恐怖は超自然的な現象に関連する", "_truth_value": false, "negation_of": "N3c", "formation_conditions": [["P1"]], "rejection_conditions": null},
+    {"id": "N6c", "label": "声は録音されたものではなかった", "_truth_value": true, "negation_of": "H6c", "formation_conditions": [["P5"]], "rejection_conditions": null},
+    {"id": "H6c", "label": "声は録音されたものだった", "_truth_value": false, "negation_of": "N6c", "formation_conditions": [["P5"]], "rejection_conditions": null},
+    {"id": "NF1a", "label": "恐怖の原因は声の質の変化ではない", "_truth_value": true, "negation_of": "HF1a", "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "HF1a", "label": "恐怖の原因は声の質の変化である", "_truth_value": false, "negation_of": "NF1a", "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "NF1b", "label": "恐怖の原因は女自身の意識や記憶の問題ではない", "_truth_value": true, "negation_of": "HF1b", "formation_conditions": [["I1"]], "rejection_conditions": null},
+    {"id": "HF1b", "label": "恐怖の原因は女自身の意識や記憶の問題である", "_truth_value": false, "negation_of": "NF1b", "formation_conditions": [["I1"]], "rejection_conditions": null},
+    {"id": "NF2a", "label": "声は自然な反響ではなかった", "_truth_value": true, "negation_of": "HF2a", "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "HF2a", "label": "声は自然な反響だった", "_truth_value": false, "negation_of": "NF2a", "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "NF2b", "label": "声は壁越しの音漏れではなかった", "_truth_value": true, "negation_of": "HF2b", "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "HF2b", "label": "声は壁越しの音漏れだった", "_truth_value": false, "negation_of": "NF2b", "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "NF2c", "label": "声は模倣者のものではなかった", "_truth_value": true, "negation_of": "HF2c", "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "HF2c", "label": "声は模倣者のものだった", "_truth_value": false, "negation_of": "NF2c", "formation_conditions": [["S2", "S3"]], "rejection_conditions": null},
+    {"id": "NF4a", "label": "脅威の原因は女から遠い場所にはなかった", "_truth_value": true, "negation_of": "HF4a", "formation_conditions": [["P1"]], "rejection_conditions": null},
+    {"id": "HF4a", "label": "脅威の原因は女から遠い場所にあった", "_truth_value": false, "negation_of": "NF4a", "formation_conditions": [["P1"]], "rejection_conditions": null},
+    {"id": "NF6b", "label": "声はリアルタイムの盗聴デバイスから聞こえたのではない", "_truth_value": true, "negation_of": "HF6b", "formation_conditions": [["I6"]], "rejection_conditions": null},
+    {"id": "HF6b", "label": "声はリアルタイムの盗聴デバイスから聞こえた", "_truth_value": false, "negation_of": "NF6b", "formation_conditions": [["I6"]], "rejection_conditions": null}
+  ],
+  "questions": [
+    {"id": "Q1a", "text": "声の聞こえ方は普段と異なっていましたか？", "answer": "はい", "reveals": ["I1"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "Q1b", "text": "恐怖の原因は女の外部にありますか？", "answer": "はい", "reveals": ["P1"], "mechanism": "observation", "prerequisites": [], "topic_category": "原因と動機"},
+    {"id": "Q1c", "text": "女自身の体調の変化が恐怖の原因ですか？", "answer": "いいえ", "reveals": ["N1c"], "mechanism": "observation", "prerequisites": [], "topic_category": "原因と動機"},
+    {"id": "Q2a", "text": "自分の声が普段と違う経路で聞こえてきましたか？", "answer": "はい", "reveals": ["I2"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q2b", "text": "声は何らかの技術的手段を通じて聞こえましたか？", "answer": "はい", "reveals": ["P5"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q3a", "text": "脅威は人為的なものですか？", "answer": "はい", "reveals": ["I3"], "mechanism": "observation", "prerequisites": ["P1"], "topic_category": "人物と背景"},
+    {"id": "Q3b", "text": "女に対して意図的に害を与えようとしている人物がいますか？", "answer": "はい", "reveals": ["P2"], "mechanism": "observation", "prerequisites": [], "topic_category": "人物と背景"},
+    {"id": "Q3c", "text": "超自然的な現象が関係していますか？", "answer": "いいえ", "reveals": ["N3c"], "mechanism": "observation", "prerequisites": ["P1"], "topic_category": "前提の確認"},
+    {"id": "Q4a", "text": "脅威の原因は女に物理的に近い場所にありましたか？", "answer": "はい", "reveals": ["I4"], "mechanism": "observation", "prerequisites": ["P1"], "topic_category": "状況の確認"},
+    {"id": "Q4b", "text": "脅威の原因となる存在は女と同じ部屋にいましたか？", "answer": "はい", "reveals": ["P4"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q5b", "text": "第三者は技術的手段を用いて女の声を利用しましたか？", "answer": "はい", "reveals": ["P6"], "mechanism": "link", "prerequisites": [], "topic_category": "人物と背景"},
+    {"id": "Q6a", "text": "声はリアルタイムで聞こえましたか？", "answer": "はい", "reveals": ["I6"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q6b", "text": "声は通信デバイスを介して聞こえましたか？", "answer": "はい", "reveals": ["P3"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q6c", "text": "聞こえた声は録音されたものでしたか？", "answer": "いいえ", "reveals": ["N6c"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "Q7b", "text": "第三者は通信デバイスを通じて女の声を利用しましたか？", "answer": "はい", "reveals": ["P7"], "mechanism": "link", "prerequisites": [], "topic_category": "状況の確認"},
+    {"id": "Q8a", "text": "同室にいた人物の通信デバイスに女の声が拾われていましたか？", "answer": "はい", "reveals": ["I8"], "mechanism": "link", "prerequisites": ["P4", "P3"], "topic_category": "状況の確認"},
+    {"id": "Q8b", "text": "女を狙うストーカーが同じ部屋に潜んでおり、電話越しに声が反射して聞こえましたか？", "answer": "はい", "reveals": ["FP"], "mechanism": "link", "prerequisites": ["I8"], "topic_category": "状況の確認"},
+    {"id": "QF1a", "text": "声の質が変化したことが恐怖の原因ですか？", "answer": "いいえ", "reveals": ["NF1a"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "QF1b", "text": "女自身の意識や記憶に問題がありましたか？", "answer": "いいえ", "reveals": ["NF1b"], "mechanism": "observation", "prerequisites": [], "topic_category": "原因と動機"},
+    {"id": "QF2a", "text": "声は部屋の中で自然に反響したものですか？", "answer": "いいえ", "reveals": ["NF2a"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "QF2b", "text": "声は壁越しの音漏れとして聞こえましたか？", "answer": "いいえ", "reveals": ["NF2b"], "mechanism": "observation", "prerequisites": [], "topic_category": "前提の確認"},
+    {"id": "QF2c", "text": "声は誰かが真似した声でしたか？", "answer": "いいえ", "reveals": ["NF2c"], "mechanism": "observation", "prerequisites": [], "topic_category": "人物と背景"},
+    {"id": "QF4a", "text": "脅威の原因は女から遠い場所にありましたか？", "answer": "いいえ", "reveals": ["NF4a"], "mechanism": "observation", "prerequisites": ["P1"], "topic_category": "状況の確認"},
+    {"id": "QF6b", "text": "声はリアルタイムの盗聴デバイスから聞こえましたか？", "answer": "いいえ", "reveals": ["NF6b"], "mechanism": "observation", "prerequisites": [], "topic_category": "状況の確認"}
+  ],
+  "_phase5": {
+    "chain_mapping": {
+      "C1": ["Q1a", "Q1b", "Q1c"],
+      "C2": ["Q2a", "Q2b"],
+      "C3": ["Q3a", "Q3b", "Q3c"],
+      "C4": ["Q4a", "Q4b"],
+      "C5": ["Q5b"],
+      "C6": ["Q6a", "Q6b", "Q6c"],
+      "C7": ["Q7b"],
+      "C8": ["Q8a", "Q8b"]
+    },
+    "exploration_paths": [
+      {
+        "name": "パス A: 恐怖の原因から入る",
+        "sequence": "Q1a(はい:I1) → Q1b(はい:P1) → Q3a(はい:I3) → Q3b(はい:P2) → Q2a(はい:I2) → Q2b(はい:P5) → Q5a(はい:I5) → Q5b(はい:P6) → Q6a(はい:I6) → Q6b(はい:P3) → Q7a(はい:I7) → Q7b(はい:P7) → Q4a(はい:I4) → Q4b(はい:P4) → Q8a(はい:I8) → Q8b(はい:FP)"
+      },
+      {
+        "name": "パス B: 声の経路から入る",
+        "sequence": "Q2a(はい:I2) → Q2b(はい:P5) → Q6a(はい:I6) → Q6b(はい:P3) → Q1a(はい:I1) → Q1b(はい:P1) → Q3a(はい:I3) → Q3b(はい:P2) → Q5a(はい:I5) → Q5b(はい:P6) → Q7a(はい:I7) → Q7b(はい:P7) → Q4a(はい:I4) → Q4b(はい:P4) → Q8a(はい:I8) → Q8b(はい:FP)"
+      },
+      {
+        "name": "パス C: 物理的近接から入る",
+        "sequence": "Q1a(はい:I1) → Q1b(はい:P1) → Q4a(はい:I4) → Q4b(はい:P4) → Q3a(はい:I3) → Q3b(はい:P2) → Q2a(はい:I2) → Q2b(はい:P5) → Q5a(はい:I5) → Q5b(はい:P6) → Q6a(はい:I6) → Q6b(はい:P3) → Q7a(はい:I7) → Q7b(はい:P7) → Q8a(はい:I8) → Q8b(はい:FP)"
+      }
+    ]
+  },
+  "_phase10": {
+    "step_a_thinning": {
+      "thinned": [
+        {"id": "I5", "label": "女が自分の声を聞いたのは第三者の技術的行為の結果である", "reason": "I5とP6が同義的。P6.fcを[[P2,P5]]に付替え", "kept_id": "P6"},
+        {"id": "I7", "label": "女は通信中に第三者の介入があったことに気づいた", "reason": "I7とP7が同義的。P7.fcを[[P6,P3]]に付替え", "kept_id": "P7"}
+      ],
+      "summary": {
+        "removed_propositions": ["I5", "I7"],
+        "removed_questions": ["Q5a", "Q7a"]
+      }
+    },
+    "step_b_entailment": {
+      "entailed": [
+        {"id": "P7", "entailment_conditions": [["P6", "P3"]], "reason": "P6（技術で声を利用）+P3（通信デバイス）= P7（通信デバイスで声を利用）。P3がP6の技術を特定する論理的結合"},
+        {"id": "I8", "entailment_conditions": [["P7", "P4"]], "reason": "P7（通信デバイスで声を利用）+P4（同室）= I8（同室の人物のデバイスに拾われた）。情報の合成"}
+      ]
+    }
+  },
+  "_phase8": {
+    "chain_branches": [
+      {"chain_id": "C1", "chain_path": "S→I1→P1", "branches": [
+        {"at_step": "I1", "true_side_label": "声の聞こえ方が通常と異なっていた", "parallels": [{"label": "声の質・内容自体が異常だった", "models": ["M8", "M12"]}]},
+        {"at_step": "P1", "true_side_label": "恐怖の原因は外部", "parallels": [{"label": "恐怖の原因は女自身の意識・記憶の問題", "models": ["M7"]}]}
+      ]},
+      {"chain_id": "C2", "chain_path": "S→I2→P5", "branches": [
+        {"at_step": "I2", "true_side_label": "別の経路で再生・中継", "parallels": [
+          {"label": "自然な反響として聞こえた", "models": ["M5"]},
+          {"label": "壁越しの音漏れとして聞こえた", "models": ["M10"]},
+          {"label": "模倣者が発した声", "models": ["M11"]}
+        ]},
+        {"at_step": "P5", "true_side_label": "技術的手段", "parallels": [{"label": "非技術的手段", "models": []}]}
+      ]},
+      {"chain_id": "C3", "chain_path": "P1→I3→P2", "branches": [
+        {"at_step": "I3", "true_side_label": "人為的なもの", "parallels": [{"label": "環境や建物構造に起因", "models": ["M10"]}]},
+        {"at_step": "P2", "true_side_label": "意図的に害を与える第三者", "parallels": [{"label": "偶然の存在", "models": ["M5"]}]}
+      ]},
+      {"chain_id": "C4", "chain_path": "P1→I4→P4", "branches": [
+        {"at_step": "I4", "true_side_label": "物理的に近い場所", "parallels": [{"label": "遠い場所", "models": ["G1", "M2", "G2", "M6"]}]},
+        {"at_step": "P4", "true_side_label": "同じ部屋", "parallels": [{"label": "隣接する場所", "models": ["M10", "M11"]}]}
+      ]},
+      {"chain_id": "C5", "chain_path": "P2+P5→I5→P6", "branches": [
+        {"at_step": "I5", "true_side_label": "第三者の技術的行為の結果", "parallels": [{"label": "声に無関係な行為", "models": []}]},
+        {"at_step": "P6", "true_side_label": "技術で声を利用", "parallels": [{"label": "技術は声の利用以外", "models": []}]}
+      ]},
+      {"chain_id": "C6", "chain_path": "P5→I6→P3", "branches": [
+        {"at_step": "I6", "true_side_label": "リアルタイム", "parallels": [{"label": "録音・合成", "models": ["M2", "G2", "M7"]}]},
+        {"at_step": "P3", "true_side_label": "通信デバイス", "parallels": [{"label": "盗聴デバイス", "models": ["G1"]}]}
+      ]},
+      {"chain_id": "C7", "chain_path": "P6+P3→I7→P7", "branches": [
+        {"at_step": "I7", "true_side_label": "通信中の第三者介入", "parallels": [{"label": "通信の遠隔傍受", "models": ["M6"]}]},
+        {"at_step": "P7", "true_side_label": "通信デバイスで声を利用", "parallels": [{"label": "概念的分岐のみ", "models": []}]}
+      ]},
+      {"chain_id": "C8", "chain_path": "P7+P4→I8→FP", "branches": [
+        {"at_step": "I8", "true_side_label": "同室の人物のデバイスに拾われた", "parallels": [{"label": "通信相手は遠隔にいる", "models": []}]},
+        {"at_step": "FP", "true_side_label": "ストーカーが潜んでいた", "parallels": [{"label": "他のシナリオ", "models": []}]}
+      ]}
+    ],
+    "coverage": {
+      "all_models": ["G1", "M2", "M3", "M5", "G2", "M6", "M7", "M8", "M10", "M11", "M12"],
+      "model_coverage": {
+        "G1": [{"chain": "C4", "step": "I4"}, {"chain": "C6", "step": "P3"}],
+        "M2": [{"chain": "C4", "step": "I4"}, {"chain": "C6", "step": "I6"}],
+        "M3": [{"chain": "existing_Q3c", "step": "N3c"}],
+        "M5": [{"chain": "C2", "step": "I2"}, {"chain": "C3", "step": "P2"}],
+        "G2": [{"chain": "C4", "step": "I4"}, {"chain": "C6", "step": "I6"}],
+        "M6": [{"chain": "C7", "step": "I7"}],
+        "M7": [{"chain": "C1", "step": "P1"}, {"chain": "C6", "step": "I6"}],
+        "M8": [{"chain": "C1", "step": "I1"}],
+        "M10": [{"chain": "C2", "step": "I2"}, {"chain": "C3", "step": "I3"}],
+        "M11": [{"chain": "C2", "step": "I2"}],
+        "M12": [{"chain": "C1", "step": "I1"}]
+      },
+      "uncovered": [],
+      "uncovered_notes": ""
+    },
+    "generated": {
+      "propositions": [
+        {"id": "NF1a", "source_chain": "C1", "source_step": "I1", "parallel_index": 0},
+        {"id": "NF1b", "source_chain": "C1", "source_step": "P1", "parallel_index": 0},
+        {"id": "NF2a", "source_chain": "C2", "source_step": "I2", "parallel_index": 0},
+        {"id": "NF2b", "source_chain": "C2", "source_step": "I2", "parallel_index": 1},
+        {"id": "NF2c", "source_chain": "C2", "source_step": "I2", "parallel_index": 2},
+        {"id": "NF4a", "source_chain": "C4", "source_step": "I4", "parallel_index": 0},
+        {"id": "NF6b", "source_chain": "C6", "source_step": "P3", "parallel_index": 0}
+      ],
+      "questions": [
+        {"id": "QF1a", "reveals_proposition": "NF1a"},
+        {"id": "QF1b", "reveals_proposition": "NF1b"},
+        {"id": "QF2a", "reveals_proposition": "NF2a"},
+        {"id": "QF2b", "reveals_proposition": "NF2b"},
+        {"id": "QF2c", "reveals_proposition": "NF2c"},
+        {"id": "QF4a", "reveals_proposition": "NF4a"},
+        {"id": "QF6b", "reveals_proposition": "NF6b"}
+      ]
+    }
+  }
+}

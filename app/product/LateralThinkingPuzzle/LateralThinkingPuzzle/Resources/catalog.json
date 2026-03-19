@@ -117,6 +117,22 @@
       ]
     },
     {
+      "id": "own_voice",
+      "engine_version": "v3",
+      "odr_tag": "puzzle-own-voice",
+      "title_ja": "自らの声",
+      "title_en": "One's Own Voice",
+      "statement_preview_ja": "女は自らの声を聞き、恐怖に震えた。",
+      "statement_preview_en": "A woman heard her own voice and trembled with fear.",
+      "icon": "🎙️",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false,
+      "locales": [
+        "ja"
+      ]
+    },
+    {
       "id": "perfect_measures",
       "engine_version": "v3",
       "odr_tag": "puzzle-perfect-measures",
