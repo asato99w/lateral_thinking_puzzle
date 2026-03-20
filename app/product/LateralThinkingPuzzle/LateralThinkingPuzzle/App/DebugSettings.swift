@@ -20,6 +20,11 @@ final class DebugSettings {
 
     private init() {
         languageOverride = UserDefaults.standard.string(forKey: "debug_languageOverride")
-        useMockDownloads = UserDefaults.standard.bool(forKey: "debug_useMockDownloads")
+        let key = "debug_useMockDownloads"
+        if UserDefaults.standard.object(forKey: key) == nil {
+            useMockDownloads = true
+        } else {
+            useMockDownloads = UserDefaults.standard.bool(forKey: key)
+        }
     }
 }

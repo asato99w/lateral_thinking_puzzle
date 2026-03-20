@@ -67,6 +67,86 @@
         "ja",
         "en"
       ]
+    },
+    {
+      "id": "hole_and_money",
+      "engine_version": "v3",
+      "odr_tag": "puzzle-hole-and-money",
+      "title_ja": "穴と一万円",
+      "title_en": "The Hole and Ten Thousand Yen",
+      "statement_preview_ja": "男は自分が掘った穴から一万円札が出てきたのを見て、死を悟った。",
+      "statement_preview_en": "A man saw a ten-thousand-yen bill come out of a hole he had dug, and realized he was going to die.",
+      "icon": "🕳️",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false,
+      "locales": [
+        "ja"
+      ]
+    },
+    {
+      "id": "music_stopped",
+      "engine_version": "v3",
+      "odr_tag": "puzzle-music-stopped",
+      "title_ja": "音楽が止まった",
+      "title_en": "The Music Stopped",
+      "statement_preview_ja": "音楽が止まった。彼女は死んだ。",
+      "statement_preview_en": "The music stopped. She died.",
+      "icon": "🎵",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false,
+      "locales": [
+        "ja"
+      ]
+    },
+    {
+      "id": "cassette_tape",
+      "engine_version": "v3",
+      "odr_tag": "puzzle-cassette-tape",
+      "title_ja": "カセットテープ",
+      "title_en": "Cassette Tape",
+      "statement_preview_ja": "ある男が自室で銃で頭を撃って死んでいた。そばのカセットテープを再生すると「もう生きていけない…」という遺書が録音されていた。しかし警察はこれを殺人と断定した。",
+      "statement_preview_en": "A man was found dead in his room, shot in the head. A cassette tape nearby played a recorded suicide note saying 'I can't go on...' Yet the police determined it was murder.",
+      "icon": "📼",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false,
+      "locales": [
+        "ja"
+      ]
+    },
+    {
+      "id": "own_voice",
+      "engine_version": "v3",
+      "odr_tag": "puzzle-own-voice",
+      "title_ja": "自らの声",
+      "title_en": "One's Own Voice",
+      "statement_preview_ja": "女は自らの声を聞き、恐怖に震えた。",
+      "statement_preview_en": "A woman heard her own voice and trembled with fear.",
+      "icon": "🎙️",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false,
+      "locales": [
+        "ja"
+      ]
+    },
+    {
+      "id": "perfect_measures",
+      "engine_version": "v3",
+      "odr_tag": "puzzle-perfect-measures",
+      "title_ja": "万全の対策",
+      "title_en": "Perfect Measures",
+      "statement_preview_ja": "男は万全の対策に満足し、安心して眠りについた。翌朝、男は絶望した。",
+      "statement_preview_en": "The man was satisfied with his thorough preparations and fell asleep at ease. The next morning, he was filled with despair.",
+      "icon": "🛡️",
+      "difficulty": 2,
+      "tier": "free",
+      "bundled": false,
+      "locales": [
+        "ja"
+      ]
     }
   ],
   "packs": [

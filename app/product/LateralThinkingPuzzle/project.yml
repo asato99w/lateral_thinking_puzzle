@@ -26,6 +26,8 @@ targets:
         type: folder
       - path: LateralThinkingPuzzle/Resources/catalog.json
         buildPhase: resources
+      - path: LateralThinkingPuzzle/Resources/catalog_debug.json
+        buildPhase: resources
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES

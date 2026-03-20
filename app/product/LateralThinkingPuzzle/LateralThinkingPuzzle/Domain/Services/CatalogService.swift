@@ -8,10 +8,19 @@ enum CatalogError: Error {
 enum CatalogService {
     private static var cached: PuzzleCatalog?
 
+    private static var catalogResourceName: String {
+        #if DEBUG
+        return "catalog_debug"
+        #else
+        return "catalog"
+        #endif
+    }
+
     static func load() throws -> PuzzleCatalog {
         if let cached { return cached }
 
-        guard let url = Bundle.main.url(forResource: "catalog", withExtension: "json") else {
+        guard let url = Bundle.main.url(forResource: catalogResourceName, withExtension: "json")
+                ?? Bundle.main.url(forResource: "catalog", withExtension: "json") else {
             throw CatalogError.notFound
         }
 
