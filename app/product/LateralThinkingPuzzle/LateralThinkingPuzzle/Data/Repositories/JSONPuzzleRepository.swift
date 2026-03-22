@@ -28,12 +28,20 @@ struct JSONPuzzleRepository: PuzzleRepository {
     @MainActor
     private func loadPuzzleData(id: String) throws -> Data {
         let lang = ContentLanguage.current
-        let url = Bundle.main.url(forResource: id, withExtension: "json", subdirectory: "Puzzles/\(lang)")
-            ?? Bundle.main.url(forResource: id, withExtension: "json", subdirectory: "Puzzles/ja")
-        guard let url else {
-            throw PuzzleRepositoryError.puzzleNotFound(id: id)
+
+        // 1. Bundled puzzles: Puzzles/{lang}/{id}.json
+        if let url = Bundle.main.url(forResource: id, withExtension: "json", subdirectory: "Puzzles/\(lang)")
+            ?? Bundle.main.url(forResource: id, withExtension: "json", subdirectory: "Puzzles/ja") {
+            return try Data(contentsOf: url)
         }
-        return try Data(contentsOf: url)
+
+        // 2. ODR puzzles: {id}_{lang}.json (flat, accessible after beginAccessingResources)
+        if let url = Bundle.main.url(forResource: "\(id)_\(lang)", withExtension: "json")
+            ?? Bundle.main.url(forResource: "\(id)_ja", withExtension: "json") {
+            return try Data(contentsOf: url)
+        }
+
+        throw PuzzleRepositoryError.puzzleNotFound(id: id)
     }
 }
 

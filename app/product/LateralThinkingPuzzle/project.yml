@@ -24,10 +24,27 @@ targets:
       - path: LateralThinkingPuzzle/Resources/Puzzles
         buildPhase: resources
         type: folder
+      # ODR puzzles (tagged for on-demand download via App Store)
+      - path: LateralThinkingPuzzle/Resources/ODRPuzzles/poisonous_mushroom_ja.json
+        buildPhase: resources
+        resourceTags: [puzzle-poisonous-mushroom]
+      - path: LateralThinkingPuzzle/Resources/ODRPuzzles/poisonous_mushroom_en.json
+        buildPhase: resources
+        resourceTags: [puzzle-poisonous-mushroom]
+      # Catalogs
       - path: LateralThinkingPuzzle/Resources/catalog.json
         buildPhase: resources
       - path: LateralThinkingPuzzle/Resources/catalog_debug.json
         buildPhase: resources
+    postBuildScripts:
+      - script: |
+          if [ "${CONFIGURATION}" = "Debug" ]; then
+            for f in "${SRCROOT}/LateralThinkingPuzzle/Resources/ODRPuzzles/debug/"*.json; do
+              [ -f "$f" ] && cp "$f" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/"
+            done
+          fi
+        name: Copy Debug Puzzles
+        basedOnDependencyAnalysis: false
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES

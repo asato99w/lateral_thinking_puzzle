@@ -13,12 +13,18 @@ protocol ResourceProvider: Sendable {
 
 final class ODRResourceProvider: ResourceProvider, @unchecked Sendable {
 
+    /// Retained resource requests that keep ODR content accessible via Bundle.main
+    private var activeRequests: [String: NSBundleResourceRequest] = [:]
+    private let lock = NSLock()
+
     func isAvailable(tag: String) async -> Bool {
         await withCheckedContinuation { continuation in
             let request = NSBundleResourceRequest(tags: [tag])
-            request.conditionallyBeginAccessingResources { available in
+            request.conditionallyBeginAccessingResources { [weak self] available in
                 if available {
-                    request.endAccessingResources()
+                    self?.lock.lock()
+                    self?.activeRequests[tag] = request
+                    self?.lock.unlock()
                 }
                 continuation.resume(returning: available)
             }
@@ -36,11 +42,18 @@ final class ODRResourceProvider: ResourceProvider, @unchecked Sendable {
 
         try await request.beginAccessingResources()
         progress(1.0)
+
+        lock.lock()
+        activeRequests[tag] = request
+        lock.unlock()
     }
 
     func remove(tag: String) {
-        let request = NSBundleResourceRequest(tags: [tag])
-        request.endAccessingResources()
+        lock.lock()
+        let request = activeRequests.removeValue(forKey: tag)
+        lock.unlock()
+
+        request?.endAccessingResources()
         Bundle.main.setPreservationPriority(0.0, forTags: [tag])
     }
 
