@@ -1,7 +1,7 @@
 ---
 name: v3-generate
 description: v3統合アルゴリズムを適用し、パズルのサンプルデータを段階的に生成する。
-argument-hint: [パズル名] [--algo v1|v2|v3|v4|v5]
+argument-hint: [パズル名] [--algo v1|v2|v3|v4|v5|v6]
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -13,8 +13,8 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 # /v3-generate — v3 サンプル生成
 
 引数: `$ARGUMENTS`（パズル名 + オプション）
-- 例: `/v3-generate desert_man`（デフォルト: v5 アルゴリズム）
-- 例: `/v3-generate turtle_soup --algo v4`
+- 例: `/v3-generate desert_man`（デフォルト: v6 アルゴリズム）
+- 例: `/v3-generate turtle_soup --algo v5`
 
 ## アルゴリズム選択
 
@@ -26,7 +26,8 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 | `--algo v2` | `theory_v3/integration/algorithms/統合アルゴリズムv2.md` |
 | `--algo v3` | `theory_v3/integration/algorithms/統合アルゴリズムv3.md` |
 | `--algo v4` | `theory_v3/integration/algorithms/統合アルゴリズムv4.md` |
-| `--algo v5`（デフォルト） | `theory_v3/integration/algorithms/統合アルゴリズムv5.md` |
+| `--algo v5` | `theory_v3/integration/algorithms/統合アルゴリズムv5.md` |
+| `--algo v6`（デフォルト） | `theory_v3/integration/algorithms/統合アルゴリズムv6.md` |
 
 各 Phase で使用する規則ファイルは、選択されたアルゴリズムファイル内の記載に従う。
 
@@ -48,7 +49,7 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 
 ### 1. 準備
 
-1. `$ARGUMENTS` から `--algo` オプションを解析する（なければ v5）
+1. `$ARGUMENTS` から `--algo` オプションを解析する（なければ v6）
 2. `app/poc_v3/samples/{puzzle}/` を確認し、次の連番を決定する
 3. `{nn}_{YYYY-MM-DD}/` ディレクトリと `history/` を作成する
 4. `history/00_メタ情報.md` を作成し、適用アルゴリズムのバージョンとファイルパスを記録する
