@@ -282,8 +282,11 @@ def check_confirmability(data: dict) -> list[str]:
         did = d["id"]
         if did in confirmable:
             continue
-        # H* 命題（「いいえ」回答の仮説側）は confirm されない設計のため除外
-        if d.get("negation_of") is not None and d.get("_truth_value") is False:
+        # H*/HF* 命題（「いいえ」回答の仮説側）は confirm されない設計のため除外
+        # 判定: negation_of を持ち、かつ ID が H で始まる（H1, HF1 等）
+        if d.get("negation_of") is not None and (
+            did.startswith("H") or d.get("_truth_value") is False
+        ):
             continue
         errors.append(
             f"命題 '{did}' ({d.get('label', '')}) が confirm 不可能"
