@@ -1,0 +1,1399 @@
+{
+  "title": "バーの男",
+  "S": "ある男がバーに入り、バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた。男は「ありがとう」と言って帰った。なぜだろう？",
+  "T": "男はしゃっくりが止まらなくて困っていた。水を飲めば治ると思いバーに立ち寄ったが、バーテンダーはしゃっくりに気づき、驚かせて止めてやろうと銃を向けた。しゃっくりが止まった男は水が不要になり、「ありがとう」と言って帰った。",
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "propositions": [
+    {
+      "id": "S1",
+      "label": "男がバーに入った"
+    },
+    {
+      "id": "S2",
+      "label": "男はバーテンダーに「水をください」と頼んだ"
+    },
+    {
+      "id": "S3",
+      "label": "バーテンダーは男に銃を向けた"
+    },
+    {
+      "id": "S4",
+      "label": "男は「ありがとう」と言った"
+    },
+    {
+      "id": "S5",
+      "label": "男は帰った"
+    },
+    {
+      "id": "SD1",
+      "label": "男がいた",
+      "_derived_from": [
+        "S1"
+      ]
+    },
+    {
+      "id": "SD2",
+      "label": "バーがあった",
+      "_derived_from": [
+        "S1"
+      ]
+    },
+    {
+      "id": "SD3",
+      "label": "バーテンダーがいた",
+      "_derived_from": [
+        "S2"
+      ]
+    },
+    {
+      "id": "SD4",
+      "label": "男は水を求めた",
+      "_derived_from": [
+        "S2"
+      ]
+    },
+    {
+      "id": "SD5",
+      "label": "男はバーの外から来た",
+      "_derived_from": [
+        "S1"
+      ]
+    },
+    {
+      "id": "SD6",
+      "label": "バーテンダーは銃を持っていた",
+      "_derived_from": [
+        "S3"
+      ]
+    },
+    {
+      "id": "SD7",
+      "label": "水の要求は銃を向けられるより前だった",
+      "_derived_from": [
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "id": "SD8",
+      "label": "銃を向けられたのは「ありがとう」と帰る行為より前だった",
+      "_derived_from": [
+        "S3",
+        "S4",
+        "S5"
+      ]
+    },
+    {
+      "id": "I_A2",
+      "label": "バーテンダーが銃を向けたのは水の要求とは別の理由による",
+      "formation_conditions": [
+        [
+          "S2",
+          "S3",
+          "SD7"
+        ]
+      ]
+    },
+    {
+      "id": "I_A3",
+      "label": "銃を向けた理由は男自身の状態に関係している",
+      "formation_conditions": [
+        [
+          "I_A2",
+          "S1",
+          "SD3"
+        ]
+      ]
+    },
+    {
+      "id": "TA1_kr",
+      "label": "男に異変があった",
+      "formation_conditions": [
+        [
+          "I_A3"
+        ]
+      ]
+    },
+    {
+      "id": "I_A4",
+      "label": "バーテンダーの銃を向ける行為は男の異変と因果関係がある",
+      "formation_conditions": [
+        [
+          "TA1_kr",
+          "SD3",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "TA2_kr",
+      "label": "バーテンダーがそれに気づいた",
+      "formation_conditions": [
+        [
+          "I_A4"
+        ]
+      ]
+    },
+    {
+      "id": "I_A5",
+      "label": "バーテンダーは男の異変に対して意図的に銃を向けた",
+      "formation_conditions": [
+        [
+          "TA2_kr",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "I_A6",
+      "label": "銃を向ける行為は男にとって有益だった",
+      "formation_conditions": [
+        [
+          "I_A5",
+          "S4",
+          "SD8"
+        ]
+      ]
+    },
+    {
+      "id": "TA3_kr",
+      "label": "銃を向けることが対処だった",
+      "formation_conditions": [
+        [
+          "I_A6"
+        ]
+      ]
+    },
+    {
+      "id": "I_B1",
+      "label": "男が水を求めたのにはそれを必要とする事情がある",
+      "formation_conditions": [
+        [
+          "S2",
+          "SD4"
+        ]
+      ]
+    },
+    {
+      "id": "I_B2",
+      "label": "男はバーに来る前から水を必要としていた",
+      "formation_conditions": [
+        [
+          "I_B1",
+          "S1",
+          "SD5"
+        ]
+      ]
+    },
+    {
+      "id": "TB1_kr",
+      "label": "男に問題があった",
+      "formation_conditions": [
+        [
+          "I_B2"
+        ]
+      ]
+    },
+    {
+      "id": "TB2_kr",
+      "label": "水は対処として求めた",
+      "formation_conditions": [
+        [
+          "TB1_kr",
+          "S2",
+          "SD4"
+        ]
+      ]
+    },
+    {
+      "id": "I_B4",
+      "label": "水による対処が不要になった",
+      "formation_conditions": [
+        [
+          "TB2_kr",
+          "S4",
+          "S5"
+        ]
+      ]
+    },
+    {
+      "id": "I_B5",
+      "label": "銃を向けられた出来事と水が不要になったことの間に因果関係がある",
+      "formation_conditions": [
+        [
+          "I_B4",
+          "S3",
+          "SD8"
+        ]
+      ]
+    },
+    {
+      "id": "TB3_kr",
+      "label": "問題が解消した",
+      "formation_conditions": [
+        [
+          "I_B5"
+        ]
+      ]
+    },
+    {
+      "id": "I_B6",
+      "label": "男の「ありがとう」は問題が解消したことへの感謝である",
+      "formation_conditions": [
+        [
+          "TB3_kr",
+          "S4"
+        ]
+      ]
+    },
+    {
+      "id": "TB4_kr",
+      "label": "男はバーテンダーの意図を理解した",
+      "formation_conditions": [
+        [
+          "I_B6",
+          "TA3_kr"
+        ]
+      ]
+    },
+    {
+      "id": "I_C1",
+      "label": "バーテンダーは男の状態を問題として認識した",
+      "formation_conditions": [
+        [
+          "TA1_kr",
+          "TA2_kr"
+        ]
+      ]
+    },
+    {
+      "id": "FPC1",
+      "label": "バーテンダーは男の異変に気づき、その対処として銃を向けた",
+      "formation_conditions": [
+        [
+          "I_C1",
+          "TA3_kr"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I_C1",
+          "TA3_kr"
+        ]
+      ]
+    },
+    {
+      "id": "I_C2",
+      "label": "男は問題を水で対処しようとしたが別の方法で問題が解消された",
+      "formation_conditions": [
+        [
+          "TB1_kr",
+          "TB2_kr",
+          "TB3_kr"
+        ]
+      ]
+    },
+    {
+      "id": "FPC2",
+      "label": "男は問題への対処として水を求めていたが、バーテンダーの行為で問題が解消し、男はその意図を理解した",
+      "formation_conditions": [
+        [
+          "I_C2",
+          "TB4_kr"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I_C2",
+          "TB4_kr"
+        ]
+      ]
+    },
+    {
+      "id": "I_C3",
+      "label": "バーテンダーの対処（銃）と男の対処（水）は同じ問題に対するものだった",
+      "formation_conditions": [
+        [
+          "FPC1",
+          "FPC2"
+        ]
+      ]
+    },
+    {
+      "id": "FP",
+      "label": "男にはある身体的異変があり水で治そうとしていた。バーテンダーはその異変に気づき驚かせて治そうと銃を向けた。異変が治まった男は水が不要になり、意図を理解して感謝した",
+      "formation_conditions": [
+        [
+          "I_C3"
+        ]
+      ]
+    },
+    {
+      "id": "H_N1",
+      "label": "バーテンダーは男を脅そうとした",
+      "negation_of": "N_N1",
+      "formation_conditions": [
+        [
+          "S3",
+          "SD6"
+        ]
+      ],
+      "_truth_value": false
+    },
+    {
+      "id": "N_N1",
+      "label": "バーテンダーは男を脅そうとしたのではない",
+      "negation_of": "H_N1"
+    },
+    {
+      "id": "H_N2",
+      "label": "男は恐怖で逃げた",
+      "negation_of": "N_N2",
+      "formation_conditions": [
+        [
+          "S3",
+          "S5",
+          "SD8"
+        ]
+      ],
+      "_truth_value": false
+    },
+    {
+      "id": "N_N2",
+      "label": "男は恐怖で逃げたのではない",
+      "negation_of": "H_N2"
+    },
+    {
+      "id": "H_N3",
+      "label": "バーテンダーは冗談で銃を向けた",
+      "negation_of": "N_N3",
+      "formation_conditions": [
+        [
+          "S3",
+          "SD6"
+        ]
+      ],
+      "_truth_value": false
+    },
+    {
+      "id": "N_N3",
+      "label": "バーテンダーは冗談で銃を向けたのではない",
+      "negation_of": "H_N3"
+    },
+    {
+      "id": "H_F1",
+      "label": "バーテンダーは迷惑な男を追い出そうとした",
+      "negation_of": "NF1",
+      "formation_conditions": [
+        [
+          "S3",
+          "SD6"
+        ]
+      ],
+      "_truth_value": false
+    },
+    {
+      "id": "NF1",
+      "label": "バーテンダーは男を追い出そうとしたのではない",
+      "negation_of": "H_F1"
+    },
+    {
+      "id": "H_F2",
+      "label": "銃を向けたのは事前に取り決めた合図だった",
+      "negation_of": "NF2",
+      "formation_conditions": [
+        [
+          "S3",
+          "SD6"
+        ]
+      ],
+      "_truth_value": false
+    },
+    {
+      "id": "NF2",
+      "label": "銃を向けたのは事前の合図ではない",
+      "negation_of": "H_F2"
+    },
+    {
+      "id": "H_F3",
+      "label": "男は犯罪目的でバーに来た",
+      "negation_of": "NF3",
+      "formation_conditions": [
+        [
+          "S1",
+          "SD2"
+        ]
+      ],
+      "_truth_value": false
+    },
+    {
+      "id": "NF3",
+      "label": "男は犯罪目的でバーに来たのではない",
+      "negation_of": "H_F3"
+    },
+    {
+      "id": "H_F4",
+      "label": "男はバーテンダーの反応をテストしていた",
+      "negation_of": "NF4",
+      "formation_conditions": [
+        [
+          "S1",
+          "S2"
+        ]
+      ],
+      "_truth_value": false
+    },
+    {
+      "id": "NF4",
+      "label": "男はバーテンダーの反応をテストしていたのではない",
+      "negation_of": "H_F4"
+    },
+    {
+      "id": "H_F5",
+      "label": "バーテンダーは男から何かを奪おうとした",
+      "negation_of": "NF5",
+      "formation_conditions": [
+        [
+          "S3",
+          "SD6"
+        ]
+      ],
+      "_truth_value": false
+    },
+    {
+      "id": "NF5",
+      "label": "バーテンダーは男から何かを奪おうとしたのではない",
+      "negation_of": "H_F5"
+    }
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "SD1",
+    "SD2",
+    "SD3",
+    "SD4",
+    "SD5",
+    "SD6",
+    "SD7",
+    "SD8"
+  ],
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "バーテンダーが銃を向けたのは、水の注文とは別の理由がありますか？",
+      "answer": "はい",
+      "reveals": [
+        "I_A2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q2",
+      "text": "銃を向けた理由は、男の身体的な異変に関係がありますか？",
+      "answer": "はい",
+      "reveals": [
+        "I_A3",
+        "TA1_kr"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3",
+      "text": "バーテンダーは男の異変に気づいて銃を向けましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I_A4",
+        "TA2_kr"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "TA1_kr"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q4",
+      "text": "銃を向けたのは意図的で、かつ男にとって良いことでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I_A5",
+        "I_A6"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q5",
+      "text": "銃を向けたのは、男の問題への対処でしたか？",
+      "answer": "はい",
+      "reveals": [
+        "TA3_kr"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6",
+      "text": "男はバーに来る前から水を必要としていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I_B1",
+        "I_B2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q7",
+      "text": "男は何か困っていることがありましたか？",
+      "answer": "はい",
+      "reveals": [
+        "TB1_kr"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q8",
+      "text": "男は水を飲むことで問題に対処しようとしていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "TB2_kr"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "TB1_kr"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q9",
+      "text": "銃を向けられたことで水が不要になり、男の問題は解消しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I_B4",
+        "I_B5",
+        "TB3_kr"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "TB2_kr"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q10",
+      "text": "男はバーテンダーが対処として銃を向けたことを理解し、感謝して帰りましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I_B6",
+        "TB4_kr"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "TA3_kr"
+      ],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q11",
+      "text": "バーテンダーは男の異変に気づき、対処として銃を向けたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "I_C1",
+        "FPC1"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "TA1_kr"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q12",
+      "text": "男は問題を水で対処しようとしたが、バーテンダーの行為で解消され、意図を理解して感謝しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I_C2",
+        "FPC2"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "TB1_kr",
+        "TB2_kr",
+        "TB4_kr"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q13",
+      "text": "バーテンダーの銃と男の水は同じ問題への対処で、銃により問題が解消されたのですか？",
+      "answer": "はい",
+      "reveals": [
+        "I_C3",
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "FPC1",
+        "FPC2"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QN1",
+      "text": "バーテンダーは男を脅そうとしたのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N_N1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QN2",
+      "text": "男は怖くなって逃げたのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N_N2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QN3",
+      "text": "バーテンダーは冗談で銃を向けたのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "N_N3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF1",
+      "text": "バーテンダーは迷惑な男を追い出そうとしたのですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF1"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2",
+      "text": "銃を向けたのは事前に取り決めた合図でしたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF2"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF3",
+      "text": "男はバーに犯罪目的で来ましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF3"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4",
+      "text": "男はバーテンダーの反応をテストしていましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF4"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF5",
+      "text": "バーテンダーは男から何かを奪おうとしましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    }
+  ],
+  "pieces": [],
+  "_phase1": {
+    "properties": [
+      "2要素"
+    ],
+    "elements": {
+      "A": {
+        "label": "水を求めた男にバーテンダーが銃を向けた",
+        "source": "バーテンダーに「水をください」と頼んだ。バーテンダーは男に銃を向けた"
+      },
+      "B": {
+        "label": "銃を向けられた男が水を受け取らず「ありがとう」と言って帰った",
+        "source": "男は「ありがとう」と言って帰った"
+      }
+    },
+    "key": "しゃっくり",
+    "t_atomic_propositions": {
+      "A": [
+        {
+          "id": "TA1",
+          "label": "男はしゃっくりが止まらなかった",
+          "key_removed": "男に異変があった"
+        },
+        {
+          "id": "TA2",
+          "label": "バーテンダーはしゃっくりに気づいた",
+          "key_removed": "バーテンダーがそれに気づいた"
+        },
+        {
+          "id": "TA3",
+          "label": "バーテンダーは驚かせて止めようとした",
+          "key_removed": "銃を向けることが対処だった"
+        }
+      ],
+      "B": [
+        {
+          "id": "TB1",
+          "label": "男はしゃっくりが止まらなかった",
+          "key_removed": "男に問題があった"
+        },
+        {
+          "id": "TB2",
+          "label": "水を飲めば治ると思っていた",
+          "key_removed": "水は対処として求めた"
+        },
+        {
+          "id": "TB3",
+          "label": "しゃっくりが止まった",
+          "key_removed": "問題が解消した"
+        },
+        {
+          "id": "TB4",
+          "label": "男はバーテンダーの意図を理解した",
+          "key_removed": "意図を理解した"
+        }
+      ]
+    },
+    "fpc": {
+      "FPC1": {
+        "label": "バーテンダーは男の異変に気づき、その対処として銃を向けた",
+        "derives": [
+          "男に異変があった（TA1の鍵なし版）",
+          "バーテンダーがそれに気づいた（TA2の鍵なし版）",
+          "銃を向けることが対処だった（TA3の鍵なし版）"
+        ]
+      },
+      "FPC2": {
+        "label": "男は問題への対処として水を求めていたが、バーテンダーの行為で問題が解消し、男はその意図を理解した",
+        "derives": [
+          "男に問題があった（TB1の鍵なし版）",
+          "水は対処として求めた（TB2の鍵なし版）",
+          "問題が解消した（TB3の鍵なし版）",
+          "意図を理解した（TB4の鍵なし版）"
+        ]
+      }
+    },
+    "fp": {
+      "id": "FP",
+      "label": "男にはある身体的異変があり水で治そうとしていた。バーテンダーはその異変に気づき驚かせて治そうと銃を向けた。異変が治まった男は水が不要になり、意図を理解して感謝した",
+      "derives": [
+        "FPC1",
+        "FPC2"
+      ]
+    },
+    "s_variables": {
+      "TA1_kr": "{s_a1}",
+      "TA2_kr": "{s_a2}",
+      "TA3_kr": "{s_a3}",
+      "TB1_kr": "{s_b1}",
+      "TB2_kr": "{s_b2}",
+      "TB3_kr": "{s_b3}",
+      "TB4_kr": "{s_b4}"
+    },
+    "competing_models": {
+      "A": [
+        {
+          "id": "MA1",
+          "label": "対処（T）",
+          "atomic_propositions": [
+            "男はしゃっくりが止まらなかった",
+            "バーテンダーはしゃっくりに気づいた",
+            "バーテンダーは驚かせて止めようとした"
+          ]
+        },
+        {
+          "id": "MA2",
+          "label": "強盗",
+          "atomic_propositions": [
+            "バーテンダーは男の金を奪おうとした"
+          ]
+        },
+        {
+          "id": "MA3",
+          "label": "自衛",
+          "atomic_propositions": [
+            "男が脅威的行動をした",
+            "バーテンダーは身を守ろうとした"
+          ]
+        },
+        {
+          "id": "MA4",
+          "label": "排除",
+          "atomic_propositions": [
+            "男が迷惑行為をしていた",
+            "バーテンダーは追い出そうとした"
+          ]
+        },
+        {
+          "id": "MA5",
+          "label": "遊戯",
+          "atomic_propositions": [
+            "バーテンダーは冗談として銃を向けた"
+          ]
+        }
+      ],
+      "B": [
+        {
+          "id": "MB1",
+          "label": "対処（T）",
+          "atomic_propositions": [
+            "男はしゃっくりが止まらなかった",
+            "水を飲めば治ると思っていた",
+            "しゃっくりが止まった",
+            "男はバーテンダーの意図を理解した"
+          ]
+        },
+        {
+          "id": "MB2",
+          "label": "恐怖退避",
+          "atomic_propositions": [
+            "男は銃に怯えた",
+            "身の安全を優先して立ち去った",
+            "場を収めるために「ありがとう」と言った"
+          ]
+        },
+        {
+          "id": "MB3",
+          "label": "合図",
+          "atomic_propositions": [
+            "二人には事前の取り決めがあった",
+            "銃を向けることは合図だった",
+            "合図を受け取り目的を達成した"
+          ]
+        },
+        {
+          "id": "MB4",
+          "label": "犯罪中止",
+          "atomic_propositions": [
+            "男は犯罪を企てていた",
+            "バーテンダーの銃で断念した",
+            "犯罪を止めてくれたことに感謝した"
+          ]
+        },
+        {
+          "id": "MB5",
+          "label": "テスト",
+          "atomic_propositions": [
+            "男はバーテンダーの反応を試していた",
+            "銃を向けたことで試験は完了した",
+            "試験結果に満足して帰った"
+          ]
+        }
+      ]
+    },
+    "common_abstractions": [],
+    "common_abstractions_note": "両要素とも評価を通過する共通抽象は得られなかった。鍵（しゃっくり）の独自性が高く、競合モデルとの間に意味のある共通抽象を形成できないため。全構成要素はT固有として扱う。"
+  },
+  "_phase3": {
+    "question_summary": {
+      "true_side": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6",
+        "Q7",
+        "Q8",
+        "Q9",
+        "Q10",
+        "Q11",
+        "Q12",
+        "Q13"
+      ],
+      "elimination": [
+        "QN1",
+        "QN2",
+        "QN3"
+      ],
+      "total": 16
+    },
+    "starting_questions": [
+      "Q1",
+      "Q6",
+      "QN1",
+      "QN2",
+      "QN3"
+    ],
+    "exploration_paths": [
+      {
+        "name": "要素A先行",
+        "path": [
+          "Q1",
+          "Q2",
+          "Q3",
+          "Q4",
+          "Q5",
+          "Q6",
+          "Q7",
+          "Q8",
+          "Q9",
+          "Q10",
+          "Q11",
+          "Q12",
+          "Q13"
+        ],
+        "note": "要素Aを完了後、要素Bへ。Q10でTA3_krが必要（要素間交差）"
+      },
+      {
+        "name": "要素B先行",
+        "path": [
+          "Q6",
+          "Q7",
+          "Q8",
+          "Q1",
+          "Q2",
+          "Q3",
+          "Q4",
+          "Q5",
+          "Q9",
+          "Q10",
+          "Q11",
+          "Q12",
+          "Q13"
+        ],
+        "note": "要素B途中で要素Aに切り替え（TA3_krが必要なため）"
+      },
+      {
+        "name": "排除から開始",
+        "path": [
+          "QN1",
+          "QN2",
+          "Q1",
+          "Q6",
+          "Q2",
+          "Q7",
+          "Q3",
+          "Q8",
+          "Q4",
+          "Q5",
+          "Q9",
+          "Q10",
+          "Q11",
+          "Q12",
+          "Q13"
+        ],
+        "note": "排除質問で常識的仮説を除外してから探索"
+      }
+    ],
+    "negation_propositions": {
+      "H_N1": {
+        "negated_by": "N_N1",
+        "question": "QN1"
+      },
+      "H_N2": {
+        "negated_by": "N_N2",
+        "question": "QN2"
+      },
+      "H_N3": {
+        "negated_by": "N_N3",
+        "question": "QN3"
+      }
+    }
+  },
+  "_phase2": {
+    "s_propositions": {
+      "atomic": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ],
+      "derived": [
+        "SD1",
+        "SD2",
+        "SD3",
+        "SD4",
+        "SD5",
+        "SD6",
+        "SD7",
+        "SD8"
+      ]
+    },
+    "generated_intermediates": [
+      "I_A1",
+      "I_A2",
+      "I_A3",
+      "I_A4",
+      "I_A5",
+      "I_A6",
+      "I_B1",
+      "I_B2",
+      "I_B3",
+      "I_B4",
+      "I_B5",
+      "I_B6",
+      "I_C1",
+      "I_C2",
+      "I_C3"
+    ],
+    "chains": {
+      "chain_A1": {
+        "target": "TA1_kr",
+        "origin": "S（initial_confirmed）",
+        "steps": [
+          {
+            "input": [
+              "S2",
+              "S3",
+              "SD7"
+            ],
+            "tactic": "矛盾の指摘",
+            "output": "I_A1"
+          },
+          {
+            "input": [
+              "I_A1",
+              "S3"
+            ],
+            "tactic": "因果の逆転",
+            "output": "I_A2"
+          },
+          {
+            "input": [
+              "I_A2",
+              "S1",
+              "SD3"
+            ],
+            "tactic": "段階的絞り込み",
+            "output": "I_A3"
+          },
+          {
+            "input": [
+              "I_A3"
+            ],
+            "tactic": "段階的絞り込み",
+            "output": "TA1_kr"
+          }
+        ]
+      },
+      "chain_A2": {
+        "target": "TA2_kr",
+        "origin": "TA1_kr（chain_A1の成果）+ S",
+        "steps": [
+          {
+            "input": [
+              "TA1_kr",
+              "SD3",
+              "S3"
+            ],
+            "tactic": "因果の逆転",
+            "output": "I_A4"
+          },
+          {
+            "input": [
+              "I_A4"
+            ],
+            "tactic": "観測事実の深掘り",
+            "output": "TA2_kr"
+          }
+        ]
+      },
+      "chain_A3": {
+        "target": "TA3_kr",
+        "origin": "TA2_kr（chain_A2の成果）+ S",
+        "steps": [
+          {
+            "input": [
+              "TA2_kr",
+              "S3"
+            ],
+            "tactic": "動機の探索",
+            "output": "I_A5"
+          },
+          {
+            "input": [
+              "I_A5",
+              "S4",
+              "SD8"
+            ],
+            "tactic": "矛盾の指摘",
+            "output": "I_A6"
+          },
+          {
+            "input": [
+              "I_A6"
+            ],
+            "tactic": "段階的絞り込み",
+            "output": "TA3_kr"
+          }
+        ]
+      },
+      "chain_B1": {
+        "target": "TB1_kr",
+        "origin": "S（initial_confirmed）",
+        "steps": [
+          {
+            "input": [
+              "S2",
+              "SD4"
+            ],
+            "tactic": "因果の逆転",
+            "output": "I_B1"
+          },
+          {
+            "input": [
+              "I_B1",
+              "S1",
+              "SD5"
+            ],
+            "tactic": "時間軸の拡張",
+            "output": "I_B2"
+          },
+          {
+            "input": [
+              "I_B2"
+            ],
+            "tactic": "段階的絞り込み",
+            "output": "TB1_kr"
+          }
+        ]
+      },
+      "chain_B2": {
+        "target": "TB2_kr",
+        "origin": "TB1_kr（chain_B1の成果）+ S",
+        "steps": [
+          {
+            "input": [
+              "TB1_kr",
+              "S2"
+            ],
+            "tactic": "因果の逆転",
+            "output": "I_B3"
+          },
+          {
+            "input": [
+              "I_B3",
+              "SD4"
+            ],
+            "tactic": "観測事実の深掘り",
+            "output": "TB2_kr"
+          }
+        ]
+      },
+      "chain_B3": {
+        "target": "TB3_kr",
+        "origin": "TB2_kr（chain_B2の成果）+ S",
+        "steps": [
+          {
+            "input": [
+              "TB2_kr",
+              "S4",
+              "S5"
+            ],
+            "tactic": "矛盾の指摘",
+            "output": "I_B4"
+          },
+          {
+            "input": [
+              "I_B4",
+              "S3",
+              "SD8"
+            ],
+            "tactic": "因果の逆転",
+            "output": "I_B5"
+          },
+          {
+            "input": [
+              "I_B5"
+            ],
+            "tactic": "段階的絞り込み",
+            "output": "TB3_kr"
+          }
+        ]
+      },
+      "chain_B4": {
+        "target": "TB4_kr",
+        "origin": "TB3_kr（chain_B3の成果）+ TA3_kr（chain_A3の成果）+ S",
+        "steps": [
+          {
+            "input": [
+              "TB3_kr",
+              "S4"
+            ],
+            "tactic": "因果の逆転",
+            "output": "I_B6"
+          },
+          {
+            "input": [
+              "I_B6",
+              "TA3_kr"
+            ],
+            "tactic": "観測事実の深掘り",
+            "output": "TB4_kr"
+          }
+        ]
+      },
+      "chain_C1": {
+        "target": "FPC1",
+        "origin": "TA1_kr, TA2_kr, TA3_kr",
+        "steps": [
+          {
+            "input": [
+              "TA1_kr",
+              "TA2_kr"
+            ],
+            "tactic": "観測事実の深掘り",
+            "output": "I_C1"
+          },
+          {
+            "input": [
+              "I_C1",
+              "TA3_kr"
+            ],
+            "tactic": "段階的絞り込み",
+            "output": "FPC1"
+          }
+        ]
+      },
+      "chain_C2": {
+        "target": "FPC2",
+        "origin": "TB1_kr, TB2_kr, TB3_kr, TB4_kr",
+        "steps": [
+          {
+            "input": [
+              "TB1_kr",
+              "TB2_kr",
+              "TB3_kr"
+            ],
+            "tactic": "段階的絞り込み",
+            "output": "I_C2"
+          },
+          {
+            "input": [
+              "I_C2",
+              "TB4_kr"
+            ],
+            "tactic": "段階的絞り込み",
+            "output": "FPC2"
+          }
+        ]
+      },
+      "chain_C3": {
+        "target": "FP",
+        "origin": "FPC1, FPC2",
+        "steps": [
+          {
+            "input": [
+              "FPC1",
+              "FPC2"
+            ],
+            "tactic": "矛盾の指摘",
+            "output": "I_C3"
+          },
+          {
+            "input": [
+              "I_C3"
+            ],
+            "tactic": "段階的絞り込み",
+            "output": "FP"
+          }
+        ]
+      }
+    },
+    "s_assignments": {
+      "s_a1": [
+        "S1",
+        "S2",
+        "S3",
+        "SD3",
+        "SD7"
+      ],
+      "s_a2": [
+        "S3",
+        "SD3"
+      ],
+      "s_a3": [
+        "S3",
+        "S4",
+        "SD8"
+      ],
+      "s_b1": [
+        "S1",
+        "S2",
+        "SD4",
+        "SD5"
+      ],
+      "s_b2": [
+        "S2",
+        "SD4"
+      ],
+      "s_b3": [
+        "S3",
+        "S4",
+        "S5",
+        "SD8"
+      ],
+      "s_b4": [
+        "S4"
+      ]
+    }
+  }
+}

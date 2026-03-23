@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>バーの男 — v6 Visualization</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: #fafafa; color: #333; padding: 20px; max-width: 1400px; margin: 0 auto; }
+  h1 { font-size: 1.5em; margin-bottom: 12px; }
+  .stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
+  .stat { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px;
+           padding: 8px 14px; min-width: 90px; text-align: center; }
+  .stat .num { font-size: 1.6em; font-weight: bold; color: #1565c0; }
+  .stat .label { font-size: 0.8em; color: #666; }
+  .tabs { display: flex; gap: 3px; margin: 16px 0 0; border-bottom: 2px solid #e0e0e0; flex-wrap: wrap; }
+  .tab { padding: 6px 14px; cursor: pointer; background: #f5f5f5;
+          border: 1px solid #e0e0e0; border-bottom: none; border-radius: 6px 6px 0 0;
+          font-size: 0.85em; user-select: none; white-space: nowrap; }
+  .tab.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px;
+                 font-weight: bold; color: #1565c0; }
+  .panel { background: #fff; border: 1px solid #e0e0e0; border-top: none; padding: 16px;
+            overflow-x: auto; display: none; }
+  .panel.active { display: block; }
+  .mermaid { text-align: center; overflow-x: auto; }
+  h2 { font-size: 1.1em; margin: 0 0 10px; padding: 6px 10px;
+       background: #e3f2fd; border-left: 3px solid #1565c0; border-radius: 2px; }
+  .note { font-size: 0.82em; color: #666; margin-bottom: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.82em; }
+  th, td { border: 1px solid #e0e0e0; padding: 4px 8px; text-align: left; vertical-align: top; }
+  th { background: #f5f5f5; font-weight: 600; position: sticky; top: 0; }
+  tr:nth-child(even) { background: #fafafa; }
+  .legend { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0; font-size: 0.8em; }
+  .legend-item { display: flex; align-items: center; gap: 3px; }
+  .swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid #999; }
+  .game-table { max-height: 500px; overflow-y: auto; }
+  .game-table td { font-size: 0.82em; }
+  small { color: #888; }
+</style>
+</head>
+<body>
+
+<h1>バーの男 — v6 data_src</h1>
+
+<div class="stats">
+  <div class="stat"><div class="num">52</div><div class="label">descriptors</div></div>
+  <div class="stat"><div class="num">21</div><div class="label">questions</div></div>
+  <div class="stat"><div class="num">13</div><div class="label">initial</div></div>
+  <div class="stat"><div class="num">2</div><div class="label">EC props</div></div>
+  <div class="stat"><div class="num">31</div><div class="label">FC props</div></div>
+  <div class="stat"><div class="num">16</div><div class="label">negation</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="swatch" style="background:#e3f2fd"></div> Initial/S</div>
+  <div class="legend-item"><div class="swatch" style="background:#c8e6c9"></div> EC (confirmed chain)</div>
+  <div class="legend-item"><div class="swatch" style="background:#fff3e0"></div> FC (hypothesis)</div>
+  <div class="legend-item"><div class="swatch" style="background:#fce4ec"></div> Negation (NF/H)</div>
+  <div class="legend-item"><div class="swatch" style="background:#ffeb3b"></div> FP</div>
+  <div class="legend-item">━━ EC edge</div>
+  <div class="legend-item">╌╌ FC edge</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="ecfc">EC/FC Flow</div>
+  <div class="tab" data-tab="deriv">Phase1 Graph</div>
+  <div class="tab" data-tab="questions">Questions</div>
+  <div class="tab" data-tab="models">Models</div>
+  <div class="tab" data-tab="chains">Chains</div>
+  <div class="tab" data-tab="game">Game Sim</div>
+  <div class="tab" data-tab="table">All Props</div>
+</div>
+
+<div id="ecfc" class="panel active">
+  <h2>EC/FC 導出フロー</h2>
+  <p class="note">太線(━━) = entailment (confirmed→confirmed, chain可), 破線(╌╌) = formation (confirmed→derived, 1回)</p>
+  <pre class="mermaid">
+graph TD
+  classDef ic fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef ec fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef fc fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef neg fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef fp fill:#ffeb3b,stroke:#f57f17,color:#333
+  S_GROUP["S命題 (0個)"]:::ic
+  FP["FP: 男にはある身体的異変があり水で治そうとしていた。バーテンダーはその異変..."]:::fp
+  FPC1["FPC1: バーテンダーは男の異変に気づき、その対処として銃を向けた"]:::ec
+  FPC2["FPC2: 男は問題への対処として水を求めていたが、バーテンダーの行為で問題が解消..."]:::ec
+  H_F1["H_F1: バーテンダーは迷惑な男を追い出そうとした"]:::neg
+  H_F2["H_F2: 銃を向けたのは事前に取り決めた合図だった"]:::neg
+  H_F3["H_F3: 男は犯罪目的でバーに来た"]:::neg
+  H_F4["H_F4: 男はバーテンダーの反応をテストしていた"]:::neg
+  H_F5["H_F5: バーテンダーは男から何かを奪おうとした"]:::neg
+  H_N1["H_N1: バーテンダーは男を脅そうとした"]:::neg
+  H_N2["H_N2: 男は恐怖で逃げた"]:::neg
+  H_N3["H_N3: バーテンダーは冗談で銃を向けた"]:::neg
+  I_A2["I_A2: バーテンダーが銃を向けたのは水の要求とは別の理由による"]:::fc
+  I_A3["I_A3: 銃を向けた理由は男自身の状態に関係している"]:::fc
+  I_A4["I_A4: バーテンダーの銃を向ける行為は男の異変と因果関係がある"]:::fc
+  I_A5["I_A5: バーテンダーは男の異変に対して意図的に銃を向けた"]:::fc
+  I_A6["I_A6: 銃を向ける行為は男にとって有益だった"]:::fc
+  I_B1["I_B1: 男が水を求めたのにはそれを必要とする事情がある"]:::fc
+  I_B2["I_B2: 男はバーに来る前から水を必要としていた"]:::fc
+  I_B4["I_B4: 水による対処が不要になった"]:::fc
+  I_B5["I_B5: 銃を向けられた出来事と水が不要になったことの間に因果関係がある"]:::fc
+  I_B6["I_B6: 男の「ありがとう」は問題が解消したことへの感謝である"]:::fc
+  I_C1["I_C1: バーテンダーは男の状態を問題として認識した"]:::fc
+  I_C2["I_C2: 男は問題を水で対処しようとしたが別の方法で問題が解消された"]:::fc
+  I_C3["I_C3: バーテンダーの対処（銃）と男の対処（水）は同じ問題に対するものだった"]:::fc
+  NF1["NF1: バーテンダーは男を追い出そうとしたのではない"]:::neg
+  NF2["NF2: 銃を向けたのは事前の合図ではない"]:::neg
+  NF3["NF3: 男は犯罪目的でバーに来たのではない"]:::neg
+  NF4["NF4: 男はバーテンダーの反応をテストしていたのではない"]:::neg
+  NF5["NF5: バーテンダーは男から何かを奪おうとしたのではない"]:::neg
+  N_N1["N_N1: バーテンダーは男を脅そうとしたのではない"]:::neg
+  N_N2["N_N2: 男は恐怖で逃げたのではない"]:::neg
+  N_N3["N_N3: バーテンダーは冗談で銃を向けたのではない"]:::neg
+  S1["S1: 男がバーに入った"]:::ic
+  S2["S2: 男はバーテンダーに「水をください」と頼んだ"]:::ic
+  S3["S3: バーテンダーは男に銃を向けた"]:::ic
+  S4["S4: 男は「ありがとう」と言った"]:::ic
+  S5["S5: 男は帰った"]:::ic
+  SD1["SD1: 男がいた"]:::ic
+  SD2["SD2: バーがあった"]:::ic
+  SD3["SD3: バーテンダーがいた"]:::ic
+  SD4["SD4: 男は水を求めた"]:::ic
+  SD5["SD5: 男はバーの外から来た"]:::ic
+  SD6["SD6: バーテンダーは銃を持っていた"]:::ic
+  SD7["SD7: 水の要求は銃を向けられるより前だった"]:::ic
+  SD8["SD8: 銃を向けられたのは「ありがとう」と帰る行為より前だった"]:::ic
+  TA1_kr["TA1_kr: 男に異変があった"]:::fc
+  TA2_kr["TA2_kr: バーテンダーがそれに気づいた"]:::fc
+  TA3_kr["TA3_kr: 銃を向けることが対処だった"]:::fc
+  TB1_kr["TB1_kr: 男に問題があった"]:::fc
+  TB2_kr["TB2_kr: 水は対処として求めた"]:::fc
+  TB3_kr["TB3_kr: 問題が解消した"]:::fc
+  TB4_kr["TB4_kr: 男はバーテンダーの意図を理解した"]:::fc
+  j_ec_FPC1(( ))
+  I_C1 ==> j_ec_FPC1
+  TA3_kr ==> j_ec_FPC1
+  j_ec_FPC1 ==> FPC1
+  j_ec_FPC2(( ))
+  I_C2 ==> j_ec_FPC2
+  TB4_kr ==> j_ec_FPC2
+  j_ec_FPC2 ==> FPC2
+  j_fc_I_A2(( ))
+  S2 -.-> j_fc_I_A2
+  S3 -.-> j_fc_I_A2
+  SD7 -.-> j_fc_I_A2
+  j_fc_I_A2 -.-> I_A2
+  j_fc_I_A3(( ))
+  I_A2 -.-> j_fc_I_A3
+  S1 -.-> j_fc_I_A3
+  SD3 -.-> j_fc_I_A3
+  j_fc_I_A3 -.-> I_A3
+  I_A3 -.-> TA1_kr
+  j_fc_I_A4(( ))
+  TA1_kr -.-> j_fc_I_A4
+  SD3 -.-> j_fc_I_A4
+  S3 -.-> j_fc_I_A4
+  j_fc_I_A4 -.-> I_A4
+  I_A4 -.-> TA2_kr
+  j_fc_I_A5(( ))
+  TA2_kr -.-> j_fc_I_A5
+  S3 -.-> j_fc_I_A5
+  j_fc_I_A5 -.-> I_A5
+  j_fc_I_A6(( ))
+  I_A5 -.-> j_fc_I_A6
+  S4 -.-> j_fc_I_A6
+  SD8 -.-> j_fc_I_A6
+  j_fc_I_A6 -.-> I_A6
+  I_A6 -.-> TA3_kr
+  j_fc_I_B1(( ))
+  S2 -.-> j_fc_I_B1
+  SD4 -.-> j_fc_I_B1
+  j_fc_I_B1 -.-> I_B1
+  j_fc_I_B2(( ))
+  I_B1 -.-> j_fc_I_B2
+  S1 -.-> j_fc_I_B2
+  SD5 -.-> j_fc_I_B2
+  j_fc_I_B2 -.-> I_B2
+  I_B2 -.-> TB1_kr
+  j_fc_TB2_kr(( ))
+  TB1_kr -.-> j_fc_TB2_kr
+  S2 -.-> j_fc_TB2_kr
+  SD4 -.-> j_fc_TB2_kr
+  j_fc_TB2_kr -.-> TB2_kr
+  j_fc_I_B4(( ))
+  TB2_kr -.-> j_fc_I_B4
+  S4 -.-> j_fc_I_B4
+  S5 -.-> j_fc_I_B4
+  j_fc_I_B4 -.-> I_B4
+  j_fc_I_B5(( ))
+  I_B4 -.-> j_fc_I_B5
+  S3 -.-> j_fc_I_B5
+  SD8 -.-> j_fc_I_B5
+  j_fc_I_B5 -.-> I_B5
+  I_B5 -.-> TB3_kr
+  j_fc_I_B6(( ))
+  TB3_kr -.-> j_fc_I_B6
+  S4 -.-> j_fc_I_B6
+  j_fc_I_B6 -.-> I_B6
+  j_fc_TB4_kr(( ))
+  I_B6 -.-> j_fc_TB4_kr
+  TA3_kr -.-> j_fc_TB4_kr
+  j_fc_TB4_kr -.-> TB4_kr
+  j_fc_I_C1(( ))
+  TA1_kr -.-> j_fc_I_C1
+  TA2_kr -.-> j_fc_I_C1
+  j_fc_I_C1 -.-> I_C1
+  j_fc_FPC1(( ))
+  I_C1 -.-> j_fc_FPC1
+  TA3_kr -.-> j_fc_FPC1
+  j_fc_FPC1 -.-> FPC1
+  j_fc_I_C2(( ))
+  TB1_kr -.-> j_fc_I_C2
+  TB2_kr -.-> j_fc_I_C2
+  TB3_kr -.-> j_fc_I_C2
+  j_fc_I_C2 -.-> I_C2
+  j_fc_FPC2(( ))
+  I_C2 -.-> j_fc_FPC2
+  TB4_kr -.-> j_fc_FPC2
+  j_fc_FPC2 -.-> FPC2
+  j_fc_I_C3(( ))
+  FPC1 -.-> j_fc_I_C3
+  FPC2 -.-> j_fc_I_C3
+  j_fc_I_C3 -.-> I_C3
+  I_C3 -.-> FP
+  </pre>
+</div>
+
+<div id="deriv" class="panel">
+  <h2>Phase 1: 導出グラフ</h2>
+  <p class="note">FP → FPC → 構成要素 → 共通抽象。黄=FP, 紫=FPC, 青=構成要素, 緑=共通抽象</p>
+  <pre class="mermaid">
+graph TD
+  empty[No derivation_graph]
+  </pre>
+</div>
+
+<div id="questions" class="panel">
+  <h2>質問 → 命題マッピング</h2>
+  <p class="note">O=はい, X=いいえ. 緑=はい質問, 赤=いいえ質問</p>
+  <pre class="mermaid">
+graph LR
+  classDef yes fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef no fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef prop fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  Q1["Q1 O: バーテンダーが銃を向けたのは、水の注文とは別の理由があります...<br/>[原因と動機]"]:::yes
+  Q1_I_A2["I_A2: バーテンダーが銃を向けたのは水の要求とは別の理由に..."]:::prop
+  Q1 --> Q1_I_A2
+  Q10["Q10 O: 男はバーテンダーが対処として銃を向けたことを理解し、感謝して...<br/>[原因と動機]<br/>prereqs: TA3_kr"]:::yes
+  Q10_I_B6["I_B6: 男の「ありがとう」は問題が解消したことへの感謝であ..."]:::prop
+  Q10 --> Q10_I_B6
+  Q10_TB4_kr["TB4_kr: 男はバーテンダーの意図を理解した"]:::prop
+  Q10 --> Q10_TB4_kr
+  Q11["Q11 O: バーテンダーは男の異変に気づき、対処として銃を向けたのですか...<br/>[状況の確認]<br/>prereqs: TA1_kr"]:::yes
+  Q11_I_C1["I_C1: バーテンダーは男の状態を問題として認識した"]:::prop
+  Q11 --> Q11_I_C1
+  Q11_FPC1["FPC1: バーテンダーは男の異変に気づき、その対処として銃を..."]:::prop
+  Q11 --> Q11_FPC1
+  Q12["Q12 O: 男は問題を水で対処しようとしたが、バーテンダーの行為で解消さ...<br/>[状況の確認]<br/>prereqs: TB1_kr,TB2_kr,TB4_kr"]:::yes
+  Q12_I_C2["I_C2: 男は問題を水で対処しようとしたが別の方法で問題が解..."]:::prop
+  Q12 --> Q12_I_C2
+  Q12_FPC2["FPC2: 男は問題への対処として水を求めていたが、バーテンダ..."]:::prop
+  Q12 --> Q12_FPC2
+  Q13["Q13 O: バーテンダーの銃と男の水は同じ問題への対処で、銃により問題が...<br/>[状況の確認]<br/>prereqs: FPC1,FPC2"]:::yes
+  Q13_I_C3["I_C3: バーテンダーの対処（銃）と男の対処（水）は同じ問題..."]:::prop
+  Q13 --> Q13_I_C3
+  Q13_FP["FP: 男にはある身体的異変があり水で治そうとしていた。バ..."]:::prop
+  Q13 --> Q13_FP
+  Q2["Q2 O: 銃を向けた理由は、男の身体的な異変に関係がありますか？<br/>[状況の確認]"]:::yes
+  Q2_I_A3["I_A3: 銃を向けた理由は男自身の状態に関係している"]:::prop
+  Q2 --> Q2_I_A3
+  Q2_TA1_kr["TA1_kr: 男に異変があった"]:::prop
+  Q2 --> Q2_TA1_kr
+  Q3["Q3 O: バーテンダーは男の異変に気づいて銃を向けましたか？<br/>[原因と動機]<br/>prereqs: TA1_kr"]:::yes
+  Q3_I_A4["I_A4: バーテンダーの銃を向ける行為は男の異変と因果関係が..."]:::prop
+  Q3 --> Q3_I_A4
+  Q3_TA2_kr["TA2_kr: バーテンダーがそれに気づいた"]:::prop
+  Q3 --> Q3_TA2_kr
+  Q4["Q4 O: 銃を向けたのは意図的で、かつ男にとって良いことでしたか？<br/>[原因と動機]"]:::yes
+  Q4_I_A5["I_A5: バーテンダーは男の異変に対して意図的に銃を向けた"]:::prop
+  Q4 --> Q4_I_A5
+  Q4_I_A6["I_A6: 銃を向ける行為は男にとって有益だった"]:::prop
+  Q4 --> Q4_I_A6
+  Q5["Q5 O: 銃を向けたのは、男の問題への対処でしたか？<br/>[状況の確認]"]:::yes
+  Q5_TA3_kr["TA3_kr: 銃を向けることが対処だった"]:::prop
+  Q5 --> Q5_TA3_kr
+  Q6["Q6 O: 男はバーに来る前から水を必要としていましたか？<br/>[人物と背景]"]:::yes
+  Q6_I_B1["I_B1: 男が水を求めたのにはそれを必要とする事情がある"]:::prop
+  Q6 --> Q6_I_B1
+  Q6_I_B2["I_B2: 男はバーに来る前から水を必要としていた"]:::prop
+  Q6 --> Q6_I_B2
+  Q7["Q7 O: 男は何か困っていることがありましたか？<br/>[状況の確認]"]:::yes
+  Q7_TB1_kr["TB1_kr: 男に問題があった"]:::prop
+  Q7 --> Q7_TB1_kr
+  Q8["Q8 O: 男は水を飲むことで問題に対処しようとしていましたか？<br/>[原因と動機]<br/>prereqs: TB1_kr"]:::yes
+  Q8_TB2_kr["TB2_kr: 水は対処として求めた"]:::prop
+  Q8 --> Q8_TB2_kr
+  Q9["Q9 O: 銃を向けられたことで水が不要になり、男の問題は解消しましたか...<br/>[原因と動機]<br/>prereqs: TB2_kr"]:::yes
+  Q9_I_B4["I_B4: 水による対処が不要になった"]:::prop
+  Q9 --> Q9_I_B4
+  Q9_I_B5["I_B5: 銃を向けられた出来事と水が不要になったことの間に因..."]:::prop
+  Q9 --> Q9_I_B5
+  Q9_TB3_kr["TB3_kr: 問題が解消した"]:::prop
+  Q9 --> Q9_TB3_kr
+  QF1["QF1 X: バーテンダーは迷惑な男を追い出そうとしたのですか？<br/>[前提の確認]"]:::no
+  QF1_NF1["NF1: バーテンダーは男を追い出そうとしたのではない"]:::prop
+  QF1 --> QF1_NF1
+  QF2["QF2 X: 銃を向けたのは事前に取り決めた合図でしたか？<br/>[前提の確認]"]:::no
+  QF2_NF2["NF2: 銃を向けたのは事前の合図ではない"]:::prop
+  QF2 --> QF2_NF2
+  QF3["QF3 X: 男はバーに犯罪目的で来ましたか？<br/>[前提の確認]"]:::no
+  QF3_NF3["NF3: 男は犯罪目的でバーに来たのではない"]:::prop
+  QF3 --> QF3_NF3
+  QF4["QF4 X: 男はバーテンダーの反応をテストしていましたか？<br/>[前提の確認]"]:::no
+  QF4_NF4["NF4: 男はバーテンダーの反応をテストしていたのではない"]:::prop
+  QF4 --> QF4_NF4
+  QF5["QF5 X: バーテンダーは男から何かを奪おうとしましたか？<br/>[前提の確認]"]:::no
+  QF5_NF5["NF5: バーテンダーは男から何かを奪おうとしたのではない"]:::prop
+  QF5 --> QF5_NF5
+  QN1["QN1 X: バーテンダーは男を脅そうとしたのですか？<br/>[前提の確認]"]:::no
+  QN1_N_N1["N_N1: バーテンダーは男を脅そうとしたのではない"]:::prop
+  QN1 --> QN1_N_N1
+  QN2["QN2 X: 男は怖くなって逃げたのですか？<br/>[前提の確認]"]:::no
+  QN2_N_N2["N_N2: 男は恐怖で逃げたのではない"]:::prop
+  QN2 --> QN2_N_N2
+  QN3["QN3 X: バーテンダーは冗談で銃を向けたのですか？<br/>[前提の確認]"]:::no
+  QN3_N_N3["N_N3: バーテンダーは冗談で銃を向けたのではない"]:::prop
+  QN3 --> QN3_N_N3
+  </pre>
+</div>
+
+<div id="models" class="panel">
+  <h2>競合モデル（Phase 1）</h2>
+  <pre class="mermaid">
+graph TD
+  classDef elemA fill:#bbdefb,stroke:#1565c0,color:#000
+  classDef elemB fill:#c8e6c9,stroke:#2e7d32,color:#000
+  classDef model fill:#fff3e0,stroke:#e65100,color:#000
+  elem_A["A: 水を求めた男にバーテンダーが銃を向けた"]:::elemA
+  elem_B["B: 銃を向けられた男が水を受け取らず「ありがとう」と言って帰った"]:::elemB
+  MA1["MA1: 対処（T）"]:::model
+  elem_A --> MA1
+  MA2["MA2: 強盗"]:::model
+  elem_A --> MA2
+  MA3["MA3: 自衛"]:::model
+  elem_A --> MA3
+  MA4["MA4: 排除"]:::model
+  elem_A --> MA4
+  MA5["MA5: 遊戯"]:::model
+  elem_A --> MA5
+  MB1["MB1: 対処（T）"]:::model
+  elem_B --> MB1
+  MB2["MB2: 恐怖退避"]:::model
+  elem_B --> MB2
+  MB3["MB3: 合図"]:::model
+  elem_B --> MB3
+  MB4["MB4: 犯罪中止"]:::model
+  elem_B --> MB4
+  MB5["MB5: テスト"]:::model
+  elem_B --> MB5
+  </pre>
+</div>
+
+<div id="chains" class="panel">
+  <h2>戦術連鎖（Phase 2）</h2>
+  <pre class="mermaid">
+graph TD
+  classDef src fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef mid fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef tgt fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  subgraph chain_A1["chain_A1: "]
+    direction LR
+    chain_A1_TA1_kr["TA1_kr"]:::tgt
+  end
+  subgraph chain_A2["chain_A2: "]
+    direction LR
+    chain_A2_TA2_kr["TA2_kr"]:::tgt
+  end
+  subgraph chain_A3["chain_A3: "]
+    direction LR
+    chain_A3_TA3_kr["TA3_kr"]:::tgt
+  end
+  subgraph chain_B1["chain_B1: "]
+    direction LR
+    chain_B1_TB1_kr["TB1_kr"]:::tgt
+  end
+  subgraph chain_B2["chain_B2: "]
+    direction LR
+    chain_B2_TB2_kr["TB2_kr"]:::tgt
+  end
+  subgraph chain_B3["chain_B3: "]
+    direction LR
+    chain_B3_TB3_kr["TB3_kr"]:::tgt
+  end
+  subgraph chain_B4["chain_B4: "]
+    direction LR
+    chain_B4_TB4_kr["TB4_kr"]:::tgt
+  end
+  subgraph chain_C1["chain_C1: "]
+    direction LR
+    chain_C1_FPC1["FPC1"]:::tgt
+  end
+  subgraph chain_C2["chain_C2: "]
+    direction LR
+    chain_C2_FPC2["FPC2"]:::tgt
+  end
+  subgraph chain_C3["chain_C3: "]
+    direction LR
+    chain_C3_FP["FP"]:::tgt
+  end
+  </pre>
+</div>
+
+<div id="game" class="panel">
+  <h2>ゲームシミュレーション（自動プレイ）</h2>
+  <p class="note">はい質問優先で自動プレイ</p>
+  <div class="game-table">
+  <table>
+    <tr><th>Step</th><th>Question</th><th>+confirmed</th><th>+derived</th></tr>
+    <tr><td colspan='4'>Simulation error: &#x27;descriptors&#x27;</td></tr>
+  </table>
+  </div>
+</div>
+
+<div id="table" class="panel">
+  <h2>全命題一覧</h2>
+  <div style="max-height:600px; overflow-y:auto;">
+  <table>
+    <tr><th>ID</th><th>Kind</th><th>Label</th><th>IC</th><th>EC</th><th>FC</th><th>neg_of</th><th>Qs</th></tr>
+    <tr><td>FP</td><td>FP</td><td>男にはある身体的異変があり水で治そうとしていた。バーテンダーはその異変に気づき驚かせて治そうと銃を向けた。異変が治まった男は水が不要になり、意図を理解して感謝した</td><td></td><td><small></small></td><td><small>[[&#x27;I_C3&#x27;]]</small></td><td></td><td>Q13</td></tr>
+<tr><td>FPC1</td><td>FPC</td><td>バーテンダーは男の異変に気づき、その対処として銃を向けた</td><td></td><td><small>[[&#x27;I_C1&#x27;, &#x27;TA3_kr&#x27;]]</small></td><td><small>[[&#x27;I_C1&#x27;, &#x27;TA3_kr&#x27;]]</small></td><td></td><td>Q11</td></tr>
+<tr><td>FPC2</td><td>FPC</td><td>男は問題への対処として水を求めていたが、バーテンダーの行為で問題が解消し、男はその意図を理解した</td><td></td><td><small>[[&#x27;I_C2&#x27;, &#x27;TB4_kr&#x27;]]</small></td><td><small>[[&#x27;I_C2&#x27;, &#x27;TB4_kr&#x27;]]</small></td><td></td><td>Q12</td></tr>
+<tr><td>H_F1</td><td>H</td><td>バーテンダーは迷惑な男を追い出そうとした</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;SD6&#x27;]]</small></td><td>NF1</td><td></td></tr>
+<tr><td>H_F2</td><td>H</td><td>銃を向けたのは事前に取り決めた合図だった</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;SD6&#x27;]]</small></td><td>NF2</td><td></td></tr>
+<tr><td>H_F3</td><td>H</td><td>男は犯罪目的でバーに来た</td><td></td><td><small></small></td><td><small>[[&#x27;S1&#x27;, &#x27;SD2&#x27;]]</small></td><td>NF3</td><td></td></tr>
+<tr><td>H_F4</td><td>H</td><td>男はバーテンダーの反応をテストしていた</td><td></td><td><small></small></td><td><small>[[&#x27;S1&#x27;, &#x27;S2&#x27;]]</small></td><td>NF4</td><td></td></tr>
+<tr><td>H_F5</td><td>H</td><td>バーテンダーは男から何かを奪おうとした</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;SD6&#x27;]]</small></td><td>NF5</td><td></td></tr>
+<tr><td>H_N1</td><td>H</td><td>バーテンダーは男を脅そうとした</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;SD6&#x27;]]</small></td><td>N_N1</td><td></td></tr>
+<tr><td>H_N2</td><td>H</td><td>男は恐怖で逃げた</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;S5&#x27;, &#x27;SD8&#x27;]]</small></td><td>N_N2</td><td></td></tr>
+<tr><td>H_N3</td><td>H</td><td>バーテンダーは冗談で銃を向けた</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;SD6&#x27;]]</small></td><td>N_N3</td><td></td></tr>
+<tr><td>I_A2</td><td>FC</td><td>バーテンダーが銃を向けたのは水の要求とは別の理由による</td><td></td><td><small></small></td><td><small>[[&#x27;S2&#x27;, &#x27;S3&#x27;, &#x27;SD7&#x27;]]</small></td><td></td><td>Q1</td></tr>
+<tr><td>I_A3</td><td>FC</td><td>銃を向けた理由は男自身の状態に関係している</td><td></td><td><small></small></td><td><small>[[&#x27;I_A2&#x27;, &#x27;S1&#x27;, &#x27;SD3&#x27;]]</small></td><td></td><td>Q2</td></tr>
+<tr><td>I_A4</td><td>FC</td><td>バーテンダーの銃を向ける行為は男の異変と因果関係がある</td><td></td><td><small></small></td><td><small>[[&#x27;TA1_kr&#x27;, &#x27;SD3&#x27;, &#x27;S3&#x27;]]</small></td><td></td><td>Q3</td></tr>
+<tr><td>I_A5</td><td>FC</td><td>バーテンダーは男の異変に対して意図的に銃を向けた</td><td></td><td><small></small></td><td><small>[[&#x27;TA2_kr&#x27;, &#x27;S3&#x27;]]</small></td><td></td><td>Q4</td></tr>
+<tr><td>I_A6</td><td>FC</td><td>銃を向ける行為は男にとって有益だった</td><td></td><td><small></small></td><td><small>[[&#x27;I_A5&#x27;, &#x27;S4&#x27;, &#x27;SD8&#x27;]]</small></td><td></td><td>Q4</td></tr>
+<tr><td>I_B1</td><td>FC</td><td>男が水を求めたのにはそれを必要とする事情がある</td><td></td><td><small></small></td><td><small>[[&#x27;S2&#x27;, &#x27;SD4&#x27;]]</small></td><td></td><td>Q6</td></tr>
+<tr><td>I_B2</td><td>FC</td><td>男はバーに来る前から水を必要としていた</td><td></td><td><small></small></td><td><small>[[&#x27;I_B1&#x27;, &#x27;S1&#x27;, &#x27;SD5&#x27;]]</small></td><td></td><td>Q6</td></tr>
+<tr><td>I_B4</td><td>FC</td><td>水による対処が不要になった</td><td></td><td><small></small></td><td><small>[[&#x27;TB2_kr&#x27;, &#x27;S4&#x27;, &#x27;S5&#x27;]]</small></td><td></td><td>Q9</td></tr>
+<tr><td>I_B5</td><td>FC</td><td>銃を向けられた出来事と水が不要になったことの間に因果関係がある</td><td></td><td><small></small></td><td><small>[[&#x27;I_B4&#x27;, &#x27;S3&#x27;, &#x27;SD8&#x27;]]</small></td><td></td><td>Q9</td></tr>
+<tr><td>I_B6</td><td>FC</td><td>男の「ありがとう」は問題が解消したことへの感謝である</td><td></td><td><small></small></td><td><small>[[&#x27;TB3_kr&#x27;, &#x27;S4&#x27;]]</small></td><td></td><td>Q10</td></tr>
+<tr><td>I_C1</td><td>FC</td><td>バーテンダーは男の状態を問題として認識した</td><td></td><td><small></small></td><td><small>[[&#x27;TA1_kr&#x27;, &#x27;TA2_kr&#x27;]]</small></td><td></td><td>Q11</td></tr>
+<tr><td>I_C2</td><td>FC</td><td>男は問題を水で対処しようとしたが別の方法で問題が解消された</td><td></td><td><small></small></td><td><small>[[&#x27;TB1_kr&#x27;, &#x27;TB2_kr&#x27;, &#x27;TB3_kr&#x27;]]</small></td><td></td><td>Q12</td></tr>
+<tr><td>I_C3</td><td>FC</td><td>バーテンダーの対処（銃）と男の対処（水）は同じ問題に対するものだった</td><td></td><td><small></small></td><td><small>[[&#x27;FPC1&#x27;, &#x27;FPC2&#x27;]]</small></td><td></td><td>Q13</td></tr>
+<tr><td>NF1</td><td>NF</td><td>バーテンダーは男を追い出そうとしたのではない</td><td></td><td><small></small></td><td><small></small></td><td>H_F1</td><td>QF1</td></tr>
+<tr><td>NF2</td><td>NF</td><td>銃を向けたのは事前の合図ではない</td><td></td><td><small></small></td><td><small></small></td><td>H_F2</td><td>QF2</td></tr>
+<tr><td>NF3</td><td>NF</td><td>男は犯罪目的でバーに来たのではない</td><td></td><td><small></small></td><td><small></small></td><td>H_F3</td><td>QF3</td></tr>
+<tr><td>NF4</td><td>NF</td><td>男はバーテンダーの反応をテストしていたのではない</td><td></td><td><small></small></td><td><small></small></td><td>H_F4</td><td>QF4</td></tr>
+<tr><td>NF5</td><td>NF</td><td>バーテンダーは男から何かを奪おうとしたのではない</td><td></td><td><small></small></td><td><small></small></td><td>H_F5</td><td>QF5</td></tr>
+<tr><td>N_N1</td><td></td><td>バーテンダーは男を脅そうとしたのではない</td><td></td><td><small></small></td><td><small></small></td><td>H_N1</td><td>QN1</td></tr>
+<tr><td>N_N2</td><td></td><td>男は恐怖で逃げたのではない</td><td></td><td><small></small></td><td><small></small></td><td>H_N2</td><td>QN2</td></tr>
+<tr><td>N_N3</td><td></td><td>バーテンダーは冗談で銃を向けたのではない</td><td></td><td><small></small></td><td><small></small></td><td>H_N3</td><td>QN3</td></tr>
+<tr><td>S1</td><td></td><td>男がバーに入った</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>S2</td><td></td><td>男はバーテンダーに「水をください」と頼んだ</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>S3</td><td></td><td>バーテンダーは男に銃を向けた</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>S4</td><td></td><td>男は「ありがとう」と言った</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>S5</td><td></td><td>男は帰った</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>SD1</td><td></td><td>男がいた</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>SD2</td><td></td><td>バーがあった</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>SD3</td><td></td><td>バーテンダーがいた</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>SD4</td><td></td><td>男は水を求めた</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>SD5</td><td></td><td>男はバーの外から来た</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>SD6</td><td></td><td>バーテンダーは銃を持っていた</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>SD7</td><td></td><td>水の要求は銃を向けられるより前だった</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>SD8</td><td></td><td>銃を向けられたのは「ありがとう」と帰る行為より前だった</td><td>IC</td><td><small></small></td><td><small></small></td><td></td><td></td></tr>
+<tr><td>TA1_kr</td><td>FC</td><td>男に異変があった</td><td></td><td><small></small></td><td><small>[[&#x27;I_A3&#x27;]]</small></td><td></td><td>Q2</td></tr>
+<tr><td>TA2_kr</td><td>FC</td><td>バーテンダーがそれに気づいた</td><td></td><td><small></small></td><td><small>[[&#x27;I_A4&#x27;]]</small></td><td></td><td>Q3</td></tr>
+<tr><td>TA3_kr</td><td>FC</td><td>銃を向けることが対処だった</td><td></td><td><small></small></td><td><small>[[&#x27;I_A6&#x27;]]</small></td><td></td><td>Q5</td></tr>
+<tr><td>TB1_kr</td><td>FC</td><td>男に問題があった</td><td></td><td><small></small></td><td><small>[[&#x27;I_B2&#x27;]]</small></td><td></td><td>Q7</td></tr>
+<tr><td>TB2_kr</td><td>FC</td><td>水は対処として求めた</td><td></td><td><small></small></td><td><small>[[&#x27;TB1_kr&#x27;, &#x27;S2&#x27;, &#x27;SD4&#x27;]]</small></td><td></td><td>Q8</td></tr>
+<tr><td>TB3_kr</td><td>FC</td><td>問題が解消した</td><td></td><td><small></small></td><td><small>[[&#x27;I_B5&#x27;]]</small></td><td></td><td>Q9</td></tr>
+<tr><td>TB4_kr</td><td>FC</td><td>男はバーテンダーの意図を理解した</td><td></td><td><small></small></td><td><small>[[&#x27;I_B6&#x27;, &#x27;TA3_kr&#x27;]]</small></td><td></td><td>Q10</td></tr>
+  </table>
+  </div>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: false, nodeSpacing: 25, rankSpacing: 50 },
+    themeVariables: { fontSize: '13px' }
+  });
+
+  // Render mermaid in active panel only (on demand)
+  async function renderPanel(id) {
+    var panel = document.getElementById(id);
+    var elems = panel.querySelectorAll('.mermaid:not([data-processed])');
+    for (var el of elems) {
+      el.setAttribute('data-processed', 'true');
+      var code = el.textContent.trim();
+      try {
+        var { svg } = await mermaid.render('mermaid_' + id + '_' + Math.random().toString(36).slice(2), code);
+        el.innerHTML = svg;
+      } catch(e) {
+        el.innerHTML = '<pre style="color:red">Mermaid error: ' + e.message + '</pre><pre>' + code + '</pre>';
+      }
+    }
+  }
+
+  // Initial render
+  renderPanel('ecfc');
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.panel').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+      var target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.add('active');
+      tab.classList.add('active');
+      renderPanel(target);
+    });
+  });
+</script>
+
+</body>
+</html>
