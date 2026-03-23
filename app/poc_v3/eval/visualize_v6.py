@@ -14,8 +14,21 @@ def load_data(path: str) -> dict:
         return json.load(f)
 
 
+def _is_s_prop(pid: str) -> bool:
+    """S命題かどうか判定（D-S*, S* 両形式対応）"""
+    return pid.startswith("D-S") or (pid.startswith("S") and len(pid) > 1 and pid[1:].isdigit())
+
+
+def _reveals_list(q: dict) -> list:
+    """reveals を常にリストとして返す（str/list 両対応）"""
+    r = q.get("reveals", [])
+    if isinstance(r, str):
+        return [r] if r else []
+    return r
+
+
 def _esc(text: str) -> str:
-    return text.replace('"', "#quot;").replace("<", "#lt;").replace(">", "#gt;").replace("&", "#amp;")
+    return text.replace("&", "&amp;").replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
 
 
 def _short(text: str, n: int = 40) -> str:
@@ -84,12 +97,12 @@ def _build_ec_fc_diagram(descriptors, initial_confirmed):
     ]
 
     # S 命題はまとめて 1 ノード
-    s_ids = sorted([d for d in initial_confirmed if d.startswith("D-S")])
+    s_ids = sorted([d for d in initial_confirmed if _is_s_prop(d)])
     lines.append(f'  S_GROUP["S命題 ({len(s_ids)}個)"]:::ic')
 
     # 非S命題を描画
     for did, d in sorted(descriptors.items()):
-        if did.startswith("D-S"):
+        if _is_s_prop(did):
             continue
         label = _short(d.get("label", did), 35)
         ec = d.get("entailment_conditions")
@@ -112,12 +125,12 @@ def _build_ec_fc_diagram(descriptors, initial_confirmed):
 
     # EC edges (solid, green)
     for did, d in descriptors.items():
-        if did.startswith("D-S"):
+        if _is_s_prop(did):
             continue
         for group in d.get("entailment_conditions") or []:
             sources = []
             for src in group:
-                if src.startswith("D-S"):
+                if _is_s_prop(src):
                     sources.append("S_GROUP")
                 elif src in descriptors:
                     sources.append(_safe_id(src))
@@ -132,14 +145,14 @@ def _build_ec_fc_diagram(descriptors, initial_confirmed):
 
     # FC edges (dashed, orange)
     for did, d in descriptors.items():
-        if did.startswith("D-S"):
+        if _is_s_prop(did):
             continue
         if d.get("negation_of"):
             continue  # skip H*/NF* for clarity
         for group in d.get("formation_conditions") or []:
             sources = []
             for src in group:
-                if src.startswith("D-S"):
+                if _is_s_prop(src):
                     sources.append("S_GROUP")
                 elif src in descriptors:
                     sources.append(_safe_id(src))
@@ -157,9 +170,14 @@ def _build_ec_fc_diagram(descriptors, initial_confirmed):
 
 def _build_phase1_derivation_diagram(phase1):
     """Phase 1 の導出グラフを描画"""
-    dg = phase1.get("derivation_graph", {})
-    if not dg:
+    dg_raw = phase1.get("derivation_graph", {})
+    if not dg_raw:
         return "graph TD\n  empty[No derivation_graph]"
+
+    # Handle both flat dict and {"nodes": {...}} formats
+    dg = dg_raw.get("nodes", dg_raw) if isinstance(dg_raw, dict) else dg_raw
+    # Filter out non-node keys like "description"
+    dg = {k: v for k, v in dg.items() if isinstance(v, dict)}
 
     lines = [
         "graph TD",
@@ -176,7 +194,7 @@ def _build_phase1_derivation_diagram(phase1):
             cls = "fp"
         elif nid.startswith("FPC"):
             cls = "fpc"
-        elif "common_abstraction" in node:
+        elif node.get("type") == "共通抽象":
             cls = "ca"
         else:
             cls = "comp"
@@ -210,7 +228,7 @@ def _build_question_diagram(questions, descriptors):
         cat_str = f"<br/>[{_esc(cat)}]" if cat else ""
         lines.append(f'  {qid}["{_esc(qid)} {mark}: {_esc(text)}{cat_str}{prereq_str}"]:::{cls}')
 
-        for rev in q.get("reveals", []):
+        for rev in _reveals_list(q):
             d = descriptors.get(rev, {})
             rev_label = _short(d.get("label", rev), 25)
             lines.append(f'  {qid}_{rev}["{_esc(rev)}: {_esc(rev_label)}"]:::prop')
@@ -249,7 +267,7 @@ def _build_models_diagram(phase1):
 
 def _build_chains_diagram(phase2):
     """戦術連鎖を描画"""
-    chains = phase2.get("chains", {})
+    chains = phase2.get("chains", phase2.get("chain_mapping", {}))
     if not chains:
         return "graph TD\n  empty[No chains in _phase2]"
 
@@ -260,9 +278,9 @@ def _build_chains_diagram(phase2):
 
     for cid, chain in chains.items():
         target = chain.get("target", "")
-        desc = chain.get("description", "")
-        intermediates = chain.get("intermediates", [])
+        desc = chain.get("description", cid)
         steps = chain.get("steps", [])
+        intermediates = chain.get("intermediates", [s["output"] for s in steps])
 
         lines.append(f'  subgraph {_safe_id(cid)}["{_esc(cid)}: {_esc(desc)}"]')
         lines.append("    direction LR")
@@ -292,21 +310,25 @@ def _build_game_simulation(data):
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
         from engine import load_puzzle, init_game, available_questions, answer_question, check_complete
 
-        # Write temp data.json
-        tmp = Path(__file__).resolve().parent / "_tmp_vis.json"
-        # Export: strip _ fields
-        cleaned = {k: v for k, v in data.items() if not k.startswith("_")}
-        if "S" in cleaned and "statement" not in cleaned:
-            cleaned["statement"] = cleaned.pop("S")
-        if "T" in cleaned and "truth" not in cleaned:
-            cleaned["truth"] = cleaned.pop("T")
-        if "id" not in cleaned and "title" in cleaned:
-            cleaned["id"] = cleaned["title"]
-        with open(tmp, "w", encoding="utf-8") as f:
-            json.dump(cleaned, f, ensure_ascii=False)
-
-        puzzle = load_puzzle(str(tmp))
-        tmp.unlink(missing_ok=True)
+        # Use data.json alongside data_src.json if available
+        src_path = data.get("_src_path", "")
+        data_json = Path(src_path).parent / "data.json" if src_path else None
+        if data_json and data_json.exists():
+            puzzle = load_puzzle(str(data_json))
+        else:
+            # Fallback: write temp file
+            tmp = Path(__file__).resolve().parent / "_tmp_vis.json"
+            cleaned = {k: v for k, v in data.items() if not k.startswith("_")}
+            if "S" in cleaned and "statement" not in cleaned:
+                cleaned["statement"] = cleaned.pop("S")
+            if "T" in cleaned and "truth" not in cleaned:
+                cleaned["truth"] = cleaned.pop("T")
+            if "id" not in cleaned and "title" in cleaned:
+                cleaned["id"] = cleaned["title"]
+            with open(tmp, "w", encoding="utf-8") as f:
+                json.dump(cleaned, f, ensure_ascii=False)
+            puzzle = load_puzzle(str(tmp))
+            tmp.unlink(missing_ok=True)
 
         rows = []
         state = init_game(puzzle)
@@ -345,7 +367,7 @@ def _build_descriptor_table(descriptors, initial_confirmed, questions):
     # Build reverse map: which question reveals which prop
     reveals_map = {}
     for qid, q in questions.items():
-        for rev in q.get("reveals", []):
+        for rev in _reveals_list(q):
             reveals_map.setdefault(rev, []).append(qid)
 
     rows = []
@@ -360,7 +382,7 @@ def _build_descriptor_table(descriptors, initial_confirmed, questions):
         fc_str = html_mod.escape(str(fc)) if fc else ""
         rev_qs = ", ".join(reveals_map.get(did, []))
         kind = ""
-        if did.startswith("D-S"):
+        if _is_s_prop(did):
             kind = "S"
         elif did.startswith("NF"):
             kind = "NF"
@@ -580,6 +602,7 @@ def main():
     )
 
     data = load_data(src_path)
+    data["_src_path"] = str(Path(src_path).resolve())
     html_content = build_html(data)
 
     with open(out_path, "w", encoding="utf-8") as f:

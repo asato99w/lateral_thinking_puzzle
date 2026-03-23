@@ -1,0 +1,1552 @@
+{
+  "title": "砂漠の男",
+  "S": "砂漠の真ん中で裸の男が死んでいた。手には折れたマッチ棒を握りしめている。",
+  "T": "男は数人で熱気球に乗っていたが、高度が下がり始めた。荷物を全て捨て、服も脱いで軽量化したが足りず、くじ引き（マッチの長さ）で一人が飛び降りることになった。短いマッチを引いた男が飛び降りて死亡した。",
+  "clear_conditions": [
+    [
+      "FP"
+    ]
+  ],
+  "initial_confirmed": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8"
+  ],
+  "propositions": [
+    {
+      "id": "P2",
+      "label": "男は乗り物で砂漠に来た",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S3",
+          "S5"
+        ]
+      ]
+    },
+    {
+      "id": "P4",
+      "label": "男は乗り物で砂漠上空を飛行していた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ]
+    },
+    {
+      "id": "P5",
+      "label": "男は以前は服を着ていた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ]
+    },
+    {
+      "id": "P7",
+      "label": "男は自ら服を脱いだ",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ]
+    },
+    {
+      "id": "P9",
+      "label": "男は外傷で死亡した",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S5",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "P10",
+      "label": "男は落下して死亡した",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P9"
+        ]
+      ]
+    },
+    {
+      "id": "P11",
+      "label": "男の他にも人がいた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S5",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "P12",
+      "label": "男の死は他の人たちとの状況に関係している",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P11",
+          "S5"
+        ]
+      ]
+    },
+    {
+      "id": "P13",
+      "label": "一人が犠牲になる必要があった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P12"
+        ]
+      ]
+    },
+    {
+      "id": "P14",
+      "label": "マッチ棒は何かの目的で使われた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S6",
+          "S7",
+          "S8"
+        ]
+      ]
+    },
+    {
+      "id": "P16",
+      "label": "マッチ棒は選択や決定の道具として使われた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P14"
+        ]
+      ]
+    },
+    {
+      "id": "P17",
+      "label": "マッチの長さでくじ引きをした",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P16"
+        ]
+      ]
+    },
+    {
+      "id": "P18",
+      "label": "マッチ棒は意図的に短くされたものである",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "S7"
+        ]
+      ]
+    },
+    {
+      "id": "P19",
+      "label": "男がこの折れたマッチ棒を握っているのは偶然ではない",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P18",
+          "S8"
+        ]
+      ]
+    },
+    {
+      "id": "P20",
+      "label": "男は短いマッチを引いた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P19"
+        ]
+      ]
+    },
+    {
+      "id": "P21",
+      "label": "男は飛行中の乗り物から落下して死亡した",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P4",
+          "P10"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P4",
+          "P10"
+        ]
+      ]
+    },
+    {
+      "id": "P22",
+      "label": "乗り物で緊急事態が発生し、軽量化のため服を脱ぐ必要があった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P21",
+          "P7"
+        ]
+      ]
+    },
+    {
+      "id": "FPC1",
+      "label": "男は乗り物で砂漠上空にいたが、緊急事態のため服を脱ぎ、落下して死亡した",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P22"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P22",
+          "P4",
+          "P10"
+        ]
+      ]
+    },
+    {
+      "id": "P23",
+      "label": "犠牲者を決めるためにマッチのくじ引きが使われた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P13",
+          "P17"
+        ]
+      ]
+    },
+    {
+      "id": "P24",
+      "label": "マッチのくじ引きで短いマッチを引いたため男が犠牲者に選ばれた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P23",
+          "P20"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P23",
+          "P20"
+        ]
+      ]
+    },
+    {
+      "id": "FPC2",
+      "label": "一人が犠牲になる必要があり、マッチの長短のくじ引きで短いマッチを引いた男が選ばれた",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P24"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "P24",
+          "P13"
+        ]
+      ]
+    },
+    {
+      "id": "P25",
+      "label": "乗り物の緊急事態で軽量化したが足りず、くじ引きで犠牲者を選んだ",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "FPC1",
+          "FPC2"
+        ]
+      ]
+    },
+    {
+      "id": "P26",
+      "label": "その乗り物は熱気球だった",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P25"
+        ]
+      ]
+    },
+    {
+      "id": "FP",
+      "label": "男たちは熱気球で砂漠上空にいたが高度が下がり始め、服を脱いで軽量化しても足りず、マッチのくじ引きで短いマッチを引いた男が飛び降りて死亡した",
+      "_truth_value": true,
+      "formation_conditions": [
+        [
+          "P26"
+        ]
+      ]
+    },
+    {
+      "id": "N1",
+      "label": "男は徒歩で砂漠に来たのではない",
+      "_truth_value": true,
+      "negation_of": "H1",
+      "formation_conditions": [
+        [
+          "S3",
+          "S5"
+        ]
+      ]
+    },
+    {
+      "id": "H1",
+      "label": "男は徒歩で砂漠に来た",
+      "_truth_value": false,
+      "negation_of": "N1",
+      "formation_conditions": [
+        [
+          "S3",
+          "S5"
+        ]
+      ]
+    },
+    {
+      "id": "N2",
+      "label": "服は外的要因で失われたのではない",
+      "_truth_value": true,
+      "negation_of": "H2",
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ]
+    },
+    {
+      "id": "H2",
+      "label": "服は外的要因（事故や他者の行為）で失われた",
+      "_truth_value": false,
+      "negation_of": "N2",
+      "formation_conditions": [
+        [
+          "P5"
+        ]
+      ]
+    },
+    {
+      "id": "N3",
+      "label": "男は暑さや脱水で死んだのではない",
+      "_truth_value": true,
+      "negation_of": "H3",
+      "formation_conditions": [
+        [
+          "S5",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "H3",
+      "label": "男は暑さや脱水で死んだ",
+      "_truth_value": false,
+      "negation_of": "N3",
+      "formation_conditions": [
+        [
+          "S5",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "N4",
+      "label": "マッチ棒は火をつけるために使われたのではない",
+      "_truth_value": true,
+      "negation_of": "H4",
+      "formation_conditions": [
+        [
+          "P14"
+        ]
+      ]
+    },
+    {
+      "id": "H4",
+      "label": "マッチ棒は火をつけるために使われた",
+      "_truth_value": false,
+      "negation_of": "N4",
+      "formation_conditions": [
+        [
+          "P14"
+        ]
+      ]
+    },
+    {
+      "id": "N5",
+      "label": "男は一人ではなかった",
+      "_truth_value": true,
+      "negation_of": "H5",
+      "formation_conditions": [
+        [
+          "S5",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "H5",
+      "label": "男は一人だった",
+      "_truth_value": false,
+      "negation_of": "N5",
+      "formation_conditions": [
+        [
+          "S5",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "NF1",
+      "label": "男は誰かに砂漠まで運ばれたのではない",
+      "_truth_value": true,
+      "negation_of": "HF1",
+      "formation_conditions": [
+        [
+          "S3",
+          "S5"
+        ]
+      ]
+    },
+    {
+      "id": "HF1",
+      "label": "男は誰かに砂漠まで運ばれた",
+      "_truth_value": false,
+      "negation_of": "NF1",
+      "formation_conditions": [
+        [
+          "S3",
+          "S5"
+        ]
+      ]
+    },
+    {
+      "id": "NF2",
+      "label": "男は地上の乗り物で砂漠に来たのではない",
+      "_truth_value": true,
+      "negation_of": "HF2",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ]
+    },
+    {
+      "id": "HF2",
+      "label": "男は地上の乗り物で砂漠に来た",
+      "_truth_value": false,
+      "negation_of": "NF2",
+      "formation_conditions": [
+        [
+          "P2"
+        ]
+      ]
+    },
+    {
+      "id": "NF3",
+      "label": "男は元から裸ではなかった",
+      "_truth_value": true,
+      "negation_of": "HF3",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ]
+    },
+    {
+      "id": "HF3",
+      "label": "男は元から裸だった",
+      "_truth_value": false,
+      "negation_of": "NF3",
+      "formation_conditions": [
+        [
+          "S4"
+        ]
+      ]
+    },
+    {
+      "id": "NF4",
+      "label": "男は誰かに殺されたのではない",
+      "_truth_value": true,
+      "negation_of": "HF4",
+      "formation_conditions": [
+        [
+          "S5",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "HF4",
+      "label": "男は誰かに殺された",
+      "_truth_value": false,
+      "negation_of": "NF4",
+      "formation_conditions": [
+        [
+          "S5",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "NF5",
+      "label": "男は自殺したのではない",
+      "_truth_value": true,
+      "negation_of": "HF5",
+      "formation_conditions": [
+        [
+          "S5",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "HF5",
+      "label": "男は自殺した",
+      "_truth_value": false,
+      "negation_of": "NF5",
+      "formation_conditions": [
+        [
+          "S5",
+          "S3"
+        ]
+      ]
+    },
+    {
+      "id": "NF6",
+      "label": "男は何かにぶつかって死亡したのではない",
+      "_truth_value": true,
+      "negation_of": "HF6",
+      "formation_conditions": [
+        [
+          "P9"
+        ]
+      ]
+    },
+    {
+      "id": "HF6",
+      "label": "男は何かにぶつかって死亡した",
+      "_truth_value": false,
+      "negation_of": "NF6",
+      "formation_conditions": [
+        [
+          "P9"
+        ]
+      ]
+    },
+    {
+      "id": "NF7",
+      "label": "マッチ棒は特に理由なく持っていたわけではない",
+      "_truth_value": true,
+      "negation_of": "HF7",
+      "formation_conditions": [
+        [
+          "S6",
+          "S7",
+          "S8"
+        ]
+      ]
+    },
+    {
+      "id": "HF7",
+      "label": "マッチ棒は特に理由なく持っていただけだった",
+      "_truth_value": false,
+      "negation_of": "NF7",
+      "formation_conditions": [
+        [
+          "S6",
+          "S7",
+          "S8"
+        ]
+      ]
+    },
+    {
+      "id": "NF8",
+      "label": "マッチ棒は使用中に折れたのではない",
+      "_truth_value": true,
+      "negation_of": "HF8",
+      "formation_conditions": [
+        [
+          "S7"
+        ]
+      ]
+    },
+    {
+      "id": "HF8",
+      "label": "マッチ棒は使用中に折れた",
+      "_truth_value": false,
+      "negation_of": "NF8",
+      "formation_conditions": [
+        [
+          "S7"
+        ]
+      ]
+    },
+    {
+      "id": "NF9",
+      "label": "乗り物が墜落して死亡したのではない",
+      "_truth_value": true,
+      "negation_of": "HF9",
+      "formation_conditions": [
+        [
+          "P4",
+          "P10"
+        ]
+      ]
+    },
+    {
+      "id": "HF9",
+      "label": "乗り物が墜落して死亡した",
+      "_truth_value": false,
+      "negation_of": "NF9",
+      "formation_conditions": [
+        [
+          "P4",
+          "P10"
+        ]
+      ]
+    },
+    {
+      "id": "NF10",
+      "label": "その乗り物は飛行機ではなかった",
+      "_truth_value": true,
+      "negation_of": "HF10",
+      "formation_conditions": [
+        [
+          "P25"
+        ]
+      ]
+    },
+    {
+      "id": "HF10",
+      "label": "その乗り物は飛行機だった",
+      "_truth_value": false,
+      "negation_of": "NF10",
+      "formation_conditions": [
+        [
+          "P25"
+        ]
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "男は歩いて砂漠に来ましたか？",
+      "answer": "いいえ",
+      "reveals": "N1",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q2",
+      "text": "男は乗り物で砂漠に来ましたか？",
+      "answer": "はい",
+      "reveals": "P2",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q3",
+      "text": "男は空を飛ぶ乗り物で砂漠の上空を飛行していましたか？",
+      "answer": "はい",
+      "reveals": "P4",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q4",
+      "text": "男は以前は服を着ていましたか？",
+      "answer": "はい",
+      "reveals": "P5",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5",
+      "text": "服は何かの事故や他者の行為で失われましたか？",
+      "answer": "いいえ",
+      "reveals": "N2",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q6",
+      "text": "男は自分で服を脱ぎましたか？",
+      "answer": "はい",
+      "reveals": "P7",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q7",
+      "text": "男は暑さや脱水で死にましたか？",
+      "answer": "いいえ",
+      "reveals": "N3",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q8",
+      "text": "男は外傷で死亡しましたか？",
+      "answer": "はい",
+      "reveals": "P9",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q9",
+      "text": "男は落下して死亡しましたか？",
+      "answer": "はい",
+      "reveals": "P10",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q10",
+      "text": "男は一人でしたか？",
+      "answer": "いいえ",
+      "reveals": "N5",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q11",
+      "text": "男の他にも人がいましたか？",
+      "answer": "はい",
+      "reveals": "P11",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q12",
+      "text": "男の死は他の人たちとの状況に関係していますか？",
+      "answer": "はい",
+      "reveals": "P12",
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q13",
+      "text": "一人が犠牲になる必要がありましたか？",
+      "answer": "はい",
+      "reveals": "P13",
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q14",
+      "text": "マッチ棒は何かの目的で使われましたか？",
+      "answer": "はい",
+      "reveals": "P14",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q15",
+      "text": "マッチ棒は火をつけるために使われましたか？",
+      "answer": "いいえ",
+      "reveals": "N4",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "Q16",
+      "text": "マッチ棒は何かを決めるために使われましたか？",
+      "answer": "はい",
+      "reveals": "P16",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q17",
+      "text": "マッチの長さでくじ引きをしましたか？",
+      "answer": "はい",
+      "reveals": "P17",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q18",
+      "text": "マッチ棒は意図的に短くされたものですか？",
+      "answer": "はい",
+      "reveals": "P18",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q19",
+      "text": "男がこのマッチ棒を持っていることには特別な意味がありますか？",
+      "answer": "はい",
+      "reveals": "P19",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q20",
+      "text": "男はくじ引きで短いマッチを引きましたか？",
+      "answer": "はい",
+      "reveals": "P20",
+      "mechanism": "observation",
+      "prerequisites": [
+        "P17"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q21",
+      "text": "男は飛行中の乗り物から落ちて死亡しましたか？",
+      "answer": "はい",
+      "reveals": "P21",
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q22",
+      "text": "乗り物で緊急事態が起き、軽量化のため服を脱ぐ必要がありましたか？",
+      "answer": "はい",
+      "reveals": "P22",
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q23",
+      "text": "空飛ぶ乗り物の緊急事態で服を脱いで軽量化し、落下して死亡したのですか？",
+      "answer": "はい",
+      "reveals": "FPC1",
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q24",
+      "text": "犠牲者をマッチのくじ引きで決めましたか？",
+      "answer": "はい",
+      "reveals": "P23",
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q25",
+      "text": "短いマッチを引いたから男が犠牲者に選ばれたのですか？",
+      "answer": "はい",
+      "reveals": "P24",
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q26",
+      "text": "マッチのくじ引きで短いマッチを引いた男が犠牲になったのですか？",
+      "answer": "はい",
+      "reveals": "FPC2",
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q27",
+      "text": "軽量化でも足りず、くじ引きで犠牲者を選びましたか？",
+      "answer": "はい",
+      "reveals": "P25",
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q28",
+      "text": "その乗り物は熱気球でしたか？",
+      "answer": "はい",
+      "reveals": "P26",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q29",
+      "text": "熱気球の高度低下で、服を脱いで軽量化しても足りず、マッチのくじ引きで選ばれた男が飛び降りて死亡したのですか？",
+      "answer": "はい",
+      "reveals": "FP",
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF1",
+      "text": "男は誰かに砂漠まで運ばれましたか？",
+      "answer": "いいえ",
+      "reveals": "NF1",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF2",
+      "text": "男は地上の乗り物（車など）で砂漠に来ましたか？",
+      "answer": "いいえ",
+      "reveals": "NF2",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "QF3",
+      "text": "男は最初から裸でしたか？",
+      "answer": "いいえ",
+      "reveals": "NF3",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF4",
+      "text": "男は誰かに殺されましたか？",
+      "answer": "いいえ",
+      "reveals": "NF4",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF5",
+      "text": "男は自殺しましたか？",
+      "answer": "いいえ",
+      "reveals": "NF5",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF6",
+      "text": "男は何かにぶつかって死亡しましたか？",
+      "answer": "いいえ",
+      "reveals": "NF6",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF7",
+      "text": "マッチ棒は特に理由なく持っていただけですか？",
+      "answer": "いいえ",
+      "reveals": "NF7",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF8",
+      "text": "マッチ棒は使っている途中で折れましたか？",
+      "answer": "いいえ",
+      "reveals": "NF8",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF9",
+      "text": "乗り物が墜落して死亡しましたか？",
+      "answer": "いいえ",
+      "reveals": "NF9",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF10",
+      "text": "その乗り物は飛行機でしたか？",
+      "answer": "いいえ",
+      "reveals": "NF10",
+      "mechanism": "observation",
+      "prerequisites": [],
+      "topic_category": "状況の確認"
+    }
+  ],
+  "_phase1": {
+    "properties": [
+      "2要素"
+    ],
+    "elements": {
+      "A": {
+        "label": "砂漠の真ん中で裸の男が死んでいた",
+        "source": "S第1文"
+      },
+      "B": {
+        "label": "手には折れたマッチ棒を握りしめている",
+        "source": "S第2文"
+      }
+    },
+    "key": "熱気球",
+    "t_atomic_propositions": {
+      "A": [
+        {
+          "id": "TA1",
+          "label": "男たちは熱気球で砂漠上空を飛行していた",
+          "key_removed": "男たちは乗り物で砂漠上空を飛行していた"
+        },
+        {
+          "id": "TA2",
+          "label": "高度低下のため服を脱いで軽量化した",
+          "key_removed": "緊急事態のため服を脱いだ"
+        },
+        {
+          "id": "TA3",
+          "label": "男は熱気球から飛び降りて死亡した",
+          "key_removed": "男は高所から落下して死亡した"
+        }
+      ],
+      "B": [
+        {
+          "id": "TB1",
+          "label": "軽量化が足りず、くじ引きで一人が飛び降りることになった",
+          "key_removed": "一人が犠牲になる必要があり、くじ引きで決めた"
+        },
+        {
+          "id": "TB2",
+          "label": "マッチの長さでくじ引きをした",
+          "key_removed": "マッチの長さでくじ引きをした"
+        },
+        {
+          "id": "TB3",
+          "label": "男は短いマッチを引いた",
+          "key_removed": "男は短いマッチを引いた"
+        }
+      ]
+    },
+    "fpc": {
+      "FPC1": {
+        "label": "男は乗り物で砂漠上空にいたが、緊急事態のため服を脱ぎ、落下して死亡した",
+        "derives": [
+          "TA1鍵なし版",
+          "TA2鍵なし版",
+          "TA3鍵なし版"
+        ]
+      },
+      "FPC2": {
+        "label": "一人が犠牲になる必要があり、マッチの長短のくじ引きで短いマッチを引いた男が選ばれた",
+        "derives": [
+          "TB1鍵なし版",
+          "TB2鍵なし版",
+          "TB3鍵なし版"
+        ]
+      }
+    },
+    "fp": {
+      "id": "FP",
+      "label": "男たちは熱気球で砂漠上空にいたが高度が下がり始め、服を脱いで軽量化しても足りず、マッチのくじ引きで短いマッチを引いた男が飛び降りて死亡した",
+      "derives": [
+        "FPC1",
+        "FPC2"
+      ]
+    },
+    "competing_models": {
+      "A": [
+        {
+          "id": "MA1",
+          "label": "遭難",
+          "atomic_propositions": [
+            "男は砂漠で遭難した",
+            "脱水・暑さで意識が混乱し服を脱いだ",
+            "脱水で死亡した"
+          ]
+        },
+        {
+          "id": "MA2",
+          "label": "犯罪（遺棄）",
+          "atomic_propositions": [
+            "男は何者かに殺害された",
+            "証拠隠滅のため裸にされた",
+            "砂漠に遺棄された"
+          ]
+        },
+        {
+          "id": "MA3",
+          "label": "飛行機事故",
+          "atomic_propositions": [
+            "男は小型飛行機で砂漠上空を飛行していた",
+            "飛行機が墜落した",
+            "衝撃で服が吹き飛んだ",
+            "墜落で死亡した"
+          ]
+        },
+        {
+          "id": "MA4",
+          "label": "自殺",
+          "atomic_propositions": [
+            "人目のない場所で死にたかった",
+            "砂漠を選んだ",
+            "裸になって自殺した"
+          ]
+        }
+      ],
+      "B": [
+        {
+          "id": "MB1",
+          "label": "火起こし",
+          "atomic_propositions": [
+            "砂漠で暖を取る必要があった",
+            "マッチで火をつけようとした",
+            "マッチが折れた"
+          ]
+        },
+        {
+          "id": "MB2",
+          "label": "信号",
+          "atomic_propositions": [
+            "救助を求める必要があった",
+            "マッチで煙の信号を出そうとした",
+            "マッチが折れた"
+          ]
+        },
+        {
+          "id": "MB3",
+          "label": "タバコ",
+          "atomic_propositions": [
+            "タバコに火をつけようとした",
+            "マッチが折れた"
+          ]
+        },
+        {
+          "id": "MB4",
+          "label": "護身",
+          "atomic_propositions": [
+            "動物に襲われる危険があった",
+            "マッチで火をつけて追い払おうとした",
+            "マッチが折れた"
+          ]
+        }
+      ]
+    },
+    "common_abstractions": [
+      {
+        "t_proposition": "TA1",
+        "competing_proposition": {
+          "model": "MA3",
+          "proposition": "男は小型飛行機で砂漠上空を飛行していた"
+        },
+        "abstraction": "男は乗り物で砂漠上空を飛行していた"
+      },
+      {
+        "t_proposition": "TA2",
+        "competing_proposition": {
+          "model": "MA1",
+          "proposition": "脱水・暑さで意識が混乱し服を脱いだ"
+        },
+        "abstraction": "男は自ら服を脱いだ"
+      },
+      {
+        "t_proposition": "TA3",
+        "competing_proposition": {
+          "model": "MA3",
+          "proposition": "墜落で死亡した"
+        },
+        "abstraction": "男は落下して死亡した"
+      }
+    ]
+  },
+  "_phase2": {
+    "s_propositions": {
+      "S1": "砂漠がある",
+      "S2": "男がいる",
+      "S3": "男は砂漠の真ん中にいた",
+      "S4": "男は裸だった",
+      "S5": "男は死んでいた",
+      "S6": "マッチ棒がある",
+      "S7": "マッチ棒は折れていた",
+      "S8": "男はマッチ棒を手に握りしめていた"
+    },
+    "generated_intermediates": [
+      "P2",
+      "P5",
+      "P9",
+      "P11",
+      "P12",
+      "P14",
+      "P16",
+      "P18",
+      "P19",
+      "P21",
+      "P22",
+      "P23",
+      "P24",
+      "P25",
+      "P26"
+    ],
+    "chain_mapping": {
+      "chain_A1": {
+        "type": "root",
+        "source": [
+          "S3",
+          "S5"
+        ],
+        "target": "P4",
+        "steps": [
+          {
+            "input": [
+              "S3",
+              "S5"
+            ],
+            "tactic": "手段の探索",
+            "output": "P2"
+          }
+        ]
+      },
+      "chain_A2": {
+        "type": "root",
+        "source": [
+          "S4"
+        ],
+        "target": "P7",
+        "steps": [
+          {
+            "input": [
+              "S4"
+            ],
+            "tactic": "観測事実の深掘り",
+            "output": "P5"
+          }
+        ]
+      },
+      "chain_A3": {
+        "type": "root",
+        "source": [
+          "S5",
+          "S3"
+        ],
+        "target": "P10",
+        "steps": [
+          {
+            "input": [
+              "S5",
+              "S3"
+            ],
+            "tactic": "手段の探索",
+            "output": "P9"
+          }
+        ]
+      },
+      "chain_B1": {
+        "type": "root",
+        "source": [
+          "S5",
+          "S3"
+        ],
+        "target": "P13",
+        "steps": [
+          {
+            "input": [
+              "S5",
+              "S3"
+            ],
+            "tactic": "登場人物の探索",
+            "output": "P11"
+          },
+          {
+            "input": [
+              "P11",
+              "S5"
+            ],
+            "tactic": "因果の逆転",
+            "output": "P12"
+          }
+        ]
+      },
+      "chain_B2": {
+        "type": "root",
+        "source": [
+          "S6",
+          "S7",
+          "S8"
+        ],
+        "target": "P17",
+        "steps": [
+          {
+            "input": [
+              "S6",
+              "S7",
+              "S8"
+            ],
+            "tactic": "因果の逆転",
+            "output": "P14"
+          },
+          {
+            "input": [
+              "P14"
+            ],
+            "tactic": "手段の探索",
+            "output": "P16"
+          }
+        ]
+      },
+      "chain_B3": {
+        "type": "root",
+        "source": [
+          "S7",
+          "S8"
+        ],
+        "target": "P20",
+        "steps": [
+          {
+            "input": [
+              "S7"
+            ],
+            "tactic": "観測事実の深掘り",
+            "output": "P18"
+          },
+          {
+            "input": [
+              "P18",
+              "S8"
+            ],
+            "tactic": "因果の逆転",
+            "output": "P19"
+          }
+        ]
+      },
+      "chain_FPC1": {
+        "type": "concrete",
+        "source": [
+          "P4",
+          "P10"
+        ],
+        "target": "FPC1",
+        "steps": [
+          {
+            "input": [
+              "P4",
+              "P10"
+            ],
+            "tactic": "因果の逆転",
+            "output": "P21"
+          },
+          {
+            "input": [
+              "P21",
+              "P7"
+            ],
+            "tactic": "動機の探索",
+            "output": "P22"
+          }
+        ]
+      },
+      "chain_FPC2": {
+        "type": "concrete",
+        "source": [
+          "P13",
+          "P17"
+        ],
+        "target": "FPC2",
+        "steps": [
+          {
+            "input": [
+              "P13",
+              "P17"
+            ],
+            "tactic": "手段の探索",
+            "output": "P23"
+          },
+          {
+            "input": [
+              "P23",
+              "P20"
+            ],
+            "tactic": "直接同定",
+            "output": "P24"
+          }
+        ]
+      },
+      "chain_FP": {
+        "type": "concrete",
+        "source": [
+          "FPC1",
+          "FPC2"
+        ],
+        "target": "FP",
+        "steps": [
+          {
+            "input": [
+              "FPC1",
+              "FPC2"
+            ],
+            "tactic": "因果の逆転",
+            "output": "P25"
+          },
+          {
+            "input": [
+              "P25"
+            ],
+            "tactic": "段階的絞り込み",
+            "output": "P26"
+          }
+        ]
+      }
+    },
+    "s_assignments": {
+      "s_a1": [
+        "S3",
+        "S5"
+      ],
+      "s_a2": [
+        "S4"
+      ],
+      "s_a3": [
+        "S3",
+        "S5"
+      ],
+      "s_b1": [
+        "S3",
+        "S5"
+      ],
+      "s_b2": [
+        "S6",
+        "S7",
+        "S8"
+      ],
+      "s_b3": [
+        "S7",
+        "S8"
+      ]
+    }
+  },
+  "_phase3": {
+    "exploration_paths": [
+      {
+        "name": "死の原因から（A側起点）",
+        "sequence": [
+          "Q2→P2",
+          "Q3→P4",
+          "Q8→P9",
+          "Q9→P10",
+          "Q21→P21",
+          "Q6→P7",
+          "Q22→P22",
+          "Q23→FPC1",
+          "Q14→P14",
+          "Q16→P16",
+          "Q17→P17",
+          "Q11→P11",
+          "Q12→P12",
+          "Q13→P13",
+          "Q24→P23",
+          "Q20→P20",
+          "Q25→P24",
+          "Q26→FPC2",
+          "Q27→P25",
+          "Q28→P26",
+          "Q29→FP"
+        ]
+      },
+      {
+        "name": "マッチ棒から（B側起点）",
+        "sequence": [
+          "Q14→P14",
+          "Q16→P16",
+          "Q17→P17",
+          "Q11→P11",
+          "Q12→P12",
+          "Q13→P13",
+          "Q24→P23",
+          "Q18→P18",
+          "Q19→P19",
+          "Q20→P20",
+          "Q25→P24",
+          "Q26→FPC2",
+          "Q2→P2",
+          "Q3→P4",
+          "Q8→P9",
+          "Q9→P10",
+          "Q21→P21",
+          "Q6→P7",
+          "Q22→P22",
+          "Q23→FPC1",
+          "Q27→P25",
+          "Q28→P26",
+          "Q29→FP"
+        ]
+      },
+      {
+        "name": "裸の原因から（A2起点）",
+        "sequence": [
+          "Q4→P5",
+          "Q6→P7",
+          "Q2→P2",
+          "Q3→P4",
+          "Q9→P10",
+          "Q21→P21",
+          "Q22→P22",
+          "Q23→FPC1",
+          "Q14→P14",
+          "Q16→P16",
+          "Q17→P17",
+          "Q11→P11",
+          "Q12→P12",
+          "Q13→P13",
+          "Q24→P23",
+          "Q18→P18",
+          "Q19→P19",
+          "Q20→P20",
+          "Q25→P24",
+          "Q26→FPC2",
+          "Q27→P25",
+          "Q28→P26",
+          "Q29→FP"
+        ]
+      }
+    ]
+  },
+  "topic_categories": [
+    {
+      "id": "状況の確認",
+      "name": "状況の確認"
+    },
+    {
+      "id": "原因と動機",
+      "name": "原因と動機"
+    },
+    {
+      "id": "人物と背景",
+      "name": "人物と背景"
+    },
+    {
+      "id": "前提の確認",
+      "name": "前提の確認"
+    }
+  ]
+}

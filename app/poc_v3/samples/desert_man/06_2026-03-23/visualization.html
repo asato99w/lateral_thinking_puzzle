@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>砂漠の男 — v6 Visualization</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: #fafafa; color: #333; padding: 20px; max-width: 1400px; margin: 0 auto; }
+  h1 { font-size: 1.5em; margin-bottom: 12px; }
+  .stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
+  .stat { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px;
+           padding: 8px 14px; min-width: 90px; text-align: center; }
+  .stat .num { font-size: 1.6em; font-weight: bold; color: #1565c0; }
+  .stat .label { font-size: 0.8em; color: #666; }
+  .tabs { display: flex; gap: 3px; margin: 16px 0 0; border-bottom: 2px solid #e0e0e0; flex-wrap: wrap; }
+  .tab { padding: 6px 14px; cursor: pointer; background: #f5f5f5;
+          border: 1px solid #e0e0e0; border-bottom: none; border-radius: 6px 6px 0 0;
+          font-size: 0.85em; user-select: none; white-space: nowrap; }
+  .tab.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px;
+                 font-weight: bold; color: #1565c0; }
+  .panel { background: #fff; border: 1px solid #e0e0e0; border-top: none; padding: 16px;
+            overflow-x: auto; display: none; }
+  .panel.active { display: block; }
+  .mermaid { text-align: center; overflow-x: auto; }
+  h2 { font-size: 1.1em; margin: 0 0 10px; padding: 6px 10px;
+       background: #e3f2fd; border-left: 3px solid #1565c0; border-radius: 2px; }
+  .note { font-size: 0.82em; color: #666; margin-bottom: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.82em; }
+  th, td { border: 1px solid #e0e0e0; padding: 4px 8px; text-align: left; vertical-align: top; }
+  th { background: #f5f5f5; font-weight: 600; position: sticky; top: 0; }
+  tr:nth-child(even) { background: #fafafa; }
+  .legend { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0; font-size: 0.8em; }
+  .legend-item { display: flex; align-items: center; gap: 3px; }
+  .swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid #999; }
+  .game-table { max-height: 500px; overflow-y: auto; }
+  .game-table td { font-size: 0.82em; }
+  small { color: #888; }
+</style>
+</head>
+<body>
+
+<h1>砂漠の男 — v6 data_src</h1>
+
+<div class="stats">
+  <div class="stat"><div class="num">54</div><div class="label">descriptors</div></div>
+  <div class="stat"><div class="num">39</div><div class="label">questions</div></div>
+  <div class="stat"><div class="num">8</div><div class="label">initial</div></div>
+  <div class="stat"><div class="num">4</div><div class="label">EC props</div></div>
+  <div class="stat"><div class="num">54</div><div class="label">FC props</div></div>
+  <div class="stat"><div class="num">30</div><div class="label">negation</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="swatch" style="background:#e3f2fd"></div> Initial/S</div>
+  <div class="legend-item"><div class="swatch" style="background:#c8e6c9"></div> EC (confirmed chain)</div>
+  <div class="legend-item"><div class="swatch" style="background:#fff3e0"></div> FC (hypothesis)</div>
+  <div class="legend-item"><div class="swatch" style="background:#fce4ec"></div> Negation (NF/H)</div>
+  <div class="legend-item"><div class="swatch" style="background:#ffeb3b"></div> FP</div>
+  <div class="legend-item">━━ EC edge</div>
+  <div class="legend-item">╌╌ FC edge</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="ecfc">EC/FC Flow</div>
+  <div class="tab" data-tab="deriv">Phase1 Graph</div>
+  <div class="tab" data-tab="questions">Questions</div>
+  <div class="tab" data-tab="models">Models</div>
+  <div class="tab" data-tab="chains">Chains</div>
+  <div class="tab" data-tab="game">Game Sim</div>
+  <div class="tab" data-tab="table">All Props</div>
+</div>
+
+<div id="ecfc" class="panel active">
+  <h2>EC/FC 導出フロー</h2>
+  <p class="note">太線(━━) = entailment (confirmed→confirmed, chain可), 破線(╌╌) = formation (confirmed→derived, 1回)</p>
+  <pre class="mermaid">
+graph TD
+  classDef ic fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef ec fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef fc fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef neg fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef fp fill:#ffeb3b,stroke:#f57f17,color:#333
+  S_GROUP["S命題 (8個)"]:::ic
+  FP["FP: 男たちは熱気球で砂漠上空にいたが高度が下がり始め、服を脱いで軽量化して..."]:::fp
+  FPC1["FPC1: 男は乗り物で砂漠上空にいたが、緊急事態のため服を脱ぎ、落下して死亡した"]:::ec
+  FPC2["FPC2: 一人が犠牲になる必要があり、マッチの長短のくじ引きで短いマッチを引いた..."]:::ec
+  H1["H1: 男は徒歩で砂漠に来た"]:::neg
+  H2["H2: 服は外的要因（事故や他者の行為）で失われた"]:::neg
+  H3["H3: 男は暑さや脱水で死んだ"]:::neg
+  H4["H4: マッチ棒は火をつけるために使われた"]:::neg
+  H5["H5: 男は一人だった"]:::neg
+  HF1["HF1: 男は誰かに砂漠まで運ばれた"]:::neg
+  HF10["HF10: その乗り物は飛行機だった"]:::neg
+  HF2["HF2: 男は地上の乗り物で砂漠に来た"]:::neg
+  HF3["HF3: 男は元から裸だった"]:::neg
+  HF4["HF4: 男は誰かに殺された"]:::neg
+  HF5["HF5: 男は自殺した"]:::neg
+  HF6["HF6: 男は何かにぶつかって死亡した"]:::neg
+  HF7["HF7: マッチ棒は特に理由なく持っていただけだった"]:::neg
+  HF8["HF8: マッチ棒は使用中に折れた"]:::neg
+  HF9["HF9: 乗り物が墜落して死亡した"]:::neg
+  N1["N1: 男は徒歩で砂漠に来たのではない"]:::neg
+  N2["N2: 服は外的要因で失われたのではない"]:::neg
+  N3["N3: 男は暑さや脱水で死んだのではない"]:::neg
+  N4["N4: マッチ棒は火をつけるために使われたのではない"]:::neg
+  N5["N5: 男は一人ではなかった"]:::neg
+  NF1["NF1: 男は誰かに砂漠まで運ばれたのではない"]:::neg
+  NF10["NF10: その乗り物は飛行機ではなかった"]:::neg
+  NF2["NF2: 男は地上の乗り物で砂漠に来たのではない"]:::neg
+  NF3["NF3: 男は元から裸ではなかった"]:::neg
+  NF4["NF4: 男は誰かに殺されたのではない"]:::neg
+  NF5["NF5: 男は自殺したのではない"]:::neg
+  NF6["NF6: 男は何かにぶつかって死亡したのではない"]:::neg
+  NF7["NF7: マッチ棒は特に理由なく持っていたわけではない"]:::neg
+  NF8["NF8: マッチ棒は使用中に折れたのではない"]:::neg
+  NF9["NF9: 乗り物が墜落して死亡したのではない"]:::neg
+  P10["P10: 男は落下して死亡した"]:::fc
+  P11["P11: 男の他にも人がいた"]:::fc
+  P12["P12: 男の死は他の人たちとの状況に関係している"]:::fc
+  P13["P13: 一人が犠牲になる必要があった"]:::fc
+  P14["P14: マッチ棒は何かの目的で使われた"]:::fc
+  P16["P16: マッチ棒は選択や決定の道具として使われた"]:::fc
+  P17["P17: マッチの長さでくじ引きをした"]:::fc
+  P18["P18: マッチ棒は意図的に短くされたものである"]:::fc
+  P19["P19: 男がこの折れたマッチ棒を握っているのは偶然ではない"]:::fc
+  P2["P2: 男は乗り物で砂漠に来た"]:::fc
+  P20["P20: 男は短いマッチを引いた"]:::fc
+  P21["P21: 男は飛行中の乗り物から落下して死亡した"]:::ec
+  P22["P22: 乗り物で緊急事態が発生し、軽量化のため服を脱ぐ必要があった"]:::fc
+  P23["P23: 犠牲者を決めるためにマッチのくじ引きが使われた"]:::fc
+  P24["P24: マッチのくじ引きで短いマッチを引いたため男が犠牲者に選ばれた"]:::ec
+  P25["P25: 乗り物の緊急事態で軽量化したが足りず、くじ引きで犠牲者を選んだ"]:::fc
+  P26["P26: その乗り物は熱気球だった"]:::fc
+  P4["P4: 男は乗り物で砂漠上空を飛行していた"]:::fc
+  P5["P5: 男は以前は服を着ていた"]:::fc
+  P7["P7: 男は自ら服を脱いだ"]:::fc
+  P9["P9: 男は外傷で死亡した"]:::fc
+  j_ec_P21(( ))
+  P4 ==> j_ec_P21
+  P10 ==> j_ec_P21
+  j_ec_P21 ==> P21
+  j_ec_FPC1(( ))
+  P22 ==> j_ec_FPC1
+  P4 ==> j_ec_FPC1
+  P10 ==> j_ec_FPC1
+  j_ec_FPC1 ==> FPC1
+  j_ec_P24(( ))
+  P23 ==> j_ec_P24
+  P20 ==> j_ec_P24
+  j_ec_P24 ==> P24
+  j_ec_FPC2(( ))
+  P24 ==> j_ec_FPC2
+  P13 ==> j_ec_FPC2
+  j_ec_FPC2 ==> FPC2
+  j_fc_P2(( ))
+  S_GROUP -.-> j_fc_P2
+  S_GROUP -.-> j_fc_P2
+  j_fc_P2 -.-> P2
+  P2 -.-> P4
+  S_GROUP -.-> P5
+  P5 -.-> P7
+  j_fc_P9(( ))
+  S_GROUP -.-> j_fc_P9
+  S_GROUP -.-> j_fc_P9
+  j_fc_P9 -.-> P9
+  P9 -.-> P10
+  j_fc_P11(( ))
+  S_GROUP -.-> j_fc_P11
+  S_GROUP -.-> j_fc_P11
+  j_fc_P11 -.-> P11
+  j_fc_P12(( ))
+  P11 -.-> j_fc_P12
+  S_GROUP -.-> j_fc_P12
+  j_fc_P12 -.-> P12
+  P12 -.-> P13
+  j_fc_P14(( ))
+  S_GROUP -.-> j_fc_P14
+  S_GROUP -.-> j_fc_P14
+  S_GROUP -.-> j_fc_P14
+  j_fc_P14 -.-> P14
+  P14 -.-> P16
+  P16 -.-> P17
+  S_GROUP -.-> P18
+  j_fc_P19(( ))
+  P18 -.-> j_fc_P19
+  S_GROUP -.-> j_fc_P19
+  j_fc_P19 -.-> P19
+  P19 -.-> P20
+  j_fc_P21(( ))
+  P4 -.-> j_fc_P21
+  P10 -.-> j_fc_P21
+  j_fc_P21 -.-> P21
+  j_fc_P22(( ))
+  P21 -.-> j_fc_P22
+  P7 -.-> j_fc_P22
+  j_fc_P22 -.-> P22
+  P22 -.-> FPC1
+  j_fc_P23(( ))
+  P13 -.-> j_fc_P23
+  P17 -.-> j_fc_P23
+  j_fc_P23 -.-> P23
+  j_fc_P24(( ))
+  P23 -.-> j_fc_P24
+  P20 -.-> j_fc_P24
+  j_fc_P24 -.-> P24
+  P24 -.-> FPC2
+  j_fc_P25(( ))
+  FPC1 -.-> j_fc_P25
+  FPC2 -.-> j_fc_P25
+  j_fc_P25 -.-> P25
+  P25 -.-> P26
+  P26 -.-> FP
+  </pre>
+</div>
+
+<div id="deriv" class="panel">
+  <h2>Phase 1: 導出グラフ</h2>
+  <p class="note">FP → FPC → 構成要素 → 共通抽象。黄=FP, 紫=FPC, 青=構成要素, 緑=共通抽象</p>
+  <pre class="mermaid">
+graph TD
+  empty[No derivation_graph]
+  </pre>
+</div>
+
+<div id="questions" class="panel">
+  <h2>質問 → 命題マッピング</h2>
+  <p class="note">O=はい, X=いいえ. 緑=はい質問, 赤=いいえ質問</p>
+  <pre class="mermaid">
+graph LR
+  classDef yes fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef no fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef prop fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  Q1["Q1 X: 男は歩いて砂漠に来ましたか？<br/>[前提の確認]"]:::no
+  Q1_N1["N1: 男は徒歩で砂漠に来たのではない"]:::prop
+  Q1 --> Q1_N1
+  Q10["Q10 X: 男は一人でしたか？<br/>[人物と背景]"]:::no
+  Q10_N5["N5: 男は一人ではなかった"]:::prop
+  Q10 --> Q10_N5
+  Q11["Q11 O: 男の他にも人がいましたか？<br/>[人物と背景]"]:::yes
+  Q11_P11["P11: 男の他にも人がいた"]:::prop
+  Q11 --> Q11_P11
+  Q12["Q12 O: 男の死は他の人たちとの状況に関係していますか？<br/>[原因と動機]"]:::yes
+  Q12_P12["P12: 男の死は他の人たちとの状況に関係している"]:::prop
+  Q12 --> Q12_P12
+  Q13["Q13 O: 一人が犠牲になる必要がありましたか？<br/>[原因と動機]"]:::yes
+  Q13_P13["P13: 一人が犠牲になる必要があった"]:::prop
+  Q13 --> Q13_P13
+  Q14["Q14 O: マッチ棒は何かの目的で使われましたか？<br/>[原因と動機]"]:::yes
+  Q14_P14["P14: マッチ棒は何かの目的で使われた"]:::prop
+  Q14 --> Q14_P14
+  Q15["Q15 X: マッチ棒は火をつけるために使われましたか？<br/>[前提の確認]"]:::no
+  Q15_N4["N4: マッチ棒は火をつけるために使われたのではない"]:::prop
+  Q15 --> Q15_N4
+  Q16["Q16 O: マッチ棒は何かを決めるために使われましたか？<br/>[状況の確認]"]:::yes
+  Q16_P16["P16: マッチ棒は選択や決定の道具として使われた"]:::prop
+  Q16 --> Q16_P16
+  Q17["Q17 O: マッチの長さでくじ引きをしましたか？<br/>[状況の確認]"]:::yes
+  Q17_P17["P17: マッチの長さでくじ引きをした"]:::prop
+  Q17 --> Q17_P17
+  Q18["Q18 O: マッチ棒は意図的に短くされたものですか？<br/>[状況の確認]"]:::yes
+  Q18_P18["P18: マッチ棒は意図的に短くされたものである"]:::prop
+  Q18 --> Q18_P18
+  Q19["Q19 O: 男がこのマッチ棒を持っていることには特別な意味がありますか？<br/>[原因と動機]"]:::yes
+  Q19_P19["P19: 男がこの折れたマッチ棒を握っているのは偶然ではない"]:::prop
+  Q19 --> Q19_P19
+  Q2["Q2 O: 男は乗り物で砂漠に来ましたか？<br/>[状況の確認]"]:::yes
+  Q2_P2["P2: 男は乗り物で砂漠に来た"]:::prop
+  Q2 --> Q2_P2
+  Q20["Q20 O: 男はくじ引きで短いマッチを引きましたか？<br/>[状況の確認]<br/>prereqs: P17"]:::yes
+  Q20_P20["P20: 男は短いマッチを引いた"]:::prop
+  Q20 --> Q20_P20
+  Q21["Q21 O: 男は飛行中の乗り物から落ちて死亡しましたか？<br/>[原因と動機]"]:::yes
+  Q21_P21["P21: 男は飛行中の乗り物から落下して死亡した"]:::prop
+  Q21 --> Q21_P21
+  Q22["Q22 O: 乗り物で緊急事態が起き、軽量化のため服を脱ぐ必要がありました...<br/>[原因と動機]"]:::yes
+  Q22_P22["P22: 乗り物で緊急事態が発生し、軽量化のため服を脱ぐ必要..."]:::prop
+  Q22 --> Q22_P22
+  Q23["Q23 O: 空飛ぶ乗り物の緊急事態で服を脱いで軽量化し、落下して死亡した...<br/>[状況の確認]"]:::yes
+  Q23_FPC1["FPC1: 男は乗り物で砂漠上空にいたが、緊急事態のため服を脱..."]:::prop
+  Q23 --> Q23_FPC1
+  Q24["Q24 O: 犠牲者をマッチのくじ引きで決めましたか？<br/>[状況の確認]"]:::yes
+  Q24_P23["P23: 犠牲者を決めるためにマッチのくじ引きが使われた"]:::prop
+  Q24 --> Q24_P23
+  Q25["Q25 O: 短いマッチを引いたから男が犠牲者に選ばれたのですか？<br/>[状況の確認]"]:::yes
+  Q25_P24["P24: マッチのくじ引きで短いマッチを引いたため男が犠牲者..."]:::prop
+  Q25 --> Q25_P24
+  Q26["Q26 O: マッチのくじ引きで短いマッチを引いた男が犠牲になったのですか...<br/>[状況の確認]"]:::yes
+  Q26_FPC2["FPC2: 一人が犠牲になる必要があり、マッチの長短のくじ引き..."]:::prop
+  Q26 --> Q26_FPC2
+  Q27["Q27 O: 軽量化でも足りず、くじ引きで犠牲者を選びましたか？<br/>[原因と動機]"]:::yes
+  Q27_P25["P25: 乗り物の緊急事態で軽量化したが足りず、くじ引きで犠..."]:::prop
+  Q27 --> Q27_P25
+  Q28["Q28 O: その乗り物は熱気球でしたか？<br/>[状況の確認]"]:::yes
+  Q28_P26["P26: その乗り物は熱気球だった"]:::prop
+  Q28 --> Q28_P26
+  Q29["Q29 O: 熱気球の高度低下で、服を脱いで軽量化しても足りず、マッチのく...<br/>[状況の確認]"]:::yes
+  Q29_FP["FP: 男たちは熱気球で砂漠上空にいたが高度が下がり始め、..."]:::prop
+  Q29 --> Q29_FP
+  Q3["Q3 O: 男は空を飛ぶ乗り物で砂漠の上空を飛行していましたか？<br/>[状況の確認]"]:::yes
+  Q3_P4["P4: 男は乗り物で砂漠上空を飛行していた"]:::prop
+  Q3 --> Q3_P4
+  Q4["Q4 O: 男は以前は服を着ていましたか？<br/>[状況の確認]"]:::yes
+  Q4_P5["P5: 男は以前は服を着ていた"]:::prop
+  Q4 --> Q4_P5
+  Q5["Q5 X: 服は何かの事故や他者の行為で失われましたか？<br/>[前提の確認]"]:::no
+  Q5_N2["N2: 服は外的要因で失われたのではない"]:::prop
+  Q5 --> Q5_N2
+  Q6["Q6 O: 男は自分で服を脱ぎましたか？<br/>[状況の確認]"]:::yes
+  Q6_P7["P7: 男は自ら服を脱いだ"]:::prop
+  Q6 --> Q6_P7
+  Q7["Q7 X: 男は暑さや脱水で死にましたか？<br/>[前提の確認]"]:::no
+  Q7_N3["N3: 男は暑さや脱水で死んだのではない"]:::prop
+  Q7 --> Q7_N3
+  Q8["Q8 O: 男は外傷で死亡しましたか？<br/>[状況の確認]"]:::yes
+  Q8_P9["P9: 男は外傷で死亡した"]:::prop
+  Q8 --> Q8_P9
+  Q9["Q9 O: 男は落下して死亡しましたか？<br/>[状況の確認]"]:::yes
+  Q9_P10["P10: 男は落下して死亡した"]:::prop
+  Q9 --> Q9_P10
+  QF1["QF1 X: 男は誰かに砂漠まで運ばれましたか？<br/>[前提の確認]"]:::no
+  QF1_NF1["NF1: 男は誰かに砂漠まで運ばれたのではない"]:::prop
+  QF1 --> QF1_NF1
+  QF10["QF10 X: その乗り物は飛行機でしたか？<br/>[状況の確認]"]:::no
+  QF10_NF10["NF10: その乗り物は飛行機ではなかった"]:::prop
+  QF10 --> QF10_NF10
+  QF2["QF2 X: 男は地上の乗り物（車など）で砂漠に来ましたか？<br/>[状況の確認]"]:::no
+  QF2_NF2["NF2: 男は地上の乗り物で砂漠に来たのではない"]:::prop
+  QF2 --> QF2_NF2
+  QF3["QF3 X: 男は最初から裸でしたか？<br/>[前提の確認]"]:::no
+  QF3_NF3["NF3: 男は元から裸ではなかった"]:::prop
+  QF3 --> QF3_NF3
+  QF4["QF4 X: 男は誰かに殺されましたか？<br/>[前提の確認]"]:::no
+  QF4_NF4["NF4: 男は誰かに殺されたのではない"]:::prop
+  QF4 --> QF4_NF4
+  QF5["QF5 X: 男は自殺しましたか？<br/>[前提の確認]"]:::no
+  QF5_NF5["NF5: 男は自殺したのではない"]:::prop
+  QF5 --> QF5_NF5
+  QF6["QF6 X: 男は何かにぶつかって死亡しましたか？<br/>[前提の確認]"]:::no
+  QF6_NF6["NF6: 男は何かにぶつかって死亡したのではない"]:::prop
+  QF6 --> QF6_NF6
+  QF7["QF7 X: マッチ棒は特に理由なく持っていただけですか？<br/>[前提の確認]"]:::no
+  QF7_NF7["NF7: マッチ棒は特に理由なく持っていたわけではない"]:::prop
+  QF7 --> QF7_NF7
+  QF8["QF8 X: マッチ棒は使っている途中で折れましたか？<br/>[前提の確認]"]:::no
+  QF8_NF8["NF8: マッチ棒は使用中に折れたのではない"]:::prop
+  QF8 --> QF8_NF8
+  QF9["QF9 X: 乗り物が墜落して死亡しましたか？<br/>[前提の確認]"]:::no
+  QF9_NF9["NF9: 乗り物が墜落して死亡したのではない"]:::prop
+  QF9 --> QF9_NF9
+  </pre>
+</div>
+
+<div id="models" class="panel">
+  <h2>競合モデル（Phase 1）</h2>
+  <pre class="mermaid">
+graph TD
+  classDef elemA fill:#bbdefb,stroke:#1565c0,color:#000
+  classDef elemB fill:#c8e6c9,stroke:#2e7d32,color:#000
+  classDef model fill:#fff3e0,stroke:#e65100,color:#000
+  elem_A["A: 砂漠の真ん中で裸の男が死んでいた"]:::elemA
+  elem_B["B: 手には折れたマッチ棒を握りしめている"]:::elemB
+  MA1["MA1: 遭難"]:::model
+  elem_A --> MA1
+  MA2["MA2: 犯罪（遺棄）"]:::model
+  elem_A --> MA2
+  MA3["MA3: 飛行機事故"]:::model
+  elem_A --> MA3
+  MA4["MA4: 自殺"]:::model
+  elem_A --> MA4
+  MB1["MB1: 火起こし"]:::model
+  elem_B --> MB1
+  MB2["MB2: 信号"]:::model
+  elem_B --> MB2
+  MB3["MB3: タバコ"]:::model
+  elem_B --> MB3
+  MB4["MB4: 護身"]:::model
+  elem_B --> MB4
+  </pre>
+</div>
+
+<div id="chains" class="panel">
+  <h2>戦術連鎖（Phase 2）</h2>
+  <pre class="mermaid">
+graph TD
+  classDef src fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef mid fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef tgt fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  subgraph chain_A1["chain_A1: chain_A1"]
+    direction LR
+    chain_A1_P2["P2"]:::mid
+    chain_A1_P4["P4"]:::tgt
+    chain_A1_P2 --> chain_A1_P4
+  end
+  subgraph chain_A2["chain_A2: chain_A2"]
+    direction LR
+    chain_A2_P5["P5"]:::mid
+    chain_A2_P7["P7"]:::tgt
+    chain_A2_P5 --> chain_A2_P7
+  end
+  subgraph chain_A3["chain_A3: chain_A3"]
+    direction LR
+    chain_A3_P9["P9"]:::mid
+    chain_A3_P10["P10"]:::tgt
+    chain_A3_P9 --> chain_A3_P10
+  end
+  subgraph chain_B1["chain_B1: chain_B1"]
+    direction LR
+    chain_B1_P11["P11"]:::mid
+    chain_B1_P12["P12"]:::mid
+    chain_B1_P11 --> chain_B1_P12
+    chain_B1_P13["P13"]:::tgt
+    chain_B1_P12 --> chain_B1_P13
+  end
+  subgraph chain_B2["chain_B2: chain_B2"]
+    direction LR
+    chain_B2_P14["P14"]:::mid
+    chain_B2_P16["P16"]:::mid
+    chain_B2_P14 --> chain_B2_P16
+    chain_B2_P17["P17"]:::tgt
+    chain_B2_P16 --> chain_B2_P17
+  end
+  subgraph chain_B3["chain_B3: chain_B3"]
+    direction LR
+    chain_B3_P18["P18"]:::mid
+    chain_B3_P19["P19"]:::mid
+    chain_B3_P18 --> chain_B3_P19
+    chain_B3_P20["P20"]:::tgt
+    chain_B3_P19 --> chain_B3_P20
+  end
+  subgraph chain_FPC1["chain_FPC1: chain_FPC1"]
+    direction LR
+    chain_FPC1_P21["P21"]:::mid
+    chain_FPC1_P22["P22"]:::mid
+    chain_FPC1_P21 --> chain_FPC1_P22
+    chain_FPC1_FPC1["FPC1"]:::tgt
+    chain_FPC1_P22 --> chain_FPC1_FPC1
+  end
+  subgraph chain_FPC2["chain_FPC2: chain_FPC2"]
+    direction LR
+    chain_FPC2_P23["P23"]:::mid
+    chain_FPC2_P24["P24"]:::mid
+    chain_FPC2_P23 --> chain_FPC2_P24
+    chain_FPC2_FPC2["FPC2"]:::tgt
+    chain_FPC2_P24 --> chain_FPC2_FPC2
+  end
+  subgraph chain_FP["chain_FP: chain_FP"]
+    direction LR
+    chain_FP_P25["P25"]:::mid
+    chain_FP_P26["P26"]:::mid
+    chain_FP_P25 --> chain_FP_P26
+    chain_FP_FP["FP"]:::tgt
+    chain_FP_P26 --> chain_FP_FP
+  end
+  </pre>
+</div>
+
+<div id="game" class="panel">
+  <h2>ゲームシミュレーション（自動プレイ）</h2>
+  <p class="note">はい質問優先で自動プレイ</p>
+  <div class="game-table">
+  <table>
+    <tr><th>Step</th><th>Question</th><th>+confirmed</th><th>+derived</th></tr>
+    <tr><td colspan='4'>Simulation error: &#x27;descriptors&#x27;</td></tr>
+  </table>
+  </div>
+</div>
+
+<div id="table" class="panel">
+  <h2>全命題一覧</h2>
+  <div style="max-height:600px; overflow-y:auto;">
+  <table>
+    <tr><th>ID</th><th>Kind</th><th>Label</th><th>IC</th><th>EC</th><th>FC</th><th>neg_of</th><th>Qs</th></tr>
+    <tr><td>FP</td><td>FP</td><td>男たちは熱気球で砂漠上空にいたが高度が下がり始め、服を脱いで軽量化しても足りず、マッチのくじ引きで短いマッチを引いた男が飛び降りて死亡した</td><td></td><td><small></small></td><td><small>[[&#x27;P26&#x27;]]</small></td><td></td><td>Q29</td></tr>
+<tr><td>FPC1</td><td>FPC</td><td>男は乗り物で砂漠上空にいたが、緊急事態のため服を脱ぎ、落下して死亡した</td><td></td><td><small>[[&#x27;P22&#x27;, &#x27;P4&#x27;, &#x27;P10&#x27;]]</small></td><td><small>[[&#x27;P22&#x27;]]</small></td><td></td><td>Q23</td></tr>
+<tr><td>FPC2</td><td>FPC</td><td>一人が犠牲になる必要があり、マッチの長短のくじ引きで短いマッチを引いた男が選ばれた</td><td></td><td><small>[[&#x27;P24&#x27;, &#x27;P13&#x27;]]</small></td><td><small>[[&#x27;P24&#x27;]]</small></td><td></td><td>Q26</td></tr>
+<tr><td>H1</td><td>H</td><td>男は徒歩で砂漠に来た</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;S5&#x27;]]</small></td><td>N1</td><td></td></tr>
+<tr><td>H2</td><td>H</td><td>服は外的要因（事故や他者の行為）で失われた</td><td></td><td><small></small></td><td><small>[[&#x27;P5&#x27;]]</small></td><td>N2</td><td></td></tr>
+<tr><td>H3</td><td>H</td><td>男は暑さや脱水で死んだ</td><td></td><td><small></small></td><td><small>[[&#x27;S5&#x27;, &#x27;S3&#x27;]]</small></td><td>N3</td><td></td></tr>
+<tr><td>H4</td><td>H</td><td>マッチ棒は火をつけるために使われた</td><td></td><td><small></small></td><td><small>[[&#x27;P14&#x27;]]</small></td><td>N4</td><td></td></tr>
+<tr><td>H5</td><td>H</td><td>男は一人だった</td><td></td><td><small></small></td><td><small>[[&#x27;S5&#x27;, &#x27;S3&#x27;]]</small></td><td>N5</td><td></td></tr>
+<tr><td>HF1</td><td>H</td><td>男は誰かに砂漠まで運ばれた</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;S5&#x27;]]</small></td><td>NF1</td><td></td></tr>
+<tr><td>HF10</td><td>H</td><td>その乗り物は飛行機だった</td><td></td><td><small></small></td><td><small>[[&#x27;P25&#x27;]]</small></td><td>NF10</td><td></td></tr>
+<tr><td>HF2</td><td>H</td><td>男は地上の乗り物で砂漠に来た</td><td></td><td><small></small></td><td><small>[[&#x27;P2&#x27;]]</small></td><td>NF2</td><td></td></tr>
+<tr><td>HF3</td><td>H</td><td>男は元から裸だった</td><td></td><td><small></small></td><td><small>[[&#x27;S4&#x27;]]</small></td><td>NF3</td><td></td></tr>
+<tr><td>HF4</td><td>H</td><td>男は誰かに殺された</td><td></td><td><small></small></td><td><small>[[&#x27;S5&#x27;, &#x27;S3&#x27;]]</small></td><td>NF4</td><td></td></tr>
+<tr><td>HF5</td><td>H</td><td>男は自殺した</td><td></td><td><small></small></td><td><small>[[&#x27;S5&#x27;, &#x27;S3&#x27;]]</small></td><td>NF5</td><td></td></tr>
+<tr><td>HF6</td><td>H</td><td>男は何かにぶつかって死亡した</td><td></td><td><small></small></td><td><small>[[&#x27;P9&#x27;]]</small></td><td>NF6</td><td></td></tr>
+<tr><td>HF7</td><td>H</td><td>マッチ棒は特に理由なく持っていただけだった</td><td></td><td><small></small></td><td><small>[[&#x27;S6&#x27;, &#x27;S7&#x27;, &#x27;S8&#x27;]]</small></td><td>NF7</td><td></td></tr>
+<tr><td>HF8</td><td>H</td><td>マッチ棒は使用中に折れた</td><td></td><td><small></small></td><td><small>[[&#x27;S7&#x27;]]</small></td><td>NF8</td><td></td></tr>
+<tr><td>HF9</td><td>H</td><td>乗り物が墜落して死亡した</td><td></td><td><small></small></td><td><small>[[&#x27;P4&#x27;, &#x27;P10&#x27;]]</small></td><td>NF9</td><td></td></tr>
+<tr><td>N1</td><td>FC</td><td>男は徒歩で砂漠に来たのではない</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;S5&#x27;]]</small></td><td>H1</td><td>Q1</td></tr>
+<tr><td>N2</td><td>FC</td><td>服は外的要因で失われたのではない</td><td></td><td><small></small></td><td><small>[[&#x27;P5&#x27;]]</small></td><td>H2</td><td>Q5</td></tr>
+<tr><td>N3</td><td>FC</td><td>男は暑さや脱水で死んだのではない</td><td></td><td><small></small></td><td><small>[[&#x27;S5&#x27;, &#x27;S3&#x27;]]</small></td><td>H3</td><td>Q7</td></tr>
+<tr><td>N4</td><td>FC</td><td>マッチ棒は火をつけるために使われたのではない</td><td></td><td><small></small></td><td><small>[[&#x27;P14&#x27;]]</small></td><td>H4</td><td>Q15</td></tr>
+<tr><td>N5</td><td>FC</td><td>男は一人ではなかった</td><td></td><td><small></small></td><td><small>[[&#x27;S5&#x27;, &#x27;S3&#x27;]]</small></td><td>H5</td><td>Q10</td></tr>
+<tr><td>NF1</td><td>NF</td><td>男は誰かに砂漠まで運ばれたのではない</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;S5&#x27;]]</small></td><td>HF1</td><td>QF1</td></tr>
+<tr><td>NF10</td><td>NF</td><td>その乗り物は飛行機ではなかった</td><td></td><td><small></small></td><td><small>[[&#x27;P25&#x27;]]</small></td><td>HF10</td><td>QF10</td></tr>
+<tr><td>NF2</td><td>NF</td><td>男は地上の乗り物で砂漠に来たのではない</td><td></td><td><small></small></td><td><small>[[&#x27;P2&#x27;]]</small></td><td>HF2</td><td>QF2</td></tr>
+<tr><td>NF3</td><td>NF</td><td>男は元から裸ではなかった</td><td></td><td><small></small></td><td><small>[[&#x27;S4&#x27;]]</small></td><td>HF3</td><td>QF3</td></tr>
+<tr><td>NF4</td><td>NF</td><td>男は誰かに殺されたのではない</td><td></td><td><small></small></td><td><small>[[&#x27;S5&#x27;, &#x27;S3&#x27;]]</small></td><td>HF4</td><td>QF4</td></tr>
+<tr><td>NF5</td><td>NF</td><td>男は自殺したのではない</td><td></td><td><small></small></td><td><small>[[&#x27;S5&#x27;, &#x27;S3&#x27;]]</small></td><td>HF5</td><td>QF5</td></tr>
+<tr><td>NF6</td><td>NF</td><td>男は何かにぶつかって死亡したのではない</td><td></td><td><small></small></td><td><small>[[&#x27;P9&#x27;]]</small></td><td>HF6</td><td>QF6</td></tr>
+<tr><td>NF7</td><td>NF</td><td>マッチ棒は特に理由なく持っていたわけではない</td><td></td><td><small></small></td><td><small>[[&#x27;S6&#x27;, &#x27;S7&#x27;, &#x27;S8&#x27;]]</small></td><td>HF7</td><td>QF7</td></tr>
+<tr><td>NF8</td><td>NF</td><td>マッチ棒は使用中に折れたのではない</td><td></td><td><small></small></td><td><small>[[&#x27;S7&#x27;]]</small></td><td>HF8</td><td>QF8</td></tr>
+<tr><td>NF9</td><td>NF</td><td>乗り物が墜落して死亡したのではない</td><td></td><td><small></small></td><td><small>[[&#x27;P4&#x27;, &#x27;P10&#x27;]]</small></td><td>HF9</td><td>QF9</td></tr>
+<tr><td>P10</td><td>FC</td><td>男は落下して死亡した</td><td></td><td><small></small></td><td><small>[[&#x27;P9&#x27;]]</small></td><td></td><td>Q9</td></tr>
+<tr><td>P11</td><td>FC</td><td>男の他にも人がいた</td><td></td><td><small></small></td><td><small>[[&#x27;S5&#x27;, &#x27;S3&#x27;]]</small></td><td></td><td>Q11</td></tr>
+<tr><td>P12</td><td>FC</td><td>男の死は他の人たちとの状況に関係している</td><td></td><td><small></small></td><td><small>[[&#x27;P11&#x27;, &#x27;S5&#x27;]]</small></td><td></td><td>Q12</td></tr>
+<tr><td>P13</td><td>FC</td><td>一人が犠牲になる必要があった</td><td></td><td><small></small></td><td><small>[[&#x27;P12&#x27;]]</small></td><td></td><td>Q13</td></tr>
+<tr><td>P14</td><td>FC</td><td>マッチ棒は何かの目的で使われた</td><td></td><td><small></small></td><td><small>[[&#x27;S6&#x27;, &#x27;S7&#x27;, &#x27;S8&#x27;]]</small></td><td></td><td>Q14</td></tr>
+<tr><td>P16</td><td>FC</td><td>マッチ棒は選択や決定の道具として使われた</td><td></td><td><small></small></td><td><small>[[&#x27;P14&#x27;]]</small></td><td></td><td>Q16</td></tr>
+<tr><td>P17</td><td>FC</td><td>マッチの長さでくじ引きをした</td><td></td><td><small></small></td><td><small>[[&#x27;P16&#x27;]]</small></td><td></td><td>Q17</td></tr>
+<tr><td>P18</td><td>FC</td><td>マッチ棒は意図的に短くされたものである</td><td></td><td><small></small></td><td><small>[[&#x27;S7&#x27;]]</small></td><td></td><td>Q18</td></tr>
+<tr><td>P19</td><td>FC</td><td>男がこの折れたマッチ棒を握っているのは偶然ではない</td><td></td><td><small></small></td><td><small>[[&#x27;P18&#x27;, &#x27;S8&#x27;]]</small></td><td></td><td>Q19</td></tr>
+<tr><td>P2</td><td>FC</td><td>男は乗り物で砂漠に来た</td><td></td><td><small></small></td><td><small>[[&#x27;S3&#x27;, &#x27;S5&#x27;]]</small></td><td></td><td>Q2</td></tr>
+<tr><td>P20</td><td>FC</td><td>男は短いマッチを引いた</td><td></td><td><small></small></td><td><small>[[&#x27;P19&#x27;]]</small></td><td></td><td>Q20</td></tr>
+<tr><td>P21</td><td>EC</td><td>男は飛行中の乗り物から落下して死亡した</td><td></td><td><small>[[&#x27;P4&#x27;, &#x27;P10&#x27;]]</small></td><td><small>[[&#x27;P4&#x27;, &#x27;P10&#x27;]]</small></td><td></td><td>Q21</td></tr>
+<tr><td>P22</td><td>FC</td><td>乗り物で緊急事態が発生し、軽量化のため服を脱ぐ必要があった</td><td></td><td><small></small></td><td><small>[[&#x27;P21&#x27;, &#x27;P7&#x27;]]</small></td><td></td><td>Q22</td></tr>
+<tr><td>P23</td><td>FC</td><td>犠牲者を決めるためにマッチのくじ引きが使われた</td><td></td><td><small></small></td><td><small>[[&#x27;P13&#x27;, &#x27;P17&#x27;]]</small></td><td></td><td>Q24</td></tr>
+<tr><td>P24</td><td>EC</td><td>マッチのくじ引きで短いマッチを引いたため男が犠牲者に選ばれた</td><td></td><td><small>[[&#x27;P23&#x27;, &#x27;P20&#x27;]]</small></td><td><small>[[&#x27;P23&#x27;, &#x27;P20&#x27;]]</small></td><td></td><td>Q25</td></tr>
+<tr><td>P25</td><td>FC</td><td>乗り物の緊急事態で軽量化したが足りず、くじ引きで犠牲者を選んだ</td><td></td><td><small></small></td><td><small>[[&#x27;FPC1&#x27;, &#x27;FPC2&#x27;]]</small></td><td></td><td>Q27</td></tr>
+<tr><td>P26</td><td>FC</td><td>その乗り物は熱気球だった</td><td></td><td><small></small></td><td><small>[[&#x27;P25&#x27;]]</small></td><td></td><td>Q28</td></tr>
+<tr><td>P4</td><td>FC</td><td>男は乗り物で砂漠上空を飛行していた</td><td></td><td><small></small></td><td><small>[[&#x27;P2&#x27;]]</small></td><td></td><td>Q3</td></tr>
+<tr><td>P5</td><td>FC</td><td>男は以前は服を着ていた</td><td></td><td><small></small></td><td><small>[[&#x27;S4&#x27;]]</small></td><td></td><td>Q4</td></tr>
+<tr><td>P7</td><td>FC</td><td>男は自ら服を脱いだ</td><td></td><td><small></small></td><td><small>[[&#x27;P5&#x27;]]</small></td><td></td><td>Q6</td></tr>
+<tr><td>P9</td><td>FC</td><td>男は外傷で死亡した</td><td></td><td><small></small></td><td><small>[[&#x27;S5&#x27;, &#x27;S3&#x27;]]</small></td><td></td><td>Q8</td></tr>
+  </table>
+  </div>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: false, nodeSpacing: 25, rankSpacing: 50 },
+    themeVariables: { fontSize: '13px' }
+  });
+
+  // Render mermaid in active panel only (on demand)
+  async function renderPanel(id) {
+    var panel = document.getElementById(id);
+    var elems = panel.querySelectorAll('.mermaid:not([data-processed])');
+    for (var el of elems) {
+      el.setAttribute('data-processed', 'true');
+      var code = el.textContent.trim();
+      try {
+        var { svg } = await mermaid.render('mermaid_' + id + '_' + Math.random().toString(36).slice(2), code);
+        el.innerHTML = svg;
+      } catch(e) {
+        el.innerHTML = '<pre style="color:red">Mermaid error: ' + e.message + '</pre><pre>' + code + '</pre>';
+      }
+    }
+  }
+
+  // Initial render
+  renderPanel('ecfc');
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.panel').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+      var target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.add('active');
+      tab.classList.add('active');
+      renderPanel(target);
+    });
+  });
+</script>
+
+</body>
+</html>
