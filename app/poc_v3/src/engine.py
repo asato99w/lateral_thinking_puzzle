@@ -67,7 +67,7 @@ def load_puzzle(path: str | Path) -> PuzzleData:
             id=item["id"],
             text=item["text"],
             answer=item["answer"],
-            reveals=item["reveals"],
+            reveals=item["reveals"] if isinstance(item["reveals"], str) else item["reveals"][0],
             mechanism=item["mechanism"],
             prerequisites=item.get("prerequisites", []),
         )
@@ -171,7 +171,7 @@ def _question_availability_conditions(q: Question, puzzle: PuzzleData) -> list[l
     """
     if not q.reveals:
         return None
-    prop = puzzle.propositions.get(q.reveals[0])
+    prop = puzzle.propositions.get(q.reveals)
     if prop is None:
         return None
     if q.answer == "いいえ" and prop.negation_of is not None:
@@ -191,8 +191,8 @@ def available_questions(state: GameState, puzzle: PuzzleData) -> list[Question]:
     for q in puzzle.questions.values():
         if q.id in state.answered:
             continue
-        # reveals 先が全て confirmed なら表示しない（既知の情報）
-        if q.reveals and all(r in state.confirmed for r in q.reveals):
+        # reveals 先が confirmed なら表示しない（既知の情報）
+        if q.reveals and q.reveals in state.confirmed:
             continue
         if q.prerequisites and not all(p in state.confirmed for p in q.prerequisites):
             continue
@@ -223,10 +223,9 @@ def answer_question(
     new_pieces: list[str] = []
 
     # 1. reveals の命題を confirmed に追加
-    for prop_id in question.reveals:
-        if prop_id not in state.confirmed:
-            state.confirmed.add(prop_id)
-            new_confirmed.append(prop_id)
+    if question.reveals and question.reveals not in state.confirmed:
+        state.confirmed.add(question.reveals)
+        new_confirmed.append(question.reveals)
 
     # 2. 論理的導出（confirmed → confirmed の不動点計算）
     entailed = evaluate_entailments(state, puzzle)

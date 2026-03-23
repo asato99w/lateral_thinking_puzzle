@@ -32,7 +32,7 @@ class Question:
     id: str
     text: str
     answer: str
-    reveals: list[str]  # 回答で明らかになる命題 ID 群
+    reveals: str  # 回答で明らかになる命題 ID
     mechanism: str  # ラベル: "observation" | "link" | "anomaly"
     prerequisites: list[str] = field(default_factory=list)  # 質問文の言語的前提（confirmed のみで判定）
     topic_category: str = ""  # トピックカテゴリ（UI 用分類）
