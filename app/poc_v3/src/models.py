@@ -10,6 +10,7 @@ class Proposition:
     id: str
     label: str
     negation_of: str | None = None  # 否定関係: 対称的（P.negation_of=Q ⇔ Q.negation_of=P）
+    entailment_conditions: list[list[str]] | None = None  # 論理的導出: confirmed → confirmed（不動点計算）
     formation_conditions: list[list[str]] | None = None  # 仮説導出: confirmed → derived（1回パス）
     rejection_conditions: list[list[str]] | None = None  # confirmed により棄却される条件
 
