@@ -28,6 +28,18 @@ def export(src_path: str) -> str:
 
     cleaned = strip_underscore_fields(data)
 
+    # 命題に必須フィールドを補完（Swift Codable 互換）
+    PROP_DEFAULTS = {
+        "negation_of": None,
+        "entailment_conditions": None,
+        "formation_conditions": None,
+        "rejection_conditions": None,
+    }
+    for prop in cleaned.get("propositions", []):
+        for key, default in PROP_DEFAULTS.items():
+            if key not in prop:
+                prop[key] = default
+
     # data_src の短縮キーをエンジン互換に変換
     if "S" in cleaned and "statement" not in cleaned:
         cleaned["statement"] = cleaned.pop("S")

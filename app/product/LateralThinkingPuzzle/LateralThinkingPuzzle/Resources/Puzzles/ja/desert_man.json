@@ -24,7 +24,10 @@
           "S3",
           "S5"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P4",
@@ -33,7 +36,10 @@
         [
           "P2"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P5",
@@ -42,7 +48,10 @@
         [
           "S4"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P7",
@@ -51,7 +60,10 @@
         [
           "P5"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P9",
@@ -61,7 +73,10 @@
           "S5",
           "S3"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P10",
@@ -70,7 +85,10 @@
         [
           "P9"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P11",
@@ -80,7 +98,10 @@
           "S5",
           "S3"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P12",
@@ -90,7 +111,10 @@
           "P11",
           "S5"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P13",
@@ -99,7 +123,10 @@
         [
           "P12"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P14",
@@ -110,7 +137,10 @@
           "S7",
           "S8"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P16",
@@ -119,7 +149,10 @@
         [
           "P14"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P17",
@@ -128,7 +161,10 @@
         [
           "P16"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P18",
@@ -137,7 +173,10 @@
         [
           "S7"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P19",
@@ -147,7 +186,10 @@
           "P18",
           "S8"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P20",
@@ -156,7 +198,10 @@
         [
           "P19"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P21",
@@ -172,7 +217,9 @@
           "P4",
           "P10"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
     },
     {
       "id": "P22",
@@ -182,7 +229,10 @@
           "P21",
           "P7"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "FPC1",
@@ -198,7 +248,9 @@
           "P4",
           "P10"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
     },
     {
       "id": "P23",
@@ -208,7 +260,10 @@
           "P13",
           "P17"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P24",
@@ -224,7 +279,9 @@
           "P23",
           "P20"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
     },
     {
       "id": "FPC2",
@@ -239,7 +296,9 @@
           "P24",
           "P13"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
     },
     {
       "id": "P25",
@@ -249,7 +308,10 @@
           "FPC1",
           "FPC2"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P26",
@@ -258,7 +320,10 @@
         [
           "P25"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "FP",
@@ -267,7 +332,10 @@
         [
           "P26"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N1",
@@ -278,7 +346,9 @@
           "S3",
           "S5"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H1",
@@ -289,7 +359,9 @@
           "S3",
           "S5"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N2",
@@ -299,7 +371,9 @@
         [
           "P5"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H2",
@@ -309,7 +383,9 @@
         [
           "P5"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N3",
@@ -320,7 +396,9 @@
           "S5",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H3",
@@ -331,7 +409,9 @@
           "S5",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N4",
@@ -341,7 +421,9 @@
         [
           "P14"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H4",
@@ -351,7 +433,9 @@
         [
           "P14"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N5",
@@ -362,7 +446,9 @@
           "S5",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H5",
@@ -373,7 +459,9 @@
           "S5",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF1",
@@ -384,7 +472,9 @@
           "S3",
           "S5"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF1",
@@ -395,7 +485,9 @@
           "S3",
           "S5"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF2",
@@ -405,7 +497,9 @@
         [
           "P2"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF2",
@@ -415,7 +509,9 @@
         [
           "P2"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF3",
@@ -425,7 +521,9 @@
         [
           "S4"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF3",
@@ -435,7 +533,9 @@
         [
           "S4"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF4",
@@ -446,7 +546,9 @@
           "S5",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF4",
@@ -457,7 +559,9 @@
           "S5",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF5",
@@ -468,7 +572,9 @@
           "S5",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF5",
@@ -479,7 +585,9 @@
           "S5",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF6",
@@ -489,7 +597,9 @@
         [
           "P9"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF6",
@@ -499,7 +609,9 @@
         [
           "P9"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF7",
@@ -511,7 +623,9 @@
           "S7",
           "S8"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF7",
@@ -523,7 +637,9 @@
           "S7",
           "S8"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF8",
@@ -533,7 +649,9 @@
         [
           "S7"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF8",
@@ -543,7 +661,9 @@
         [
           "S7"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF9",
@@ -554,7 +674,9 @@
           "P4",
           "P10"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF9",
@@ -565,7 +687,9 @@
           "P4",
           "P10"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF10",
@@ -575,7 +699,9 @@
         [
           "P25"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF10",
@@ -585,7 +711,9 @@
         [
           "P25"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     }
   ],
   "questions": [
