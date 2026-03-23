@@ -40,6 +40,11 @@ def export(src_path: str) -> str:
             if key not in prop:
                 prop[key] = default
 
+    # reveals: str → [str] 変換（v6 は str 型、アプリ DTO は配列型）
+    for q in cleaned.get("questions", []):
+        if isinstance(q.get("reveals"), str):
+            q["reveals"] = [q["reveals"]] if q["reveals"] else []
+
     # data_src の短縮キーをエンジン互換に変換
     if "S" in cleaned and "statement" not in cleaned:
         cleaned["statement"] = cleaned.pop("S")

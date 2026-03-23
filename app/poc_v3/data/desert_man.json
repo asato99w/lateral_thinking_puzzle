@@ -721,7 +721,9 @@
       "id": "Q1",
       "text": "男は歩いて砂漠に来ましたか？",
       "answer": "いいえ",
-      "reveals": "N1",
+      "reveals": [
+        "N1"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -730,7 +732,9 @@
       "id": "Q2",
       "text": "男は乗り物で砂漠に来ましたか？",
       "answer": "はい",
-      "reveals": "P2",
+      "reveals": [
+        "P2"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -739,7 +743,9 @@
       "id": "Q3",
       "text": "男は空を飛ぶ乗り物で砂漠の上空を飛行していましたか？",
       "answer": "はい",
-      "reveals": "P4",
+      "reveals": [
+        "P4"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -748,7 +754,9 @@
       "id": "Q4",
       "text": "男は以前は服を着ていましたか？",
       "answer": "はい",
-      "reveals": "P5",
+      "reveals": [
+        "P5"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -757,7 +765,9 @@
       "id": "Q5",
       "text": "服は何かの事故や他者の行為で失われましたか？",
       "answer": "いいえ",
-      "reveals": "N2",
+      "reveals": [
+        "N2"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -766,7 +776,9 @@
       "id": "Q6",
       "text": "男は自分で服を脱ぎましたか？",
       "answer": "はい",
-      "reveals": "P7",
+      "reveals": [
+        "P7"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -775,7 +787,9 @@
       "id": "Q7",
       "text": "男は暑さや脱水で死にましたか？",
       "answer": "いいえ",
-      "reveals": "N3",
+      "reveals": [
+        "N3"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -784,7 +798,9 @@
       "id": "Q8",
       "text": "男は外傷で死亡しましたか？",
       "answer": "はい",
-      "reveals": "P9",
+      "reveals": [
+        "P9"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -793,7 +809,9 @@
       "id": "Q9",
       "text": "男は落下して死亡しましたか？",
       "answer": "はい",
-      "reveals": "P10",
+      "reveals": [
+        "P10"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -802,7 +820,9 @@
       "id": "Q10",
       "text": "男は一人でしたか？",
       "answer": "いいえ",
-      "reveals": "N5",
+      "reveals": [
+        "N5"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "人物と背景"
@@ -811,7 +831,9 @@
       "id": "Q11",
       "text": "男の他にも人がいましたか？",
       "answer": "はい",
-      "reveals": "P11",
+      "reveals": [
+        "P11"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "人物と背景"
@@ -820,7 +842,9 @@
       "id": "Q12",
       "text": "男の死は他の人たちとの状況に関係していますか？",
       "answer": "はい",
-      "reveals": "P12",
+      "reveals": [
+        "P12"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -829,7 +853,9 @@
       "id": "Q13",
       "text": "一人が犠牲になる必要がありましたか？",
       "answer": "はい",
-      "reveals": "P13",
+      "reveals": [
+        "P13"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -838,7 +864,9 @@
       "id": "Q14",
       "text": "マッチ棒は何かの目的で使われましたか？",
       "answer": "はい",
-      "reveals": "P14",
+      "reveals": [
+        "P14"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -847,7 +875,9 @@
       "id": "Q15",
       "text": "マッチ棒は火をつけるために使われましたか？",
       "answer": "いいえ",
-      "reveals": "N4",
+      "reveals": [
+        "N4"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -856,7 +886,9 @@
       "id": "Q16",
       "text": "マッチ棒は何かを決めるために使われましたか？",
       "answer": "はい",
-      "reveals": "P16",
+      "reveals": [
+        "P16"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -865,7 +897,9 @@
       "id": "Q17",
       "text": "マッチの長さでくじ引きをしましたか？",
       "answer": "はい",
-      "reveals": "P17",
+      "reveals": [
+        "P17"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -874,7 +908,9 @@
       "id": "Q18",
       "text": "マッチ棒は意図的に短くされたものですか？",
       "answer": "はい",
-      "reveals": "P18",
+      "reveals": [
+        "P18"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -883,7 +919,9 @@
       "id": "Q19",
       "text": "男がこのマッチ棒を持っていることには特別な意味がありますか？",
       "answer": "はい",
-      "reveals": "P19",
+      "reveals": [
+        "P19"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -892,7 +930,9 @@
       "id": "Q20",
       "text": "男はくじ引きで短いマッチを引きましたか？",
       "answer": "はい",
-      "reveals": "P20",
+      "reveals": [
+        "P20"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "P17"
@@ -903,7 +943,9 @@
       "id": "Q21",
       "text": "男は飛行中の乗り物から落ちて死亡しましたか？",
       "answer": "はい",
-      "reveals": "P21",
+      "reveals": [
+        "P21"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -912,7 +954,9 @@
       "id": "Q22",
       "text": "乗り物で緊急事態が起き、軽量化のため服を脱ぐ必要がありましたか？",
       "answer": "はい",
-      "reveals": "P22",
+      "reveals": [
+        "P22"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -921,7 +965,9 @@
       "id": "Q23",
       "text": "空飛ぶ乗り物の緊急事態で服を脱いで軽量化し、落下して死亡したのですか？",
       "answer": "はい",
-      "reveals": "FPC1",
+      "reveals": [
+        "FPC1"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -930,7 +976,9 @@
       "id": "Q24",
       "text": "犠牲者をマッチのくじ引きで決めましたか？",
       "answer": "はい",
-      "reveals": "P23",
+      "reveals": [
+        "P23"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -939,7 +987,9 @@
       "id": "Q25",
       "text": "短いマッチを引いたから男が犠牲者に選ばれたのですか？",
       "answer": "はい",
-      "reveals": "P24",
+      "reveals": [
+        "P24"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -948,7 +998,9 @@
       "id": "Q26",
       "text": "マッチのくじ引きで短いマッチを引いた男が犠牲になったのですか？",
       "answer": "はい",
-      "reveals": "FPC2",
+      "reveals": [
+        "FPC2"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -957,7 +1009,9 @@
       "id": "Q27",
       "text": "軽量化でも足りず、くじ引きで犠牲者を選びましたか？",
       "answer": "はい",
-      "reveals": "P25",
+      "reveals": [
+        "P25"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -966,7 +1020,9 @@
       "id": "Q28",
       "text": "その乗り物は熱気球でしたか？",
       "answer": "はい",
-      "reveals": "P26",
+      "reveals": [
+        "P26"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -975,7 +1031,9 @@
       "id": "Q29",
       "text": "熱気球の高度低下で、服を脱いで軽量化しても足りず、マッチのくじ引きで選ばれた男が飛び降りて死亡したのですか？",
       "answer": "はい",
-      "reveals": "FP",
+      "reveals": [
+        "FP"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -984,7 +1042,9 @@
       "id": "QF1",
       "text": "男は誰かに砂漠まで運ばれましたか？",
       "answer": "いいえ",
-      "reveals": "NF1",
+      "reveals": [
+        "NF1"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -993,7 +1053,9 @@
       "id": "QF2",
       "text": "男は地上の乗り物（車など）で砂漠に来ましたか？",
       "answer": "いいえ",
-      "reveals": "NF2",
+      "reveals": [
+        "NF2"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -1002,7 +1064,9 @@
       "id": "QF3",
       "text": "男は最初から裸でしたか？",
       "answer": "いいえ",
-      "reveals": "NF3",
+      "reveals": [
+        "NF3"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -1011,7 +1075,9 @@
       "id": "QF4",
       "text": "男は誰かに殺されましたか？",
       "answer": "いいえ",
-      "reveals": "NF4",
+      "reveals": [
+        "NF4"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -1020,7 +1086,9 @@
       "id": "QF5",
       "text": "男は自殺しましたか？",
       "answer": "いいえ",
-      "reveals": "NF5",
+      "reveals": [
+        "NF5"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -1029,7 +1097,9 @@
       "id": "QF6",
       "text": "男は何かにぶつかって死亡しましたか？",
       "answer": "いいえ",
-      "reveals": "NF6",
+      "reveals": [
+        "NF6"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -1038,7 +1108,9 @@
       "id": "QF7",
       "text": "マッチ棒は特に理由なく持っていただけですか？",
       "answer": "いいえ",
-      "reveals": "NF7",
+      "reveals": [
+        "NF7"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -1047,7 +1119,9 @@
       "id": "QF8",
       "text": "マッチ棒は使っている途中で折れましたか？",
       "answer": "いいえ",
-      "reveals": "NF8",
+      "reveals": [
+        "NF8"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -1056,7 +1130,9 @@
       "id": "QF9",
       "text": "乗り物が墜落して死亡しましたか？",
       "answer": "いいえ",
-      "reveals": "NF9",
+      "reveals": [
+        "NF9"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -1065,7 +1141,9 @@
       "id": "QF10",
       "text": "その乗り物は飛行機でしたか？",
       "answer": "いいえ",
-      "reveals": "NF10",
+      "reveals": [
+        "NF10"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
