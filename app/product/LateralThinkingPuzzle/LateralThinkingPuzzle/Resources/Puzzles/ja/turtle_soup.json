@@ -37,421 +37,506 @@
     "S11",
     "S12",
     "S13",
-    "S14"
+    "S14",
+    "S15",
+    "S16",
+    "S17"
   ],
   "propositions": [
     {
-      "id": "P1",
-      "label": "男は過去に、他者が「ウミガメのスープ」だと偽った飲食物を口にした体験がある",
-      "formation_conditions": [
-        [
-          "I2"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "P2",
-      "label": "過去のスープの材料は人間の肉だった",
-      "formation_conditions": [
-        [
-          "I7"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "P3",
-      "label": "男は過去のスープ体験の時点で生命に関わる極限状況にあった",
-      "formation_conditions": [
-        [
-          "I6"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "P4",
-      "label": "男の過去のスープ体験に関わる出来事の中で、人が死亡していた",
-      "formation_conditions": [
-        [
-          "I4"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "P5",
-      "label": "偽りのスープを男に提供した人物は、男の身近な人物（家族・仲間）だった",
-      "formation_conditions": [
-        [
-          "I8"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "P6",
-      "label": "過去のスープは、食料不足の極限状況で人の死体から作られたものだった",
-      "formation_conditions": [
-        [
-          "I9"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "FP",
-      "label": "男はかつて食料の尽きた極限状況で、死んだ仲間の肉で作ったスープを「ウミガメのスープ」だと偽られて飲まされた",
-      "formation_conditions": [
-        [
-          "P6",
-          "P5"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
       "id": "I1",
-      "label": "男が記憶している「ウミガメのスープ」の味とレストランの味は異なっていた",
+      "label": "男はスープの味がきっかけで店員にスープの正体を確認した",
       "formation_conditions": [
         [
-          "S5"
+          "S5",
+          "S6",
+          "S16"
         ]
       ],
+      "negation_of": null,
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "I2",
-      "label": "男が過去に「ウミガメのスープ」として飲んだものは本物のウミガメのスープではなかった",
+      "id": "P1",
+      "label": "男はスープを飲んで違和感を覚えた",
       "formation_conditions": [
         [
           "I1"
         ]
       ],
+      "negation_of": null,
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "I3",
-      "label": "男はスープの確認をきっかけに過去の体験に関する真実を悟った",
+      "id": "I2",
+      "label": "男は以前にもウミガメのスープとして提供されたスープを飲んだことがある",
       "formation_conditions": [
         [
-          "S7"
+          "P1"
         ]
       ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P10",
+      "label": "男は以前「ウミガメのスープ」として飲んだスープと今回のスープの味が違うと感じた",
+      "formation_conditions": [
+        [
+          "I2",
+          "S15"
+        ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P11",
+      "label": "男が以前飲んだスープはウミガメのスープではなかった",
+      "formation_conditions": [
+        [
+          "P10",
+          "S15"
+        ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
       "id": "I4",
-      "label": "男が悟った真実は取り返しのつかない出来事に関するものだった",
+      "label": "男の自殺は過去の出来事に起因する",
       "formation_conditions": [
         [
-          "I3"
+          "S9"
         ]
       ],
+      "entailment_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P2",
+      "label": "男は過去に深刻な苦境を経験した",
+      "formation_conditions": [
+        [
+          "I4"
+        ]
+      ],
+      "entailment_conditions": [
+        [
+          "I7"
+        ]
+      ],
+      "negation_of": null,
       "rejection_conditions": null
     },
     {
       "id": "I5",
-      "label": "過去の「ウミガメのスープ」体験の味の記憶が一口で判別可能なほど強く残っていた",
+      "label": "男は過去に生死に関わる危険な状況に置かれた",
       "formation_conditions": [
         [
-          "S4"
+          "P2"
         ]
       ],
+      "negation_of": null,
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "I6",
-      "label": "過去のスープ体験は日常的な食事の場面ではなかった",
+      "id": "P4",
+      "label": "男はかつて仲間と船で遭難した",
       "formation_conditions": [
         [
           "I5"
         ]
       ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I6",
+      "label": "遭難中に生存に必要な物資が不足した",
+      "formation_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P6",
+      "label": "遭難中に食料が尽きた",
+      "formation_conditions": [
+        [
+          "I6"
+        ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
       "id": "I7",
-      "label": "偽スープの正体は死亡した人物に関連がある",
+      "label": "男には死を選ぶほど深刻な過去の経験がある",
       "formation_conditions": [
         [
-          "P4",
-          "I2"
+          "S9"
         ]
       ],
+      "negation_of": null,
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "I8",
-      "label": "偽りのスープを提供した人物は男と何らかの関係があった",
+      "id": "P3",
+      "label": "男は人の死に関わる経験をした",
       "formation_conditions": [
         [
-          "P1"
+          "I7"
         ]
       ],
+      "negation_of": null,
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
       "id": "I9",
-      "label": "極限状況での食料枯渇が人肉使用の背景にあった",
+      "label": "男と共に遭難した仲間がいた",
       "formation_conditions": [
         [
-          "P2",
-          "P3"
+          "P3",
+          "P4"
         ]
       ],
+      "entailment_conditions": [
+        [
+          "P4"
+        ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P5",
+      "label": "遭難中に仲間の一人が死んだ",
+      "formation_conditions": [
+        [
+          "I9"
+        ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P7",
+      "label": "遭難中に仲間がスープを作った",
+      "formation_conditions": [
+        [
+          "P6",
+          "P5"
+        ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "I11",
+      "label": "仲間は男に作ったスープについて説明した",
+      "formation_conditions": [
+        [
+          "P7"
+        ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P8",
+      "label": "仲間は男にスープをウミガメのスープだと言った",
+      "formation_conditions": [
+        [
+          "I11"
+        ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "P9",
+      "label": "男は遭難中にそのスープを飲んだ",
+      "formation_conditions": [
+        [
+          "P8"
+        ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "FP",
+      "label": "男が遭難中に飲まされたスープは死んだ仲間の肉で作られていた",
+      "formation_conditions": [
+        [
+          "P11",
+          "P6",
+          "P5",
+          "P7",
+          "P8",
+          "P9"
+        ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
       "id": "N1a",
-      "label": "男がスープの真偽を確認したのは味の不味さからではない",
+      "label": "男がスープの正体を確認した理由はスープの見た目ではない",
       "negation_of": "H1a",
       "formation_conditions": [
         [
-          "S5"
+          "S5",
+          "S6",
+          "S16"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
       "id": "H1a",
-      "label": "男はスープの味が不味かったから真偽を確認した",
+      "label": "男がスープの正体を確認したのはスープの見た目がおかしかったからである",
       "negation_of": "N1a",
       "formation_conditions": [
         [
-          "S5"
+          "S5",
+          "S6",
+          "S16"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "N2a",
-      "label": "男の自殺は金銭的な問題が原因ではない",
-      "negation_of": "H2a",
+      "id": "NF1a",
+      "label": "男がスープの正体を確認したのはアレルギー反応によるものではない",
+      "negation_of": "HF1a",
       "formation_conditions": [
         [
-          "S7"
+          "S5",
+          "S6",
+          "S16"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "H2a",
-      "label": "男の自殺は金銭的な問題が原因だった",
-      "negation_of": "N2a",
+      "id": "HF1a",
+      "label": "男がスープの正体を確認したのはアレルギー反応がきっかけだった",
+      "negation_of": "NF1a",
       "formation_conditions": [
         [
-          "S7"
+          "S5",
+          "S6",
+          "S16"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "N3a",
-      "label": "男は料理の専門家ではなかった",
-      "negation_of": "H3a",
-      "formation_conditions": [
-        [
-          "S4"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "H3a",
-      "label": "男は料理の専門家だった",
-      "negation_of": "N3a",
-      "formation_conditions": [
-        [
-          "S4"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "NF1c",
-      "label": "過去のスープが偽物だったのは男自身の誤認ではなかった",
-      "negation_of": "HF1c",
+      "id": "NF2a",
+      "label": "男が以前ウミガメのスープとして飲んだのは通常の外食の場ではなかった",
+      "negation_of": "HF2a",
       "formation_conditions": [
         [
           "I2"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "HF1c",
-      "label": "過去のスープが偽物だったのは男自身の誤認によるものだった",
-      "negation_of": "NF1c",
+      "id": "HF2a",
+      "label": "男が以前ウミガメのスープとして飲んだのは通常の外食の場だった",
+      "negation_of": "NF2a",
       "formation_conditions": [
         [
           "I2"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "NF2b",
-      "label": "男が悟った真実は社会的・経済的な問題に関するものではなかった",
-      "negation_of": "HF2b",
+      "id": "NF4a",
+      "label": "男の自殺の原因はその日のレストランでの出来事だけではない",
+      "negation_of": "HF4a",
       "formation_conditions": [
         [
-          "I3"
+          "S9"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "HF2b",
-      "label": "男が悟った真実は社会的・経済的な問題に関するものだった",
-      "negation_of": "NF2b",
+      "id": "HF4a",
+      "label": "男の自殺の原因はその日のレストランでの出来事のみに起因する",
+      "negation_of": "NF4a",
       "formation_conditions": [
         [
-          "I3"
+          "S9"
         ]
       ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "NF3a",
-      "label": "男がウミガメのスープと称するものを過去に飲んだのは繰り返しではなかった",
-      "negation_of": "HF3a",
-      "formation_conditions": [
-        [
-          "S4"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "HF3a",
-      "label": "男はウミガメのスープを過去に何度も繰り返し飲んでいた",
-      "negation_of": "NF3a",
-      "formation_conditions": [
-        [
-          "S4"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "NF3c",
-      "label": "過去の体験は感情的な出来事に関連するものではなかった",
-      "negation_of": "HF3c",
-      "formation_conditions": [
-        [
-          "I6"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "HF3c",
-      "label": "過去の体験は感情的な出来事（別れや記念日等）に関連していた",
-      "negation_of": "NF3c",
-      "formation_conditions": [
-        [
-          "I6"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "NF4b",
-      "label": "過去のスープの材料は家畜や野生動物の肉ではなかった",
-      "negation_of": "HF4b",
-      "formation_conditions": [
-        [
-          "I7"
-        ]
-      ],
-      "rejection_conditions": null
-    },
-    {
-      "id": "HF4b",
-      "label": "過去のスープの材料は家畜や野生動物の肉だった",
-      "negation_of": "NF4b",
-      "formation_conditions": [
-        [
-          "I7"
-        ]
-      ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
       "id": "NF5a",
-      "label": "偽りのスープを提供した人物は男と業務上・制度上の関係ではなかった",
+      "label": "男の過去の苦境は経済的な問題ではなかった",
       "negation_of": "HF5a",
       "formation_conditions": [
         [
-          "P1"
+          "P2"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
       "id": "HF5a",
-      "label": "偽りのスープを提供した人物は男と業務上・制度上の関係にあった",
+      "label": "男の過去の苦境は経済的な問題だった",
       "negation_of": "NF5a",
       "formation_conditions": [
         [
-          "P1"
+          "P2"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "NF6b",
-      "label": "スープの材料となった人物は男が生前知らなかった人ではなかった",
-      "negation_of": "HF6b",
+      "id": "NF6a",
+      "label": "遭難中の主な困難は怪我や病気ではなかった",
+      "negation_of": "HF6a",
       "formation_conditions": [
         [
-          "I9"
+          "P4"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
-      "id": "HF6b",
-      "label": "スープの材料となった人物は男が生前知らなかった人だった",
-      "negation_of": "NF6b",
+      "id": "HF6a",
+      "label": "遭難中の主な困難は怪我や病気だった",
+      "negation_of": "NF6a",
       "formation_conditions": [
         [
-          "I9"
+          "P4"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
       "id": "NF7a",
-      "label": "偽りのスープを提供した人物は悪意をもって騙したのではなかった",
+      "label": "男の過去の体験は犯罪に関わるものではなかった",
       "negation_of": "HF7a",
       "formation_conditions": [
         [
-          "P6",
-          "P5"
+          "S9"
         ]
       ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     },
     {
       "id": "HF7a",
-      "label": "偽りのスープを提供した人物は悪意をもって男を騙した",
+      "label": "男の過去の体験は犯罪に関わるものだった",
       "negation_of": "NF7a",
       "formation_conditions": [
         [
-          "P6",
-          "P5"
+          "S9"
         ]
       ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF8a",
+      "label": "男と共に遭難したのは家族ではなかった",
+      "negation_of": "HF8a",
+      "formation_conditions": [
+        [
+          "P3",
+          "P4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF8a",
+      "label": "男と共に遭難したのは家族だった",
+      "negation_of": "NF8a",
+      "formation_conditions": [
+        [
+          "P3",
+          "P4"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "NF10a",
+      "label": "仲間はスープについて男に正直に話さなかった",
+      "negation_of": "HF10a",
+      "formation_conditions": [
+        [
+          "P7"
+        ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
+    },
+    {
+      "id": "HF10a",
+      "label": "仲間はスープについて男に正直に話した",
+      "negation_of": "NF10a",
+      "formation_conditions": [
+        [
+          "P7"
+        ]
+      ],
+      "entailment_conditions": null,
       "rejection_conditions": null
     }
   ],
   "questions": [
     {
       "id": "Q1a",
-      "text": "男はスープの味が不味いと感じたから確認しましたか？",
+      "text": "男がスープの正体を確認したのは、スープの見た目がおかしかったからですか？",
       "answer": "いいえ",
       "reveals": [
         "N1a"
@@ -462,29 +547,18 @@
     },
     {
       "id": "Q1b",
-      "text": "男はスープの味が以前飲んだものと違うと感じましたか？",
+      "text": "男がスープの正体を確認したのは、スープの味がきっかけでしたか？",
       "answer": "はい",
       "reveals": [
         "I1"
       ],
       "mechanism": "observation",
       "prerequisites": [],
-      "topic_category": "前提の確認"
+      "topic_category": "原因と動機"
     },
     {
       "id": "Q1c",
-      "text": "男が以前「ウミガメのスープ」として飲んだものは、本物のウミガメのスープではなかったのですか？",
-      "answer": "はい",
-      "reveals": [
-        "I2"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "前提の確認"
-    },
-    {
-      "id": "Q1d",
-      "text": "男は誰かに「ウミガメのスープ」だと偽られて飲まされたのですか？",
+      "text": "男はスープを飲んで味に違和感を覚えましたか？",
       "answer": "はい",
       "reveals": [
         "P1"
@@ -495,286 +569,325 @@
     },
     {
       "id": "Q2a",
-      "text": "男の自殺は金銭的な問題が原因ですか？",
-      "answer": "いいえ",
-      "reveals": [
-        "N2a"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "原因と動機"
-    },
-    {
-      "id": "Q2b",
-      "text": "男はスープの味を確認したことで何かを悟りましたか？",
+      "text": "男は以前にもウミガメのスープとして出されたスープを飲んだことがありますか？",
       "answer": "はい",
       "reveals": [
-        "I3"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "原因と動機"
-    },
-    {
-      "id": "Q2c",
-      "text": "男が悟った真実は取り返しのつかない出来事に関するものでしたか？",
-      "answer": "はい",
-      "reveals": [
-        "I4"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "原因と動機"
-    },
-    {
-      "id": "Q2d",
-      "text": "男の過去の体験に関わる出来事の中で、人が死亡していましたか？",
-      "answer": "はい",
-      "reveals": [
-        "P4"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q3a",
-      "text": "男は料理の専門家ですか？",
-      "answer": "いいえ",
-      "reveals": [
-        "N3a"
+        "I2"
       ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "人物と背景"
     },
     {
-      "id": "Q3b",
-      "text": "男が以前飲んだ味の記憶は、一口で判別できるほど強く残っていましたか？",
+      "id": "Q2b",
+      "text": "以前飲んだスープと今回のスープでは味が違いましたか？",
       "answer": "はい",
       "reveals": [
-        "I5"
+        "P10"
       ],
       "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q3c",
-      "text": "過去のスープ体験は特殊な状況で起きたものでしたか？",
-      "answer": "はい",
-      "reveals": [
-        "I6"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q3d",
-      "text": "男は過去に生命に関わるような極限状況にあったことがありますか？",
-      "answer": "はい",
-      "reveals": [
-        "P3"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q4a",
-      "text": "偽りのスープの正体は、死亡した人物に関連があるものでしたか？",
-      "answer": "はい",
-      "reveals": [
-        "I7"
-      ],
-      "mechanism": "link",
       "prerequisites": [
-        "P4",
         "I2"
       ],
       "topic_category": "状況の確認"
     },
     {
-      "id": "Q4b",
-      "text": "過去のスープの材料は人間の肉でしたか？",
+      "id": "Q3b",
+      "text": "男が以前飲んだスープは、実際にはウミガメのスープではなかったのですか？",
       "answer": "はい",
       "reveals": [
-        "P2"
+        "P11"
       ],
-      "mechanism": "observation",
-      "prerequisites": [],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q5a",
-      "text": "偽りのスープを男に提供した人物は、男と何らかの関係がある人でしたか？",
-      "answer": "はい",
-      "reveals": [
-        "I8"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [
-        "P1"
-      ],
-      "topic_category": "人物と背景"
-    },
-    {
-      "id": "Q5b",
-      "text": "その人物は男の身近な人物（家族や仲間）でしたか？",
-      "answer": "はい",
-      "reveals": [
-        "P5"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [
-        "I8"
-      ],
-      "topic_category": "人物と背景"
-    },
-    {
-      "id": "Q6a",
-      "text": "極限状況で食料が不足していたことが、人肉をスープの材料にした背景でしたか？",
-      "answer": "はい",
-      "reveals": [
-        "I9"
-      ],
-      "mechanism": "link",
-      "prerequisites": [
-        "P2",
-        "P3"
-      ],
-      "topic_category": "原因と動機"
-    },
-    {
-      "id": "Q6b",
-      "text": "過去のスープは、食料不足の極限状況で人の死体から作られたものでしたか？",
-      "answer": "はい",
-      "reveals": [
-        "P6"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [
-        "I9"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "Q7b",
-      "text": "男はかつて食料の尽きた極限状況で、死んだ仲間の肉で作ったスープを「ウミガメのスープ」だと偽られて飲まされたのですか？",
-      "answer": "はい",
-      "reveals": [
-        "FP"
-      ],
-      "mechanism": "observation",
-      "prerequisites": [
-        "P6",
-        "P5"
-      ],
-      "topic_category": "状況の確認"
-    },
-    {
-      "id": "QF1c",
-      "text": "過去のスープが偽物だったのは、他者の嘘ではなく男自身の勘違いによるものですか？",
-      "answer": "いいえ",
-      "reveals": [
-        "NF1c"
-      ],
-      "mechanism": "observation",
+      "mechanism": "anomaly",
       "prerequisites": [
         "I2"
       ],
       "topic_category": "前提の確認"
     },
     {
-      "id": "QF2b",
-      "text": "男が悟った真実は社会的や経済的な問題に関するものですか？",
-      "answer": "いいえ",
+      "id": "Q4a",
+      "text": "男の自殺の原因は過去の出来事に関係していますか？",
+      "answer": "はい",
       "reveals": [
-        "NF2b"
+        "I4"
       ],
-      "mechanism": "observation",
-      "prerequisites": [
-        "I3"
-      ],
+      "mechanism": "link",
+      "prerequisites": [],
       "topic_category": "原因と動機"
     },
     {
-      "id": "QF3a",
-      "text": "男はウミガメのスープを過去に何度も繰り返し飲んでいましたか？",
+      "id": "Q4b",
+      "text": "男は過去に深刻な苦境を経験しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P2"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q5a",
+      "text": "男が経験した苦境は生死に関わるものでしたか？",
+      "answer": "はい",
+      "reveals": [
+        "I5"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P2"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q5b",
+      "text": "男はかつて遭難したことがありますか？",
+      "answer": "はい",
+      "reveals": [
+        "P4"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q6a",
+      "text": "遭難中に物資が不足しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P4"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q6b",
+      "text": "遭難中に食料が尽きましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P6"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P4"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q7a",
+      "text": "男には自殺を選ぶほど深刻な過去の体験がありますか？",
+      "answer": "はい",
+      "reveals": [
+        "I7"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q7b",
+      "text": "男の過去の体験は人の死に関わるものですか？",
+      "answer": "はい",
+      "reveals": [
+        "P3"
+      ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "Q8a",
+      "text": "男が遭難したとき、他にも人がいましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I9"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P4"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q8b",
+      "text": "遭難中に仲間の一人が亡くなりましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P5"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P4"
+      ],
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "Q9b",
+      "text": "遭難中に仲間がスープを作りましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P7"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P4"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q10a",
+      "text": "仲間は男に作ったスープについて説明しましたか？",
+      "answer": "はい",
+      "reveals": [
+        "I11"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q10b",
+      "text": "仲間は男にスープをウミガメのスープだと言いましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P8"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P7"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q11b",
+      "text": "男は遭難中にそのスープを飲みましたか？",
+      "answer": "はい",
+      "reveals": [
+        "P9"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P4"
+      ],
+      "topic_category": "状況の確認"
+    },
+    {
+      "id": "Q12",
+      "text": "男が遭難中に飲まされたスープは、死んだ仲間の肉で作られていましたか？",
+      "answer": "はい",
+      "reveals": [
+        "FP"
+      ],
+      "mechanism": "link",
+      "prerequisites": [
+        "P4",
+        "P5",
+        "P9"
+      ],
+      "topic_category": "前提の確認"
+    },
+    {
+      "id": "QF1a",
+      "text": "男がスープの正体を確認したのは、アレルギー反応が出たからですか？",
       "answer": "いいえ",
       "reveals": [
-        "NF3a"
+        "NF1a"
       ],
       "mechanism": "observation",
       "prerequisites": [],
-      "topic_category": "状況の確認"
+      "topic_category": "前提の確認"
     },
     {
-      "id": "QF3c",
-      "text": "過去の体験は感情的な出来事（別れや記念日等）に関連していましたか？",
+      "id": "QF2a",
+      "text": "男は以前に別のレストランでウミガメのスープを飲んだことがありますか？",
       "answer": "いいえ",
       "reveals": [
-        "NF3c"
+        "NF2a"
       ],
       "mechanism": "observation",
       "prerequisites": [
-        "I6"
+        "I2"
       ],
-      "topic_category": "状況の確認"
+      "topic_category": "人物と背景"
     },
     {
-      "id": "QF4b",
-      "text": "過去のスープの材料は家畜や野生動物の肉でしたか？",
+      "id": "QF4a",
+      "text": "男の自殺は、その日レストランで起きたことだけが原因ですか？",
       "answer": "いいえ",
       "reveals": [
-        "NF4b"
+        "NF4a"
       ],
-      "mechanism": "observation",
-      "prerequisites": [
-        "I7"
-      ],
-      "topic_category": "状況の確認"
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
     },
     {
       "id": "QF5a",
-      "text": "偽りのスープを提供した人物は男と業務上や制度上の関係にある人でしたか？",
+      "text": "男が経験した苦境は借金や経済的な問題ですか？",
       "answer": "いいえ",
       "reveals": [
         "NF5a"
       ],
-      "mechanism": "observation",
+      "mechanism": "link",
       "prerequisites": [
-        "P1"
+        "P2"
       ],
-      "topic_category": "人物と背景"
+      "topic_category": "原因と動機"
     },
     {
-      "id": "QF6b",
-      "text": "スープの材料となった人物は男が生前知らなかった人でしたか？",
+      "id": "QF6a",
+      "text": "遭難中に男や仲間が怪我をしたり病気になったりしましたか？",
       "answer": "いいえ",
       "reveals": [
-        "NF6b"
+        "NF6a"
       ],
       "mechanism": "observation",
       "prerequisites": [
-        "I9"
+        "P4"
       ],
-      "topic_category": "人物と背景"
+      "topic_category": "状況の確認"
     },
     {
       "id": "QF7a",
-      "text": "偽りのスープを提供した人物は悪意をもって男を騙しましたか？",
+      "text": "男の過去の体験は犯罪に関わるものですか？",
       "answer": "いいえ",
       "reveals": [
         "NF7a"
       ],
+      "mechanism": "link",
+      "prerequisites": [],
+      "topic_category": "原因と動機"
+    },
+    {
+      "id": "QF8a",
+      "text": "男と共に遭難したのは家族ですか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF8a"
+      ],
       "mechanism": "observation",
       "prerequisites": [
-        "P6",
-        "P5"
+        "P4"
       ],
-      "topic_category": "原因と動機"
+      "topic_category": "人物と背景"
+    },
+    {
+      "id": "QF10a",
+      "text": "仲間は男にスープの正体について正直に話しましたか？",
+      "answer": "いいえ",
+      "reveals": [
+        "NF10a"
+      ],
+      "mechanism": "observation",
+      "prerequisites": [
+        "P7"
+      ],
+      "topic_category": "前提の確認"
     }
   ],
   "statement": "ある男がレストランに入り、「ウミガメのスープ」を注文した。一口飲んだ男は店員に「これは本当にウミガメのスープか？」と尋ねた。店員は「はい、間違いなくウミガメのスープです」と答えた。男はその夜、自殺した。なぜだろう？",

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ウミガメのスープ data_src</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: #fafafa; color: #333; padding: 20px; }
+  h1 { font-size: 1.6em; margin-bottom: 10px; }
+  h2 { font-size: 1.2em; margin: 20px 0 10px; padding: 8px 12px;
+       background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 2px; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+  .stat { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px;
+           padding: 10px 16px; min-width: 120px; }
+  .stat .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+  .stat .label { font-size: 0.85em; color: #666; }
+  .tabs { display: flex; gap: 4px; margin: 16px 0 0; border-bottom: 2px solid #e0e0e0; }
+  .tab { padding: 8px 16px; cursor: pointer; background: #f5f5f5;
+          border: 1px solid #e0e0e0; border-bottom: none; border-radius: 6px 6px 0 0;
+          font-size: 0.9em; user-select: none; }
+  .tab.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px;
+                 font-weight: bold; color: #1565c0; }
+  .tab-content { background: #fff; border: 1px solid #e0e0e0;
+                  border-top: none; padding: 16px; overflow-x: auto; }
+  .tab-content.hidden { display: none; }
+  .mermaid { text-align: center; overflow-x: auto; }
+  .mermaid svg { min-width: 800px; min-height: 400px; }
+  ul.checks { list-style: none; padding: 8px 0; }
+  ul.checks li { padding: 4px 8px; font-size: 0.9em; }
+  li.issue { color: #e65100; }
+  li.ok { color: #2e7d32; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0; font-size: 0.8em; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-swatch { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #999; }
+  .note { font-size: 0.85em; color: #666; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h1>ウミガメのスープ — data_src.json</h1>
+
+<div class="stats">
+  <div class="stat"><div class="num">2</div><div class="label">tension</div></div>
+  <div class="stat"><div class="num">0</div><div class="label">model</div></div>
+  <div class="stat"><div class="num">0</div><div class="label">S prop</div></div>
+  <div class="stat"><div class="num">38</div><div class="label">proposition</div></div>
+  <div class="stat"><div class="num">29</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">0</div><div class="label">chain</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#e3f2fd"></div> S</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fff3e0"></div> N</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#e8f5e9"></div> P</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fce4ec"></div> NT</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f3e5f5"></div> NU</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f5f5f5"></div> NF</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="deriv_graph">derivation graph</div>
+  <div class="tab" data-tab="derivation">fc flow</div>
+  <div class="tab" data-tab="questions">Q -&gt; prop</div>
+  <div class="tab" data-tab="division">model split</div>
+  <div class="tab" data-tab="chains">chain</div>
+  <div class="tab" data-tab="branches">branch / NF</div>
+  <div class="tab" data-tab="paths">path</div>
+  <div class="tab" data-tab="integrity">integrity</div>
+</div>
+
+<div id="deriv_graph" class="tab-content">
+<h2>derivation graph (_phase2)</h2>
+<p class="note">
+  Conceptual derivation: A &rarr; B means confirming A makes B redundant.
+  Blue = independent axis, green = root (S-reachable), purple = composite, orange = derived.
+  Dashed = combination derivation.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef axisNode fill:#42a5f5,stroke:#1565c0,color:#fff
+  classDef rootNode fill:#4caf50,stroke:#2e7d32,color:#fff
+  classDef compositeNode fill:#9c27b0,stroke:#6a1b9a,color:#fff
+  classDef derivedNode fill:#ff9800,stroke:#e65100,color:#fff
+  classDef defaultNode fill:#e0e0e0,stroke:#757575,color:#424242
+  empty["No derivation_graph in _phase2"]
+</pre>
+</div>
+
+<div id="derivation" class="tab-content">
+<h2>formation_conditions</h2>
+<p class="note">
+  S -&gt; N -&gt; P -&gt; NT -&gt; NU. Solid = fc, dotted = S derived_from.
+  Junction = AND. Multiple arrows to same node = OR.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef sNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  I1["I1: 男はスープの味がきっかけで店員にスープの正体を確認した"]:::nNode
+  P1["P1: 男はスープを飲んで違和感を覚えた"]:::pNode
+  I2["I2: 男は以前にもウミガメのスープとして提供されたスープを飲んだことがある"]:::nNode
+  P10["P10: 男は以前「ウミガメのスープ」として飲んだスープと今回のスープの味が違うと感じた"]:::pNode
+  P11["P11: 男が以前飲んだスープはウミガメのスープではなかった"]:::pNode
+  I4["I4: 男の自殺は過去の出来事に起因する"]:::nNode
+  P2["P2: 男は過去に深刻な苦境を経験した"]:::pNode
+  I5["I5: 男は過去に生死に関わる危険な状況に置かれた"]:::nNode
+  P4["P4: 男はかつて仲間と船で遭難した"]:::pNode
+  I6["I6: 遭難中に生存に必要な物資が不足した"]:::nNode
+  P6["P6: 遭難中に食料が尽きた"]:::pNode
+  I7["I7: 男には死を選ぶほど深刻な過去の経験がある"]:::nNode
+  P3["P3: 男は人の死に関わる経験をした"]:::pNode
+  I9["I9: 男と共に遭難した仲間がいた"]:::nNode
+  P5["P5: 遭難中に仲間の一人が死んだ"]:::pNode
+  P7["P7: 遭難中に仲間がスープを作った"]:::pNode
+  I11["I11: 仲間は男に作ったスープについて説明した"]:::nNode
+  P8["P8: 仲間は男にスープをウミガメのスープだと言った"]:::pNode
+  P9["P9: 男は遭難中にそのスープを飲んだ"]:::pNode
+  FP["FP: 男が遭難中に飲まされたスープは死んだ仲間の肉で作られていた"]:::nNode
+  N1a["N1a: 男がスープの正体を確認した理由はスープの見た目ではない"]:::nNode
+  I1 --> P1
+  P1 --> I2
+  I2 --> P10
+  P10 --> P11
+  I4 --> P2
+  P2 --> I5
+  I5 --> P4
+  P4 --> I6
+  I6 --> P6
+  I7 --> P3
+  j_I9_P3_P4(( ))
+  P3 --> j_I9_P3_P4
+  P4 --> j_I9_P3_P4
+  j_I9_P3_P4 --> I9
+  I9 --> P5
+  j_P7_P6_P5(( ))
+  P6 --> j_P7_P6_P5
+  P5 --> j_P7_P6_P5
+  j_P7_P6_P5 --> P7
+  P7 --> I11
+  I11 --> P8
+  P8 --> P9
+  j_FP_P11_P6_P5_P7_P8_P9(( ))
+  P11 --> j_FP_P11_P6_P5_P7_P8_P9
+  P6 --> j_FP_P11_P6_P5_P7_P8_P9
+  P5 --> j_FP_P11_P6_P5_P7_P8_P9
+  P7 --> j_FP_P11_P6_P5_P7_P8_P9
+  P8 --> j_FP_P11_P6_P5_P7_P8_P9
+  P9 --> j_FP_P11_P6_P5_P7_P8_P9
+  j_FP_P11_P6_P5_P7_P8_P9 --> FP
+</pre>
+</div>
+
+<div id="questions" class="tab-content">
+<h2>Q -&gt; proposition (reveals)</h2>
+<p class="note">O = yes, X = no</p>
+<pre class="mermaid">
+graph LR
+  classDef qNode fill:#e8eaf6,stroke:#283593,color:#1a237e
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  Q10a["Q10a O<br/>仲間は男に作ったスープについて説明しましたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  1_q["1: 1"]:::nNode
+  1_q["1: 1"]:::nNode
+  Q10b["Q10b O<br/>仲間は男にスープをウミガメのスープだと言いましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  8_q["8: 8"]:::nNode
+  Q11b["Q11b O<br/>男は遭難中にそのスープを飲みましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  9_q["9: 9"]:::nNode
+  Q12["Q12 O<br/>男が遭難中に飲まされたスープは、死んだ仲間の肉で作られていましたか？"]:::qNode
+  F_q["F: F"]:::nNode
+  P_q["P: P"]:::pNode
+  Q1a["Q1a X<br/>男がスープの正体を確認したのは、スープの見た目がおかしかったからですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  1_q["1: 1"]:::nNode
+  a_q["a: a"]:::nNode
+  Q1b["Q1b O<br/>男がスープの正体を確認したのは、スープの味がきっかけでしたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  1_q["1: 1"]:::nNode
+  Q1c["Q1c O<br/>男はスープを飲んで味に違和感を覚えましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  1_q["1: 1"]:::nNode
+  Q2a["Q2a O<br/>男は以前にもウミガメのスープとして出されたスープを飲んだことがありますか？"]:::qNode
+  I_q["I: I"]:::nNode
+  2_q["2: 2"]:::nNode
+  Q2b["Q2b O<br/>以前飲んだスープと今回のスープでは味が違いましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  1_q["1: 1"]:::nNode
+  0_q["0: 0"]:::nNode
+  Q3b["Q3b O<br/>男が以前飲んだスープは、実際にはウミガメのスープではなかったのですか？"]:::qNode
+  P_q["P: P"]:::pNode
+  1_q["1: 1"]:::nNode
+  1_q["1: 1"]:::nNode
+  Q4a["Q4a O<br/>男の自殺の原因は過去の出来事に関係していますか？"]:::qNode
+  I_q["I: I"]:::nNode
+  4_q["4: 4"]:::nNode
+  Q4b["Q4b O<br/>男は過去に深刻な苦境を経験しましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  2_q["2: 2"]:::nNode
+  Q5a["Q5a O<br/>男が経験した苦境は生死に関わるものでしたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  5_q["5: 5"]:::nNode
+  Q5b["Q5b O<br/>男はかつて遭難したことがありますか？"]:::qNode
+  P_q["P: P"]:::pNode
+  4_q["4: 4"]:::nNode
+  Q6a["Q6a O<br/>遭難中に物資が不足しましたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  6_q["6: 6"]:::nNode
+  Q6b["Q6b O<br/>遭難中に食料が尽きましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  6_q["6: 6"]:::nNode
+  Q7a["Q7a O<br/>男には自殺を選ぶほど深刻な過去の体験がありますか？"]:::qNode
+  I_q["I: I"]:::nNode
+  7_q["7: 7"]:::nNode
+  Q7b["Q7b O<br/>男の過去の体験は人の死に関わるものですか？"]:::qNode
+  P_q["P: P"]:::pNode
+  3_q["3: 3"]:::nNode
+  Q8a["Q8a O<br/>男が遭難したとき、他にも人がいましたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  9_q["9: 9"]:::nNode
+  Q8b["Q8b O<br/>遭難中に仲間の一人が亡くなりましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  5_q["5: 5"]:::nNode
+  Q9b["Q9b O<br/>遭難中に仲間がスープを作りましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  7_q["7: 7"]:::nNode
+  QF10a["QF10a X<br/>仲間は男にスープの正体について正直に話しましたか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  1_q["1: 1"]:::nNode
+  0_q["0: 0"]:::nNode
+  a_q["a: a"]:::nNode
+  QF1a["QF1a X<br/>男がスープの正体を確認したのは、アレルギー反応が出たからですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  1_q["1: 1"]:::nNode
+  a_q["a: a"]:::nNode
+  QF2a["QF2a X<br/>男は以前に別のレストランでウミガメのスープを飲んだことがありますか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  2_q["2: 2"]:::nNode
+  a_q["a: a"]:::nNode
+  QF4a["QF4a X<br/>男の自殺は、その日レストランで起きたことだけが原因ですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  4_q["4: 4"]:::nNode
+  a_q["a: a"]:::nNode
+  QF5a["QF5a X<br/>男が経験した苦境は借金や経済的な問題ですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  5_q["5: 5"]:::nNode
+  a_q["a: a"]:::nNode
+  QF6a["QF6a X<br/>遭難中に男や仲間が怪我をしたり病気になったりしましたか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  6_q["6: 6"]:::nNode
+  a_q["a: a"]:::nNode
+  QF7a["QF7a X<br/>男の過去の体験は犯罪に関わるものですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  7_q["7: 7"]:::nNode
+  a_q["a: a"]:::nNode
+  QF8a["QF8a X<br/>男と共に遭難したのは家族ですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  8_q["8: 8"]:::nNode
+  a_q["a: a"]:::nNode
+  Q10a -->|reveals| I_q
+  Q10a -->|reveals| 1_q
+  Q10a -->|reveals| 1_q
+  Q10b -->|reveals| P_q
+  Q10b -->|reveals| 8_q
+  Q11b -->|reveals| P_q
+  Q11b -->|reveals| 9_q
+  Q12 -->|reveals| F_q
+  Q12 -->|reveals| P_q
+  Q1a -->|reveals| N_q
+  Q1a -->|reveals| 1_q
+  Q1a -->|reveals| a_q
+  Q1b -->|reveals| I_q
+  Q1b -->|reveals| 1_q
+  Q1c -->|reveals| P_q
+  Q1c -->|reveals| 1_q
+  Q2a -->|reveals| I_q
+  Q2a -->|reveals| 2_q
+  Q2b -->|reveals| P_q
+  Q2b -->|reveals| 1_q
+  Q2b -->|reveals| 0_q
+  Q3b -->|reveals| P_q
+  Q3b -->|reveals| 1_q
+  Q3b -->|reveals| 1_q
+  Q4a -->|reveals| I_q
+  Q4a -->|reveals| 4_q
+  Q4b -->|reveals| P_q
+  Q4b -->|reveals| 2_q
+  Q5a -->|reveals| I_q
+  Q5a -->|reveals| 5_q
+  Q5b -->|reveals| P_q
+  Q5b -->|reveals| 4_q
+  Q6a -->|reveals| I_q
+  Q6a -->|reveals| 6_q
+  Q6b -->|reveals| P_q
+  Q6b -->|reveals| 6_q
+  Q7a -->|reveals| I_q
+  Q7a -->|reveals| 7_q
+  Q7b -->|reveals| P_q
+  Q7b -->|reveals| 3_q
+  Q8a -->|reveals| I_q
+  Q8a -->|reveals| 9_q
+  Q8b -->|reveals| P_q
+  Q8b -->|reveals| 5_q
+  Q9b -->|reveals| P_q
+  Q9b -->|reveals| 7_q
+  QF10a -->|reveals| N_q
+  QF10a -->|reveals| F_q
+  QF10a -->|reveals| 1_q
+  QF10a -->|reveals| 0_q
+  QF10a -->|reveals| a_q
+  QF1a -->|reveals| N_q
+  QF1a -->|reveals| F_q
+  QF1a -->|reveals| 1_q
+  QF1a -->|reveals| a_q
+  QF2a -->|reveals| N_q
+  QF2a -->|reveals| F_q
+  QF2a -->|reveals| 2_q
+  QF2a -->|reveals| a_q
+  QF4a -->|reveals| N_q
+  QF4a -->|reveals| F_q
+  QF4a -->|reveals| 4_q
+  QF4a -->|reveals| a_q
+  QF5a -->|reveals| N_q
+  QF5a -->|reveals| F_q
+  QF5a -->|reveals| 5_q
+  QF5a -->|reveals| a_q
+  QF6a -->|reveals| N_q
+  QF6a -->|reveals| F_q
+  QF6a -->|reveals| 6_q
+  QF6a -->|reveals| a_q
+  QF7a -->|reveals| N_q
+  QF7a -->|reveals| F_q
+  QF7a -->|reveals| 7_q
+  QF7a -->|reveals| a_q
+  QF8a -->|reveals| N_q
+  QF8a -->|reveals| F_q
+  QF8a -->|reveals| 8_q
+  QF8a -->|reveals| a_q
+</pre>
+</div>
+
+<div id="division" class="tab-content">
+<h2>model division hierarchy</h2>
+<pre class="mermaid">
+graph TD
+  classDef trueSet fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseSet fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef propNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  ALL[""]
+</pre>
+</div>
+
+<div id="chains" class="tab-content">
+<h2>tactical chains</h2>
+<p class="note">C1-C5 + extensions. Parsed from _phase3 description.</p>
+<pre class="mermaid">
+graph TD
+  classDef srcNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef midNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef tgtNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef extNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uniNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+</pre>
+</div>
+
+<div id="branches" class="tab-content">
+<h2>chain branches / rejection (_phase9)</h2>
+<p class="note">T = true side, F = false side (parallel). Dotted = generated NF proposition.</p>
+<pre class="mermaid">
+graph TD
+  classDef trueNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseNode fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef nfNode fill:#f5f5f5,stroke:#757575,color:#424242
+</pre>
+</div>
+
+<div id="paths" class="tab-content">
+<h2>exploration paths</h2>
+<pre class="mermaid">
+graph LR
+  classDef pathNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+</pre>
+</div>
+
+<div id="integrity" class="tab-content">
+<h2>integrity check</h2>
+<ul class="checks">
+<li class="issue">&#9888; Q Q1a reveals unknown proposition N</li>
+<li class="issue">&#9888; Q Q1a reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q1a reveals unknown proposition a</li>
+<li class="issue">&#9888; Q Q1b reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q1b reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q1c reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q1c reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q2a reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q2a reveals unknown proposition 2</li>
+<li class="issue">&#9888; Q Q2b reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q2b reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q2b reveals unknown proposition 0</li>
+<li class="issue">&#9888; Q Q3b reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q3b reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q3b reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q4a reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q4a reveals unknown proposition 4</li>
+<li class="issue">&#9888; Q Q4b reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q4b reveals unknown proposition 2</li>
+<li class="issue">&#9888; Q Q5a reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q5a reveals unknown proposition 5</li>
+<li class="issue">&#9888; Q Q5b reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q5b reveals unknown proposition 4</li>
+<li class="issue">&#9888; Q Q6a reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q6a reveals unknown proposition 6</li>
+<li class="issue">&#9888; Q Q6b reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q6b reveals unknown proposition 6</li>
+<li class="issue">&#9888; Q Q7a reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q7a reveals unknown proposition 7</li>
+<li class="issue">&#9888; Q Q7b reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q7b reveals unknown proposition 3</li>
+<li class="issue">&#9888; Q Q8a reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q8a reveals unknown proposition 9</li>
+<li class="issue">&#9888; Q Q8b reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q8b reveals unknown proposition 5</li>
+<li class="issue">&#9888; Q Q9b reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q9b reveals unknown proposition 7</li>
+<li class="issue">&#9888; Q Q10a reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q10a reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q10a reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q10b reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q10b reveals unknown proposition 8</li>
+<li class="issue">&#9888; Q Q11b reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q11b reveals unknown proposition 9</li>
+<li class="issue">&#9888; Q Q12 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q Q12 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q QF1a reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF1a reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF1a reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q QF1a reveals unknown proposition a</li>
+<li class="issue">&#9888; Q QF2a reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF2a reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF2a reveals unknown proposition 2</li>
+<li class="issue">&#9888; Q QF2a reveals unknown proposition a</li>
+<li class="issue">&#9888; Q QF4a reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF4a reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF4a reveals unknown proposition 4</li>
+<li class="issue">&#9888; Q QF4a reveals unknown proposition a</li>
+<li class="issue">&#9888; Q QF5a reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF5a reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF5a reveals unknown proposition 5</li>
+<li class="issue">&#9888; Q QF5a reveals unknown proposition a</li>
+<li class="issue">&#9888; Q QF6a reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF6a reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF6a reveals unknown proposition 6</li>
+<li class="issue">&#9888; Q QF6a reveals unknown proposition a</li>
+<li class="issue">&#9888; Q QF7a reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF7a reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF7a reveals unknown proposition 7</li>
+<li class="issue">&#9888; Q QF7a reveals unknown proposition a</li>
+<li class="issue">&#9888; Q QF8a reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF8a reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF8a reveals unknown proposition 8</li>
+<li class="issue">&#9888; Q QF8a reveals unknown proposition a</li>
+<li class="issue">&#9888; Q QF10a reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF10a reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF10a reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q QF10a reveals unknown proposition 0</li>
+<li class="issue">&#9888; Q QF10a reveals unknown proposition a</li>
+<li class="issue">&#9888; Proposition I1: fc が未知の S5 を参照</li>
+<li class="issue">&#9888; Proposition I1: fc が未知の S6 を参照</li>
+<li class="issue">&#9888; Proposition I1: fc が未知の S16 を参照</li>
+<li class="issue">&#9888; Proposition P10: fc が未知の S15 を参照</li>
+<li class="issue">&#9888; Proposition P11: fc が未知の S15 を参照</li>
+<li class="issue">&#9888; Proposition I4: fc が未知の S9 を参照</li>
+<li class="issue">&#9888; Proposition I7: fc が未知の S9 を参照</li>
+<li class="issue">&#9888; Proposition N1a: fc が未知の S5 を参照</li>
+<li class="issue">&#9888; Proposition N1a: fc が未知の S6 を参照</li>
+<li class="issue">&#9888; Proposition N1a: fc が未知の S16 を参照</li>
+<li class="issue">&#9888; Proposition H1a: fc が未知の S5 を参照</li>
+<li class="issue">&#9888; Proposition H1a: fc が未知の S6 を参照</li>
+<li class="issue">&#9888; Proposition H1a: fc が未知の S16 を参照</li>
+<li class="issue">&#9888; Proposition NF1a: fc が未知の S5 を参照</li>
+<li class="issue">&#9888; Proposition NF1a: fc が未知の S6 を参照</li>
+<li class="issue">&#9888; Proposition NF1a: fc が未知の S16 を参照</li>
+<li class="issue">&#9888; Proposition HF1a: fc が未知の S5 を参照</li>
+<li class="issue">&#9888; Proposition HF1a: fc が未知の S6 を参照</li>
+<li class="issue">&#9888; Proposition HF1a: fc が未知の S16 を参照</li>
+<li class="issue">&#9888; Proposition NF4a: fc が未知の S9 を参照</li>
+<li class="issue">&#9888; Proposition HF4a: fc が未知の S9 を参照</li>
+<li class="issue">&#9888; Proposition NF7a: fc が未知の S9 を参照</li>
+<li class="issue">&#9888; Proposition HF7a: fc が未知の S9 を参照</li>
+<li class="issue">&#9888; Q1a: reveals が 3 要素</li>
+<li class="issue">&#9888; Q1b: reveals が 2 要素</li>
+<li class="issue">&#9888; Q1c: reveals が 2 要素</li>
+<li class="issue">&#9888; Q2a: reveals が 2 要素</li>
+<li class="issue">&#9888; Q2b: reveals が 3 要素</li>
+<li class="issue">&#9888; Q3b: reveals が 3 要素</li>
+<li class="issue">&#9888; Q4a: reveals が 2 要素</li>
+<li class="issue">&#9888; Q4b: reveals が 2 要素</li>
+<li class="issue">&#9888; Q5a: reveals が 2 要素</li>
+<li class="issue">&#9888; Q5b: reveals が 2 要素</li>
+<li class="issue">&#9888; Q6a: reveals が 2 要素</li>
+<li class="issue">&#9888; Q6b: reveals が 2 要素</li>
+<li class="issue">&#9888; Q7a: reveals が 2 要素</li>
+<li class="issue">&#9888; Q7b: reveals が 2 要素</li>
+<li class="issue">&#9888; Q8a: reveals が 2 要素</li>
+<li class="issue">&#9888; Q8b: reveals が 2 要素</li>
+<li class="issue">&#9888; Q9b: reveals が 2 要素</li>
+<li class="issue">&#9888; Q10a: reveals が 3 要素</li>
+<li class="issue">&#9888; Q10b: reveals が 2 要素</li>
+<li class="issue">&#9888; Q11b: reveals が 2 要素</li>
+<li class="issue">&#9888; Q12: reveals が 2 要素</li>
+<li class="issue">&#9888; QF1a: reveals が 4 要素</li>
+<li class="issue">&#9888; QF2a: reveals が 4 要素</li>
+<li class="issue">&#9888; QF4a: reveals が 4 要素</li>
+<li class="issue">&#9888; QF5a: reveals が 4 要素</li>
+<li class="issue">&#9888; QF6a: reveals が 4 要素</li>
+<li class="issue">&#9888; QF7a: reveals が 4 要素</li>
+<li class="issue">&#9888; QF8a: reveals が 4 要素</li>
+<li class="issue">&#9888; QF10a: reveals が 5 要素</li>
+<li class="ok">&#10003; negation_of の対称性が保たれている</li>
+<li class="ok">&#10003; 全モデル (0個) がカバー済み</li>
+
+</ul>
+</div>
+
+<script>
+  // Initialize mermaid - render all diagrams while all tabs visible
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: {
+      htmlLabels: true,
+      curve: 'basis',
+      useMaxWidth: false,
+      nodeSpacing: 30,
+      rankSpacing: 60,
+      padding: 15
+    },
+    themeVariables: {
+      fontSize: '14px'
+    }
+  });
+
+  // After mermaid renders, hide non-active tabs
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var tabs = document.querySelectorAll('.tab-content');
+      for (var i = 1; i < tabs.length; i++) {
+        tabs[i].classList.add('hidden');
+      }
+    }, 500);
+  });
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.add('hidden');
+      });
+      document.querySelectorAll('.tab').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      var target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.remove('hidden');
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
