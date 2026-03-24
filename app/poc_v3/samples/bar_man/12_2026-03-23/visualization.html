@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>バーの男 data_src</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: #fafafa; color: #333; padding: 20px; }
+  h1 { font-size: 1.6em; margin-bottom: 10px; }
+  h2 { font-size: 1.2em; margin: 20px 0 10px; padding: 8px 12px;
+       background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 2px; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+  .stat { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px;
+           padding: 10px 16px; min-width: 120px; }
+  .stat .num { font-size: 1.8em; font-weight: bold; color: #1565c0; }
+  .stat .label { font-size: 0.85em; color: #666; }
+  .tabs { display: flex; gap: 4px; margin: 16px 0 0; border-bottom: 2px solid #e0e0e0; }
+  .tab { padding: 8px 16px; cursor: pointer; background: #f5f5f5;
+          border: 1px solid #e0e0e0; border-bottom: none; border-radius: 6px 6px 0 0;
+          font-size: 0.9em; user-select: none; }
+  .tab.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px;
+                 font-weight: bold; color: #1565c0; }
+  .tab-content { background: #fff; border: 1px solid #e0e0e0;
+                  border-top: none; padding: 16px; overflow-x: auto; }
+  .tab-content.hidden { display: none; }
+  .mermaid { text-align: center; overflow-x: auto; }
+  .mermaid svg { min-width: 800px; min-height: 400px; }
+  ul.checks { list-style: none; padding: 8px 0; }
+  ul.checks li { padding: 4px 8px; font-size: 0.9em; }
+  li.issue { color: #e65100; }
+  li.ok { color: #2e7d32; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0; font-size: 0.8em; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-swatch { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #999; }
+  .note { font-size: 0.85em; color: #666; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h1>バーの男 — data_src.json</h1>
+
+<div class="stats">
+  <div class="stat"><div class="num">0</div><div class="label">tension</div></div>
+  <div class="stat"><div class="num">0</div><div class="label">model</div></div>
+  <div class="stat"><div class="num">0</div><div class="label">S prop</div></div>
+  <div class="stat"><div class="num">62</div><div class="label">proposition</div></div>
+  <div class="stat"><div class="num">43</div><div class="label">question</div></div>
+  <div class="stat"><div class="num">0</div><div class="label">chain</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#e3f2fd"></div> S</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fff3e0"></div> N</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#e8f5e9"></div> P</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fce4ec"></div> NT</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f3e5f5"></div> NU</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f5f5f5"></div> NF</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="deriv_graph">derivation graph</div>
+  <div class="tab" data-tab="derivation">fc flow</div>
+  <div class="tab" data-tab="questions">Q -&gt; prop</div>
+  <div class="tab" data-tab="division">model split</div>
+  <div class="tab" data-tab="chains">chain</div>
+  <div class="tab" data-tab="branches">branch / NF</div>
+  <div class="tab" data-tab="paths">path</div>
+  <div class="tab" data-tab="integrity">integrity</div>
+</div>
+
+<div id="deriv_graph" class="tab-content">
+<h2>derivation graph (_phase2)</h2>
+<p class="note">
+  Conceptual derivation: A &rarr; B means confirming A makes B redundant.
+  Blue = independent axis, green = root (S-reachable), purple = composite, orange = derived.
+  Dashed = combination derivation.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef axisNode fill:#42a5f5,stroke:#1565c0,color:#fff
+  classDef rootNode fill:#4caf50,stroke:#2e7d32,color:#fff
+  classDef compositeNode fill:#9c27b0,stroke:#6a1b9a,color:#fff
+  classDef derivedNode fill:#ff9800,stroke:#e65100,color:#fff
+  classDef defaultNode fill:#e0e0e0,stroke:#757575,color:#424242
+  empty["No derivation_graph in _phase2"]
+</pre>
+</div>
+
+<div id="derivation" class="tab-content">
+<h2>formation_conditions</h2>
+<p class="note">
+  S -&gt; N -&gt; P -&gt; NT -&gt; NU. Solid = fc, dotted = S derived_from.
+  Junction = AND. Multiple arrows to same node = OR.
+</p>
+<pre class="mermaid">
+graph TD
+  classDef sNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  I1["I1: 水を頼んだ客に銃を向けるのは通常の反応ではない"]:::nNode
+  I2["I2: バーテンダーが銃を向けた直接の動機は男の水の要求ではない"]:::nNode
+  P1["P1: 男に異変があった"]:::pNode
+  I3["I3: 男は銃を向けられた後も「ありがとう」と言って帰っており、水の入手に固執しなかった"]:::nNode
+  P5["P5: 男が水を求めた動機は喉の渇きではなかった"]:::pNode
+  I5["I5: 男の「ありがとう」は真意からの感謝だった"]:::nNode
+  I6["I6: バーテンダーが銃を向けた行為は男にとって利益になった"]:::nNode
+  P7["P7: バーテンダーが銃を向けたことで男の問題が解消した"]:::pNode
+  I7["I7: バーテンダーの銃を向ける行為は男の状態に対する反応だった"]:::nNode
+  P2["P2: バーテンダーは男の異変に気づいた"]:::pNode
+  I8["I8: 男が銃を向けられて「ありがとう」と言ったのは銃を向けた行為が有益だったからである"]:::nNode
+  I9["I9: 銃を向けた行為が男の異変を解消した"]:::nNode
+  P3["P3: バーテンダーは男の異変への対処として銃を向けた"]:::pNode
+  I10["I10: 男には喉の渇き以外に水を必要とする事情があった"]:::nNode
+  I11["I11: 男は身体的な不調への対処として水を必要としていた"]:::nNode
+  P4["P4: 男は身体的な問題を抱えていた"]:::pNode
+  P6["P6: 男は身体的な問題の対処として水を求めた"]:::pNode
+  I13["I13: 男はバーテンダーの行為が自分の問題解消の原因だと認識した"]:::nNode
+  P8["P8: 男はバーテンダーが銃を向けた意図を理解した"]:::pNode
+  FPC1["FPC1: バーテンダーは男の異変に気づき、その対処として銃を向けた"]:::nNode
+  FPC2["FPC2: 男は身体的な問題の対処として水を求めていたが、バーテンダーの行為で問題が解消し、男はその意図を理解した"]:::nNode
+  I17["I17: 男の問題は驚かされることで解消する種類の身体症状だった"]:::nNode
+  I18["I18: 男はしゃっくりが止まらなかった"]:::nNode
+  FP["FP: 男はしゃっくりを止めたくて水を求めたが、バーテンダーがしゃっくりに気づき銃で驚かせて止めてやり、しゃっくりが止まった男は水が不要になり礼を言って帰った"]:::nNode
+  N1["N1: バーテンダーは強盗目的で銃を向けたのではない"]:::nNode
+  N2["N2: バーテンダーは自衛のために銃を向けたのではない"]:::nNode
+  N3["N3: バーテンダーは男を追い出すために銃を向けたのではない"]:::nNode
+  N4["N4: バーテンダーは冗談で銃を向けたのではない"]:::nNode
+  N5["N5: 男は脅されて帰ったのではない"]:::nNode
+  N6["N6: 男の「ありがとう」は皮肉ではない"]:::nNode
+  N7["N7: バーテンダーは男を危険から守ろうとしたのではない"]:::nNode
+  I1 --> I2
+  I2 --> P1
+  I3 --> P5
+  I5 --> I6
+  I6 --> P7
+  P1 --> I7
+  I7 --> P2
+  P1 --> I8
+  j_I9_I8_P1(( ))
+  I8 --> j_I9_I8_P1
+  P1 --> j_I9_I8_P1
+  j_I9_I8_P1 --> I9
+  I9 --> P3
+  P5 --> I10
+  I10 --> I11
+  I11 --> P4
+  j_P6_P5_P4(( ))
+  P5 --> j_P6_P5_P4
+  P4 --> j_P6_P5_P4
+  j_P6_P5_P4 --> P6
+  j_I13_P7_P3(( ))
+  P7 --> j_I13_P7_P3
+  P3 --> j_I13_P7_P3
+  j_I13_P7_P3 --> I13
+  I13 --> P8
+  j_FPC1_P2_P3(( ))
+  P2 --> j_FPC1_P2_P3
+  P3 --> j_FPC1_P2_P3
+  j_FPC1_P2_P3 --> FPC1
+  j_FPC2_P6_P7_P8(( ))
+  P6 --> j_FPC2_P6_P7_P8
+  P7 --> j_FPC2_P6_P7_P8
+  P8 --> j_FPC2_P6_P7_P8
+  j_FPC2_P6_P7_P8 --> FPC2
+  j_I17_FPC1_FPC2(( ))
+  FPC1 --> j_I17_FPC1_FPC2
+  FPC2 --> j_I17_FPC1_FPC2
+  j_I17_FPC1_FPC2 --> I17
+  I17 --> I18
+  I18 --> FP
+</pre>
+</div>
+
+<div id="questions" class="tab-content">
+<h2>Q -&gt; proposition (reveals)</h2>
+<p class="note">O = yes, X = no</p>
+<pre class="mermaid">
+graph LR
+  classDef qNode fill:#e8eaf6,stroke:#283593,color:#1a237e
+  classDef nNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef pNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  classDef tNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+  classDef fNode fill:#f5f5f5,stroke:#757575,color:#424242
+  Q1["Q1 O<br/>バーテンダーが銃を向けたのは通常ありえない反応ですか？"]:::qNode
+  I_q["I: I"]:::nNode
+  1_q["1: 1"]:::nNode
+  Q10["Q10 O<br/>バーテンダーが銃を向けたのは男の状態に対する反応でしたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  7_q["7: 7"]:::nNode
+  Q11["Q11 O<br/>バーテンダーは男の異変に気づいていましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  2_q["2: 2"]:::nNode
+  Q12["Q12 O<br/>男が「ありがとう」と言ったのは銃を向けられたことが役に立ったからですか？"]:::qNode
+  I_q["I: I"]:::nNode
+  8_q["8: 8"]:::nNode
+  Q13["Q13 O<br/>銃を向けたことが男の異変を解消しましたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  9_q["9: 9"]:::nNode
+  Q14["Q14 O<br/>バーテンダーは男の異変への対処として銃を向けましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  3_q["3: 3"]:::nNode
+  Q15["Q15 O<br/>男には喉の渇き以外に水を必要とする事情がありましたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  1_q["1: 1"]:::nNode
+  0_q["0: 0"]:::nNode
+  Q16["Q16 O<br/>男は身体的な不調のために水を必要としていましたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  1_q["1: 1"]:::nNode
+  1_q["1: 1"]:::nNode
+  Q17["Q17 O<br/>男は身体的な問題を抱えていましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  4_q["4: 4"]:::nNode
+  Q19["Q19 O<br/>男は身体的な問題の対処として水を求めましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  6_q["6: 6"]:::nNode
+  Q2["Q2 O<br/>バーテンダーが銃を向けた理由は水の注文とは別にありますか？"]:::qNode
+  I_q["I: I"]:::nNode
+  2_q["2: 2"]:::nNode
+  Q20["Q20 O<br/>男はバーテンダーの行為が問題解消の原因だと気づきましたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  1_q["1: 1"]:::nNode
+  3_q["3: 3"]:::nNode
+  Q22["Q22 O<br/>男はバーテンダーが銃を向けた意図を理解しましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  8_q["8: 8"]:::nNode
+  Q24["Q24 O<br/>バーテンダーは男の異変に気づき、対処として銃を向けたのですか？"]:::qNode
+  F_q["F: F"]:::nNode
+  P_q["P: P"]:::pNode
+  C_q["C: C"]:::nNode
+  1_q["1: 1"]:::nNode
+  Q26["Q26 O<br/>男は身体的問題の対処に水を求め、バーテンダーの行為で解消し、その意図を理解したのですか？"]:::qNode
+  F_q["F: F"]:::nNode
+  P_q["P: P"]:::pNode
+  C_q["C: C"]:::nNode
+  2_q["2: 2"]:::nNode
+  Q27["Q27 O<br/>男の問題は驚かされることで治る種類の身体症状でしたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  1_q["1: 1"]:::nNode
+  7_q["7: 7"]:::nNode
+  Q28["Q28 O<br/>男はしゃっくりが止まらなかったのですか？"]:::qNode
+  I_q["I: I"]:::nNode
+  1_q["1: 1"]:::nNode
+  8_q["8: 8"]:::nNode
+  Q29["Q29 O<br/>男はしゃっくりを止めたくて水を求め、バーテンダーが銃で驚かせて止めたのですか？"]:::qNode
+  F_q["F: F"]:::nNode
+  P_q["P: P"]:::pNode
+  Q3["Q3 O<br/>男自身に何か変わった点がありましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  1_q["1: 1"]:::nNode
+  Q30["Q30 X<br/>バーテンダーは男から金品を奪おうとしたのですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  1_q["1: 1"]:::nNode
+  Q31["Q31 X<br/>バーテンダーは男に脅威を感じて銃を向けたのですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  2_q["2: 2"]:::nNode
+  Q32["Q32 X<br/>バーテンダーは男を追い出すために銃を向けたのですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  3_q["3: 3"]:::nNode
+  Q33["Q33 X<br/>バーテンダーは冗談で銃を向けたのですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  4_q["4: 4"]:::nNode
+  Q34["Q34 X<br/>男は銃で脅されて怖くなって帰ったのですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  5_q["5: 5"]:::nNode
+  Q35["Q35 X<br/>男の「ありがとう」は皮肉でしたか？"]:::qNode
+  N_q["N: N"]:::nNode
+  6_q["6: 6"]:::nNode
+  Q36["Q36 X<br/>バーテンダーは男を何かの危険から守ろうとしたのですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  7_q["7: 7"]:::nNode
+  Q4["Q4 O<br/>男は水を受け取らずに帰りましたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  3_q["3: 3"]:::nNode
+  Q6["Q6 O<br/>男が水を求めたのには喉の渇き以外の理由がありましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  5_q["5: 5"]:::nNode
+  Q7["Q7 O<br/>男の「ありがとう」は心からの感謝でしたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  5_q["5: 5"]:::nNode
+  Q8["Q8 O<br/>銃を向けられたことは男にとって良い結果をもたらしましたか？"]:::qNode
+  I_q["I: I"]:::nNode
+  6_q["6: 6"]:::nNode
+  Q9["Q9 O<br/>男は困りごとを抱えていて、バーテンダーの行為でそれが解消しましたか？"]:::qNode
+  P_q["P: P"]:::pNode
+  7_q["7: 7"]:::nNode
+  QF1["QF1 X<br/>バーテンダーが銃を向けたのはこの店の慣習ですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  1_q["1: 1"]:::nNode
+  QF10["QF10 X<br/>男が水を必要としていたのは精神的な理由ですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  1_q["1: 1"]:::nNode
+  0_q["0: 0"]:::nNode
+  QF12["QF12 X<br/>男はバーテンダーの行為が偶然だったと考えましたか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  1_q["1: 1"]:::nNode
+  2_q["2: 2"]:::nNode
+  QF16["QF16 X<br/>男の問題は時間が経てば自然に治りましたか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  1_q["1: 1"]:::nNode
+  6_q["6: 6"]:::nNode
+  QF17["QF17 X<br/>男は体の震えが止まらなかったのですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  1_q["1: 1"]:::nNode
+  7_q["7: 7"]:::nNode
+  QF2["QF2 X<br/>バーテンダーは水を頼まれたこと自体に怒って銃を向けたのですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  2_q["2: 2"]:::nNode
+  QF3["QF3 X<br/>男は水をもらえなかったことに不満でしたか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  3_q["3: 3"]:::nNode
+  QF5["QF5 X<br/>銃を向けられたことは男にとって脅威でしたか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  5_q["5: 5"]:::nNode
+  QF6["QF6 X<br/>バーテンダーが銃を向けたのは男とは無関係な個人的事情ですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  6_q["6: 6"]:::nNode
+  QF7["QF7 X<br/>男の「ありがとう」は銃を向けた行為とは別の理由によるものですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  7_q["7: 7"]:::nNode
+  QF8["QF8 X<br/>銃を向けたことと男の異変の解消は偶然の一致ですか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  8_q["8: 8"]:::nNode
+  QF9["QF9 X<br/>男が水を頼んだのは別の目的のための口実でしたか？"]:::qNode
+  N_q["N: N"]:::nNode
+  F_q["F: F"]:::nNode
+  9_q["9: 9"]:::nNode
+  Q1 -->|reveals| I_q
+  Q1 -->|reveals| 1_q
+  Q10 -->|reveals| I_q
+  Q10 -->|reveals| 7_q
+  Q11 -->|reveals| P_q
+  Q11 -->|reveals| 2_q
+  Q12 -->|reveals| I_q
+  Q12 -->|reveals| 8_q
+  Q13 -->|reveals| I_q
+  Q13 -->|reveals| 9_q
+  Q14 -->|reveals| P_q
+  Q14 -->|reveals| 3_q
+  Q15 -->|reveals| I_q
+  Q15 -->|reveals| 1_q
+  Q15 -->|reveals| 0_q
+  Q16 -->|reveals| I_q
+  Q16 -->|reveals| 1_q
+  Q16 -->|reveals| 1_q
+  Q17 -->|reveals| P_q
+  Q17 -->|reveals| 4_q
+  Q19 -->|reveals| P_q
+  Q19 -->|reveals| 6_q
+  Q2 -->|reveals| I_q
+  Q2 -->|reveals| 2_q
+  Q20 -->|reveals| I_q
+  Q20 -->|reveals| 1_q
+  Q20 -->|reveals| 3_q
+  Q22 -->|reveals| P_q
+  Q22 -->|reveals| 8_q
+  Q24 -->|reveals| F_q
+  Q24 -->|reveals| P_q
+  Q24 -->|reveals| C_q
+  Q24 -->|reveals| 1_q
+  Q26 -->|reveals| F_q
+  Q26 -->|reveals| P_q
+  Q26 -->|reveals| C_q
+  Q26 -->|reveals| 2_q
+  Q27 -->|reveals| I_q
+  Q27 -->|reveals| 1_q
+  Q27 -->|reveals| 7_q
+  Q28 -->|reveals| I_q
+  Q28 -->|reveals| 1_q
+  Q28 -->|reveals| 8_q
+  Q29 -->|reveals| F_q
+  Q29 -->|reveals| P_q
+  Q3 -->|reveals| P_q
+  Q3 -->|reveals| 1_q
+  Q30 -->|reveals| N_q
+  Q30 -->|reveals| 1_q
+  Q31 -->|reveals| N_q
+  Q31 -->|reveals| 2_q
+  Q32 -->|reveals| N_q
+  Q32 -->|reveals| 3_q
+  Q33 -->|reveals| N_q
+  Q33 -->|reveals| 4_q
+  Q34 -->|reveals| N_q
+  Q34 -->|reveals| 5_q
+  Q35 -->|reveals| N_q
+  Q35 -->|reveals| 6_q
+  Q36 -->|reveals| N_q
+  Q36 -->|reveals| 7_q
+  Q4 -->|reveals| I_q
+  Q4 -->|reveals| 3_q
+  Q6 -->|reveals| P_q
+  Q6 -->|reveals| 5_q
+  Q7 -->|reveals| I_q
+  Q7 -->|reveals| 5_q
+  Q8 -->|reveals| I_q
+  Q8 -->|reveals| 6_q
+  Q9 -->|reveals| P_q
+  Q9 -->|reveals| 7_q
+  QF1 -->|reveals| N_q
+  QF1 -->|reveals| F_q
+  QF1 -->|reveals| 1_q
+  QF10 -->|reveals| N_q
+  QF10 -->|reveals| F_q
+  QF10 -->|reveals| 1_q
+  QF10 -->|reveals| 0_q
+  QF12 -->|reveals| N_q
+  QF12 -->|reveals| F_q
+  QF12 -->|reveals| 1_q
+  QF12 -->|reveals| 2_q
+  QF16 -->|reveals| N_q
+  QF16 -->|reveals| F_q
+  QF16 -->|reveals| 1_q
+  QF16 -->|reveals| 6_q
+  QF17 -->|reveals| N_q
+  QF17 -->|reveals| F_q
+  QF17 -->|reveals| 1_q
+  QF17 -->|reveals| 7_q
+  QF2 -->|reveals| N_q
+  QF2 -->|reveals| F_q
+  QF2 -->|reveals| 2_q
+  QF3 -->|reveals| N_q
+  QF3 -->|reveals| F_q
+  QF3 -->|reveals| 3_q
+  QF5 -->|reveals| N_q
+  QF5 -->|reveals| F_q
+  QF5 -->|reveals| 5_q
+  QF6 -->|reveals| N_q
+  QF6 -->|reveals| F_q
+  QF6 -->|reveals| 6_q
+  QF7 -->|reveals| N_q
+  QF7 -->|reveals| F_q
+  QF7 -->|reveals| 7_q
+  QF8 -->|reveals| N_q
+  QF8 -->|reveals| F_q
+  QF8 -->|reveals| 8_q
+  QF9 -->|reveals| N_q
+  QF9 -->|reveals| F_q
+  QF9 -->|reveals| 9_q
+</pre>
+</div>
+
+<div id="division" class="tab-content">
+<h2>model division hierarchy</h2>
+<pre class="mermaid">
+graph TD
+  classDef trueSet fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseSet fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef propNode fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+  ALL[""]
+</pre>
+</div>
+
+<div id="chains" class="tab-content">
+<h2>tactical chains</h2>
+<p class="note">C1-C5 + extensions. Parsed from _phase3 description.</p>
+<pre class="mermaid">
+graph TD
+  classDef srcNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+  classDef midNode fill:#fff3e0,stroke:#e65100,color:#bf360c
+  classDef tgtNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef extNode fill:#fce4ec,stroke:#c62828,color:#b71c1c
+  classDef uniNode fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+</pre>
+</div>
+
+<div id="branches" class="tab-content">
+<h2>chain branches / rejection (_phase9)</h2>
+<p class="note">T = true side, F = false side (parallel). Dotted = generated NF proposition.</p>
+<pre class="mermaid">
+graph TD
+  classDef trueNode fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+  classDef falseNode fill:#ffcdd2,stroke:#c62828,color:#b71c1c
+  classDef nfNode fill:#f5f5f5,stroke:#757575,color:#424242
+</pre>
+</div>
+
+<div id="paths" class="tab-content">
+<h2>exploration paths</h2>
+<pre class="mermaid">
+graph LR
+  classDef pathNode fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+</pre>
+</div>
+
+<div id="integrity" class="tab-content">
+<h2>integrity check</h2>
+<ul class="checks">
+<li class="issue">&#9888; Q Q1 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q1 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q2 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q2 reveals unknown proposition 2</li>
+<li class="issue">&#9888; Q Q3 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q3 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q4 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q4 reveals unknown proposition 3</li>
+<li class="issue">&#9888; Q Q6 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q6 reveals unknown proposition 5</li>
+<li class="issue">&#9888; Q Q7 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q7 reveals unknown proposition 5</li>
+<li class="issue">&#9888; Q Q8 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q8 reveals unknown proposition 6</li>
+<li class="issue">&#9888; Q Q9 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q9 reveals unknown proposition 7</li>
+<li class="issue">&#9888; Q Q10 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q10 reveals unknown proposition 7</li>
+<li class="issue">&#9888; Q Q11 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q11 reveals unknown proposition 2</li>
+<li class="issue">&#9888; Q Q12 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q12 reveals unknown proposition 8</li>
+<li class="issue">&#9888; Q Q13 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q13 reveals unknown proposition 9</li>
+<li class="issue">&#9888; Q Q14 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q14 reveals unknown proposition 3</li>
+<li class="issue">&#9888; Q Q15 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q15 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q15 reveals unknown proposition 0</li>
+<li class="issue">&#9888; Q Q16 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q16 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q16 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q17 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q17 reveals unknown proposition 4</li>
+<li class="issue">&#9888; Q Q19 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q19 reveals unknown proposition 6</li>
+<li class="issue">&#9888; Q Q20 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q20 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q20 reveals unknown proposition 3</li>
+<li class="issue">&#9888; Q Q22 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q22 reveals unknown proposition 8</li>
+<li class="issue">&#9888; Q Q24 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q Q24 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q24 reveals unknown proposition C</li>
+<li class="issue">&#9888; Q Q24 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q26 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q Q26 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q26 reveals unknown proposition C</li>
+<li class="issue">&#9888; Q Q26 reveals unknown proposition 2</li>
+<li class="issue">&#9888; Q Q27 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q27 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q27 reveals unknown proposition 7</li>
+<li class="issue">&#9888; Q Q28 reveals unknown proposition I</li>
+<li class="issue">&#9888; Q Q28 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q28 reveals unknown proposition 8</li>
+<li class="issue">&#9888; Q Q29 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q Q29 reveals unknown proposition P</li>
+<li class="issue">&#9888; Q Q30 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q Q30 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q Q31 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q Q31 reveals unknown proposition 2</li>
+<li class="issue">&#9888; Q Q32 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q Q32 reveals unknown proposition 3</li>
+<li class="issue">&#9888; Q Q33 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q Q33 reveals unknown proposition 4</li>
+<li class="issue">&#9888; Q Q34 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q Q34 reveals unknown proposition 5</li>
+<li class="issue">&#9888; Q Q35 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q Q35 reveals unknown proposition 6</li>
+<li class="issue">&#9888; Q Q36 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q Q36 reveals unknown proposition 7</li>
+<li class="issue">&#9888; Q QF1 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF1 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF1 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q QF2 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF2 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF2 reveals unknown proposition 2</li>
+<li class="issue">&#9888; Q QF3 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF3 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF3 reveals unknown proposition 3</li>
+<li class="issue">&#9888; Q QF5 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF5 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF5 reveals unknown proposition 5</li>
+<li class="issue">&#9888; Q QF6 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF6 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF6 reveals unknown proposition 6</li>
+<li class="issue">&#9888; Q QF7 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF7 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF7 reveals unknown proposition 7</li>
+<li class="issue">&#9888; Q QF8 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF8 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF8 reveals unknown proposition 8</li>
+<li class="issue">&#9888; Q QF9 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF9 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF9 reveals unknown proposition 9</li>
+<li class="issue">&#9888; Q QF10 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF10 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF10 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q QF10 reveals unknown proposition 0</li>
+<li class="issue">&#9888; Q QF12 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF12 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF12 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q QF12 reveals unknown proposition 2</li>
+<li class="issue">&#9888; Q QF16 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF16 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF16 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q QF16 reveals unknown proposition 6</li>
+<li class="issue">&#9888; Q QF17 reveals unknown proposition N</li>
+<li class="issue">&#9888; Q QF17 reveals unknown proposition F</li>
+<li class="issue">&#9888; Q QF17 reveals unknown proposition 1</li>
+<li class="issue">&#9888; Q QF17 reveals unknown proposition 7</li>
+<li class="issue">&#9888; Proposition I1: fc が未知の S2 を参照</li>
+<li class="issue">&#9888; Proposition I1: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition I2: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition I3: fc が未知の S2 を参照</li>
+<li class="issue">&#9888; Proposition I3: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition I3: fc が未知の S4 を参照</li>
+<li class="issue">&#9888; Proposition P5: fc が未知の S2 を参照</li>
+<li class="issue">&#9888; Proposition I5: fc が未知の S4 を参照</li>
+<li class="issue">&#9888; Proposition I5: fc が未知の S5 を参照</li>
+<li class="issue">&#9888; Proposition I6: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition I7: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition I8: fc が未知の S4 を参照</li>
+<li class="issue">&#9888; Proposition N1: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition H1: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition N2: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition H2: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition N3: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition H3: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition N4: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition H4: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition N5: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition N5: fc が未知の S5 を参照</li>
+<li class="issue">&#9888; Proposition H5: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition H5: fc が未知の S5 を参照</li>
+<li class="issue">&#9888; Proposition N6: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition N6: fc が未知の S4 を参照</li>
+<li class="issue">&#9888; Proposition H6: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition H6: fc が未知の S4 を参照</li>
+<li class="issue">&#9888; Proposition N7: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition H7: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition NF1: fc が未知の S2 を参照</li>
+<li class="issue">&#9888; Proposition NF1: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition HF1: fc が未知の S2 を参照</li>
+<li class="issue">&#9888; Proposition HF1: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition NF2: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition HF2: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition NF3: fc が未知の S2 を参照</li>
+<li class="issue">&#9888; Proposition NF3: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition NF3: fc が未知の S4 を参照</li>
+<li class="issue">&#9888; Proposition HF3: fc が未知の S2 を参照</li>
+<li class="issue">&#9888; Proposition HF3: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition HF3: fc が未知の S4 を参照</li>
+<li class="issue">&#9888; Proposition NF5: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition HF5: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition NF6: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition HF6b: fc が未知の S3 を参照</li>
+<li class="issue">&#9888; Proposition NF7: fc が未知の S4 を参照</li>
+<li class="issue">&#9888; Proposition HF7: fc が未知の S4 を参照</li>
+<li class="issue">&#9888; Q1: reveals が 2 要素</li>
+<li class="issue">&#9888; Q2: reveals が 2 要素</li>
+<li class="issue">&#9888; Q3: reveals が 2 要素</li>
+<li class="issue">&#9888; Q4: reveals が 2 要素</li>
+<li class="issue">&#9888; Q6: reveals が 2 要素</li>
+<li class="issue">&#9888; Q7: reveals が 2 要素</li>
+<li class="issue">&#9888; Q8: reveals が 2 要素</li>
+<li class="issue">&#9888; Q9: reveals が 2 要素</li>
+<li class="issue">&#9888; Q10: reveals が 2 要素</li>
+<li class="issue">&#9888; Q11: reveals が 2 要素</li>
+<li class="issue">&#9888; Q12: reveals が 2 要素</li>
+<li class="issue">&#9888; Q13: reveals が 2 要素</li>
+<li class="issue">&#9888; Q14: reveals が 2 要素</li>
+<li class="issue">&#9888; Q15: reveals が 3 要素</li>
+<li class="issue">&#9888; Q16: reveals が 3 要素</li>
+<li class="issue">&#9888; Q17: reveals が 2 要素</li>
+<li class="issue">&#9888; Q19: reveals が 2 要素</li>
+<li class="issue">&#9888; Q20: reveals が 3 要素</li>
+<li class="issue">&#9888; Q22: reveals が 2 要素</li>
+<li class="issue">&#9888; Q24: reveals が 4 要素</li>
+<li class="issue">&#9888; Q26: reveals が 4 要素</li>
+<li class="issue">&#9888; Q27: reveals が 3 要素</li>
+<li class="issue">&#9888; Q28: reveals が 3 要素</li>
+<li class="issue">&#9888; Q29: reveals が 2 要素</li>
+<li class="issue">&#9888; Q30: reveals が 2 要素</li>
+<li class="issue">&#9888; Q31: reveals が 2 要素</li>
+<li class="issue">&#9888; Q32: reveals が 2 要素</li>
+<li class="issue">&#9888; Q33: reveals が 2 要素</li>
+<li class="issue">&#9888; Q34: reveals が 2 要素</li>
+<li class="issue">&#9888; Q35: reveals が 2 要素</li>
+<li class="issue">&#9888; Q36: reveals が 2 要素</li>
+<li class="issue">&#9888; QF1: reveals が 3 要素</li>
+<li class="issue">&#9888; QF2: reveals が 3 要素</li>
+<li class="issue">&#9888; QF3: reveals が 3 要素</li>
+<li class="issue">&#9888; QF5: reveals が 3 要素</li>
+<li class="issue">&#9888; QF6: reveals が 3 要素</li>
+<li class="issue">&#9888; QF7: reveals が 3 要素</li>
+<li class="issue">&#9888; QF8: reveals が 3 要素</li>
+<li class="issue">&#9888; QF9: reveals が 3 要素</li>
+<li class="issue">&#9888; QF10: reveals が 4 要素</li>
+<li class="issue">&#9888; QF12: reveals が 4 要素</li>
+<li class="issue">&#9888; QF16: reveals が 4 要素</li>
+<li class="issue">&#9888; QF17: reveals が 4 要素</li>
+<li class="ok">&#10003; negation_of の対称性が保たれている</li>
+<li class="ok">&#10003; 全モデル (0個) がカバー済み</li>
+
+</ul>
+</div>
+
+<script>
+  // Initialize mermaid - render all diagrams while all tabs visible
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: {
+      htmlLabels: true,
+      curve: 'basis',
+      useMaxWidth: false,
+      nodeSpacing: 30,
+      rankSpacing: 60,
+      padding: 15
+    },
+    themeVariables: {
+      fontSize: '14px'
+    }
+  });
+
+  // After mermaid renders, hide non-active tabs
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var tabs = document.querySelectorAll('.tab-content');
+      for (var i = 1; i < tabs.length; i++) {
+        tabs[i].classList.add('hidden');
+      }
+    }, 500);
+  });
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.add('hidden');
+      });
+      document.querySelectorAll('.tab').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      var target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.remove('hidden');
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

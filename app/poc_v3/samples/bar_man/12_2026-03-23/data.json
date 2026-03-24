@@ -29,7 +29,10 @@
           "S2",
           "S3"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "I2",
@@ -39,7 +42,10 @@
           "I1",
           "S3"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P1",
@@ -48,7 +54,10 @@
         [
           "I2"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "I3",
@@ -59,7 +68,10 @@
           "S3",
           "S4"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P5",
@@ -69,7 +81,10 @@
           "I3",
           "S2"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "I5",
@@ -79,7 +94,10 @@
           "S4",
           "S5"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "I6",
@@ -89,7 +107,10 @@
           "I5",
           "S3"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P7",
@@ -98,7 +119,10 @@
         [
           "I6"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "I7",
@@ -108,7 +132,10 @@
           "P1",
           "S3"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P2",
@@ -122,7 +149,9 @@
         [
           "P3"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
     },
     {
       "id": "I8",
@@ -132,7 +161,10 @@
           "P1",
           "S4"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "I9",
@@ -142,7 +174,10 @@
           "I8",
           "P1"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P3",
@@ -151,7 +186,10 @@
         [
           "I9"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "I10",
@@ -160,7 +198,10 @@
         [
           "P5"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "I11",
@@ -169,7 +210,10 @@
         [
           "I10"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P4",
@@ -183,7 +227,9 @@
         [
           "P6"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
     },
     {
       "id": "P6",
@@ -193,7 +239,10 @@
           "P5",
           "P4"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "I13",
@@ -203,7 +252,10 @@
           "P7",
           "P3"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "P8",
@@ -212,7 +264,10 @@
         [
           "I13"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "FPC1",
@@ -228,7 +283,9 @@
           "P2",
           "P3"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
     },
     {
       "id": "FPC2",
@@ -246,7 +303,9 @@
           "P7",
           "P8"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "rejection_conditions": null
     },
     {
       "id": "I17",
@@ -256,7 +315,10 @@
           "FPC1",
           "FPC2"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "I18",
@@ -265,7 +327,10 @@
         [
           "I17"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "FP",
@@ -274,7 +339,10 @@
         [
           "I18"
         ]
-      ]
+      ],
+      "negation_of": null,
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N1",
@@ -284,7 +352,9 @@
         [
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H1",
@@ -294,7 +364,9 @@
         [
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N2",
@@ -304,7 +376,9 @@
         [
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H2",
@@ -314,7 +388,9 @@
         [
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N3",
@@ -324,7 +400,9 @@
         [
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H3",
@@ -334,7 +412,9 @@
         [
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N4",
@@ -344,7 +424,9 @@
         [
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H4",
@@ -354,7 +436,9 @@
         [
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N5",
@@ -365,7 +449,9 @@
           "S3",
           "S5"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H5",
@@ -376,7 +462,9 @@
           "S3",
           "S5"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N6",
@@ -387,7 +475,9 @@
           "S3",
           "S4"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H6",
@@ -398,7 +488,9 @@
           "S3",
           "S4"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "N7",
@@ -408,7 +500,9 @@
         [
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "H7",
@@ -418,7 +512,9 @@
         [
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF1",
@@ -429,7 +525,9 @@
           "S2",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF1",
@@ -440,7 +538,9 @@
           "S2",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF2",
@@ -451,7 +551,9 @@
           "I1",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF2",
@@ -462,7 +564,9 @@
           "I1",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF3",
@@ -474,7 +578,9 @@
           "S3",
           "S4"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF3",
@@ -486,7 +592,9 @@
           "S3",
           "S4"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF5",
@@ -497,7 +605,9 @@
           "I5",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF5",
@@ -508,7 +618,9 @@
           "I5",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF6",
@@ -519,7 +631,9 @@
           "P1",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF6b",
@@ -530,7 +644,9 @@
           "P1",
           "S3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF7",
@@ -541,7 +657,9 @@
           "P1",
           "S4"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF7",
@@ -552,7 +670,9 @@
           "P1",
           "S4"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF8",
@@ -563,7 +683,9 @@
           "I8",
           "P1"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF8",
@@ -574,7 +696,9 @@
           "I8",
           "P1"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF9",
@@ -584,7 +708,9 @@
         [
           "P5"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF9",
@@ -594,7 +720,9 @@
         [
           "P5"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF10",
@@ -604,7 +732,9 @@
         [
           "I10"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF10",
@@ -614,7 +744,9 @@
         [
           "I10"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF12",
@@ -625,7 +757,9 @@
           "P7",
           "P3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF12",
@@ -636,7 +770,9 @@
           "P7",
           "P3"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF16",
@@ -647,7 +783,9 @@
           "FPC1",
           "FPC2"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF16",
@@ -658,7 +796,9 @@
           "FPC1",
           "FPC2"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "NF17",
@@ -668,7 +808,9 @@
         [
           "I17"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     },
     {
       "id": "HF17",
@@ -678,7 +820,9 @@
         [
           "I17"
         ]
-      ]
+      ],
+      "entailment_conditions": null,
+      "rejection_conditions": null
     }
   ],
   "questions": [
@@ -686,7 +830,9 @@
       "id": "Q1",
       "text": "バーテンダーが銃を向けたのは通常ありえない反応ですか？",
       "answer": "はい",
-      "reveals": "I1",
+      "reveals": [
+        "I1"
+      ],
       "mechanism": "anomaly",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -695,7 +841,9 @@
       "id": "Q2",
       "text": "バーテンダーが銃を向けた理由は水の注文とは別にありますか？",
       "answer": "はい",
-      "reveals": "I2",
+      "reveals": [
+        "I2"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -704,7 +852,9 @@
       "id": "Q3",
       "text": "男自身に何か変わった点がありましたか？",
       "answer": "はい",
-      "reveals": "P1",
+      "reveals": [
+        "P1"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "人物と背景"
@@ -713,7 +863,9 @@
       "id": "Q4",
       "text": "男は水を受け取らずに帰りましたか？",
       "answer": "はい",
-      "reveals": "I3",
+      "reveals": [
+        "I3"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -722,7 +874,9 @@
       "id": "Q6",
       "text": "男が水を求めたのには喉の渇き以外の理由がありましたか？",
       "answer": "はい",
-      "reveals": "P5",
+      "reveals": [
+        "P5"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -731,7 +885,9 @@
       "id": "Q7",
       "text": "男の「ありがとう」は心からの感謝でしたか？",
       "answer": "はい",
-      "reveals": "I5",
+      "reveals": [
+        "I5"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -740,7 +896,9 @@
       "id": "Q8",
       "text": "銃を向けられたことは男にとって良い結果をもたらしましたか？",
       "answer": "はい",
-      "reveals": "I6",
+      "reveals": [
+        "I6"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -749,7 +907,9 @@
       "id": "Q9",
       "text": "男は困りごとを抱えていて、バーテンダーの行為でそれが解消しましたか？",
       "answer": "はい",
-      "reveals": "P7",
+      "reveals": [
+        "P7"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -758,7 +918,9 @@
       "id": "Q10",
       "text": "バーテンダーが銃を向けたのは男の状態に対する反応でしたか？",
       "answer": "はい",
-      "reveals": "I7",
+      "reveals": [
+        "I7"
+      ],
       "mechanism": "link",
       "prerequisites": [
         "P1"
@@ -769,7 +931,9 @@
       "id": "Q11",
       "text": "バーテンダーは男の異変に気づいていましたか？",
       "answer": "はい",
-      "reveals": "P2",
+      "reveals": [
+        "P2"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "P1"
@@ -780,7 +944,9 @@
       "id": "Q12",
       "text": "男が「ありがとう」と言ったのは銃を向けられたことが役に立ったからですか？",
       "answer": "はい",
-      "reveals": "I8",
+      "reveals": [
+        "I8"
+      ],
       "mechanism": "link",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -789,7 +955,9 @@
       "id": "Q13",
       "text": "銃を向けたことが男の異変を解消しましたか？",
       "answer": "はい",
-      "reveals": "I9",
+      "reveals": [
+        "I9"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "P1"
@@ -800,7 +968,9 @@
       "id": "Q14",
       "text": "バーテンダーは男の異変への対処として銃を向けましたか？",
       "answer": "はい",
-      "reveals": "P3",
+      "reveals": [
+        "P3"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "P1"
@@ -811,7 +981,9 @@
       "id": "Q15",
       "text": "男には喉の渇き以外に水を必要とする事情がありましたか？",
       "answer": "はい",
-      "reveals": "I10",
+      "reveals": [
+        "I10"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -820,7 +992,9 @@
       "id": "Q16",
       "text": "男は身体的な不調のために水を必要としていましたか？",
       "answer": "はい",
-      "reveals": "I11",
+      "reveals": [
+        "I11"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -829,7 +1003,9 @@
       "id": "Q17",
       "text": "男は身体的な問題を抱えていましたか？",
       "answer": "はい",
-      "reveals": "P4",
+      "reveals": [
+        "P4"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "人物と背景"
@@ -838,7 +1014,9 @@
       "id": "Q19",
       "text": "男は身体的な問題の対処として水を求めましたか？",
       "answer": "はい",
-      "reveals": "P6",
+      "reveals": [
+        "P6"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "P4"
@@ -849,7 +1027,9 @@
       "id": "Q20",
       "text": "男はバーテンダーの行為が問題解消の原因だと気づきましたか？",
       "answer": "はい",
-      "reveals": "I13",
+      "reveals": [
+        "I13"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "P7"
@@ -860,7 +1040,9 @@
       "id": "Q22",
       "text": "男はバーテンダーが銃を向けた意図を理解しましたか？",
       "answer": "はい",
-      "reveals": "P8",
+      "reveals": [
+        "P8"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "I13"
@@ -871,7 +1053,9 @@
       "id": "Q24",
       "text": "バーテンダーは男の異変に気づき、対処として銃を向けたのですか？",
       "answer": "はい",
-      "reveals": "FPC1",
+      "reveals": [
+        "FPC1"
+      ],
       "mechanism": "link",
       "prerequisites": [
         "P2",
@@ -883,7 +1067,9 @@
       "id": "Q26",
       "text": "男は身体的問題の対処に水を求め、バーテンダーの行為で解消し、その意図を理解したのですか？",
       "answer": "はい",
-      "reveals": "FPC2",
+      "reveals": [
+        "FPC2"
+      ],
       "mechanism": "link",
       "prerequisites": [
         "P6",
@@ -896,7 +1082,9 @@
       "id": "Q27",
       "text": "男の問題は驚かされることで治る種類の身体症状でしたか？",
       "answer": "はい",
-      "reveals": "I17",
+      "reveals": [
+        "I17"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "FPC1",
@@ -908,7 +1096,9 @@
       "id": "Q28",
       "text": "男はしゃっくりが止まらなかったのですか？",
       "answer": "はい",
-      "reveals": "I18",
+      "reveals": [
+        "I18"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "I17"
@@ -919,7 +1109,9 @@
       "id": "Q29",
       "text": "男はしゃっくりを止めたくて水を求め、バーテンダーが銃で驚かせて止めたのですか？",
       "answer": "はい",
-      "reveals": "FP",
+      "reveals": [
+        "FP"
+      ],
       "mechanism": "link",
       "prerequisites": [
         "I18"
@@ -930,7 +1122,9 @@
       "id": "Q30",
       "text": "バーテンダーは男から金品を奪おうとしたのですか？",
       "answer": "いいえ",
-      "reveals": "N1",
+      "reveals": [
+        "N1"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -939,7 +1133,9 @@
       "id": "Q31",
       "text": "バーテンダーは男に脅威を感じて銃を向けたのですか？",
       "answer": "いいえ",
-      "reveals": "N2",
+      "reveals": [
+        "N2"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -948,7 +1144,9 @@
       "id": "Q32",
       "text": "バーテンダーは男を追い出すために銃を向けたのですか？",
       "answer": "いいえ",
-      "reveals": "N3",
+      "reveals": [
+        "N3"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -957,7 +1155,9 @@
       "id": "Q33",
       "text": "バーテンダーは冗談で銃を向けたのですか？",
       "answer": "いいえ",
-      "reveals": "N4",
+      "reveals": [
+        "N4"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -966,7 +1166,9 @@
       "id": "Q34",
       "text": "男は銃で脅されて怖くなって帰ったのですか？",
       "answer": "いいえ",
-      "reveals": "N5",
+      "reveals": [
+        "N5"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -975,7 +1177,9 @@
       "id": "Q35",
       "text": "男の「ありがとう」は皮肉でしたか？",
       "answer": "いいえ",
-      "reveals": "N6",
+      "reveals": [
+        "N6"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -984,7 +1188,9 @@
       "id": "Q36",
       "text": "バーテンダーは男を何かの危険から守ろうとしたのですか？",
       "answer": "いいえ",
-      "reveals": "N7",
+      "reveals": [
+        "N7"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -993,7 +1199,9 @@
       "id": "QF1",
       "text": "バーテンダーが銃を向けたのはこの店の慣習ですか？",
       "answer": "いいえ",
-      "reveals": "NF1",
+      "reveals": [
+        "NF1"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -1002,7 +1210,9 @@
       "id": "QF2",
       "text": "バーテンダーは水を頼まれたこと自体に怒って銃を向けたのですか？",
       "answer": "いいえ",
-      "reveals": "NF2",
+      "reveals": [
+        "NF2"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -1011,7 +1221,9 @@
       "id": "QF3",
       "text": "男は水をもらえなかったことに不満でしたか？",
       "answer": "いいえ",
-      "reveals": "NF3",
+      "reveals": [
+        "NF3"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "人物と背景"
@@ -1020,7 +1232,9 @@
       "id": "QF5",
       "text": "銃を向けられたことは男にとって脅威でしたか？",
       "answer": "いいえ",
-      "reveals": "NF5",
+      "reveals": [
+        "NF5"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "人物と背景"
@@ -1029,7 +1243,9 @@
       "id": "QF6",
       "text": "バーテンダーが銃を向けたのは男とは無関係な個人的事情ですか？",
       "answer": "いいえ",
-      "reveals": "NF6",
+      "reveals": [
+        "NF6"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "P1"
@@ -1040,7 +1256,9 @@
       "id": "QF7",
       "text": "男の「ありがとう」は銃を向けた行為とは別の理由によるものですか？",
       "answer": "いいえ",
-      "reveals": "NF7",
+      "reveals": [
+        "NF7"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "前提の確認"
@@ -1049,7 +1267,9 @@
       "id": "QF8",
       "text": "銃を向けたことと男の異変の解消は偶然の一致ですか？",
       "answer": "いいえ",
-      "reveals": "NF8",
+      "reveals": [
+        "NF8"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "P1"
@@ -1060,7 +1280,9 @@
       "id": "QF9",
       "text": "男が水を頼んだのは別の目的のための口実でしたか？",
       "answer": "いいえ",
-      "reveals": "NF9",
+      "reveals": [
+        "NF9"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "原因と動機"
@@ -1069,7 +1291,9 @@
       "id": "QF10",
       "text": "男が水を必要としていたのは精神的な理由ですか？",
       "answer": "いいえ",
-      "reveals": "NF10",
+      "reveals": [
+        "NF10"
+      ],
       "mechanism": "observation",
       "prerequisites": [],
       "topic_category": "状況の確認"
@@ -1078,7 +1302,9 @@
       "id": "QF12",
       "text": "男はバーテンダーの行為が偶然だったと考えましたか？",
       "answer": "いいえ",
-      "reveals": "NF12",
+      "reveals": [
+        "NF12"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "P7"
@@ -1089,7 +1315,9 @@
       "id": "QF16",
       "text": "男の問題は時間が経てば自然に治りましたか？",
       "answer": "いいえ",
-      "reveals": "NF16",
+      "reveals": [
+        "NF16"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "FPC1"
@@ -1100,7 +1328,9 @@
       "id": "QF17",
       "text": "男は体の震えが止まらなかったのですか？",
       "answer": "いいえ",
-      "reveals": "NF17",
+      "reveals": [
+        "NF17"
+      ],
       "mechanism": "observation",
       "prerequisites": [
         "I17"
